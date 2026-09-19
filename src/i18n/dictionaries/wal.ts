@@ -138,7 +138,7 @@ export const wal: DeepPartial<Dictionary> = {
       slide: 'Slide {n}',
       statGenerations: 'Generations',
       statYears: 'Years of heritage',
-      statLanguages: 'Languages',
+      statCollections: 'Heritage collections',
     },
     intro: {
       eyebrow: 'Our Purpose',
@@ -269,7 +269,7 @@ export const wal: DeepPartial<Dictionary> = {
     who: {
       eyebrow: 'Who We Are',
       title: 'More Than a Place — A Living Story',
-      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination in the heart of Wolaita Sodo, Ethiopia. We are not a museum, a resort, or a tourist attraction — we are a family heritage that has been tended and passed down across five generations.',
+      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination in the heart of Wolaita Sodo, Ethiopia. We are not a museum, a resort, or a tourist attraction — we are a family heritage that has been tended and passed down across four generations.',
       p2: 'What began as a family homestead — with its trees, houses, animals, and traditions — has grown into a place where the whole world can come and experience the depth, beauty, and wisdom of Wolaita culture.',
       p3: 'From our cultural houses and ancient trees, to our library, oral histories, traditional food, and guesthouse — every element of Bushaashe Garuwa exists to honor the past, celebrate the present, and protect the future of Wolaita heritage.',
       generations: 'Generations',
@@ -302,7 +302,7 @@ export const wal: DeepPartial<Dictionary> = {
     },
     generations: {
       eyebrow: 'The People Behind the Heritage',
-      title: 'Five Generations, One Heritage',
+      title: 'Four Generations, One Heritage',
       desc: 'Bushaashe Garuwa was not created in a single moment. It was built slowly, lovingly, across generations — each one adding a new layer to the heritage we share today.',
       items: [
         { label: 'Great-Grandfather', role: 'The Founder', desc: 'Established the first homestead and planted the heritage trees that still stand today. His vision of preserving the family land and traditions became the seed of Bushaashe Garuwa.' },
@@ -368,7 +368,7 @@ export const wal: DeepPartial<Dictionary> = {
       eyebrow: 'Why Bushaashe Garuwa?',
       title: 'Four Reasons to Come',
       items: {
-        heritage: { title: 'Heritage', desc: 'Five generations of Wolaita family history, cultural houses, artifacts and oral traditions preserved in one living destination.' },
+        heritage: { title: 'Heritage', desc: 'Four generations of Wolaita family history, cultural houses, artifacts and oral traditions preserved in one living destination.' },
         nature: { title: 'Nature', desc: 'Ancient trees, heritage plants, animals, and the natural landscape of Wolaita — all within the Bushaashe Garuwa grounds.' },
         knowledge: { title: 'Knowledge', desc: 'A library, digital archive, and oral history collection dedicated to Wolaita culture, language, and traditional knowledge.' },
         hospitality: { title: 'Hospitality', desc: 'Authentic Wolaita food, a welcoming guesthouse, a warm restaurant and the genuine hospitality of our family.' },
@@ -418,8 +418,8 @@ export const wal: DeepPartial<Dictionary> = {
     hero: { eyebrow: 'Be Part of the Story', title: 'Experience Wolaita' },
     intro: 'Bushaashe Garuwa is not simply observed — it is experienced. Each of our visitor experiences is designed to create a genuine, respectful and memorable encounter with living Wolaita culture.',
     duration: 'Duration',
-    showIncluded: "↓ What's included",
-    hideDetails: '↑ Hide details',
+    showIncluded: "What's included",
+    hideDetails: 'Hide details',
     items: {
       food: {
         title: 'Food Experience',
@@ -660,7 +660,7 @@ export const wal: DeepPartial<Dictionary> = {
       agriculture: { title: 'Traditional Agricultural Practices of Southern Ethiopia', author: 'Agricultural Research Institute', desc: 'Documents the indigenous farming knowledge of Wolaita communities.' },
       grammar: { title: 'Wolaytta Language: A Complete Reference Grammar', author: 'Language Council of Ethiopia', desc: 'The definitive reference grammar for the Wolaytta language.' },
       ceremonies: { title: 'Cultural Ceremonies of Southern Ethiopia', author: 'Alemayehu Wolde', desc: 'Documents the ceremonies and rituals of Wolaita and neighboring communities.' },
-      chronicle: { title: 'The Bushaashe Family Chronicle', author: 'Family Archive', desc: 'A private family history document spanning five generations of the Bushaashe heritage.' },
+      chronicle: { title: 'The Bushaashe Family Chronicle', author: 'Family Archive', desc: 'A private family history document spanning four generations of the Bushaashe heritage.' },
       ensete: { title: 'Ensete: The False Banana and Wolaita Food Culture', author: 'Dr. Mulugeta Fanta', desc: 'A study of ensete cultivation and its role as the cornerstone of Wolaita food culture.' },
       knowledge: { title: 'Traditional Knowledge Systems of the Wolaita', author: 'Knowledge Preservation Project', desc: 'Documents indigenous knowledge across medicine, ecology, and community governance.' },
       literature: { title: 'Oral Literature of the Wolaita People', author: 'Biruk Haile', desc: 'A collection of proverbs, folktales, and oral poetry from the Wolaita tradition.' },
@@ -706,7 +706,7 @@ export const wal: DeepPartial<Dictionary> = {
       visitorMany: '{count} visitors',
       message: 'Message',
       messagePlaceholder: 'Any special requirements or questions...',
-      submit: 'Continue →',
+      submit: 'Continue',
     },
   },
 

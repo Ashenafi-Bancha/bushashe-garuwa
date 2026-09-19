@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/brand/logo.png';
 import { useI18n } from '../i18n/I18nProvider';
 import LanguageSwitcher from './LanguageSwitcher';
+import { lockScroll } from '../lib/motion';
 
 const navRoutes = [
   { key: 'home', to: '/' },
@@ -38,8 +39,8 @@ export default function Navbar() {
   useEffect(() => { setMobileOpen(false); setSearchOpen(false); }, [location.pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    lockScroll(mobileOpen || searchOpen);
+    return () => lockScroll(false);
   }, [mobileOpen, searchOpen]);
 
   const isHome = location.pathname === '/';
@@ -104,10 +105,9 @@ export default function Navbar() {
 
             <Link
               to="/visit"
-              className="hidden lg:inline-flex items-center gap-2 bg-[#C99A45] hover:bg-[#d9af65] text-[#0e2820] text-[13px] font-semibold rounded-full pl-5 pr-2 py-2 ml-1 transition-all duration-300 group"
+              className="hidden lg:inline-flex items-center bg-[#C99A45] hover:bg-[#d9af65] text-[#0e2820] text-[13px] font-semibold rounded-full px-5 py-2.5 ml-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-8px_rgba(201,154,69,0.7)]"
             >
               {t.common.planVisit}
-              <span className="w-7 h-7 rounded-full bg-[#0e2820] text-[#C99A45] flex items-center justify-center transition-transform duration-300 group-hover:rotate-[-45deg]">→</span>
             </Link>
 
             {/* Menu (all screen sizes below xl, and for the full list above) */}
@@ -142,7 +142,7 @@ export default function Navbar() {
         <div className="absolute -top-40 -right-40 w-[34rem] h-[34rem] glow-gold pointer-events-none" />
         <div className="absolute -bottom-52 -left-40 w-[40rem] h-[40rem] glow-forest pointer-events-none" />
 
-        <div className="relative flex-1 overflow-y-auto px-6 sm:px-12 pt-28 pb-8">
+        <div className="relative flex-1 overflow-y-auto px-6 sm:px-12 pt-28 pb-8" data-lenis-prevent>
           <div className="max-w-screen-xl mx-auto grid lg:grid-cols-[1.4fr_1fr] gap-12">
             <nav className="grid sm:grid-cols-2 gap-x-10" aria-label={t.nav.mobileNav}>
               {navLinks.map((link, i) => (
@@ -160,7 +160,6 @@ export default function Navbar() {
                 >
                   <span className="text-[11px] font-medium text-white/30 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
                   <span className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">{link.label}</span>
-                  <span className="ml-auto text-[#C99A45] opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">→</span>
                 </Link>
               ))}
             </nav>
@@ -178,7 +177,7 @@ export default function Navbar() {
                 <LanguageSwitcher variant="menu" />
               </div>
               <Link to="/visit" className="btn-primary justify-center w-full sm:w-auto sm:self-start">
-                {t.common.planVisit} <span>→</span>
+                {t.common.planVisit}
               </Link>
               <p className="text-white/40 text-sm leading-relaxed max-w-sm">{t.common.slogan}</p>
             </div>

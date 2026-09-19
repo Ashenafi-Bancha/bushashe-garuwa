@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { photos, type PhotoKey } from '../assets/photos';
 import Photo from '../components/Photo';
 import { fmt, useI18n } from '../i18n/I18nProvider';
+import { Tilt, useScrollY } from '../lib/motion';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
   { key: 'home',      pos: 'object-center' },
@@ -101,30 +102,17 @@ function Heading({ eyebrow, title, desc, dark = false, center = false, action }:
   );
 }
 
-/* ── Circular arrow used on cards ── */
-function ArrowCircle({ light = false }: { light?: boolean }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={`inline-flex w-11 h-11 rounded-full items-center justify-center flex-shrink-0 transition-all duration-500 group-hover:rotate-[-45deg] ${
-        light ? 'glass text-white group-hover:bg-[#C99A45] group-hover:text-[#0e2820] group-hover:border-[#C99A45]' : 'bg-[#0e2820] text-[#C99A45] group-hover:bg-[#C99A45] group-hover:text-[#0e2820]'
-      }`}
-    >
-      →
-    </span>
-  );
-}
-
 function TextLink({ to, children, dark = false }: { to: string; children: ReactNode; dark?: boolean }) {
   return (
     <Link
       to={to}
-      className={`group inline-flex items-center gap-3 text-sm font-semibold rounded-full pl-5 pr-1.5 py-1.5 border transition-colors ${
-        dark ? 'border-white/20 text-white hover:border-[#C99A45]' : 'border-[#0e2820]/15 text-[#0e2820] hover:border-[#0e2820]'
+      className={`inline-flex items-center text-sm font-semibold rounded-full px-6 py-3 border transition-all duration-500 hover:-translate-y-0.5 ${
+        dark
+          ? 'border-white/20 text-white hover:bg-white hover:text-[#0e2820]'
+          : 'border-[#0e2820]/15 text-[#0e2820] hover:bg-[#0e2820] hover:text-white'
       }`}
     >
       {children}
-      <span className="w-8 h-8 rounded-full bg-[#C99A45] text-[#0e2820] flex items-center justify-center transition-transform duration-300 group-hover:rotate-[-45deg]">→</span>
     </Link>
   );
 }
@@ -147,10 +135,12 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const scrollY = useScrollY(1400);
+
   const stats = [
-    { value: '5', label: h.hero.statGenerations },
+    { value: '4+', label: h.hero.statGenerations },
     { value: '100+', label: h.hero.statYears },
-    { value: '3', label: h.hero.statLanguages },
+    { value: '8', label: h.hero.statCollections },
   ];
 
   return (
@@ -159,6 +149,7 @@ export default function Home() {
 
         {/* ═════════ HERO ═════════ */}
         <section className="relative h-[100svh] min-h-[640px] overflow-hidden bg-[#0a1f19]" aria-label={h.hero.title}>
+          <div className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(0, ${scrollY * 0.35}px, 0)` }}>
           {heroSlides.map(({ key, pos }, i) => (
             <img
               key={key}
@@ -170,24 +161,33 @@ export default function Home() {
               }`}
             />
           ))}
+          </div>
           <div className="absolute inset-0 bg-gradient-to-b from-[#0a1f19]/55 via-[#0a1f19]/10 to-[#0a1f19]"/>
           <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f19]/70 via-[#0a1f19]/10 to-transparent"/>
 
-          <div className="relative z-10 h-full max-w-screen-xl mx-auto px-5 sm:px-8 flex flex-col justify-end pb-24 sm:pb-28">
+          <div
+            className="relative z-10 h-full max-w-screen-xl mx-auto px-5 sm:px-8 flex flex-col justify-end pb-24 sm:pb-28 will-change-transform"
+            style={{ transform: `translate3d(0, ${scrollY * -0.12}px, 0)`, opacity: Math.max(0, 1 - scrollY / 700) }}
+          >
             <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
               <div className="max-w-4xl">
                 <span className="eyebrow glass text-white mb-6 sm:mb-8 animate-fade-up">
                   {h.hero.eyebrow}
                 </span>
-                <h1 className="font-display font-extrabold text-white text-[clamp(2.9rem,9vw,7.5rem)] leading-[0.92] tracking-[-0.045em] animate-fade-up delay-100">
+                <h1 className="font-display text-white text-[clamp(3.25rem,9.5vw,8rem)] leading-[0.95] animate-fade-up delay-100">
                   {h.hero.title}
                 </h1>
-                <p className="mt-6 sm:mt-8 text-lg sm:text-2xl text-white/80 font-light leading-snug max-w-2xl animate-fade-up delay-200">
+                <p className="mt-5 sm:mt-6 font-display font-normal text-xl sm:text-3xl text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
                   {h.hero.subtitle}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 mt-9 sm:mt-10 animate-fade-up delay-300">
+                <p className="mt-5 sm:mt-6 pl-4 sm:pl-5 border-l-2 border-[#C99A45] max-w-xl font-display italic font-medium text-lg sm:text-2xl leading-snug text-white/90 animate-fade-up delay-300">
+                  <span className="text-[#E6BE6E]">{h.hero.sloganA}</span>{' '}
+                  {h.hero.sloganB}{' '}
+                  <span className="text-white/75">{h.hero.sloganC}</span>
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 mt-8 sm:mt-10 animate-fade-up delay-400">
                   <Link to="/discover" className="btn-primary justify-center">
-                    {h.hero.explore} <span>→</span>
+                    {h.hero.explore}
                   </Link>
                   <Link to="/visit" className="btn-glass justify-center">
                     {t.common.planVisit}
@@ -196,13 +196,17 @@ export default function Home() {
               </div>
 
               {/* Stats card */}
-              <div className="hidden lg:grid grid-cols-3 glass rounded-3xl p-2 animate-fade-up delay-400">
-                {stats.map((s, i) => (
-                  <div key={i} className={`px-6 py-5 ${i > 0 ? 'border-l border-white/15' : ''}`}>
-                    <div className="font-display text-4xl font-bold text-white">{s.value}</div>
-                    <div className="text-xs text-white/60 mt-1 whitespace-nowrap">{s.label}</div>
+              <div className="hidden lg:block animate-fade-up delay-400 [perspective:1000px]">
+                <Tilt className="rounded-3xl" max={10}>
+                  <div className="grid grid-cols-3 glass rounded-3xl p-2 animate-float shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
+                    {stats.map((s, i) => (
+                      <div key={i} className={`px-6 py-5 ${i > 0 ? 'border-l border-white/15' : ''}`}>
+                        <div className="font-display text-4xl font-bold text-white">{s.value}</div>
+                        <div className="text-xs text-white/60 mt-1 whitespace-nowrap">{s.label}</div>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                </Tilt>
               </div>
             </div>
           </div>
@@ -226,7 +230,7 @@ export default function Home() {
               </div>
               <div className="hidden sm:flex items-center gap-2 text-white/50 text-xs font-medium tracking-[0.14em] uppercase">
                 {h.hero.scroll}
-                <span className="animate-scroll-bounce">↓</span>
+                <span className="block w-px h-7 bg-gradient-to-b from-white/60 to-transparent animate-scroll-bounce" />
               </div>
             </div>
           </div>
@@ -240,7 +244,7 @@ export default function Home() {
                 {[...h.intro.pillars, ...h.intro.pillars].map((p, i) => (
                   <span key={i} className="flex items-center font-display text-2xl sm:text-3xl font-bold text-[#0e2820] tracking-tight">
                     <span className="px-6 sm:px-8">{p}</span>
-                    <span className="text-[#0e2820]/40 text-xl">✦</span>
+                    <span className="w-10 h-px bg-[#0e2820]/35" />
                   </span>
                 ))}
               </div>
@@ -258,16 +262,13 @@ export default function Home() {
               </h2>
               <p className="text-lg sm:text-xl text-[#1D211E]/75 leading-relaxed mb-5">{h.intro.p1}</p>
               <p className="text-base text-[#1D211E]/55 leading-relaxed mb-8">{h.intro.p2}</p>
-              <div className="flex flex-wrap gap-2 mb-10">
+              <div className="flex flex-wrap gap-2">
                 {h.intro.pillars.map((pillar, i) => (
                   <span key={i} className="inline-flex items-center gap-2 rounded-full bg-white border border-[#0e2820]/8 px-4 py-2 text-sm font-medium text-[#0e2820] shadow-sm">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#C99A45]"/>{pillar}
                   </span>
                 ))}
               </div>
-              <blockquote className="border-l-2 border-[#C99A45] pl-5 font-display text-lg sm:text-xl font-medium italic text-[#173F35] leading-snug">
-                {h.hero.sloganA} {h.hero.sloganB} {h.hero.sloganC}
-              </blockquote>
             </FadeSection>
 
             <FadeSection delay={150} className="relative">
@@ -278,7 +279,7 @@ export default function Home() {
                 <img src={photos.gifaataa2} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy"/>
               </div>
               <div className="absolute top-6 right-3 sm:-right-6 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#0e2820] text-[#C99A45] flex items-center justify-center font-display text-2xl font-bold">5</div>
+                <div className="w-12 h-12 rounded-xl bg-[#0e2820] text-[#C99A45] flex items-center justify-center font-display text-xl font-bold">4+</div>
                 <div className="text-sm font-semibold text-[#0e2820] leading-tight">{h.intro.generations}</div>
               </div>
             </FadeSection>
@@ -295,6 +296,7 @@ export default function Home() {
                 const text = h.explore.cards[card.id];
                 return (
                   <FadeSection key={card.id} delay={i * 90} className={`${card.span} min-h-[320px] md:min-h-0`}>
+                    <Tilt className="h-full rounded-[1.75rem]" max={5}>
                     <Link to={card.to} className="group relative block h-full rounded-[1.75rem] overflow-hidden">
                       <Photo
                         src={card.img}
@@ -302,12 +304,12 @@ export default function Home() {
                         className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f19]/90 via-[#0a1f19]/20 to-transparent"/>
-                      <div className="absolute top-5 right-5"><ArrowCircle light /></div>
                       <div className="absolute bottom-0 inset-x-0 p-6 sm:p-7">
                         <h3 className={`font-display font-bold text-white mb-2 ${i === 0 ? 'text-3xl sm:text-5xl' : 'text-2xl sm:text-3xl'}`}>{text.title}</h3>
                         <p className="text-white/70 text-sm sm:text-base leading-relaxed max-w-md line-clamp-2">{text.sub}</p>
                       </div>
                     </Link>
+                    </Tilt>
                   </FadeSection>
                 );
               })}
@@ -328,6 +330,7 @@ export default function Home() {
                 const text = h.living.items[item.id];
                 return (
                   <FadeSection key={item.id} delay={i * 80}>
+                    <Tilt className="h-full rounded-3xl">
                     <Link to="/heritage" className="group heritage-card bg-white flex flex-col h-full">
                       <div className="img-zoom relative aspect-[4/3] bg-[#173F35]/8">
                         <Photo src={'img' in item ? item.img : undefined} alt={text.title} className="w-full h-full object-cover"/>
@@ -336,11 +339,12 @@ export default function Home() {
                       <div className="p-6 flex flex-col flex-1">
                         <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{text.title}</h3>
                         <p className="text-[#1D211E]/60 text-sm leading-relaxed mb-6 flex-1">{text.desc}</p>
-                        <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#A65A3A] transition-all duration-300 group-hover:gap-3">
-                          {t.common.explore} <span>→</span>
+                        <span className="text-sm font-semibold text-[#A65A3A] underline decoration-[#A65A3A]/30 underline-offset-4 transition-colors group-hover:decoration-[#A65A3A]">
+                          {t.common.explore}
                         </span>
                       </div>
                     </Link>
+                    </Tilt>
                   </FadeSection>
                 );
               })}
@@ -366,11 +370,13 @@ export default function Home() {
                 {h.timeline.items.map((item, i) => (
                   <FadeSection key={i} delay={i * 90}>
                     <div className="w-3.5 h-3.5 rounded-full bg-[#C99A45] ring-8 ring-[#C99A45]/15 mb-8"/>
+                    <Tilt className="rounded-3xl h-full" max={8}>
                     <div className="rounded-3xl bg-white/[0.04] border border-white/10 p-6 h-full hover:bg-white/[0.07] hover:border-[#C99A45]/30 transition-colors duration-500">
                       <div className="font-display text-2xl font-bold text-[#C99A45] mb-3">{item.period}</div>
                       <div className="font-display text-lg font-semibold text-white mb-2">{item.label}</div>
                       <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
                     </div>
+                    </Tilt>
                   </FadeSection>
                 ))}
               </div>
@@ -408,18 +414,17 @@ export default function Home() {
                 const text = h.experiences.items[exp.id];
                 return (
                   <FadeSection key={exp.id} delay={(i % 3) * 80}>
+                    <Tilt className="h-full rounded-3xl">
                     <Link to={exp.to} className="group heritage-card bg-white block h-full">
                       <div className="img-zoom relative aspect-[16/11] bg-[#173F35]/8">
                         <Photo src={'img' in exp ? exp.img : undefined} alt={text.title} className="w-full h-full object-cover"/>
                       </div>
-                      <div className="p-6 flex items-end justify-between gap-4">
-                        <div>
-                          <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{text.title}</h3>
-                          <p className="text-[#1D211E]/60 text-sm leading-relaxed line-clamp-2">{text.desc}</p>
-                        </div>
-                        <ArrowCircle />
+                      <div className="p-6">
+                        <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{text.title}</h3>
+                        <p className="text-[#1D211E]/60 text-sm leading-relaxed line-clamp-2">{text.desc}</p>
                       </div>
                     </Link>
+                    </Tilt>
                   </FadeSection>
                 );
               })}
@@ -443,6 +448,7 @@ export default function Home() {
                 const text = h.events.items[ev.id];
                 return (
                   <FadeSection key={ev.id} delay={i * 100}>
+                    <Tilt className="h-full rounded-3xl" max={4}>
                     <div className="group grid sm:grid-cols-[0.9fr_1.1fr] rounded-3xl overflow-hidden bg-white/[0.04] border border-white/10 hover:border-[#C99A45]/40 transition-colors duration-500 h-full">
                       <div className="img-zoom relative min-h-[220px]">
                         <Photo alt={text.name} className="absolute inset-0 w-full h-full object-cover"/>
@@ -450,15 +456,16 @@ export default function Home() {
                       </div>
                       <div className="p-6 sm:p-7 flex flex-col">
                         <span className={`self-start text-[11px] font-semibold rounded-full px-3 py-1 mb-4 ${ev.availKind === 'open' ? 'bg-emerald-400/15 text-emerald-300' : 'bg-[#A65A3A]/25 text-[#f0a584]'}`}>
-                          ● {text.avail}
+                          {text.avail}
                         </span>
                         <h3 className="font-display text-2xl font-bold text-white mb-3">{text.name}</h3>
                         <p className="text-white/55 text-sm leading-relaxed mb-6 flex-1">{text.desc}</p>
                         <Link to="/events" className="btn-primary self-start text-[13px] py-3 px-5">
-                          {t.common.reserveYourPlace} <span>→</span>
+                          {t.common.reserveYourPlace}
                         </Link>
                       </div>
                     </div>
+                    </Tilt>
                   </FadeSection>
                 );
               })}
@@ -476,6 +483,7 @@ export default function Home() {
                   const room = h.stay.rooms[id];
                   return (
                     <FadeSection key={id} delay={i * 90} className="snap-start w-[78vw] sm:w-auto flex-shrink-0">
+                      <Tilt className="h-full rounded-3xl">
                       <Link to="/stay" className="group heritage-card bg-white block h-full">
                         <div className="img-zoom relative aspect-[4/3] bg-[#173F35]/8">
                           <Photo alt={room.name} className="w-full h-full object-cover"/>
@@ -484,11 +492,12 @@ export default function Home() {
                         <div className="p-6">
                           <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{room.name}</h3>
                           <p className="text-[#1D211E]/60 text-sm leading-relaxed mb-5 line-clamp-2">{room.desc}</p>
-                          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#A65A3A] transition-all duration-300 group-hover:gap-3">
-                            {h.stay.viewRoom} <span>→</span>
+                          <span className="text-sm font-semibold text-[#A65A3A] underline decoration-[#A65A3A]/30 underline-offset-4 transition-colors group-hover:decoration-[#A65A3A]">
+                            {h.stay.viewRoom}
                           </span>
                         </div>
                       </Link>
+                      </Tilt>
                     </FadeSection>
                   );
                 })}
@@ -496,7 +505,7 @@ export default function Home() {
             </div>
             <FadeSection className="text-center mt-12">
               <Link to="/stay" className="btn-primary bg-[#0e2820] border-[#0e2820] text-white hover:bg-[#173F35] hover:border-[#173F35]">
-                {h.stay.cta} <span>→</span>
+                {h.stay.cta}
               </Link>
             </FadeSection>
           </div>
@@ -520,7 +529,7 @@ export default function Home() {
                   ))}
                 </div>
                 <Link to="/dine" className="relative btn-primary self-start">
-                  {h.restaurant.cta} <span>→</span>
+                  {h.restaurant.cta}
                 </Link>
               </FadeSection>
             </div>
@@ -595,26 +604,23 @@ export default function Home() {
                   <span key={i} className="rounded-full bg-white border border-[#0e2820]/8 text-[#0e2820]/80 text-sm px-4 py-2 shadow-sm">{cat}</span>
                 ))}
               </div>
-              <Link to="/library" className="btn-primary">{h.library.cta} <span>→</span></Link>
+              <Link to="/library" className="btn-primary">{h.library.cta}</Link>
             </FadeSection>
 
             <FadeSection delay={100}>
               <div className="grid grid-cols-2 gap-4">
                 {h.library.books.map((book, i) => (
-                  <div
-                    key={i}
-                    className={`group rounded-3xl p-3 bg-white border border-[#0e2820]/8 shadow-sm hover:-translate-y-1.5 hover:shadow-xl transition-all duration-500 ${i % 2 === 1 ? 'mt-8' : ''}`}
-                  >
-                    <div className={`aspect-[3/4] rounded-2xl mb-4 p-5 flex flex-col justify-between relative overflow-hidden ${
+                  <div key={i} className={`book-3d group ${i % 2 === 1 ? 'mt-10' : ''}`}>
+                    <div className={`book aspect-[3/4] p-5 pl-7 flex flex-col justify-between overflow-hidden ${
                       ['bg-[#0e2820]', 'bg-[#A65A3A]', 'bg-[#173F35]', 'bg-[#C99A45]'][i]
                     }`}>
-                      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_20%,white,transparent_55%)]"/>
+                      <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_75%_15%,white,transparent_55%)]"/>
                       <span className={`relative text-[10px] font-semibold tracking-[0.12em] uppercase ${i === 3 ? 'text-[#0e2820]/70' : 'text-white/60'}`}>{book.cat}</span>
-                      <span className={`relative font-display text-lg sm:text-xl font-bold leading-tight ${i === 3 ? 'text-[#0e2820]' : 'text-white'}`}>{book.title}</span>
-                    </div>
-                    <div className="px-1 pb-1 flex items-center justify-between text-xs text-[#1D211E]/50">
-                      <span>{bookYears[i]}</span>
-                      <span className="text-[#A65A3A] transition-transform duration-300 group-hover:translate-x-1">→</span>
+                      <div className="relative">
+                        <div className={`w-8 h-px mb-3 ${i === 3 ? 'bg-[#0e2820]/40' : 'bg-white/40'}`}/>
+                        <span className={`block font-display text-lg sm:text-xl font-bold leading-tight ${i === 3 ? 'text-[#0e2820]' : 'text-white'}`}>{book.title}</span>
+                        <span className={`block mt-2 text-xs ${i === 3 ? 'text-[#0e2820]/60' : 'text-white/50'}`}>{bookYears[i]}</span>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -653,19 +659,14 @@ export default function Home() {
                   {h.final.title}
                 </h2>
                 <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
-                  {[
-                    { icon: <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>, text: t.common.locationLine },
-                    { icon: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>, text: t.common.hoursDaily },
-                    { icon: <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>, text: '+251 XXX XXX XXX' },
-                  ].map((item, i) => (
-                    <span key={i} className="glass rounded-full pl-3 pr-4 py-2 flex items-center gap-2 text-white/85 text-sm">
-                      <svg className="w-4 h-4 text-[#C99A45]" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">{item.icon}</svg>
-                      {item.text}
+                  {[t.common.locationLine, t.common.hoursDaily, '+251 XXX XXX XXX'].map((text, i) => (
+                    <span key={i} className="glass rounded-full px-5 py-2 text-white/85 text-sm">
+                      {text}
                     </span>
                   ))}
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Link to="/visit" className="btn-primary justify-center">{t.common.planVisit} <span>→</span></Link>
+                  <Link to="/visit" className="btn-primary justify-center">{t.common.planVisit}</Link>
                   <a href="#" className="btn-glass justify-center">{t.common.getDirections}</a>
                 </div>
               </FadeSection>

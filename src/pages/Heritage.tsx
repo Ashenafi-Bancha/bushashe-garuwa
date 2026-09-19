@@ -6,14 +6,14 @@ import { fmt, useI18n } from '../i18n/I18nProvider';
 
 /* Page structure — the text for each id lives in the translations (t.heritage.*) */
 const categories = [
-  { id: 'houses', icon: '🏠', img: photos.house, count: 8, to: '/heritage/houses' },
-  { id: 'trees', icon: '🌳', img: photos.lawn, count: 24, to: '/heritage/trees' },
-  { id: 'animals', icon: '🐐', count: 15, to: '/heritage/animals' },
-  { id: 'artifacts', icon: '🏛', count: 120, to: '/heritage/artifacts' },
-  { id: 'clothing', icon: '👘', img: photos.gifaataa2, count: 35, to: '/heritage/clothing' },
-  { id: 'music', icon: '🎵', count: 18, to: '/heritage/music' },
-  { id: 'food', icon: '🍲', count: 40, to: '/dine' },
-  { id: 'stories', icon: '📖', count: 60, to: '/heritage/stories' },
+  { id: 'houses', img: photos.house, count: 8, to: '/heritage/houses' },
+  { id: 'trees', img: photos.lawn, count: 24, to: '/heritage/trees' },
+  { id: 'animals', count: 15, to: '/heritage/animals' },
+  { id: 'artifacts', count: 120, to: '/heritage/artifacts' },
+  { id: 'clothing', img: photos.gifaataa2, count: 35, to: '/heritage/clothing' },
+  { id: 'music', count: 18, to: '/heritage/music' },
+  { id: 'food', count: 40, to: '/dine' },
+  { id: 'stories', count: 60, to: '/heritage/stories' },
 ] as const;
 
 /* Wolaytta and scientific names stay the same in every language */
@@ -59,7 +59,6 @@ export default function Heritage() {
                 </div>
                 <div className="p-5">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-2xl">{cat.icon}</span>
                     <span className="text-[#C99A45] text-xs font-sans">{fmt(hg.itemCount, { count: cat.count })}</span>
                   </div>
                   <h3 className="font-display text-lg font-semibold text-[#173F35] mb-2">{text.label}</h3>
@@ -96,7 +95,6 @@ export default function Heritage() {
                   </div>
                   <div className="text-right flex-shrink-0">
                     <div className="text-white/40 text-xs font-sans">{text.age}</div>
-                    <div className={`mt-2 text-[#C99A45] text-xs transition-transform ${activeTree === i ? 'rotate-180' : ''}`}>↓</div>
                   </div>
                 </div>
                 {activeTree === i && (
@@ -110,7 +108,6 @@ export default function Heritage() {
           </div>
           <div className="mt-10 text-center">
             <div className="inline-flex items-center gap-3 rounded-full border border-[#C99A45]/30 text-[#C99A45] text-sm font-sans px-6 py-3">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6M9 12h6M9 15h4"/></svg>
               {hg.trees.qr}
             </div>
           </div>

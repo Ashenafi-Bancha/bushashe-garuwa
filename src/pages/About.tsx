@@ -4,25 +4,25 @@ import { useI18n } from '../i18n/I18nProvider';
 
 /* Icons per item — the text lives in the translations (t.about.*) */
 const values = [
-  { id: 'authenticity', icon: '🌿' },
-  { id: 'respect', icon: '🤝' },
-  { id: 'preservation', icon: '📚' },
-  { id: 'continuity', icon: '🌱' },
-  { id: 'hospitality', icon: '🏡' },
-  { id: 'education', icon: '💡' },
+  { id: 'authenticity' },
+  { id: 'respect' },
+  { id: 'preservation' },
+  { id: 'continuity' },
+  { id: 'hospitality' },
+  { id: 'education' },
 ] as const;
 
 const offerItems = [
-  { id: 'houses', icon: '🏠' },
-  { id: 'trees', icon: '🌳' },
-  { id: 'artifacts', icon: '🏛' },
-  { id: 'performances', icon: '🎭' },
-  { id: 'library', icon: '📚' },
-  { id: 'food', icon: '🍲' },
-  { id: 'coffee', icon: '☕' },
-  { id: 'guesthouse', icon: '🏡' },
-  { id: 'music', icon: '🎵' },
-  { id: 'stories', icon: '📖' },
+  { id: 'houses' },
+  { id: 'trees' },
+  { id: 'artifacts' },
+  { id: 'performances' },
+  { id: 'library' },
+  { id: 'food' },
+  { id: 'coffee' },
+  { id: 'guesthouse' },
+  { id: 'music' },
+  { id: 'stories' },
 ] as const;
 
 export default function About() {
@@ -75,7 +75,7 @@ export default function About() {
                 <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover" />
               </div>
               <div className="absolute -bottom-5 -left-5 bg-[#173F35] rounded-2xl shadow-xl p-6 hidden lg:block">
-                <div className="text-[#C99A45] font-display text-3xl font-semibold">5</div>
+                <div className="text-[#C99A45] font-display text-3xl font-semibold">4+</div>
                 <div className="text-white/50 font-sans text-xs tracking-wider uppercase mt-1">{a.who.generations}</div>
               </div>
               <div className="absolute -top-5 -right-5 bg-[#C99A45] rounded-2xl shadow-xl p-6 hidden lg:block">
@@ -157,7 +157,6 @@ export default function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {values.map((val) => (
               <div key={val.id} className="bg-white heritage-card p-7">
-                <div className="icon-tile mb-5">{val.icon}</div>
                 <h3 className="font-display text-xl font-semibold text-[#173F35] mb-3">{a.values.items[val.id].title}</h3>
                 <p className="text-[#1D211E]/60 font-sans text-sm leading-relaxed">{a.values.items[val.id].desc}</p>
               </div>
@@ -233,7 +232,6 @@ export default function About() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {offerItems.map((item) => (
               <div key={item.id} className="rounded-2xl border border-white/10 hover:border-[#C99A45]/40 p-5 text-center transition-colors duration-200">
-                <div className="icon-tile icon-tile-dark mb-3">{item.icon}</div>
                 <div className="text-white/70 font-sans text-xs leading-snug">{a.offer.items[item.id]}</div>
               </div>
             ))}

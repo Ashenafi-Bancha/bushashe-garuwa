@@ -7,14 +7,14 @@ import type { Dictionary } from '../i18n/dictionaries/en';
 type ExperienceType = keyof Dictionary['visit']['types'];
 
 /* Icons per option — labels live in the translations (t.visit.types) */
-const experienceTypes: { id: ExperienceType; icon: string }[] = [
-  { id: 'heritage', icon: '🏛' },
-  { id: 'cultural', icon: '🎭' },
-  { id: 'food', icon: '🍲' },
-  { id: 'restaurant', icon: '🍽' },
-  { id: 'guesthouse', icon: '🏡' },
-  { id: 'group', icon: '👥' },
-  { id: 'education', icon: '📚' },
+const experienceTypes: { id: ExperienceType }[] = [
+  { id: 'heritage' },
+  { id: 'cultural' },
+  { id: 'food' },
+  { id: 'restaurant' },
+  { id: 'guesthouse' },
+  { id: 'group' },
+  { id: 'education' },
 ];
 
 export default function Visit() {
@@ -50,7 +50,6 @@ export default function Visit() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
-              <svg className="w-5 h-5 text-[#C99A45] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
               <div>
                 <div className="text-[#C99A45] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
                 <div className="text-white font-sans text-sm">{t.common.addressLine1}</div>
@@ -58,7 +57,6 @@ export default function Visit() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <svg className="w-5 h-5 text-[#C99A45] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
               <div>
                 <div className="text-[#C99A45] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
                 <div className="text-white font-sans text-sm">{t.common.hoursDaily}</div>
@@ -66,7 +64,6 @@ export default function Visit() {
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <svg className="w-5 h-5 text-[#C99A45] mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
               <div>
                 <div className="text-[#C99A45] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
                 <div className="text-white font-sans text-sm">+251 XXX XXX XXX</div>
@@ -100,7 +97,6 @@ export default function Visit() {
                         : 'border-[#173F35]/20 bg-white hover:border-[#173F35]/50 text-[#173F35]'
                     }`}
                   >
-                    <div className="text-2xl mb-2">{exp.icon}</div>
                     <div className="font-sans font-semibold text-xs mb-1">{v.types[exp.id].label}</div>
                     <div className={`font-sans text-[10px] ${selectedExp.includes(exp.id) ? 'text-white/60' : 'text-[#1D211E]/45'}`}>{v.types[exp.id].desc}</div>
                   </button>
@@ -129,7 +125,7 @@ export default function Visit() {
               <div className="bg-white p-8 rounded-3xl shadow-sm">
                 {submitted ? (
                   <div className="text-center py-12">
-                    <div className="text-5xl mb-6">✓</div>
+                    <div className="w-12 h-1 rounded-full bg-[#C99A45] mx-auto mb-8" />
                     <h3 className="font-display text-2xl font-semibold text-[#173F35] mb-3">{v.form.thanksTitle}</h3>
                     <p className="text-[#1D211E]/60 font-sans text-sm leading-relaxed">{v.form.thanksText}</p>
                   </div>

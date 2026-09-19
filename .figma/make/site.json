@@ -1,10 +1,14 @@
 {
-  "description": "Streamline project planning and collaboration with a user-friendly interface that helps teams organize tasks, share updates, and track progress efficiently.",
+  "description": "Bushaashe Garuwa is a living Wolaita heritage destination in Wolaita Sodo, Ethiopia — cultural houses, heritage trees, traditional food, Gifaataa celebrations, a guesthouse and a library of Wolaita history.",
   "robots": {
     "index": false
   },
   "accessibility": {
     "addBypassLinks": false,
     "ignoreReducedMotion": false
+  },
+  "title": "Bushaashe Garuwa — Where Wolaita Heritage Lives",
+  "icons": {
+    "icon": "/favicon.png"
   }
 }

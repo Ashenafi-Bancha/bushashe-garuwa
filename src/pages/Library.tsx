@@ -50,15 +50,12 @@ export default function Library() {
       <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="relative max-w-xl mb-8">
-            <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
-            </svg>
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               type="search"
               placeholder={lb.searchPlaceholder}
-              className="w-full rounded-full bg-white/10 border border-white/20 text-white placeholder-white/30 pl-11 pr-4 py-3 font-sans text-sm focus:outline-none focus:border-[#C99A45] transition-colors"
+              className="w-full rounded-full bg-white/10 border border-white/20 text-white placeholder-white/30 px-6 py-3.5 font-sans text-sm focus:outline-none focus:border-[#C99A45] transition-colors"
             />
           </div>
           <div className="flex flex-wrap gap-2">

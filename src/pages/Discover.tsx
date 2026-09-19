@@ -3,10 +3,10 @@ import { photos } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 
 const pillars = [
-  { id: 'heritage', icon: '🏛' },
-  { id: 'nature', icon: '🌳' },
-  { id: 'knowledge', icon: '📚' },
-  { id: 'hospitality', icon: '☕' },
+  { id: 'heritage' },
+  { id: 'nature' },
+  { id: 'knowledge' },
+  { id: 'hospitality' },
 ] as const;
 
 export default function Discover() {
@@ -69,7 +69,6 @@ export default function Discover() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {pillars.map((pillar) => (
               <div key={pillar.id} className="bg-white rounded-2xl border border-[#173F35]/10 p-7 hover:border-[#C99A45]/30 transition-colors">
-                <div className="icon-tile mb-4">{pillar.icon}</div>
                 <h3 className="font-display text-xl font-semibold text-[#173F35] mb-3">{d.pillars.items[pillar.id].title}</h3>
                 <p className="text-[#1D211E]/55 font-sans text-sm leading-relaxed">{d.pillars.items[pillar.id].desc}</p>
               </div>

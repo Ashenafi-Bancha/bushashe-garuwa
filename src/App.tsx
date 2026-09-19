@@ -14,11 +14,14 @@ import Visit from './pages/Visit';
 import Contact from './pages/Contact';
 import About from './pages/About';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
+import { scrollToTop, startSmoothScroll, useAutoReveal } from './lib/motion';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
+  useEffect(() => startSmoothScroll(), []);
+  useAutoReveal(pathname);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop();
   }, [pathname]);
   return null;
 }

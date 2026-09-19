@@ -14,26 +14,11 @@ const rooms: { id: keyof Dictionary['stay']['rooms']; size: string; amenities: A
   { id: 'heritage', size: '45 m²', amenities: ['wifi', 'bathroom', 'breakfast', 'terrace', 'fullCultural', 'coffee', 'guide'] },
 ];
 
-const amenityIcons: Record<Amenity, string> = {
-  wifi: '📶',
-  bathroom: '🚿',
-  breakfast: '🍳',
-  garden: '🌿',
-  cultural: '🏛',
-  reading: '📚',
-  outdoor: '🌳',
-  kids: '🎁',
-  terrace: '☀️',
-  coffee: '☕',
-  guide: '🗺',
-  fullCultural: '✨',
-};
-
 const whyStay = [
-  { id: 'setting', icon: '🌿' },
-  { id: 'breakfast', icon: '🍳' },
-  { id: 'access', icon: '🏛' },
-  { id: 'coffee', icon: '☕' },
+  { id: 'setting' },
+  { id: 'breakfast' },
+  { id: 'access' },
+  { id: 'coffee' },
 ] as const;
 
 export default function Stay() {
@@ -88,7 +73,6 @@ export default function Stay() {
                     <div className="flex flex-wrap gap-2">
                       {amenities.map((a) => (
                         <span key={a} className="flex items-center gap-1.5 text-xs font-sans text-[#173F35]/70 rounded-full border border-[#173F35]/15 px-3 py-1.5">
-                          <span>{amenityIcons[a]}</span>
                           {st.amenities[a]}
                         </span>
                       ))}
@@ -124,7 +108,6 @@ export default function Stay() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {whyStay.map((item) => (
               <div key={item.id} className="text-center">
-                <div className="icon-tile icon-tile-dark mb-4">{item.icon}</div>
                 <h3 className="text-white font-display text-lg mb-2">{st.why.items[item.id].title}</h3>
                 <p className="text-white/45 font-sans text-sm leading-relaxed">{st.why.items[item.id].desc}</p>
               </div>
