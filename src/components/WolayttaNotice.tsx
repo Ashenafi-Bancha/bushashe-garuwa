@@ -34,7 +34,7 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
         role="dialog"
         aria-modal="true"
         aria-labelledby="wal-notice-title"
-        className={`relative w-full max-w-lg bg-[#F6F1E7] shadow-2xl transition-transform duration-500 ${open ? 'translate-y-0' : 'translate-y-4'}`}
+        className={`relative w-full max-w-lg bg-[#F7F5F0] shadow-2xl transition-transform duration-500 ${open ? 'translate-y-0' : 'translate-y-4'}`}
         style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}
       >
         <div className="h-1 bg-gradient-to-r from-[#173F35] via-[#C99A45] to-[#A65A3A]" />
@@ -43,9 +43,9 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
         </button>
 
         <div className="px-6 sm:px-10 pt-9 pb-8">
-          <div className="text-[#A65A3A] text-[10px] font-sans font-semibold tracking-[0.3em] uppercase mb-3">Wolayttatto</div>
-          <h2 id="wal-notice-title" className="font-serif text-3xl font-light text-[#173F35] leading-tight mb-1">{texts.en.title}</h2>
-          <div lang="am" className="font-serif text-2xl font-light text-[#173F35]/80 leading-snug mb-5">{texts.am.title}</div>
+          <div className="text-[#A65A3A] text-[10px] font-sans font-semibold tracking-[0.16em] uppercase mb-3">Wolayttatto</div>
+          <h2 id="wal-notice-title" className="font-display text-3xl font-semibold text-[#173F35] leading-tight mb-1">{texts.en.title}</h2>
+          <div lang="am" className="font-display text-2xl font-semibold text-[#173F35]/80 leading-snug mb-5">{texts.am.title}</div>
 
           <p className="text-[#1D211E]/70 font-sans text-sm leading-relaxed mb-2">{texts.en.body}</p>
           <p lang="am" className="text-[#1D211E]/60 font-sans text-sm leading-relaxed mb-7">{texts.am.body}</p>

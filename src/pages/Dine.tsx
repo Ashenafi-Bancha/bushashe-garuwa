@@ -20,18 +20,18 @@ export default function Dine() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative h-[60vh] min-h-[400px] flex items-end overflow-hidden">
+      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[60vh] min-h-[400px] flex items-end overflow-hidden">
         <img src={photos.pavilions} alt={t.photos.pavilions} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/30 to-transparent"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{dn.hero.eyebrow}</div>
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light text-white leading-tight">{dn.hero.title}</h1>
+          <span className="eyebrow glass text-white mb-5">{dn.hero.eyebrow}</span>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{dn.hero.title}</h1>
           <p className="text-white/65 font-sans text-base mt-4 max-w-xl">{dn.hero.desc}</p>
         </div>
       </section>
 
       {/* Menu */}
-      <section className="bg-[#F6F1E7] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           {/* Category tabs */}
           <div className="flex flex-wrap gap-2 mb-8 sm:mb-14">
@@ -39,7 +39,7 @@ export default function Dine() {
               <button
                 key={cat}
                 onClick={() => setActiveMenu(cat)}
-                className={`text-xs font-sans font-semibold tracking-wider uppercase px-6 py-3 transition-colors border ${
+                className={`text-xs font-sans font-semibold rounded-full px-6 py-3 transition-colors border ${
                   activeMenu === cat
                     ? 'bg-[#173F35] text-white border-[#173F35]'
                     : 'border-[#173F35]/20 text-[#173F35]/60 hover:border-[#173F35]/50 hover:text-[#173F35]'
@@ -57,7 +57,7 @@ export default function Dine() {
                   <Photo src={dishPhotos[id]} alt={item.name} className="w-full h-full object-cover"/>
                 </div>
                 <div className="p-5">
-                  <h3 className="font-serif text-lg font-medium text-[#173F35] mb-2">{item.name}</h3>
+                  <h3 className="font-display text-lg font-semibold text-[#173F35] mb-2">{item.name}</h3>
                   <p className="text-[#1D211E]/55 text-xs font-sans leading-relaxed mb-4">{item.desc}</p>
                   <div className="text-[#C99A45] font-sans font-semibold text-sm">{item.price}</div>
                 </div>
@@ -66,7 +66,7 @@ export default function Dine() {
           </div>
 
           <div className="mt-14 text-center">
-            <Link to="/events" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-sm font-sans font-semibold tracking-widest uppercase px-8 py-4 transition-colors">
+            <Link to="/events" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
               {dn.joinEvent}
             </Link>
           </div>
@@ -74,14 +74,14 @@ export default function Dine() {
       </section>
 
       {/* Bar section */}
-      <section id="bar" className="relative py-24 lg:py-32 overflow-hidden">
+      <section id="bar" className="relative mx-2 sm:mx-3 rounded-[2rem] py-24 lg:py-32 overflow-hidden">
         <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-[#0e2820]/88"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{dn.bar.eyebrow}</div>
-              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white leading-tight mb-6">{dn.bar.title}</h2>
+              <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{dn.bar.eyebrow}</div>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-6">{dn.bar.title}</h2>
               <p className="text-white/65 font-sans text-base leading-relaxed mb-8">
                 {dn.bar.desc}
               </p>
@@ -92,7 +92,7 @@ export default function Dine() {
             </div>
             <div className="grid grid-cols-2 gap-4">
               {dn.bar.drinks.map((drink, i) => (
-                <div key={i} className="border border-white/10 p-4 text-white/60 font-sans text-sm hover:border-[#C99A45]/30 hover:text-white/80 transition-colors">
+                <div key={i} className="rounded-2xl border border-white/10 p-4 text-white/60 font-sans text-sm hover:border-[#C99A45]/30 hover:text-white/80 transition-colors">
                   {drink}
                 </div>
               ))}

@@ -36,17 +36,17 @@ export default function Visit() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative h-[55vh] min-h-[380px] flex items-end overflow-hidden">
+      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[55vh] min-h-[380px] flex items-end overflow-hidden">
         <img src={photos.lawn} alt={t.photos.lawn} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/40 to-transparent"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{v.hero.eyebrow}</div>
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light text-white leading-tight">{v.hero.title}</h1>
+          <span className="eyebrow glass text-white mb-5">{v.hero.eyebrow}</span>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{v.hero.title}</h1>
         </div>
       </section>
 
       {/* Info strip */}
-      <section className="bg-[#173F35] py-10">
+      <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-10">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
@@ -78,12 +78,12 @@ export default function Visit() {
       </section>
 
       {/* Booking form */}
-      <section className="bg-[#F6F1E7] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
             <div>
-              <div className="text-[#A65A3A] text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{v.booking.eyebrow}</div>
-              <h2 className="font-serif text-4xl font-light text-[#173F35] leading-tight mb-6">{v.booking.title}</h2>
+              <div className="text-[#A65A3A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{v.booking.eyebrow}</div>
+              <h2 className="font-display text-4xl font-semibold text-[#173F35] leading-tight mb-6">{v.booking.title}</h2>
               <p className="text-[#1D211E]/60 font-sans text-sm leading-relaxed mb-8">{v.booking.desc}</p>
 
               {/* Experience selector */}
@@ -94,7 +94,7 @@ export default function Visit() {
                     type="button"
                     aria-pressed={selectedExp.includes(exp.id)}
                     onClick={() => toggleExp(exp.id)}
-                    className={`p-4 text-left border transition-all duration-200 ${
+                    className={`p-4 text-left rounded-2xl border transition-all duration-200 ${
                       selectedExp.includes(exp.id)
                         ? 'border-[#173F35] bg-[#173F35] text-white'
                         : 'border-[#173F35]/20 bg-white hover:border-[#173F35]/50 text-[#173F35]'
@@ -109,7 +109,7 @@ export default function Visit() {
 
               {/* Getting here */}
               <div>
-                <h3 className="font-serif text-2xl font-light text-[#173F35] mb-5">{v.gettingHere.title}</h3>
+                <h3 className="font-display text-2xl font-semibold text-[#173F35] mb-5">{v.gettingHere.title}</h3>
                 <div className="space-y-4">
                   {v.gettingHere.routes.map((route, i) => (
                     <div key={i} className="flex gap-4">
@@ -126,16 +126,16 @@ export default function Visit() {
 
             {/* Contact form */}
             <div>
-              <div className="bg-white p-8 shadow-sm">
+              <div className="bg-white p-8 rounded-3xl shadow-sm">
                 {submitted ? (
                   <div className="text-center py-12">
                     <div className="text-5xl mb-6">✓</div>
-                    <h3 className="font-serif text-2xl font-light text-[#173F35] mb-3">{v.form.thanksTitle}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-[#173F35] mb-3">{v.form.thanksTitle}</h3>
                     <p className="text-[#1D211E]/60 font-sans text-sm leading-relaxed">{v.form.thanksText}</p>
                   </div>
                 ) : (
                   <>
-                    <h3 className="font-serif text-2xl font-light text-[#173F35] mb-6">{v.form.title}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-[#173F35] mb-6">{v.form.title}</h3>
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
@@ -145,7 +145,7 @@ export default function Visit() {
                             type="text"
                             value={form.name}
                             onChange={(e) => setForm({ ...form, name: e.target.value })}
-                            className="w-full border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F6F1E7]"
+                            className="w-full rounded-xl border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F7F5F0]"
                             placeholder={v.form.namePlaceholder}
                           />
                         </div>
@@ -156,7 +156,7 @@ export default function Visit() {
                             type="tel"
                             value={form.phone}
                             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                            className="w-full border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F6F1E7]"
+                            className="w-full rounded-xl border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F7F5F0]"
                             placeholder="+251..."
                           />
                         </div>
@@ -167,7 +167,7 @@ export default function Visit() {
                           type="email"
                           value={form.email}
                           onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          className="w-full border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F6F1E7]"
+                          className="w-full rounded-xl border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F7F5F0]"
                           placeholder="your@email.com"
                         />
                       </div>
@@ -179,7 +179,7 @@ export default function Visit() {
                             type="date"
                             value={form.date}
                             onChange={(e) => setForm({ ...form, date: e.target.value })}
-                            className="w-full border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F6F1E7]"
+                            className="w-full rounded-xl border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F7F5F0]"
                           />
                         </div>
                         <div>
@@ -187,7 +187,7 @@ export default function Visit() {
                           <select
                             value={form.visitors}
                             onChange={(e) => setForm({ ...form, visitors: e.target.value })}
-                            className="w-full border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F6F1E7] appearance-none"
+                            className="w-full rounded-xl border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F7F5F0] appearance-none"
                           >
                             {['1', '2', '3–5', '6–10', '11–20', '21–50', '50+'].map((n) => <option key={n} value={n}>{n === '1' ? v.form.visitorOne : fmt(v.form.visitorMany, { count: n })}</option>)}
                           </select>
@@ -199,20 +199,20 @@ export default function Visit() {
                           rows={3}
                           value={form.message}
                           onChange={(e) => setForm({ ...form, message: e.target.value })}
-                          className="w-full border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F6F1E7] resize-none"
+                          className="w-full rounded-xl border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 font-sans text-base text-[#1D211E] outline-none transition-colors bg-[#F7F5F0] resize-none"
                           placeholder={v.form.messagePlaceholder}
                         />
                       </div>
                       {selectedExp.length > 0 && (
                         <div className="flex flex-wrap gap-2 pt-2">
                           {selectedExp.map((id) => (
-                            <span key={id} className="bg-[#173F35]/10 text-[#173F35] text-xs font-sans px-3 py-1">{v.types[id].label}</span>
+                            <span key={id} className="bg-[#173F35]/10 text-[#173F35] text-xs font-sans rounded-full px-3 py-1">{v.types[id].label}</span>
                           ))}
                         </div>
                       )}
                       <button
                         type="submit"
-                        className="w-full bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] font-sans font-semibold text-sm tracking-widest uppercase py-4 transition-colors"
+                        className="w-full bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] font-sans font-semibold text-sm rounded-full py-4 transition-colors"
                       >
                         {v.form.submit}
                       </button>

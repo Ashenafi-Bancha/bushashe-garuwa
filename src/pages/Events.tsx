@@ -38,22 +38,22 @@ export default function Events() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative h-[55vh] min-h-[380px] flex items-end overflow-hidden">
+      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[55vh] min-h-[380px] flex items-end overflow-hidden">
         <img src={photos.gifaataa3} alt={t.photos.gifaataa3} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/40 to-transparent"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{e.hero.eyebrow}</div>
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light text-white leading-tight">{e.hero.titleA}<br/>{e.hero.titleB}</h1>
+          <span className="eyebrow glass text-white mb-5">{e.hero.eyebrow}</span>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{e.hero.titleA}<br/>{e.hero.titleB}</h1>
         </div>
       </section>
 
       {/* Featured events */}
-      <section className="bg-[#173F35] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-10">{e.featured}</div>
+          <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-10">{e.featured}</div>
           <div className="grid md:grid-cols-2 gap-6">
             {featured.map((ev) => (
-              <div key={ev.id} className="group relative overflow-hidden flex flex-col bg-[#0e2820]/50 border border-white/10 hover:border-[#C99A45]/30 transition-all duration-300">
+              <div key={ev.id} className="group relative overflow-hidden flex flex-col rounded-3xl bg-[#0e2820]/50 border border-white/10 hover:border-[#C99A45]/30 transition-all duration-300">
                 <div className="img-zoom aspect-[16/9] bg-[#0e2820]">
                   <Photo alt={ev.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"/>
                 </div>
@@ -63,15 +63,15 @@ export default function Events() {
                       <span className="text-[#C99A45] text-xs font-sans tracking-wider">{ev.dateLabel}</span>
                       <span className="text-white/40 text-xs font-sans ml-3">· {ev.time}</span>
                     </div>
-                    <span className={`text-xs font-sans px-3 py-1 flex-shrink-0 ${availStyle(ev.availKind, true)}`}>
+                    <span className={`text-xs font-sans rounded-full px-3 py-1 flex-shrink-0 ${availStyle(ev.availKind, true)}`}>
                       {ev.avail}
                     </span>
                   </div>
-                  <h2 className="font-serif text-xl sm:text-2xl font-medium text-white mb-3">{ev.name}</h2>
+                  <h2 className="font-display text-xl sm:text-2xl font-semibold text-white mb-3">{ev.name}</h2>
                   <p className="text-white/55 font-sans text-sm leading-relaxed mb-5 flex-1">{ev.desc}</p>
                   <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/10">
                     <span className="text-[#C99A45] font-sans font-semibold text-sm">{ev.price}</span>
-                    <Link to="/contact" className="inline-flex items-center gap-2 bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] text-xs font-sans font-semibold tracking-widest uppercase px-5 py-3 transition-colors">
+                    <Link to="/contact" className="inline-flex items-center gap-2 bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors">
                       {t.common.reserveYourPlace}
                     </Link>
                   </div>
@@ -83,16 +83,16 @@ export default function Events() {
       </section>
 
       {/* All events */}
-      <section className="bg-[#F6F1E7] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between gap-6 mb-10 flex-wrap">
-            <h2 className="font-serif text-3xl font-light text-[#173F35]">{e.upcoming}</h2>
+            <h2 className="font-display text-3xl font-semibold text-[#173F35]">{e.upcoming}</h2>
             <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <button
                   key={cat}
                   onClick={() => setActiveCat(cat)}
-                  className={`text-xs font-sans font-semibold tracking-wider uppercase px-4 py-2 transition-colors border ${
+                  className={`text-xs font-sans font-semibold rounded-full px-4 py-2 transition-colors border ${
                     activeCat === cat
                       ? 'bg-[#173F35] text-white border-[#173F35]'
                       : 'border-[#173F35]/20 text-[#173F35]/60 hover:border-[#173F35]/50 hover:text-[#173F35]'
@@ -115,17 +115,17 @@ export default function Events() {
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
                       <span className="text-[#C99A45] text-xs font-sans tracking-wider">{ev.dateLabel}</span>
                       <span className="text-[#1D211E]/30 text-xs font-sans">{ev.time}</span>
-                      <span className="bg-[#F6F1E7] text-[#173F35] text-[10px] font-sans font-semibold uppercase tracking-wider px-2 py-0.5">{e.categories[ev.cat]}</span>
+                      <span className="bg-[#F7F5F0] text-[#173F35] text-[10px] font-sans font-semibold uppercase tracking-wider rounded-full px-2.5 py-0.5">{e.categories[ev.cat]}</span>
                     </div>
-                    <h3 className="font-serif text-xl font-medium text-[#173F35] mb-2">{ev.name}</h3>
+                    <h3 className="font-display text-xl font-semibold text-[#173F35] mb-2">{ev.name}</h3>
                     <p className="text-[#1D211E]/55 text-sm font-sans leading-relaxed">{ev.desc}</p>
                   </div>
                   <div className="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-3 flex-shrink-0">
-                    <span className={`text-xs font-sans px-3 py-1 ${availStyle(ev.availKind, false)}`}>
+                    <span className={`text-xs font-sans rounded-full px-3 py-1 ${availStyle(ev.availKind, false)}`}>
                       {ev.avail}
                     </span>
                     <div className="text-[#C99A45] font-sans font-semibold text-sm text-right">{ev.price}</div>
-                    <Link to="/contact" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-xs font-sans font-semibold tracking-widest uppercase px-4 py-2.5 transition-colors whitespace-nowrap">
+                    <Link to="/contact" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-xs font-sans font-semibold rounded-full px-4 py-2.5 transition-colors whitespace-nowrap">
                       {t.common.reserve}
                     </Link>
                   </div>

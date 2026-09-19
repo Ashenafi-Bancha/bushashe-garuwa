@@ -1,7 +1,7 @@
 import { LANGUAGES, WOLAYTTA_READY } from '../i18n/config';
 import { useI18n } from '../i18n/I18nProvider';
 
-/** EN / አማ / WAL selector. `bar` sits in the header; `menu` is the larger mobile-menu version. */
+/** EN / አማ / WAL selector. `bar` sits in the header; `menu` is the larger full-menu version. */
 export default function LanguageSwitcher({ variant }: { variant: 'bar' | 'menu' }) {
   const { lang, setLanguage, t } = useI18n();
 
@@ -9,7 +9,7 @@ export default function LanguageSwitcher({ variant }: { variant: 'bar' | 'menu' 
     <div
       role="group"
       aria-label={t.nav.language}
-      className={variant === 'bar' ? 'flex items-center border border-white/15 divide-x divide-white/15' : 'flex items-center gap-1'}
+      className={`flex items-center rounded-full ${variant === 'bar' ? 'bg-white/8 p-1 gap-0.5' : 'bg-white/5 border border-white/10 p-1.5 gap-1 w-fit'}`}
     >
       {LANGUAGES.map((l) => {
         const active = lang === l.code;
@@ -21,18 +21,12 @@ export default function LanguageSwitcher({ variant }: { variant: 'bar' | 'menu' 
             lang={l.code}
             aria-pressed={active}
             title={soon ? `${l.name} — ${t.nav.wolayttaSoon}` : l.name}
-            className={
-              variant === 'bar'
-                ? `relative text-[10px] tracking-widest px-2.5 py-1.5 font-sans font-medium transition-colors duration-200 ${
-                    active ? 'text-[#C99A45] bg-white/5' : 'text-white/40 hover:text-white/70'
-                  }`
-                : `relative text-sm tracking-wider px-3 py-1.5 font-sans transition-colors border ${
-                    active ? 'text-[#C99A45] border-[#C99A45]/40 bg-[#C99A45]/8' : 'text-white/35 border-white/10 hover:text-white/60'
-                  }`
-            }
+            className={`relative rounded-full font-semibold transition-colors duration-200 ${
+              variant === 'bar' ? 'text-[11px] px-2.5 py-1.5' : 'text-sm px-4 py-2'
+            } ${active ? 'bg-[#C99A45] text-[#0e2820]' : 'text-white/55 hover:text-white'}`}
           >
             {l.short}
-            {soon && <span className="absolute top-1 right-1 w-1 h-1 rounded-full bg-[#C99A45]/70" aria-hidden="true" />}
+            {soon && <span className="absolute top-0.5 right-0.5 w-1.5 h-1.5 rounded-full bg-[#C99A45]" aria-hidden="true" />}
           </button>
         );
       })}

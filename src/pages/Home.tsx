@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { photos, type PhotoKey } from '../assets/photos';
 import Photo from '../components/Photo';
@@ -6,18 +6,19 @@ import { fmt, useI18n } from '../i18n/I18nProvider';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
   { key: 'home',      pos: 'object-center' },
+  { key: 'gifaataa1', pos: 'object-center' },
   { key: 'house',     pos: 'object-center' },
   { key: 'pavilions', pos: 'object-center' },
-  { key: 'gardens',   pos: 'object-bottom' },
-  { key: 'lawn',      pos: 'object-top' },
+  { key: 'lawn',      pos: 'object-[center_65%]' },
 ];
+const SLIDE_MS = 6500;
 
 /* Page structure — the text for each id lives in the translations (t.home.*) */
 const exploreCards = [
-  { id: 'heritage', img: photos.house, to: '/heritage' },
-  { id: 'nature', img: photos.lawn, to: '/heritage' },
-  { id: 'culture', img: photos.gifaataa1, to: '/experiences' },
-  { id: 'hospitality', img: photos.pavilions, to: '/stay' },
+  { id: 'heritage', img: photos.house, to: '/heritage', span: 'md:col-span-2 md:row-span-2' },
+  { id: 'nature', img: photos.lawn, to: '/heritage', span: 'md:col-span-2' },
+  { id: 'culture', img: photos.gifaataa1, to: '/experiences', span: '' },
+  { id: 'hospitality', img: photos.pavilions, to: '/stay', span: '' },
 ] as const;
 
 const livingHeritage = [
@@ -30,7 +31,7 @@ const livingHeritage = [
 const experiences = [
   { id: 'food', to: '/experiences' },
   { id: 'coffee', to: '/experiences' },
-  { id: 'performance', to: '/experiences' },
+  { id: 'performance', img: photos.gifaataa2, to: '/experiences' },
   { id: 'tour', img: photos.pavilions, to: '/experiences' },
   { id: 'education', to: '/experiences/education' },
   { id: 'photography', img: photos.gardens, to: '/experiences' },
@@ -45,10 +46,20 @@ const rooms = ['standard', 'family', 'heritage'] as const;
 
 const bookYears = ['2018', '2020', '2015', '2019'];
 
-const galleryPhotos: PhotoKey[] = ['home', 'gifaataa1', 'house', 'gifaataa2', 'pavilions', 'gifaataa3', 'gardens', 'lawn'];
+/* Mosaic: spans fill a 4-column grid exactly (2 columns on mobile) */
+const galleryPhotos: { key: PhotoKey; span: string }[] = [
+  { key: 'home', span: 'col-span-2 row-span-2' },
+  { key: 'gifaataa1', span: '' },
+  { key: 'house', span: 'md:row-span-2' },
+  { key: 'gifaataa2', span: '' },
+  { key: 'pavilions', span: 'md:col-span-2' },
+  { key: 'gifaataa3', span: 'md:col-span-2' },
+  { key: 'gardens', span: 'md:col-span-2' },
+  { key: 'lawn', span: 'col-span-2' },
+];
 
-/* ── FadeSection hook ── */
-function FadeSection({ children, className = '', delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+/* ── Scroll reveal ── */
+function FadeSection({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
   useEffect(() => {
@@ -72,6 +83,52 @@ function FadeSection({ children, className = '', delay = 0 }: { children: React.
   );
 }
 
+/* ── Section heading ── */
+function Heading({ eyebrow, title, desc, dark = false, center = false, action }: {
+  eyebrow: string; title: string; desc?: string; dark?: boolean; center?: boolean; action?: ReactNode;
+}) {
+  return (
+    <FadeSection className={`mb-12 sm:mb-16 ${action ? 'flex flex-col md:flex-row md:items-end justify-between gap-6' : ''}`}>
+      <div className={center ? 'text-center mx-auto max-w-3xl' : 'max-w-3xl'}>
+        <span className={`eyebrow mb-5 ${dark ? 'bg-white/8 text-[#C99A45]' : 'bg-[#A65A3A]/10 text-[#A65A3A]'}`}>{eyebrow}</span>
+        <h2 className={`font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] ${dark ? 'text-white' : 'text-[#0e2820]'}`}>
+          {title}
+        </h2>
+        {desc && <p className={`mt-5 text-base sm:text-lg leading-relaxed ${center ? 'mx-auto' : ''} max-w-2xl ${dark ? 'text-white/60' : 'text-[#1D211E]/60'}`}>{desc}</p>}
+      </div>
+      {action}
+    </FadeSection>
+  );
+}
+
+/* ── Circular arrow used on cards ── */
+function ArrowCircle({ light = false }: { light?: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={`inline-flex w-11 h-11 rounded-full items-center justify-center flex-shrink-0 transition-all duration-500 group-hover:rotate-[-45deg] ${
+        light ? 'glass text-white group-hover:bg-[#C99A45] group-hover:text-[#0e2820] group-hover:border-[#C99A45]' : 'bg-[#0e2820] text-[#C99A45] group-hover:bg-[#C99A45] group-hover:text-[#0e2820]'
+      }`}
+    >
+      →
+    </span>
+  );
+}
+
+function TextLink({ to, children, dark = false }: { to: string; children: ReactNode; dark?: boolean }) {
+  return (
+    <Link
+      to={to}
+      className={`group inline-flex items-center gap-3 text-sm font-semibold rounded-full pl-5 pr-1.5 py-1.5 border transition-colors ${
+        dark ? 'border-white/20 text-white hover:border-[#C99A45]' : 'border-[#0e2820]/15 text-[#0e2820] hover:border-[#0e2820]'
+      }`}
+    >
+      {children}
+      <span className="w-8 h-8 rounded-full bg-[#C99A45] text-[#0e2820] flex items-center justify-center transition-transform duration-300 group-hover:rotate-[-45deg]">→</span>
+    </Link>
+  );
+}
+
 export default function Home() {
   const { t } = useI18n();
   const h = t.home;
@@ -80,9 +137,9 @@ export default function Home() {
   const [showStickyCta, setShowStickyCta] = useState(false);
 
   useEffect(() => {
-    const timer = setInterval(() => setHeroIdx((i) => (i + 1) % heroSlides.length), 6500);
-    return () => clearInterval(timer);
-  }, []);
+    const timer = setTimeout(() => setHeroIdx((i) => (i + 1) % heroSlides.length), SLIDE_MS);
+    return () => clearTimeout(timer);
+  }, [heroIdx]);
 
   useEffect(() => {
     const onScroll = () => setShowStickyCta(window.scrollY > window.innerHeight * 0.6);
@@ -90,234 +147,196 @@ export default function Home() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const stats = [
+    { value: '5', label: h.hero.statGenerations },
+    { value: '100+', label: h.hero.statYears },
+    { value: '3', label: h.hero.statLanguages },
+  ];
+
   return (
     <>
-      <main className="pb-16 lg:pb-0">
+      <main className="pb-24 lg:pb-0">
 
-        {/* ════════════════════════════════════════
-            HERO
-        ════════════════════════════════════════ */}
-        <section className="relative h-screen min-h-[580px] flex items-end overflow-hidden" aria-label={h.hero.title}>
-
-          {/* Slideshow */}
+        {/* ═════════ HERO ═════════ */}
+        <section className="relative h-[100svh] min-h-[640px] overflow-hidden bg-[#0a1f19]" aria-label={h.hero.title}>
           {heroSlides.map(({ key, pos }, i) => (
             <img
               key={key}
               src={photos[key]}
               alt={t.photos[key]}
               fetchPriority={i === 0 ? 'high' : 'auto'}
-              className={`absolute inset-0 w-full h-full object-cover ${pos} transition-opacity duration-[1400ms] ease-in-out ${
-                i === heroIdx ? 'opacity-100' : 'opacity-0'
+              className={`absolute inset-0 w-full h-full object-cover ${pos} transition-opacity duration-[1600ms] ease-in-out ${
+                i === heroIdx ? 'opacity-100 animate-ken-burns' : 'opacity-0'
               }`}
             />
           ))}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1f19]/55 via-[#0a1f19]/10 to-[#0a1f19]"/>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f19]/70 via-[#0a1f19]/10 to-transparent"/>
 
-          {/* Multi-layer gradient for depth */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f19]/95 via-[#173F35]/35 to-transparent"/>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0e2820]/60 via-transparent to-transparent"/>
-
-          {/* Content */}
-          <div className="relative z-10 w-full max-w-screen-xl mx-auto px-4 sm:px-8 pb-14 sm:pb-20 lg:pb-28">
-            <div className="max-w-4xl">
-
-              {/* Label row */}
-              <div className="flex items-center gap-3 mb-5 sm:mb-8 animate-fade-up">
-                <div className="h-px w-6 sm:w-10 bg-[#C99A45]/70 flex-shrink-0"/>
-                <span className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.25em] sm:tracking-[0.4em] uppercase">
+          <div className="relative z-10 h-full max-w-screen-xl mx-auto px-5 sm:px-8 flex flex-col justify-end pb-24 sm:pb-28">
+            <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
+              <div className="max-w-4xl">
+                <span className="eyebrow glass text-white mb-6 sm:mb-8 animate-fade-up">
                   {h.hero.eyebrow}
                 </span>
-              </div>
-
-              {/* Main headline */}
-              <h1 className="font-serif font-light text-white leading-[1.05] mb-5 sm:mb-8 animate-fade-up delay-100">
-                <span className="block text-[clamp(2rem,8vw,5.5rem)] mb-2 sm:mb-3 tracking-tight">
+                <h1 className="font-display font-extrabold text-white text-[clamp(2.9rem,9vw,7.5rem)] leading-[0.92] tracking-[-0.045em] animate-fade-up delay-100">
                   {h.hero.title}
-                </span>
-                <span className="block text-[clamp(1rem,3.5vw,2rem)] font-light text-white/75 leading-snug max-w-2xl">
+                </h1>
+                <p className="mt-6 sm:mt-8 text-lg sm:text-2xl text-white/80 font-light leading-snug max-w-2xl animate-fade-up delay-200">
                   {h.hero.subtitle}
-                </span>
-              </h1>
-
-              {/* Slogan */}
-              <div className="flex items-start gap-3 mb-7 sm:mb-10 max-w-xl animate-fade-up delay-200">
-                <div className="w-px self-stretch bg-[#C99A45]/50 flex-shrink-0 mt-1"/>
-                <p className="font-serif italic text-sm sm:text-lg lg:text-xl text-white/90 leading-snug font-light">
-                  {h.hero.sloganA}{' '}
-                  <span className="not-italic text-white/65 text-xs sm:text-base lg:text-lg">
-                    {h.hero.sloganB}
-                  </span>
-                  {' '}{h.hero.sloganC}
                 </p>
+                <div className="flex flex-col sm:flex-row gap-3 mt-9 sm:mt-10 animate-fade-up delay-300">
+                  <Link to="/discover" className="btn-primary justify-center">
+                    {h.hero.explore} <span>→</span>
+                  </Link>
+                  <Link to="/visit" className="btn-glass justify-center">
+                    {t.common.planVisit}
+                  </Link>
+                </div>
               </div>
 
-              {/* CTA buttons */}
-              <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 animate-fade-up delay-300">
-                <Link
-                  to="/discover"
-                  className="btn-primary justify-center text-center py-3.5 sm:py-[14px] shadow-lg shadow-[#C99A45]/25"
-                >
-                  {h.hero.explore}
-                  <span className="ml-1">→</span>
-                </Link>
-                <Link
-                  to="/visit"
-                  className="inline-flex items-center justify-center gap-2 font-sans font-bold text-[11px] tracking-[0.18em] uppercase text-white py-3.5 sm:py-[14px] px-8 border border-white/90 active:scale-[0.98] transition-all duration-300"
-                  style={{
-                    background: 'rgba(255,255,255,0.12)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    textShadow: '0 1px 4px rgba(0,0,0,0.5)',
-                    boxShadow: '0 2px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.2)',
-                  }}
-                  onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.22)')}
-                  onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
-                >
-                  {t.common.planVisit}
-                </Link>
+              {/* Stats card */}
+              <div className="hidden lg:grid grid-cols-3 glass rounded-3xl p-2 animate-fade-up delay-400">
+                {stats.map((s, i) => (
+                  <div key={i} className={`px-6 py-5 ${i > 0 ? 'border-l border-white/15' : ''}`}>
+                    <div className="font-display text-4xl font-bold text-white">{s.value}</div>
+                    <div className="text-xs text-white/60 mt-1 whitespace-nowrap">{s.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* Scroll hint */}
-          <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/35 animate-fade-in delay-500">
-            <span className="text-[9px] sm:text-[10px] font-sans tracking-[0.25em] uppercase">{h.hero.scroll}</span>
-            <div className="animate-scroll-bounce">
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <path d="M12 5v14M5 12l7 7 7-7"/>
-              </svg>
+          {/* Slide progress + scroll hint */}
+          <div className="absolute bottom-7 inset-x-0 z-10">
+            <div className="max-w-screen-xl mx-auto px-5 sm:px-8 flex items-center justify-between">
+              <div className="flex gap-2">
+                {heroSlides.map((s, i) => (
+                  <button
+                    key={s.key}
+                    onClick={() => setHeroIdx(i)}
+                    className="relative h-1 w-10 sm:w-14 rounded-full bg-white/25 overflow-hidden"
+                    aria-label={fmt(h.hero.slide, { n: i + 1 })}
+                    aria-current={i === heroIdx}
+                  >
+                    {i === heroIdx && <span key={heroIdx} className="absolute inset-0 bg-[#C99A45] rounded-full animate-progress" />}
+                    {i < heroIdx && <span className="absolute inset-0 bg-white/70 rounded-full" />}
+                  </button>
+                ))}
+              </div>
+              <div className="hidden sm:flex items-center gap-2 text-white/50 text-xs font-medium tracking-[0.14em] uppercase">
+                {h.hero.scroll}
+                <span className="animate-scroll-bounce">↓</span>
+              </div>
             </div>
           </div>
+        </section>
 
-          {/* Slide dots */}
-          <div className="absolute bottom-6 sm:bottom-8 right-5 sm:right-8 flex gap-2">
-            {heroSlides.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setHeroIdx(i)}
-                className={`h-1 rounded-full transition-all duration-500 ${
-                  i === heroIdx ? 'bg-[#C99A45] w-7' : 'bg-white/30 w-3 hover:bg-white/50'
-                }`}
-                aria-label={fmt(h.hero.slide, { n: i + 1 })}
-              />
+        {/* ═════════ MARQUEE ═════════ */}
+        <div className="bg-[#C99A45] overflow-hidden py-4 sm:py-5" aria-hidden="true">
+          <div className="flex w-max animate-marquee">
+            {[0, 1].map((copy) => (
+              <div key={copy} className="flex items-center">
+                {[...h.intro.pillars, ...h.intro.pillars].map((p, i) => (
+                  <span key={i} className="flex items-center font-display text-2xl sm:text-3xl font-bold text-[#0e2820] tracking-tight">
+                    <span className="px-6 sm:px-8">{p}</span>
+                    <span className="text-[#0e2820]/40 text-xl">✦</span>
+                  </span>
+                ))}
+              </div>
             ))}
           </div>
+        </div>
+
+        {/* ═════════ INTRO ═════════ */}
+        <section className="relative py-20 sm:py-28 lg:py-32 overflow-hidden">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+            <FadeSection>
+              <span className="eyebrow bg-[#A65A3A]/10 text-[#A65A3A] mb-5">{h.intro.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0e2820] leading-[1.05] mb-7">
+                {h.intro.title}
+              </h2>
+              <p className="text-lg sm:text-xl text-[#1D211E]/75 leading-relaxed mb-5">{h.intro.p1}</p>
+              <p className="text-base text-[#1D211E]/55 leading-relaxed mb-8">{h.intro.p2}</p>
+              <div className="flex flex-wrap gap-2 mb-10">
+                {h.intro.pillars.map((pillar, i) => (
+                  <span key={i} className="inline-flex items-center gap-2 rounded-full bg-white border border-[#0e2820]/8 px-4 py-2 text-sm font-medium text-[#0e2820] shadow-sm">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#C99A45]"/>{pillar}
+                  </span>
+                ))}
+              </div>
+              <blockquote className="border-l-2 border-[#C99A45] pl-5 font-display text-lg sm:text-xl font-medium italic text-[#173F35] leading-snug">
+                {h.hero.sloganA} {h.hero.sloganB} {h.hero.sloganC}
+              </blockquote>
+            </FadeSection>
+
+            <FadeSection delay={150} className="relative">
+              <div className="img-zoom rounded-[2rem] aspect-[4/5] bg-[#173F35]/10 shadow-2xl shadow-[#0e2820]/20">
+                <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover object-[center_60%]"/>
+              </div>
+              <div className="hidden sm:block absolute -bottom-10 -left-10 w-[48%] aspect-square rounded-[1.75rem] overflow-hidden border-8 border-[#F7F5F0] shadow-xl">
+                <img src={photos.gifaataa2} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy"/>
+              </div>
+              <div className="absolute top-6 right-3 sm:-right-6 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-[#0e2820] text-[#C99A45] flex items-center justify-center font-display text-2xl font-bold">5</div>
+                <div className="text-sm font-semibold text-[#0e2820] leading-tight">{h.intro.generations}</div>
+              </div>
+            </FadeSection>
+          </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            MORE THAN A DESTINATION
-        ════════════════════════════════════════ */}
-        <section className="bg-[#F6F1E7] pattern-weave py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <div className="order-2 lg:order-1">
-                <FadeSection>
-                  <div className="text-[#A65A3A] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{h.intro.eyebrow}</div>
-                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#173F35] leading-tight mb-5 sm:mb-6 gold-underline">
-                    {h.intro.title}
-                  </h2>
-                  <p className="text-[#1D211E]/65 font-sans text-sm sm:text-base leading-relaxed mb-4">
-                    {h.intro.p1}
-                  </p>
-                  <p className="text-[#1D211E]/50 font-sans text-sm sm:text-base leading-relaxed mb-8 sm:mb-10">
-                    {h.intro.p2}
-                  </p>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                    {h.intro.pillars.map((pillar, i) => (
-                      <FadeSection key={i} delay={i * 80}>
-                        <div className="flex items-center gap-2.5">
-                          <div className="w-1.5 h-1.5 bg-[#C99A45] flex-shrink-0"/>
-                          <span className="text-[#173F35] font-sans font-semibold text-xs sm:text-sm tracking-wide uppercase">{pillar}</span>
-                        </div>
-                      </FadeSection>
-                    ))}
-                  </div>
-                </FadeSection>
-              </div>
-              <FadeSection className="order-1 lg:order-2 relative" delay={150}>
-                <div className="img-zoom aspect-[4/5] bg-[#173F35]/10">
-                  <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover object-top"/>
-                </div>
-                <div className="absolute -bottom-4 sm:-bottom-6 -left-4 sm:-left-6 bg-[#173F35] text-white p-5 sm:p-6 hidden sm:block">
-                  <div className="font-serif text-3xl sm:text-4xl font-light text-[#C99A45]">5</div>
-                  <div className="font-sans text-[10px] tracking-wider text-white/55 uppercase mt-1">{h.intro.generations}</div>
-                </div>
-              </FadeSection>
+        {/* ═════════ EXPLORE — bento ═════════ */}
+        <section className="relative bg-[#0e2820] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
+          <div className="absolute -top-40 -right-32 w-[36rem] h-[36rem] glow-gold pointer-events-none"/>
+          <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading eyebrow={h.explore.eyebrow} title={h.explore.title} dark />
+            <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[640px]">
+              {exploreCards.map((card, i) => {
+                const text = h.explore.cards[card.id];
+                return (
+                  <FadeSection key={card.id} delay={i * 90} className={`${card.span} min-h-[320px] md:min-h-0`}>
+                    <Link to={card.to} className="group relative block h-full rounded-[1.75rem] overflow-hidden">
+                      <Photo
+                        src={card.img}
+                        alt={text.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f19]/90 via-[#0a1f19]/20 to-transparent"/>
+                      <div className="absolute top-5 right-5"><ArrowCircle light /></div>
+                      <div className="absolute bottom-0 inset-x-0 p-6 sm:p-7">
+                        <h3 className={`font-display font-bold text-white mb-2 ${i === 0 ? 'text-3xl sm:text-5xl' : 'text-2xl sm:text-3xl'}`}>{text.title}</h3>
+                        <p className="text-white/70 text-sm sm:text-base leading-relaxed max-w-md line-clamp-2">{text.sub}</p>
+                      </div>
+                    </Link>
+                  </FadeSection>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            EXPLORE BUSHASHE — 4 cards
-        ════════════════════════════════════════ */}
-        <section className="bg-[#173F35] py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeSection>
-              <div className="text-center mb-10 sm:mb-14">
-                <div className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-3 sm:mb-4">{h.explore.eyebrow}</div>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white">{h.explore.title}</h2>
-              </div>
-            </FadeSection>
-
-            {/* Mobile: horizontal scroll; desktop: grid */}
-            <div className="scroll-smooth-x pb-4 -mx-5 px-5 sm:mx-0 sm:px-0 sm:overflow-visible sm:pb-0">
-              <div className="flex gap-3 sm:gap-1 sm:grid sm:grid-cols-2 lg:grid-cols-4 w-[200%] sm:w-auto">
-                {exploreCards.map((card, i) => {
-                  const text = h.explore.cards[card.id];
-                  return (
-                    <FadeSection key={card.id} delay={i * 80} className="snap-start w-[80vw] sm:w-auto flex-shrink-0">
-                      <Link to={card.to} className="group relative overflow-hidden flex items-end aspect-[3/4] sm:aspect-[3/4] block">
-                        <Photo
-                          src={'img' in card ? card.img : undefined}
-                          alt={text.title}
-                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f19]/90 via-[#173F35]/20 to-transparent transition-opacity duration-400"/>
-                        <div className="relative p-5 sm:p-6 z-10 w-full">
-                          <h3 className="font-serif text-2xl sm:text-3xl font-light text-white mb-1.5">{text.title}</h3>
-                          <p className="text-white/55 text-xs sm:text-sm font-sans leading-relaxed mb-3 line-clamp-2">{text.sub}</p>
-                          <span className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-bold tracking-widest uppercase flex items-center gap-2 transition-all duration-300 group-hover:gap-3">
-                            {t.common.explore} <span>→</span>
-                          </span>
-                        </div>
-                      </Link>
-                    </FadeSection>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ════════════════════════════════════════
-            LIVING HERITAGE
-        ════════════════════════════════════════ */}
-        <section className="bg-[#F6F1E7] py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeSection>
-              <div className="mb-10 sm:mb-14 flex flex-col sm:flex-row sm:items-end justify-between gap-5">
-                <div>
-                  <div className="text-[#A65A3A] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-3 sm:mb-4">{h.living.eyebrow}</div>
-                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#173F35] leading-tight">{h.living.title}</h2>
-                </div>
-                <Link to="/heritage" className="text-[#173F35] text-xs sm:text-sm font-sans font-semibold tracking-wider uppercase hover:text-[#C99A45] transition-colors flex items-center gap-2 flex-shrink-0 group">
-                  {t.common.exploreAll} <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </Link>
-              </div>
-            </FadeSection>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+        {/* ═════════ LIVING HERITAGE ═════════ */}
+        <section className="py-20 sm:py-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading
+              eyebrow={h.living.eyebrow}
+              title={h.living.title}
+              action={<TextLink to="/heritage">{t.common.exploreAll}</TextLink>}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {livingHeritage.map((item, i) => {
                 const text = h.living.items[item.id];
                 return (
                   <FadeSection key={item.id} delay={i * 80}>
-                    <Link to="/heritage" className="group flex gap-4 sm:gap-5 items-start heritage-card bg-white p-4 sm:p-5">
-                      <div className="img-zoom w-24 sm:w-28 h-24 sm:h-28 flex-shrink-0 bg-[#173F35]/8">
+                    <Link to="/heritage" className="group heritage-card bg-white flex flex-col h-full">
+                      <div className="img-zoom relative aspect-[4/3] bg-[#173F35]/8">
                         <Photo src={'img' in item ? item.img : undefined} alt={text.title} className="w-full h-full object-cover"/>
+                        <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-xs font-bold text-[#0e2820] tabular-nums">0{i + 1}</span>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="font-serif text-lg sm:text-xl font-medium text-[#173F35] mb-1.5">{text.title}</h3>
-                        <p className="text-[#1D211E]/55 text-xs sm:text-sm font-sans leading-relaxed mb-3 line-clamp-2">{text.desc}</p>
-                        <span className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-bold tracking-wider uppercase flex items-center gap-2 transition-all duration-300 group-hover:gap-3">
+                      <div className="p-6 flex flex-col flex-1">
+                        <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{text.title}</h3>
+                        <p className="text-[#1D211E]/60 text-sm leading-relaxed mb-6 flex-1">{text.desc}</p>
+                        <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#A65A3A] transition-all duration-300 group-hover:gap-3">
                           {t.common.explore} <span>→</span>
                         </span>
                       </div>
@@ -329,92 +348,76 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            TIMELINE
-        ════════════════════════════════════════ */}
-        <section className="bg-[#173F35] py-12 sm:py-16 lg:py-24 overflow-hidden">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeSection>
-              <div className="text-center mb-12 sm:mb-16">
-                <div className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-3 sm:mb-4">{h.timeline.eyebrow}</div>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white">{h.timeline.title}</h2>
-              </div>
-            </FadeSection>
+        {/* ═════════ TIMELINE ═════════ */}
+        <section className="relative bg-[#0e2820] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
+          <div className="absolute -bottom-48 -left-40 w-[40rem] h-[40rem] glow-forest pointer-events-none"/>
+          <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading
+              eyebrow={h.timeline.eyebrow}
+              title={h.timeline.title}
+              dark
+              action={<TextLink to="/heritage/timeline" dark>{h.timeline.cta}</TextLink>}
+            />
 
-            {/* Mobile: vertical; desktop: horizontal */}
+            {/* Desktop: horizontal */}
             <div className="hidden lg:block relative">
-              <div className="absolute top-4 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#C99A45]/35 to-transparent"/>
-              <div className="grid grid-cols-5 gap-4">
+              <div className="absolute top-[7px] left-0 right-0 h-px bg-gradient-to-r from-[#C99A45]/60 via-[#C99A45]/30 to-transparent"/>
+              <div className="grid grid-cols-5 gap-5">
                 {h.timeline.items.map((item, i) => (
-                  <FadeSection key={i} delay={i * 80}>
-                    <div className="flex flex-col items-center text-center">
-                      <div className="w-8 h-8 border-2 border-[#C99A45] bg-[#173F35] flex items-center justify-center z-10 mb-6">
-                        <div className="w-2 h-2 bg-[#C99A45] transition-all duration-300"/>
-                      </div>
-                      <div className="text-[#C99A45] text-[10px] font-sans tracking-wider uppercase mb-1">{item.period}</div>
-                      <div className="text-white font-serif text-lg font-medium mb-2">{item.label}</div>
-                      <p className="text-white/45 text-xs font-sans leading-relaxed">{item.desc}</p>
+                  <FadeSection key={i} delay={i * 90}>
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#C99A45] ring-8 ring-[#C99A45]/15 mb-8"/>
+                    <div className="rounded-3xl bg-white/[0.04] border border-white/10 p-6 h-full hover:bg-white/[0.07] hover:border-[#C99A45]/30 transition-colors duration-500">
+                      <div className="font-display text-2xl font-bold text-[#C99A45] mb-3">{item.period}</div>
+                      <div className="font-display text-lg font-semibold text-white mb-2">{item.label}</div>
+                      <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </FadeSection>
                 ))}
               </div>
             </div>
 
-            {/* Mobile vertical */}
-            <div className="lg:hidden space-y-4">
-              {h.timeline.items.map((item, i) => (
-                <FadeSection key={i} delay={i * 60}>
-                  <div className="flex gap-5 items-start">
-                    <div className="flex flex-col items-center flex-shrink-0">
-                      <div className="w-7 h-7 border-2 border-[#C99A45] bg-[#173F35] flex items-center justify-center">
-                        <div className="w-1.5 h-1.5 bg-[#C99A45]"/>
-                      </div>
-                      {i < h.timeline.items.length - 1 && <div className="w-px flex-1 bg-[#C99A45]/20 mt-2 min-h-[2rem]"/>}
+            {/* Mobile: vertical */}
+            <div className="lg:hidden relative pl-8">
+              <div className="absolute left-[6px] top-2 bottom-2 w-px bg-gradient-to-b from-[#C99A45]/60 to-[#C99A45]/10"/>
+              <div className="space-y-5">
+                {h.timeline.items.map((item, i) => (
+                  <FadeSection key={i} delay={i * 60} className="relative">
+                    <div className="absolute -left-8 top-6 w-3.5 h-3.5 rounded-full bg-[#C99A45] ring-4 ring-[#C99A45]/15"/>
+                    <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
+                      <div className="font-display text-xl font-bold text-[#C99A45] mb-1">{item.period}</div>
+                      <div className="font-display text-base font-semibold text-white mb-1">{item.label}</div>
+                      <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
                     </div>
-                    <div className="pb-4">
-                      <div className="text-[#C99A45] text-[10px] font-sans tracking-wider uppercase mb-1">{item.period}</div>
-                      <div className="text-white font-serif text-lg font-medium mb-1">{item.label}</div>
-                      <p className="text-white/45 text-xs font-sans leading-relaxed">{item.desc}</p>
-                    </div>
-                  </div>
-                </FadeSection>
-              ))}
+                  </FadeSection>
+                ))}
+              </div>
             </div>
-
-            <FadeSection className="text-center mt-12 sm:mt-14">
-              <Link to="/heritage/timeline" className="btn-outline border-[#C99A45]/45 text-[#C99A45] hover:bg-[#C99A45]/8">
-                {h.timeline.cta}
-              </Link>
-            </FadeSection>
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            EXPERIENCES
-        ════════════════════════════════════════ */}
-        <section className="bg-[#F6F1E7] py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeSection>
-              <div className="mb-10 sm:mb-14">
-                <div className="text-[#A65A3A] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-3 sm:mb-4">{h.experiences.eyebrow}</div>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#173F35]">{h.experiences.title}</h2>
-              </div>
-            </FadeSection>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        {/* ═════════ EXPERIENCES ═════════ */}
+        <section className="py-20 sm:py-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading
+              eyebrow={h.experiences.eyebrow}
+              title={h.experiences.title}
+              action={<TextLink to="/experiences">{t.common.exploreAll}</TextLink>}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {experiences.map((exp, i) => {
                 const text = h.experiences.items[exp.id];
                 return (
-                  <FadeSection key={exp.id} delay={i * 60}>
-                    <Link to={exp.to} className="group block bg-white heritage-card overflow-hidden h-full">
-                      <div className="img-zoom aspect-video bg-[#173F35]/8">
+                  <FadeSection key={exp.id} delay={(i % 3) * 80}>
+                    <Link to={exp.to} className="group heritage-card bg-white block h-full">
+                      <div className="img-zoom relative aspect-[16/11] bg-[#173F35]/8">
                         <Photo src={'img' in exp ? exp.img : undefined} alt={text.title} className="w-full h-full object-cover"/>
                       </div>
-                      <div className="p-5 sm:p-6">
-                        <h3 className="font-serif text-lg sm:text-xl font-medium text-[#173F35] mb-2">{text.title}</h3>
-                        <p className="text-[#1D211E]/55 text-xs sm:text-sm font-sans leading-relaxed mb-4 line-clamp-2">{text.desc}</p>
-                        <span className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-bold tracking-wider uppercase flex items-center gap-2 transition-all duration-300 group-hover:gap-3">
-                          {t.common.learnMore} <span>→</span>
-                        </span>
+                      <div className="p-6 flex items-end justify-between gap-4">
+                        <div>
+                          <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{text.title}</h3>
+                          <p className="text-[#1D211E]/60 text-sm leading-relaxed line-clamp-2">{text.desc}</p>
+                        </div>
+                        <ArrowCircle />
                       </div>
                     </Link>
                   </FadeSection>
@@ -424,43 +427,35 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            EVENTS
-        ════════════════════════════════════════ */}
-        <section className="bg-[#1D211E] py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeSection>
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10 sm:mb-14">
-                <div>
-                  <div className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-3 sm:mb-4">{h.events.eyebrow}</div>
-                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white">{h.events.title}</h2>
-                  <p className="text-white/45 font-sans text-sm mt-3 max-w-lg leading-relaxed">{h.events.desc}</p>
-                </div>
-                <Link to="/events" className="text-[#C99A45] text-xs sm:text-sm font-sans font-semibold tracking-wider uppercase hover:text-[#d9af65] transition-colors flex items-center gap-2 flex-shrink-0 group">
-                  {h.events.all} <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </Link>
-              </div>
-            </FadeSection>
-            <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+        {/* ═════════ EVENTS ═════════ */}
+        <section className="relative bg-[#101815] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
+          <div className="absolute -top-40 left-1/3 w-[40rem] h-[30rem] glow-gold opacity-60 pointer-events-none"/>
+          <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading
+              eyebrow={h.events.eyebrow}
+              title={h.events.title}
+              desc={h.events.desc}
+              dark
+              action={<TextLink to="/events" dark>{h.events.all}</TextLink>}
+            />
+            <div className="grid lg:grid-cols-2 gap-5">
               {events.map((ev, i) => {
                 const text = h.events.items[ev.id];
                 return (
-                  <FadeSection key={ev.id} delay={i * 80}>
-                    <div className="group bg-white/5 border border-white/10 hover:border-[#C99A45]/30 overflow-hidden transition-all duration-400">
-                      <div className="img-zoom aspect-video bg-[#173F35]">
-                        <Photo alt={text.name} className="w-full h-full object-cover opacity-75 group-hover:opacity-100 transition-opacity duration-500"/>
+                  <FadeSection key={ev.id} delay={i * 100}>
+                    <div className="group grid sm:grid-cols-[0.9fr_1.1fr] rounded-3xl overflow-hidden bg-white/[0.04] border border-white/10 hover:border-[#C99A45]/40 transition-colors duration-500 h-full">
+                      <div className="img-zoom relative min-h-[220px]">
+                        <Photo alt={text.name} className="absolute inset-0 w-full h-full object-cover"/>
+                        <span className="absolute top-4 left-4 rounded-full bg-[#C99A45] text-[#0e2820] text-xs font-bold px-3 py-1.5">{text.date}</span>
                       </div>
-                      <div className="p-5 sm:p-6">
-                        <div className="flex items-center justify-between mb-3 gap-3 flex-wrap">
-                          <span className="text-[#C99A45] text-xs font-sans tracking-wider">{text.date}</span>
-                          <span className={`text-[10px] font-sans px-3 py-1 flex-shrink-0 ${ev.availKind === 'open' ? 'bg-[#173F35] text-[#C99A45]' : 'bg-[#A65A3A]/20 text-[#A65A3A]'}`}>
-                            {text.avail}
-                          </span>
-                        </div>
-                        <h3 className="font-serif text-xl sm:text-2xl font-medium text-white mb-2">{text.name}</h3>
-                        <p className="text-white/45 text-xs sm:text-sm font-sans leading-relaxed mb-5">{text.desc}</p>
-                        <Link to="/events" className="btn-primary text-[10px] inline-flex">
-                          {t.common.reserveYourPlace}
+                      <div className="p-6 sm:p-7 flex flex-col">
+                        <span className={`self-start text-[11px] font-semibold rounded-full px-3 py-1 mb-4 ${ev.availKind === 'open' ? 'bg-emerald-400/15 text-emerald-300' : 'bg-[#A65A3A]/25 text-[#f0a584]'}`}>
+                          ● {text.avail}
+                        </span>
+                        <h3 className="font-display text-2xl font-bold text-white mb-3">{text.name}</h3>
+                        <p className="text-white/55 text-sm leading-relaxed mb-6 flex-1">{text.desc}</p>
+                        <Link to="/events" className="btn-primary self-start text-[13px] py-3 px-5">
+                          {t.common.reserveYourPlace} <span>→</span>
                         </Link>
                       </div>
                     </div>
@@ -471,35 +466,25 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            GUESTHOUSE
-        ════════════════════════════════════════ */}
-        <section className="bg-[#F6F1E7] py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeSection>
-              <div className="mb-10 sm:mb-14 text-center">
-                <div className="text-[#A65A3A] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-3 sm:mb-4">{h.stay.eyebrow}</div>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#173F35]">{h.stay.title}</h2>
-                <p className="text-[#1D211E]/55 font-sans text-sm sm:text-base mt-4 max-w-lg mx-auto leading-relaxed">{h.stay.desc}</p>
-              </div>
-            </FadeSection>
-
-            {/* Mobile: horizontal scroll cards */}
+        {/* ═════════ GUESTHOUSE ═════════ */}
+        <section className="py-20 sm:py-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading eyebrow={h.stay.eyebrow} title={h.stay.title} desc={h.stay.desc} center />
             <div className="scroll-smooth-x -mx-5 px-5 sm:mx-0 sm:px-0 sm:overflow-visible pb-4 sm:pb-0">
-              <div className="flex gap-4 sm:grid sm:grid-cols-3 w-[260%] sm:w-auto">
+              <div className="flex gap-5 sm:grid sm:grid-cols-3 w-max sm:w-auto">
                 {rooms.map((id, i) => {
                   const room = h.stay.rooms[id];
                   return (
-                    <FadeSection key={id} delay={i * 80} className="snap-start w-[75vw] sm:w-auto flex-shrink-0">
-                      <Link to="/stay" className="group block bg-white heritage-card overflow-hidden h-full">
-                        <div className="img-zoom aspect-[4/3] bg-[#173F35]/8">
+                    <FadeSection key={id} delay={i * 90} className="snap-start w-[78vw] sm:w-auto flex-shrink-0">
+                      <Link to="/stay" className="group heritage-card bg-white block h-full">
+                        <div className="img-zoom relative aspect-[4/3] bg-[#173F35]/8">
                           <Photo alt={room.name} className="w-full h-full object-cover"/>
+                          <span className="absolute bottom-4 left-4 rounded-full bg-white/95 backdrop-blur text-[#0e2820] text-sm font-bold px-4 py-1.5 shadow">{room.price}</span>
                         </div>
-                        <div className="p-5">
-                          <h3 className="font-serif text-lg sm:text-xl font-medium text-[#173F35] mb-1.5">{room.name}</h3>
-                          <p className="text-[#1D211E]/55 text-xs sm:text-sm font-sans leading-relaxed mb-3 line-clamp-2">{room.desc}</p>
-                          <div className="text-[#C99A45] font-sans font-semibold text-sm mb-4">{room.price}</div>
-                          <span className="text-[#173F35] text-[10px] font-sans font-bold tracking-wider uppercase flex items-center gap-2 transition-all duration-300 group-hover:gap-3">
+                        <div className="p-6">
+                          <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{room.name}</h3>
+                          <p className="text-[#1D211E]/60 text-sm leading-relaxed mb-5 line-clamp-2">{room.desc}</p>
+                          <span className="inline-flex items-center gap-2 text-sm font-semibold text-[#A65A3A] transition-all duration-300 group-hover:gap-3">
                             {h.stay.viewRoom} <span>→</span>
                           </span>
                         </div>
@@ -509,218 +494,192 @@ export default function Home() {
                 })}
               </div>
             </div>
-
-            <FadeSection className="text-center mt-10 sm:mt-12">
-              <Link to="/stay" className="btn-primary bg-[#173F35] border-[#173F35] hover:bg-[#1e5447]">
-                {h.stay.cta}
+            <FadeSection className="text-center mt-12">
+              <Link to="/stay" className="btn-primary bg-[#0e2820] border-[#0e2820] text-white hover:bg-[#173F35] hover:border-[#173F35]">
+                {h.stay.cta} <span>→</span>
               </Link>
             </FadeSection>
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            RESTAURANT — full bleed
-        ════════════════════════════════════════ */}
-        <section className="relative py-20 sm:py-24 lg:py-32 overflow-hidden">
-          <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f19]/96 via-[#0e2820]/80 to-transparent"/>
-          <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <FadeSection>
-              <div className="max-w-xl">
-                <div className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{h.restaurant.eyebrow}</div>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white leading-tight mb-5 sm:mb-6">{h.restaurant.title}</h2>
-                <p className="text-white/65 font-sans text-sm sm:text-base leading-relaxed mb-7 sm:mb-8">
-                  {h.restaurant.desc}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-8 sm:mb-10">
+        {/* ═════════ RESTAURANT ═════════ */}
+        <section className="pb-20 sm:pb-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <div className="grid lg:grid-cols-2 gap-6 items-stretch">
+              <FadeSection className="relative min-h-[360px] lg:min-h-[520px] rounded-[2rem] overflow-hidden img-zoom">
+                <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+              </FadeSection>
+              <FadeSection delay={120} className="rounded-[2rem] bg-[#0e2820] p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative overflow-hidden">
+                <div className="absolute -top-32 -right-24 w-80 h-80 glow-gold pointer-events-none"/>
+                <span className="relative eyebrow bg-white/8 text-[#C99A45] mb-5 self-start">{h.restaurant.eyebrow}</span>
+                <h2 className="relative font-display text-4xl sm:text-5xl font-bold text-white leading-[1.05] mb-6">{h.restaurant.title}</h2>
+                <p className="relative text-white/65 text-base sm:text-lg leading-relaxed mb-8">{h.restaurant.desc}</p>
+                <div className="relative flex flex-wrap gap-2 mb-10">
                   {h.restaurant.categories.map((cat, i) => (
-                    <span key={i} className="border border-white/25 text-white/65 text-[10px] sm:text-xs font-sans px-3 sm:px-4 py-1.5 sm:py-2 hover:border-[#C99A45]/60 hover:text-white transition-colors duration-300">
-                      {cat}
-                    </span>
+                    <span key={i} className="rounded-full border border-white/15 bg-white/5 text-white/80 text-sm px-4 py-2">{cat}</span>
                   ))}
                 </div>
-                <Link to="/dine" className="btn-primary">
-                  {h.restaurant.cta}
+                <Link to="/dine" className="relative btn-primary self-start">
+                  {h.restaurant.cta} <span>→</span>
                 </Link>
+              </FadeSection>
+            </div>
+          </div>
+        </section>
+
+        {/* ═════════ ORAL HISTORY ═════════ */}
+        <section className="relative bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
+          <div className="absolute -bottom-40 -right-40 w-[36rem] h-[36rem] glow-gold opacity-70 pointer-events-none"/>
+          <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+            <FadeSection className="relative">
+              <div className="rounded-[2rem] overflow-hidden aspect-[4/5] sm:aspect-[5/5] lg:aspect-[4/5]">
+                <Photo alt={h.stories.elderAlt} className="w-full h-full object-cover"/>
               </div>
+              {/* Audio player */}
+              <div className="relative -mt-24 mx-4 sm:mx-8 glass rounded-3xl p-5 sm:p-6 shadow-2xl">
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setIsPlaying(!isPlaying)}
+                    className="w-14 h-14 flex-shrink-0 rounded-full bg-[#C99A45] text-[#0e2820] flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
+                    aria-label={isPlaying ? h.stories.pause : h.stories.play}
+                  >
+                    {isPlaying
+                      ? <span className="flex gap-1"><span className="w-1 h-4 rounded bg-current"/><span className="w-1 h-4 rounded bg-current"/></span>
+                      : <svg className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>}
+                  </button>
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[#C99A45] text-[11px] font-semibold tracking-[0.12em] uppercase mb-1">{h.stories.nowPlaying}</div>
+                    <div className="font-display text-white font-semibold truncate">{h.stories.storyTitle}</div>
+                    <div className="text-white/50 text-xs mt-0.5">{h.stories.meta}</div>
+                  </div>
+                </div>
+                <div className="flex items-end gap-[3px] h-10 mt-5">
+                  {Array.from({ length: 42 }, (_, i) => (
+                    <span
+                      key={i}
+                      className={`flex-1 rounded-full ${isPlaying ? 'bg-[#C99A45] animate-wave' : 'bg-white/25'}`}
+                      style={{
+                        height: `${30 + Math.abs(Math.sin(i * 0.7) * 55 + Math.cos(i * 1.9) * 15)}%`,
+                        animationDelay: `${(i % 7) * 90}ms`,
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+            </FadeSection>
+
+            <FadeSection delay={120}>
+              <span className="eyebrow bg-white/8 text-[#C99A45] mb-5">{h.stories.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] mb-7">{h.stories.title}</h2>
+              <p className="text-white/70 text-lg leading-relaxed mb-5">{h.stories.p1}</p>
+              <p className="text-white/50 text-base leading-relaxed mb-8">{h.stories.p2}</p>
+              <div className="flex flex-wrap gap-2 mb-10">
+                {h.stories.languages.map((l, i) => (
+                  <span key={i} className="rounded-full bg-white/8 border border-white/10 text-white/80 text-sm px-4 py-2">{l}</span>
+                ))}
+              </div>
+              <TextLink to="/heritage/stories" dark>{h.stories.cta}</TextLink>
             </FadeSection>
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            ORAL HISTORY
-        ════════════════════════════════════════ */}
-        <section className="bg-[#F6F1E7] py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <FadeSection>
-                <div className="relative">
-                  <div className="aspect-[3/4] bg-[#173F35]/8 overflow-hidden">
-                    <Photo alt={h.stories.elderAlt} className="w-full h-full object-cover grayscale-[25%]"/>
-                  </div>
-                  {/* Audio card — repositioned for mobile */}
-                  <div className="mt-4 lg:mt-0 lg:absolute lg:-bottom-5 lg:-right-5 bg-[#173F35] p-5 sm:p-6">
-                    <div className="text-[#C99A45] font-sans text-[10px] tracking-wider uppercase mb-2">{h.stories.nowPlaying}</div>
-                    <div className="text-white font-serif text-sm mb-3">{h.stories.storyTitle}</div>
-                    <div className="flex items-end gap-0.5 mb-3 h-8">
-                      {Array.from({ length: 28 }, (_, i) => (
-                        <div
-                          key={i}
-                          className={`flex-1 rounded-full transition-all duration-300 ${isPlaying ? 'bg-[#C99A45]' : 'bg-[#C99A45]/40'}`}
-                          style={{ height: `${20 + Math.sin(i * 0.9) * 10 + Math.cos(i * 1.3) * 8}px` }}
-                        />
-                      ))}
-                    </div>
-                    <button
-                      onClick={() => setIsPlaying(!isPlaying)}
-                      className="flex items-center gap-3 text-white/65 hover:text-white transition-colors group"
-                    >
-                      <div className="w-8 h-8 border border-[#C99A45] flex items-center justify-center group-hover:bg-[#C99A45]/15 transition-colors">
-                        {isPlaying
-                          ? <span className="flex gap-0.5"><span className="w-0.5 h-3 bg-[#C99A45]"/><span className="w-0.5 h-3 bg-[#C99A45]"/></span>
-                          : <svg className="w-3 h-3 text-[#C99A45] ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        }
-                      </div>
-                      <span className="text-xs font-sans">{isPlaying ? h.stories.pause : h.stories.play} · {h.stories.meta}</span>
-                    </button>
-                  </div>
-                </div>
-              </FadeSection>
-
-              <FadeSection delay={120}>
-                <div className="text-[#A65A3A] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{h.stories.eyebrow}</div>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#173F35] leading-tight mb-5 sm:mb-6">{h.stories.title}</h2>
-                <p className="text-[#1D211E]/65 font-sans text-sm sm:text-base leading-relaxed mb-4 sm:mb-5">
-                  {h.stories.p1}
-                </p>
-                <p className="text-[#1D211E]/50 font-sans text-sm sm:text-base leading-relaxed mb-8 sm:mb-10">
-                  {h.stories.p2}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-7 sm:mb-8">
-                  {h.stories.languages.map((l, i) => (
-                    <span key={i} className="border border-[#173F35]/20 text-[#173F35]/55 text-xs font-sans px-4 py-2 hover:border-[#173F35]/40 transition-colors">{l}</span>
-                  ))}
-                </div>
-                <Link to="/heritage/stories" className="btn-outline border-[#173F35] text-[#173F35] hover:bg-[#173F35] hover:text-white">
-                  {h.stories.cta}
-                </Link>
-              </FadeSection>
-            </div>
-          </div>
-        </section>
-
-        {/* ════════════════════════════════════════
-            LIBRARY
-        ════════════════════════════════════════ */}
-        <section className="bg-[#173F35] py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <FadeSection>
-                <div className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{h.library.eyebrow}</div>
-                <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-white leading-tight mb-5 sm:mb-6">{h.library.title}</h2>
-                <p className="text-white/65 font-sans text-sm sm:text-base leading-relaxed mb-4 sm:mb-5">
-                  {h.library.desc}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-8 sm:mb-10">
-                  {h.library.categories.map((cat, i) => (
-                    <span key={i} className="border border-[#C99A45]/25 text-[#C99A45]/65 text-[10px] sm:text-xs font-sans px-3 py-1.5 hover:border-[#C99A45]/50 transition-colors">{cat}</span>
-                  ))}
-                </div>
-                <Link to="/library" className="btn-primary">{h.library.cta}</Link>
-              </FadeSection>
-
-              <FadeSection delay={100}>
-                <div className="grid grid-cols-2 gap-3">
-                  {h.library.books.map((book, i) => (
-                    <div key={i} className="bg-white/5 border border-white/10 p-4 hover:border-[#C99A45]/25 transition-all duration-400 hover:bg-white/8">
-                      <div className="w-full aspect-[3/4] bg-[#0e2820] mb-3 flex items-center justify-center pattern-weave relative overflow-hidden">
-                        <svg className="w-7 h-7 text-[#C99A45]/35" fill="currentColor" viewBox="0 0 24 24"><path d="M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm0 2v16h12V4H6zm2 2h8v2H8V6zm0 4h8v2H8v-2zm0 4h5v2H8v-2z"/></svg>
-                      </div>
-                      <div className="text-[#C99A45] text-[9px] font-sans tracking-wider uppercase mb-1">{book.cat}</div>
-                      <div className="text-white text-xs font-sans font-medium leading-snug mb-1 line-clamp-2">{book.title}</div>
-                      <div className="text-white/30 text-[10px] font-sans">{bookYears[i]}</div>
-                    </div>
-                  ))}
-                </div>
-              </FadeSection>
-            </div>
-          </div>
-        </section>
-
-        {/* ════════════════════════════════════════
-            GALLERY
-        ════════════════════════════════════════ */}
-        <section className="bg-[#F6F1E7] py-12 sm:py-16 lg:py-24">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* ═════════ LIBRARY ═════════ */}
+        <section className="py-20 sm:py-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
             <FadeSection>
-              <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-10 sm:mb-12">
-                <div>
-                  <div className="text-[#A65A3A] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-3 sm:mb-4">{h.gallery.eyebrow}</div>
-                  <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-light text-[#173F35]">{h.gallery.title}</h2>
-                </div>
-                <Link to="/gallery" className="text-[#173F35] text-xs sm:text-sm font-sans font-semibold tracking-wider uppercase hover:text-[#C99A45] transition-colors flex items-center gap-2 group">
-                  {h.gallery.full} <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </Link>
+              <span className="eyebrow bg-[#A65A3A]/10 text-[#A65A3A] mb-5">{h.library.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0e2820] leading-[1.05] mb-7">{h.library.title}</h2>
+              <p className="text-[#1D211E]/65 text-lg leading-relaxed mb-8">{h.library.desc}</p>
+              <div className="flex flex-wrap gap-2 mb-10">
+                {h.library.categories.map((cat, i) => (
+                  <span key={i} className="rounded-full bg-white border border-[#0e2820]/8 text-[#0e2820]/80 text-sm px-4 py-2 shadow-sm">{cat}</span>
+                ))}
               </div>
+              <Link to="/library" className="btn-primary">{h.library.cta} <span>→</span></Link>
             </FadeSection>
 
-            <div className="columns-2 lg:columns-4 gap-2 sm:gap-3 space-y-2 sm:space-y-3">
-              {/* Real site photos */}
-              {galleryPhotos.map((key) => (
-                <div key={key} className="img-zoom break-inside-avoid bg-[#173F35]/8 cursor-pointer">
-                  <img src={photos[key]} alt={t.photos[key]} className="w-full block" loading="lazy" />
-                </div>
+            <FadeSection delay={100}>
+              <div className="grid grid-cols-2 gap-4">
+                {h.library.books.map((book, i) => (
+                  <div
+                    key={i}
+                    className={`group rounded-3xl p-3 bg-white border border-[#0e2820]/8 shadow-sm hover:-translate-y-1.5 hover:shadow-xl transition-all duration-500 ${i % 2 === 1 ? 'mt-8' : ''}`}
+                  >
+                    <div className={`aspect-[3/4] rounded-2xl mb-4 p-5 flex flex-col justify-between relative overflow-hidden ${
+                      ['bg-[#0e2820]', 'bg-[#A65A3A]', 'bg-[#173F35]', 'bg-[#C99A45]'][i]
+                    }`}>
+                      <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_20%,white,transparent_55%)]"/>
+                      <span className={`relative text-[10px] font-semibold tracking-[0.12em] uppercase ${i === 3 ? 'text-[#0e2820]/70' : 'text-white/60'}`}>{book.cat}</span>
+                      <span className={`relative font-display text-lg sm:text-xl font-bold leading-tight ${i === 3 ? 'text-[#0e2820]' : 'text-white'}`}>{book.title}</span>
+                    </div>
+                    <div className="px-1 pb-1 flex items-center justify-between text-xs text-[#1D211E]/50">
+                      <span>{bookYears[i]}</span>
+                      <span className="text-[#A65A3A] transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </FadeSection>
+          </div>
+        </section>
+
+        {/* ═════════ GALLERY ═════════ */}
+        <section className="pb-20 sm:pb-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading
+              eyebrow={h.gallery.eyebrow}
+              title={h.gallery.title}
+              action={<TextLink to="/gallery">{h.gallery.full}</TextLink>}
+            />
+            <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[160px] sm:auto-rows-[200px] lg:auto-rows-[230px] gap-3 sm:gap-4">
+              {galleryPhotos.map(({ key, span }) => (
+                <FadeSection key={key} className={`img-zoom rounded-2xl sm:rounded-3xl bg-[#173F35]/8 ${span}`}>
+                  <img src={photos[key]} alt={t.photos[key]} className="w-full h-full object-cover" loading="lazy" />
+                </FadeSection>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ════════════════════════════════════════
-            FINAL CTA
-        ════════════════════════════════════════ */}
-        <section className="relative py-24 sm:py-28 lg:py-36 overflow-hidden">
-          <img src={photos.pavilions} alt={t.photos.pavilions} className="absolute inset-0 w-full h-full object-cover"/>
-          <div className="absolute inset-0 bg-[#0a1f19]/82"/>
-          <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <FadeSection>
-              <div className="text-[#C99A45] text-[10px] sm:text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-5 sm:mb-6">{h.final.eyebrow}</div>
-              <h2 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-tight mb-5 sm:mb-6">
-                {h.final.title}
-              </h2>
-              <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-white/55 font-sans text-xs sm:text-sm mb-10 sm:mb-12">
-                <span className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-[#C99A45] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                  {t.common.locationLine}
-                </span>
-                <span className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-[#C99A45] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  {t.common.hoursDaily}
-                </span>
-                <span className="flex items-center gap-2">
-                  <svg className="w-4 h-4 text-[#C99A45] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
-                  +251 XXX XXX XXX
-                </span>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                <Link to="/visit" className="btn-primary justify-center">
-                  {t.common.planVisit}
-                </Link>
-                <a href="#" className="btn-outline border-white/40 text-white hover:bg-white/8 justify-center">
-                  {t.common.getDirections}
-                </a>
-              </div>
-            </FadeSection>
+        {/* ═════════ FINAL CTA ═════════ */}
+        <section className="px-2 sm:px-3 pb-3">
+          <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden py-24 sm:py-32 lg:py-40">
+            <img src={photos.home} alt={t.photos.home} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f19] via-[#0a1f19]/70 to-[#0a1f19]/40"/>
+            <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
+              <FadeSection>
+                <span className="eyebrow glass text-white mb-6">{h.final.eyebrow}</span>
+                <h2 className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[0.98] tracking-[-0.04em] mb-10">
+                  {h.final.title}
+                </h2>
+                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
+                  {[
+                    { icon: <path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z M12 12a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>, text: t.common.locationLine },
+                    { icon: <><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></>, text: t.common.hoursDaily },
+                    { icon: <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>, text: '+251 XXX XXX XXX' },
+                  ].map((item, i) => (
+                    <span key={i} className="glass rounded-full pl-3 pr-4 py-2 flex items-center gap-2 text-white/85 text-sm">
+                      <svg className="w-4 h-4 text-[#C99A45]" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">{item.icon}</svg>
+                      {item.text}
+                    </span>
+                  ))}
+                </div>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <Link to="/visit" className="btn-primary justify-center">{t.common.planVisit} <span>→</span></Link>
+                  <a href="#" className="btn-glass justify-center">{t.common.getDirections}</a>
+                </div>
+              </FadeSection>
+            </div>
           </div>
         </section>
-
       </main>
 
       {/* ── Mobile sticky CTA ── */}
-      <div className={`mobile-sticky-cta lg:hidden ${showStickyCta ? '' : 'hidden-cta'}`} aria-hidden={!showStickyCta}>
-        <Link to="/visit" className="flex-1 btn-primary justify-center py-3 text-[10px]">
+      <div className={`mobile-sticky-cta lg:hidden ${showStickyCta ? '' : 'hidden-cta'}`} inert={!showStickyCta}>
+        <Link to="/visit" className="flex-1 btn-primary justify-center py-3 text-[13px] shadow-none">
           {t.common.planVisit}
         </Link>
-        <Link to="/contact" className="flex-1 btn-outline border-white/30 text-white hover:bg-white/8 justify-center py-3 text-[10px]">
+        <Link to="/contact" className="flex-1 btn-glass justify-center py-3 text-[13px]">
           {t.common.contactUs}
         </Link>
       </div>

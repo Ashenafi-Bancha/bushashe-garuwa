@@ -26,12 +26,12 @@ function ScrollToTop() {
 function NotFound() {
   const { t } = useI18n();
   return (
-    <main className="pt-20 min-h-screen bg-[#F6F1E7] flex items-center justify-center">
+    <main className="pt-20 min-h-screen bg-[#F7F5F0] flex items-center justify-center">
       <div className="text-center px-6">
-        <div className="font-serif text-8xl text-[#173F35]/20 mb-6">404</div>
-        <h1 className="font-serif text-3xl font-light text-[#173F35] mb-4">{t.notFound.title}</h1>
+        <div className="font-display text-8xl text-[#173F35]/20 mb-6">404</div>
+        <h1 className="font-display text-3xl font-semibold text-[#173F35] mb-4">{t.notFound.title}</h1>
         <p className="text-[#1D211E]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
-        <a href="/" className="inline-flex items-center gap-2 bg-[#173F35] text-white text-sm font-sans font-semibold tracking-widest uppercase px-8 py-4 transition-colors hover:bg-[#1e5447]">
+        <a href="/" className="inline-flex items-center gap-2 bg-[#173F35] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#1e5447]">
           {t.notFound.button}
         </a>
       </div>

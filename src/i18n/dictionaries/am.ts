@@ -121,6 +121,9 @@ export const am: Dictionary = {
       explore: 'ቡሻሼ ጋሯን ያስሱ',
       scroll: 'ለማሰስ ወደ ታች ይሸብልሉ',
       slide: 'ምስል {n}',
+      statGenerations: 'ትውልዶች',
+      statYears: 'ዓመታት የቆየ ቅርስ',
+      statLanguages: 'ቋንቋዎች',
     },
     intro: {
       eyebrow: 'ዓላማችን',

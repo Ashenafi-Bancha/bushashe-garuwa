@@ -17,229 +17,212 @@ const navRoutes = [
   { key: 'visit', to: '/visit' },
 ] as const;
 
+/* Shown in the desktop bar; every link is in the full menu */
+const barKeys = ['about', 'heritage', 'experiences', 'events', 'stay', 'dine', 'library'] as const;
+
 export default function Navbar() {
   const [scrolled, setScrolled]     = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
   const { t } = useI18n();
-  const navLinks = navRoutes.map((r) => ({ to: r.to, label: t.nav.links[r.key] }));
+  const navLinks = navRoutes.map((r) => ({ key: r.key, to: r.to, label: t.nav.links[r.key] }));
+  const barLinks = navLinks.filter((l) => (barKeys as readonly string[]).includes(l.key));
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => { setMobileOpen(false); }, [location.pathname]);
+  useEffect(() => { setMobileOpen(false); setSearchOpen(false); }, [location.pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    document.body.style.overflow = mobileOpen || searchOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
+  }, [mobileOpen, searchOpen]);
 
-  const isHome     = location.pathname === '/';
+  const isHome = location.pathname === '/';
   const transparent = isHome && !scrolled && !mobileOpen;
+  const isActive = (to: string) => (to === '/' ? location.pathname === '/' : location.pathname.startsWith(to));
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          transparent
-            ? 'bg-transparent'
-            : 'bg-[#0e2820]/95 backdrop-blur-md border-b border-white/5'
-        }`}
-        style={{ WebkitBackdropFilter: scrolled ? 'blur(16px)' : undefined }}
-      >
+      <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-4 pt-3">
         <div
-          className={`max-w-screen-xl mx-auto px-4 sm:px-6 flex items-center justify-between transition-all duration-500 ${
-            scrolled ? 'h-14' : 'h-16 sm:h-20'
-          }`}
+          className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full pl-2 pr-2 sm:pl-3 transition-all duration-500 ${
+            transparent
+              ? 'bg-white/10 border border-white/15 backdrop-blur-md'
+              : 'bg-[#0e2820]/85 border border-white/10 backdrop-blur-xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]'
+          } ${scrolled ? 'h-14' : 'h-16'}`}
         >
           {/* ── Logo ── */}
-          <Link to="/" className="flex items-center gap-2 sm:gap-3 group flex-shrink-0 min-h-[44px]" aria-label={t.nav.homeAria}>
+          <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group" aria-label={t.nav.homeAria}>
             <img
               src={logo}
               alt="Bushaashe Garuwa Lodge"
-              className={`object-contain flex-shrink-0 transition-all duration-500 group-hover:scale-105 drop-shadow-sm ${
-                scrolled ? 'w-9 h-9 sm:w-10 sm:h-10' : 'w-10 h-10 sm:w-12 sm:h-12'
+              className={`rounded-full object-contain bg-white/90 p-0.5 transition-all duration-500 group-hover:scale-105 ${
+                scrolled ? 'w-9 h-9' : 'w-11 h-11'
               }`}
             />
-            <div className="hidden sm:block">
-              <div className="text-[#C99A45] font-serif text-xs sm:text-sm font-semibold tracking-[0.18em] uppercase leading-none">Bushaashe</div>
-              <div className="text-white/50 font-sans text-[8px] sm:text-[9px] tracking-[0.22em] uppercase leading-none mt-0.5">Garuwa</div>
+            <div className="hidden sm:block leading-none">
+              <div className="font-display text-white text-[15px] font-bold tracking-tight">Bushaashe Garuwa</div>
+              <div className="text-[#C99A45] text-[10px] font-medium tracking-[0.18em] uppercase mt-1">Wolaita · Ethiopia</div>
             </div>
           </Link>
 
-          {/* ── Desktop Nav ── */}
-          <nav className="hidden lg:flex items-center gap-0.5" aria-label={t.nav.mainNav}>
-            {navLinks.map((link) => (
+          {/* ── Desktop links ── */}
+          <nav className="hidden xl:flex items-center gap-0.5" aria-label={t.nav.mainNav}>
+            {barLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`relative px-2.5 py-2 text-[11px] tracking-[0.12em] uppercase font-sans font-semibold transition-colors duration-300 group ${
-                  location.pathname === link.to
-                    ? 'text-[#C99A45]'
-                    : 'text-white/70 hover:text-white'
+                className={`px-3.5 py-2 rounded-full text-[13px] font-medium transition-colors duration-300 ${
+                  isActive(link.to) ? 'bg-white/15 text-white' : 'text-white/70 hover:text-white hover:bg-white/8'
                 }`}
               >
                 {link.label}
-                <span
-                  className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-px bg-[#C99A45] transition-all duration-400 ${
-                    location.pathname === link.to ? 'w-4' : 'w-0 group-hover:w-4'
-                  }`}
-                />
               </Link>
             ))}
           </nav>
 
           {/* ── Right controls ── */}
-          <div className="flex items-center gap-1 sm:gap-2">
-            {/* Search */}
+          <div className="flex items-center gap-1.5">
             <button
               onClick={() => setSearchOpen(true)}
-              className="touch-target text-white/60 hover:text-white transition-colors rounded-sm"
+              className="touch-target rounded-full text-white/70 hover:text-white hover:bg-white/10"
               aria-label={t.nav.search}
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2" strokeLinecap="round"/>
               </svg>
             </button>
 
-            {/* Language — hide at lg where nav links take the space, restore at xl */}
-            <div className="hidden md:flex lg:hidden xl:flex">
+            <div className="hidden md:block">
               <LanguageSwitcher variant="bar" />
             </div>
 
-            {/* CTA — xl+ only (lg is occupied by nav links) */}
             <Link
               to="/visit"
-              className="hidden xl:inline-flex items-center gap-2 bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] text-[10px] font-sans font-bold uppercase tracking-[0.18em] px-5 py-3 ml-2 transition-all duration-300 hover:shadow-lg hover:shadow-[#C99A45]/20 active:scale-95"
+              className="hidden lg:inline-flex items-center gap-2 bg-[#C99A45] hover:bg-[#d9af65] text-[#0e2820] text-[13px] font-semibold rounded-full pl-5 pr-2 py-2 ml-1 transition-all duration-300 group"
             >
               {t.common.planVisit}
+              <span className="w-7 h-7 rounded-full bg-[#0e2820] text-[#C99A45] flex items-center justify-center transition-transform duration-300 group-hover:rotate-[-45deg]">→</span>
             </Link>
 
-            {/* Hamburger — lg hidden */}
+            {/* Menu (all screen sizes below xl, and for the full list above) */}
             <button
-              className="lg:hidden touch-target text-white"
+              className="touch-target rounded-full bg-white/10 hover:bg-white/20 text-white ml-0.5"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
               aria-expanded={mobileOpen}
               aria-controls="mobile-menu"
             >
-              <div className="w-5 flex flex-col gap-[5px]">
-                <span className={`block h-px bg-current transition-all duration-400 origin-center ${mobileOpen ? 'rotate-45 translate-y-[6px]' : ''}`}/>
-                <span className={`block h-px bg-current transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`}/>
-                <span className={`block h-px bg-current transition-all duration-400 origin-center ${mobileOpen ? '-rotate-45 -translate-y-[6px]' : ''}`}/>
+              <div className="w-[18px] flex flex-col gap-[5px]">
+                <span className={`block h-[1.5px] rounded-full bg-current transition-all duration-400 origin-center ${mobileOpen ? 'rotate-45 translate-y-[6.5px]' : ''}`}/>
+                <span className={`block h-[1.5px] rounded-full bg-current transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`}/>
+                <span className={`block h-[1.5px] rounded-full bg-current transition-all duration-400 origin-center ${mobileOpen ? '-rotate-45 -translate-y-[6.5px]' : ''}`}/>
               </div>
             </button>
           </div>
         </div>
       </header>
 
-      {/* ── Mobile full-screen menu ── */}
+      {/* ── Full-screen menu ── */}
       <div
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
         aria-label={t.nav.menuLabel}
-        className={`fixed inset-0 z-40 flex flex-col bg-[#0e2820] transition-all duration-500 ${
-          mobileOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
+        inert={!mobileOpen}
+        className={`fixed inset-0 z-40 flex flex-col bg-[#0a1f19] transition-all duration-500 ${
+          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       >
-        {/* Subtle pattern */}
-        <div className="absolute inset-0 pattern-diamond opacity-30 pointer-events-none"/>
+        <div className="absolute -top-40 -right-40 w-[34rem] h-[34rem] glow-gold pointer-events-none" />
+        <div className="absolute -bottom-52 -left-40 w-[40rem] h-[40rem] glow-forest pointer-events-none" />
 
-        <div className="relative flex-1 flex flex-col justify-center px-6 sm:px-12 pt-20 pb-6 overflow-y-auto">
-          <nav className="flex flex-col" aria-label={t.nav.mobileNav}>
-            {navLinks.map((link, i) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`font-serif text-3xl sm:text-4xl font-light py-3 border-b border-white/8 flex items-center justify-between group transition-all duration-300 ${
-                  location.pathname === link.to
-                    ? 'text-[#C99A45]'
-                    : 'text-white/75 hover:text-white hover:pl-1'
-                }`}
-                style={{
-                  transitionDelay: mobileOpen ? `${i * 40}ms` : '0ms',
-                  transform: mobileOpen ? 'translateX(0)' : 'translateX(-16px)',
-                  opacity: mobileOpen ? 1 : 0,
-                  transition: `opacity 0.45s ease ${i * 40}ms, transform 0.5s var(--ease-out-expo) ${i * 40}ms, color 0.25s ease, padding 0.25s ease`,
-                }}
-              >
-                {link.label}
-                <span className="text-[#C99A45]/50 text-lg group-hover:text-[#C99A45] transition-colors">→</span>
-              </Link>
-            ))}
-          </nav>
+        <div className="relative flex-1 overflow-y-auto px-6 sm:px-12 pt-28 pb-8">
+          <div className="max-w-screen-xl mx-auto grid lg:grid-cols-[1.4fr_1fr] gap-12">
+            <nav className="grid sm:grid-cols-2 gap-x-10" aria-label={t.nav.mobileNav}>
+              {navLinks.map((link, i) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={`group flex items-baseline gap-4 py-3.5 border-b border-white/8 transition-all duration-300 ${
+                    isActive(link.to) ? 'text-[#C99A45]' : 'text-white/85 hover:text-white'
+                  }`}
+                  style={{
+                    transform: mobileOpen ? 'translateY(0)' : 'translateY(14px)',
+                    opacity: mobileOpen ? 1 : 0,
+                    transition: `opacity 0.5s ease ${i * 35}ms, transform 0.6s var(--ease-out-expo) ${i * 35}ms, color 0.25s ease`,
+                  }}
+                >
+                  <span className="text-[11px] font-medium text-white/30 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                  <span className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">{link.label}</span>
+                  <span className="ml-auto text-[#C99A45] opacity-0 -translate-x-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">→</span>
+                </Link>
+              ))}
+            </nav>
 
-          {/* Language + CTA */}
-          <div
-            className="mt-8 flex flex-col gap-5"
-            style={{
-              opacity: mobileOpen ? 1 : 0,
-              transform: mobileOpen ? 'translateY(0)' : 'translateY(12px)',
-              transition: `opacity 0.5s ease ${navLinks.length * 40 + 80}ms, transform 0.5s var(--ease-out-expo) ${navLinks.length * 40 + 80}ms`,
-            }}
-          >
-            <div className="flex items-center gap-1">
-              <span className="text-white/25 text-xs font-sans tracking-wider mr-2">{t.nav.language}:</span>
-              <LanguageSwitcher variant="menu" />
-            </div>
-
-            <Link
-              to="/visit"
-              className="inline-flex items-center justify-center bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] text-sm font-sans font-bold uppercase tracking-[0.18em] py-4 transition-colors active:scale-[0.98]"
+            <div
+              className="flex flex-col gap-6 lg:pt-4"
+              style={{
+                opacity: mobileOpen ? 1 : 0,
+                transform: mobileOpen ? 'translateY(0)' : 'translateY(14px)',
+                transition: `opacity 0.6s ease 350ms, transform 0.6s var(--ease-out-expo) 350ms`,
+              }}
             >
-              {t.common.planVisit}
-            </Link>
+              <div>
+                <div className="text-white/35 text-xs font-medium tracking-[0.14em] uppercase mb-3">{t.nav.language}</div>
+                <LanguageSwitcher variant="menu" />
+              </div>
+              <Link to="/visit" className="btn-primary justify-center w-full sm:w-auto sm:self-start">
+                {t.common.planVisit} <span>→</span>
+              </Link>
+              <p className="text-white/40 text-sm leading-relaxed max-w-sm">{t.common.slogan}</p>
+            </div>
           </div>
-        </div>
-
-        <div className="relative px-6 sm:px-12 pb-8 text-white/20 text-xs font-sans tracking-wider" style={{ paddingBottom: 'calc(2rem + env(safe-area-inset-bottom, 0px))' }}>
-          {t.common.slogan}
         </div>
       </div>
 
       {/* ── Search overlay ── */}
       <div
-        className={`fixed inset-0 z-50 transition-all duration-400 ${
+        inert={!searchOpen}
+        className={`fixed inset-0 z-[55] transition-all duration-400 ${
           searchOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
-        style={{ backdropFilter: searchOpen ? 'blur(20px) saturate(1.2)' : 'none', background: 'rgba(14,40,32,0.96)' }}
+        style={{ backdropFilter: searchOpen ? 'blur(20px) saturate(1.2)' : 'none', background: 'rgba(10,31,25,0.94)' }}
       >
         <button
           onClick={() => setSearchOpen(false)}
           className="absolute inset-0 w-full h-full"
           aria-label={t.nav.closeSearch}
+          tabIndex={-1}
         />
-        <div className="relative z-10 flex items-start justify-center pt-28 sm:pt-36 px-6">
+        <div className="relative z-10 flex items-start justify-center pt-28 sm:pt-36 px-5">
           <div className="w-full max-w-2xl">
-            <div className="flex items-center border-b-2 border-[#C99A45] pb-4 mb-10">
-              <svg className="w-5 h-5 text-[#C99A45] mr-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            <div className="flex items-center gap-3 rounded-full bg-white/8 border border-white/15 pl-6 pr-2 py-2 mb-10 focus-within:border-[#C99A45]/60 transition-colors">
+              <svg className="w-5 h-5 text-[#C99A45] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2" strokeLinecap="round"/>
               </svg>
               <input
-                autoFocus
                 type="search"
                 placeholder={t.nav.searchPlaceholder}
-                className="flex-1 bg-transparent text-white text-xl sm:text-2xl font-serif placeholder-white/25 outline-none"
+                className="flex-1 bg-transparent text-white text-lg sm:text-xl font-display placeholder-white/30 outline-none py-2"
               />
-              <button onClick={() => setSearchOpen(false)} className="touch-target text-white/40 hover:text-white ml-2" aria-label={t.nav.closeSearch}>
+              <button onClick={() => setSearchOpen(false)} className="touch-target rounded-full text-white/50 hover:text-white hover:bg-white/10" aria-label={t.nav.closeSearch}>
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M18 6L6 18M6 6l12 12" strokeWidth="1.5"/>
+                  <path d="M18 6L6 18M6 6l12 12" strokeWidth="1.6" strokeLinecap="round"/>
                 </svg>
               </button>
             </div>
-            <div className="text-white/30 text-xs font-sans tracking-[0.2em] uppercase mb-4">{t.nav.suggested}</div>
+            <div className="text-white/35 text-xs font-medium tracking-[0.14em] uppercase mb-4">{t.nav.suggested}</div>
             <div className="flex flex-wrap gap-2">
               {t.nav.suggestions.map((s) => (
                 <button
                   key={s}
-                  className="border border-white/15 text-white/50 hover:border-[#C99A45] hover:text-[#C99A45] text-xs font-sans px-4 py-2.5 transition-all duration-300 active:scale-95"
+                  className="rounded-full border border-white/15 bg-white/5 text-white/70 hover:border-[#C99A45] hover:text-[#C99A45] text-sm px-4 py-2 transition-all duration-300 active:scale-95"
                 >
                   {s}
                 </button>

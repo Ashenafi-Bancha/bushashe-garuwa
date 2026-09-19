@@ -136,6 +136,9 @@ export const wal: DeepPartial<Dictionary> = {
       explore: 'Explore Bushaashe Garuwa',
       scroll: 'Scroll to Explore',
       slide: 'Slide {n}',
+      statGenerations: 'Generations',
+      statYears: 'Years of heritage',
+      statLanguages: 'Languages',
     },
     intro: {
       eyebrow: 'Our Purpose',

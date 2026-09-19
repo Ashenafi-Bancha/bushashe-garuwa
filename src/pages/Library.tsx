@@ -37,17 +37,17 @@ export default function Library() {
   return (
     <main className="pt-20">
       {/* Hero */}
-      <section className="relative h-[55vh] min-h-[380px] flex items-end overflow-hidden">
+      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[55vh] min-h-[380px] flex items-end overflow-hidden">
         <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/40 to-transparent"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.3em] uppercase mb-4">{lb.hero.eyebrow}</div>
-          <h1 className="font-serif text-3xl sm:text-5xl lg:text-6xl font-light text-white leading-tight">{lb.hero.title}</h1>
+          <span className="eyebrow glass text-white mb-5">{lb.hero.eyebrow}</span>
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{lb.hero.title}</h1>
         </div>
       </section>
 
       {/* Search + filter */}
-      <section className="bg-[#173F35] py-12">
+      <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="relative max-w-xl mb-8">
             <svg className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -58,7 +58,7 @@ export default function Library() {
               onChange={(e) => setQuery(e.target.value)}
               type="search"
               placeholder={lb.searchPlaceholder}
-              className="w-full bg-white/10 border border-white/20 text-white placeholder-white/30 pl-11 pr-4 py-3 font-sans text-sm focus:outline-none focus:border-[#C99A45] transition-colors"
+              className="w-full rounded-full bg-white/10 border border-white/20 text-white placeholder-white/30 pl-11 pr-4 py-3 font-sans text-sm focus:outline-none focus:border-[#C99A45] transition-colors"
             />
           </div>
           <div className="flex flex-wrap gap-2">
@@ -66,7 +66,7 @@ export default function Library() {
               <button
                 key={f}
                 onClick={() => setActiveFilter(f)}
-                className={`text-xs font-sans font-semibold tracking-wider uppercase px-4 py-2 transition-colors border ${
+                className={`text-xs font-sans font-semibold rounded-full px-4 py-2 transition-colors border ${
                   activeFilter === f
                     ? 'bg-[#C99A45] text-[#173F35] border-[#C99A45]'
                     : 'border-white/20 text-white/50 hover:border-white/40 hover:text-white'
@@ -80,7 +80,7 @@ export default function Library() {
       </section>
 
       {/* Resources */}
-      <section className="bg-[#F6F1E7] py-12 sm:py-16">
+      <section className="bg-[#F7F5F0] py-12 sm:py-16">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 text-[#1D211E]/40 font-sans text-sm">{fmt(filtered.length === 1 ? lb.resultsOne : lb.resultsMany, { count: filtered.length })}</div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -91,15 +91,15 @@ export default function Library() {
                   <div className="absolute inset-0 pattern-weave"/>
                   <div className="relative z-10 text-center">
                     <div className="text-[#C99A45]/60 text-xs font-sans tracking-wider uppercase mb-4">{lb.filters[res.cat]}</div>
-                    <div className="text-white font-serif text-lg font-light leading-snug mb-4">{res.title}</div>
+                    <div className="text-white font-display text-lg font-semibold leading-snug mb-4">{res.title}</div>
                     <div className="w-12 h-px bg-[#C99A45]/40 mx-auto"/>
                   </div>
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="font-serif text-base font-medium text-[#173F35] mb-1">{res.title}</h3>
+                  <h3 className="font-display text-base font-semibold text-[#173F35] mb-1">{res.title}</h3>
                   <div className="text-[#1D211E]/45 text-xs font-sans mb-3">{res.author} · {res.year}</div>
                   <p className="text-[#1D211E]/55 text-xs font-sans leading-relaxed flex-1 mb-4">{res.desc}</p>
-                  <button className="border border-[#173F35]/20 hover:border-[#173F35] text-[#173F35]/70 hover:text-[#173F35] text-xs font-sans font-semibold uppercase tracking-wider py-2.5 transition-colors">
+                  <button className="border border-[#173F35]/20 hover:border-[#173F35] text-[#173F35]/70 hover:text-[#173F35] text-xs font-sans font-semibold rounded-full py-2.5 transition-colors">
                     {lb.viewResource}
                   </button>
                 </div>
