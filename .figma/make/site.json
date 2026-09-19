@@ -1,0 +1,10 @@
+{
+  "description": "Streamline project planning and collaboration with a user-friendly interface that helps teams organize tasks, share updates, and track progress efficiently.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
