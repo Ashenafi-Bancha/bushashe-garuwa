@@ -84,8 +84,7 @@ export default function Experiences() {
                     </ul>
                   )}
 
-                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-[#173F35]/10">
-                    <div className="text-[#C99A45] font-sans font-semibold text-sm">{exp.price}</div>
+                  <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#173F35]/10">
                     <Link to="/visit" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors">
                       {t.common.reserve}
                     </Link>

@@ -491,7 +491,6 @@ export default function Home() {
                       <Link to="/stay" className="group heritage-card bg-white block h-full">
                         <div className="img-zoom relative aspect-[4/3] bg-[#173F35]/8">
                           <Photo alt={room.name} className="w-full h-full object-cover"/>
-                          <span className="absolute bottom-4 left-4 rounded-full bg-white/95 backdrop-blur text-[#0e2820] text-sm font-bold px-4 py-1.5 shadow">{room.price}</span>
                         </div>
                         <div className="p-6">
                           <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{room.name}</h3>

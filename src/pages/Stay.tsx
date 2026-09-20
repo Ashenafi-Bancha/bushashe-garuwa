@@ -7,7 +7,7 @@ import type { Dictionary } from '../i18n/dictionaries/en';
 
 type Amenity = keyof Dictionary['stay']['amenities'];
 
-/* Room facts and amenities — names, descriptions and prices live in the translations (t.stay.rooms) */
+/* Room facts and amenities — names and descriptions live in the translations (t.stay.rooms) */
 const rooms: { id: keyof Dictionary['stay']['rooms']; size: string; amenities: Amenity[] }[] = [
   { id: 'standard', size: '22 m²', amenities: ['wifi', 'bathroom', 'breakfast', 'garden', 'cultural', 'reading'] },
   { id: 'family', size: '38 m²', amenities: ['wifi', 'bathroom', 'breakfast', 'outdoor', 'cultural', 'kids'] },
@@ -54,12 +54,7 @@ export default function Stay() {
 
                 {/* Info */}
                 <div className="p-5 sm:p-8 lg:p-10 flex flex-col">
-                  <div className="flex items-start justify-between gap-4 mb-4">
-                    <h2 className="font-display text-3xl font-semibold text-[#173F35]">{room.name}</h2>
-                    <div className="text-right flex-shrink-0">
-                      <div className="text-[#C99A45] font-sans font-semibold text-base">{room.price}</div>
-                    </div>
-                  </div>
+                  <h2 className="font-display text-3xl font-semibold text-[#173F35] mb-4">{room.name}</h2>
 
                   <div className="flex gap-6 mb-5">
                     <div className="text-[#1D211E]/50 text-xs font-sans">{size}</div>

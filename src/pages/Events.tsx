@@ -10,7 +10,7 @@ type AvailKind = 'limited' | 'open' | 'group';
 
 const categories: Category[] = ['all', 'food', 'culture', 'education', 'music', 'community'];
 
-/* Schedule data — names, dates, descriptions and prices live in the translations (t.events.items) */
+/* Schedule data — names, dates and descriptions live in the translations (t.events.items) */
 const events: { id: keyof Dictionary['events']['items']; date: string; time: string; cat: Exclude<Category, 'all'>; availKind: AvailKind; featured: boolean }[] = [
   { id: 'foodOct', date: '2026-10-05', time: '17:00 – 21:00', cat: 'food', availKind: 'limited', featured: true },
   { id: 'oralHistory', date: '2026-10-12', time: '16:00 – 18:30', cat: 'culture', availKind: 'open', featured: false },
@@ -69,8 +69,7 @@ export default function Events() {
                   </div>
                   <h2 className="font-display text-xl sm:text-2xl font-semibold text-white mb-3">{ev.name}</h2>
                   <p className="text-white/55 font-sans text-sm leading-relaxed mb-5 flex-1">{ev.desc}</p>
-                  <div className="flex items-center justify-between gap-4 pt-4 border-t border-white/10">
-                    <span className="text-[#C99A45] font-sans font-semibold text-sm">{ev.price}</span>
+                  <div className="flex items-center justify-end gap-4 pt-4 border-t border-white/10">
                     <Link to="/contact" className="inline-flex items-center gap-2 bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors">
                       {t.common.reserveYourPlace}
                     </Link>
@@ -124,7 +123,6 @@ export default function Events() {
                     <span className={`text-xs font-sans rounded-full px-3 py-1 ${availStyle(ev.availKind, false)}`}>
                       {ev.avail}
                     </span>
-                    <div className="text-[#C99A45] font-sans font-semibold text-sm text-right">{ev.price}</div>
                     <Link to="/contact" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-xs font-sans font-semibold rounded-full px-4 py-2.5 transition-colors whitespace-nowrap">
                       {t.common.reserve}
                     </Link>

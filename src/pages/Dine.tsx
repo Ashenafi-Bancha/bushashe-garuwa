@@ -58,8 +58,7 @@ export default function Dine() {
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-lg font-semibold text-[#173F35] mb-2">{item.name}</h3>
-                  <p className="text-[#1D211E]/55 text-xs font-sans leading-relaxed mb-4">{item.desc}</p>
-                  <div className="text-[#C99A45] font-sans font-semibold text-sm">{item.price}</div>
+                  <p className="text-[#1D211E]/55 text-xs font-sans leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
