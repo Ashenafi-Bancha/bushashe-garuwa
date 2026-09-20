@@ -77,6 +77,36 @@ export default function Discover() {
         </div>
       </section>
 
+
+      {/* A walk through the grounds — a visitor's account */}
+      <section className="py-16 sm:py-24">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <div className="max-w-3xl mb-10">
+            <span className="eyebrow bg-[#A65A3A]/10 text-[#A65A3A] mb-5">{d.walk.eyebrow}</span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-[#0e2820] leading-[1.05] mb-6">{d.walk.title}</h2>
+            <p className="font-display italic text-xl sm:text-2xl text-[#173F35] leading-snug">{d.walk.lead}</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 mb-12">
+            {[photos.zigba, photos.house, photos.enset].map((src, i) => (
+              <div key={i} className="img-zoom rounded-2xl sm:rounded-3xl aspect-[4/3] bg-[#173F35]/8">
+                <img src={src} alt="" className="w-full h-full object-cover" loading="lazy" />
+              </div>
+            ))}
+          </div>
+
+          <div className="lg:columns-2 gap-12 [&>p]:mb-5 [&>p]:break-inside-avoid">
+            {d.walk.paragraphs.map((p, i) => (
+              <p key={i} className="text-[#1D211E]/70 text-base sm:text-[17px] leading-[1.9]">{p}</p>
+            ))}
+          </div>
+
+          <div className="mt-12 rounded-3xl border-l-4 border-[#C99A45] bg-white p-7 sm:p-9 shadow-sm max-w-3xl">
+            <p className="font-display italic text-lg sm:text-xl text-[#173F35] leading-relaxed">{d.walk.closing}</p>
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
       <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-20 text-center">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">

@@ -45,7 +45,7 @@ const events = [
 
 const rooms = ['standard', 'family', 'heritage'] as const;
 
-const facilities = ['meetingHall', 'zoo', 'pool', 'orchard', 'guesthouse', 'restaurant'] as const;
+const facilities = ['meetingHall', 'zoo', 'pool', 'orchard', 'horses', 'crocodile', 'fish', 'guesthouse', 'restaurant'] as const;
 
 const bookYears = ['2018', '2020', '2015', '2019'];
 

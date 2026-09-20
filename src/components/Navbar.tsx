@@ -68,8 +68,8 @@ export default function Navbar() {
                 scrolled ? 'w-9 h-9' : 'w-11 h-11'
               }`}
             />
-            <div className="hidden sm:block leading-none">
-              <div className="font-display text-white text-[15px] font-bold tracking-tight whitespace-nowrap">Bushaashe Garuwa</div>
+            <div className="leading-none">
+              <div className="font-display text-white text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap">Bushaashe Garuwa</div>
               <div className="hidden xl:block text-[#C99A45] text-[10px] font-medium tracking-[0.18em] uppercase mt-1">Wolaita · Ethiopia</div>
             </div>
           </Link>
@@ -101,9 +101,7 @@ export default function Navbar() {
               </svg>
             </button>
 
-            <div className="hidden md:block">
-              <LanguageSwitcher variant="bar" />
-            </div>
+            <LanguageSwitcher variant="bar" />
 
             <Link
               to="/visit"
