@@ -126,7 +126,7 @@ export const am: Dictionary = {
       slide: 'ምስል {n}',
       statGenerations: 'ትውልዶች',
       statYears: 'ዓመታት የቆየ ቅርስ',
-      statCentury: 'ክፍለ ዘመን ቅርስ',
+      sinceCentury: 'ከ18ኛው ክፍለ ዘመን ጀምሮ',
     },
     intro: {
       eyebrow: 'ዓላማችን',
@@ -287,6 +287,7 @@ export const am: Dictionary = {
       p3: 'ከባህላዊ ቤቶቻችንና ጥንታዊ ዛፎቻችን እስከ ቤተ መጻሕፍታችን፣ የቃል ታሪኮቻችን፣ ባህላዊ ምግባችንና የእንግዳ ማረፊያችን ድረስ — እያንዳንዱ የቡሻሼ ጋሯ አካል ያለፈውን ለማክበር፣ የአሁኑን ለማክበርና የወላይታን ቅርስ የወደፊት ዕጣ ለመጠበቅ ይኖራል።',
       generations: 'ትውልዶች',
       years: 'ዓመታት የቆየ ቅርስ',
+      since: 'ከ18ኛው ክፍለ ዘመን ጀምሮ',
     },
     purpose: {
       eyebrow: 'ዓላማችን',

@@ -78,9 +78,8 @@ export default function About() {
                 <div className="text-[#C99A45] font-display text-3xl font-semibold">4+</div>
                 <div className="text-white/50 font-sans text-xs tracking-wider uppercase mt-1">{a.who.generations}</div>
               </div>
-              <div className="absolute -top-5 -right-5 bg-[#C99A45] rounded-2xl shadow-xl p-6 hidden lg:block">
-                <div className="text-[#173F35] font-display text-3xl font-semibold">200+</div>
-                <div className="text-[#173F35]/70 font-sans text-xs tracking-wider uppercase mt-1">{a.who.years}</div>
+              <div className="absolute -top-5 -right-5 bg-[#C99A45] rounded-2xl shadow-xl px-6 py-5 hidden lg:block max-w-[12rem]">
+                <div className="text-[#173F35] font-display text-2xl font-semibold leading-tight">{a.who.since}</div>
               </div>
             </div>
           </div>

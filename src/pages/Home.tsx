@@ -141,10 +141,10 @@ export default function Home() {
 
   const scrollY = useScrollY(1400);
 
-  const stats = [
+  const stats: { value?: string; label?: string; phrase?: string }[] = [
     { value: '4+', label: h.hero.statGenerations },
     { value: '200+', label: h.hero.statYears },
-    { value: '18th', label: h.hero.statCentury },
+    { phrase: h.hero.sinceCentury },
   ];
 
   return (
@@ -204,9 +204,15 @@ export default function Home() {
                 <Tilt className="rounded-3xl" max={10}>
                   <div className="grid grid-cols-3 glass rounded-3xl p-2 animate-float shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
                     {stats.map((s, i) => (
-                      <div key={i} className={`px-6 py-5 ${i > 0 ? 'border-l border-white/15' : ''}`}>
-                        <div className="font-display text-4xl font-bold text-white">{s.value}</div>
-                        <div className="text-xs text-white/60 mt-1 whitespace-nowrap">{s.label}</div>
+                      <div key={i} className={`px-6 py-5 flex flex-col justify-center ${i > 0 ? 'border-l border-white/15' : ''}`}>
+                        {s.phrase ? (
+                          <div className="font-display text-2xl leading-tight text-[#E6BE6E] max-w-[9rem]">{s.phrase}</div>
+                        ) : (
+                          <>
+                            <div className="font-display text-4xl font-bold text-white">{s.value}</div>
+                            <div className="text-xs text-white/60 mt-1 whitespace-nowrap">{s.label}</div>
+                          </>
+                        )}
                       </div>
                     ))}
                   </div>

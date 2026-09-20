@@ -128,7 +128,7 @@ export const en = {
       slide: 'Slide {n}',
       statGenerations: 'Generations',
       statYears: 'Years of heritage',
-      statCentury: 'Century heritage',
+      sinceCentury: 'Since the 18th century',
     },
     intro: {
       eyebrow: 'Our Purpose',
@@ -289,6 +289,7 @@ export const en = {
       p3: 'From our cultural houses and ancient trees, to our library, oral histories, traditional food, and guesthouse — every element of Bushaashe Garuwa exists to honor the past, celebrate the present, and protect the future of Wolaita heritage.',
       generations: 'Generations',
       years: 'Years of Heritage',
+      since: 'Since the 18th century',
     },
     purpose: {
       eyebrow: 'Our Purpose',
