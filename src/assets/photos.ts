@@ -17,6 +17,7 @@ import gardensImg from './photos/grounds/gardens.jpg';
 import lawnImg from './photos/grounds/lawn-and-great-tree.jpg';
 
 // trees & plants
+import ensetImg from './photos/trees-plants/enset-false-banana.jpg';
 import zigbaImg from './photos/trees-plants/zigba-tree.jpg';
 
 // events — Gifaataa celebration
@@ -35,7 +36,9 @@ export const photos = {
   gardens: gardensImg,
   /** Open lawn with the great tree and heritage house (portrait) */
   lawn: lawnImg,
-  /** Zigba tree (Podocarpus) planted by the forefathers (landscape) */
+  /** Enset (false banana) garden — the staple plant of Wolaita (landscape) */
+  enset: ensetImg,
+  /** Zigba tree planted by the forefathers (small photo — a larger original would be better) */
   zigba: zigbaImg,
   /** Gifaataa — guests in traditional dress walking through the heritage gate (landscape) */
   gifaataa1: gifaataa1Img,

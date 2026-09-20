@@ -24,7 +24,7 @@ const exploreCards = [
 
 const livingHeritage = [
   { id: 'houses', img: photos.house },
-  { id: 'trees', img: photos.zigba },
+  { id: 'trees', img: photos.enset },
   { id: 'animals' },
   { id: 'artifacts' },
 ] as const;
@@ -58,7 +58,8 @@ const galleryPhotos: { key: PhotoKey; span: string }[] = [
   { key: 'pavilions', span: 'md:col-span-2' },
   { key: 'gifaataa3', span: 'md:col-span-2' },
   { key: 'gardens', span: 'md:col-span-2' },
-  { key: 'zigba', span: 'md:col-span-2' },
+  { key: 'enset', span: 'md:col-span-2' },
+  { key: 'zigba', span: '' },
   { key: 'lawn', span: 'col-span-2' },
 ];
 
@@ -142,7 +143,7 @@ export default function Home() {
 
   const stats = [
     { value: '4+', label: h.hero.statGenerations },
-    { value: '100+', label: h.hero.statYears },
+    { value: '200+', label: h.hero.statYears },
     { value: '18th', label: h.hero.statCentury },
   ];
 

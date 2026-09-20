@@ -53,6 +53,7 @@ export const wal: DeepPartial<Dictionary> = {
     gardens: 'Bushaashe Garuwa — gardens and recreational grounds',
     lawn: 'Bushaashe Garuwa — open lawns, heritage tree and traditional house',
     home: 'Bushaashe Garuwa — traditional thatched house, fountain and flags among the gardens',
+    enset: 'Enset (false banana) growing at Bushaashe Garuwa — the staple plant of Wolaita food culture',
     zigba: 'The zigba tree at Bushaashe Garuwa — planted by the forefathers of the family',
     gifaataa1: 'Gifaataa celebration at Bushaashe Garuwa — guests in traditional Wolaita dress walking through the heritage gate',
     gifaataa2: 'Gifaataa celebration — women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn',
@@ -174,7 +175,7 @@ export const wal: DeepPartial<Dictionary> = {
       eyebrow: 'Our History',
       title: 'A Journey Through Time',
       items: [
-        { period: 'Early 1900s', label: 'Origins', desc: 'The founding family settles in the Wolaita highlands.' },
+        { period: 'The 1700s', label: 'Roots', desc: "The family's story in the Wolaita highlands begins in the 18th century." },
         { period: '1940s', label: 'First Houses', desc: 'Cultural houses built; heritage trees planted.' },
         { period: '1970s', label: 'Preservation', desc: 'Oral histories and artifacts formally documented.' },
         { period: '1995', label: 'Library', desc: 'A library and cultural archive established.' },
@@ -342,6 +343,7 @@ export const wal: DeepPartial<Dictionary> = {
       eyebrow: 'Our Journey',
       title: 'Key Milestones',
       items: [
+        { year: 'The 1700s', event: 'The family’s roots in Wolaita reach back to the 18th century' },
         { year: 'Early 1900s', event: 'Founding homestead established in Wolaita Sodo' },
         { year: '1940s', event: 'First cultural houses built; heritage trees planted' },
         { year: '1970s', event: 'Oral history collection and artifact preservation begins' },
