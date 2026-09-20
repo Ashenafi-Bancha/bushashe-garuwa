@@ -57,6 +57,7 @@ export const en = {
       dine: 'Dine',
       library: 'Library',
       visit: 'Visit',
+      gallery: 'Gallery',
     },
     homeAria: 'Bushaashe Garuwa home',
     mainNav: 'Main navigation',
@@ -125,7 +126,7 @@ export const en = {
       slide: 'Slide {n}',
       statGenerations: 'Generations',
       statYears: 'Years of heritage',
-      statCollections: 'Heritage collections',
+      statCentury: 'Century heritage',
     },
     intro: {
       eyebrow: 'Our Purpose',
@@ -244,6 +245,18 @@ export const en = {
       eyebrow: 'Ready to Visit?',
       title: 'Your Journey Starts Here',
     },
+  },
+
+  gallery: {
+    hero: { eyebrow: 'Gallery', title: 'Life at Bushaashe Garuwa' },
+    intro: 'Photographs from the grounds, the gardens and our cultural celebrations. More are added as the seasons and events go by.',
+    filters: { all: 'All', grounds: 'Grounds & Nature', culture: 'Culture & Events' },
+    count: '{count} photos',
+    empty: 'No photos in this category yet.',
+    close: 'Close',
+    previous: 'Previous photo',
+    next: 'Next photo',
+    position: '{current} of {total}',
   },
 
   about: {

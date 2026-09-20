@@ -13,6 +13,7 @@ import Library from './pages/Library';
 import Visit from './pages/Visit';
 import Contact from './pages/Contact';
 import About from './pages/About';
+import Gallery from './pages/Gallery';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
 import { scrollToTop, startSmoothScroll, useAutoReveal } from './lib/motion';
 
@@ -58,6 +59,7 @@ function AppLayout() {
         <Route path="/stay" element={<Stay />} />
         <Route path="/dine" element={<Dine />} />
         <Route path="/library" element={<Library />} />
+        <Route path="/gallery" element={<Gallery />} />
         <Route path="/visit" element={<Visit />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />

@@ -407,6 +407,11 @@ main {
   justify-content: center;
 }
 
+/* The menu button is for tablet and phone only — desktop shows every link in the bar */
+@media (min-width: 1024px) {
+  .menu-toggle { display: none; }
+}
+
 /* ── Amharic (Ge'ez script) typography ──
    Wide letter-spacing and tiny sizes suit Latin capitals but make Ethiopic hard to read. */
 html:lang(am) [class*="tracking-"],

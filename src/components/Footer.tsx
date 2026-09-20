@@ -4,7 +4,7 @@ import { useI18n } from '../i18n/I18nProvider';
 
 /** Routes per footer column; labels come from t.footer.columns. */
 const footerRoutes = {
-  explore: { heritage: '/heritage', experiences: '/experiences', events: '/events', gallery: '/gallery', archive: '/archive' },
+  explore: { heritage: '/heritage', experiences: '/experiences', events: '/events', gallery: '/gallery', archive: '/library' },
   stay: { guesthouse: '/stay', restaurant: '/dine', bar: '/dine#bar', bookRoom: '/stay#book', foodEvents: '/events' },
   discover: { story: '/discover', family: '/heritage/family', timeline: '/heritage/timeline', library: '/library', stories: '/heritage/stories' },
   visit: { plan: '/visit', contact: '/contact', education: '/experiences/education', groups: '/experiences', schools: '/experiences/education' },

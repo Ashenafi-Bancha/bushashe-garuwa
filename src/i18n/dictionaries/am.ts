@@ -55,6 +55,7 @@ export const am: Dictionary = {
       dine: 'ምግብ',
       library: 'ቤተ መጻሕፍት',
       visit: 'ጉብኝት',
+      gallery: 'የፎቶ ማዕከል',
     },
     homeAria: 'ቡሻሼ ጋሯ ዋና ገጽ',
     mainNav: 'ዋና ማውጫ',
@@ -123,7 +124,7 @@ export const am: Dictionary = {
       slide: 'ምስል {n}',
       statGenerations: 'ትውልዶች',
       statYears: 'ዓመታት የቆየ ቅርስ',
-      statCollections: 'የቅርስ ስብስቦች',
+      statCentury: 'ክፍለ ዘመን ቅርስ',
     },
     intro: {
       eyebrow: 'ዓላማችን',
@@ -242,6 +243,18 @@ export const am: Dictionary = {
       eyebrow: 'ለመጎብኘት ዝግጁ ነዎት?',
       title: 'ጉዞዎ እዚህ ይጀምራል',
     },
+  },
+
+  gallery: {
+    hero: { eyebrow: 'የፎቶ ማዕከል', title: 'ሕይወት በቡሻሼ ጋሯ' },
+    intro: 'ከግቢው፣ ከአትክልት ስፍራዎቻችንና ከባህላዊ በዓሎቻችን የተነሱ ፎቶዎች። በየወቅቱና በየዝግጅቱ ተጨማሪ ፎቶዎች ይታከላሉ።',
+    filters: { all: 'ሁሉም', grounds: 'ግቢና ተፈጥሮ', culture: 'ባህልና ዝግጅቶች' },
+    count: '{count} ፎቶዎች',
+    empty: 'በዚህ ምድብ ውስጥ እስካሁን ፎቶ የለም።',
+    close: 'ዝጋ',
+    previous: 'ቀዳሚ ፎቶ',
+    next: 'ቀጣይ ፎቶ',
+    position: 'ከ{total} ውስጥ {current}',
   },
 
   about: {

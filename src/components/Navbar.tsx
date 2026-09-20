@@ -15,11 +15,13 @@ const navRoutes = [
   { key: 'stay', to: '/stay' },
   { key: 'dine', to: '/dine' },
   { key: 'library', to: '/library' },
+  { key: 'gallery', to: '/gallery' },
   { key: 'visit', to: '/visit' },
 ] as const;
 
-/* Shown in the desktop bar; every link is in the full menu */
-const barKeys = ['about', 'heritage', 'experiences', 'events', 'stay', 'dine', 'library'] as const;
+/* The desktop bar shows every page except Home — the logo links home.
+   The full-screen menu (tablet and phone) still lists all of them. */
+const barKeys = ['about', 'discover', 'heritage', 'experiences', 'events', 'stay', 'dine', 'library', 'gallery', 'visit'] as const;
 
 export default function Navbar() {
   const [scrolled, setScrolled]     = useState(false);
@@ -67,18 +69,18 @@ export default function Navbar() {
               }`}
             />
             <div className="hidden sm:block leading-none">
-              <div className="font-display text-white text-[15px] font-bold tracking-tight">Bushaashe Garuwa</div>
-              <div className="text-[#C99A45] text-[10px] font-medium tracking-[0.18em] uppercase mt-1">Wolaita · Ethiopia</div>
+              <div className="font-display text-white text-[15px] font-bold tracking-tight whitespace-nowrap">Bushaashe Garuwa</div>
+              <div className="hidden xl:block text-[#C99A45] text-[10px] font-medium tracking-[0.18em] uppercase mt-1">Wolaita · Ethiopia</div>
             </div>
           </Link>
 
           {/* ── Desktop links ── */}
-          <nav className="hidden xl:flex items-center gap-0.5" aria-label={t.nav.mainNav}>
+          <nav className="hidden lg:flex items-center gap-0.5 min-w-0" aria-label={t.nav.mainNav}>
             {barLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`px-3.5 py-2 rounded-full text-[13px] font-medium transition-colors duration-300 ${
+                className={`px-2 xl:px-3 py-2 rounded-full text-[12px] xl:text-[13px] font-medium whitespace-nowrap transition-colors duration-300 ${
                   isActive(link.to) ? 'bg-white/15 text-white' : 'text-white/70 hover:text-white hover:bg-white/8'
                 }`}
               >
@@ -105,14 +107,14 @@ export default function Navbar() {
 
             <Link
               to="/visit"
-              className="hidden lg:inline-flex items-center bg-[#C99A45] hover:bg-[#d9af65] text-[#0e2820] text-[13px] font-semibold rounded-full px-5 py-2.5 ml-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-8px_rgba(201,154,69,0.7)]"
+              className="hidden 2xl:inline-flex items-center bg-[#C99A45] hover:bg-[#d9af65] text-[#0e2820] text-[13px] font-semibold rounded-full px-5 py-2.5 ml-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-8px_rgba(201,154,69,0.7)]"
             >
               {t.common.planVisit}
             </Link>
 
             {/* Menu (all screen sizes below xl, and for the full list above) */}
             <button
-              className="touch-target rounded-full bg-white/10 hover:bg-white/20 text-white ml-0.5"
+              className="menu-toggle touch-target rounded-full bg-white/10 hover:bg-white/20 text-white ml-0.5"
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
               aria-expanded={mobileOpen}

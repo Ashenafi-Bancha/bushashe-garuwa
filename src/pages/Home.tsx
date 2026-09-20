@@ -140,7 +140,7 @@ export default function Home() {
   const stats = [
     { value: '4+', label: h.hero.statGenerations },
     { value: '100+', label: h.hero.statYears },
-    { value: '8', label: h.hero.statCollections },
+    { value: '18th', label: h.hero.statCentury },
   ];
 
   return (
