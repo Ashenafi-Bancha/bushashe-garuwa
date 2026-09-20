@@ -7,7 +7,7 @@ import { fmt, useI18n } from '../i18n/I18nProvider';
 /* Page structure — the text for each id lives in the translations (t.heritage.*) */
 const categories = [
   { id: 'houses', img: photos.house, count: 8, to: '/heritage/houses' },
-  { id: 'trees', img: photos.lawn, count: 24, to: '/heritage/trees' },
+  { id: 'trees', img: photos.zigba, count: 24, to: '/heritage/trees' },
   { id: 'animals', count: 15, to: '/heritage/animals' },
   { id: 'artifacts', count: 120, to: '/heritage/artifacts' },
   { id: 'clothing', img: photos.gifaataa2, count: 35, to: '/heritage/clothing' },
@@ -22,6 +22,7 @@ const trees = [
   { id: 'doro', wolaytta: 'Doro', scientific: 'Acacia abyssinica' },
   { id: 'wonka', wolaytta: 'Wonka', scientific: 'Ensete ventricosum' },
   { id: 'tigo', wolaytta: 'Tigo', scientific: 'Olea europaea subsp. africana' },
+  { id: 'zigba', wolaytta: 'Zigba', scientific: 'Podocarpus falcatus' },
 ] as const;
 
 export default function Heritage() {

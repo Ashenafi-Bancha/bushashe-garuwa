@@ -16,6 +16,9 @@ import pavilionsImg from './photos/grounds/thatched-pavilions.jpg';
 import gardensImg from './photos/grounds/gardens.jpg';
 import lawnImg from './photos/grounds/lawn-and-great-tree.jpg';
 
+// trees & plants
+import zigbaImg from './photos/trees-plants/zigba-tree.jpg';
+
 // events — Gifaataa celebration
 import gifaataa1Img from './photos/events/gifaataa/gifaataa-01.jpg';
 import gifaataa2Img from './photos/events/gifaataa/gifaataa-02.jpg';
@@ -32,6 +35,8 @@ export const photos = {
   gardens: gardensImg,
   /** Open lawn with the great tree and heritage house (portrait) */
   lawn: lawnImg,
+  /** Zigba tree (Podocarpus) planted by the forefathers (landscape) */
+  zigba: zigbaImg,
   /** Gifaataa — guests in traditional dress walking through the heritage gate (landscape) */
   gifaataa1: gifaataa1Img,
   /** Gifaataa — women in traditional Wolaita dress on the lawn (landscape) */

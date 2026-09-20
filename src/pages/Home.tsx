@@ -24,7 +24,7 @@ const exploreCards = [
 
 const livingHeritage = [
   { id: 'houses', img: photos.house },
-  { id: 'trees', img: photos.lawn },
+  { id: 'trees', img: photos.zigba },
   { id: 'animals' },
   { id: 'artifacts' },
 ] as const;
@@ -45,6 +45,8 @@ const events = [
 
 const rooms = ['standard', 'family', 'heritage'] as const;
 
+const facilities = ['meetingHall', 'zoo', 'pool', 'orchard', 'guesthouse', 'restaurant'] as const;
+
 const bookYears = ['2018', '2020', '2015', '2019'];
 
 /* Mosaic: spans fill a 4-column grid exactly (2 columns on mobile) */
@@ -56,6 +58,7 @@ const galleryPhotos: { key: PhotoKey; span: string }[] = [
   { key: 'pavilions', span: 'md:col-span-2' },
   { key: 'gifaataa3', span: 'md:col-span-2' },
   { key: 'gardens', span: 'md:col-span-2' },
+  { key: 'zigba', span: 'md:col-span-2' },
   { key: 'lawn', span: 'col-span-2' },
 ];
 
@@ -532,6 +535,29 @@ export default function Home() {
                   {h.restaurant.cta}
                 </Link>
               </FadeSection>
+            </div>
+          </div>
+        </section>
+
+        {/* ═════════ FACILITIES & SERVICES ═════════ */}
+        <section className="pb-20 sm:pb-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading eyebrow={h.facilities.eyebrow} title={h.facilities.title} desc={h.facilities.desc} />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {facilities.map((id, i) => {
+                const item = h.facilities.items[id];
+                return (
+                  <FadeSection key={id} delay={(i % 3) * 80}>
+                    <Tilt className="h-full rounded-3xl" max={6}>
+                      <div className="heritage-card bg-white h-full p-7 sm:p-8 flex flex-col">
+                        <span className="text-[#C99A45] text-sm font-semibold tabular-nums mb-5">0{i + 1}</span>
+                        <h3 className="font-display text-2xl font-semibold text-[#0e2820] mb-3">{item.title}</h3>
+                        <p className="text-[#1D211E]/60 text-sm leading-relaxed">{item.desc}</p>
+                      </div>
+                    </Tilt>
+                  </FadeSection>
+                );
+              })}
             </div>
           </div>
         </section>

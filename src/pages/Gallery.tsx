@@ -16,6 +16,7 @@ const items: { key: PhotoKey; cat: Category }[] = [
   { key: 'pavilions', cat: 'grounds' },
   { key: 'gifaataa3', cat: 'culture' },
   { key: 'gardens', cat: 'grounds' },
+  { key: 'zigba', cat: 'grounds' },
   { key: 'lawn', cat: 'grounds' },
 ];
 

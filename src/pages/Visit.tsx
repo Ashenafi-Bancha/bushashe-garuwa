@@ -15,6 +15,7 @@ const experienceTypes: { id: ExperienceType }[] = [
   { id: 'guesthouse' },
   { id: 'group' },
   { id: 'education' },
+  { id: 'meeting' },
 ];
 
 export default function Visit() {

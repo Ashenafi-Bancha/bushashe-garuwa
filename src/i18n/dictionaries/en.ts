@@ -40,6 +40,7 @@ export const en = {
     gardens: 'Bushaashe Garuwa — gardens and recreational grounds',
     lawn: 'Bushaashe Garuwa — open lawns, heritage tree and traditional house',
     home: 'Bushaashe Garuwa — traditional thatched house, fountain and flags among the gardens',
+    zigba: 'The zigba tree at Bushaashe Garuwa — planted by the forefathers of the family',
     gifaataa1: 'Gifaataa celebration at Bushaashe Garuwa — guests in traditional Wolaita dress walking through the heritage gate',
     gifaataa2: 'Gifaataa celebration — women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn',
     gifaataa3: 'Gifaataa celebration — guests in traditional Wolaita attire on the Bushaashe Garuwa grounds',
@@ -151,8 +152,8 @@ export const en = {
       title: 'A Living Heritage',
       items: {
         houses: { title: 'Cultural Houses', desc: 'Traditional Wolaita homes carrying centuries of architectural wisdom.' },
-        trees: { title: 'Historical Trees & Plants', desc: 'Ancient trees whose roots hold stories of generations.' },
-        animals: { title: 'Animals & Wildlife', desc: 'A sanctuary of animals that share the heritage landscape.' },
+        trees: { title: 'Trees, Plants & Orchards', desc: 'Ancient trees, fruit orchards and enset, whose roots hold stories of generations.' },
+        animals: { title: 'Animals & Zoo', desc: 'A small zoo of animals kept on the heritage grounds — a favourite with families.' },
         artifacts: { title: 'Cultural Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },
       },
     },
@@ -188,6 +189,19 @@ export const en = {
       items: {
         food: { date: 'Oct 5, 2026', name: 'Wolaita Cultural Food Experience', desc: 'Traditional dishes, coffee ceremony, music and storytelling around the fire.', avail: 'Limited spaces' },
         harvest: { date: 'Oct 19, 2026', name: 'Harvest Heritage Evening', desc: 'Celebrate the harvest with traditional food, dance and elder storytelling.', avail: 'Open' },
+      },
+    },
+    facilities: {
+      eyebrow: 'On the Grounds',
+      title: 'Facilities & Services',
+      desc: 'Beyond the heritage itself, Bushaashe Garuwa is a place to gather, learn and relax — for families, schools, organisations and travellers.',
+      items: {
+        meetingHall: { title: 'Meeting Hall', desc: 'A hall for meetings, trainings, workshops and community gatherings, with food and coffee served from our kitchen.' },
+        zoo: { title: 'Zoo & Animals', desc: 'A small zoo where visitors — especially children and school groups — meet the animals kept on the grounds.' },
+        pool: { title: 'Swimming Pool', desc: 'A swimming pool set among the gardens, for guests of the guesthouse and for day visitors.' },
+        orchard: { title: 'Plants & Fruit Trees', desc: 'Orchards of fruit trees, indigenous plants and enset — the false banana at the heart of Wolaita food and culture.' },
+        guesthouse: { title: 'Guesthouse', desc: 'Comfortable rooms for an overnight stay inside the heritage site itself.' },
+        restaurant: { title: 'Restaurant & Bar', desc: 'Wolaita and Ethiopian dishes, traditional drinks and the coffee ceremony, served all day.' },
       },
     },
     stay: {
@@ -386,8 +400,8 @@ export const en = {
     itemCount: '{count} items',
     categories: {
       houses: { label: 'Cultural Houses', desc: 'Traditional Wolaita homes carrying centuries of architectural wisdom and family memory.' },
-      trees: { label: 'Trees & Plants', desc: 'Ancient trees whose roots hold stories older than living memory.' },
-      animals: { label: 'Animals', desc: 'A sanctuary of animals that share the heritage landscape of Bushaashe.' },
+      trees: { label: 'Trees & Plants', desc: 'Ancient trees, fruit orchards and enset — plants whose roots hold stories older than living memory.' },
+      animals: { label: 'Animals & Zoo', desc: 'A small zoo where visitors meet the animals kept on the heritage grounds of Bushaashe.' },
       artifacts: { label: 'Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },
       clothing: { label: 'Traditional Clothing', desc: 'Clothing that carries culture — the visual language of Wolaita identity.' },
       music: { label: 'Music & Dance', desc: 'Living traditions of Wolaita music, song, and ceremonial dance.' },
@@ -401,6 +415,7 @@ export const en = {
         goba: { name: 'Wild Fig', age: '~200 years', sig: 'Sacred gathering place for elders and community decisions.' },
         doro: { name: 'Acacia', age: '~150 years', sig: 'Planted at the founding of the family homestead.' },
         wonka: { name: 'False Banana', age: 'Perennial', sig: 'Staple food crop and cultural symbol of Wolaita life.' },
+        zigba: { name: 'Zigba (African Yellowwood)', age: 'Planted by our forefathers', sig: 'Planted by the fathers of past generations and still standing on the grounds — one of the trees the family has protected ever since.' },
         tigo: { name: 'African Olive', age: '~180 years', sig: 'Used in traditional medicine and ceremonial practices.' },
       },
       qr: "Scan QR codes on-site to discover each tree's full story",
@@ -682,6 +697,7 @@ export const en = {
       guesthouse: { label: 'Guesthouse', desc: 'Overnight stay' },
       group: { label: 'Group Visit', desc: 'Groups of 10 or more' },
       education: { label: 'Educational Visit', desc: 'Schools, universities and researchers' },
+      meeting: { label: 'Meeting Hall', desc: 'Meetings, trainings and workshops' },
     },
     gettingHere: {
       title: 'Getting Here',
