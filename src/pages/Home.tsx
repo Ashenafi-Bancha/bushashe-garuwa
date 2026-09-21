@@ -60,7 +60,7 @@ const galleryPhotos: { key: PhotoKey; span: string }[] = [
   { key: 'gardens', span: 'md:col-span-2' },
   { key: 'enset', span: 'md:col-span-2' },
   { key: 'zigba', span: '' },
-  { key: 'lawn', span: 'col-span-2' },
+  { key: 'lawn', span: 'col-span-2 md:col-span-3' },
 ];
 
 /* ── Scroll reveal ── */
@@ -675,8 +675,15 @@ export default function Home() {
             />
             <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[160px] sm:auto-rows-[200px] lg:auto-rows-[230px] gap-3 sm:gap-4">
               {galleryPhotos.map(({ key, span }) => (
-                <FadeSection key={key} className={`img-zoom rounded-2xl sm:rounded-3xl bg-[#173F35]/8 ${span}`}>
-                  <img src={photos[key]} alt={t.photos[key]} className="w-full h-full object-cover" loading="lazy" />
+                <FadeSection key={key} className={`img-zoom group relative rounded-2xl sm:rounded-3xl bg-[#173F35]/8 ${span}`}>
+                  <Link to="/gallery" className="block w-full h-full">
+                    <img src={photos[key]} alt={t.photos[key]} className="w-full h-full object-cover" loading="lazy" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-[#0a1f19]/85 via-[#0a1f19]/10 to-transparent" />
+                    <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5">
+                      <span className="block font-display text-base sm:text-xl text-white leading-tight">{t.photoCaptions[key].title}</span>
+                      <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{t.photoCaptions[key].desc}</span>
+                    </span>
+                  </Link>
                 </FadeSection>
               ))}
             </div>

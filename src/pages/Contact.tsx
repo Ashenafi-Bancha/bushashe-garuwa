@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useI18n } from '../i18n/I18nProvider';
 import SocialLinks from '../components/SocialLinks';
+import PageHero from '../components/PageHero';
 
 export default function Contact() {
   const { t } = useI18n();
@@ -14,14 +15,9 @@ export default function Contact() {
   };
 
   return (
-    <main className="pt-20">
+    <main>
       {/* Hero */}
-      <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <span className="eyebrow glass text-white mb-5">{c.hero.eyebrow}</span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02] max-w-xl">{c.hero.title}</h1>
-        </div>
-      </section>
+      <PageHero photo="gardens" eyebrow={c.hero.eyebrow} title={c.hero.title} desc={c.intro} />
 
       {/* Contact content */}
       <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">
@@ -29,9 +25,6 @@ export default function Contact() {
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-16">
             {/* Left: info */}
             <div>
-              <p className="text-[#1D211E]/65 font-sans text-base leading-relaxed mb-12 max-w-md">
-                {c.intro}
-              </p>
 
               <div className="space-y-8">
                 <div className="flex items-start gap-5">
@@ -45,7 +38,7 @@ export default function Contact() {
                 <div className="flex items-start gap-5">
                   <div>
                     <div className="text-[#C99A45] text-xs font-sans tracking-wider uppercase mb-1">{t.common.email}</div>
-                    <div className="text-[#173F35] font-sans text-base font-medium">info@bushashegdestination.et</div>
+                    <a href="mailto:info@bushaashegaruwa.com" className="block text-[#173F35] font-sans text-base font-medium hover:text-[#C99A45] transition-colors">info@bushaashegaruwa.com</a>
                     <div className="text-[#1D211E]/45 font-sans text-sm mt-0.5">{c.emailNote}</div>
                   </div>
                 </div>

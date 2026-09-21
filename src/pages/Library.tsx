@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { photos } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
+import PageHero from '../components/PageHero';
 
 type Filter = keyof Dictionary['library']['filters'];
 
@@ -35,16 +36,9 @@ export default function Library() {
     });
 
   return (
-    <main className="pt-20">
+    <main>
       {/* Hero */}
-      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[55vh] min-h-[380px] flex items-end overflow-hidden">
-        <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/40 to-transparent"/>
-        <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <span className="eyebrow glass text-white mb-5">{lb.hero.eyebrow}</span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{lb.hero.title}</h1>
-        </div>
-      </section>
+      <PageHero photo="gardens" eyebrow={lb.hero.eyebrow} title={lb.hero.title} desc={t.home.library.desc} />
 
       {/* Search + filter */}
       <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12">

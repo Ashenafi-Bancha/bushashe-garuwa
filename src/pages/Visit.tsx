@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
+import PageHero from '../components/PageHero';
 
 type ExperienceType = keyof Dictionary['visit']['types'];
 
@@ -35,16 +36,9 @@ export default function Visit() {
   };
 
   return (
-    <main className="pt-20">
+    <main>
       {/* Hero */}
-      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[55vh] min-h-[380px] flex items-end overflow-hidden">
-        <img src={photos.lawn} alt={t.photos.lawn} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/40 to-transparent"/>
-        <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <span className="eyebrow glass text-white mb-5">{v.hero.eyebrow}</span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{v.hero.title}</h1>
-        </div>
-      </section>
+      <PageHero photo="lawn" pos="object-[center_62%]" eyebrow={v.hero.eyebrow} title={v.hero.title} desc={t.common.locationLine} />
 
       {/* Info strip */}
       <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-10">
@@ -68,7 +62,7 @@ export default function Visit() {
               <div>
                 <div className="text-[#C99A45] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
                 <div className="text-white font-sans text-sm">+251 XXX XXX XXX</div>
-                <div className="text-white/50 font-sans text-xs">info@bushashegdestination.et</div>
+                <a href="mailto:info@bushaashegaruwa.com" className="block text-white/60 font-sans text-xs hover:text-[#C99A45] transition-colors">info@bushaashegaruwa.com</a>
               </div>
             </div>
           </div>

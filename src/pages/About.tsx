@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
+import PageHero from '../components/PageHero';
 
 /* Icons per item — the text lives in the translations (t.about.*) */
 /* The family line, oldest first — names, labels and histories live in the translations (t.about.lineage) */
@@ -35,27 +36,11 @@ export default function About() {
   const [person, setPerson] = useState<(typeof lineage)[number]>('bushaashe');
   const selected = a.lineage.people[person];
   return (
-    <main className="pt-20">
+    <main>
 
       {/* Hero */}
-      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[65vh] min-h-[440px] flex items-end overflow-hidden">
-        <img
-          src={photos.gifaataa2}
-          alt={t.photos.gifaataa2}
-          className="absolute inset-0 w-full h-full object-cover grayscale-[15%]"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/95 via-[#173F35]/50 to-[#173F35]/10" />
-        <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <span className="eyebrow glass text-white mb-5">{a.hero.eyebrow}</span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02] max-w-3xl">
-            {a.hero.titleA}<br />
-            <span className="text-[#C99A45]">{a.hero.titleB}</span>
-          </h1>
-          <p className="text-white/60 font-sans text-base mt-5 max-w-xl leading-relaxed">
-            {t.common.slogan}
-          </p>
-        </div>
-      </section>
+      <PageHero photo="gifaataa2" eyebrow={a.hero.eyebrow} desc={t.common.slogan}
+        title={<>{a.hero.titleA}<br /><span className="text-[#A65A3A]">{a.hero.titleB}</span></>} />
 
       {/* Who we are */}
       <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">

@@ -136,6 +136,12 @@ a, button {
 .animate-marquee     { animation: marquee 38s linear infinite; }
 .animate-wave        { animation: wave 1.1s ease-in-out infinite; transform-origin: bottom; }
 .animate-progress    { animation: progress 6.5s linear both; transform-origin: left; }
+/* Page banner photo: settles in from a gentle zoom */
+@keyframes heroPhoto {
+  from { opacity: 0; transform: scale(1.08); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.animate-hero-photo  { animation: heroPhoto 1.6s var(--ease-out-expo) both; }
 
 /* Stagger delays */
 .delay-100 { animation-delay: 100ms; }

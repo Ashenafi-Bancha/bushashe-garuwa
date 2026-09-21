@@ -18,7 +18,7 @@ export default function Photo({ src, alt, className = '', ...rest }: PhotoProps)
   return (
     <div
       role="img"
-      aria-label={`${alt} — ${t.common.photoComingSoon}`}
+      aria-label={`${alt} (${t.common.photoComingSoon})`}
       className={`${className} relative flex flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-[#1e5447] to-[#0e2820] text-[#C99A45]`}
     >
       <div className="absolute inset-0 pattern-diamond opacity-60" />

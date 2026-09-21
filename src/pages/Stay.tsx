@@ -4,6 +4,7 @@ import { photos } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
+import PageHero from '../components/PageHero';
 
 type Amenity = keyof Dictionary['stay']['amenities'];
 
@@ -27,17 +28,9 @@ export default function Stay() {
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
 
   return (
-    <main className="pt-20">
+    <main>
       {/* Hero */}
-      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[60vh] min-h-[400px] flex items-end overflow-hidden">
-        <img src={photos.pavilions} alt={t.photos.pavilions} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/30 to-transparent"/>
-        <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <span className="eyebrow glass text-white mb-5">{st.hero.eyebrow}</span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{st.hero.title}</h1>
-          <p className="text-white/65 font-sans text-base mt-4 max-w-xl">{st.hero.desc}</p>
-        </div>
-      </section>
+      <PageHero photo="pavilions" eyebrow={st.hero.eyebrow} title={st.hero.title} desc={st.hero.desc} />
 
       {/* Room cards */}
       <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">

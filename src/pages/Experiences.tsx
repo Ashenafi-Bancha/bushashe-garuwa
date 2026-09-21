@@ -4,6 +4,7 @@ import { photos } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
+import PageHero from '../components/PageHero';
 
 /* Order and photos — the text for each id lives in the translations (t.experiences.items) */
 const experiences: { id: keyof Dictionary['experiences']['items']; img?: string }[] = [
@@ -22,25 +23,10 @@ export default function Experiences() {
   const [selected, setSelected] = useState<number | null>(null);
 
   return (
-    <main className="pt-20">
+    <main>
       {/* Hero */}
-      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[55vh] min-h-[380px] flex items-end overflow-hidden">
-        <img src={photos.pavilions} alt={t.photos.pavilions} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/40 to-transparent"/>
-        <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <span className="eyebrow glass text-white mb-5">{x.hero.eyebrow}</span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{x.hero.title}</h1>
-        </div>
-      </section>
+      <PageHero photo="gifaataa1" eyebrow={x.hero.eyebrow} title={x.hero.title} desc={x.intro} />
 
-      {/* Intro */}
-      <section className="bg-[#F7F5F0] py-16">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <p className="text-[#1D211E]/65 font-sans text-base leading-relaxed max-w-2xl">
-            {x.intro}
-          </p>
-        </div>
-      </section>
 
       {/* Experience cards */}
       <section className="bg-[#F7F5F0] pb-12 sm:pb-20">

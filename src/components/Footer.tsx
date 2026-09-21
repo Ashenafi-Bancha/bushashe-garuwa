@@ -71,7 +71,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-6 text-white/40 text-xs font-sans text-center sm:text-left">
             <span>{t.footer.address}</span>
             <span>+251 XXX XXX XXX</span>
-            <span>info@bushaashegaruwa.com</span>
+            <a href="mailto:info@bushaashegaruwa.com" className="hover:text-white transition-colors">info@bushaashegaruwa.com</a>
           </div>
           <div className="text-white/25 text-xs font-sans">
             © {new Date().getFullYear()} {t.footer.rights}

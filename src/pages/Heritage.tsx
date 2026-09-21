@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import Photo from '../components/Photo';
 import { fmt, useI18n } from '../i18n/I18nProvider';
+import PageHero from '../components/PageHero';
 
 /* Page structure — the text for each id lives in the translations (t.heritage.*) */
 const categories = [
@@ -34,25 +35,13 @@ export default function Heritage() {
   const [activeTree, setActiveTree] = useState<number | null>(null);
 
   return (
-    <main className="pt-20">
+    <main>
       {/* Hero */}
-      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[60vh] min-h-[400px] flex items-end overflow-hidden">
-        <img src={photos.house} alt={t.photos.house} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/40 to-transparent"/>
-        <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 pb-16 w-full">
-          <span className="eyebrow glass text-white mb-5">{hg.hero.eyebrow}</span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-bold text-white leading-[1.02]">{hg.hero.title}</h1>
-        </div>
-      </section>
+      <PageHero photo="house" eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
 
       {/* Heritage categories grid */}
       <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="mb-8 sm:mb-12">
-            <p className="text-[#1D211E]/60 font-sans text-base leading-relaxed max-w-2xl">
-              {hg.intro}
-            </p>
-          </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {categories.map((cat) => {
               const text = hg.categories[cat.id];

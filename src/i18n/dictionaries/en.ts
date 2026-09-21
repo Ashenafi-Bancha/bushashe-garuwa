@@ -5,7 +5,7 @@
  */
 export const en = {
   meta: {
-    title: 'Bushaashe Garuwa — Where Wolaita Heritage Lives',
+    title: 'Bushaashe Garuwa | Where Wolaita Heritage Lives',
   },
 
   common: {
@@ -34,21 +34,34 @@ export const en = {
     comeBePart: 'Come and Be Part of the Story',
     goal: {
       eyebrow: 'Our Ultimate Goal',
-      text: 'To keep and preserve the culture, traditions and heritage of Wolaita — and to pass them on to future generations.',
+      text: 'To keep and preserve the culture, traditions and heritage of Wolaita, and to pass them on to future generations.',
     },
   },
 
   photos: {
-    house: 'Bushaashe Garuwa — traditional thatched house, flags and grounds',
-    pavilions: 'Bushaashe Garuwa — thatched pavilions and lush gardens',
-    gardens: 'Bushaashe Garuwa — gardens and recreational grounds',
-    lawn: 'Bushaashe Garuwa — open lawns, heritage tree and traditional house',
-    home: 'Bushaashe Garuwa — traditional thatched house, fountain and flags among the gardens',
-    enset: 'Enset (false banana) growing at Bushaashe Garuwa — the staple plant of Wolaita food culture',
-    zigba: 'The zigba tree at Bushaashe Garuwa — planted by the forefathers of the family',
-    gifaataa1: 'Gifaataa celebration at Bushaashe Garuwa — guests in traditional Wolaita dress walking through the heritage gate',
-    gifaataa2: 'Gifaataa celebration — women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn',
-    gifaataa3: 'Gifaataa celebration — guests in traditional Wolaita attire on the Bushaashe Garuwa grounds',
+    house: 'Bushaashe Garuwa: traditional thatched house, flags and grounds',
+    pavilions: 'Bushaashe Garuwa: thatched pavilions and lush gardens',
+    gardens: 'Bushaashe Garuwa: gardens and recreational grounds',
+    lawn: 'Bushaashe Garuwa: open lawns, heritage tree and traditional house',
+    home: 'Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens',
+    enset: 'Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture',
+    zigba: 'The zigba tree at Bushaashe Garuwa, planted by the forefathers of the family',
+    gifaataa1: 'Gifaataa celebration at Bushaashe Garuwa: guests in traditional Wolaita dress walking through the heritage gate',
+    gifaataa2: 'Gifaataa celebration: women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn',
+    gifaataa3: 'Gifaataa celebration: guests in traditional Wolaita attire on the Bushaashe Garuwa grounds',
+  },
+
+  photoCaptions: {
+    home: { title: 'The Heart of the Grounds', desc: 'The great traditional house, the fountain and the flags, set among the gardens.' },
+    gifaataa1: { title: 'Arriving for Gifaataa', desc: 'Guests in traditional Wolaita dress walk through the heritage gate for the new year celebration.' },
+    house: { title: 'The Traditional House', desc: 'A traditional Wolaita house with its thatched roof, beside the path and the Ge\'ez letters of the name.' },
+    gifaataa2: { title: 'Women of Gifaataa', desc: 'Women in white and red traditional Wolaita dress gather on the lawn during Gifaataa.' },
+    pavilions: { title: 'Thatched Pavilions', desc: 'Shaded pavilions among the trees, where visitors rest and gather.' },
+    gifaataa3: { title: 'Guests of the Celebration', desc: 'Guests in traditional Wolaita attire stand together on the grounds during Gifaataa.' },
+    gardens: { title: 'The Gardens', desc: 'Green lawns, hedges and a play area for children and families.' },
+    enset: { title: 'Enset, the False Banana', desc: 'Enset growing on the grounds: the staple plant at the heart of Wolaita food and culture.' },
+    zigba: { title: 'The Zigba Tree', desc: 'A zigba tree planted by the forefathers of the family and cared for ever since.' },
+    lawn: { title: 'The Great Lawn', desc: 'Open lawns and the great tree, with the traditional house in the distance.' },
   },
 
   nav: {
@@ -138,8 +151,8 @@ export const en = {
     intro: {
       eyebrow: 'Our Purpose',
       title: 'More Than a Destination',
-      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination — where generations of history, culture, and knowledge meet the warmth of genuine hospitality.',
-      p2: 'We are not a museum. We are a living family heritage that welcomes visitors to become part of our ongoing story. From cultural houses to our library, from traditional food to oral histories — Bushaashe Garuwa is an experience unlike any other in Ethiopia.',
+      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination, where generations of history, culture, and knowledge meet the warmth of genuine hospitality.',
+      p2: 'We are not a museum. We are a living family heritage that welcomes visitors to become part of our ongoing story. From cultural houses to our library, from traditional food to oral histories, Bushaashe Garuwa is an experience unlike any other in Ethiopia.',
       pillars: ['Heritage', 'Nature', 'Culture', 'Hospitality'],
       generations: 'Generations',
     },
@@ -157,9 +170,9 @@ export const en = {
       eyebrow: 'In Every Corner',
       title: 'A Living Heritage',
       items: {
-        houses: { title: 'Cultural Houses', desc: 'Gulanttaa Keettaa and Meesho Keettaa — two traditional Wolaita houses holding the tools of Wolaita life.' },
+        houses: { title: 'Cultural Houses', desc: 'Gulanttaa Keettaa and Meesho Keettaa: two traditional Wolaita houses holding the tools of Wolaita life.' },
         trees: { title: 'Trees, Plants & Orchards', desc: 'Mango, apple, papaya, banana, more than 1,800 coffee trees, enset and fragrant garden plants.' },
-        animals: { title: 'Animals & Zoo', desc: 'A small zoo of animals kept on the heritage grounds — a favourite with families.' },
+        animals: { title: 'Animals & Zoo', desc: 'A small zoo of animals kept on the heritage grounds, a favourite with families.' },
         artifacts: { title: 'Cultural Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },
       },
     },
@@ -200,10 +213,10 @@ export const en = {
     facilities: {
       eyebrow: 'On the Grounds',
       title: 'Facilities & Services',
-      desc: 'Beyond the heritage itself, Bushaashe Garuwa is a place to gather, learn and relax — for families, schools, organisations and travellers.',
+      desc: 'Beyond the heritage itself, Bushaashe Garuwa is a place to gather, learn and relax, for families, schools, organisations and travellers.',
       items: {
         meetingHall: { title: 'Meeting Hall', desc: 'A hall for meetings, trainings, workshops and community gatherings, with food and coffee served from our kitchen.' },
-        zoo: { title: 'Zoo & Animals', desc: 'A small zoo where visitors — especially children and school groups — meet the animals kept on the grounds.' },
+        zoo: { title: 'Zoo & Animals', desc: 'A small zoo where visitors (especially children and school groups) meet the animals kept on the grounds.' },
         pool: { title: 'Swimming Pool', desc: 'A swimming pool set among the gardens, for guests of the guesthouse and for day visitors.' },
         orchard: { title: 'Plants & Fruit Trees', desc: 'Mango, apple, papaya and banana trees, more than 1,800 coffee trees, enset, and traditional garden plants with wonderful scents.' },
         horses: { title: 'Horse Riding', desc: 'Horses wait on the great lawn for visitors who would like to ride.' },
@@ -220,7 +233,7 @@ export const en = {
       rooms: {
         standard: { name: 'Standard Room', desc: 'Cultural touches, private bathroom, garden views.' },
         family: { name: 'Family Room', desc: 'Spacious with private outdoor area and heritage decor.' },
-        heritage: { name: 'Heritage Room', desc: 'Full Wolaita immersion — our most special stay.' },
+        heritage: { name: 'Heritage Room', desc: 'Full Wolaita immersion: our most special stay.' },
       },
       viewRoom: 'View Room',
       cta: 'Explore Guesthouse',
@@ -228,7 +241,7 @@ export const en = {
     restaurant: {
       eyebrow: 'Restaurant',
       title: 'Taste the Culture in Bushaashe Garuwa',
-      desc: 'Our restaurant serves authentic Wolaita cuisine alongside Ethiopian classics — every dish rooted in tradition, prepared with care.',
+      desc: 'Our restaurant serves authentic Wolaita cuisine alongside Ethiopian classics, every dish rooted in tradition, prepared with care.',
       categories: ['Wolaita Cuisine', 'Ethiopian Cuisine', 'Drinks', 'Special Events'],
       cta: 'Explore Restaurant',
     },
@@ -241,7 +254,7 @@ export const en = {
       elderAlt: 'Wolaita elder storyteller',
       eyebrow: 'Oral History',
       title: 'Stories Passed Down',
-      p1: 'For generations, Wolaita knowledge has lived in words — spoken around fires, in homes, at ceremonies. Our oral history collection preserves these living stories.',
+      p1: 'For generations, Wolaita knowledge has lived in words, spoken around fires, in homes, at ceremonies. Our oral history collection preserves these living stories.',
       p2: 'Hear elders speak in Wolaytta, Amharic and English. Each story is a window into a world that continues to shape Wolaita life today.',
       languages: ['Wolaytta', 'Amharic', 'English'],
       cta: 'Listen to More Stories',
@@ -249,7 +262,7 @@ export const en = {
     library: {
       eyebrow: 'Library & Archive',
       title: 'Knowledge Preserved',
-      desc: 'Explore books, documents, stories and resources connected to Wolaita history, language, agriculture, and culture — carefully preserved for future generations.',
+      desc: 'Explore books, documents, stories and resources connected to Wolaita history, language, agriculture, and culture, carefully preserved for future generations.',
       categories: ['History', 'Culture', 'Language', 'Agriculture', 'Traditional Knowledge'],
       cta: 'Explore Library',
       books: [
@@ -291,10 +304,10 @@ export const en = {
     },
     who: {
       eyebrow: 'Who We Are',
-      title: 'More Than a Place — A Living Story',
-      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination in Damot Sore Woreda, Wolaita Zone, Ethiopia. We are not a museum, a resort, or a tourist attraction — we are a family heritage that has been tended and passed down across four generations.',
-      p2: 'What began as a family homestead — with its trees, houses, animals, and traditions — has grown into a place where the whole world can come and experience the depth, beauty, and wisdom of Wolaita culture.',
-      p3: 'From our cultural houses and ancient trees, to our library, oral histories, traditional food, and guesthouse — every element of Bushaashe Garuwa exists to honor the past, celebrate the present, and protect the future of Wolaita heritage.',
+      title: 'More Than a Place: A Living Story',
+      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination in Damot Sore Woreda, Wolaita Zone, Ethiopia. We are not a museum, a resort, or a tourist attraction; we are a family heritage that has been tended and passed down across four generations.',
+      p2: 'What began as a family homestead, with its trees, houses, animals, and traditions, has grown into a place where the whole world can come and experience the depth, beauty, and wisdom of Wolaita culture.',
+      p3: 'From our cultural houses and ancient trees, to our library, oral histories, traditional food, and guesthouse: every element of Bushaashe Garuwa exists to honor the past, celebrate the present, and protect the future of Wolaita heritage.',
       generations: 'Generations',
       years: 'Years of Heritage',
       since: 'Since the 18th century',
@@ -304,11 +317,11 @@ export const en = {
       title: 'Mission & Vision',
       missionLabel: 'Our Mission',
       missionTitle: 'To Honor, Preserve, and Share the Living Heritage of Wolaita',
-      missionP1: 'Our mission is to preserve and celebrate the cultural, historical, natural, and oral heritage of the Wolaita people — and to make that heritage accessible, meaningful, and alive for every generation.',
-      missionP2: 'We do this through authentic cultural experiences, a living heritage site, a library and digital archive, traditional food, community engagement, and education — all grounded in the spirit of our ancestors and the warmth of Wolaita hospitality.',
+      missionP1: 'Our mission is to preserve and celebrate the cultural, historical, natural, and oral heritage of the Wolaita people, and to make that heritage accessible, meaningful, and alive for every generation.',
+      missionP2: 'We do this through authentic cultural experiences, a living heritage site, a library and digital archive, traditional food, community engagement, and education, all grounded in the spirit of our ancestors and the warmth of Wolaita hospitality.',
       visionLabel: 'Our Vision',
       visionTitle: 'Wolaita Heritage Celebrated by Ethiopia and the World',
-      visionP1: 'We envision Bushaashe Garuwa as the leading cultural heritage destination of Southern Ethiopia — a place recognized nationally and internationally as a model of authentic heritage preservation, community pride, and cultural tourism done with integrity.',
+      visionP1: 'We envision Bushaashe Garuwa as the leading cultural heritage destination of Southern Ethiopia, a place recognized nationally and internationally as a model of authentic heritage preservation, community pride, and cultural tourism done with integrity.',
       visionP2: 'We envision a future where every child in Wolaita knows their heritage, where researchers and travelers come from around the world to experience it, and where the wisdom of our ancestors continues to shape the lives of generations yet to come.',
       tags: ['Authentic', 'Educational', 'Community-led', 'Sustainable', 'Celebrated'],
     },
@@ -316,7 +329,7 @@ export const en = {
       eyebrow: 'What Guides Us',
       title: 'Our Values',
       items: {
-        authenticity: { title: 'Authenticity', desc: 'We present Wolaita heritage exactly as it is — without performance, without distortion. Every story we tell, every tradition we share, every experience we offer is rooted in lived truth.' },
+        authenticity: { title: 'Authenticity', desc: 'We present Wolaita heritage exactly as it is, without performance, without distortion. Every story we tell, every tradition we share, every experience we offer is rooted in lived truth.' },
         respect: { title: 'Respect', desc: 'We hold our ancestors, their knowledge, and their way of life in the highest regard. Visitors are welcomed as guests into a living heritage, and we ask that this respect is shared.' },
         preservation: { title: 'Preservation', desc: 'We believe that what is not preserved is lost. Our library, archive, oral history collection, and heritage site exist so that future generations inherit what past generations built.' },
         continuity: { title: 'Continuity', desc: 'Heritage is not a museum piece. It is a living practice. We actively pass Wolaita knowledge, traditions, and culture to the next generation through education, experience, and community.' },
@@ -377,8 +390,8 @@ export const en = {
     story: {
       eyebrow: 'Our Story',
       title: 'A Heritage That Lives and Breathes',
-      p1: 'Bushaashe Garuwa was not built as a destination. It grew as a family — generation by generation — rooted in the soil of Wolaita, shaped by its history, and sustained by its culture.',
-      p2: 'What began as a family homestead became a place of cultural preservation. What was preserved became a heritage. What became a heritage became an invitation — to visitors, students, researchers, and anyone curious about the depth and beauty of Wolaita culture.',
+      p1: 'Bushaashe Garuwa was not built as a destination. It grew as a family, generation by generation, rooted in the soil of Wolaita, shaped by its history, and sustained by its culture.',
+      p2: 'What began as a family homestead became a place of cultural preservation. What was preserved became a heritage. What became a heritage became an invitation: to visitors, students, researchers, and anyone curious about the depth and beauty of Wolaita culture.',
     },
     walk: {
       eyebrow: 'A Visit in Words',
@@ -386,22 +399,22 @@ export const en = {
       lead: 'A visitor’s account of a day spent at Bushaashe Garuwa during the Gifaataa celebration.',
       paragraphs: [
         'The entrance to Bushaashe Garuwa is beautiful: the aged zigba trees stand in a row, as though they had come out in a peaceful procession. They are so vast that their shade covers a wide stretch of ground, and the air beside them is cool and clean.',
-        'From the gate you see a broad green lawn and a well-kept compound spreading out before you — and horses waiting, ready for anyone confident enough to ride.',
+        'From the gate you see a broad green lawn and a well-kept compound spreading out before you, and horses waiting, ready for anyone confident enough to ride.',
         'On the right, a fountain built with unusual skill throws its water back and forth and holds the eye; on the left, accompanied by the monument of the founder of this place, we continued our walk.',
         'The traditional Wolaita house, beautifully built, is very large, and its workmanship shows that it was raised by skilled hands. Inside, the coolness calms the spirit and invites you to rest.',
         'It holds stalls for the cattle in their order, a living room and an inner room divided by a partition, the traditional grinding stone (wotta) by which a woman’s skill and strength were measured, weaving tools that show the Wolaita as a people who grew cotton, spun it, wove it and wore it, and all the other goods that complete a home.',
         'The backyard is covered with natra (ariti), talotiya (tena adam), debba (dimbilal), bucheecha, borisa (qebercho), sibika (fetto), damburssa (which mends broken bones) and more, and their fragrance fills the air. How many illnesses did these garden plants once heal?',
         'Enset varieties such as maziya, arikiya and gefetenya form a beautiful grove (ala), with matte santa flowering thickly beside it. Modern beehives are preparing organic honey for us.',
-        'Improved coffee plants that bear fruit in two years — lower in height, so less of the crop is lost at picking time — stand among peach, hopi, banana, olive, apple, gishta and papaya across the wide backyard farm. Fields of ginger and boyina give the place a beauty of its own.',
+        'Improved coffee plants that bear fruit in two years (lower in height, so less of the crop is lost at picking time) stand among peach, hopi, banana, olive, apple, gishta and papaya across the wide backyard farm. Fields of ginger and boyina give the place a beauty of its own.',
         'The crocodile pond and the area where wild animals are cared for are properly fenced. When a crocodile opens its mouth, birds gather the meat lodged between its teeth and feed; because they serve as its toothpick, it does not harm them. Nature supporting nature.',
         'The compound also holds a fish pond, a modest swimming pool and a meeting hall.',
         'After the words of welcome and the greetings of the season, traditional dances carrying the spirit of Gifaataa were performed, and the stage programme came to an end.',
         'The modern guesthouse lodge meets the many standards such a place should have.',
-        'On Saturday, the eve of the celebration, bachira was served — beautifully prepared, with a taste that makes you bite your fingers. After many years, this was the true taste of the Saturday bachira of Gifaataa eve that I knew as a child.',
+        'On Saturday, the eve of the celebration, bachira was served, beautifully prepared, with a taste that makes you bite your fingers. After many years, this was the true taste of the Saturday bachira of Gifaataa eve that I knew as a child.',
         'As the old words say, a platter full of meat was brought to us on an enset leaf. Traditional borde was poured from a gosiya, a gourd adorned by a skilled woman, and served to us.',
-        'With the friends we grew up with, we drank together from a single gourd — the dagwa — and satisfied our longing.',
+        'With the friends we grew up with, we drank together from a single gourd (the dagwa) and satisfied our longing.',
         'Everyone gathered and embraced, and we played "hayaya leke", unmatched in its splendour, while the women in their groups drummed the indiyane, adiya and karabiya, the small male and female drums.',
-        'In the middle of this game the women are openly allowed to choose the young man their heart desires and throw him a lemon — a way to declare their love, to choose a partner, and to begin a betrothal.',
+        'In the middle of this game the women are openly allowed to choose the young man their heart desires and throw him a lemon: a way to declare their love, to choose a partner, and to begin a betrothal.',
         'At the close of the hayaya leke, the guliya (demera) bonfire was lit by our fathers and elders, and we played and rejoiced around it. With that, the programme came to its end.',
       ],
       closing: 'Commissioner Fiseha Garedew and his family: you have brought all of this together and let us see once more what our fathers made of Wolaita. Because you have honoured and protected the culture, the history, the heritage and Wolaittatetta, your honour and your work will be written in golden letters in the history of this great people.',
@@ -409,19 +422,19 @@ export const en = {
     mission: {
       label: 'Our Mission',
       title: 'To Preserve, Share and Celebrate Wolaita Heritage',
-      text: 'We preserve the cultural, historical, and natural heritage of Wolaita and make it accessible to all — through authentic experiences, education, and living community participation.',
+      text: 'We preserve the cultural, historical, and natural heritage of Wolaita and make it accessible to all, through authentic experiences, education, and living community participation.',
     },
     vision: {
       label: 'Our Vision',
       title: 'A Living Heritage, Celebrated by the World',
-      text: 'We envision Bushaashe Garuwa as the leading cultural heritage destination in Southern Ethiopia — a place where Wolaita knowledge, culture and community continue to thrive and inspire.',
+      text: 'We envision Bushaashe Garuwa as the leading cultural heritage destination in Southern Ethiopia, a place where Wolaita knowledge, culture and community continue to thrive and inspire.',
     },
     pillars: {
       eyebrow: 'Why Bushaashe Garuwa?',
       title: 'Four Reasons to Come',
       items: {
         heritage: { title: 'Heritage', desc: 'Four generations of Wolaita family history, cultural houses, artifacts and oral traditions preserved in one living destination.' },
-        nature: { title: 'Nature', desc: 'Ancient trees, heritage plants, animals, and the natural landscape of Wolaita — all within the Bushaashe Garuwa grounds.' },
+        nature: { title: 'Nature', desc: 'Ancient trees, heritage plants, animals, and the natural landscape of Wolaita, all within the Bushaashe Garuwa grounds.' },
         knowledge: { title: 'Knowledge', desc: 'A library, digital archive, and oral history collection dedicated to Wolaita culture, language, and traditional knowledge.' },
         hospitality: { title: 'Hospitality', desc: 'Authentic Wolaita food, a welcoming guesthouse, a warm restaurant and the genuine hospitality of our family.' },
       },
@@ -437,13 +450,13 @@ export const en = {
     intro: 'Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one.',
     itemCount: '{count} items',
     categories: {
-      houses: { label: 'Cultural Houses', desc: 'Two traditional Wolaita houses — Gulanttaa Keettaa and Meesho Keettaa — full of the traditional tools and instruments of the Wolaita people.' },
+      houses: { label: 'Cultural Houses', desc: 'Two traditional Wolaita houses, Gulanttaa Keettaa and Meesho Keettaa, full of the traditional tools and instruments of the Wolaita people.' },
       trees: { label: 'Trees & Plants', desc: 'Heritage trees, mango, apple, papaya and banana, more than 1,800 coffee trees, enset and fragrant traditional garden plants.' },
       animals: { label: 'Animals & Zoo', desc: 'A small zoo where visitors meet the animals kept on the heritage grounds of Bushaashe Garuwa.' },
       artifacts: { label: 'Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },
-      clothing: { label: 'Traditional Clothing', desc: 'Clothing that carries culture — the visual language of Wolaita identity.' },
+      clothing: { label: 'Traditional Clothing', desc: 'Clothing that carries culture: the visual language of Wolaita identity.' },
       music: { label: 'Music & Dance', desc: 'Living traditions of Wolaita music, song, and ceremonial dance.' },
-      food: { label: 'Traditional Food', desc: 'Recipes passed through generations — the taste of Wolaita heritage.' },
+      food: { label: 'Traditional Food', desc: 'Recipes passed through generations: the taste of Wolaita heritage.' },
       stories: { label: 'Oral Histories', desc: 'Stories passed down in Wolaytta, Amharic and English.' },
     },
     houses: {
@@ -460,7 +473,7 @@ export const en = {
         goba: { name: 'Wild Fig', age: '~200 years', sig: 'Sacred gathering place for elders and community decisions.' },
         doro: { name: 'Acacia', age: '~150 years', sig: 'Planted at the founding of the family homestead.' },
         wonka: { name: 'False Banana', age: 'Perennial', sig: 'Staple food crop and cultural symbol of Wolaita life.' },
-        zigba: { name: 'Zigba (African Yellowwood)', age: 'Planted by our forefathers', sig: 'Planted by the fathers of past generations and still standing on the grounds — one of the trees the family has protected ever since.' },
+        zigba: { name: 'Zigba (African Yellowwood)', age: 'Planted by our forefathers', sig: 'Planted by the fathers of past generations and still standing on the grounds, one of the trees the family has protected ever since.' },
         tigo: { name: 'African Olive', age: '~180 years', sig: 'Used in traditional medicine and ceremonial practices.' },
       },
       qr: "Scan QR codes on-site to discover each tree's full story",
@@ -468,7 +481,7 @@ export const en = {
     family: {
       eyebrow: 'Family Legacy',
       title: 'Generations of Heritage',
-      desc: 'Behind every cultural house, every artifact, every story — is a family that devoted generations to preserving the soul of Wolaita. Discover the people behind the heritage.',
+      desc: 'Behind every cultural house, every artifact and every story is a family that devoted generations to preserving the soul of Wolaita. Discover the people behind the heritage.',
       cta: 'Discover the Family Story',
       generations: ['Bushaashe', 'Alambo', 'Garedew', 'Today'],
     },
@@ -476,7 +489,7 @@ export const en = {
 
   experiences: {
     hero: { eyebrow: 'Be Part of the Story', title: 'Experience Wolaita in Bushaashe Garuwa' },
-    intro: 'Bushaashe Garuwa is not simply observed — it is experienced. Each of our visitor experiences is designed to create a genuine, respectful and memorable encounter with living Wolaita culture.',
+    intro: 'Bushaashe Garuwa is not simply observed; it is experienced. Each of our visitor experiences is designed to create a genuine, respectful and memorable encounter with living Wolaita culture.',
     duration: 'Duration',
     showIncluded: "What's included",
     hideDetails: 'Hide details',
@@ -520,14 +533,14 @@ export const en = {
         title: 'Photography Experience',
         sub: 'Capture the living heritage',
         duration: '3 hours',
-        desc: 'A guided photography experience through the most visually striking locations of Bushaashe Garuwa — cultural houses, heritage trees, cultural performances and authentic daily life.',
+        desc: 'A guided photography experience through the most visually striking locations of Bushaashe Garuwa: cultural houses, heritage trees, cultural performances and authentic daily life.',
         includes: ['Photography guide', 'Access to all heritage areas', 'Portrait sessions with traditional dress', 'Best viewpoint guidance'],
       },
       family: {
         title: 'Family Heritage Tour',
         sub: 'Discover the family story together',
         duration: '4 hours',
-        desc: 'A special tour designed for families — blending storytelling, nature walks, cultural activities and food in a relaxed, multi-generational experience.',
+        desc: 'A special tour designed for families, blending storytelling, nature walks, cultural activities and food in a relaxed, multi-generational experience.',
         includes: ['Family-friendly program', 'Nature walk', 'Storytelling session for children', 'Traditional meal', 'Family portrait'],
       },
     },
@@ -546,8 +559,8 @@ export const en = {
       foodOct: {
         dateLabel: 'Sunday 5 October 2026',
         name: 'Wolaita Cultural Food Experience',
-        desc: 'Our flagship monthly gathering — traditional dishes, coffee ceremony, music and oral storytelling around the fire. A complete evening of Wolaita culture.',
-        avail: 'Limited — 12 places remaining',
+        desc: 'Our flagship monthly gathering: traditional dishes, coffee ceremony, music and oral storytelling around the fire. A complete evening of Wolaita culture.',
+        avail: 'Limited: 12 places remaining',
       },
       oralHistory: {
         dateLabel: 'Sunday 12 October 2026',
@@ -564,7 +577,7 @@ export const en = {
       schoolDay: {
         dateLabel: 'Saturday 25 October 2026',
         name: 'School Heritage Visit Day',
-        desc: 'A structured educational day for school groups — heritage tour, cultural activities, and traditional lunch.',
+        desc: 'A structured educational day for school groups: heritage tour, cultural activities, and traditional lunch.',
         avail: 'Group booking',
       },
       foodNov: {
@@ -586,7 +599,7 @@ export const en = {
     hero: {
       eyebrow: 'Guesthouse',
       title: 'Stay Within the Story',
-      desc: 'Sleep where history breathes — in rooms that reflect the warmth and authenticity of Wolaita heritage.',
+      desc: 'Sleep where history breathes, in rooms that reflect the warmth and authenticity of Wolaita heritage.',
     },
     amenitiesLabel: 'Amenities',
     viewDetails: 'View Details',
@@ -624,7 +637,7 @@ export const en = {
     },
     why: {
       title: 'Why Stay at Bushaashe Garuwa?',
-      desc: 'Every night here is more than accommodation — it is an immersion in a living heritage.',
+      desc: 'Every night here is more than accommodation; it is an immersion in a living heritage.',
       items: {
         setting: { title: 'Authentic Setting', desc: 'Surrounded by heritage trees, cultural houses and nature.' },
         breakfast: { title: 'Traditional Breakfast', desc: 'Start each day with a Wolaita breakfast prepared by our kitchen.' },
@@ -650,33 +663,33 @@ export const en = {
     menu: {
       wolaita: {
         kitfo: { name: 'Kitfo Wolaita', desc: 'Minced beef seasoned with mitmita and niter kibbeh, served with kocho and ayib.' },
-        bulla: { name: 'Bulla Porridge', desc: 'Traditional Wolaita porridge made from the root of the false banana plant — a staple food of the region.' },
+        bulla: { name: 'Bulla Porridge', desc: 'Traditional Wolaita porridge made from the root of the false banana plant, a staple food of the region.' },
         kocho: { name: 'Kocho with Wot', desc: 'Traditional Wolaita flat bread made from ensete, served with richly spiced vegetable or meat stew.' },
         tibs: { name: 'Tibs Wolaita', desc: 'Sautéed beef or lamb with onion, tomato, green pepper and traditional spices.' },
       },
       ethiopian: {
         doroWat: { name: 'Doro Wat', desc: "Ethiopia's iconic slow-cooked chicken stew in a rich berbere sauce, served with injera." },
-        beyaynetu: { name: 'Injera with Beyaynetu', desc: 'A generous spread of vegetarian wots and salads on injera — ideal for cultural sharing.' },
+        beyaynetu: { name: 'Injera with Beyaynetu', desc: 'A generous spread of vegetarian wots and salads on injera, ideal for cultural sharing.' },
         goredGored: { name: 'Gored Gored', desc: 'Tender cubed beef seasoned with kibbeh and served with injera.' },
         shiro: { name: 'Shiro Wat', desc: 'Smooth chickpea flour stew slow-cooked with spices. A classic Ethiopian comfort dish.' },
       },
       drinks: {
-        bunna: { name: 'Bunna (Coffee)', desc: 'Ethiopian coffee served in the traditional ceremony style — three rounds, fresh roasted.' },
+        bunna: { name: 'Bunna (Coffee)', desc: 'Ethiopian coffee served in the traditional ceremony style: three rounds, fresh roasted.' },
         tej: { name: 'Tej', desc: 'Traditional Ethiopian honey wine, lightly fermented and refreshing.' },
         tella: { name: 'Tella', desc: 'Home-brewed sorghum beer, a community beverage of Wolaita.' },
-        juice: { name: 'Fresh Juice', desc: 'Seasonal fresh fruit juice — avocado, mango, papaya or passion fruit.' },
+        juice: { name: 'Fresh Juice', desc: 'Seasonal fresh fruit juice: avocado, mango, papaya or passion fruit.' },
       },
       special: {
-        foodEvening: { name: 'Cultural Food Evening', desc: 'Our monthly gathering — full traditional meal, coffee ceremony, music and storytelling. Reserve in advance.' },
+        foodEvening: { name: 'Cultural Food Evening', desc: 'Our monthly gathering: full traditional meal, coffee ceremony, music and storytelling. Reserve in advance.' },
         groupFeast: { name: 'Group Cultural Feast', desc: 'A full traditional feast for groups of 8–30 people, with cultural performance included.' },
-        privateDinner: { name: 'Private Heritage Dinner', desc: 'An intimate private dinner experience in the heritage garden — available by request.' },
+        privateDinner: { name: 'Private Heritage Dinner', desc: 'An intimate private dinner experience in the heritage garden, available by request.' },
       },
     },
     joinEvent: 'Join a Cultural Food Event',
     bar: {
       eyebrow: 'Bar',
       title: 'Gather. Relax. Connect.',
-      desc: 'Our bar is where stories are shared, community is built, and the day slowly fades into the warmth of Wolaita evenings. Traditional drinks alongside modern refreshments — always served with genuine hospitality.',
+      desc: 'Our bar is where stories are shared, community is built, and the day slowly fades into the warmth of Wolaita evenings. Traditional drinks alongside modern refreshments, always served with genuine hospitality.',
       weekdays: 'Weekdays',
       weekends: 'Weekends',
       drinks: ['Tej (Honey Wine)', 'Tella (Sorghum Beer)', 'Ethiopian Coffee', 'Fresh Juices', 'Local Spirits', 'Soft Drinks'],
@@ -731,7 +744,7 @@ export const en = {
     gettingHere: {
       title: 'Getting Here',
       routes: [
-        { from: 'Directions', dir: 'Bushaashe Garuwa is in Damot Sore Woreda, Wolaita Zone. Detailed directions will be added here soon — until then, contact us and we will guide you.' },
+        { from: 'Directions', dir: 'Bushaashe Garuwa is in Damot Sore Woreda, Wolaita Zone. Detailed directions will be added here soon. Until then, contact us and we will guide you.' },
       ],
     },
     form: {
@@ -754,7 +767,7 @@ export const en = {
 
   contact: {
     hero: { eyebrow: 'Contact', title: "We'd Love to Hear From You" },
-    intro: "Whether you're planning a visit, reserving an experience, booking a room, or simply curious about Bushaashe Garuwa — we're here to help.",
+    intro: "Whether you're planning a visit, reserving an experience, booking a room, or simply curious about Bushaashe Garuwa, we're here to help.",
     phoneNote: 'Available daily 08:00 – 18:00',
     emailNote: 'We respond within 24 hours',
     locationLine1: 'Damot Sore Woreda, Wolaita Zone',

@@ -3,22 +3,25 @@ import { photos, type PhotoKey } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import { lockScroll, Tilt } from '../lib/motion';
 import type { Dictionary } from '../i18n/dictionaries/en';
+import PageHero from '../components/PageHero';
 
 type Category = Exclude<keyof Dictionary['gallery']['filters'], 'all'>;
 type Filter = Category | 'all';
 
 /** Every real photo, with the category it belongs to. Add new ones here as they are registered in photos.ts. */
-const items: { key: PhotoKey; cat: Category }[] = [
-  { key: 'home', cat: 'grounds' },
-  { key: 'gifaataa1', cat: 'culture' },
-  { key: 'house', cat: 'grounds' },
-  { key: 'gifaataa2', cat: 'culture' },
-  { key: 'pavilions', cat: 'grounds' },
-  { key: 'gifaataa3', cat: 'culture' },
-  { key: 'gardens', cat: 'grounds' },
-  { key: 'enset', cat: 'grounds' },
-  { key: 'zigba', cat: 'grounds' },
-  { key: 'lawn', cat: 'grounds' },
+/* `span` is the tile size in the full mosaic (All); it fills the 4-column grid exactly.
+   The small zigba photo always gets a small tile. */
+const items: { key: PhotoKey; cat: Category; span: string }[] = [
+  { key: 'home', cat: 'grounds', span: 'sm:col-span-2 sm:row-span-2' },
+  { key: 'gifaataa1', cat: 'culture', span: '' },
+  { key: 'house', cat: 'grounds', span: 'sm:row-span-2' },
+  { key: 'gifaataa2', cat: 'culture', span: '' },
+  { key: 'pavilions', cat: 'grounds', span: 'sm:col-span-2' },
+  { key: 'gifaataa3', cat: 'culture', span: '' },
+  { key: 'gardens', cat: 'grounds', span: '' },
+  { key: 'enset', cat: 'grounds', span: 'sm:col-span-2' },
+  { key: 'zigba', cat: 'grounds', span: '' },
+  { key: 'lawn', cat: 'grounds', span: '' },
 ];
 
 const filters: Filter[] = ['all', 'grounds', 'culture'];
@@ -68,26 +71,14 @@ export default function Gallery() {
 
   return (
     <>
-    <main className="pt-20">
+    <main>
       {/* Hero */}
-      <section className="relative mx-2 sm:mx-3 rounded-[2rem] h-[46vh] min-h-[320px] flex items-end overflow-hidden">
-        <img src={photos.gifaataa3} alt={t.photos.gifaataa3} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0e2820]/90 via-[#173F35]/40 to-transparent" />
-        <div className="relative z-10 max-w-screen-xl mx-auto px-5 sm:px-8 pb-12 w-full">
-          <span className="eyebrow glass text-white mb-5">{g.hero.eyebrow}</span>
-          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl text-white leading-[1.02]">{g.hero.title}</h1>
-        </div>
-      </section>
+      <PageHero photo="home" eyebrow={g.hero.eyebrow} title={g.hero.title} desc={g.intro} />
 
       {/* Filters + grid */}
       <section className="py-14 sm:py-20">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
-            <p className="text-[#1D211E]/60 text-base sm:text-lg leading-relaxed max-w-2xl">{g.intro}</p>
-            <span className="text-[#1D211E]/40 text-sm whitespace-nowrap">{fmt(g.count, { count: shown.length })}</span>
-          </div>
-
-          <div className="flex flex-wrap gap-2 mb-8">
+          <div className="flex flex-wrap items-center gap-2 mb-8">
             {filters.map((f) => (
               <button
                 key={f}
@@ -102,6 +93,7 @@ export default function Gallery() {
                 {g.filters[f]}
               </button>
             ))}
+            <span className="ml-auto text-[#1D211E]/40 text-sm whitespace-nowrap">{fmt(g.count, { count: shown.length })}</span>
           </div>
 
           {shown.length === 0 ? (
@@ -109,13 +101,17 @@ export default function Gallery() {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[210px] lg:auto-rows-[240px] gap-3 sm:gap-4">
               {shown.map((item, i) => (
-                <Tilt key={item.key} className={`rounded-2xl sm:rounded-3xl ${spans[i % spans.length]}`} max={5}>
+                <Tilt key={item.key} className={`rounded-2xl sm:rounded-3xl ${filter === 'all' ? item.span : spans[i % spans.length]}`} max={5}>
                   <button
                     onClick={() => setOpenIdx(i)}
                     className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#173F35]/8"
                   >
                     <img src={photos[item.key]} alt={t.photos[item.key]} loading="lazy" className="w-full h-full object-cover" />
-                    <span className="absolute inset-0 bg-[#0a1f19]/0 group-hover:bg-[#0a1f19]/25 transition-colors duration-500" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-[#0a1f19]/85 via-[#0a1f19]/15 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5 text-left">
+                      <span className="block font-display text-base sm:text-xl text-white leading-tight">{t.photoCaptions[item.key].title}</span>
+                      <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{t.photoCaptions[item.key].desc}</span>
+                    </span>
                   </button>
                 </Tilt>
               ))}
@@ -164,7 +160,10 @@ export default function Gallery() {
                   alt={t.photos[current.key]}
                   className="max-h-[75vh] max-w-full object-contain rounded-2xl shadow-2xl animate-scale-in"
                 />
-                <figcaption className="text-white/60 text-sm text-center max-w-2xl">{t.photos[current.key]}</figcaption>
+                <figcaption className="text-center max-w-2xl">
+                  <span className="block font-display text-2xl sm:text-3xl text-white">{t.photoCaptions[current.key].title}</span>
+                  <span className="block text-white/65 text-sm sm:text-base mt-2 leading-relaxed">{t.photoCaptions[current.key].desc}</span>
+                </figcaption>
               </>
             )}
           </figure>
