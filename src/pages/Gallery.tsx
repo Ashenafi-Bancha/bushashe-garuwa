@@ -9,8 +9,7 @@ type Category = Exclude<keyof Dictionary['gallery']['filters'], 'all'>;
 type Filter = Category | 'all';
 
 /** Every real photo, with the category it belongs to. Add new ones here as they are registered in photos.ts. */
-/* `span` is the tile size in the full mosaic (All); it fills the 4-column grid exactly.
-   The small zigba photo always gets a small tile. */
+/* `span` is the tile size in the full mosaic (All); it fills the 4-column grid exactly. */
 const items: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'home', cat: 'grounds', span: 'sm:col-span-2 sm:row-span-2' },
   { key: 'gifaataa1', cat: 'culture', span: '' },
@@ -19,8 +18,8 @@ const items: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'pavilions', cat: 'grounds', span: 'sm:col-span-2' },
   { key: 'gifaataa3', cat: 'culture', span: '' },
   { key: 'gardens', cat: 'grounds', span: '' },
-  { key: 'enset', cat: 'grounds', span: 'sm:col-span-2' },
-  { key: 'zigba', cat: 'grounds', span: '' },
+  { key: 'enset', cat: 'grounds', span: '' },
+  { key: 'zigba', cat: 'grounds', span: 'sm:col-span-2' },
   { key: 'lawn', cat: 'grounds', span: '' },
 ];
 

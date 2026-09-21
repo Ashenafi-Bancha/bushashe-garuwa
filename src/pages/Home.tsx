@@ -9,6 +9,7 @@ const heroSlides: { key: PhotoKey; pos: string }[] = [
   { key: 'home',      pos: 'object-center' },
   { key: 'gifaataa1', pos: 'object-center' },
   { key: 'house',     pos: 'object-center' },
+  { key: 'zigba',     pos: 'object-[center_40%]' },
   { key: 'pavilions', pos: 'object-center' },
   { key: 'lawn',      pos: 'object-[center_65%]' },
 ];
@@ -58,8 +59,8 @@ const galleryPhotos: { key: PhotoKey; span: string }[] = [
   { key: 'pavilions', span: 'md:col-span-2' },
   { key: 'gifaataa3', span: 'md:col-span-2' },
   { key: 'gardens', span: 'md:col-span-2' },
-  { key: 'enset', span: 'md:col-span-2' },
-  { key: 'zigba', span: '' },
+  { key: 'enset', span: '' },
+  { key: 'zigba', span: 'md:col-span-2' },
   { key: 'lawn', span: 'col-span-2 md:col-span-3' },
 ];
 

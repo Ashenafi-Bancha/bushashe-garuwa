@@ -25,7 +25,7 @@ export default function Experiences() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo="gifaataa1" eyebrow={x.hero.eyebrow} title={x.hero.title} desc={x.intro} />
+      <PageHero photo="gifaataa1" pos="object-[center_35%]" eyebrow={x.hero.eyebrow} title={x.hero.title} desc={x.intro} />
 
 
       {/* Experience cards */}

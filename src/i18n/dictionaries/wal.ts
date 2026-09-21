@@ -58,7 +58,7 @@ export const wal: DeepPartial<Dictionary> = {
     lawn: 'Bushaashe Garuwa: open lawns, heritage tree and traditional house',
     home: 'Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens',
     enset: 'Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture',
-    zigba: 'The zigba tree at Bushaashe Garuwa, planted by the forefathers of the family',
+    zigba: 'The row of zigba trees at Bushaashe Garuwa, planted by the forefathers of the family',
     gifaataa1: 'Gifaataa celebration at Bushaashe Garuwa: guests in traditional Wolaita dress walking through the heritage gate',
     gifaataa2: 'Gifaataa celebration: women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn',
     gifaataa3: 'Gifaataa celebration: guests in traditional Wolaita attire on the Bushaashe Garuwa grounds',
@@ -73,7 +73,7 @@ export const wal: DeepPartial<Dictionary> = {
     gifaataa3: { title: 'Guests of the Celebration', desc: 'Guests in traditional Wolaita attire stand together on the grounds during Gifaataa.' },
     gardens: { title: 'The Gardens', desc: 'Green lawns, hedges and a play area for children and families.' },
     enset: { title: 'Enset, the False Banana', desc: 'Enset growing on the grounds: the staple plant at the heart of Wolaita food and culture.' },
-    zigba: { title: 'The Zigba Tree', desc: 'A zigba tree planted by the forefathers of the family and cared for ever since.' },
+    zigba: { title: 'The Zigba Trees', desc: 'Zigba trees planted by the forefathers of the family, standing in a row like a peaceful procession.' },
     lawn: { title: 'The Great Lawn', desc: 'Open lawns and the great tree, with the traditional house in the distance.' },
   },
 

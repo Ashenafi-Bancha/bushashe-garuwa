@@ -39,7 +39,7 @@ export default function About() {
     <main>
 
       {/* Hero */}
-      <PageHero photo="gifaataa2" eyebrow={a.hero.eyebrow} desc={t.common.slogan}
+      <PageHero photo="gifaataa2" pos="object-bottom" eyebrow={a.hero.eyebrow} desc={t.common.slogan}
         title={<>{a.hero.titleA}<br /><span className="text-[#A65A3A]">{a.hero.titleB}</span></>} />
 
       {/* Who we are */}

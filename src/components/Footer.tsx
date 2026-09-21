@@ -14,7 +14,7 @@ const footerRoutes = {
 export default function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="bg-[#0e2820] text-white pb-20 lg:pb-0">
+    <footer className="bg-[#0e2820] text-white">
       {/* Pattern accent */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#C99A45] to-transparent opacity-40"/>
 
@@ -37,9 +37,11 @@ export default function Footer() {
               {t.footer.tagline}
             </p>
 
-            {/* Follow us */}
-            <div className="text-[#C99A45] text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-3">{t.footer.followUs}</div>
-            <SocialLinks small />
+            {/* Follow us (desktop; on smaller screens it closes the footer) */}
+            <div className="hidden lg:block">
+              <div className="text-[#C99A45] text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-3">{t.footer.followUs}</div>
+              <SocialLinks small />
+            </div>
           </div>
 
           {/* Link columns */}
@@ -76,6 +78,12 @@ export default function Footer() {
           <div className="text-white/25 text-xs font-sans">
             © {new Date().getFullYear()} {t.footer.rights}
           </div>
+        </div>
+
+        {/* Follow us, last on phones and tablets */}
+        <div className="lg:hidden border-t border-white/10 mt-6 pt-6 flex flex-col items-center gap-3">
+          <div className="text-[#C99A45] text-[10px] font-sans font-semibold tracking-[0.2em] uppercase">{t.footer.followUs}</div>
+          <SocialLinks small />
         </div>
       </div>
     </footer>
