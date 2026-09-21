@@ -17,11 +17,11 @@ const navRoutes = [
   { key: 'library', to: '/library' },
   { key: 'gallery', to: '/gallery' },
   { key: 'visit', to: '/visit' },
+  { key: 'contact', to: '/contact' },
 ] as const;
 
-/* The desktop bar shows every page except Home — the logo links home.
-   The full-screen menu (tablet and phone) still lists all of them. */
-const barKeys = ['about', 'discover', 'heritage', 'experiences', 'events', 'stay', 'dine', 'library', 'gallery', 'visit'] as const;
+/* The desktop bar shows every page; the full-screen menu (tablet and phone) lists them too. */
+const barKeys = ['home', 'about', 'discover', 'heritage', 'experiences', 'events', 'stay', 'dine', 'library', 'gallery', 'visit', 'contact'] as const;
 
 export default function Navbar() {
   const [scrolled, setScrolled]     = useState(false);
@@ -80,7 +80,7 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className={`px-2 xl:px-3 py-2 rounded-full text-[12px] xl:text-[13px] font-medium whitespace-nowrap transition-colors duration-300 ${
+                className={`px-[5px] xl:px-3 py-2 rounded-full text-[11.5px] xl:text-[13px] font-medium whitespace-nowrap transition-colors duration-300 ${
                   isActive(link.to) ? 'bg-white/15 text-white' : 'text-white/70 hover:text-white hover:bg-white/8'
                 }`}
               >
@@ -103,12 +103,6 @@ export default function Navbar() {
 
             <LanguageSwitcher variant="bar" />
 
-            <Link
-              to="/visit"
-              className="hidden 2xl:inline-flex items-center bg-[#C99A45] hover:bg-[#d9af65] text-[#0e2820] text-[13px] font-semibold rounded-full px-5 py-2.5 ml-1 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_-8px_rgba(201,154,69,0.7)]"
-            >
-              {t.common.planVisit}
-            </Link>
 
             {/* Menu (all screen sizes below xl, and for the full list above) */}
             <button

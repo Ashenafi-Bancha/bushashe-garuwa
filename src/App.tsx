@@ -15,15 +15,17 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import Gallery from './pages/Gallery';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
-import { scrollToTop, startSmoothScroll, useAutoReveal } from './lib/motion';
+import { scrollToHash, scrollToTop, startSmoothScroll, useAutoReveal } from './lib/motion';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   useEffect(() => startSmoothScroll(), []);
   useAutoReveal(pathname);
   useEffect(() => {
-    scrollToTop();
-  }, [pathname]);
+    if (!hash) return scrollToTop();
+    const timer = setTimeout(() => scrollToHash(hash), 300);
+    return () => clearTimeout(timer);
+  }, [pathname, hash]);
   return null;
 }
 

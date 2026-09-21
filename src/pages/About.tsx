@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 
 /* Icons per item — the text lives in the translations (t.about.*) */
+/* The family line, oldest first — names, labels and histories live in the translations (t.about.lineage) */
+const lineage = ['bushaashe', 'alambo', 'garedew', 'current'] as const;
+
 const values = [
   { id: 'authenticity' },
   { id: 'respect' },
@@ -28,6 +32,8 @@ const offerItems = [
 export default function About() {
   const { t } = useI18n();
   const a = t.about;
+  const [person, setPerson] = useState<(typeof lineage)[number]>('bushaashe');
+  const selected = a.lineage.people[person];
   return (
     <main className="pt-20">
 
@@ -83,6 +89,14 @@ export default function About() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* Ultimate goal */}
+      <section className="py-16 sm:py-24">
+        <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
+          <span className="eyebrow bg-[#A65A3A]/10 text-[#A65A3A] mb-7">{t.common.goal.eyebrow}</span>
+          <p className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#0e2820] leading-[1.2]">{t.common.goal.text}</p>
         </div>
       </section>
 
@@ -164,31 +178,64 @@ export default function About() {
         </div>
       </section>
 
-      {/* Generations */}
-      <section className="bg-[#1D211E] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="mb-8 sm:mb-12">
-            <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.generations.eyebrow}</div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight">{a.generations.title}</h2>
-            <p className="text-white/45 font-sans text-base mt-4 max-w-xl leading-relaxed">
-              {a.generations.desc}
-            </p>
+      {/* Family line: Bushaashe -> Alambo -> Garedew -> today */}
+      <section id="family" className="bg-[#1D211E] mx-2 sm:mx-3 rounded-[2rem] py-16 sm:py-24 overflow-hidden">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <div className="max-w-3xl mb-12">
+            <span className="eyebrow bg-white/8 text-[#C99A45] mb-5">{a.lineage.eyebrow}</span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] mb-5">{a.lineage.title}</h2>
+            <p className="text-white/55 text-base sm:text-lg leading-relaxed">{a.lineage.desc}</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            {a.generations.items.map((gen, i) => (
-              <div key={i} className="flex gap-6 rounded-3xl border border-white/10 hover:border-[#C99A45]/30 p-7 transition-colors duration-300">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 border-2 border-[#C99A45]/50 flex items-center justify-center">
-                    <span className="text-[#C99A45] font-display text-lg font-semibold">{i + 1}</span>
-                  </div>
-                </div>
-                <div>
-                  <div className="text-[#C99A45] text-xs font-sans tracking-wider uppercase mb-1">{gen.label}</div>
-                  <div className="text-white font-display text-xl font-semibold mb-3">{gen.role}</div>
-                  <p className="text-white/50 font-sans text-sm leading-relaxed">{gen.desc}</p>
-                </div>
-              </div>
-            ))}
+
+          <div className="relative">
+            {/* connecting line */}
+            <div className="hidden lg:block absolute top-[76px] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-[#C99A45]/80 via-[#C99A45]/40 to-[#C99A45]/80" />
+            <div className="lg:hidden absolute left-[52px] top-10 bottom-10 w-px bg-[#C99A45]/40" />
+
+            <div className="grid lg:grid-cols-4 gap-3 lg:gap-6">
+              {lineage.map((id, i) => {
+                const p = a.lineage.people[id];
+                const active = person === id;
+                return (
+                  <button
+                    key={id}
+                    onClick={() => setPerson(id)}
+                    aria-pressed={active}
+                    className={`relative flex lg:flex-col items-center lg:text-center gap-5 lg:gap-4 rounded-3xl p-4 lg:p-6 text-left transition-all duration-500 ${
+                      active ? 'bg-white/[0.07] ring-1 ring-[#C99A45]/50' : 'hover:bg-white/[0.04]'
+                    }`}
+                  >
+                    <span
+                      className={`relative z-10 w-[72px] h-[72px] lg:w-[104px] lg:h-[104px] flex-shrink-0 rounded-full flex items-center justify-center font-display text-3xl lg:text-5xl transition-all duration-500 ${
+                        active ? 'bg-[#C99A45] text-[#0e2820] shadow-[0_0_0_8px_rgba(201,154,69,0.15)]' : 'bg-[#173F35] text-[#C99A45] ring-4 ring-[#1D211E]'
+                      }`}
+                    >
+                      {i + 1}
+                    </span>
+                    <span className="min-w-0">
+                      <span className="block text-[#C99A45] text-[11px] font-semibold tracking-[0.12em] uppercase mb-1.5">{p.generation}</span>
+                      <span className="block font-display text-2xl lg:text-3xl text-white">{p.name}</span>
+                      {p.period && <span className="block text-white/45 text-sm mt-1">{p.period}</span>}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* history of the selected father */}
+          <div key={person} className="mt-10 rounded-3xl bg-white/[0.04] border border-white/10 p-7 sm:p-10 animate-fade-up">
+            <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-5">
+              <h3 className="font-display text-3xl sm:text-4xl text-white">{selected.name}</h3>
+              <span className="text-[#C99A45] text-sm">{selected.generation}{selected.period ? ` · ${selected.period}` : ''}</span>
+            </div>
+            {selected.story.trim() ? (
+              selected.story.split(/\n\s*\n/).map((para, i) => (
+                <p key={i} className="text-white/70 text-base sm:text-lg leading-relaxed mb-4 max-w-4xl">{para}</p>
+              ))
+            ) : (
+              <p className="text-white/45 italic">{a.lineage.pending}</p>
+            )}
           </div>
         </div>
       </section>

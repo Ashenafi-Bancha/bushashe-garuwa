@@ -6,7 +6,7 @@ import { fmt, useI18n } from '../i18n/I18nProvider';
 
 /* Page structure — the text for each id lives in the translations (t.heritage.*) */
 const categories = [
-  { id: 'houses', img: photos.house, count: 8, to: '/heritage/houses' },
+  { id: 'houses', img: photos.house, count: 2, to: '/heritage/houses' },
   { id: 'trees', img: photos.enset, count: 24, to: '/heritage/trees' },
   { id: 'animals', count: 15, to: '/heritage/animals' },
   { id: 'artifacts', count: 120, to: '/heritage/artifacts' },
@@ -15,6 +15,9 @@ const categories = [
   { id: 'food', count: 40, to: '/dine' },
   { id: 'stories', count: 60, to: '/heritage/stories' },
 ] as const;
+
+/* The two traditional houses keep their Wolaytta names in every language */
+const houseNames = ['Gulanttaa Keettaa', 'Meesho Keettaa'];
 
 /* Wolaytta and scientific names stay the same in every language */
 const trees = [
@@ -72,6 +75,29 @@ export default function Heritage() {
         </div>
       </section>
 
+      {/* The two traditional houses */}
+      <section className="py-12 sm:py-16 lg:py-20">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div className="img-zoom rounded-[2rem] aspect-[4/3] bg-[#173F35]/10">
+            <img src={photos.house} alt={t.photos.house} className="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div>
+            <span className="eyebrow bg-[#A65A3A]/10 text-[#A65A3A] mb-5">{hg.houses.eyebrow}</span>
+            <h2 className="font-display text-4xl sm:text-5xl text-[#0e2820] leading-[1.05] mb-5">{hg.houses.title}</h2>
+            <p className="text-[#1D211E]/65 text-base sm:text-lg leading-relaxed mb-8">{hg.houses.desc}</p>
+            <div className="grid sm:grid-cols-2 gap-4 mb-6">
+              {houseNames.map((name) => (
+                <div key={name} className="heritage-card bg-white p-6">
+                  <div className="text-[#C99A45] text-[11px] font-semibold tracking-[0.12em] uppercase mb-2">{hg.houses.label}</div>
+                  <div lang="wal" className="font-display text-2xl text-[#0e2820]">{name}</div>
+                </div>
+              ))}
+            </div>
+            <p className="text-[#1D211E]/55 text-sm leading-relaxed">{hg.houses.inside}</p>
+          </div>
+        </div>
+      </section>
+
       {/* Trees section */}
       <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
@@ -125,16 +151,16 @@ export default function Heritage() {
               <p className="text-[#1D211E]/70 font-sans text-base leading-relaxed mb-8">
                 {hg.family.desc}
               </p>
-              <Link to="/heritage/family" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
+              <Link to="/about#family" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
                 {hg.family.cta}
               </Link>
             </div>
-            <div className="grid grid-cols-3 gap-2">
+            <div className="grid grid-cols-2 gap-3">
               {hg.family.generations.map((gen, i) => (
-                <div key={i} className={`aspect-square rounded-2xl bg-[#173F35]/10 flex flex-col items-center justify-center p-3 ${i === 2 ? 'col-span-1 row-span-2' : ''}`}>
-                  <div className={`rounded-full bg-[#173F35]/20 mb-2 ${i === 2 ? 'w-16 h-16' : 'w-10 h-10'}`}/>
-                  <div className="text-[#173F35] text-xs font-sans text-center leading-tight">{gen}</div>
-                </div>
+                <Link key={i} to="/about#family" className="heritage-card bg-white p-6 flex items-center gap-4">
+                  <span className="w-12 h-12 rounded-full bg-[#0e2820] text-[#C99A45] flex items-center justify-center font-display text-2xl flex-shrink-0">{i + 1}</span>
+                  <span className="font-display text-2xl text-[#0e2820]">{gen}</span>
+                </Link>
               ))}
             </div>
           </div>

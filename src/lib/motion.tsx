@@ -24,6 +24,17 @@ export function scrollToTop() {
   else window.scrollTo(0, 0);
 }
 
+/** Smoothly scroll to an element by its #id, leaving room for the fixed header. */
+export function scrollToHash(hash: string) {
+  const el = document.getElementById(decodeURIComponent(hash.replace('#', '')));
+  if (!el) return;
+  if (lenis) {
+    lenis.resize(); // the new page may be taller than the previous one
+    lenis.scrollTo(el, { offset: -96 });
+  }
+  else window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
+}
+
 /** Pause page scrolling while a full-screen menu or dialog is open. */
 export function lockScroll(locked: boolean) {
   if (lenis) (locked ? lenis.stop() : lenis.start());

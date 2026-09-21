@@ -32,6 +32,10 @@ export const en = {
     eveningEvents: 'Evening events available by reservation',
     slogan: 'Honoring Our Ancestors, Preserving Our Heritage, and Passing It On to Future Generations.',
     comeBePart: 'Come and Be Part of the Story',
+    goal: {
+      eyebrow: 'Our Ultimate Goal',
+      text: 'To keep and preserve the culture, traditions and heritage of Wolaita — and to pass them on to future generations.',
+    },
   },
 
   photos: {
@@ -60,6 +64,7 @@ export const en = {
       library: 'Library',
       visit: 'Visit',
       gallery: 'Gallery',
+      contact: 'Contact',
     },
     homeAria: 'Bushaashe Garuwa home',
     mainNav: 'Main navigation',
@@ -152,8 +157,8 @@ export const en = {
       eyebrow: 'In Every Corner',
       title: 'A Living Heritage',
       items: {
-        houses: { title: 'Cultural Houses', desc: 'Traditional Wolaita homes carrying centuries of architectural wisdom.' },
-        trees: { title: 'Trees, Plants & Orchards', desc: 'Ancient trees, fruit orchards and enset, whose roots hold stories of generations.' },
+        houses: { title: 'Cultural Houses', desc: 'Gulanttaa Keettaa and Meesho Keettaa — two traditional Wolaita houses holding the tools of Wolaita life.' },
+        trees: { title: 'Trees, Plants & Orchards', desc: 'Mango, apple, papaya, banana, more than 1,800 coffee trees, enset and fragrant garden plants.' },
         animals: { title: 'Animals & Zoo', desc: 'A small zoo of animals kept on the heritage grounds — a favourite with families.' },
         artifacts: { title: 'Cultural Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },
       },
@@ -200,7 +205,7 @@ export const en = {
         meetingHall: { title: 'Meeting Hall', desc: 'A hall for meetings, trainings, workshops and community gatherings, with food and coffee served from our kitchen.' },
         zoo: { title: 'Zoo & Animals', desc: 'A small zoo where visitors — especially children and school groups — meet the animals kept on the grounds.' },
         pool: { title: 'Swimming Pool', desc: 'A swimming pool set among the gardens, for guests of the guesthouse and for day visitors.' },
-        orchard: { title: 'Plants & Fruit Trees', desc: 'Orchards of fruit trees, indigenous plants and enset — the false banana at the heart of Wolaita food and culture.' },
+        orchard: { title: 'Plants & Fruit Trees', desc: 'Mango, apple, papaya and banana trees, more than 1,800 coffee trees, enset, and traditional garden plants with wonderful scents.' },
         horses: { title: 'Horse Riding', desc: 'Horses wait on the great lawn for visitors who would like to ride.' },
         crocodile: { title: 'Crocodile Pond & Wildlife', desc: 'A properly fenced crocodile pond and an area where wild animals are cared for.' },
         fish: { title: 'Fish Pond', desc: 'A fish pond among the gardens, part of the working life of the grounds.' },
@@ -319,16 +324,17 @@ export const en = {
         education: { title: 'Education', desc: 'Knowledge shared is knowledge multiplied. We welcome schools, universities, researchers, and curious visitors to learn from the depth of Wolaita heritage and history.' },
       },
     },
-    generations: {
-      eyebrow: 'The People Behind the Heritage',
-      title: 'Four Generations, One Heritage',
-      desc: 'Bushaashe Garuwa was not created in a single moment. It was built slowly, lovingly, across generations — each one adding a new layer to the heritage we share today.',
-      items: [
-        { label: 'Great-Grandfather', role: 'The Founder', desc: 'Established the first homestead and planted the heritage trees that still stand today. His vision of preserving the family land and traditions became the seed of Bushaashe Garuwa.' },
-        { label: 'Grandfather', role: 'The Builder', desc: 'Expanded the cultural houses and began collecting and documenting traditional artifacts, oral stories, and agricultural knowledge of the Wolaita people.' },
-        { label: 'Father', role: 'The Preserver', desc: 'Formalized the preservation efforts, established the cultural library, and opened the heritage site to community members, researchers, and visitors for the first time.' },
-        { label: 'Present Generation', role: 'The Stewards', desc: 'Carrying the vision forward — expanding the digital archive, building visitor experiences, and ensuring that the Bushaashe Garuwa heritage reaches the world.' },
-      ],
+    lineage: {
+      eyebrow: 'The Family Line',
+      title: 'From Bushaashe to Today',
+      desc: 'Bushaashe Garuwa bears the name of Bushaashe, the first father of this line. His story continued through Alambo and Garedew, and lives on today in the family that cares for the grounds. Choose a name to read their history.',
+      pending: 'The family is writing this history now. It will be published here soon.',
+      people: {
+        bushaashe: { name: 'Bushaashe', generation: 'First generation · The founder', period: '18th century', story: '' },
+        alambo: { name: 'Alambo', generation: 'Second generation', period: '', story: '' },
+        garedew: { name: 'Garedew', generation: 'Third generation', period: '', story: '' },
+        current: { name: 'The Current Generation', generation: 'Today · Colonel Fisseha Garedew and family', period: '', story: '' },
+      },
     },
     milestones: {
       eyebrow: 'Our Journey',
@@ -431,14 +437,21 @@ export const en = {
     intro: 'Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one.',
     itemCount: '{count} items',
     categories: {
-      houses: { label: 'Cultural Houses', desc: 'Traditional Wolaita homes carrying centuries of architectural wisdom and family memory.' },
-      trees: { label: 'Trees & Plants', desc: 'Ancient trees, fruit orchards and enset — plants whose roots hold stories older than living memory.' },
+      houses: { label: 'Cultural Houses', desc: 'Two traditional Wolaita houses — Gulanttaa Keettaa and Meesho Keettaa — full of the traditional tools and instruments of the Wolaita people.' },
+      trees: { label: 'Trees & Plants', desc: 'Heritage trees, mango, apple, papaya and banana, more than 1,800 coffee trees, enset and fragrant traditional garden plants.' },
       animals: { label: 'Animals & Zoo', desc: 'A small zoo where visitors meet the animals kept on the heritage grounds of Bushaashe Garuwa.' },
       artifacts: { label: 'Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },
       clothing: { label: 'Traditional Clothing', desc: 'Clothing that carries culture — the visual language of Wolaita identity.' },
       music: { label: 'Music & Dance', desc: 'Living traditions of Wolaita music, song, and ceremonial dance.' },
       food: { label: 'Traditional Food', desc: 'Recipes passed through generations — the taste of Wolaita heritage.' },
       stories: { label: 'Oral Histories', desc: 'Stories passed down in Wolaytta, Amharic and English.' },
+    },
+    houses: {
+      eyebrow: 'Traditional Houses',
+      title: 'Two Traditional Wolaita Houses',
+      desc: 'Bushaashe Garuwa keeps two traditional and cultural Wolaita houses. Inside them are the traditional tools and instruments the Wolaita people have used in daily life, work and ceremony.',
+      label: 'Traditional Wolaita house',
+      inside: 'Inside: the traditional grinding stone (wotta), tools for spinning and weaving cotton, household goods, and the traditional instruments of the Wolaita people.',
     },
     trees: {
       eyebrow: 'Living Memory',
@@ -457,7 +470,7 @@ export const en = {
       title: 'Generations of Heritage',
       desc: 'Behind every cultural house, every artifact, every story — is a family that devoted generations to preserving the soul of Wolaita. Discover the people behind the heritage.',
       cta: 'Discover the Family Story',
-      generations: ['Founder', 'Generation 2', 'Generation 3', 'Generation 4', 'Today'],
+      generations: ['Bushaashe', 'Alambo', 'Garedew', 'Today'],
     },
   },
 

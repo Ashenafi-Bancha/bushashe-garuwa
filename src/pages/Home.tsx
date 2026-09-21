@@ -272,6 +272,10 @@ export default function Home() {
               </h2>
               <p className="text-lg sm:text-xl text-[#1D211E]/75 leading-relaxed mb-5">{h.intro.p1}</p>
               <p className="text-base text-[#1D211E]/55 leading-relaxed mb-8">{h.intro.p2}</p>
+              <div className="border-l-2 border-[#C99A45] pl-5 mb-8">
+                <div className="text-[#A65A3A] text-xs font-semibold tracking-[0.14em] uppercase mb-2">{t.common.goal.eyebrow}</div>
+                <p className="font-display italic text-xl sm:text-2xl text-[#173F35] leading-snug">{t.common.goal.text}</p>
+              </div>
               <div className="flex flex-wrap gap-2">
                 {h.intro.pillars.map((pillar, i) => (
                   <span key={i} className="inline-flex items-center gap-2 rounded-full bg-white border border-[#0e2820]/8 px-4 py-2 text-sm font-medium text-[#0e2820] shadow-sm">
