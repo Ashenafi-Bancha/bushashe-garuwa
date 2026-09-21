@@ -31,7 +31,7 @@ const livingHeritage = [
 ] as const;
 
 const experiences = [
-  { id: 'food', to: '/experiences' },
+  { id: 'food', img: photos.food, to: '/experiences' },
   { id: 'coffee', to: '/experiences' },
   { id: 'performance', img: photos.gifaataa2, to: '/experiences' },
   { id: 'tour', img: photos.pavilions, to: '/experiences' },
@@ -135,7 +135,11 @@ export default function Home() {
   }, [heroIdx]);
 
   useEffect(() => {
-    const onScroll = () => setShowStickyCta(window.scrollY > window.innerHeight * 0.6);
+    // shown after the hero, hidden again at the footer so it never covers the social icons
+    const onScroll = () => {
+      const y = window.scrollY, vh = window.innerHeight;
+      setShowStickyCta(y > vh * 0.6 && y + vh < document.documentElement.scrollHeight - 520);
+    };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -466,7 +470,7 @@ export default function Home() {
                     <Tilt className="h-full rounded-3xl" max={4}>
                     <div className="group grid sm:grid-cols-[0.9fr_1.1fr] rounded-3xl overflow-hidden bg-white/[0.04] border border-white/10 hover:border-[#C99A45]/40 transition-colors duration-500 h-full">
                       <div className="img-zoom relative min-h-[220px]">
-                        <Photo alt={text.name} className="absolute inset-0 w-full h-full object-cover"/>
+                        <Photo src={ev.id === 'food' ? photos.food : undefined} alt={text.name} className="absolute inset-0 w-full h-full object-cover"/>
                         <span className="absolute top-4 left-4 rounded-full bg-[#C99A45] text-[#0e2820] text-xs font-bold px-3 py-1.5">{text.date}</span>
                       </div>
                       <div className="p-6 sm:p-7 flex flex-col">
@@ -530,7 +534,7 @@ export default function Home() {
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <div className="grid lg:grid-cols-2 gap-6 items-stretch">
               <FadeSection className="relative min-h-[360px] lg:min-h-[520px] rounded-[2rem] overflow-hidden img-zoom">
-                <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+                <img src={photos.food} alt={t.photos.food} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
               </FadeSection>
               <FadeSection delay={120} className="rounded-[2rem] bg-[#0e2820] p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative overflow-hidden">
                 <div className="absolute -top-32 -right-24 w-80 h-80 glow-gold pointer-events-none"/>

@@ -15,12 +15,13 @@ const items: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'gifaataa1', cat: 'culture', span: '' },
   { key: 'house', cat: 'grounds', span: 'sm:row-span-2' },
   { key: 'gifaataa2', cat: 'culture', span: '' },
-  { key: 'pavilions', cat: 'grounds', span: 'sm:col-span-2' },
+  { key: 'food', cat: 'culture', span: 'sm:col-span-2 sm:row-span-2' },
   { key: 'gifaataa3', cat: 'culture', span: '' },
   { key: 'gardens', cat: 'grounds', span: '' },
   { key: 'enset', cat: 'grounds', span: '' },
-  { key: 'zigba', cat: 'grounds', span: 'sm:col-span-2' },
   { key: 'lawn', cat: 'grounds', span: '' },
+  { key: 'zigba', cat: 'grounds', span: 'col-span-2' },
+  { key: 'pavilions', cat: 'grounds', span: 'col-span-2' },
 ];
 
 const filters: Filter[] = ['all', 'grounds', 'culture'];

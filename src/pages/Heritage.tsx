@@ -13,7 +13,7 @@ const categories = [
   { id: 'artifacts', count: 120, to: '/heritage/artifacts' },
   { id: 'clothing', img: photos.gifaataa2, count: 35, to: '/heritage/clothing' },
   { id: 'music', count: 18, to: '/heritage/music' },
-  { id: 'food', count: 40, to: '/dine' },
+  { id: 'food', img: photos.food, count: 40, to: '/dine' },
   { id: 'stories', count: 60, to: '/heritage/stories' },
 ] as const;
 

@@ -8,7 +8,7 @@ import PageHero from '../components/PageHero';
 
 /* Order and photos — the text for each id lives in the translations (t.experiences.items) */
 const experiences: { id: keyof Dictionary['experiences']['items']; img?: string }[] = [
-  { id: 'food' },
+  { id: 'food', img: photos.food },
   { id: 'coffee' },
   { id: 'performance' },
   { id: 'tour', img: photos.house },

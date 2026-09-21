@@ -332,6 +332,7 @@ a, button {
   transition: transform 0.5s var(--ease-out-expo), opacity 0.4s ease;
 }
 .mobile-sticky-cta.hidden-cta { transform: translateY(140%); opacity: 0; }
+@media (min-width: 1024px) { .mobile-sticky-cta { display: none; } }
 
 /* ── Fluid display type ── */
 .fluid-display {
