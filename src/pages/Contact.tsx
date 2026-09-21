@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useI18n } from '../i18n/I18nProvider';
+import SocialLinks from '../components/SocialLinks';
 
 export default function Contact() {
   const { t } = useI18n();
@@ -68,13 +69,7 @@ export default function Contact() {
 
               <div className="mt-10 pt-10 border-t border-[#173F35]/10">
                 <div className="text-[#1D211E]/40 text-xs font-sans tracking-wider uppercase mb-4">{c.social}</div>
-                <div className="flex gap-3">
-                  {['Facebook', 'Instagram', 'YouTube'].map((s) => (
-                    <a key={s} href="#" className="border border-[#173F35]/20 hover:border-[#C99A45] text-[#173F35]/60 hover:text-[#C99A45] text-xs font-sans rounded-full px-4 py-2 transition-colors">
-                      {s}
-                    </a>
-                  ))}
-                </div>
+                <SocialLinks dark={false} />
               </div>
             </div>
 

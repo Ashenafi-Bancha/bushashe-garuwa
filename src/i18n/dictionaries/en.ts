@@ -25,8 +25,8 @@ export const en = {
     contact: 'Contact',
     phone: 'Phone',
     email: 'Email',
-    locationLine: 'Wolaita Sodo, Ethiopia',
-    addressLine1: 'Bushaashe Garuwa, Wolaita Sodo',
+    locationLine: 'Damot Sore Woreda, Wolaita Zone, Ethiopia',
+    addressLine1: 'Bushaashe Garuwa, Damot Sore Woreda',
     addressLine2: 'Wolaita Zone, Ethiopia',
     hoursDaily: 'Daily 08:00 – 18:00',
     eveningEvents: 'Evening events available by reservation',
@@ -110,7 +110,7 @@ export const en = {
         links: { plan: 'Plan Your Visit', contact: 'Contact Us', education: 'Educational Visits', groups: 'Group Tours', schools: 'School Visits' },
       },
     },
-    address: 'Bushaashe Garuwa, Wolaita Sodo, Ethiopia',
+    address: 'Bushaashe Garuwa, Damot Sore Woreda, Wolaita Zone, Ethiopia',
     rights: 'Bushaashe Garuwa. Where Wolaita Heritage Lives.',
   },
 
@@ -292,7 +292,7 @@ export const en = {
     who: {
       eyebrow: 'Who We Are',
       title: 'More Than a Place — A Living Story',
-      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination in the heart of Wolaita Sodo, Ethiopia. We are not a museum, a resort, or a tourist attraction — we are a family heritage that has been tended and passed down across four generations.',
+      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination in Damot Sore Woreda, Wolaita Zone, Ethiopia. We are not a museum, a resort, or a tourist attraction — we are a family heritage that has been tended and passed down across four generations.',
       p2: 'What began as a family homestead — with its trees, houses, animals, and traditions — has grown into a place where the whole world can come and experience the depth, beauty, and wisdom of Wolaita culture.',
       p3: 'From our cultural houses and ancient trees, to our library, oral histories, traditional food, and guesthouse — every element of Bushaashe Garuwa exists to honor the past, celebrate the present, and protect the future of Wolaita heritage.',
       generations: 'Generations',
@@ -341,7 +341,7 @@ export const en = {
       title: 'Key Milestones',
       items: [
         { year: 'The 1700s', event: 'The family’s roots in Wolaita reach back to the 18th century' },
-        { year: 'Early 1900s', event: 'Founding homestead established in Wolaita Sodo' },
+        { year: 'Early 1900s', event: 'Founding homestead established in Damot Sore' },
         { year: '1940s', event: 'First cultural houses built; heritage trees planted' },
         { year: '1970s', event: 'Oral history collection and artifact preservation begins' },
         { year: '1995', event: 'Library and cultural archive established' },
@@ -731,10 +731,7 @@ export const en = {
     gettingHere: {
       title: 'Getting Here',
       routes: [
-        { from: 'From Wolaita Sodo', dir: 'Bushaashe Garuwa is located 4 km from Wolaita Sodo town center. Follow the main road south and look for our heritage signage.' },
-        { from: 'From Addis Ababa', dir: 'Wolaita Sodo is 380 km from Addis Ababa via the A3 highway. Journey time approximately 5–6 hours by car.' },
-        { from: 'By Bus', dir: 'Regular bus services connect Addis Ababa and Wolaita Sodo. From Sodo bus station, take a taxi or bajaj to Bushaashe Garuwa.' },
-        { from: 'Local Transport', dir: 'Bajaj (3-wheel taxis) and minibuses are available from Wolaita Sodo. Ask for "Bushaashe Garuwa" — it is well known locally.' },
+        { from: 'Directions', dir: 'Bushaashe Garuwa is in Damot Sore Woreda, Wolaita Zone. Detailed directions will be added here soon — until then, contact us and we will guide you.' },
       ],
     },
     form: {
@@ -760,7 +757,7 @@ export const en = {
     intro: "Whether you're planning a visit, reserving an experience, booking a room, or simply curious about Bushaashe Garuwa — we're here to help.",
     phoneNote: 'Available daily 08:00 – 18:00',
     emailNote: 'We respond within 24 hours',
-    locationLine1: 'Wolaita Sodo, Wolaita Zone',
+    locationLine1: 'Damot Sore Woreda, Wolaita Zone',
     locationLine2: 'Ethiopia',
     social: 'Social Media',
     form: {

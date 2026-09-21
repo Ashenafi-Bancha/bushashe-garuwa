@@ -93,7 +93,7 @@ export default function Navbar() {
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => setSearchOpen(true)}
-              className="touch-target rounded-full text-white/70 hover:text-white hover:bg-white/10"
+              className="search-toggle touch-target rounded-full text-white/70 hover:text-white hover:bg-white/10"
               aria-label={t.nav.search}
             >
               <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -104,9 +104,9 @@ export default function Navbar() {
             <LanguageSwitcher variant="bar" />
 
 
-            {/* Menu (all screen sizes below xl, and for the full list above) */}
+            {/* Menu — phones and tablets */}
             <button
-              className="menu-toggle touch-target rounded-full bg-white/10 hover:bg-white/20 text-white ml-0.5"
+              className={`menu-toggle touch-target rounded-full text-white/85 hover:text-white hover:bg-white/10 ${mobileOpen ? 'bg-white/10 text-white' : ''}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
               aria-expanded={mobileOpen}
@@ -122,59 +122,51 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* ── Full-screen menu ── */}
+      {/* ── Mobile menu: drops down from the header, same glass style ── */}
+      <div
+        className={`menu-panel fixed inset-0 z-40 bg-[#0a1f19]/40 backdrop-blur-[2px] transition-opacity duration-400 ${
+          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={() => setMobileOpen(false)}
+        aria-hidden="true"
+      />
       <div
         id="mobile-menu"
         role="dialog"
         aria-modal="true"
         aria-label={t.nav.menuLabel}
         inert={!mobileOpen}
-        className={`fixed inset-0 z-40 flex flex-col bg-[#0a1f19] transition-all duration-500 ${
-          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
+        className={`menu-panel fixed inset-x-0 top-0 z-[45] px-3 sm:px-4 pt-[76px] pointer-events-none`}
       >
-        <div className="absolute -top-40 -right-40 w-[34rem] h-[34rem] glow-gold pointer-events-none" />
-        <div className="absolute -bottom-52 -left-40 w-[40rem] h-[40rem] glow-forest pointer-events-none" />
-
-        <div className="relative flex-1 overflow-y-auto px-6 sm:px-12 pt-28 pb-8" data-lenis-prevent>
-          <div className="max-w-screen-xl mx-auto grid lg:grid-cols-[1.4fr_1fr] gap-12">
-            <nav className="grid sm:grid-cols-2 gap-x-10" aria-label={t.nav.mobileNav}>
-              {navLinks.map((link, i) => (
-                <Link
-                  key={link.to}
-                  to={link.to}
-                  className={`group flex items-baseline gap-4 py-3.5 border-b border-white/8 transition-all duration-300 ${
-                    isActive(link.to) ? 'text-[#C99A45]' : 'text-white/85 hover:text-white'
-                  }`}
-                  style={{
-                    transform: mobileOpen ? 'translateY(0)' : 'translateY(14px)',
-                    opacity: mobileOpen ? 1 : 0,
-                    transition: `opacity 0.5s ease ${i * 35}ms, transform 0.6s var(--ease-out-expo) ${i * 35}ms, color 0.25s ease`,
-                  }}
-                >
-                  <span className="text-[11px] font-medium text-white/30 tabular-nums">{String(i + 1).padStart(2, '0')}</span>
-                  <span className="font-display text-3xl sm:text-4xl font-semibold tracking-tight">{link.label}</span>
-                </Link>
-              ))}
-            </nav>
-
-            <div
-              className="flex flex-col gap-6 lg:pt-4"
-              style={{
-                opacity: mobileOpen ? 1 : 0,
-                transform: mobileOpen ? 'translateY(0)' : 'translateY(14px)',
-                transition: `opacity 0.6s ease 350ms, transform 0.6s var(--ease-out-expo) 350ms`,
-              }}
-            >
-              <div>
-                <div className="text-white/35 text-xs font-medium tracking-[0.14em] uppercase mb-3">{t.nav.language}</div>
-                <LanguageSwitcher variant="menu" />
-              </div>
-              <Link to="/visit" className="btn-primary justify-center w-full sm:w-auto sm:self-start">
-                {t.common.planVisit}
+        <div
+          className={`mx-auto max-w-screen-xl rounded-[1.75rem] bg-[#0e2820]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-3 origin-top transition-all duration-500 max-h-[calc(100svh-96px)] overflow-y-auto ${
+            mobileOpen ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-y-3 scale-[0.98]'
+          }`}
+          style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}
+          data-lenis-prevent
+        >
+          <nav className="grid grid-cols-2 gap-1" aria-label={t.nav.mobileNav}>
+            {navLinks.map((link, i) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`rounded-2xl px-4 py-3.5 text-[15px] font-medium transition-all duration-300 ${
+                  isActive(link.to) ? 'bg-[#C99A45] text-[#0e2820]' : 'text-white/85 hover:bg-white/10 hover:text-white'
+                }`}
+                style={{
+                  opacity: mobileOpen ? 1 : 0,
+                  transform: mobileOpen ? 'translateY(0)' : 'translateY(-6px)',
+                  transition: `opacity 0.4s ease ${i * 25}ms, transform 0.5s var(--ease-out-expo) ${i * 25}ms, background-color 0.25s ease, color 0.25s ease`,
+                }}
+              >
+                {link.label}
               </Link>
-              <p className="text-white/40 text-sm leading-relaxed max-w-sm">{t.common.slogan}</p>
-            </div>
+            ))}
+          </nav>
+          <div className="mt-3 pt-3 border-t border-white/10">
+            <Link to="/visit" className="btn-primary w-full justify-center">
+              {t.common.planVisit}
+            </Link>
           </div>
         </div>
       </div>

@@ -407,9 +407,13 @@ main {
   justify-content: center;
 }
 
-/* The menu button is for tablet and phone only — desktop shows every link in the bar */
+/* The menu button and its panel are for tablet and phone only — desktop shows every link in the bar */
 @media (min-width: 1024px) {
-  .menu-toggle { display: none; }
+  .menu-toggle, .menu-panel { display: none; }
+}
+/* Search is a desktop feature; phones and tablets keep a clean header */
+@media (max-width: 1023px) {
+  .search-toggle { display: none; }
 }
 
 /* ── Amharic (Ge'ez script) typography ──
