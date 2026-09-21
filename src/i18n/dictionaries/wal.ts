@@ -346,7 +346,7 @@ export const wal: DeepPartial<Dictionary> = {
         bushaashe: { name: 'Bushaashe', generation: 'First generation · The founder', period: '18th century', story: '' },
         alambo: { name: 'Alambo', generation: 'Second generation', period: '', story: '' },
         garedew: { name: 'Garedew', generation: 'Third generation', period: '', story: '' },
-        current: { name: 'The Current Generation', generation: 'Today · Colonel Fisseha Garedew and family', period: '', story: '' },
+        current: { name: 'The Current Generation', generation: 'Today · Commissioner Fiseha Garedew and family', period: '', story: '' },
       },
     },
     milestones: {
@@ -417,7 +417,7 @@ export const wal: DeepPartial<Dictionary> = {
         'In the middle of this game the women are openly allowed to choose the young man their heart desires and throw him a lemon — a way to declare their love, to choose a partner, and to begin a betrothal.',
         'At the close of the hayaya leke, the guliya (demera) bonfire was lit by our fathers and elders, and we played and rejoiced around it. With that, the programme came to its end.',
       ],
-      closing: 'Colonel Fisseha Garedew and his family: you have brought all of this together and let us see once more what our fathers made of Wolaita. Because you have honoured and protected the culture, the history, the heritage and Wolaittatetta, your honour and your work will be written in golden letters in the history of this great people.',
+      closing: 'Commissioner Fiseha Garedew and his family: you have brought all of this together and let us see once more what our fathers made of Wolaita. Because you have honoured and protected the culture, the history, the heritage and Wolaittatetta, your honour and your work will be written in golden letters in the history of this great people.',
     },
     mission: {
       label: 'Our Mission',
