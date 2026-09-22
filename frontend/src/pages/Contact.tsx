@@ -1,17 +1,30 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useI18n } from '../i18n/I18nProvider';
 import SocialLinks from '../components/SocialLinks';
 import PageHero from '../components/PageHero';
+import { sendContactMessage } from '../lib/api';
 
 export default function Contact() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const c = t.contact;
   const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const honeypot = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setFailed(false);
+    try {
+      await sendContactMessage({ ...form, language: lang, website: honeypot.current?.value });
+      setSubmitted(true);
+    } catch {
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -78,6 +91,8 @@ export default function Contact() {
                 <>
                   <h2 className="font-display text-2xl font-semibold text-[#173F35] mb-7">{c.form.title}</h2>
                   <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* hidden from people; spam bots fill it in */}
+                    <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                     <div>
                       <label className="block text-xs font-sans font-semibold text-[#173F35]/70 tracking-wider uppercase mb-2">{c.form.name}</label>
                       <input
@@ -121,9 +136,12 @@ export default function Contact() {
                         placeholder={c.form.messagePlaceholder}
                       />
                     </div>
+                    {failed && <p role="alert" className="text-sm font-sans text-[#A65A3A]">{t.common.formError}</p>}
                     <button
                       type="submit"
-                      className="w-full bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] font-sans font-semibold text-sm rounded-full py-4 transition-colors"
+                      disabled={sending}
+                      aria-busy={sending}
+                      className="w-full bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
                     >
                       {c.form.submit}
                     </button>

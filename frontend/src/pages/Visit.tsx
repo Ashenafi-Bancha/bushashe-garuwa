@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
+import { sendVisitRequest } from '../lib/api';
 
 type ExperienceType = keyof Dictionary['visit']['types'];
 
@@ -20,7 +21,7 @@ const experienceTypes: { id: ExperienceType }[] = [
 ];
 
 export default function Visit() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const v = t.visit;
   const [selectedExp, setSelectedExp] = useState<ExperienceType[]>([]);
   const [submitted, setSubmitted] = useState(false);
@@ -30,9 +31,22 @@ export default function Visit() {
     setSelectedExp((prev) => prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id]);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const honeypot = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSending(true);
+    setFailed(false);
+    try {
+      await sendVisitRequest({ ...form, experiences: selectedExp, language: lang, website: honeypot.current?.value });
+      setSubmitted(true);
+    } catch {
+      setFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -128,6 +142,8 @@ export default function Visit() {
                   <>
                     <h3 className="font-display text-2xl font-semibold text-[#173F35] mb-6">{v.form.title}</h3>
                     <form onSubmit={handleSubmit} className="space-y-4">
+                      {/* hidden from people; spam bots fill it in */}
+                      <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-xs font-sans font-semibold text-[#173F35]/70 tracking-wider uppercase mb-2">{v.form.name}</label>
@@ -201,9 +217,12 @@ export default function Visit() {
                           ))}
                         </div>
                       )}
+                      {failed && <p role="alert" className="text-sm font-sans text-[#A65A3A]">{t.common.formError}</p>}
                       <button
                         type="submit"
-                        className="w-full bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] font-sans font-semibold text-sm rounded-full py-4 transition-colors"
+                        disabled={sending}
+                        aria-busy={sending}
+                        className="w-full bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
                       >
                         {v.form.submit}
                       </button>

@@ -1,0 +1,68 @@
+# Bushaashe Garuwa API
+
+Receives the website's forms and keeps them for the staff.
+Node.js 22.13+, Express 5, TypeScript, zod for validation, and Node's built-in SQLite (no database server to install).
+
+## Structure
+
+```
+src/
+├── server.ts              Starts the API, shuts down cleanly
+├── app.ts                 Builds the Express app: security, CORS, routes, errors
+├── config/env.ts          Settings from environment variables, checked at start-up
+├── db/
+│   ├── database.ts        Opens SQLite and applies migrations
+│   └── migrations.ts      Database changes, in order
+├── middleware/            validate, error-handler, rate-limit, require-admin
+├── lib/                   logger, http-error, pagination
+└── modules/               One folder per feature, each in four layers:
+    ├── contact/           *.schema.ts      what a request may contain (zod)
+    ├── visits/            *.repository.ts  all SQL for the feature
+    └── health/            *.service.ts     the feature's rules
+                           *.routes.ts      the HTTP endpoints
+```
+
+Requests flow `routes → service → repository → database`. To add a feature
+(for example room bookings), copy the `visits` folder, add a migration and
+mount the routes in `app.ts`.
+
+## Endpoints
+
+All responses are JSON: `{ "data": … }` on success, `{ "error": { "code", "message", "details" } }` on failure.
+
+| Method | Path | Who | Purpose |
+| --- | --- | --- | --- |
+| GET | `/api/health` | anyone | Status check |
+| POST | `/api/v1/contact` | website | Contact page form |
+| POST | `/api/v1/visits` | website | Plan Your Visit form |
+| GET | `/api/v1/contact?page=1&pageSize=20` | staff | List messages |
+| GET | `/api/v1/visits?upcoming=true` | staff | List visit requests |
+| PATCH | `/api/v1/contact/:id/status` | staff | `{ "status": "new" \| "in_progress" \| "done" \| "archived" }` |
+| PATCH | `/api/v1/visits/:id/status` | staff | Same statuses |
+
+Staff endpoints need the header `Authorization: Bearer <ADMIN_API_KEY>`.
+
+Example:
+
+```bash
+curl -H "Authorization: Bearer $ADMIN_API_KEY" "http://localhost:4000/api/v1/visits?upcoming=true"
+```
+
+## Protection
+
+- Every field is validated; invalid requests get a 400 with the fields to fix.
+- Form posts are limited per visitor (`FORM_RATE_LIMIT` per 15 minutes).
+- A hidden form field catches spam bots; their posts are accepted but not saved.
+- Security headers (helmet), CORS limited to `CORS_ORIGINS`, 32 KB body limit.
+
+## Running
+
+```bash
+cp .env.example .env     # then fill in ADMIN_API_KEY
+pnpm dev                 # from this folder, or `pnpm dev:api` from the root
+pnpm test
+pnpm build && pnpm start # production
+```
+
+The database file is created at `DATABASE_PATH` (default `./data/bushaashe.db`) and is not committed to Git.
+On a host, put it on a persistent disk and back it up.

@@ -1,0 +1,10 @@
+packages:
+  - frontend
+  - backend
+
+# Packages allowed to run install scripts (esbuild is used by tsx in the backend).
+# allowBuilds is read by pnpm 11, onlyBuiltDependencies by pnpm 10.
+allowBuilds:
+  esbuild: true
+onlyBuiltDependencies:
+  - esbuild

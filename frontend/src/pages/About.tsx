@@ -55,10 +55,16 @@ export default function About() {
                 {a.who.p1}
               </p>
               <p className="text-[#1D211E]/60 font-sans text-base leading-relaxed mb-5">
+                {a.who.name}
+              </p>
+              <p className="text-[#1D211E]/60 font-sans text-base leading-relaxed mb-5">
                 {a.who.p2}
               </p>
-              <p className="text-[#1D211E]/60 font-sans text-base leading-relaxed">
+              <p className="text-[#1D211E]/60 font-sans text-base leading-relaxed mb-5">
                 {a.who.p3}
+              </p>
+              <p className="text-[#1D211E]/60 font-sans text-base leading-relaxed">
+                {a.who.festival}
               </p>
             </div>
             <div className="relative">

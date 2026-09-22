@@ -3,7 +3,8 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 
-import siteConfiguration from './.figma/make/site.json'
+// Site title, description and icons live with the Figma Make settings at the repository root
+import siteConfiguration from '../.figma/make/site.json'
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -30,6 +31,10 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      // /api calls go to the backend while developing (pnpm dev:all); see frontend/.env.example
+      proxy: {
+        '/api': { target: process.env.API_PROXY_TARGET || 'http://localhost:4000', changeOrigin: true },
+      },
       host: process.env.FIGMA_DEV_SERVER_HOST || '0.0.0.0',
       port: parseInt(process.env.PORT || '8443'),
       strictPort: true,
