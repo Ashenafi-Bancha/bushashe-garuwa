@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/brand/logo.png';
 import { useI18n } from '../i18n/I18nProvider';
 import SocialLinks from './SocialLinks';
+import { MAPS_URL } from '../lib/location';
 
 /** Routes per footer column; labels come from t.footer.columns. */
 const footerRoutes = {
@@ -71,7 +72,7 @@ export default function Footer() {
         {/* Contact row */}
         <div className="border-t border-white/10 pt-6 sm:pt-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
           <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-6 text-white/40 text-xs font-sans text-center sm:text-left">
-            <span>{t.footer.address}</span>
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.address}</a>
             <span>+251 XXX XXX XXX</span>
             <a href="mailto:info@bushaashegaruwa.com" className="hover:text-white transition-colors">info@bushaashegaruwa.com</a>
           </div>

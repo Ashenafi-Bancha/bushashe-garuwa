@@ -4,6 +4,7 @@ import { photos } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
+import LocationMap from '../components/LocationMap';
 import { sendVisitRequest } from '../lib/api';
 
 type ExperienceType = keyof Dictionary['visit']['types'];
@@ -61,7 +62,7 @@ export default function Visit() {
             <div className="flex items-start gap-4">
               <div>
                 <div className="text-[#C99A45] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
-                <div className="text-white font-sans text-sm">{t.common.addressLine1}</div>
+                <a href="#map" className="block text-white font-sans text-sm hover:text-[#C99A45] transition-colors">{t.common.addressLine1}</a>
                 <div className="text-white/50 font-sans text-xs">{t.common.addressLine2}</div>
               </div>
             </div>
@@ -234,6 +235,9 @@ export default function Visit() {
           </div>
         </div>
       </section>
+
+      {/* Map */}
+      <LocationMap />
     </main>
   );
 }

@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import { useI18n } from '../i18n/I18nProvider';
 import SocialLinks from '../components/SocialLinks';
 import PageHero from '../components/PageHero';
+import LocationMap from '../components/LocationMap';
 import { sendContactMessage } from '../lib/api';
 
 export default function Contact() {
@@ -59,7 +60,7 @@ export default function Contact() {
                 <div className="flex items-start gap-5">
                   <div>
                     <div className="text-[#C99A45] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
-                    <div className="text-[#173F35] font-sans text-base font-medium">{t.common.brand}</div>
+                    <a href="#map" className="block text-[#173F35] font-sans text-base font-medium hover:text-[#C99A45] transition-colors">{t.common.brand}</a>
                     <div className="text-[#1D211E]/45 font-sans text-sm mt-0.5">{c.locationLine1}<br/>{c.locationLine2}</div>
                   </div>
                 </div>
@@ -152,6 +153,9 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* Map */}
+      <LocationMap />
     </main>
   );
 }

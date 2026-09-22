@@ -40,6 +40,16 @@ export const wal: DeepPartial<Dictionary> = {
     phone: 'Phone',
     email: 'Email',
     locationLine: 'Damot Sore Woreda, Wolaita Zone, Ethiopia',
+    map: {
+      eyebrow: 'Find Us',
+      title: 'Where Bushaashe Garuwa Is',
+      desc: 'Bushaashe Garuwa is near Gununo, in Damot Sore Woreda, Wolaita Zone. Open the map for directions from wherever you are.',
+      listedAs: 'On Google Maps',
+      plusCode: 'Plus code',
+      directions: 'Get Directions',
+      open: 'Open in Google Maps',
+      frameTitle: 'Map showing the location of Bushaashe Garuwa',
+    },
     addressLine1: 'Bushaashe Garuwa, Damot Sore Woreda',
     addressLine2: 'Wolaita Zone, Ethiopia',
     hoursDaily: 'Daily 08:00 – 18:00',
@@ -762,7 +772,7 @@ export const wal: DeepPartial<Dictionary> = {
     gettingHere: {
       title: 'Getting Here',
       routes: [
-        { from: 'Directions', dir: 'Bushaashe Garuwa is in Damot Sore Woreda, Wolaita Zone. Detailed directions will be added here soon. Until then, contact us and we will guide you.' },
+        { from: 'Directions', dir: 'Bushaashe Garuwa is near Gununo in Damot Sore Woreda, Wolaita Zone. Use the map below, or search for "XP44+J6 Gununo" on Google Maps. Contact us and we will gladly guide you.' },
       ],
     },
     form: {
