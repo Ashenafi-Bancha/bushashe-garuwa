@@ -1,11 +1,11 @@
 /**
  * Social media links shown as each network's own logo in its brand colours.
- * Replace the placeholder addresses below with Bushaashe Garuwa's real pages.
+ * A network with an empty `href` is hidden; fill in its address to show it.
  */
 const SOCIAL = [
   {
     name: 'Facebook',
-    href: 'https://facebook.com',
+    href: 'https://www.facebook.com/bushaashe.garuwa',
     icon: (
       <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
         <circle cx="12" cy="12" r="12" fill="#1877F2" />
@@ -18,7 +18,7 @@ const SOCIAL = [
   },
   {
     name: 'Instagram',
-    href: 'https://instagram.com',
+    href: '',
     icon: (
       <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
         <defs>
@@ -39,7 +39,7 @@ const SOCIAL = [
   },
   {
     name: 'TikTok',
-    href: 'https://tiktok.com',
+    href: '',
     icon: (
       <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
         <rect width="24" height="24" rx="6" fill="#010101" />
@@ -53,7 +53,7 @@ const SOCIAL = [
   },
   {
     name: 'YouTube',
-    href: 'https://youtube.com',
+    href: 'https://www.youtube.com/results?search_query=bushaashe+garuwa',
     icon: (
       <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
         <rect width="24" height="24" rx="6" fill="#FF0000" />
@@ -63,7 +63,7 @@ const SOCIAL = [
   },
   {
     name: 'WhatsApp',
-    href: 'https://wa.me/251000000000',
+    href: '', // e.g. 'https://wa.me/2519XXXXXXXX'
     icon: (
       <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
         <circle cx="12" cy="12" r="12" fill="#25D366" />
@@ -76,7 +76,7 @@ const SOCIAL = [
   },
   {
     name: 'Telegram',
-    href: 'https://t.me/',
+    href: 'https://t.me/bushaashegaruwafrist',
     icon: (
       <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
         <circle cx="12" cy="12" r="12" fill="#26A5E4" />
@@ -92,7 +92,7 @@ const SOCIAL = [
 export default function SocialLinks({ dark = true, small = false }: { dark?: boolean; small?: boolean }) {
   return (
     <div className={`flex flex-wrap items-center ${small ? 'gap-2' : 'gap-3'}`}>
-      {SOCIAL.map((s) => (
+      {SOCIAL.filter((s) => s.href).map((s) => (
         <a
           key={s.name}
           href={s.href}
