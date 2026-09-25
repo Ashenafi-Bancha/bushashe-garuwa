@@ -53,18 +53,22 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
                     </div>
                     <span
                       className={`flex-shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold ${
-                        event.availability === 'full'
+                        event.placesLeft === 0 || event.availability === 'full'
                           ? 'bg-white/10 text-white/50'
-                          : event.availability === 'limited'
+                          : event.availability === 'limited' || (event.placesLeft !== null && event.placesLeft <= 5)
                             ? 'bg-[#A65A3A]/30 text-[#f0a584]'
                             : 'bg-emerald-400/15 text-emerald-300'
                       }`}
                     >
-                      {event.availability === 'full'
+                      {event.placesLeft === 0 || event.availability === 'full'
                         ? t.events.live.full
-                        : event.availability === 'limited'
-                          ? t.events.live.limited
-                          : t.events.live.open}
+                        : event.placesLeft !== null
+                          ? event.placesLeft === 1
+                            ? t.events.live.onePlaceLeft
+                            : fmt(t.events.live.placesLeft, { count: event.placesLeft })
+                          : event.availability === 'limited'
+                            ? t.events.live.limited
+                            : t.events.live.open}
                     </span>
                   </li>
                 );

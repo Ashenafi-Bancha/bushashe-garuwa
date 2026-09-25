@@ -3,7 +3,7 @@
  * evening and anything else). When the API is not reachable, the pages fall
  * back to the schedule written in the translations.
  */
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { Lang } from '../i18n/config';
 import { API_BASE, ApiError, apiEnabled } from './api';
 
@@ -21,6 +21,10 @@ export type SiteEvent = {
   photo: string | null;
   partner: string | null;
   bookable: boolean;
+  /** how many guests fit, null when there is no limit */
+  capacity: number | null;
+  /** places still free, null when there is no limit */
+  placesLeft: number | null;
   translations: Partial<Record<Lang, { name?: string; desc?: string }>>;
 };
 
@@ -34,10 +38,14 @@ export function eventText(event: SiteEvent, lang: Lang) {
   };
 }
 
-export async function fetchEvents(): Promise<SiteEvent[]> {
+/** `fresh` skips the browser's cached copy, for after a booking changes the places left */
+export async function fetchEvents(fresh = false): Promise<SiteEvent[]> {
   if (!apiEnabled) return [];
   try {
-    const res = await fetch(`${API_BASE}/v1/events`, { signal: AbortSignal.timeout(4000) });
+    const res = await fetch(`${API_BASE}/v1/events`, {
+      signal: AbortSignal.timeout(4000),
+      cache: fresh ? 'no-store' : 'default',
+    });
     if (!res.ok) return [];
     const json = await res.json();
     return (json?.data?.items ?? []) as SiteEvent[];
@@ -51,6 +59,13 @@ export function useSiteEvents() {
   const [events, setEvents] = useState<SiteEvent[]>([]);
   const [loaded, setLoaded] = useState(!apiEnabled);
 
+  const reload = useCallback(async () => {
+    const items = await fetchEvents(true);
+    setEvents(items);
+    setLoaded(true);
+    return items;
+  }, []);
+
   useEffect(() => {
     let current = true;
     void fetchEvents().then((items) => {
@@ -63,7 +78,7 @@ export function useSiteEvents() {
     };
   }, []);
 
-  return { events, loaded };
+  return { events, loaded, reload };
 }
 
 export type BookingInput = {
@@ -76,8 +91,10 @@ export type BookingInput = {
   website?: string;
 };
 
+export type BookingResult = { id: number | null; reference: string | null; received: true; placesLeft: number | null };
+
 /** Reserve places at an event */
-export async function bookEvent(eventId: number, input: BookingInput) {
+export async function bookEvent(eventId: number, input: BookingInput): Promise<BookingResult | null> {
   if (!apiEnabled) return null;
   let res: Response;
   try {

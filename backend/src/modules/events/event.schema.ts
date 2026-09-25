@@ -50,6 +50,8 @@ export const SaveEvent = z.object({
   partner: optionalText(120),
   /** People may reserve a place for this event */
   bookable: z.boolean().default(false),
+  /** How many guests fit; leave empty for no limit */
+  capacity: z.coerce.number().int().min(1).max(5000).nullish().transform((value) => value ?? null),
   translations: EventTranslations,
 });
 export type SaveEvent = z.infer<typeof SaveEvent>;
@@ -74,6 +76,9 @@ export type EventRecord = {
   photo: string | null;
   partner: string | null;
   bookable: boolean;
+  capacity: number | null;
+  /** worked out from the bookings; null when there is no limit */
+  placesLeft?: number | null;
   translations: z.infer<typeof EventTranslations>;
   createdAt: string;
   updatedAt: string;

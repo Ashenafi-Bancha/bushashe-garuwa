@@ -5,7 +5,7 @@ import { PaginationQuery } from '../../http/pagination.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
-import { CreateBooking, UpdateBookingStatus } from './booking.schema.js';
+import { BookingStatus, CreateBooking, UpdateBookingStatus } from './booking.schema.js';
 import type { BookingService } from './booking.service.js';
 import { SaveEvent } from './event.schema.js';
 import type { EventService } from './event.service.js';
@@ -17,12 +17,13 @@ import type { EventService } from './event.service.js';
  * PUT    /events/admin/:id    staff: change an event
  * DELETE /events/admin/:id    staff: remove an event
  *
- * POST   /events/:id/bookings         public: reserve places at an event
+ * POST   /events/:id/bookings         public: reserve places at an event (answers with its reference)
  * GET    /events/admin/bookings       staff: every booking (?eventId, ?page)
  * PATCH  /events/admin/bookings/:id/status   staff: change a booking's status
  */
 const BookingListQuery = PaginationQuery.extend({
   eventId: z.coerce.number().int().min(1).optional(),
+  status: BookingStatus.optional(),
 });
 
 export function eventRoutes(service: EventService, bookings: BookingService, guards: Guards) {
@@ -30,8 +31,8 @@ export function eventRoutes(service: EventService, bookings: BookingService, gua
 
   // bookings are listed before /admin/:id so "bookings" is not read as an id
   router.get('/admin/bookings', ...guards.admin, validateQuery(BookingListQuery), (_req, res) => {
-    const { eventId, ...pagination } = res.locals.query as z.infer<typeof BookingListQuery>;
-    sendData(res, bookings.list(pagination, { eventId }));
+    const { eventId, status, ...pagination } = res.locals.query as z.infer<typeof BookingListQuery>;
+    sendData(res, bookings.list(pagination, { eventId, status }));
   });
 
   router.patch('/admin/bookings/:id/status', ...guards.admin, validateBody(UpdateBookingStatus), (req, res) => {
@@ -39,12 +40,19 @@ export function eventRoutes(service: EventService, bookings: BookingService, gua
   });
 
   router.post('/:id/bookings', ...guards.form, validateBody(CreateBooking), (req, res) => {
-    const booking = bookings.book(parseId(req.params.id), req.body);
-    sendData(res, { id: booking?.id ?? null, received: true }, 201);
+    const eventId = parseId(req.params.id);
+    const booking = bookings.book(eventId, req.body);
+    // the reference is what the guest quotes when they call us
+    sendData(
+      res,
+      { id: booking?.id ?? null, reference: booking?.reference ?? null, received: true, placesLeft: bookings.placesLeftFor(eventId) },
+      201,
+    );
   });
 
   router.get('/', (_req, res) => {
-    res.setHeader('Cache-Control', 'public, max-age=60');
+    // short: the places left change as people book
+    res.setHeader('Cache-Control', 'public, max-age=15');
     sendData(res, { items: service.published() });
   });
 

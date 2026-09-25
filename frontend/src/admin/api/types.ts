@@ -42,7 +42,7 @@ export type Summary = {
   contact: { total: number; new: number; last7Days: number };
   visits: { total: number; new: number; upcoming: number };
   events: { total: number; upcoming: number; drafts: number };
-  bookings: { total: number; new: number; guestsUpcoming: number };
+  bookings: { total: number; pending: number; guestsUpcoming: number };
   content: { edited: number; lastUpdatedAt: string | null };
   generatedAt: string;
 };
@@ -58,16 +58,29 @@ export type AdminEvent = {
   photo: string | null;
   partner: string | null;
   bookable: boolean;
+  capacity: number | null;
+  placesLeft?: number | null;
   translations: { en: { name: string; desc?: string }; am?: { name?: string; desc?: string }; wal?: { name?: string; desc?: string } };
   createdAt: string;
   updatedAt: string;
 };
 
-export type SaveEventInput = Omit<AdminEvent, 'id' | 'createdAt' | 'updatedAt'>;
+export type SaveEventInput = Omit<AdminEvent, 'id' | 'createdAt' | 'updatedAt' | 'placesLeft'>;
+
+/** A booking's life: pending → confirmed → attended, or cancelled (which frees the places) */
+export type BookingStatus = 'pending' | 'confirmed' | 'attended' | 'cancelled';
+export const BOOKING_STATUSES: BookingStatus[] = ['pending', 'confirmed', 'attended', 'cancelled'];
+export const BOOKING_STATUS_LABELS: Record<BookingStatus, string> = {
+  pending: 'To call',
+  confirmed: 'Confirmed',
+  attended: 'Came',
+  cancelled: 'Cancelled',
+};
 
 export type Booking = {
   id: number;
   eventId: number;
+  reference: string;
   eventDate?: string;
   eventName?: string;
   name: string;
@@ -76,7 +89,7 @@ export type Booking = {
   guests: number;
   message: string | null;
   language: string;
-  status: RequestStatus;
+  status: BookingStatus;
   createdAt: string;
 };
 

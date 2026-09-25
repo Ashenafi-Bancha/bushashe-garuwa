@@ -51,7 +51,7 @@ All responses are JSON: `{ "data": … }` on success, `{ "error": { "code", "mes
 | GET | `/api/v1/events` | website | Published events still to come |
 | GET/POST | `/api/v1/events/admin` | staff | List every event, add one |
 | PUT/DELETE | `/api/v1/events/admin/:id` | staff | Change or remove an event |
-| POST | `/api/v1/events/:id/bookings` | website | Reserve places at an event |
+| POST | `/api/v1/events/:id/bookings` | website | Reserve places (answers with a booking reference) |
 | GET | `/api/v1/events/admin/bookings` | staff | Bookings, newest first (`?eventId`) |
 | PATCH | `/api/v1/events/admin/bookings/:id/status` | staff | Handle a booking |
 
@@ -63,6 +63,20 @@ Example:
 ```bash
 curl -H "Authorization: Bearer $ADMIN_API_KEY" "http://localhost:4000/api/v1/visits?upcoming=true"
 ```
+
+## How bookings work
+
+- An event may have a **capacity**. The API works out the places left from the bookings
+  that still hold a place, and sends it to the website with every event.
+- A booking is refused with 409 when the event is full (`event_full`) or when the guest
+  asked for more places than are left (`not_enough_places`, which also says how many are left).
+- Each booking gets a short **reference** such as `BG-7K3Q`, which the guest can quote on the phone.
+- A second request **from the same phone number for the same event within 24 hours** returns the
+  booking already made instead of creating another, so a double tap never books twice.
+  Numbers written differently (`0911…` and `+251911…`) count as the same person.
+- A booking moves **pending → confirmed → attended**, or is **cancelled**. Cancelling gives the
+  places back to the event straight away; the booking itself is kept for the record.
+- Bookings are refused for events that are unpublished, past, or not open for bookings.
 
 ## Protection
 

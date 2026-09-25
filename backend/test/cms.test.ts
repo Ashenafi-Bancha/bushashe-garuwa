@@ -44,6 +44,7 @@ const culturalFood = {
   featured: true,
   published: true,
   bookable: true,
+  capacity: 10,
   partner: 'Lidya Cultural Food',
   translations: {
     en: { name: 'Wolaita Cultural Food Evening', desc: 'Traditional dishes, coffee ceremony and storytelling.' },
@@ -143,6 +144,13 @@ describe('booking a place at an event', () => {
     eventId = list.data.items.find((e: any) => e.translations.en.name === 'Wolaita Cultural Food Evening').id;
   });
 
+  it('shows how many places are left on the website', async () => {
+    const publicList = await read(await fetch(base + '/v1/events'));
+    const event = publicList.data.items.find((e: any) => e.id === eventId);
+    assert.equal(event.capacity, 10);
+    assert.equal(event.placesLeft, 10);
+  });
+
   it('takes a booking and counts the guests', async () => {
     const res = await post(`/v1/events/${eventId}/bookings`, {
       name: 'Selam Bekele',
@@ -157,6 +165,9 @@ describe('booking a place at an event', () => {
     assert.equal(bookings.data.total, 1);
     assert.equal(bookings.data.items[0].guests, 4);
     assert.equal(bookings.data.items[0].eventName, 'Wolaita Cultural Food Evening');
+
+    assert.match(bookings.data.items[0].reference, /^BG-[2-9A-HJ-NP-Z]{4}$/, 'the guest gets a short code');
+    assert.equal(bookings.data.items[0].status, 'pending');
 
     const summary = await read(await staff('/v1/admin/summary'));
     assert.equal(summary.data.bookings.guestsUpcoming, 4);
@@ -177,10 +188,49 @@ describe('booking a place at an event', () => {
     assert.deepEqual(fields.sort(), ['guests', 'name', 'phone']);
   });
 
-  it('lets staff mark a booking as done', async () => {
-    const bookings = await read(await staff('/v1/events/admin/bookings'));
+  it('treats a repeat request from the same phone as the same booking', async () => {
+    const again = await post(`/v1/events/${eventId}/bookings`, {
+      name: 'Selam Bekele',
+      phone: '0911 00 11 22', // the same number written differently
+      guests: 4,
+      language: 'en',
+    });
+    assert.equal(again.status, 201);
+    const bookings = await read(await staff(`/v1/events/admin/bookings?eventId=${eventId}`));
+    assert.equal(bookings.data.total, 1, 'no second booking is created');
+  });
+
+  it('refuses more guests than there are places left', async () => {
+    const tooMany = await post(`/v1/events/${eventId}/bookings`, { name: 'Big group', phone: '0922 00 00 00', guests: 9 });
+    assert.equal(tooMany.status, 409);
+    const body = await read(tooMany);
+    assert.equal(body.error.code, 'not_enough_places');
+    assert.equal(body.error.details.placesLeft, 6);
+  });
+
+  it('fills the event, then frees the places again when a booking is cancelled', async () => {
+    const fill = await post(`/v1/events/${eventId}/bookings`, { name: 'Family', phone: '0933 00 00 00', guests: 6 });
+    assert.equal(fill.status, 201);
+    const filled = await read(await fetch(base + '/v1/events'));
+    assert.equal(filled.data.items.find((e: any) => e.id === eventId).placesLeft, 0);
+
+    const full = await post(`/v1/events/${eventId}/bookings`, { name: 'Late guest', phone: '0944 00 00 00', guests: 1 });
+    assert.equal(full.status, 409);
+    assert.equal((await read(full)).error.code, 'event_full');
+
+    const list = await read(await staff(`/v1/events/admin/bookings?eventId=${eventId}`));
+    const family = list.data.items.find((b: any) => b.name === 'Family');
+    await staff(`/v1/events/admin/bookings/${family.id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'cancelled' }) });
+
+    const freed = await read(await fetch(base + '/v1/events'));
+    assert.equal(freed.data.items.find((e: any) => e.id === eventId).placesLeft, 6, 'cancelled places go back');
+  });
+
+  it('lets staff confirm a booking', async () => {
+    const bookings = await read(await staff(`/v1/events/admin/bookings?eventId=${eventId}&status=pending`));
     const id = bookings.data.items[0].id;
-    const updated = await read(await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'done' }) }));
-    assert.equal(updated.data.status, 'done');
+    const updated = await read(await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'confirmed' }) }));
+    assert.equal(updated.data.status, 'confirmed');
+    assert.equal((await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'done' }) })).status, 400, 'only booking statuses are allowed');
   });
 });

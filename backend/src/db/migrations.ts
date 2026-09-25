@@ -79,4 +79,30 @@ export const migrations: { id: number; name: string; sql: string }[] = [
       CREATE INDEX idx_event_bookings_event ON event_bookings (event_id, created_at DESC);
     `,
   },
+  {
+    id: 3,
+    name: 'event capacity, booking references and booking statuses',
+    sql: `
+      -- how many guests an event can take; NULL means no limit
+      ALTER TABLE events ADD COLUMN capacity INTEGER;
+
+      -- a short code the guest can quote, e.g. BG-7K3Q
+      ALTER TABLE event_bookings ADD COLUMN reference TEXT;
+      CREATE UNIQUE INDEX idx_event_bookings_reference ON event_bookings (reference);
+
+      -- bookings have their own life: pending -> confirmed -> attended, or cancelled
+      UPDATE event_bookings SET status = 'pending'   WHERE status IN ('new', 'in_progress');
+      UPDATE event_bookings SET status = 'confirmed' WHERE status = 'done';
+      UPDATE event_bookings SET status = 'cancelled' WHERE status = 'archived';
+    `,
+  },
+  {
+    id: 4,
+    name: 'give older bookings a reference',
+    sql: `
+      UPDATE event_bookings
+         SET reference = 'BG-' || substr(hex(randomblob(4)), 1, 4)
+       WHERE reference IS NULL;
+    `,
+  },
 ];

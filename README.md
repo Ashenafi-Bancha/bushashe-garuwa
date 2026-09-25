@@ -71,7 +71,9 @@ From there staff can:
 - **Events**: add the cultural food evenings and other events, with the date, time, partner
   (for example Lidya Cultural Food), photo and words in all three languages. Each event can be
   published, shown on the home page, and opened for bookings.
-- **Event bookings**: see who reserved a place, for how many guests, and handle each one.
+- **Event bookings**: see who reserved a place, for how many guests, with the booking number.
+  Each one moves from "to call" to confirmed, came, or cancelled. Cancelling frees the places again.
+  Events can have a limit, and the website counts down the places left and stops when it is full.
 - **Website text**: change headings, paragraphs, opening hours and contact details, per page and
   per language. An empty box puts the built-in words back.
 

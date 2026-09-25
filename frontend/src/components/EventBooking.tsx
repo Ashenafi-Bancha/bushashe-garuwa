@@ -1,13 +1,22 @@
 import { useRef, useState } from 'react';
-import { useI18n } from '../i18n/I18nProvider';
+import { fmt, useI18n } from '../i18n/I18nProvider';
 import { bookEvent, eventText, type SiteEvent } from '../lib/events';
 
 /** Reserve places at an event, for example the cultural food evening. */
-export default function EventBooking({ event, onClose }: { event: SiteEvent; onClose?: () => void }) {
+export default function EventBooking({
+  event,
+  onClose,
+  onBooked,
+}: {
+  event: SiteEvent;
+  onClose?: () => void;
+  /** lets the page show the new number of places left */
+  onBooked?: () => void;
+}) {
   const { t, lang } = useI18n();
   const b = t.events.booking;
   const [form, setForm] = useState({ name: '', phone: '', email: '', guests: '2', message: '' });
-  const [done, setDone] = useState(false);
+  const [done, setDone] = useState<{ reference: string | null } | null>(null);
   const [sending, setSending] = useState(false);
   const [failed, setFailed] = useState('');
   const honeypot = useRef<HTMLInputElement>(null);
@@ -17,7 +26,7 @@ export default function EventBooking({ event, onClose }: { event: SiteEvent; onC
     setSending(true);
     setFailed('');
     try {
-      await bookEvent(event.id, {
+      const result = await bookEvent(event.id, {
         name: form.name,
         phone: form.phone,
         email: form.email || undefined,
@@ -26,7 +35,8 @@ export default function EventBooking({ event, onClose }: { event: SiteEvent; onC
         language: lang,
         website: honeypot.current?.value,
       });
-      setDone(true);
+      setDone({ reference: result?.reference ?? null });
+      onBooked?.();
     } catch (err) {
       setFailed((err as Error).message || t.common.formError);
     } finally {
@@ -43,6 +53,13 @@ export default function EventBooking({ event, onClose }: { event: SiteEvent; onC
         <div className="w-12 h-1 rounded-full bg-[#C99A45] mx-auto mb-6" />
         <h3 className="font-display text-2xl text-[#173F35] mb-3">{b.thanksTitle}</h3>
         <p className="text-[#1D211E]/60 font-sans text-sm leading-relaxed">{b.thanksText}</p>
+        {done.reference && (
+          <div className="mt-6 inline-block rounded-2xl bg-[#F7F5F0] px-6 py-4">
+            <div className="text-[#C99A45] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1">{b.referenceLabel}</div>
+            <div className="font-display text-2xl text-[#173F35] tracking-wide">{done.reference}</div>
+            <p className="text-[#1D211E]/50 text-xs mt-2 max-w-xs">{b.referenceNote}</p>
+          </div>
+        )}
         {onClose && (
           <button type="button" onClick={onClose} className="mt-6 text-[#173F35] font-sans text-sm font-semibold underline">
             {b.close}
@@ -57,6 +74,15 @@ export default function EventBooking({ event, onClose }: { event: SiteEvent; onC
       <div>
         <h3 className="font-display text-2xl text-[#173F35]">{b.title}</h3>
         <p className="text-[#1D211E]/55 font-sans text-sm mt-1">{eventText(event, lang).name}</p>
+        {event.placesLeft !== null && (
+          <p className="text-[#A65A3A] font-sans text-sm mt-2">
+            {event.placesLeft === 0
+              ? b.noPlaces
+              : event.placesLeft === 1
+                ? b.onePlaceLeft
+                : fmt(b.placesLeft, { count: event.placesLeft })}
+          </p>
+        )}
       </div>
 
       <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
@@ -76,7 +102,16 @@ export default function EventBooking({ event, onClose }: { event: SiteEvent; onC
         </div>
         <div>
           <label className={label} htmlFor="booking-guests">{b.guests}</label>
-          <input id="booking-guests" required type="number" min={1} max={200} value={form.guests} onChange={(e) => setForm({ ...form, guests: e.target.value })} className={field} />
+          <input
+            id="booking-guests"
+            required
+            type="number"
+            min={1}
+            max={event.placesLeft ?? 200}
+            value={form.guests}
+            onChange={(e) => setForm({ ...form, guests: e.target.value })}
+            className={field}
+          />
         </div>
       </div>
 

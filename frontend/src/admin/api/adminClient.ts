@@ -1,5 +1,5 @@
 import { API_BASE, ApiError } from '../../lib/api';
-import type { AdminEvent, Booking, ContactMessage, ContentEntry, Page, RequestStatus, SaveEventInput, Summary, VisitRequest } from './types';
+import type { AdminEvent, Booking, BookingStatus, ContactMessage, ContentEntry, Page, RequestStatus, SaveEventInput, Summary, VisitRequest } from './types';
 
 /**
  * Calls the staff endpoints of the API. Every call carries the staff key
@@ -69,7 +69,7 @@ export const adminApi = {
   bookings: (key: string, page: number, eventId?: number) =>
     request<Page<Booking>>(key, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId })}`),
 
-  setBookingStatus: (key: string, id: number, status: RequestStatus) =>
+  setBookingStatus: (key: string, id: number, status: BookingStatus) =>
     request<Booking>(key, `/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
 
   // ── Website text ──

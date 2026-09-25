@@ -73,7 +73,7 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
           <StatCard label="Upcoming events" value={summary?.events.upcoming ?? '–'} hint={`${summary?.events.drafts ?? 0} draft(s)`} />
-          <StatCard label="Guests booked" value={summary?.bookings.guestsUpcoming ?? '–'} hint="For events to come" />
+          <StatCard label="Guests booked" value={summary?.bookings.guestsUpcoming ?? '–'} hint={`${summary?.bookings.pending ?? 0} to call back`} />
           <StatCard label="Upcoming visits" value={summary?.visits.upcoming ?? '–'} hint={`${summary?.visits.new ?? 0} not handled`} />
           <StatCard label="New messages" value={summary?.contact.new ?? '–'} hint={`${summary?.contact.last7Days ?? 0} this week`} />
           <StatCard label="Edited texts" value={summary?.content.edited ?? '–'} hint="Words changed from the admin" />

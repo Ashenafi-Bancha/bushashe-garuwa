@@ -17,6 +17,7 @@ export const emptyEvent = (): SaveEventInput => ({
   photo: 'food',
   partner: 'Lidya Cultural Food',
   bookable: true,
+  capacity: 40,
   translations: { en: { name: '', desc: '' }, am: { name: '', desc: '' }, wal: { name: '', desc: '' } },
 });
 
@@ -91,10 +92,26 @@ export default function EventForm({
           </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-3 gap-4">
           <div>
             <label className={label} htmlFor="event-partner">Partner (optional)</label>
             <input id="event-partner" type="text" value={values.partner ?? ''} onChange={(e) => set({ partner: e.target.value })} className={field} placeholder="Lidya Cultural Food" />
+          </div>
+          <div>
+            <label className={label} htmlFor="event-capacity">How many guests fit</label>
+            <input
+              id="event-capacity"
+              type="number"
+              min={1}
+              max={5000}
+              value={values.capacity ?? ''}
+              onChange={(e) => set({ capacity: e.target.value === '' ? null : Number(e.target.value) })}
+              className={field}
+              placeholder="Leave empty for no limit"
+            />
+            <p className="text-[#1D211E]/45 text-xs mt-1.5">
+              The website counts the places left and stops taking bookings when the event is full.
+            </p>
           </div>
           <div>
             <label className={label} htmlFor="event-photo">Photo</label>

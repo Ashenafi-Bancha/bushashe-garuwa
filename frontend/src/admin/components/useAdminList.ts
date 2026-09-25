@@ -1,14 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import { ApiError } from '../../lib/api';
-import type { Page, RequestStatus } from '../api/types';
+import type { Page } from '../api/types';
 
 /**
  * Loads one page of a staff list and keeps it in step with status changes.
  * Both list views (messages and visit requests) work the same way, so they share this.
  */
-export function useAdminList<T extends { id: number; status: RequestStatus }>(
+export function useAdminList<T extends { id: number; status: S }, S extends string = T['status']>(
   load: (page: number) => Promise<Page<T>>,
-  update: (id: number, status: RequestStatus) => Promise<T>,
+  update: (id: number, status: S) => Promise<T>,
   deps: unknown[] = [],
 ) {
   const [page, setPage] = useState(1);
@@ -34,7 +34,7 @@ export function useAdminList<T extends { id: number; status: RequestStatus }>(
     void refresh();
   }, [refresh]);
 
-  const changeStatus = async (id: number, status: RequestStatus) => {
+  const changeStatus = async (id: number, status: S) => {
     setBusyId(id);
     setError('');
     try {

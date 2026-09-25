@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { STATUSES, STATUS_LABELS, type RequestStatus } from '../api/types';
+import { BOOKING_STATUSES, BOOKING_STATUS_LABELS, STATUSES, STATUS_LABELS, type BookingStatus, type RequestStatus } from '../api/types';
 
 /** Small building blocks shared by the admin views. */
 
@@ -48,6 +48,40 @@ export function StatusSelect({
       {STATUSES.map((s) => (
         <option key={s} value={s}>
           {STATUS_LABELS[s]}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+const BOOKING_STATUS_STYLES: Record<BookingStatus, string> = {
+  pending: 'bg-[#C99A45]/15 text-[#8a6620]',
+  confirmed: 'bg-emerald-500/12 text-emerald-700',
+  attended: 'bg-[#173F35]/10 text-[#173F35]',
+  cancelled: 'bg-[#1D211E]/8 text-[#1D211E]/50',
+};
+
+/** Bookings move pending → confirmed → came, or are cancelled (which frees the places) */
+export function BookingStatusSelect({
+  status,
+  busy,
+  onChange,
+}: {
+  status: BookingStatus;
+  busy?: boolean;
+  onChange: (status: BookingStatus) => void;
+}) {
+  return (
+    <select
+      value={status}
+      disabled={busy}
+      onChange={(e) => onChange(e.target.value as BookingStatus)}
+      aria-label="Change booking status"
+      className={`rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2 focus:ring-[#173F35]/30 disabled:opacity-50 ${BOOKING_STATUS_STYLES[status]}`}
+    >
+      {BOOKING_STATUSES.map((s) => (
+        <option key={s} value={s}>
+          {BOOKING_STATUS_LABELS[s]}
         </option>
       ))}
     </select>

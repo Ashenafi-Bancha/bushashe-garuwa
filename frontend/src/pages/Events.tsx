@@ -44,10 +44,11 @@ export default function Events() {
   const e = t.events;
   const [activeCat, setActiveCat] = useState<Category>('all');
   const [booking, setBooking] = useState<SiteEvent | null>(null);
-  const { events: liveEvents } = useSiteEvents();
+  const { events: liveEvents, reload } = useSiteEvents();
 
   const availLabel = (kind: AvailKind) =>
     kind === 'full' ? e.live.full : kind === 'limited' ? e.live.limited : e.live.open;
+  const placesLeftLabel = (count: number) => (count === 1 ? e.live.onePlaceLeft : fmt(e.live.placesLeft, { count }));
 
   const fromApi: Shown[] = liveEvents.map((event) => {
     const text = eventText(event, lang);
@@ -61,8 +62,13 @@ export default function Events() {
       }),
       time: event.time ?? '',
       cat: event.category,
-      availKind: event.availability,
-      avail: availLabel(event.availability),
+      availKind: event.placesLeft === 0 ? 'full' : event.availability,
+      avail:
+        event.placesLeft === 0
+          ? e.live.full
+          : event.placesLeft !== null
+            ? placesLeftLabel(event.placesLeft)
+            : availLabel(event.availability),
       name: text.name,
       desc: text.desc,
       photo: event.photo ?? (event.category === 'food' ? 'food' : undefined),
@@ -131,7 +137,15 @@ export default function Events() {
       {booking && (
         <section id="book" className="bg-[#F7F5F0] pt-12 sm:pt-16">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6">
-            <EventBooking event={booking} onClose={() => setBooking(null)} />
+            <EventBooking
+              event={booking}
+              onBooked={async () => {
+                const items = await reload();
+                const fresh = items.find((item) => item.id === booking.id);
+                if (fresh) setBooking(fresh);
+              }}
+              onClose={() => setBooking(null)}
+            />
           </div>
         </section>
       )}

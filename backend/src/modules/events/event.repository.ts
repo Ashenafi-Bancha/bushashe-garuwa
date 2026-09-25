@@ -12,6 +12,8 @@ type Row = {
   photo: string | null;
   partner: string | null;
   bookable: number;
+  capacity: number | null;
+  places_taken?: number;
   translations: string;
   created_at: string;
   updated_at: string;
@@ -28,6 +30,8 @@ const toEvent = (row: Row): EventRecord => ({
   photo: row.photo,
   partner: row.partner,
   bookable: row.bookable === 1,
+  capacity: row.capacity,
+  placesLeft: row.capacity === null ? null : Math.max(0, row.capacity - (row.places_taken ?? 0)),
   translations: JSON.parse(row.translations),
   createdAt: row.created_at,
   updatedAt: row.updated_at,
@@ -43,8 +47,14 @@ const values = (input: SaveEvent) => [
   input.photo ?? null,
   input.partner ?? null,
   input.bookable ? 1 : 0,
+  input.capacity,
   JSON.stringify(input.translations),
 ];
+
+
+/** Bookings that still hold a place: cancelled ones give their places back */
+const PLACES_TAKEN = `(SELECT COALESCE(SUM(b.guests), 0) FROM event_bookings b
+   WHERE b.event_id = events.id AND b.status != 'cancelled') AS places_taken`;
 
 /** All SQL for events. */
 export function eventRepository(db: Database) {
@@ -52,26 +62,26 @@ export function eventRepository(db: Database) {
     /** Published and not yet past, soonest first: what the website shows */
     upcoming(): EventRecord[] {
       const rows = db
-        .prepare(`SELECT * FROM events WHERE published = 1 AND event_date >= date('now') ORDER BY event_date ASC, id ASC`)
+        .prepare(`SELECT *, ${PLACES_TAKEN} FROM events WHERE published = 1 AND event_date >= date('now') ORDER BY event_date ASC, id ASC`)
         .all() as Row[];
       return rows.map(toEvent);
     },
 
     /** Everything, newest date first: what the staff page shows */
     all(): EventRecord[] {
-      return (db.prepare('SELECT * FROM events ORDER BY event_date DESC, id DESC').all() as Row[]).map(toEvent);
+      return (db.prepare(`SELECT *, ${PLACES_TAKEN} FROM events ORDER BY event_date DESC, id DESC`).all() as Row[]).map(toEvent);
     },
 
     find(id: number): EventRecord | undefined {
-      const row = db.prepare('SELECT * FROM events WHERE id = ?').get(id) as Row | undefined;
+      const row = db.prepare(`SELECT *, ${PLACES_TAKEN} FROM events WHERE id = ?`).get(id) as Row | undefined;
       return row && toEvent(row);
     },
 
     create(input: SaveEvent): EventRecord {
       const row = db
         .prepare(
-          `INSERT INTO events (event_date, event_time, category, availability, featured, published, photo, partner, bookable, translations)
-           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`,
+          `INSERT INTO events (event_date, event_time, category, availability, featured, published, photo, partner, bookable, capacity, translations)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`,
         )
         .get(...values(input)) as Row;
       return toEvent(row);
@@ -81,7 +91,7 @@ export function eventRepository(db: Database) {
       const row = db
         .prepare(
           `UPDATE events SET event_date = ?, event_time = ?, category = ?, availability = ?, featured = ?,
-                             published = ?, photo = ?, partner = ?, bookable = ?, translations = ?,
+                             published = ?, photo = ?, partner = ?, bookable = ?, capacity = ?, translations = ?,
                              updated_at = strftime('%Y-%m-%dT%H:%M:%fZ', 'now')
            WHERE id = ? RETURNING *`,
         )

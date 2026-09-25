@@ -55,7 +55,7 @@ export default function EventsView() {
   const toggle = async (event: AdminEvent, change: Partial<SaveEventInput>) => {
     setBusyId(event.id);
     try {
-      const { id: _id, createdAt: _c, updatedAt: _u, ...current } = event;
+      const { id: _id, createdAt: _c, updatedAt: _u, placesLeft: _p, ...current } = event;
       await adminApi.updateEvent(key, event.id, { ...current, ...change });
       await refresh();
     } catch (err) {
@@ -117,6 +117,18 @@ export default function EventsView() {
                       {event.time ? ` · ${event.time}` : ''} · {event.category}
                       {event.partner ? ` · with ${event.partner}` : ''}
                     </div>
+                    {event.bookable && (
+                      <div className="text-sm mt-1">
+                        {event.capacity === null ? (
+                          <span className="text-[#1D211E]/50">Open bookings, no limit</span>
+                        ) : (
+                          <span className={event.placesLeft === 0 ? 'text-[#A65A3A] font-semibold' : 'text-[#173F35]'}>
+                            {event.capacity - (event.placesLeft ?? 0)} of {event.capacity} places booked
+                            {event.placesLeft === 0 ? ' · full' : ` · ${event.placesLeft} left`}
+                          </span>
+                        )}
+                      </div>
+                    )}
                     {event.translations.en.desc && (
                       <p className="text-[#1D211E]/70 text-sm mt-2 max-w-2xl">{event.translations.en.desc}</p>
                     )}
@@ -142,7 +154,7 @@ export default function EventsView() {
                     <button
                       type="button"
                       onClick={() => {
-                        const { id: _id, createdAt: _c, updatedAt: _u, ...values } = event;
+                        const { id: _id, createdAt: _c, updatedAt: _u, placesLeft: _p, ...values } = event;
                         setEditing({ id: event.id, values });
                       }}
                       className="admin-btn-quiet"

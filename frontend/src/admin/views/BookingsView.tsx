@@ -2,7 +2,7 @@ import { adminApi } from '../api/adminClient';
 import type { Booking } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { useAdminList } from '../components/useAdminList';
-import { Notice, Pager, Panel, StatusSelect, formatDate, formatDateTime } from '../components/ui';
+import { BookingStatusSelect, Notice, Pager, Panel, formatDate, formatDateTime } from '../components/ui';
 
 /** Places reserved at events, newest first. */
 export default function BookingsView() {
@@ -24,6 +24,7 @@ export default function BookingsView() {
             <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
               <div>
                 <h3 className="font-display text-xl text-[#0e2820]">
+                  <span className="text-[#C99A45] text-sm font-sans font-semibold tracking-wide mr-2">{booking.reference}</span>
                   {booking.name}
                   <span className="text-[#C99A45] text-base"> · {booking.guests} {booking.guests === 1 ? 'guest' : 'guests'}</span>
                 </h3>
@@ -39,7 +40,7 @@ export default function BookingsView() {
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-xs text-[#1D211E]/40">booked {formatDateTime(booking.createdAt)}</span>
-                <StatusSelect status={booking.status} busy={busyId === booking.id} onChange={(status) => changeStatus(booking.id, status)} />
+                <BookingStatusSelect status={booking.status} busy={busyId === booking.id} onChange={(status) => changeStatus(booking.id, status)} />
               </div>
             </div>
 
