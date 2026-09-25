@@ -1,5 +1,5 @@
 import type { ErrorRequestHandler, RequestHandler } from 'express';
-import { HttpError } from '../lib/http-error.js';
+import { HttpError } from './http-error.js';
 import { logger } from '../lib/logger.js';
 
 /** Unknown routes under /api */

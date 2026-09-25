@@ -1,4 +1,4 @@
-import { HttpError } from '../lib/http-error.js';
+import { HttpError } from '../../http/http-error.js';
 
 /** Route ids like /contact/12 */
 export function parseId(value: unknown): number {

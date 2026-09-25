@@ -117,6 +117,21 @@ describe('visit requests', () => {
   });
 });
 
+describe('admin dashboard', () => {
+  it('confirms a valid staff key and refuses a wrong one', async () => {
+    assert.equal((await staff('/v1/admin/session')).status, 200);
+    assert.equal((await fetch(base + '/v1/admin/session', { headers: { authorization: 'Bearer nope' } })).status, 401);
+  });
+
+  it('counts messages and visit requests', async () => {
+    const { data } = await read(await staff('/v1/admin/summary'));
+    assert.equal(data.contact.total, 1);
+    assert.equal(data.contact.new, 0); // the one message was marked done above
+    assert.equal(data.contact.last7Days, 1);
+    assert.deepEqual(data.visits, { total: 1, new: 1, upcoming: 1 });
+  });
+});
+
 describe('protection', () => {
   it('limits form submissions per visitor', async () => {
     // 7 form posts allowed per window in this test (shared by both forms); the tests above used 5

@@ -1,6 +1,6 @@
 import type { Database } from '../../db/database.js';
-import type { Page, Pagination } from '../../lib/pagination.js';
-import type { RequestStatus } from '../shared.js';
+import type { Page, Pagination } from '../../http/pagination.js';
+import type { RequestStatus } from '../shared/schemas.js';
 import type { ContactMessage, CreateContactMessage } from './contact.schema.js';
 
 type Row = {
@@ -44,6 +44,19 @@ export function contactRepository(db: Database) {
         .all(pageSize, (page - 1) * pageSize) as Row[];
       const { total } = db.prepare('SELECT COUNT(*) AS total FROM contact_messages').get() as { total: number };
       return { items: rows.map(toMessage), page, pageSize, total };
+    },
+
+    /** Counts for the admin dashboard */
+    stats(): { total: number; new: number; last7Days: number } {
+      const row = db
+        .prepare(
+          `SELECT COUNT(*) AS total,
+                  SUM(status = 'new') AS unread,
+                  SUM(created_at >= datetime('now', '-7 days')) AS recent
+           FROM contact_messages`,
+        )
+        .get() as { total: number; unread: number | null; recent: number | null };
+      return { total: row.total, new: row.unread ?? 0, last7Days: row.recent ?? 0 };
     },
 
     updateStatus(id: number, status: RequestStatus): ContactMessage | undefined {

@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Email, Honeypot, Language, Phone, RequestStatus, optionalText, text } from '../shared.js';
+import { Email, Honeypot, Language, Phone, RequestStatus, optionalText, text } from '../shared/schemas.js';
 
 /** The options on the Plan Your Visit page (frontend t.visit.types) */
 export const ExperienceType = z.enum([

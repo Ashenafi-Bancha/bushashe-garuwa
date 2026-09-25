@@ -9,6 +9,7 @@ bushaashe-garuwa/
 │   │   ├── pages/         One file per page (Home, About, Heritage, Visit, …)
 │   │   ├── components/    Shared pieces (Navbar, Footer, PageHero, …)
 │   │   ├── i18n/          Languages: English, Amharic, Wolaytta (dictionaries/)
+│   │   ├── admin/         Staff area at /admin (sign-in, dashboard, lists)
 │   │   ├── lib/           Motion helpers and the API client (api.ts)
 │   │   └── assets/        Logo and the optimized photos (photos.ts is the registry)
 │   ├── photos-originals/  Full-size original photos, sorted by section
@@ -16,11 +17,12 @@ bushaashe-garuwa/
 │   └── public/            Favicon and icons
 ├── backend/               The API (Node.js, Express, TypeScript, SQLite)
 │   ├── src/
-│   │   ├── modules/       One folder per feature: contact, visits, health
-│   │   ├── middleware/    Validation, errors, rate limit, staff key
+│   │   ├── modules/       One folder per feature: contact, visits, admin, health
+│   │   ├── container.ts   Composition root: repositories, services, guards
+│   │   ├── http/          Validation, errors, rate limit, staff key, responses
 │   │   ├── db/            Database connection and migrations
 │   │   ├── config/        Environment settings
-│   │   └── lib/           Logger, errors, pagination
+│   │   └── lib/           Logger
 │   └── test/              API tests
 ├── .figma/make/           Figma Make settings (site title, description, icons)
 ├── package.json           Workspace scripts (below)
@@ -57,6 +59,12 @@ For local development:
 1. `cp backend/.env.example backend/.env`
 2. Create `frontend/.env.local` with `VITE_API_URL=/api`
 3. `pnpm dev:all`
+
+## Staff area (/admin)
+
+Open http://localhost:8443/admin and sign in with the `ADMIN_API_KEY` from `backend/.env`.
+Staff can see the visit requests and contact messages, and mark each one as
+new, in progress, done or archived. The key is kept only until the browser window closes.
 
 ## Deployment
 

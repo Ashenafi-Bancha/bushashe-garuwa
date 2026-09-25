@@ -9,17 +9,20 @@ Node.js 22.13+, Express 5, TypeScript, zod for validation, and Node's built-in S
 src/
 ├── server.ts              Starts the API, shuts down cleanly
 ├── app.ts                 Builds the Express app: security, CORS, routes, errors
+├── container.ts           Composition root: builds repositories, services and guards
 ├── config/env.ts          Settings from environment variables, checked at start-up
 ├── db/
 │   ├── database.ts        Opens SQLite and applies migrations
 │   └── migrations.ts      Database changes, in order
-├── middleware/            validate, error-handler, rate-limit, require-admin
-├── lib/                   logger, http-error, pagination
+├── http/                  Plumbing shared by every module: validate, error-handler,
+│                          rate-limit, require-admin, guards, pagination, respond
+├── lib/                   logger
 └── modules/               One folder per feature, each in four layers:
     ├── contact/           *.schema.ts      what a request may contain (zod)
     ├── visits/            *.repository.ts  all SQL for the feature
-    └── health/            *.service.ts     the feature's rules
-                           *.routes.ts      the HTTP endpoints
+    ├── admin/             *.service.ts     the feature's rules
+    ├── health/            *.routes.ts      the HTTP endpoints
+    └── shared/            schemas and helpers used by several modules
 ```
 
 Requests flow `routes → service → repository → database`. To add a feature
@@ -39,8 +42,11 @@ All responses are JSON: `{ "data": … }` on success, `{ "error": { "code", "mes
 | GET | `/api/v1/visits?upcoming=true` | staff | List visit requests |
 | PATCH | `/api/v1/contact/:id/status` | staff | `{ "status": "new" \| "in_progress" \| "done" \| "archived" }` |
 | PATCH | `/api/v1/visits/:id/status` | staff | Same statuses |
+| GET | `/api/v1/admin/session` | staff | Checks the key (used by the sign-in box) |
+| GET | `/api/v1/admin/summary` | staff | Counts for the dashboard cards |
 
 Staff endpoints need the header `Authorization: Bearer <ADMIN_API_KEY>`.
+The staff pages of the website (`/admin`) use exactly these endpoints.
 
 Example:
 

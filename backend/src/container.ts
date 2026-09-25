@@ -1,0 +1,37 @@
+import type { Env } from './config/env.js';
+import type { Database } from './db/database.js';
+import type { Guards } from './http/guards.js';
+import { rateLimit } from './http/rate-limit.js';
+import { requireAdmin } from './http/require-admin.js';
+import { contactRepository } from './modules/contact/contact.repository.js';
+import { contactService } from './modules/contact/contact.service.js';
+import { visitRepository } from './modules/visits/visit.repository.js';
+import { visitService } from './modules/visits/visit.service.js';
+
+const MINUTE = 60 * 1000;
+
+/**
+ * Composition root: the one place where the parts are built and joined.
+ * Repositories talk to the database, services hold the rules, guards protect
+ * the routes. `app.ts` only mounts routers onto what this returns.
+ */
+export function createContainer(env: Env, db: Database) {
+  const repositories = {
+    contact: contactRepository(db),
+    visits: visitRepository(db),
+  };
+
+  const services = {
+    contact: contactService(repositories.contact),
+    visits: visitService(repositories.visits),
+  };
+
+  const guards: Guards = {
+    form: [rateLimit({ max: env.FORM_RATE_LIMIT, windowMs: 15 * MINUTE })],
+    admin: [rateLimit({ max: 120, windowMs: 5 * MINUTE }), requireAdmin(env.ADMIN_API_KEY)],
+  };
+
+  return { db, env, repositories, services, guards };
+}
+
+export type Container = ReturnType<typeof createContainer>;

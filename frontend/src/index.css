@@ -502,3 +502,26 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
+
+/* ── Staff area (/admin) ── */
+.admin-btn-quiet {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 63, 53, 0.2);
+  background: #fff;
+  color: #173F35;
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 16px;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+}
+.admin-btn-quiet:hover:not(:disabled) { border-color: rgba(23, 63, 53, 0.5); }
+.admin-btn-quiet:disabled { opacity: 0.4; }
+.admin-btn-quiet.on-dark {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+.admin-btn-quiet.on-dark:hover:not(:disabled) { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.45); }

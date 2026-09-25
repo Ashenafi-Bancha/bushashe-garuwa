@@ -1,7 +1,7 @@
-import { HttpError } from '../../lib/http-error.js';
+import { HttpError } from '../../http/http-error.js';
 import { logger } from '../../lib/logger.js';
-import type { Pagination } from '../../lib/pagination.js';
-import type { RequestStatus } from '../shared.js';
+import type { Pagination } from '../../http/pagination.js';
+import type { RequestStatus } from '../shared/schemas.js';
 import type { ContactRepository } from './contact.repository.js';
 import type { CreateContactMessage } from './contact.schema.js';
 

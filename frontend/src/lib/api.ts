@@ -8,9 +8,9 @@
  */
 import type { Lang } from '../i18n/config';
 
-const API_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '') ?? '';
+export const API_BASE = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '') ?? '';
 
-export const apiEnabled = API_URL !== '';
+export const apiEnabled = API_BASE !== '';
 
 export class ApiError extends Error {
   constructor(
@@ -28,7 +28,7 @@ async function post<T>(path: string, body: unknown): Promise<T | null> {
 
   let res: Response;
   try {
-    res = await fetch(`${API_URL}${path}`, {
+    res = await fetch(`${API_BASE}${path}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(body),

@@ -1,5 +1,5 @@
 import type { RequestHandler } from 'express';
-import { HttpError } from '../lib/http-error.js';
+import { HttpError } from './http-error.js';
 
 /**
  * Limits how many requests one address can make in a time window (kept in memory,

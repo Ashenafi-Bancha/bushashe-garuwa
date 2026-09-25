@@ -1,6 +1,6 @@
 import type { RequestHandler } from 'express';
 import type { z } from 'zod';
-import { HttpError } from '../lib/http-error.js';
+import { HttpError } from './http-error.js';
 
 /**
  * Checks the request body against a schema and replaces it with the cleaned value.

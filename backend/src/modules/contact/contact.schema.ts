@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { Email, Honeypot, Language, Phone, RequestStatus, text } from '../shared.js';
+import { Email, Honeypot, Language, Phone, RequestStatus, text } from '../shared/schemas.js';
 
 /** Body of POST /api/v1/contact (the form on the Contact page) */
 export const CreateContactMessage = z.object({

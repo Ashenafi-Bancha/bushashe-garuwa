@@ -19,6 +19,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 - `frontend/src/pages/` - One component per page; `src/components/` holds shared pieces
 - `frontend/src/i18n/` - English, Amharic and Wolaytta text (`dictionaries/en.ts`, `am.ts`, `wal.ts`); every key added to `en.ts` must also go into `am.ts` and `wal.ts`
 - `frontend/src/lib/api.ts` - Client for the backend; forms send only when `VITE_API_URL` is set
+- `frontend/src/admin/` - Staff area at `/admin`, lazy-loaded and outside the public layout: `api/` (client and types), `auth/` (key session), `components/`, `views/` (SignIn, Dashboard, MessagesView, VisitsView); English only
 - `frontend/src/assets/photos.ts` - Photo registry; originals live in `frontend/photos-originals/`, optimized with `pnpm photos`
 - `frontend/src/index.css` - Global CSS entrypoint and Tailwind CSS v4 import
 - `frontend/index.html` - Vite HTML shell containing the `#root` element and loading `src/main.tsx`
@@ -27,6 +28,8 @@ Start with task-relevant files below. Only follow imports or inspect other files
 ### API (`backend/`)
 
 - `backend/src/app.ts` - Express app: middleware and route mounting
+- `backend/src/container.ts` - Composition root: repositories, services and route guards
+- `backend/src/http/` - Plumbing shared by modules: validate, error-handler, rate-limit, require-admin, guards, pagination, respond
 - `backend/src/modules/<feature>/` - `*.schema.ts` (zod), `*.repository.ts` (SQL), `*.service.ts` (rules), `*.routes.ts` (endpoints)
 - `backend/src/db/migrations.ts` - Append-only list of database changes
 - `backend/test/` - API tests (`pnpm test`)

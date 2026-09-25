@@ -1,6 +1,6 @@
 import type { Database } from '../../db/database.js';
-import type { Page, Pagination } from '../../lib/pagination.js';
-import type { RequestStatus } from '../shared.js';
+import type { Page, Pagination } from '../../http/pagination.js';
+import type { RequestStatus } from '../shared/schemas.js';
 import type { CreateVisitRequest, VisitRequest } from './visit.schema.js';
 
 type Row = {
@@ -62,6 +62,19 @@ export function visitRepository(db: Database) {
         .all(pageSize, (page - 1) * pageSize) as Row[];
       const { total } = db.prepare(`SELECT COUNT(*) AS total FROM visit_requests ${where}`).get() as { total: number };
       return { items: rows.map(toVisit), page, pageSize, total };
+    },
+
+    /** Counts for the admin dashboard */
+    stats(): { total: number; new: number; upcoming: number } {
+      const row = db
+        .prepare(
+          `SELECT COUNT(*) AS total,
+                  SUM(status = 'new') AS fresh,
+                  SUM(visit_date >= date('now') AND status != 'archived') AS upcoming
+           FROM visit_requests`,
+        )
+        .get() as { total: number; fresh: number | null; upcoming: number | null };
+      return { total: row.total, new: row.fresh ?? 0, upcoming: row.upcoming ?? 0 };
     },
 
     updateStatus(id: number, status: RequestStatus): VisitRequest | undefined {

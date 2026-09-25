@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -16,6 +16,9 @@ import About from './pages/About';
 import Gallery from './pages/Gallery';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
 import { scrollToHash, scrollToTop, startSmoothScroll, useAutoReveal } from './lib/motion';
+
+/** Staff area: loaded only when someone opens /admin, so visitors never download it */
+const AdminApp = lazy(() => import('./admin/AdminApp'));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -76,7 +79,17 @@ export default function App() {
   return (
     <I18nProvider>
       <BrowserRouter>
-        <AppLayout />
+        <Routes>
+          <Route
+            path="/admin/*"
+            element={
+              <Suspense fallback={<div className="min-h-screen bg-[#0e2820]" />}>
+                <AdminApp />
+              </Suspense>
+            }
+          />
+          <Route path="*" element={<AppLayout />} />
+        </Routes>
       </BrowserRouter>
     </I18nProvider>
   );

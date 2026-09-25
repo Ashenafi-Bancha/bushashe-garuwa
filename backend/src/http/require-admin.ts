@@ -1,6 +1,6 @@
 import { timingSafeEqual } from 'node:crypto';
 import type { RequestHandler } from 'express';
-import { HttpError } from '../lib/http-error.js';
+import { HttpError } from './http-error.js';
 
 /** Staff-only endpoints: expects `Authorization: Bearer <ADMIN_API_KEY>`. */
 export function requireAdmin(adminKey: string): RequestHandler {
