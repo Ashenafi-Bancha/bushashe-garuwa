@@ -63,8 +63,20 @@ For local development:
 ## Staff area (/admin)
 
 Open http://localhost:8443/admin and sign in with the `ADMIN_API_KEY` from `backend/.env`.
-Staff can see the visit requests and contact messages, and mark each one as
-new, in progress, done or archived. The key is kept only until the browser window closes.
+The key is kept only until the browser window closes.
+
+From there staff can:
+
+- **Visit requests** and **Messages**: read them and mark each one new, in progress, done or archived.
+- **Events**: add the cultural food evenings and other events, with the date, time, partner
+  (for example Lidya Cultural Food), photo and words in all three languages. Each event can be
+  published, shown on the home page, and opened for bookings.
+- **Event bookings**: see who reserved a place, for how many guests, and handle each one.
+- **Website text**: change headings, paragraphs, opening hours and contact details, per page and
+  per language. An empty box puts the built-in words back.
+
+The public website always has its own built-in text and falls back to it, so the pages stay
+correct even when the API is offline. Edits and events appear within a minute.
 
 ## Deployment
 

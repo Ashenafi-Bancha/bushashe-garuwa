@@ -1,5 +1,5 @@
 import { API_BASE, ApiError } from '../../lib/api';
-import type { ContactMessage, Page, RequestStatus, Summary, VisitRequest } from './types';
+import type { AdminEvent, Booking, ContactMessage, ContentEntry, Page, RequestStatus, SaveEventInput, Summary, VisitRequest } from './types';
 
 /**
  * Calls the staff endpoints of the API. Every call carries the staff key
@@ -52,4 +52,29 @@ export const adminApi = {
 
   setVisitStatus: (key: string, id: number, status: RequestStatus) =>
     request<VisitRequest>(key, `/v1/visits/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+
+  // ── Events ──
+  events: (key: string) => request<{ items: AdminEvent[] }>(key, '/v1/events/admin'),
+
+  createEvent: (key: string, input: SaveEventInput) =>
+    request<AdminEvent>(key, '/v1/events/admin', { method: 'POST', body: JSON.stringify(input) }),
+
+  updateEvent: (key: string, id: number, input: SaveEventInput) =>
+    request<AdminEvent>(key, `/v1/events/admin/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
+
+  deleteEvent: (key: string, id: number) =>
+    request<{ removed: true }>(key, `/v1/events/admin/${id}`, { method: 'DELETE' }),
+
+  // ── Bookings ──
+  bookings: (key: string, page: number, eventId?: number) =>
+    request<Page<Booking>>(key, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId })}`),
+
+  setBookingStatus: (key: string, id: number, status: RequestStatus) =>
+    request<Booking>(key, `/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+
+  // ── Website text ──
+  content: (key: string) => request<{ items: ContentEntry[] }>(key, '/v1/content/admin'),
+
+  saveContent: (key: string, entries: { key: string; lang: string; value: string }[]) =>
+    request<{ saved: ContentEntry[] }>(key, '/v1/content/admin', { method: 'PUT', body: JSON.stringify({ entries }) }),
 };

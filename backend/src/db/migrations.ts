@@ -35,4 +35,48 @@ export const migrations: { id: number; name: string; sql: string }[] = [
       CREATE INDEX idx_visit_requests_date ON visit_requests (visit_date);
     `,
   },
+  {
+    id: 2,
+    name: 'website content, events and event bookings',
+    sql: `
+      CREATE TABLE content_entries (
+        key         TEXT NOT NULL,
+        lang        TEXT NOT NULL,
+        value       TEXT NOT NULL,
+        updated_at  TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+        PRIMARY KEY (key, lang)
+      );
+
+      CREATE TABLE events (
+        id            INTEGER PRIMARY KEY AUTOINCREMENT,
+        event_date    TEXT    NOT NULL,
+        event_time    TEXT,
+        category      TEXT    NOT NULL,
+        availability  TEXT    NOT NULL DEFAULT 'open',
+        featured      INTEGER NOT NULL DEFAULT 0,
+        published     INTEGER NOT NULL DEFAULT 1,
+        photo         TEXT,
+        partner       TEXT,
+        bookable      INTEGER NOT NULL DEFAULT 0,
+        translations  TEXT    NOT NULL,
+        created_at    TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now')),
+        updated_at    TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+      );
+      CREATE INDEX idx_events_date ON events (event_date);
+
+      CREATE TABLE event_bookings (
+        id          INTEGER PRIMARY KEY AUTOINCREMENT,
+        event_id    INTEGER NOT NULL REFERENCES events (id) ON DELETE CASCADE,
+        name        TEXT    NOT NULL,
+        phone       TEXT    NOT NULL,
+        email       TEXT,
+        guests      INTEGER NOT NULL DEFAULT 1,
+        message     TEXT,
+        language    TEXT    NOT NULL DEFAULT 'en',
+        status      TEXT    NOT NULL DEFAULT 'new',
+        created_at  TEXT    NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
+      );
+      CREATE INDEX idx_event_bookings_event ON event_bookings (event_id, created_at DESC);
+    `,
+  },
 ];

@@ -6,10 +6,21 @@ import { adminApi } from '../api/adminClient';
 import type { Summary } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { Notice, StatCard } from '../components/ui';
+import BookingsView from './BookingsView';
+import ContentView from './ContentView';
+import EventsView from './EventsView';
 import MessagesView from './MessagesView';
 import VisitsView from './VisitsView';
 
-type Tab = 'visits' | 'messages';
+const TABS = [
+  { id: 'visits', label: 'Visit requests' },
+  { id: 'bookings', label: 'Event bookings' },
+  { id: 'messages', label: 'Messages' },
+  { id: 'events', label: 'Events' },
+  { id: 'content', label: 'Website text' },
+] as const;
+
+type Tab = (typeof TABS)[number]['id'];
 
 /** The staff dashboard: counts on top, then visit requests or messages. */
 export default function Dashboard() {
@@ -60,27 +71,28 @@ export default function Dashboard() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <StatCard label="Upcoming visits" value={summary?.visits.upcoming ?? '–'} hint="Today and later" />
-          <StatCard label="New requests" value={summary?.visits.new ?? '–'} hint="Not handled yet" />
-          <StatCard label="New messages" value={summary?.contact.new ?? '–'} hint="Not handled yet" />
-          <StatCard label="Messages this week" value={summary?.contact.last7Days ?? '–'} hint="Last 7 days" />
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+          <StatCard label="Upcoming events" value={summary?.events.upcoming ?? '–'} hint={`${summary?.events.drafts ?? 0} draft(s)`} />
+          <StatCard label="Guests booked" value={summary?.bookings.guestsUpcoming ?? '–'} hint="For events to come" />
+          <StatCard label="Upcoming visits" value={summary?.visits.upcoming ?? '–'} hint={`${summary?.visits.new ?? 0} not handled`} />
+          <StatCard label="New messages" value={summary?.contact.new ?? '–'} hint={`${summary?.contact.last7Days ?? 0} this week`} />
+          <StatCard label="Edited texts" value={summary?.content.edited ?? '–'} hint="Words changed from the admin" />
         </div>
 
         <div className="flex flex-wrap items-center gap-2 mb-5">
-          {(['visits', 'messages'] as Tab[]).map((name) => (
+          {TABS.map(({ id, label }) => (
             <button
-              key={name}
+              key={id}
               type="button"
-              onClick={() => setTab(name)}
-              aria-pressed={tab === name}
+              onClick={() => setTab(id)}
+              aria-pressed={tab === id}
               className={`rounded-full px-5 py-2.5 text-sm font-semibold border transition-colors ${
-                tab === name
+                tab === id
                   ? 'bg-[#0e2820] text-white border-[#0e2820]'
                   : 'border-[#0e2820]/15 text-[#0e2820]/70 hover:border-[#0e2820]/50 hover:text-[#0e2820]'
               }`}
             >
-              {name === 'visits' ? 'Visit requests' : 'Messages'}
+              {label}
             </button>
           ))}
           <button type="button" onClick={loadSummary} className="admin-btn-quiet ml-auto">
@@ -88,7 +100,11 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {tab === 'visits' ? <VisitsView /> : <MessagesView />}
+        {tab === 'visits' && <VisitsView />}
+        {tab === 'bookings' && <BookingsView />}
+        {tab === 'messages' && <MessagesView />}
+        {tab === 'events' && <EventsView />}
+        {tab === 'content' && <ContentView />}
       </main>
     </div>
   );

@@ -4,6 +4,8 @@ import { photos, type PhotoKey } from '../assets/photos';
 import Photo from '../components/Photo';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import { Tilt, useScrollY } from '../lib/motion';
+import { useSiteEvents } from '../lib/events';
+import CulturalFoodDates from '../components/CulturalFoodDates';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
   { key: 'home',      pos: 'object-center' },
@@ -127,6 +129,7 @@ export default function Home() {
   const h = t.home;
   const [heroIdx, setHeroIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+  const { events: siteEvents } = useSiteEvents();
   const [showStickyCta, setShowStickyCta] = useState(false);
 
   useEffect(() => {
@@ -450,6 +453,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ═════════ CULTURAL FOOD EVENT (dates from the admin area) ═════════ */}
+        <CulturalFoodDates events={siteEvents} />
 
         {/* ═════════ EVENTS ═════════ */}
         <section className="relative bg-[#101815] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">

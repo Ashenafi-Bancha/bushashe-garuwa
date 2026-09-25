@@ -7,6 +7,8 @@ import type { Database } from './db/database.js';
 import { errorHandler, notFound } from './http/error-handler.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
 import { contactRoutes } from './modules/contact/contact.routes.js';
+import { contentRoutes } from './modules/content/content.routes.js';
+import { eventRoutes } from './modules/events/event.routes.js';
 import { healthRoutes } from './modules/health/health.routes.js';
 import { visitRoutes } from './modules/visits/visit.routes.js';
 
@@ -17,6 +19,8 @@ import { visitRoutes } from './modules/visits/visit.routes.js';
  *   /api/health          status check
  *   /api/v1/contact      Contact page form, and the staff list of messages
  *   /api/v1/visits       Plan Your Visit form, and the staff list of requests
+ *   /api/v1/content      website text edited by staff
+ *   /api/v1/events       events, and reserving a place at one
  *   /api/v1/admin        staff dashboard: session check and counts
  */
 export function createApp(env: Env, db: Database) {
@@ -32,6 +36,8 @@ export function createApp(env: Env, db: Database) {
   const v1 = express.Router();
   v1.use('/contact', contactRoutes(services.contact, guards));
   v1.use('/visits', visitRoutes(services.visits, guards));
+  v1.use('/content', contentRoutes(services.content, guards));
+  v1.use('/events', eventRoutes(services.events, services.bookings, guards));
   v1.use('/admin', adminRoutes(repositories, guards));
 
   app.use('/api/health', healthRoutes(db));

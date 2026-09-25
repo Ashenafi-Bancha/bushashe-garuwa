@@ -4,6 +4,7 @@ import { en, type Dictionary } from './dictionaries/en';
 import { am } from './dictionaries/am';
 import { wal } from './dictionaries/wal';
 import WolayttaNotice from '../components/WolayttaNotice';
+import { applyOverrides, cachedContent, fetchContent, type ContentOverrides } from '../lib/content';
 
 const STORAGE_KEY = 'bg-lang';
 
@@ -56,6 +57,8 @@ function readStoredLang(): Lang {
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>(readStoredLang);
   const [noticeOpen, setNoticeOpen] = useState(false);
+  // text the staff edited in the admin area; empty until the API answers
+  const [overrides, setOverrides] = useState<ContentOverrides>(() => cachedContent(readStoredLang()));
 
   const applyLang = useCallback((next: Lang) => {
     setLang(next);
@@ -78,7 +81,18 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     [applyLang],
   );
 
-  const t = dictionaries[lang];
+  useEffect(() => {
+    let current = true;
+    setOverrides(cachedContent(lang));
+    void fetchContent(lang).then((entries) => {
+      if (current) setOverrides(entries);
+    });
+    return () => {
+      current = false;
+    };
+  }, [lang]);
+
+  const t = useMemo(() => applyOverrides(dictionaries[lang], overrides), [lang, overrides]);
 
   useEffect(() => {
     document.documentElement.lang = lang;

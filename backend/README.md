@@ -20,8 +20,10 @@ src/
 └── modules/               One folder per feature, each in four layers:
     ├── contact/           *.schema.ts      what a request may contain (zod)
     ├── visits/            *.repository.ts  all SQL for the feature
-    ├── admin/             *.service.ts     the feature's rules
-    ├── health/            *.routes.ts      the HTTP endpoints
+    ├── content/           *.service.ts     the feature's rules
+    ├── events/            *.routes.ts      the HTTP endpoints
+    ├── admin/             (events also holds bookings: booking.*.ts)
+    ├── health/
     └── shared/            schemas and helpers used by several modules
 ```
 
@@ -44,6 +46,14 @@ All responses are JSON: `{ "data": … }` on success, `{ "error": { "code", "mes
 | PATCH | `/api/v1/visits/:id/status` | staff | Same statuses |
 | GET | `/api/v1/admin/session` | staff | Checks the key (used by the sign-in box) |
 | GET | `/api/v1/admin/summary` | staff | Counts for the dashboard cards |
+| GET | `/api/v1/content?lang=en` | website | Text edited by staff, as `{ key: value }` |
+| GET/PUT | `/api/v1/content/admin` | staff | Read and save edited text (empty value undoes one) |
+| GET | `/api/v1/events` | website | Published events still to come |
+| GET/POST | `/api/v1/events/admin` | staff | List every event, add one |
+| PUT/DELETE | `/api/v1/events/admin/:id` | staff | Change or remove an event |
+| POST | `/api/v1/events/:id/bookings` | website | Reserve places at an event |
+| GET | `/api/v1/events/admin/bookings` | staff | Bookings, newest first (`?eventId`) |
+| PATCH | `/api/v1/events/admin/bookings/:id/status` | staff | Handle a booking |
 
 Staff endpoints need the header `Authorization: Bearer <ADMIN_API_KEY>`.
 The staff pages of the website (`/admin`) use exactly these endpoints.
