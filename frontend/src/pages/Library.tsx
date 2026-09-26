@@ -41,7 +41,7 @@ export default function Library() {
       <PageHero photo="gardens" eyebrow={lb.hero.eyebrow} title={lb.hero.title} desc={t.home.library.desc} />
 
       {/* Search + filter */}
-      <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12">
+      <section className="bg-[#17463A] mx-2 sm:mx-3 rounded-[2rem] py-12">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="relative max-w-xl mb-8">
             <input
@@ -49,7 +49,7 @@ export default function Library() {
               onChange={(e) => setQuery(e.target.value)}
               type="search"
               placeholder={lb.searchPlaceholder}
-              className="w-full rounded-full bg-white/10 border border-white/20 text-white placeholder-white/30 px-6 py-3.5 font-sans text-sm focus:outline-none focus:border-[#C99A45] transition-colors"
+              className="w-full rounded-full bg-white/10 border border-white/20 text-white placeholder-white/30 px-6 py-3.5 font-sans text-sm focus:outline-none focus:border-[#C8963C] transition-colors"
             />
           </div>
           <div className="flex flex-wrap gap-2">
@@ -59,7 +59,7 @@ export default function Library() {
                 onClick={() => setActiveFilter(f)}
                 className={`text-xs font-sans font-semibold rounded-full px-4 py-2 transition-colors border ${
                   activeFilter === f
-                    ? 'bg-[#C99A45] text-[#173F35] border-[#C99A45]'
+                    ? 'bg-[#C8963C] text-[#17463A] border-[#C8963C]'
                     : 'border-white/20 text-white/50 hover:border-white/40 hover:text-white'
                 }`}
               >
@@ -71,26 +71,26 @@ export default function Library() {
       </section>
 
       {/* Resources */}
-      <section className="bg-[#F7F5F0] py-12 sm:py-16">
+      <section className="bg-[#F4EEE2] py-12 sm:py-16">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="mb-8 text-[#1D211E]/40 font-sans text-sm">{fmt(filtered.length === 1 ? lb.resultsOne : lb.resultsMany, { count: filtered.length })}</div>
+          <div className="mb-8 text-[#1F2420]/40 font-sans text-sm">{fmt(filtered.length === 1 ? lb.resultsOne : lb.resultsMany, { count: filtered.length })}</div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
             {filtered.map((res) => (
               <div key={res.id} className="bg-white heritage-card flex flex-col">
                 {/* Book cover placeholder */}
-                <div className="aspect-[3/4] bg-gradient-to-br from-[#173F35] to-[#0e2820] flex flex-col items-center justify-center p-6 relative overflow-hidden">
+                <div className="aspect-[3/4] bg-gradient-to-br from-[#17463A] to-[#0D2A1E] flex flex-col items-center justify-center p-6 relative overflow-hidden">
                   <div className="absolute inset-0 pattern-weave"/>
                   <div className="relative z-10 text-center">
-                    <div className="text-[#C99A45]/60 text-xs font-sans tracking-wider uppercase mb-4">{lb.filters[res.cat]}</div>
+                    <div className="text-[#C8963C]/60 text-xs font-sans tracking-wider uppercase mb-4">{lb.filters[res.cat]}</div>
                     <div className="text-white font-display text-lg font-semibold leading-snug mb-4">{res.title}</div>
-                    <div className="w-12 h-px bg-[#C99A45]/40 mx-auto"/>
+                    <div className="w-12 h-px bg-[#C8963C]/40 mx-auto"/>
                   </div>
                 </div>
                 <div className="p-5 flex-1 flex flex-col">
-                  <h3 className="font-display text-base font-semibold text-[#173F35] mb-1">{res.title}</h3>
-                  <div className="text-[#1D211E]/45 text-xs font-sans mb-3">{res.author} · {res.year}</div>
-                  <p className="text-[#1D211E]/55 text-xs font-sans leading-relaxed flex-1 mb-4">{res.desc}</p>
-                  <button className="border border-[#173F35]/20 hover:border-[#173F35] text-[#173F35]/70 hover:text-[#173F35] text-xs font-sans font-semibold rounded-full py-2.5 transition-colors">
+                  <h3 className="font-display text-base font-semibold text-[#17463A] mb-1">{res.title}</h3>
+                  <div className="text-[#1F2420]/45 text-xs font-sans mb-3">{res.author} · {res.year}</div>
+                  <p className="text-[#1F2420]/55 text-xs font-sans leading-relaxed flex-1 mb-4">{res.desc}</p>
+                  <button className="border border-[#17463A]/20 hover:border-[#17463A] text-[#17463A]/70 hover:text-[#17463A] text-xs font-sans font-semibold rounded-full py-2.5 transition-colors">
                     {lb.viewResource}
                   </button>
                 </div>
@@ -98,7 +98,7 @@ export default function Library() {
             ))}
           </div>
           {filtered.length === 0 && (
-            <div className="text-center py-20 text-[#1D211E]/40 font-sans">
+            <div className="text-center py-20 text-[#1F2420]/40 font-sans">
               {lb.empty}
             </div>
           )}

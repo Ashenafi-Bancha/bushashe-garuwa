@@ -43,21 +43,21 @@ export default function Dashboard() {
   }, [loadSummary]);
 
   return (
-    <div className="min-h-screen bg-[#F7F5F0]">
-      <header className="bg-[#0e2820] text-white">
+    <div className="min-h-screen bg-[#F4EEE2]">
+      <header className="bg-[#0D2A1E] text-white">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img src={logo} alt="" className="w-10 h-10 rounded-full bg-white/90 object-contain p-0.5" />
             <div>
               <div className="font-display text-lg leading-none">Bushaashe Garuwa</div>
-              <div className="text-[#C99A45] text-[10px] tracking-[0.18em] uppercase mt-1">Staff area</div>
+              <div className="text-[#C8963C] text-[10px] tracking-[0.18em] uppercase mt-1">Staff area</div>
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <Link to="/" className="admin-btn-quiet on-dark">
+            <Link to="/" className="inline-flex admin-btn-quiet on-dark">
               View website
             </Link>
-            <button type="button" onClick={signOut} className="admin-btn-quiet on-dark">
+            <button type="button" onClick={signOut} className="inline-flex admin-btn-quiet on-dark">
               Sign out
             </button>
           </div>
@@ -71,7 +71,7 @@ export default function Dashboard() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-7 sm:mb-8 [&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1">
           <StatCard label="Upcoming events" value={summary?.events.upcoming ?? '–'} hint={`${summary?.events.drafts ?? 0} draft(s)`} />
           <StatCard label="Guests booked" value={summary?.bookings.guestsUpcoming ?? '–'} hint={`${summary?.bookings.pending ?? 0} to call back`} />
           <StatCard label="Upcoming visits" value={summary?.visits.upcoming ?? '–'} hint={`${summary?.visits.new ?? 0} not handled`} />
@@ -79,23 +79,25 @@ export default function Dashboard() {
           <StatCard label="Edited texts" value={summary?.content.edited ?? '–'} hint="Words changed from the admin" />
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 mb-5">
-          {TABS.map(({ id, label }) => (
-            <button
-              key={id}
-              type="button"
-              onClick={() => setTab(id)}
-              aria-pressed={tab === id}
-              className={`rounded-full px-5 py-2.5 text-sm font-semibold border transition-colors ${
-                tab === id
-                  ? 'bg-[#0e2820] text-white border-[#0e2820]'
-                  : 'border-[#0e2820]/15 text-[#0e2820]/70 hover:border-[#0e2820]/50 hover:text-[#0e2820]'
-              }`}
-            >
-              {label}
-            </button>
-          ))}
-          <button type="button" onClick={loadSummary} className="admin-btn-quiet ml-auto">
+        <div className="flex items-center gap-2 mb-5">
+          <div className="flex-1 min-w-0 flex gap-2 overflow-x-auto scroll-smooth-x pb-1 -mb-1">
+            {TABS.map(({ id, label }) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setTab(id)}
+                aria-pressed={tab === id}
+                className={`flex-shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold border transition-colors ${
+                  tab === id
+                    ? 'bg-[#0D2A1E] text-white border-[#0D2A1E]'
+                    : 'border-[#0D2A1E]/15 text-[#0D2A1E]/70 hover:border-[#0D2A1E]/50 hover:text-[#0D2A1E]'
+                }`}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+          <button type="button" onClick={loadSummary} className="admin-btn-quiet flex-shrink-0 hidden sm:inline-flex">
             Refresh counts
           </button>
         </div>

@@ -17,7 +17,7 @@ const LANGS: { code: Lang; name: string }[] = [
 ];
 const builtIn: Record<Lang, unknown> = { en, am, wal };
 
-const field = 'w-full rounded-xl border border-[#173F35]/20 focus:border-[#173F35] px-4 py-3 text-sm text-[#1D211E] outline-none transition-colors bg-[#F7F5F0]';
+const field = 'w-full rounded-xl border border-[#17463A]/20 focus:border-[#17463A] px-4 py-3 text-sm text-[#1F2420] outline-none transition-colors bg-[#F4EEE2]';
 
 /** Editing the words on the website, one page at a time, in each language. */
 export default function ContentView() {
@@ -92,13 +92,13 @@ export default function ContentView() {
             onClick={() => setLang(l.code)}
             aria-pressed={lang === l.code}
             className={`rounded-full px-4 py-2 text-sm font-semibold border transition-colors ${
-              lang === l.code ? 'bg-[#173F35] text-white border-[#173F35]' : 'border-[#173F35]/15 text-[#173F35]/70 hover:border-[#173F35]/50'
+              lang === l.code ? 'bg-[#17463A] text-white border-[#17463A]' : 'border-[#17463A]/15 text-[#17463A]/70 hover:border-[#17463A]/50'
             }`}
           >
             {l.name}
           </button>
         ))}
-        <button type="button" onClick={refresh} className="admin-btn-quiet ml-auto">Refresh</button>
+        <button type="button" onClick={refresh} className="inline-flex admin-btn-quiet ml-auto">Refresh</button>
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -109,7 +109,7 @@ export default function ContentView() {
             onClick={() => setGroupId(g.id)}
             aria-pressed={g.id === groupId}
             className={`rounded-full px-4 py-2 text-xs font-semibold border transition-colors ${
-              g.id === groupId ? 'bg-[#C99A45] text-[#173F35] border-[#C99A45]' : 'border-[#173F35]/15 text-[#173F35]/60 hover:border-[#173F35]/40'
+              g.id === groupId ? 'bg-[#C8963C] text-[#17463A] border-[#C8963C]' : 'border-[#17463A]/15 text-[#17463A]/60 hover:border-[#17463A]/40'
             }`}
           >
             {g.title}
@@ -123,8 +123,8 @@ export default function ContentView() {
 
       <Panel>
         <div className="mb-5">
-          <h2 className="font-display text-2xl text-[#0e2820]">{group.title}</h2>
-          <p className="text-[#1D211E]/50 text-sm mt-1">
+          <h2 className="font-display text-2xl text-[#0D2A1E]">{group.title}</h2>
+          <p className="text-[#1F2420]/50 text-sm mt-1">
             {group.note ?? 'Leave a box empty to go back to the words built into the website.'}
           </p>
         </div>
@@ -137,11 +137,11 @@ export default function ContentView() {
             return (
               <div key={f.path}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-                  <label htmlFor={`f-${f.path}`} className="text-xs font-semibold text-[#173F35]/70 tracking-wider uppercase">
+                  <label htmlFor={`f-${f.path}`} className="text-xs font-semibold text-[#17463A]/70 tracking-wider uppercase">
                     {f.label}
-                    {f.shared && <span className="text-[#1D211E]/35 normal-case tracking-normal"> · all languages</span>}
+                    {f.shared && <span className="text-[#1F2420]/35 normal-case tracking-normal"> · all languages</span>}
                   </label>
-                  {isEdited && <span className="text-[#C99A45] text-[11px] font-semibold uppercase tracking-wider">Edited</span>}
+                  {isEdited && <span className="text-[#C8963C] text-[11px] font-semibold uppercase tracking-wider">Edited</span>}
                 </div>
                 {f.multiline ? (
                   <textarea
@@ -162,23 +162,23 @@ export default function ContentView() {
                     className={field}
                   />
                 )}
-                {builtInText && <p className="text-[#1D211E]/40 text-xs mt-1.5">Built in: {builtInText}</p>}
+                {builtInText && <p className="text-[#1F2420]/40 text-xs mt-1.5">Built in: {builtInText}</p>}
               </div>
             );
           })}
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[#173F35]/10">
+        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[#17463A]/10">
           <button
             type="button"
             onClick={save}
             disabled={!changed || saving}
-            className="rounded-full bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-50"
+            className="rounded-full bg-[#C8963C] hover:bg-[#d9af65] text-[#17463A] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving…' : 'Save changes'}
           </button>
           {changed && (
-            <button type="button" onClick={() => setDrafts({})} className="admin-btn-quiet">
+            <button type="button" onClick={() => setDrafts({})} className="inline-flex admin-btn-quiet">
               Undo my changes
             </button>
           )}

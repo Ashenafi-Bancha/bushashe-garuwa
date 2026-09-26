@@ -5,19 +5,19 @@ import { BOOKING_STATUSES, BOOKING_STATUS_LABELS, STATUSES, STATUS_LABELS, type 
 
 export function StatCard({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
   return (
-    <div className="rounded-2xl bg-white border border-[#173F35]/10 p-5">
-      <div className="text-[#C99A45] text-[11px] font-semibold tracking-[0.16em] uppercase mb-2">{label}</div>
-      <div className="font-display text-4xl text-[#0e2820] leading-none">{value}</div>
-      {hint && <div className="text-[#1D211E]/45 text-xs mt-2">{hint}</div>}
+    <div className="rounded-2xl bg-white border border-[#17463A]/10 p-4 sm:p-5">
+      <div className="text-[#C8963C] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1.5 sm:mb-2">{label}</div>
+      <div className="font-display text-3xl sm:text-4xl text-[#0D2A1E] leading-none">{value}</div>
+      {hint && <div className="text-[#1F2420]/45 text-xs mt-1.5 sm:mt-2">{hint}</div>}
     </div>
   );
 }
 
 const STATUS_STYLES: Record<RequestStatus, string> = {
-  new: 'bg-[#C99A45]/15 text-[#8a6620]',
-  in_progress: 'bg-[#173F35]/10 text-[#173F35]',
+  new: 'bg-[#C8963C]/15 text-[#8a6620]',
+  in_progress: 'bg-[#17463A]/10 text-[#17463A]',
   done: 'bg-emerald-500/12 text-emerald-700',
-  archived: 'bg-[#1D211E]/8 text-[#1D211E]/55',
+  archived: 'bg-[#1F2420]/8 text-[#1F2420]/55',
 };
 
 export function StatusPill({ status }: { status: RequestStatus }) {
@@ -43,7 +43,7 @@ export function StatusSelect({
       disabled={busy}
       onChange={(e) => onChange(e.target.value as RequestStatus)}
       aria-label="Change status"
-      className="rounded-full border border-[#173F35]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#173F35] outline-none focus:border-[#173F35] disabled:opacity-50"
+      className="rounded-full border border-[#17463A]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#17463A] outline-none focus:border-[#17463A] disabled:opacity-50"
     >
       {STATUSES.map((s) => (
         <option key={s} value={s}>
@@ -55,10 +55,10 @@ export function StatusSelect({
 }
 
 const BOOKING_STATUS_STYLES: Record<BookingStatus, string> = {
-  pending: 'bg-[#C99A45]/15 text-[#8a6620]',
+  pending: 'bg-[#C8963C]/15 text-[#8a6620]',
   confirmed: 'bg-emerald-500/12 text-emerald-700',
-  attended: 'bg-[#173F35]/10 text-[#173F35]',
-  cancelled: 'bg-[#1D211E]/8 text-[#1D211E]/50',
+  attended: 'bg-[#17463A]/10 text-[#17463A]',
+  cancelled: 'bg-[#1F2420]/8 text-[#1F2420]/50',
 };
 
 /** Bookings move pending → confirmed → came, or are cancelled (which frees the places) */
@@ -77,7 +77,7 @@ export function BookingStatusSelect({
       disabled={busy}
       onChange={(e) => onChange(e.target.value as BookingStatus)}
       aria-label="Change booking status"
-      className={`rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2 focus:ring-[#173F35]/30 disabled:opacity-50 ${BOOKING_STATUS_STYLES[status]}`}
+      className={`rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2 focus:ring-[#17463A]/30 disabled:opacity-50 ${BOOKING_STATUS_STYLES[status]}`}
     >
       {BOOKING_STATUSES.map((s) => (
         <option key={s} value={s}>
@@ -103,14 +103,14 @@ export function Pager({
   if (total === 0) return null;
   return (
     <div className="flex items-center justify-between gap-4 pt-5">
-      <span className="text-[#1D211E]/50 text-xs">
+      <span className="text-[#1F2420]/50 text-xs">
         {total} in total, page {page} of {pages}
       </span>
       <div className="flex gap-2">
-        <button type="button" onClick={() => onPage(page - 1)} disabled={page <= 1} className="admin-btn-quiet">
+        <button type="button" onClick={() => onPage(page - 1)} disabled={page <= 1} className="inline-flex admin-btn-quiet">
           Previous
         </button>
-        <button type="button" onClick={() => onPage(page + 1)} disabled={page >= pages} className="admin-btn-quiet">
+        <button type="button" onClick={() => onPage(page + 1)} disabled={page >= pages} className="inline-flex admin-btn-quiet">
           Next
         </button>
       </div>
@@ -119,11 +119,11 @@ export function Pager({
 }
 
 export function Panel({ children }: { children: ReactNode }) {
-  return <div className="rounded-3xl bg-white border border-[#173F35]/10 p-5 sm:p-7">{children}</div>;
+  return <div className="rounded-3xl bg-white border border-[#17463A]/10 p-5 sm:p-7">{children}</div>;
 }
 
 export function Notice({ kind = 'info', children }: { kind?: 'info' | 'error'; children: ReactNode }) {
-  const styles = kind === 'error' ? 'bg-[#A65A3A]/10 text-[#8c4227]' : 'bg-[#173F35]/6 text-[#173F35]/70';
+  const styles = kind === 'error' ? 'bg-[#A85436]/10 text-[#8c4227]' : 'bg-[#17463A]/6 text-[#17463A]/70';
   return (
     <p role={kind === 'error' ? 'alert' : undefined} className={`rounded-2xl px-4 py-3 text-sm ${styles}`}>
       {children}

@@ -17,7 +17,7 @@ export default function VisitsView() {
 
   return (
     <div className="space-y-4">
-      <label className="inline-flex items-center gap-2 text-sm text-[#173F35] cursor-pointer">
+      <label className="inline-flex items-center gap-2 text-sm text-[#17463A] cursor-pointer">
         <input
           type="checkbox"
           checked={upcomingOnly}
@@ -25,7 +25,7 @@ export default function VisitsView() {
             setPage(1);
             setUpcomingOnly(e.target.checked);
           }}
-          className="w-4 h-4 accent-[#173F35]"
+          className="w-4 h-4 accent-[#17463A]"
         />
         Upcoming visits only
       </label>
@@ -38,20 +38,20 @@ export default function VisitsView() {
 
       {data && data.total > 0 && (
         <Panel>
-          <ul className="divide-y divide-[#173F35]/10">
+          <ul className="divide-y divide-[#17463A]/10">
             {data.items.map((visit) => (
               <li key={visit.id} className="py-5 first:pt-0 last:pb-0">
                 <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
                   <div>
-                    <h3 className="font-display text-xl text-[#0e2820]">{visit.name}</h3>
-                    <div className="text-sm text-[#1D211E]/60 mt-0.5">
-                      <a href={`tel:${visit.phone.replace(/\s/g, '')}`} className="hover:text-[#C99A45]">
+                    <h3 className="font-display text-xl text-[#0D2A1E]">{visit.name}</h3>
+                    <div className="text-sm text-[#1F2420]/60 mt-0.5">
+                      <a href={`tel:${visit.phone.replace(/\s/g, '')}`} className="hover:text-[#C8963C]">
                         {visit.phone}
                       </a>
                       {visit.email && (
                         <>
                           {' · '}
-                          <a href={`mailto:${visit.email}`} className="hover:text-[#C99A45]">
+                          <a href={`mailto:${visit.email}`} className="hover:text-[#C8963C]">
                             {visit.email}
                           </a>
                         </>
@@ -59,7 +59,7 @@ export default function VisitsView() {
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="text-xs text-[#1D211E]/40">asked {formatDateTime(visit.createdAt)}</span>
+                    <span className="text-xs text-[#1F2420]/40">asked {formatDateTime(visit.createdAt)}</span>
                     <StatusSelect
                       status={visit.status}
                       busy={busyId === visit.id}
@@ -68,13 +68,13 @@ export default function VisitsView() {
                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-2 text-sm text-[#1D211E]/75 mb-2">
+                <div className="grid sm:grid-cols-2 gap-2 text-sm text-[#1F2420]/75 mb-2">
                   <div>
-                    <span className="text-[#C99A45] text-[11px] uppercase tracking-wider block">Visit date</span>
+                    <span className="text-[#C8963C] text-[11px] uppercase tracking-wider block">Visit date</span>
                     {formatDate(visit.date)}
                   </div>
                   <div>
-                    <span className="text-[#C99A45] text-[11px] uppercase tracking-wider block">Guests</span>
+                    <span className="text-[#C8963C] text-[11px] uppercase tracking-wider block">Guests</span>
                     {visit.visitors}
                   </div>
                 </div>
@@ -82,14 +82,14 @@ export default function VisitsView() {
                 {visit.experiences.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-2">
                     {visit.experiences.map((experience) => (
-                      <span key={experience} className="rounded-full bg-[#173F35]/8 text-[#173F35] text-xs px-3 py-1">
+                      <span key={experience} className="rounded-full bg-[#17463A]/8 text-[#17463A] text-xs px-3 py-1">
                         {experience}
                       </span>
                     ))}
                   </div>
                 )}
 
-                {visit.message && <p className="text-[#1D211E]/75 leading-relaxed whitespace-pre-line">{visit.message}</p>}
+                {visit.message && <p className="text-[#1F2420]/75 leading-relaxed whitespace-pre-line">{visit.message}</p>}
               </li>
             ))}
           </ul>

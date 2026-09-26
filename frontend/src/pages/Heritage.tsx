@@ -40,22 +40,22 @@ export default function Heritage() {
       <PageHero photo="house" eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
 
       {/* Heritage categories grid */}
-      <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F4EEE2] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {categories.map((cat) => {
               const text = hg.categories[cat.id];
               return (
               <Link key={cat.id} to={cat.to} className="group bg-white overflow-hidden heritage-card">
-                <div className="img-zoom aspect-video bg-[#173F35]/10">
+                <div className="img-zoom aspect-video bg-[#17463A]/10">
                   <Photo src={'img' in cat ? cat.img : undefined} alt={text.label} label={text.label} className="w-full h-full object-cover"/>
                 </div>
                 <div className="p-5">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-[#C99A45] text-xs font-sans">{fmt(hg.itemCount, { count: cat.count })}</span>
+                    <span className="text-[#C8963C] text-xs font-sans">{fmt(hg.itemCount, { count: cat.count })}</span>
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-[#173F35] mb-2">{text.label}</h3>
-                  <p className="text-[#1D211E]/55 text-xs font-sans leading-relaxed">{text.desc}</p>
+                  <h3 className="font-display text-lg font-semibold text-[#17463A] mb-2">{text.label}</h3>
+                  <p className="text-[#1F2420]/55 text-xs font-sans leading-relaxed">{text.desc}</p>
                 </div>
               </Link>
               );
@@ -67,31 +67,31 @@ export default function Heritage() {
       {/* The two traditional houses */}
       <section className="py-12 sm:py-16 lg:py-20">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <div className="img-zoom rounded-[2rem] aspect-[4/3] bg-[#173F35]/10">
+          <div className="img-zoom rounded-[2rem] aspect-[4/3] bg-[#17463A]/10">
             <img src={photos.house} alt={t.photos.house} className="w-full h-full object-cover" loading="lazy" />
           </div>
           <div>
-            <span className="eyebrow bg-[#A65A3A]/10 text-[#A65A3A] mb-5">{hg.houses.eyebrow}</span>
-            <h2 className="font-display text-4xl sm:text-5xl text-[#0e2820] leading-[1.05] mb-5">{hg.houses.title}</h2>
-            <p className="text-[#1D211E]/65 text-base sm:text-lg leading-relaxed mb-8">{hg.houses.desc}</p>
+            <span className="eyebrow bg-[#A85436]/10 text-[#A85436] mb-5">{hg.houses.eyebrow}</span>
+            <h2 className="font-display text-4xl sm:text-5xl text-[#0D2A1E] leading-[1.05] mb-5">{hg.houses.title}</h2>
+            <p className="text-[#1F2420]/65 text-base sm:text-lg leading-relaxed mb-8">{hg.houses.desc}</p>
             <div className="grid sm:grid-cols-2 gap-4 mb-6">
               {houseNames.map((name) => (
                 <div key={name} className="heritage-card bg-white p-6">
-                  <div className="text-[#C99A45] text-[11px] font-semibold tracking-[0.12em] uppercase mb-2">{hg.houses.label}</div>
-                  <div lang="wal" className="font-display text-2xl text-[#0e2820]">{name}</div>
+                  <div className="text-[#C8963C] text-[11px] font-semibold tracking-[0.12em] uppercase mb-2">{hg.houses.label}</div>
+                  <div lang="wal" className="font-display text-2xl text-[#0D2A1E]">{name}</div>
                 </div>
               ))}
             </div>
-            <p className="text-[#1D211E]/55 text-sm leading-relaxed">{hg.houses.inside}</p>
+            <p className="text-[#1F2420]/55 text-sm leading-relaxed">{hg.houses.inside}</p>
           </div>
         </div>
       </section>
 
       {/* Trees section */}
-      <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#17463A] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
-            <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{hg.trees.eyebrow}</div>
+            <div className="text-[#C8963C] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{hg.trees.eyebrow}</div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight">{hg.trees.title}</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -101,11 +101,11 @@ export default function Heritage() {
               <button
                 key={tree.id}
                 onClick={() => setActiveTree(activeTree === i ? null : i)}
-                className="text-left rounded-2xl border border-white/10 hover:border-[#C99A45]/40 p-6 transition-all duration-300"
+                className="text-left rounded-2xl border border-white/10 hover:border-[#C8963C]/40 p-6 transition-all duration-300"
               >
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <div className="text-[#C99A45] font-display text-2xl font-semibold mb-1">{tree.wolaytta}</div>
+                    <div className="text-[#C8963C] font-display text-2xl font-semibold mb-1">{tree.wolaytta}</div>
                     <div className="text-white/70 font-sans text-sm mb-1">{text.name}</div>
                     <div className="text-white/30 font-sans text-xs italic">{tree.scientific}</div>
                   </div>
@@ -123,7 +123,7 @@ export default function Heritage() {
             })}
           </div>
           <div className="mt-10 text-center">
-            <div className="inline-flex items-center gap-3 rounded-full border border-[#C99A45]/30 text-[#C99A45] text-sm font-sans px-6 py-3">
+            <div className="inline-flex items-center gap-3 rounded-full border border-[#C8963C]/30 text-[#C8963C] text-sm font-sans px-6 py-3">
               {hg.trees.qr}
             </div>
           </div>
@@ -131,24 +131,24 @@ export default function Heritage() {
       </section>
 
       {/* Family history CTA */}
-      <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F4EEE2] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div>
-              <div className="text-[#A65A3A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{hg.family.eyebrow}</div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#173F35] leading-tight mb-6">{hg.family.title}</h2>
-              <p className="text-[#1D211E]/70 font-sans text-base leading-relaxed mb-8">
+              <div className="text-[#A85436] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{hg.family.eyebrow}</div>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#17463A] leading-tight mb-6">{hg.family.title}</h2>
+              <p className="text-[#1F2420]/70 font-sans text-base leading-relaxed mb-8">
                 {hg.family.desc}
               </p>
-              <Link to="/about#family" className="inline-flex items-center gap-2 bg-[#173F35] hover:bg-[#1e5447] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
+              <Link to="/about#family" className="inline-flex items-center gap-2 bg-[#17463A] hover:bg-[#1F5A4A] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
                 {hg.family.cta}
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {hg.family.generations.map((gen, i) => (
                 <Link key={i} to="/about#family" className="heritage-card bg-white p-6 flex items-center gap-4">
-                  <span className="w-12 h-12 rounded-full bg-[#0e2820] text-[#C99A45] flex items-center justify-center font-display text-2xl flex-shrink-0">{i + 1}</span>
-                  <span className="font-display text-2xl text-[#0e2820]">{gen}</span>
+                  <span className="w-12 h-12 rounded-full bg-[#0D2A1E] text-[#C8963C] flex items-center justify-center font-display text-2xl flex-shrink-0">{i + 1}</span>
+                  <span className="font-display text-2xl text-[#0D2A1E]">{gen}</span>
                 </Link>
               ))}
             </div>

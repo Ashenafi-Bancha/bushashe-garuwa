@@ -99,12 +99,12 @@ export default function Events() {
   const photoOf = (key?: string) => (key && key in photos ? photos[key as PhotoKey] : undefined);
   const availStyle = (kind: AvailKind, dark: boolean) =>
     kind === 'limited'
-      ? dark ? 'bg-[#A65A3A]/20 text-[#f0a584]' : 'bg-[#A65A3A]/10 text-[#A65A3A]'
+      ? dark ? 'bg-[#A85436]/20 text-[#f0a584]' : 'bg-[#A85436]/10 text-[#A85436]'
       : kind === 'full'
-        ? dark ? 'bg-white/10 text-white/50' : 'bg-[#1D211E]/8 text-[#1D211E]/50'
+        ? dark ? 'bg-white/10 text-white/50' : 'bg-[#1F2420]/8 text-[#1F2420]/50'
         : kind === 'group'
-          ? 'bg-[#173F35]/10 text-[#173F35]'
-          : dark ? 'bg-[#173F35] text-[#C99A45]' : 'bg-[#C99A45]/10 text-[#C99A45]';
+          ? 'bg-[#17463A]/10 text-[#17463A]'
+          : dark ? 'bg-[#17463A] text-[#C8963C]' : 'bg-[#C8963C]/10 text-[#C8963C]';
 
   const bookButton = (event: Shown, dark: boolean) =>
     event.live?.bookable && event.availKind !== 'full' ? (
@@ -112,7 +112,7 @@ export default function Events() {
         type="button"
         onClick={() => setBooking(event.live ?? null)}
         className={`inline-flex items-center gap-2 text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors ${
-          dark ? 'bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35]' : 'bg-[#173F35] hover:bg-[#1e5447] text-white'
+          dark ? 'bg-[#C8963C] hover:bg-[#d9af65] text-[#17463A]' : 'bg-[#17463A] hover:bg-[#1F5A4A] text-white'
         }`}
       >
         {e.live.bookCta}
@@ -121,7 +121,7 @@ export default function Events() {
       <Link
         to="/contact"
         className={`inline-flex items-center gap-2 text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors ${
-          dark ? 'bg-[#C99A45] hover:bg-[#d9af65] text-[#173F35]' : 'bg-[#173F35] hover:bg-[#1e5447] text-white'
+          dark ? 'bg-[#C8963C] hover:bg-[#d9af65] text-[#17463A]' : 'bg-[#17463A] hover:bg-[#1F5A4A] text-white'
         }`}
       >
         {t.common.reserveYourPlace}
@@ -135,7 +135,7 @@ export default function Events() {
 
       {/* Booking form, opened from any bookable event */}
       {booking && (
-        <section id="book" className="bg-[#F7F5F0] pt-12 sm:pt-16">
+        <section id="book" className="bg-[#F4EEE2] pt-12 sm:pt-16">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6">
             <EventBooking
               event={booking}
@@ -152,25 +152,25 @@ export default function Events() {
 
       {/* Featured events */}
       {featured.length > 0 && (
-        <section className="bg-[#173F35] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+        <section className="bg-[#17463A] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-            <div className="text-[#C99A45] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-10">{e.featured}</div>
+            <div className="text-[#C8963C] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-10">{e.featured}</div>
             <div className="grid md:grid-cols-2 gap-6">
               {featured.map((event) => (
-                <div key={event.key} className="group relative overflow-hidden flex flex-col rounded-3xl bg-[#0e2820]/50 border border-white/10 hover:border-[#C99A45]/30 transition-all duration-300">
-                  <div className="img-zoom aspect-[16/9] bg-[#0e2820]">
+                <div key={event.key} className="group relative overflow-hidden flex flex-col rounded-3xl bg-[#0D2A1E]/50 border border-white/10 hover:border-[#C8963C]/30 transition-all duration-300">
+                  <div className="img-zoom aspect-[16/9] bg-[#0D2A1E]">
                     <Photo src={photoOf(event.photo)} alt={event.name} label={event.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                   </div>
                   <div className="p-5 sm:p-7 flex-1 flex flex-col">
                     <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
                       <div>
-                        <span className="text-[#C99A45] text-xs font-sans tracking-wider">{event.dateLabel}</span>
+                        <span className="text-[#C8963C] text-xs font-sans tracking-wider">{event.dateLabel}</span>
                         {event.time && <span className="text-white/40 text-xs font-sans ml-3">· {event.time}</span>}
                       </div>
                       <span className={`text-xs font-sans rounded-full px-3 py-1 flex-shrink-0 ${availStyle(event.availKind, true)}`}>{event.avail}</span>
                     </div>
                     <h2 className="font-display text-xl sm:text-2xl font-semibold text-white mb-3">{event.name}</h2>
-                    {event.partner && <p className="text-[#E3B866] text-sm mb-3">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
+                    {event.partner && <p className="text-[#E7C074] text-sm mb-3">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
                     <p className="text-white/55 font-sans text-sm leading-relaxed mb-5 flex-1">{event.desc}</p>
                     <div className="flex items-center justify-end gap-4 pt-4 border-t border-white/10">{bookButton(event, true)}</div>
                   </div>
@@ -182,10 +182,10 @@ export default function Events() {
       )}
 
       {/* All events */}
-      <section className="bg-[#F7F5F0] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F4EEE2] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between gap-6 mb-10 flex-wrap">
-            <h2 className="font-display text-3xl font-semibold text-[#173F35]">{e.upcoming}</h2>
+            <h2 className="font-display text-3xl font-semibold text-[#17463A]">{e.upcoming}</h2>
             <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <button
@@ -193,8 +193,8 @@ export default function Events() {
                   onClick={() => setActiveCat(cat)}
                   className={`text-xs font-sans font-semibold rounded-full px-4 py-2 transition-colors border ${
                     activeCat === cat
-                      ? 'bg-[#173F35] text-white border-[#173F35]'
-                      : 'border-[#173F35]/20 text-[#173F35]/60 hover:border-[#173F35]/50 hover:text-[#173F35]'
+                      ? 'bg-[#17463A] text-white border-[#17463A]'
+                      : 'border-[#17463A]/20 text-[#17463A]/60 hover:border-[#17463A]/50 hover:text-[#17463A]'
                   }`}
                 >
                   {e.categories[cat]}
@@ -206,19 +206,19 @@ export default function Events() {
           <div className="space-y-4">
             {filtered.map((event) => (
               <div key={event.key} className="bg-white heritage-card flex flex-col sm:flex-row overflow-hidden">
-                <div className="img-zoom sm:w-48 flex-shrink-0 aspect-video sm:aspect-auto bg-[#173F35]/10">
+                <div className="img-zoom sm:w-48 flex-shrink-0 aspect-video sm:aspect-auto bg-[#17463A]/10">
                   <Photo src={photoOf(event.photo)} alt={event.name} label={event.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col sm:flex-row sm:items-center gap-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
-                      <span className="text-[#C99A45] text-xs font-sans tracking-wider">{event.dateLabel}</span>
-                      {event.time && <span className="text-[#1D211E]/30 text-xs font-sans">{event.time}</span>}
-                      <span className="bg-[#F7F5F0] text-[#173F35] text-[10px] font-sans font-semibold uppercase tracking-wider rounded-full px-2.5 py-0.5">{e.categories[event.cat]}</span>
+                      <span className="text-[#C8963C] text-xs font-sans tracking-wider">{event.dateLabel}</span>
+                      {event.time && <span className="text-[#1F2420]/30 text-xs font-sans">{event.time}</span>}
+                      <span className="bg-[#F4EEE2] text-[#17463A] text-[10px] font-sans font-semibold uppercase tracking-wider rounded-full px-2.5 py-0.5">{e.categories[event.cat]}</span>
                     </div>
-                    <h3 className="font-display text-xl font-semibold text-[#173F35] mb-2">{event.name}</h3>
-                    {event.partner && <p className="text-[#A65A3A] text-sm mb-2">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
-                    <p className="text-[#1D211E]/55 text-sm font-sans leading-relaxed">{event.desc}</p>
+                    <h3 className="font-display text-xl font-semibold text-[#17463A] mb-2">{event.name}</h3>
+                    {event.partner && <p className="text-[#A85436] text-sm mb-2">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
+                    <p className="text-[#1F2420]/55 text-sm font-sans leading-relaxed">{event.desc}</p>
                   </div>
                   <div className="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-3 flex-shrink-0">
                     <span className={`text-xs font-sans rounded-full px-3 py-1 ${availStyle(event.availKind, false)}`}>{event.avail}</span>

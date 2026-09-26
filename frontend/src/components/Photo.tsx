@@ -21,9 +21,9 @@ export default function Photo({ src, alt, label, className = '', ...rest }: Phot
   // three quiet variations, picked from the name, so a row of panels is not identical
   const variant = [...(label ?? alt)].reduce((sum, ch) => sum + ch.charCodeAt(0), 0) % 3;
   const wash = [
-    'bg-gradient-to-br from-[#1e5447]/70 via-transparent to-[#0a1f19]/70',
-    'bg-gradient-to-tr from-[#0a1f19]/75 via-transparent to-[#26604f]/55',
-    'bg-gradient-to-b from-[#23594a]/60 via-transparent to-[#0a1f19]/80',
+    'bg-gradient-to-br from-[#1F5A4A]/70 via-transparent to-[#071F16]/70',
+    'bg-gradient-to-tr from-[#071F16]/75 via-transparent to-[#26604f]/55',
+    'bg-gradient-to-b from-[#23594a]/60 via-transparent to-[#071F16]/80',
   ][variant];
 
   return (
@@ -34,7 +34,7 @@ export default function Photo({ src, alt, label, className = '', ...rest }: Phot
     >
       <span className={`absolute inset-0 ${wash}`} />
       {label && (
-        <span className="absolute left-4 bottom-4 right-4 text-[#E3B866]/90 font-display text-base leading-tight">
+        <span className="absolute left-4 bottom-4 right-4 text-[#E7C074]/90 font-display text-base leading-tight">
           {label}
         </span>
       )}

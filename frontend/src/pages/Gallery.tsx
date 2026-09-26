@@ -86,28 +86,28 @@ export default function Gallery() {
                 aria-pressed={filter === f}
                 className={`text-sm font-semibold rounded-full px-5 py-2.5 border transition-all duration-300 ${
                   filter === f
-                    ? 'bg-[#0e2820] text-white border-[#0e2820]'
-                    : 'border-[#0e2820]/15 text-[#0e2820]/70 hover:border-[#0e2820]/50 hover:text-[#0e2820]'
+                    ? 'bg-[#0D2A1E] text-white border-[#0D2A1E]'
+                    : 'border-[#0D2A1E]/15 text-[#0D2A1E]/70 hover:border-[#0D2A1E]/50 hover:text-[#0D2A1E]'
                 }`}
               >
                 {g.filters[f]}
               </button>
             ))}
-            <span className="ml-auto text-[#1D211E]/40 text-sm whitespace-nowrap">{fmt(g.count, { count: shown.length })}</span>
+            <span className="ml-auto text-[#1F2420]/40 text-sm whitespace-nowrap">{fmt(g.count, { count: shown.length })}</span>
           </div>
 
           {shown.length === 0 ? (
-            <p className="py-20 text-center text-[#1D211E]/40">{g.empty}</p>
+            <p className="py-20 text-center text-[#1F2420]/40">{g.empty}</p>
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[210px] lg:auto-rows-[240px] gap-3 sm:gap-4">
               {shown.map((item, i) => (
                 <Tilt key={item.key} className={`rounded-2xl sm:rounded-3xl ${filter === 'all' ? item.span : spans[i % spans.length]}`} max={5}>
                   <button
                     onClick={() => setOpenIdx(i)}
-                    className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#173F35]/8"
+                    className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#17463A]/8"
                   >
                     <img src={photos[item.key]} alt={t.photos[item.key]} loading="lazy" className="w-full h-full object-cover" />
-                    <span className="absolute inset-0 bg-gradient-to-t from-[#0a1f19]/85 via-[#0a1f19]/15 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-[#071F16]/85 via-[#071F16]/15 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5 text-left">
                       <span className="block font-display text-base sm:text-xl text-white leading-tight">{t.photoCaptions[item.key].title}</span>
                       <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{t.photoCaptions[item.key].desc}</span>
