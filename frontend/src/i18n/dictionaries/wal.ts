@@ -174,6 +174,15 @@ export const wal: DeepPartial<Dictionary> = {
       statYears: 'Years of heritage',
       sinceCentury: 'Since the 18th century',
     },
+    facts: {
+      items: [
+        { value: '18th c.', label: 'Where the story begins' },
+        { value: '4+', label: 'Generations of the family' },
+        { value: '2', label: 'Traditional Wolaita houses' },
+        { value: '1,800+', label: 'Coffee trees on the grounds' },
+        { value: '2', label: 'Cultural food evenings a month' },
+      ],
+    },
     intro: {
       eyebrow: 'Our Purpose',
       title: 'More Than a Destination',

@@ -37,7 +37,7 @@ export default function Experiences() {
               return (
               <div key={id} className="bg-white heritage-card overflow-hidden">
                 <div className="img-zoom aspect-video bg-[#173F35]/10">
-                  <Photo src={img} alt={exp.title} className="w-full h-full object-cover"/>
+                  <Photo src={img} alt={exp.title} label={exp.title} className="w-full h-full object-cover"/>
                 </div>
                 <div className="p-5 sm:p-7">
                   <div className="flex items-start justify-between gap-4 mb-4">

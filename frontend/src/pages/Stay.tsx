@@ -42,7 +42,7 @@ export default function Stay() {
               <div key={id} className={`grid lg:grid-cols-2 gap-0 overflow-hidden bg-white rounded-3xl shadow-sm ${i % 2 === 1 ? 'lg:[&>*:first-child]:order-2' : ''}`}>
                 {/* Gallery */}
                 <div className="relative aspect-[4/3] lg:aspect-auto lg:min-h-[420px] bg-[#173F35]/10">
-                  <Photo alt={room.name} className="absolute inset-0 w-full h-full object-cover" />
+                  <Photo alt={room.name} label={room.name} className="absolute inset-0 w-full h-full object-cover" />
                 </div>
 
                 {/* Info */}

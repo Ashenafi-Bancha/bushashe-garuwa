@@ -48,7 +48,7 @@ export default function Heritage() {
               return (
               <Link key={cat.id} to={cat.to} className="group bg-white overflow-hidden heritage-card">
                 <div className="img-zoom aspect-video bg-[#173F35]/10">
-                  <Photo src={'img' in cat ? cat.img : undefined} alt={text.label} className="w-full h-full object-cover"/>
+                  <Photo src={'img' in cat ? cat.img : undefined} alt={text.label} label={text.label} className="w-full h-full object-cover"/>
                 </div>
                 <div className="p-5">
                   <div className="flex items-center justify-between mb-2">

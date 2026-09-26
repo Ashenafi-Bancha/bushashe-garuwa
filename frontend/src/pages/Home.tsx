@@ -41,11 +41,6 @@ const experiences = [
   { id: 'photography', img: photos.gardens, to: '/experiences' },
 ] as const;
 
-const events = [
-  { id: 'food', availKind: 'limited' },
-  { id: 'harvest', availKind: 'open' },
-] as const;
-
 const rooms = ['standard', 'family', 'heritage'] as const;
 
 const facilities = ['meetingHall', 'zoo', 'pool', 'orchard', 'horses', 'crocodile', 'fish', 'guesthouse', 'restaurant'] as const;
@@ -174,8 +169,11 @@ export default function Home() {
             />
           ))}
           </div>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1f19]/55 via-[#0a1f19]/10 to-[#0a1f19]"/>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f19]/70 via-[#0a1f19]/10 to-transparent"/>
+          {/* header stays readable over a bright sky */}
+          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0a1f19]/70 to-transparent" />
+          {/* the words sit on this: heavier on phones, where the photo is closest to the text */}
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a1f19] via-[#0a1f19]/75 to-[#0a1f19]/25 sm:via-[#0a1f19]/45 sm:to-transparent" />
+          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#0a1f19]/80 via-[#0a1f19]/20 to-transparent" />
 
           <div
             className="relative z-10 h-full max-w-screen-xl mx-auto px-5 sm:px-8 flex flex-col justify-end pb-24 sm:pb-28 will-change-transform"
@@ -254,19 +252,22 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═════════ MARQUEE ═════════ */}
-        <div className="bg-[#C99A45] overflow-hidden py-4 sm:py-5" aria-hidden="true">
-          <div className="flex w-max animate-marquee">
-            {[0, 1].map((copy) => (
-              <div key={copy} className="flex items-center">
-                {[...h.intro.pillars, ...h.intro.pillars].map((p, i) => (
-                  <span key={i} className="flex items-center font-display text-2xl sm:text-3xl font-bold text-[#0e2820] tracking-tight">
-                    <span className="px-6 sm:px-8">{p}</span>
-                    <span className="w-10 h-px bg-[#0e2820]/35" />
-                  </span>
-                ))}
-              </div>
-            ))}
+        {/* ═════════ THE PLACE IN NUMBERS ═════════ */}
+        <div className="bg-[#C99A45] text-[#0e2820]">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-7 sm:py-9">
+            <ul className="grid grid-cols-2 lg:grid-cols-5 gap-y-7 gap-x-6 text-center lg:text-left">
+              {h.facts.items.map((fact, i) => (
+                <li
+                  key={fact.label}
+                  className={`lg:pl-6 ${i > 0 ? 'lg:border-l lg:border-[#0e2820]/20' : ''} ${i === 4 ? 'col-span-2 lg:col-span-1' : ''}`}
+                >
+                  <div className="font-display text-3xl sm:text-4xl leading-none">{fact.value}</div>
+                  <div className="text-[11px] sm:text-xs font-semibold tracking-[0.14em] uppercase mt-2 text-[#0e2820]/70">
+                    {fact.label}
+                  </div>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 
@@ -355,7 +356,7 @@ export default function Home() {
                     <Tilt className="h-full rounded-3xl">
                     <Link to="/heritage" className="group heritage-card bg-white flex flex-col h-full">
                       <div className="img-zoom relative aspect-[4/3] bg-[#173F35]/8">
-                        <Photo src={'img' in item ? item.img : undefined} alt={text.title} className="w-full h-full object-cover"/>
+                        <Photo src={'img' in item ? item.img : undefined} alt={text.title} label={text.title} className="w-full h-full object-cover"/>
                         <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-xs font-bold text-[#0e2820] tabular-nums">0{i + 1}</span>
                       </div>
                       <div className="p-6 flex flex-col flex-1">
@@ -439,7 +440,7 @@ export default function Home() {
                     <Tilt className="h-full rounded-3xl">
                     <Link to={exp.to} className="group heritage-card bg-white block h-full">
                       <div className="img-zoom relative aspect-[16/11] bg-[#173F35]/8">
-                        <Photo src={'img' in exp ? exp.img : undefined} alt={text.title} className="w-full h-full object-cover"/>
+                        <Photo src={'img' in exp ? exp.img : undefined} alt={text.title} label={text.title} className="w-full h-full object-cover"/>
                       </div>
                       <div className="p-6">
                         <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{text.title}</h3>
@@ -457,47 +458,6 @@ export default function Home() {
         {/* ═════════ CULTURAL FOOD EVENT (dates from the admin area) ═════════ */}
         <CulturalFoodDates events={siteEvents} />
 
-        {/* ═════════ EVENTS ═════════ */}
-        <section className="relative bg-[#101815] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
-          <div className="absolute -top-40 left-1/3 w-[40rem] h-[30rem] glow-gold opacity-60 pointer-events-none"/>
-          <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading
-              eyebrow={h.events.eyebrow}
-              title={h.events.title}
-              desc={h.events.desc}
-              dark
-              action={<TextLink to="/events" dark>{h.events.all}</TextLink>}
-            />
-            <div className="grid lg:grid-cols-2 gap-5">
-              {events.map((ev, i) => {
-                const text = h.events.items[ev.id];
-                return (
-                  <FadeSection key={ev.id} delay={i * 100}>
-                    <Tilt className="h-full rounded-3xl" max={4}>
-                    <div className="group grid sm:grid-cols-[0.9fr_1.1fr] rounded-3xl overflow-hidden bg-white/[0.04] border border-white/10 hover:border-[#C99A45]/40 transition-colors duration-500 h-full">
-                      <div className="img-zoom relative min-h-[220px]">
-                        <Photo src={ev.id === 'food' ? photos.food : undefined} alt={text.name} className="absolute inset-0 w-full h-full object-cover"/>
-                        <span className="absolute top-4 left-4 rounded-full bg-[#C99A45] text-[#0e2820] text-xs font-bold px-3 py-1.5">{text.date}</span>
-                      </div>
-                      <div className="p-6 sm:p-7 flex flex-col">
-                        <span className={`self-start text-[11px] font-semibold rounded-full px-3 py-1 mb-4 ${ev.availKind === 'open' ? 'bg-emerald-400/15 text-emerald-300' : 'bg-[#A65A3A]/25 text-[#f0a584]'}`}>
-                          {text.avail}
-                        </span>
-                        <h3 className="font-display text-2xl font-bold text-white mb-3">{text.name}</h3>
-                        <p className="text-white/55 text-sm leading-relaxed mb-6 flex-1">{text.desc}</p>
-                        <Link to="/events" className="btn-primary self-start text-[13px] py-3 px-5">
-                          {t.common.reserveYourPlace}
-                        </Link>
-                      </div>
-                    </div>
-                    </Tilt>
-                  </FadeSection>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
         {/* ═════════ GUESTHOUSE ═════════ */}
         <section className="py-20 sm:py-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
@@ -511,7 +471,7 @@ export default function Home() {
                       <Tilt className="h-full rounded-3xl">
                       <Link to="/stay" className="group heritage-card bg-white block h-full">
                         <div className="img-zoom relative aspect-[4/3] bg-[#173F35]/8">
-                          <Photo alt={room.name} className="w-full h-full object-cover"/>
+                          <Photo alt={room.name} label={room.name} className="w-full h-full object-cover"/>
                         </div>
                         <div className="p-6">
                           <h3 className="font-display text-xl font-bold text-[#0e2820] mb-2">{room.name}</h3>
@@ -589,7 +549,7 @@ export default function Home() {
           <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
             <FadeSection className="relative">
               <div className="rounded-[2rem] overflow-hidden aspect-[4/5] sm:aspect-[5/5] lg:aspect-[4/5]">
-                <Photo alt={h.stories.elderAlt} className="w-full h-full object-cover"/>
+                <Photo alt={h.stories.elderAlt} label={h.stories.elderAlt} className="w-full h-full object-cover"/>
               </div>
               {/* Audio player */}
               <div className="relative -mt-24 mx-4 sm:mx-8 glass rounded-3xl p-5 sm:p-6 shadow-2xl">

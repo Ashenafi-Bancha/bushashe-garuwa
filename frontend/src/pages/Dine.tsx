@@ -47,7 +47,7 @@ export default function Dine() {
             {Object.entries(dn.menu[activeMenu]).map(([id, item]) => (
               <div key={id} className="bg-white heritage-card overflow-hidden">
                 <div className="img-zoom aspect-video bg-[#173F35]/10">
-                  <Photo src={dishPhotos[id]} alt={item.name} className="w-full h-full object-cover"/>
+                  <Photo src={dishPhotos[id]} alt={item.name} label={item.name} className="w-full h-full object-cover"/>
                 </div>
                 <div className="p-5">
                   <h3 className="font-display text-lg font-semibold text-[#173F35] mb-2">{item.name}</h3>

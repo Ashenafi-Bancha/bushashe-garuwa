@@ -165,6 +165,19 @@ a, button {
   background-image: radial-gradient(rgba(23, 63, 53, 0.07) 1px, transparent 1px);
   background-size: 22px 22px;
 }
+/* Woven panel: stands in for a photo the client has not sent yet.
+   Warp and weft lines in the house colours, like the walls of a cultural house. */
+.woven-panel {
+  background-image:
+    repeating-linear-gradient(90deg, rgba(201, 154, 69, 0.11) 0 1px, transparent 1px 9px),
+    repeating-linear-gradient(0deg, rgba(201, 154, 69, 0.07) 0 1px, transparent 1px 14px),
+    radial-gradient(120% 80% at 20% 0%, rgba(30, 84, 71, 0.9), rgba(10, 31, 25, 0.95));
+}
+
+/* the weave sits at a slightly different scale in each variation */
+.woven-2 { background-size: 14px 14px, 18px 18px, 100% 100%; }
+.woven-3 { background-size: 7px 7px, 11px 11px, 100% 100%; }
+
 .pattern-diamond {
   background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 0l8 8-8 8L0 8z' fill='%23C99A45' fill-opacity='0.04'/%3E%3C/svg%3E");
 }

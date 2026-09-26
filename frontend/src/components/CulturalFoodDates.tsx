@@ -20,7 +20,8 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
   return (
     <section className="relative mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden">
       <img src={photos.food} alt={t.photos.food} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f19]/95 via-[#0a1f19]/85 to-[#0a1f19]/55" />
+      <div className="absolute inset-0 bg-[#0a1f19]/70" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#0a1f19] via-[#0a1f19]/85 to-[#0a1f19]/45" />
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
@@ -34,7 +35,7 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
           </div>
         </div>
 
-        <div className="rounded-3xl bg-white/[0.06] border border-white/12 backdrop-blur-sm p-6 sm:p-8">
+        <div className="rounded-3xl bg-[#0a1f19]/70 border border-white/12 backdrop-blur-md p-6 sm:p-8 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]">
           <div className="text-[#C99A45] text-xs font-semibold tracking-[0.16em] uppercase mb-5">{c.nextTitle}</div>
           {dates.length === 0 ? (
             <p className="text-white/60 text-sm leading-relaxed">{c.soon}</p>

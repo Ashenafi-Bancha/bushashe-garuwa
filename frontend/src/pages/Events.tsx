@@ -159,7 +159,7 @@ export default function Events() {
               {featured.map((event) => (
                 <div key={event.key} className="group relative overflow-hidden flex flex-col rounded-3xl bg-[#0e2820]/50 border border-white/10 hover:border-[#C99A45]/30 transition-all duration-300">
                   <div className="img-zoom aspect-[16/9] bg-[#0e2820]">
-                    <Photo src={photoOf(event.photo)} alt={event.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
+                    <Photo src={photoOf(event.photo)} alt={event.name} label={event.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                   </div>
                   <div className="p-5 sm:p-7 flex-1 flex flex-col">
                     <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
@@ -207,7 +207,7 @@ export default function Events() {
             {filtered.map((event) => (
               <div key={event.key} className="bg-white heritage-card flex flex-col sm:flex-row overflow-hidden">
                 <div className="img-zoom sm:w-48 flex-shrink-0 aspect-video sm:aspect-auto bg-[#173F35]/10">
-                  <Photo src={photoOf(event.photo)} alt={event.name} className="w-full h-full object-cover" />
+                  <Photo src={photoOf(event.photo)} alt={event.name} label={event.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col sm:flex-row sm:items-center gap-4">
                   <div className="flex-1 min-w-0">

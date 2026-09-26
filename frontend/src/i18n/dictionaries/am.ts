@@ -159,6 +159,15 @@ export const am: Dictionary = {
       statYears: 'ዓመታት የቆየ ቅርስ',
       sinceCentury: 'ከ18ኛው ክፍለ ዘመን ጀምሮ',
     },
+    facts: {
+      items: [
+        { value: '18ኛው ክ/ዘ', label: 'ታሪኩ የጀመረበት' },
+        { value: '4+', label: 'የቤተሰቡ ትውልዶች' },
+        { value: '2', label: 'ባህላዊ የወላይታ ቤቶች' },
+        { value: '1,800+', label: 'የቡና ዛፎች በግቢው' },
+        { value: '2', label: 'የባህላዊ ምግብ ምሽቶች በወር' },
+      ],
+    },
     intro: {
       eyebrow: 'ዓላማችን',
       title: 'ከመዳረሻነት በላይ',
