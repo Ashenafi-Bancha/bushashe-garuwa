@@ -161,6 +161,12 @@ export const en = {
       statYears: 'Years of heritage',
       sinceCentury: 'Since the 18th century',
     },
+    film: {
+      eyebrow: 'Watch',
+      title: 'A Film of Bushaashe Garuwa',
+      desc: 'A short walk through the grounds, the cultural houses and a Gifaataa celebration.',
+      play: 'Play the film',
+    },
     facts: {
       items: [
         { value: '18th c.', label: 'Where the story begins' },

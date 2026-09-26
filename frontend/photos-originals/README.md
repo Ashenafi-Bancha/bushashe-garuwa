@@ -1,3 +1,5 @@
+See **CONTENT-PLAN.md** in the main project folder for the full list of photos and film the website is waiting for.
+
 # Bushaashe Garuwa — original photos
 
 Put the **full-size original photos** here, in the folder for the part of the website they belong to.

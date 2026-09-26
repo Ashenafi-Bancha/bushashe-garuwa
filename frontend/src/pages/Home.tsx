@@ -5,6 +5,9 @@ import Photo from '../components/Photo';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import { Tilt, useScrollY } from '../lib/motion';
 import { useSiteEvents } from '../lib/events';
+import { videos } from '../assets/videos';
+import StoryFilm from '../components/StoryFilm';
+import { useHeroVideo } from '../lib/heroVideo';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
@@ -125,6 +128,7 @@ export default function Home() {
   const [heroIdx, setHeroIdx] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const { events: siteEvents } = useSiteEvents();
+  const heroVideo = useHeroVideo();
   const [showStickyCta, setShowStickyCta] = useState(false);
 
   useEffect(() => {
@@ -157,6 +161,19 @@ export default function Home() {
         {/* ═════════ HERO ═════════ */}
         <section className="relative h-[100svh] min-h-[640px] overflow-hidden bg-[#0a1f19]" aria-label={h.hero.title}>
           <div className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(0, ${scrollY * 0.35}px, 0)` }}>
+          {heroVideo && (
+            <video
+              src={videos.heroLoop}
+              poster={photos[heroSlides[0]!.key]}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="none"
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover z-[1]"
+            />
+          )}
           {heroSlides.map(({ key, pos }, i) => (
             <img
               key={key}
@@ -251,6 +268,9 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        {/* ═════════ THE FILM (hidden until one is added) ═════════ */}
+        <StoryFilm />
 
         {/* ═════════ THE PLACE IN NUMBERS ═════════ */}
         <div className="bg-[#C99A45] text-[#0e2820]">

@@ -48,6 +48,13 @@ bushaashe-garuwa/
 | `pnpm typecheck` | Check the TypeScript in both parts |
 | `pnpm test` | Run the API tests |
 | `pnpm photos` | Optimize new photos from `frontend/photos-originals` |
+| `pnpm video` | Make the web copy of the hero film from `frontend/media-originals/video` (needs ffmpeg) |
+
+## Photos and film
+
+`CONTENT-PLAN.md` lists every photo and film the website is waiting for, folder by folder,
+with how each should be taken. Where a photo is missing the page shows a woven green panel
+naming what belongs there, so nothing looks broken while you wait for the photographer.
 
 ## Connecting the website forms to the API
 

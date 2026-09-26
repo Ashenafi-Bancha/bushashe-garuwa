@@ -156,3 +156,8 @@
 *.gif                -filter -diff -merge -text
 *.webp               -filter -diff -merge -text
 *.ico                -filter -diff -merge -text
+
+# Short website films are stored the same way. Keep them small (under ~8 MB);
+# long films belong on the YouTube channel, not in this repository.
+*.mp4                -filter -diff -merge -text
+*.webm               -filter -diff -merge -text

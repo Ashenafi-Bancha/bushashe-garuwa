@@ -159,6 +159,12 @@ export const am: Dictionary = {
       statYears: 'ዓመታት የቆየ ቅርስ',
       sinceCentury: 'ከ18ኛው ክፍለ ዘመን ጀምሮ',
     },
+    film: {
+      eyebrow: 'ይመልከቱ',
+      title: 'የቡሻሼ ጋሯ ፊልም',
+      desc: 'በግቢው፣ በባህላዊ ቤቶቹና በጊፋታ በዓል ውስጥ የሚያልፍ አጭር ጉዞ።',
+      play: 'ፊልሙን ይመልከቱ',
+    },
     facts: {
       items: [
         { value: '18ኛው ክ/ዘ', label: 'ታሪኩ የጀመረበት' },
