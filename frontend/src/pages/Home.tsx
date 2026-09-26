@@ -203,8 +203,8 @@ export default function Home() {
                 <span className="eyebrow glass text-white mb-6 sm:mb-8 animate-fade-up">
                   {h.hero.eyebrow}
                 </span>
-                <WelcomeTyper className="font-display italic text-[#E7C074] text-xl sm:text-2xl lg:text-3xl mb-3 sm:mb-4 min-h-[1.6em] animate-fade-up delay-75" />
-                <h1 className="font-display text-white text-[clamp(3.25rem,9.5vw,8rem)] leading-[0.95] animate-fade-up delay-100">
+                <WelcomeTyper className="glow-welcome font-display italic text-[#E7C074] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] leading-tight mb-4 sm:mb-5 min-h-[1.5em] animate-fade-up delay-75 lg:absolute lg:top-28 xl:top-32 lg:right-0 lg:mb-0 lg:w-[46%] lg:text-left" />
+                <h1 className="glow-title font-display text-white text-[clamp(3.25rem,9.5vw,8rem)] leading-[0.95] animate-fade-up delay-100">
                   {h.hero.title}
                 </h1>
                 <p className="mt-5 sm:mt-6 font-display font-normal text-xl sm:text-3xl text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
