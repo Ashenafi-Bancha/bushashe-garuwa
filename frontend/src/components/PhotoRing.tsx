@@ -1,0 +1,184 @@
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { photos, type PhotoKey } from '../assets/photos';
+import { useI18n } from '../i18n/I18nProvider';
+
+const RING: PhotoKey[] = ['home', 'house', 'gifaataa1', 'food', 'pavilions', 'gifaataa2', 'gardens', 'zigba', 'lawn', 'enset'];
+
+/** Photograph width in the ring, per screen size */
+const cardWidth = (viewport: number) => (viewport < 640 ? 200 : viewport < 1024 ? 260 : 320);
+
+/**
+ * The grounds as a ring of photographs standing in 3D space: it turns by itself,
+ * and can be dragged or swiped. The face nearest the viewer is the one in focus.
+ *
+ * Built from CSS 3D transforms, so it costs no extra download, and it settles
+ * into a plain row of photographs when someone has asked for less motion.
+ */
+export default function PhotoRing() {
+  const { t } = useI18n();
+  const ring = t.home.ring;
+  const [angle, setAngle] = useState(0);
+  const [dragging, setDragging] = useState(false);
+  const [radius, setRadius] = useState(520);
+  const [width, setWidth] = useState(320);
+  const [stillMode, setStillMode] = useState(false);
+  const drag = useRef<{ x: number; angle: number } | null>(null);
+  const frame = useRef(0);
+  const holder = useRef<HTMLDivElement>(null);
+  const [onScreen, setOnScreen] = useState(false);
+
+  const step = 360 / RING.length;
+
+  useEffect(() => {
+    const measure = () => {
+      const viewport = window.innerWidth;
+      const w = cardWidth(viewport);
+      setWidth(w);
+      // the ring is wide enough that neighbouring photographs never overlap
+      setRadius(Math.round((w * 1.25) / (2 * Math.tan(Math.PI / RING.length))));
+    };
+    measure();
+    window.addEventListener('resize', measure);
+    setStillMode(window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+
+  // nothing turns while the ring is out of sight, or the tab is in the background
+  useEffect(() => {
+    const element = holder.current;
+    if (!element) return;
+    const watcher = new IntersectionObserver(([entry]) => setOnScreen(Boolean(entry?.isIntersecting)), { threshold: 0.15 });
+    watcher.observe(element);
+    const onVisibility = () => setOnScreen(document.visibilityState === 'visible' && Boolean(element.getBoundingClientRect().bottom > 0));
+    document.addEventListener('visibilitychange', onVisibility);
+    return () => {
+      watcher.disconnect();
+      document.removeEventListener('visibilitychange', onVisibility);
+    };
+  }, []);
+
+  // turns slowly on its own until someone takes hold of it
+  useEffect(() => {
+    if (stillMode || dragging || !onScreen) return;
+    let last = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - last;
+      last = now;
+      setAngle((current) => current - elapsed * 0.0055);
+      frame.current = requestAnimationFrame(tick);
+    };
+    frame.current = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame.current);
+  }, [stillMode, dragging, onScreen]);
+
+  const onPointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      drag.current = { x: e.clientX, angle };
+      setDragging(true);
+      (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+    },
+    [angle],
+  );
+
+  const onPointerMove = useCallback((e: React.PointerEvent) => {
+    if (!drag.current) return;
+    setAngle(drag.current.angle + (e.clientX - drag.current.x) * 0.25);
+  }, []);
+
+  const endDrag = useCallback(() => {
+    drag.current = null;
+    setDragging(false);
+  }, []);
+
+  const turn = (direction: -1 | 1) => setAngle((current) => current + direction * step);
+
+  /** Which photograph is facing the viewer, so its name can be shown */
+  const facing = useMemo(() => {
+    const normalized = ((-angle % 360) + 360) % 360;
+    return RING[Math.round(normalized / step) % RING.length]!;
+  }, [angle, step]);
+
+  if (stillMode) {
+    return (
+      <section className="py-20 sm:py-28 bg-[#0D2A1E]">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <h2 className="font-display text-4xl sm:text-5xl text-white mb-8">{ring.title}</h2>
+          <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {RING.map((key) => (
+              <img key={key} src={photos[key]} alt={t.photos[key]} loading="lazy" className="rounded-2xl aspect-[3/4] object-cover" />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="relative py-20 sm:py-28 bg-[#0D2A1E] overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C8963C]/40 to-transparent" />
+      <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[46rem] h-[26rem] glow-gold opacity-40 pointer-events-none" />
+
+      <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 text-center mb-10 sm:mb-14">
+        <span className="eyebrow bg-[#C8963C]/15 text-[#E7C074] mb-5">{ring.eyebrow}</span>
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05]">{ring.title}</h2>
+        <p className="text-white/60 mt-4 max-w-xl mx-auto">{ring.desc}</p>
+      </div>
+
+      <div
+        ref={holder}
+        className="relative select-none"
+        style={{ perspective: '1400px', height: `${Math.round(width * 1.45)}px` }}
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerCancel={endDrag}
+        onPointerLeave={endDrag}
+      >
+        <div
+          className={`absolute inset-0 mx-auto ${dragging ? '' : 'transition-transform duration-500 ease-out'}`}
+          style={{
+            width: `${width}px`,
+            transformStyle: 'preserve-3d',
+            transform: `translateZ(-${radius}px) rotateY(${angle}deg)`,
+            cursor: dragging ? 'grabbing' : 'grab',
+          }}
+        >
+          {RING.map((key, i) => (
+            <figure
+              key={key}
+              className="absolute inset-0 rounded-[1.5rem] overflow-hidden shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10"
+              style={{ transform: `rotateY(${i * step}deg) translateZ(${radius}px)` }}
+            >
+              <img
+                src={photos[key]}
+                alt={t.photos[key]}
+                loading="lazy"
+                draggable={false}
+                className="w-full h-full object-cover pointer-events-none"
+              />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#071F16]/80 via-transparent to-transparent" />
+              <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">
+                {t.photoCaptions[key].title}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
+        <div className="flex items-center gap-3">
+          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-11 h-11 rounded-full border border-white/20 text-white hover:border-[#C8963C] hover:text-[#E7C074] transition-colors">
+            ‹
+          </button>
+          <span className="text-white/70 text-sm min-w-[12rem] text-center">{t.photoCaptions[facing].title}</span>
+          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-11 h-11 rounded-full border border-white/20 text-white hover:border-[#C8963C] hover:text-[#E7C074] transition-colors">
+            ›
+          </button>
+        </div>
+        <Link to="/gallery" className="btn-outline text-white border-white/25">{ring.cta}</Link>
+      </div>
+      <p className="relative text-center text-white/35 text-xs mt-5">{ring.hint}</p>
+    </section>
+  );
+}

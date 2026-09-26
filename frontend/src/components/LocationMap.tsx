@@ -35,7 +35,7 @@ export default function LocationMap({ id = 'map' }: { id?: string }) {
           </div>
         </div>
 
-        <div className="relative rounded-[2rem] overflow-hidden bg-[#17463A]/10 shadow-[0_30px_60px_-30px_rgba(14,40,32,0.45)] h-[340px] sm:h-[440px] lg:h-[520px]">
+        <div className="relative rounded-[2rem] overflow-hidden bg-[#17463A]/10 elev-3 h-[340px] sm:h-[440px] lg:h-[520px]">
           <iframe
             src={MAP_EMBED_URL}
             title={m.frameTitle}

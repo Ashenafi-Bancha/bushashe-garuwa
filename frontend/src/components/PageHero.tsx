@@ -22,7 +22,7 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
   return (
     <section className="relative bg-[#F4EEE2] overflow-hidden lg:bg-[#0D2A1E] lg:h-[92vh] lg:min-h-[640px] lg:max-h-[980px] lg:flex lg:items-end">
       {/* Photo */}
-      <div className="relative h-[52svh] min-h-[320px] sm:h-[60svh] overflow-hidden lg:absolute lg:inset-0 lg:h-auto lg:min-h-0">
+      <div className="relative h-[52svh] min-h-[320px] sm:h-[60svh] overflow-hidden lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 photo-3d">
         <img
           src={photos[photo]}
           alt={t.photos[photo]}

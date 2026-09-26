@@ -167,6 +167,15 @@ export const en = {
       desc: 'A short walk through the grounds, the cultural houses and a Gifaataa celebration.',
       play: 'Play the film',
     },
+    ring: {
+      eyebrow: 'Step inside',
+      title: 'Turn the grounds in your hand',
+      desc: 'Drag the photographs to walk around Bushaashe Garuwa.',
+      previous: 'Turn to the previous photograph',
+      next: 'Turn to the next photograph',
+      cta: 'Open the gallery',
+      hint: 'Drag, swipe, or use the arrows',
+    },
     facts: {
       items: [
         { value: '18th c.', label: 'Where the story begins' },

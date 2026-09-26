@@ -7,6 +7,8 @@ import { Tilt, useScrollY } from '../lib/motion';
 import { useSiteEvents } from '../lib/events';
 import { videos } from '../assets/videos';
 import StoryFilm from '../components/StoryFilm';
+import PhotoRing from '../components/PhotoRing';
+import WelcomeTyper from '../components/WelcomeTyper';
 import { useHeroVideo } from '../lib/heroVideo';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 
@@ -201,6 +203,7 @@ export default function Home() {
                 <span className="eyebrow glass text-white mb-6 sm:mb-8 animate-fade-up">
                   {h.hero.eyebrow}
                 </span>
+                <WelcomeTyper className="font-display italic text-[#E7C074] text-xl sm:text-2xl lg:text-3xl mb-3 sm:mb-4 min-h-[1.6em] animate-fade-up delay-75" />
                 <h1 className="font-display text-white text-[clamp(3.25rem,9.5vw,8rem)] leading-[0.95] animate-fade-up delay-100">
                   {h.hero.title}
                 </h1>
@@ -398,6 +401,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ═════════ THE GROUNDS IN 3D ═════════ */}
+        <PhotoRing />
+
         {/* ═════════ TIMELINE ═════════ */}
         <section className="relative bg-[#0D2A1E] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
           <div className="absolute -bottom-48 -left-40 w-[40rem] h-[40rem] glow-forest pointer-events-none"/>
@@ -522,7 +528,7 @@ export default function Home() {
         <section className="pb-20 sm:pb-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <div className="grid lg:grid-cols-2 gap-6 items-stretch">
-              <FadeSection className="relative min-h-[360px] lg:min-h-[520px] rounded-[2rem] overflow-hidden img-zoom">
+              <FadeSection className="relative min-h-[360px] lg:min-h-[520px] rounded-[2rem] overflow-hidden img-zoom photo-3d">
                 <img src={photos.food} alt={t.photos.food} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
               </FadeSection>
               <FadeSection delay={120} className="rounded-[2rem] bg-[#0D2A1E] p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative overflow-hidden">

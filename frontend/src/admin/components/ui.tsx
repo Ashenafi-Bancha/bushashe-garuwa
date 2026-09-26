@@ -5,7 +5,7 @@ import { BOOKING_STATUSES, BOOKING_STATUS_LABELS, STATUSES, STATUS_LABELS, type 
 
 export function StatCard({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
   return (
-    <div className="rounded-2xl bg-white border border-[#17463A]/10 p-4 sm:p-5">
+    <div className="rounded-2xl bg-white border border-[#17463A]/10 elev-1 p-4 sm:p-5">
       <div className="text-[#C8963C] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1.5 sm:mb-2">{label}</div>
       <div className="font-display text-3xl sm:text-4xl text-[#0D2A1E] leading-none">{value}</div>
       {hint && <div className="text-[#1F2420]/45 text-xs mt-1.5 sm:mt-2">{hint}</div>}
@@ -119,7 +119,7 @@ export function Pager({
 }
 
 export function Panel({ children }: { children: ReactNode }) {
-  return <div className="rounded-3xl bg-white border border-[#17463A]/10 p-5 sm:p-7">{children}</div>;
+  return <div className="rounded-3xl bg-white border border-[#17463A]/10 elev-2 p-5 sm:p-7">{children}</div>;
 }
 
 export function Notice({ kind = 'info', children }: { kind?: 'info' | 'error'; children: ReactNode }) {
