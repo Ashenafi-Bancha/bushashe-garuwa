@@ -6,7 +6,7 @@ import { useI18n } from '../i18n/I18nProvider';
  * Globe menu listing the three languages. English is the default.
  * Wolayttatto doonaa (WOL) is marked "coming soon" until its translation is published.
  */
-export default function LanguageSwitcher({ variant }: { variant: 'bar' | 'menu' }) {
+export default function LanguageSwitcher({ variant, onDark = true }: { variant: 'bar' | 'menu'; /** white type for a clear header over a photograph */ onDark?: boolean }) {
   const { lang, setLanguage, t } = useI18n();
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -35,9 +35,13 @@ export default function LanguageSwitcher({ variant }: { variant: 'bar' | 'menu' 
         aria-label={`${t.nav.language}: ${current.name}`}
         className={`flex items-center gap-2 rounded-full font-semibold transition-colors duration-300 ${
           variant === 'bar'
-            ? 'text-[13px] px-3 py-2 text-white/80 hover:text-white hover:bg-white/10'
+            ? `text-[13px] px-3 py-2 ${
+                onDark
+                  ? 'text-white/85 hover:text-white hover:bg-white/12'
+                  : 'text-[#12150F]/70 hover:text-[#35723A] hover:bg-[#35723A]/8'
+              }`
             : 'text-sm px-4 py-2.5 text-white/80 bg-white/5 border border-white/10 hover:text-white'
-        } ${open ? 'bg-white/12 text-white' : ''}`}
+        } ${open ? (onDark ? 'bg-white/15 text-white' : 'bg-[#35723A]/10 text-[#35723A]') : ''}`}
       >
         {/* globe */}
         <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="1.6" viewBox="0 0 24 24" aria-hidden="true">

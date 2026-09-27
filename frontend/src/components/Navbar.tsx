@@ -44,19 +44,21 @@ export default function Navbar() {
     return () => lockScroll(false);
   }, [mobileOpen, searchOpen]);
 
-  const isHome = location.pathname === '/';
-  const transparent = isHome && !scrolled && !mobileOpen;
+  // clear over the photograph at the top of any page; a solid white bar once scrolling starts
+  const transparent = !scrolled && !mobileOpen;
   const isActive = (to: string) => (to === '/' ? location.pathname === '/' : location.pathname.startsWith(to));
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-4 pt-3">
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+          transparent ? 'bg-transparent' : 'bg-white/95 backdrop-blur-xl border-b border-[#12150F]/8 shadow-[0_10px_30px_-18px_rgba(22,37,15,0.35)]'
+        }`}
+      >
         <div
-          className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full pl-2 pr-2 sm:pl-3 transition-all duration-500 ${
-            transparent
-              ? 'bg-white/85 border border-[#12150F]/8 backdrop-blur-md'
-              : 'bg-white border border-[#12150F]/8 backdrop-blur-xl shadow-[0_14px_40px_-16px_rgba(22,37,15,0.35)]'
-          } ${scrolled ? 'h-14' : 'h-16'}`}
+          className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 px-3 sm:px-6 transition-all duration-500 ${
+            scrolled ? 'h-16' : 'h-20'
+          }`}
         >
           {/* ── Logo ── */}
           <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group" aria-label={t.nav.homeAria}>
@@ -68,8 +70,8 @@ export default function Navbar() {
               }`}
             />
             <div className="leading-none">
-              <div className="font-display text-[#12150F] text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap">Bushaashe Garuwa</div>
-              <div className="hidden xl:block text-[#B8863B] text-[10px] font-medium tracking-[0.18em] uppercase mt-1">Wolaita · Ethiopia</div>
+              <div className={`font-display text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${transparent ? 'text-white' : 'text-[#12150F]'}`}>Bushaashe Garuwa</div>
+              <div className={`hidden xl:block text-[10px] font-medium tracking-[0.18em] uppercase mt-1 transition-colors duration-500 ${transparent ? 'text-white/70' : 'text-[#B8863B]'}`}>Wolaita · Ethiopia</div>
             </div>
           </Link>
 
@@ -80,7 +82,13 @@ export default function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={`px-[5px] xl:px-3 py-2 rounded-full text-[11.5px] xl:text-[13px] font-medium whitespace-nowrap transition-colors duration-300 ${
-                  isActive(link.to) ? 'bg-[#35723A] text-white' : 'text-[#12150F]/70 hover:text-[#35723A] hover:bg-[#35723A]/8'
+                  isActive(link.to)
+                    ? transparent
+                      ? 'bg-white/20 text-white backdrop-blur-sm'
+                      : 'bg-[#35723A] text-white'
+                    : transparent
+                      ? 'text-white/85 hover:text-white hover:bg-white/12'
+                      : 'text-[#12150F]/70 hover:text-[#35723A] hover:bg-[#35723A]/8'
                 }`}
               >
                 {link.label}
@@ -92,7 +100,9 @@ export default function Navbar() {
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => setSearchOpen(true)}
-              className="search-toggle touch-target rounded-full text-[#12150F]/60 hover:text-[#35723A] hover:bg-[#35723A]/8"
+              className={`search-toggle touch-target rounded-full transition-colors duration-500 ${
+                transparent ? 'text-white/80 hover:text-white hover:bg-white/12' : 'text-[#12150F]/60 hover:text-[#35723A] hover:bg-[#35723A]/8'
+              }`}
               aria-label={t.nav.search}
             >
               <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -100,12 +110,14 @@ export default function Navbar() {
               </svg>
             </button>
 
-            <LanguageSwitcher variant="bar" />
+            <LanguageSwitcher variant="bar" onDark={transparent} />
 
 
             {/* Menu — phones and tablets */}
             <button
-              className={`menu-toggle touch-target rounded-full text-[#12150F]/75 hover:text-[#35723A] hover:bg-[#35723A]/8 ${mobileOpen ? 'bg-[#35723A]/10 text-[#35723A]' : ''}`}
+              className={`menu-toggle touch-target rounded-full transition-colors duration-500 ${
+                transparent ? 'text-white hover:bg-white/12' : 'text-[#12150F]/75 hover:text-[#35723A] hover:bg-[#35723A]/8'
+              } ${mobileOpen ? 'bg-[#35723A]/10 text-[#35723A]' : ''}`}
               onClick={() => setMobileOpen(!mobileOpen)}
               aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
               aria-expanded={mobileOpen}
