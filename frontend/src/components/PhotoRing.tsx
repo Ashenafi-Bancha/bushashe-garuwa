@@ -158,7 +158,7 @@ export default function PhotoRing() {
                 draggable={false}
                 className="w-full h-full object-cover pointer-events-none"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#16250F]/80 via-transparent to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/80 via-transparent to-transparent" />
               <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">
                 {t.photoCaptions[key].title}
               </figcaption>

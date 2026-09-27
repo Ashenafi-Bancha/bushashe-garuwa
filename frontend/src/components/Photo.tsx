@@ -21,9 +21,9 @@ export default function Photo({ src, alt, label, className = '', ...rest }: Phot
   // three quiet variations, picked from the name, so a row of panels is not identical
   const variant = [...(label ?? alt)].reduce((sum, ch) => sum + ch.charCodeAt(0), 0) % 3;
   const wash = [
-    'bg-gradient-to-br from-[#43884A]/70 via-transparent to-[#16250F]/70',
-    'bg-gradient-to-tr from-[#16250F]/75 via-transparent to-[#43884A]/55',
-    'bg-gradient-to-b from-[#43884A]/60 via-transparent to-[#16250F]/80',
+    'bg-gradient-to-br from-[#43884A]/70 via-transparent to-[#0A0A0B]/70',
+    'bg-gradient-to-tr from-[#0A0A0B]/75 via-transparent to-[#43884A]/55',
+    'bg-gradient-to-b from-[#43884A]/60 via-transparent to-[#0A0A0B]/80',
   ][variant];
 
   return (

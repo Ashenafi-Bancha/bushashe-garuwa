@@ -122,7 +122,7 @@ function TextLink({ to, children, dark = false }: { to: string; children: ReactN
       className={`inline-flex items-center text-sm font-semibold rounded-full px-6 py-3 border transition-all duration-500 hover:-translate-y-0.5 ${
         dark
           ? 'border-white/20 text-white hover:bg-white hover:text-[#12150F]'
-          : 'border-[#12150F]/15 text-[#12150F] hover:bg-[#2F4A2B] hover:text-white'
+          : 'border-[#12150F]/15 text-[#12150F] hover:bg-[#0B0B0C] hover:text-white'
       }`}
     >
       {children}
@@ -181,7 +181,7 @@ export default function Home() {
         {/* ═════════ HERO ═════════
             Phones: the photographs come first in their own panel, then the words
             beneath them. Desktop: the words sit on the photograph, as before. */}
-        <section className="relative bg-[#16250F] lg:h-[100svh] lg:min-h-[640px] overflow-hidden" aria-label={h.hero.title}>
+        <section className="relative bg-[#0A0A0B] lg:h-[100svh] lg:min-h-[640px] overflow-hidden" aria-label={h.hero.title}>
 
           {/* The photographs */}
           <div className="relative h-[60svh] min-h-[380px] sm:h-[62svh] overflow-hidden rounded-b-[1rem] lg:rounded-none lg:absolute lg:inset-0 lg:h-auto lg:min-h-0">
@@ -213,10 +213,10 @@ export default function Home() {
             </div>
 
             {/* header stays readable over a bright sky */}
-            <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#16250F]/70 to-transparent" />
+            <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0A0A0B]/70 to-transparent" />
             {/* the photographs sink into the dark below them on phones, and carry the words on desktop */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#16250F] via-transparent to-transparent lg:via-[#16250F]/45" />
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#16250F]/80 via-[#16250F]/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-transparent to-transparent lg:via-[#0A0A0B]/45" />
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#0A0A0B]/80 via-[#0A0A0B]/20 to-transparent" />
 
             {/* Which photograph is showing */}
             <div className="absolute bottom-5 inset-x-0 z-10 lg:bottom-7">
@@ -342,7 +342,7 @@ export default function Home() {
                 <img src={photos.gifaataa2} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy"/>
               </div>
               <div className="absolute top-6 right-3 sm:-right-6 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#2F4A2B] text-[#B8863B] flex items-center justify-center font-display text-xl font-bold">4+</div>
+                <div className="w-12 h-12 rounded-xl bg-[#0B0B0C] text-[#B8863B] flex items-center justify-center font-display text-xl font-bold">4+</div>
                 <div className="text-sm font-semibold text-[#12150F] leading-tight">{h.intro.generations}</div>
               </div>
             </FadeSection>
@@ -592,7 +592,7 @@ export default function Home() {
 
             <FadeSection delay={100} className="relative rounded-[2rem] overflow-hidden img-zoom photo-3d min-h-[340px] lg:min-h-[460px]">
               <img src={photos.gardens} alt={t.photos.gardens} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#16250F]/80 via-transparent to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/80 via-transparent to-transparent" />
               <span className="absolute left-6 right-6 bottom-6 text-white font-display text-xl sm:text-2xl leading-tight">
                 {h.reading.caption}
               </span>
@@ -613,7 +613,7 @@ export default function Home() {
                 <FadeSection key={key} className={`img-zoom group relative rounded-2xl sm:rounded-3xl bg-[#35723A]/8 ${span}`}>
                   <Link to="/gallery" className="block w-full h-full">
                     <img src={photos[key]} alt={t.photos[key]} className="w-full h-full object-cover" loading="lazy" />
-                    <span className="absolute inset-0 bg-gradient-to-t from-[#16250F]/85 via-[#16250F]/10 to-transparent" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/85 via-[#0A0A0B]/10 to-transparent" />
                     <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5">
                       <span className="block font-display text-base sm:text-xl text-white leading-tight">{t.photoCaptions[key].title}</span>
                       <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{t.photoCaptions[key].desc}</span>
@@ -629,7 +629,7 @@ export default function Home() {
         <section className="px-2 sm:px-3 pb-3">
           <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden py-24 sm:py-32 lg:py-40">
             <img src={photos.home} alt={t.photos.home} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#16250F] via-[#16250F]/70 to-[#16250F]/40"/>
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/70 to-[#0A0A0B]/40"/>
             <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
               <FadeSection>
                 <span className="eyebrow glass text-white mb-6">{h.final.eyebrow}</span>

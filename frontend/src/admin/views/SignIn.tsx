@@ -30,11 +30,11 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-[100svh] bg-[#2F4A2B] lg:grid lg:grid-cols-[1.1fr_1fr]">
+    <div className="min-h-[100svh] bg-[#0B0B0C] lg:grid lg:grid-cols-[1.1fr_1fr]">
       {/* Photo, on larger screens only */}
       <div className="relative hidden lg:block overflow-hidden">
         <img src={photos.house} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#16250F] via-[#16250F]/55 to-[#16250F]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/55 to-[#0A0A0B]/20" />
         <div className="relative h-full flex flex-col justify-end p-12 xl:p-16">
           <h2 className="font-display text-4xl xl:text-5xl text-white leading-tight max-w-md">
             Keeping Wolaita heritage, one visitor at a time

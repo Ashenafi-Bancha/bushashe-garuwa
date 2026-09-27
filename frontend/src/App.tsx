@@ -49,7 +49,7 @@ function NotFound() {
 
 function AppLayout() {
   return (
-    <div className="min-h-screen bg-[#2F4A2B] p-2 sm:p-3">
+    <div className="min-h-screen bg-[#0B0B0C] p-2 sm:p-3">
       {/* the whole site is a white sheet floating on the green canvas */}
       <div className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden">
       <ScrollToTop />
@@ -84,7 +84,7 @@ export default function App() {
           <Route
             path="/admin/*"
             element={
-              <Suspense fallback={<div className="min-h-screen bg-[#2F4A2B]" />}>
+              <Suspense fallback={<div className="min-h-screen bg-[#0B0B0C]" />}>
                 <AdminApp />
               </Suspense>
             }

@@ -62,7 +62,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
         role="listbox"
         aria-label={t.nav.language}
         inert={!open}
-        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-[#2F4A2B]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_50px_-16px_rgba(0,0,0,0.6)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
+        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-[#0B0B0C]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_50px_-16px_rgba(0,0,0,0.6)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
           open ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
         }`}
       >
@@ -89,7 +89,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
               </span>
               {soon && (
                 <span className={`text-[10px] font-semibold rounded-full px-2 py-0.5 flex-shrink-0 ${
-                  active ? 'bg-[#2F4A2B]/15 text-[#12150F]' : 'bg-[#B8863B]/20 text-[#B8863B]'
+                  active ? 'bg-[#0B0B0C]/15 text-[#12150F]' : 'bg-[#B8863B]/20 text-[#B8863B]'
                 }`}>
                   {t.nav.wolayttaSoon}
                 </span>

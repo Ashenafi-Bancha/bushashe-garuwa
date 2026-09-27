@@ -28,7 +28,7 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
       }`}
       inert={!open}
     >
-      <button className="absolute inset-0 w-full h-full bg-[#16250F]/80 backdrop-blur-sm" onClick={onClose} aria-label={texts.en.close} tabIndex={-1} />
+      <button className="absolute inset-0 w-full h-full bg-[#0A0A0B]/80 backdrop-blur-sm" onClick={onClose} aria-label={texts.en.close} tabIndex={-1} />
 
       <div
         role="dialog"

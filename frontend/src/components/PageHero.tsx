@@ -20,7 +20,7 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
   const caption = t.photoCaptions[photo];
 
   return (
-    <section className="relative bg-[#FAFAF8] overflow-hidden lg:bg-[#2F4A2B] lg:h-[92vh] lg:min-h-[640px] lg:max-h-[980px] lg:flex lg:items-end">
+    <section className="relative bg-[#FAFAF8] overflow-hidden lg:bg-[#0B0B0C] lg:h-[92vh] lg:min-h-[640px] lg:max-h-[980px] lg:flex lg:items-end">
       {/* Photo */}
       <div className="relative h-[52svh] min-h-[320px] sm:h-[60svh] overflow-hidden lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 photo-3d">
         <img
@@ -30,11 +30,11 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
           className={`absolute inset-0 w-full h-full object-cover ${pos} animate-hero-photo`}
         />
         {/* keeps the floating header readable over bright skies */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#16250F]/45 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0A0A0B]/45 to-transparent" />
         {/* desktop: shade only behind the text in the lower left */}
-        <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-[#16250F]/90 via-[#16250F]/25 via-45% to-transparent to-70%" />
-        <div className="hidden lg:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#16250F]/55 to-transparent" />
-        <span className="absolute left-4 bottom-4 sm:left-6 sm:bottom-6 lg:left-auto lg:right-8 lg:bottom-8 rounded-full bg-[#16250F]/55 backdrop-blur-md border border-white/15 px-4 py-2 text-white text-xs sm:text-sm font-medium animate-fade-up delay-500">
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-[#0A0A0B]/90 via-[#0A0A0B]/25 via-45% to-transparent to-70%" />
+        <div className="hidden lg:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0A0A0B]/55 to-transparent" />
+        <span className="absolute left-4 bottom-4 sm:left-6 sm:bottom-6 lg:left-auto lg:right-8 lg:bottom-8 rounded-full bg-[#0A0A0B]/55 backdrop-blur-md border border-white/15 px-4 py-2 text-white text-xs sm:text-sm font-medium animate-fade-up delay-500">
           {caption.title}
         </span>
       </div>

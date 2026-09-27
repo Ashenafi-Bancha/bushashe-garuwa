@@ -135,7 +135,7 @@ export default function Navbar() {
 
       {/* ── Mobile menu: drops down from the header, same glass style ── */}
       <div
-        className={`menu-panel fixed inset-0 z-40 bg-[#16250F]/40 backdrop-blur-[2px] transition-opacity duration-400 ${
+        className={`menu-panel fixed inset-0 z-40 bg-[#0A0A0B]/40 backdrop-blur-[2px] transition-opacity duration-400 ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setMobileOpen(false)}
@@ -150,7 +150,7 @@ export default function Navbar() {
         className={`menu-panel fixed inset-x-0 top-0 z-[45] px-3 sm:px-4 pt-[76px] pointer-events-none`}
       >
         <div
-          className={`mx-auto max-w-screen-xl rounded-[1.75rem] bg-[#2F4A2B]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-3 origin-top transition-all duration-500 max-h-[calc(100svh-96px)] overflow-y-auto ${
+          className={`mx-auto max-w-screen-xl rounded-[1.75rem] bg-[#0B0B0C]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-3 origin-top transition-all duration-500 max-h-[calc(100svh-96px)] overflow-y-auto ${
             mobileOpen ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-y-3 scale-[0.98]'
           }`}
           style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}

@@ -101,7 +101,7 @@ export default function About() {
 
           <div className="grid md:grid-cols-2 gap-4">
             {/* Mission */}
-            <div className="bg-[#2F4A2B] rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
+            <div className="bg-[#0B0B0C] rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 border-r border-t border-[#B8863B]/10" />
               <div className="text-[#B8863B] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
                 <div className="w-6 h-px bg-[#B8863B]" />
@@ -170,7 +170,7 @@ export default function About() {
       </section>
 
       {/* Family line: Bushaashe -> Alambo -> Garedew -> today */}
-      <section id="family" className="bg-[#2F4A2B] mx-2 sm:mx-3 rounded-[2rem] py-16 sm:py-24 overflow-hidden">
+      <section id="family" className="bg-[#0B0B0C] mx-2 sm:mx-3 rounded-[2rem] py-16 sm:py-24 overflow-hidden">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="max-w-3xl mb-12">
             <span className="eyebrow bg-white/8 text-[#B8863B] mb-5">{a.lineage.eyebrow}</span>
@@ -279,7 +279,7 @@ export default function About() {
       {/* CTA */}
       <section className="relative mx-2 sm:mx-3 rounded-[2rem] py-28 overflow-hidden">
         <img src={photos.pavilions} alt={t.photos.pavilions} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-[#2F4A2B]/82" />
+        <div className="absolute inset-0 bg-[#0B0B0C]/82" />
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4">
             {t.common.comeBePart}
