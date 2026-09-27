@@ -49,9 +49,9 @@ function NotFound() {
 
 function AppLayout() {
   return (
-    <div className="min-h-screen bg-[#0B0B0C] p-2 sm:p-3">
+    <div className="min-h-screen bg-[#0B0B0C] p-1 sm:p-1.5">
       {/* the whole site is a white sheet floating on the green canvas */}
-      <div className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden">
+      <div className="bg-white rounded-[0.9rem] sm:rounded-[1.4rem] overflow-hidden">
       <ScrollToTop />
       <Navbar />
       <Routes>
