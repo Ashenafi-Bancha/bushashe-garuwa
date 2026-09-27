@@ -44,24 +44,24 @@ export default function EventBooking({
     }
   };
 
-  const field = 'w-full rounded-xl border border-[#17463A]/20 focus:border-[#17463A] px-4 py-3 font-sans text-sm text-[#1F2420] outline-none transition-colors bg-[#F4EEE2]';
-  const label = 'block text-xs font-sans font-semibold text-[#17463A]/70 tracking-wider uppercase mb-2';
+  const field = 'w-full rounded-xl border border-[#12483A]/20 focus:border-[#12483A] px-4 py-3 font-sans text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]';
+  const label = 'block text-xs font-sans font-semibold text-[#12483A]/70 tracking-wider uppercase mb-2';
 
   if (done) {
     return (
       <div className="bg-white rounded-3xl p-8 text-center">
-        <div className="w-12 h-1 rounded-full bg-[#C8963C] mx-auto mb-6" />
-        <h3 className="font-display text-2xl text-[#17463A] mb-3">{b.thanksTitle}</h3>
-        <p className="text-[#1F2420]/60 font-sans text-sm leading-relaxed">{b.thanksText}</p>
+        <div className="w-12 h-1 rounded-full bg-[#B8863B] mx-auto mb-6" />
+        <h3 className="font-display text-2xl text-[#12483A] mb-3">{b.thanksTitle}</h3>
+        <p className="text-[#12150F]/60 font-sans text-sm leading-relaxed">{b.thanksText}</p>
         {done.reference && (
-          <div className="mt-6 inline-block rounded-2xl bg-[#F4EEE2] px-6 py-4">
-            <div className="text-[#C8963C] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1">{b.referenceLabel}</div>
-            <div className="font-display text-2xl text-[#17463A] tracking-wide">{done.reference}</div>
-            <p className="text-[#1F2420]/50 text-xs mt-2 max-w-xs">{b.referenceNote}</p>
+          <div className="mt-6 inline-block rounded-2xl bg-[#FAFAF8] px-6 py-4">
+            <div className="text-[#B8863B] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1">{b.referenceLabel}</div>
+            <div className="font-display text-2xl text-[#12483A] tracking-wide">{done.reference}</div>
+            <p className="text-[#12150F]/50 text-xs mt-2 max-w-xs">{b.referenceNote}</p>
           </div>
         )}
         {onClose && (
-          <button type="button" onClick={onClose} className="mt-6 text-[#17463A] font-sans text-sm font-semibold underline">
+          <button type="button" onClick={onClose} className="mt-6 text-[#12483A] font-sans text-sm font-semibold underline">
             {b.close}
           </button>
         )}
@@ -72,10 +72,10 @@ export default function EventBooking({
   return (
     <form onSubmit={submit} className="bg-white rounded-3xl p-6 sm:p-8 space-y-4">
       <div>
-        <h3 className="font-display text-2xl text-[#17463A]">{b.title}</h3>
-        <p className="text-[#1F2420]/55 font-sans text-sm mt-1">{eventText(event, lang).name}</p>
+        <h3 className="font-display text-2xl text-[#12483A]">{b.title}</h3>
+        <p className="text-[#12150F]/55 font-sans text-sm mt-1">{eventText(event, lang).name}</p>
         {event.placesLeft !== null && (
-          <p className="text-[#A85436] font-sans text-sm mt-2">
+          <p className="text-[#12483A] font-sans text-sm mt-2">
             {event.placesLeft === 0
               ? b.noPlaces
               : event.placesLeft === 1
@@ -120,18 +120,18 @@ export default function EventBooking({
         <textarea id="booking-message" rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${field} resize-none`} placeholder={b.messagePlaceholder} />
       </div>
 
-      {failed && <p role="alert" className="text-sm font-sans text-[#A85436]">{failed}</p>}
+      {failed && <p role="alert" className="text-sm font-sans text-[#12483A]">{failed}</p>}
 
       <div className="flex flex-wrap gap-3">
         <button
           type="submit"
           disabled={sending}
-          className="flex-1 min-w-[12rem] bg-[#C8963C] hover:bg-[#d9af65] text-[#17463A] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
+          className="flex-1 min-w-[12rem] bg-[#B8863B] hover:bg-[#d9af65] text-[#12483A] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
         >
           {sending ? b.sending : b.submit}
         </button>
         {onClose && (
-          <button type="button" onClick={onClose} className="rounded-full border border-[#17463A]/20 px-6 py-4 text-sm font-sans font-semibold text-[#17463A] hover:border-[#17463A]/50 transition-colors">
+          <button type="button" onClick={onClose} className="rounded-full border border-[#12483A]/20 px-6 py-4 text-sm font-sans font-semibold text-[#12483A] hover:border-[#12483A]/50 transition-colors">
             {b.cancel}
           </button>
         )}

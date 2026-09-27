@@ -21,20 +21,20 @@ export default function Photo({ src, alt, label, className = '', ...rest }: Phot
   // three quiet variations, picked from the name, so a row of panels is not identical
   const variant = [...(label ?? alt)].reduce((sum, ch) => sum + ch.charCodeAt(0), 0) % 3;
   const wash = [
-    'bg-gradient-to-br from-[#1F5A4A]/70 via-transparent to-[#071F16]/70',
-    'bg-gradient-to-tr from-[#071F16]/75 via-transparent to-[#26604f]/55',
-    'bg-gradient-to-b from-[#23594a]/60 via-transparent to-[#071F16]/80',
+    'bg-gradient-to-br from-[#1B5F4C]/70 via-transparent to-[#0B0F0C]/70',
+    'bg-gradient-to-tr from-[#0B0F0C]/75 via-transparent to-[#1B5F4C]/55',
+    'bg-gradient-to-b from-[#1B5F4C]/60 via-transparent to-[#0B0F0C]/80',
   ][variant];
 
   return (
     <div
       role="img"
       aria-label={`${alt} (${t.common.photoComingSoon})`}
-      className={`${className} relative overflow-hidden bg-[#143a30] woven-panel woven-${variant + 1}`}
+      className={`${className} relative overflow-hidden bg-[#12483A] woven-panel woven-${variant + 1}`}
     >
       <span className={`absolute inset-0 ${wash}`} />
       {label && (
-        <span className="absolute left-4 bottom-4 right-4 text-[#E7C074]/90 font-display text-base leading-tight">
+        <span className="absolute left-4 bottom-4 right-4 text-[#D8B778]/90 font-display text-base leading-tight">
           {label}
         </span>
       )}

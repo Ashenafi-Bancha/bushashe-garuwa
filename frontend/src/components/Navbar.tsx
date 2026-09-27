@@ -55,7 +55,7 @@ export default function Navbar() {
           className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full pl-2 pr-2 sm:pl-3 transition-all duration-500 ${
             transparent
               ? 'bg-white/10 border border-white/15 backdrop-blur-md'
-              : 'bg-[#0D2A1E]/85 border border-white/10 backdrop-blur-xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]'
+              : 'bg-[#0F2A21]/85 border border-white/10 backdrop-blur-xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]'
           } ${scrolled ? 'h-14' : 'h-16'}`}
         >
           {/* ── Logo ── */}
@@ -69,7 +69,7 @@ export default function Navbar() {
             />
             <div className="leading-none">
               <div className="font-display text-white text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap">Bushaashe Garuwa</div>
-              <div className="hidden xl:block text-[#C8963C] text-[10px] font-medium tracking-[0.18em] uppercase mt-1">Wolaita · Ethiopia</div>
+              <div className="hidden xl:block text-[#B8863B] text-[10px] font-medium tracking-[0.18em] uppercase mt-1">Wolaita · Ethiopia</div>
             </div>
           </Link>
 
@@ -123,7 +123,7 @@ export default function Navbar() {
 
       {/* ── Mobile menu: drops down from the header, same glass style ── */}
       <div
-        className={`menu-panel fixed inset-0 z-40 bg-[#071F16]/40 backdrop-blur-[2px] transition-opacity duration-400 ${
+        className={`menu-panel fixed inset-0 z-40 bg-[#0B0F0C]/40 backdrop-blur-[2px] transition-opacity duration-400 ${
           mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
         onClick={() => setMobileOpen(false)}
@@ -138,7 +138,7 @@ export default function Navbar() {
         className={`menu-panel fixed inset-x-0 top-0 z-[45] px-3 sm:px-4 pt-[76px] pointer-events-none`}
       >
         <div
-          className={`mx-auto max-w-screen-xl rounded-[1.75rem] bg-[#0D2A1E]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-3 origin-top transition-all duration-500 max-h-[calc(100svh-96px)] overflow-y-auto ${
+          className={`mx-auto max-w-screen-xl rounded-[1.75rem] bg-[#0F2A21]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-3 origin-top transition-all duration-500 max-h-[calc(100svh-96px)] overflow-y-auto ${
             mobileOpen ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-y-3 scale-[0.98]'
           }`}
           style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}
@@ -150,7 +150,7 @@ export default function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={`rounded-2xl px-4 py-3.5 text-[15px] font-medium transition-all duration-300 ${
-                  isActive(link.to) ? 'bg-[#C8963C] text-[#0D2A1E]' : 'text-white/85 hover:bg-white/10 hover:text-white'
+                  isActive(link.to) ? 'bg-[#B8863B] text-[#12150F]' : 'text-white/85 hover:bg-white/10 hover:text-white'
                 }`}
                 style={{
                   opacity: mobileOpen ? 1 : 0,
@@ -186,8 +186,8 @@ export default function Navbar() {
         />
         <div className="relative z-10 flex items-start justify-center pt-28 sm:pt-36 px-5">
           <div className="w-full max-w-2xl">
-            <div className="flex items-center gap-3 rounded-full bg-white/8 border border-white/15 pl-6 pr-2 py-2 mb-10 focus-within:border-[#C8963C]/60 transition-colors">
-              <svg className="w-5 h-5 text-[#C8963C] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+            <div className="flex items-center gap-3 rounded-full bg-white/8 border border-white/15 pl-6 pr-2 py-2 mb-10 focus-within:border-[#B8863B]/60 transition-colors">
+              <svg className="w-5 h-5 text-[#B8863B] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                 <circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2" strokeLinecap="round"/>
               </svg>
               <input
@@ -206,7 +206,7 @@ export default function Navbar() {
               {t.nav.suggestions.map((s) => (
                 <button
                   key={s}
-                  className="rounded-full border border-white/15 bg-white/5 text-white/70 hover:border-[#C8963C] hover:text-[#C8963C] text-sm px-4 py-2 transition-all duration-300 active:scale-95"
+                  className="rounded-full border border-white/15 bg-white/5 text-white/70 hover:border-[#B8863B] hover:text-[#B8863B] text-sm px-4 py-2 transition-all duration-300 active:scale-95"
                 >
                   {s}
                 </button>

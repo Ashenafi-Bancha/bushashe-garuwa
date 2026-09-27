@@ -21,8 +21,8 @@ export const emptyEvent = (): SaveEventInput => ({
   translations: { en: { name: '', desc: '' }, am: { name: '', desc: '' }, wal: { name: '', desc: '' } },
 });
 
-const field = 'w-full rounded-xl border border-[#17463A]/20 focus:border-[#17463A] px-4 py-3 text-sm text-[#1F2420] outline-none transition-colors bg-[#F4EEE2]';
-const label = 'block text-xs font-semibold text-[#17463A]/70 tracking-wider uppercase mb-2';
+const field = 'w-full rounded-xl border border-[#12483A]/20 focus:border-[#12483A] px-4 py-3 text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]';
+const label = 'block text-xs font-semibold text-[#12483A]/70 tracking-wider uppercase mb-2';
 
 /** Add or change one event, with its words in each language. */
 export default function EventForm({
@@ -62,7 +62,7 @@ export default function EventForm({
   return (
     <Panel>
       <form onSubmit={submit} className="space-y-6">
-        <h2 className="font-display text-2xl text-[#0D2A1E]">{heading}</h2>
+        <h2 className="font-display text-2xl text-[#12150F]">{heading}</h2>
         {error && <Notice kind="error">{error}</Notice>}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -109,7 +109,7 @@ export default function EventForm({
               className={field}
               placeholder="Leave empty for no limit"
             />
-            <p className="text-[#1F2420]/45 text-xs mt-1.5">
+            <p className="text-[#12150F]/45 text-xs mt-1.5">
               The website counts the places left and stops taking bookings when the event is full.
             </p>
           </div>
@@ -130,8 +130,8 @@ export default function EventForm({
             ['featured', 'Show on the home page'],
             ['bookable', 'People can reserve a place'],
           ] as const).map(([name, text]) => (
-            <label key={name} className="inline-flex items-center gap-2 text-sm text-[#17463A] cursor-pointer">
-              <input type="checkbox" checked={values[name]} onChange={(e) => set({ [name]: e.target.checked })} className="w-4 h-4 accent-[#17463A]" />
+            <label key={name} className="inline-flex items-center gap-2 text-sm text-[#12483A] cursor-pointer">
+              <input type="checkbox" checked={values[name]} onChange={(e) => set({ [name]: e.target.checked })} className="w-4 h-4 accent-[#12483A]" />
               {text}
             </label>
           ))}
@@ -139,8 +139,8 @@ export default function EventForm({
 
         <div className="space-y-5">
           {(['en', 'am', 'wal'] as const).map((lang) => (
-            <div key={lang} className="rounded-2xl border border-[#17463A]/10 p-4">
-              <div className="text-[#C8963C] text-[11px] font-semibold tracking-[0.16em] uppercase mb-3">
+            <div key={lang} className="rounded-2xl border border-[#12483A]/10 p-4">
+              <div className="text-[#B8863B] text-[11px] font-semibold tracking-[0.16em] uppercase mb-3">
                 {lang === 'en' ? 'English (required)' : lang === 'am' ? 'Amharic' : 'Wolayttatto doonaa'}
               </div>
               <div className="space-y-3">
@@ -162,11 +162,11 @@ export default function EventForm({
               </div>
             </div>
           ))}
-          <p className="text-[#1F2420]/45 text-xs">Left empty, Amharic and Wolaytta show the English words.</p>
+          <p className="text-[#12150F]/45 text-xs">Left empty, Amharic and Wolaytta show the English words.</p>
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <button type="submit" disabled={saving} className="rounded-full bg-[#C8963C] hover:bg-[#d9af65] text-[#17463A] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-60">
+          <button type="submit" disabled={saving} className="rounded-full bg-[#B8863B] hover:bg-[#d9af65] text-[#12483A] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-60">
             {saving ? 'Saving…' : 'Save event'}
           </button>
           <button type="button" onClick={onCancel} className="inline-flex admin-btn-quiet">Cancel</button>

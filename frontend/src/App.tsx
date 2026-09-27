@@ -34,12 +34,12 @@ function ScrollToTop() {
 function NotFound() {
   const { t } = useI18n();
   return (
-    <main className="pt-20 min-h-screen bg-[#F4EEE2] flex items-center justify-center">
+    <main className="pt-20 min-h-screen bg-[#FAFAF8] flex items-center justify-center">
       <div className="text-center px-6">
-        <div className="font-display text-8xl text-[#17463A]/20 mb-6">404</div>
-        <h1 className="font-display text-3xl font-semibold text-[#17463A] mb-4">{t.notFound.title}</h1>
-        <p className="text-[#1F2420]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
-        <a href="/" className="inline-flex items-center gap-2 bg-[#17463A] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#1F5A4A]">
+        <div className="font-display text-8xl text-[#12483A]/20 mb-6">404</div>
+        <h1 className="font-display text-3xl font-semibold text-[#12483A] mb-4">{t.notFound.title}</h1>
+        <p className="text-[#12150F]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
+        <a href="/" className="inline-flex items-center gap-2 bg-[#12483A] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#1B5F4C]">
           {t.notFound.button}
         </a>
       </div>
@@ -81,7 +81,7 @@ export default function App() {
           <Route
             path="/admin/*"
             element={
-              <Suspense fallback={<div className="min-h-screen bg-[#0D2A1E]" />}>
+              <Suspense fallback={<div className="min-h-screen bg-[#0F2A21]" />}>
                 <AdminApp />
               </Suspense>
             }

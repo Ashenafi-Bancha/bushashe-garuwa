@@ -84,7 +84,7 @@ export default function EventsView() {
         <button
           type="button"
           onClick={() => setEditing({ id: null, values: emptyEvent() })}
-          className="rounded-full bg-[#0D2A1E] text-white text-sm font-semibold px-5 py-2.5 hover:bg-[#1F5A4A] transition-colors"
+          className="rounded-full bg-[#0F2A21] text-white text-sm font-semibold px-5 py-2.5 hover:bg-[#1B5F4C] transition-colors"
         >
           Add an event
         </button>
@@ -101,18 +101,18 @@ export default function EventsView() {
 
       {events.length > 0 && (
         <Panel>
-          <ul className="divide-y divide-[#17463A]/10">
+          <ul className="divide-y divide-[#12483A]/10">
             {events.map((event) => (
               <li key={event.id} className="py-5 first:pt-0 last:pb-0">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <h3 className="font-display text-xl text-[#0D2A1E]">{event.translations.en.name}</h3>
-                      {!event.published && <span className="rounded-full bg-[#1F2420]/8 text-[#1F2420]/55 text-xs font-semibold px-2.5 py-0.5">Draft</span>}
-                      {event.featured && <span className="rounded-full bg-[#C8963C]/15 text-[#8a6620] text-xs font-semibold px-2.5 py-0.5">On the home page</span>}
-                      {event.date < today && <span className="rounded-full bg-[#1F2420]/8 text-[#1F2420]/55 text-xs font-semibold px-2.5 py-0.5">Past</span>}
+                      <h3 className="font-display text-xl text-[#12150F]">{event.translations.en.name}</h3>
+                      {!event.published && <span className="rounded-full bg-[#0F2A21]/8 text-[#12150F]/55 text-xs font-semibold px-2.5 py-0.5">Draft</span>}
+                      {event.featured && <span className="rounded-full bg-[#B8863B]/15 text-[#8a6620] text-xs font-semibold px-2.5 py-0.5">On the home page</span>}
+                      {event.date < today && <span className="rounded-full bg-[#0F2A21]/8 text-[#12150F]/55 text-xs font-semibold px-2.5 py-0.5">Past</span>}
                     </div>
-                    <div className="text-sm text-[#1F2420]/60">
+                    <div className="text-sm text-[#12150F]/60">
                       {formatDate(event.date)}
                       {event.time ? ` · ${event.time}` : ''} · {event.category}
                       {event.partner ? ` · with ${event.partner}` : ''}
@@ -120,9 +120,9 @@ export default function EventsView() {
                     {event.bookable && (
                       <div className="text-sm mt-1">
                         {event.capacity === null ? (
-                          <span className="text-[#1F2420]/50">Open bookings, no limit</span>
+                          <span className="text-[#12150F]/50">Open bookings, no limit</span>
                         ) : (
-                          <span className={event.placesLeft === 0 ? 'text-[#A85436] font-semibold' : 'text-[#17463A]'}>
+                          <span className={event.placesLeft === 0 ? 'text-[#12483A] font-semibold' : 'text-[#12483A]'}>
                             {event.capacity - (event.placesLeft ?? 0)} of {event.capacity} places booked
                             {event.placesLeft === 0 ? ' · full' : ` · ${event.placesLeft} left`}
                           </span>
@@ -130,7 +130,7 @@ export default function EventsView() {
                       </div>
                     )}
                     {event.translations.en.desc && (
-                      <p className="text-[#1F2420]/70 text-sm mt-2 max-w-2xl">{event.translations.en.desc}</p>
+                      <p className="text-[#12150F]/70 text-sm mt-2 max-w-2xl">{event.translations.en.desc}</p>
                     )}
                   </div>
 

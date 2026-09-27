@@ -58,7 +58,7 @@ export default function LanguageSwitcher({ variant }: { variant: 'bar' | 'menu' 
         role="listbox"
         aria-label={t.nav.language}
         inert={!open}
-        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-[#0D2A1E]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_50px_-16px_rgba(0,0,0,0.6)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
+        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-[#0F2A21]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_50px_-16px_rgba(0,0,0,0.6)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
           open ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
         }`}
       >
@@ -76,16 +76,16 @@ export default function LanguageSwitcher({ variant }: { variant: 'bar' | 'menu' 
                 setOpen(false);
               }}
               className={`w-full flex items-center justify-between gap-3 rounded-xl px-3.5 py-2.5 text-left transition-colors duration-200 ${
-                active ? 'bg-[#C8963C] text-[#0D2A1E]' : 'text-white/80 hover:bg-white/10 hover:text-white'
+                active ? 'bg-[#B8863B] text-[#12150F]' : 'text-white/80 hover:bg-white/10 hover:text-white'
               }`}
             >
               <span className="flex items-baseline gap-2.5 min-w-0">
-                <span className={`text-[11px] font-bold w-8 flex-shrink-0 ${active ? 'text-[#0D2A1E]/70' : 'text-white/40'}`}>{l.short}</span>
+                <span className={`text-[11px] font-bold w-8 flex-shrink-0 ${active ? 'text-[#12150F]/70' : 'text-white/40'}`}>{l.short}</span>
                 <span className="text-sm font-medium">{l.name}</span>
               </span>
               {soon && (
                 <span className={`text-[10px] font-semibold rounded-full px-2 py-0.5 flex-shrink-0 ${
-                  active ? 'bg-[#0D2A1E]/15 text-[#0D2A1E]' : 'bg-[#C8963C]/20 text-[#C8963C]'
+                  active ? 'bg-[#0F2A21]/15 text-[#12150F]' : 'bg-[#B8863B]/20 text-[#B8863B]'
                 }`}>
                   {t.nav.wolayttaSoon}
                 </span>

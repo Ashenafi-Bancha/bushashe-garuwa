@@ -18,20 +18,20 @@ export default function MessagesView() {
 
   return (
     <Panel>
-      <ul className="divide-y divide-[#17463A]/10">
+      <ul className="divide-y divide-[#12483A]/10">
         {data?.items.map((message) => (
           <li key={message.id} className="py-5 first:pt-0 last:pb-0">
             <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
               <div>
-                <h3 className="font-display text-xl text-[#0D2A1E]">{message.name}</h3>
-                <div className="text-sm text-[#1F2420]/60 mt-0.5">
-                  <a href={`mailto:${message.email}`} className="hover:text-[#C8963C]">
+                <h3 className="font-display text-xl text-[#12150F]">{message.name}</h3>
+                <div className="text-sm text-[#12150F]/60 mt-0.5">
+                  <a href={`mailto:${message.email}`} className="hover:text-[#B8863B]">
                     {message.email}
                   </a>
                   {message.phone && (
                     <>
                       {' · '}
-                      <a href={`tel:${message.phone.replace(/\s/g, '')}`} className="hover:text-[#C8963C]">
+                      <a href={`tel:${message.phone.replace(/\s/g, '')}`} className="hover:text-[#B8863B]">
                         {message.phone}
                       </a>
                     </>
@@ -39,7 +39,7 @@ export default function MessagesView() {
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-xs text-[#1F2420]/40">{formatDateTime(message.createdAt)}</span>
+                <span className="text-xs text-[#12150F]/40">{formatDateTime(message.createdAt)}</span>
                 <StatusSelect
                   status={message.status}
                   busy={busyId === message.id}
@@ -47,8 +47,8 @@ export default function MessagesView() {
                 />
               </div>
             </div>
-            <p className="text-[#1F2420]/75 leading-relaxed whitespace-pre-line">{message.message}</p>
-            <div className="text-[11px] uppercase tracking-wider text-[#1F2420]/35 mt-2">
+            <p className="text-[#12150F]/75 leading-relaxed whitespace-pre-line">{message.message}</p>
+            <div className="text-[11px] uppercase tracking-wider text-[#12150F]/35 mt-2">
               Written in {message.language}
             </div>
           </li>

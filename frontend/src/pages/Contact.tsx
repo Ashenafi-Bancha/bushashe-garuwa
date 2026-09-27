@@ -34,7 +34,7 @@ export default function Contact() {
       <PageHero photo="gardens" eyebrow={c.hero.eyebrow} title={c.hero.title} desc={c.intro} />
 
       {/* Contact content */}
-      <section className="bg-[#F4EEE2] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-16">
             {/* Left: info */}
@@ -43,39 +43,39 @@ export default function Contact() {
               <div className="space-y-8">
                 <div className="flex items-start gap-5">
                   <div>
-                    <div className="text-[#C8963C] text-xs font-sans tracking-wider uppercase mb-1">{t.common.phone}</div>
-                    <div className="text-[#17463A] font-sans text-base font-medium">+251 XXX XXX XXX</div>
-                    <div className="text-[#1F2420]/45 font-sans text-sm mt-0.5">{c.phoneNote}</div>
+                    <div className="text-[#B8863B] text-xs font-sans tracking-wider uppercase mb-1">{t.common.phone}</div>
+                    <div className="text-[#12483A] font-sans text-base font-medium">+251 XXX XXX XXX</div>
+                    <div className="text-[#12150F]/45 font-sans text-sm mt-0.5">{c.phoneNote}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-5">
                   <div>
-                    <div className="text-[#C8963C] text-xs font-sans tracking-wider uppercase mb-1">{t.common.email}</div>
-                    <a href="mailto:info@bushaashegaruwa.com" className="block text-[#17463A] font-sans text-base font-medium hover:text-[#C8963C] transition-colors">info@bushaashegaruwa.com</a>
-                    <div className="text-[#1F2420]/45 font-sans text-sm mt-0.5">{c.emailNote}</div>
+                    <div className="text-[#B8863B] text-xs font-sans tracking-wider uppercase mb-1">{t.common.email}</div>
+                    <a href="mailto:info@bushaashegaruwa.com" className="block text-[#12483A] font-sans text-base font-medium hover:text-[#B8863B] transition-colors">info@bushaashegaruwa.com</a>
+                    <div className="text-[#12150F]/45 font-sans text-sm mt-0.5">{c.emailNote}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-5">
                   <div>
-                    <div className="text-[#C8963C] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
-                    <a href="#map" className="block text-[#17463A] font-sans text-base font-medium hover:text-[#C8963C] transition-colors">{t.common.brand}</a>
-                    <div className="text-[#1F2420]/45 font-sans text-sm mt-0.5">{c.locationLine1}<br/>{c.locationLine2}</div>
+                    <div className="text-[#B8863B] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
+                    <a href="#map" className="block text-[#12483A] font-sans text-base font-medium hover:text-[#B8863B] transition-colors">{t.common.brand}</a>
+                    <div className="text-[#12150F]/45 font-sans text-sm mt-0.5">{c.locationLine1}<br/>{c.locationLine2}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-5">
                   <div>
-                    <div className="text-[#C8963C] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
-                    <div className="text-[#17463A] font-sans text-base font-medium">{t.common.hoursDaily}</div>
-                    <div className="text-[#1F2420]/45 font-sans text-sm mt-0.5">{t.common.eveningEvents}</div>
+                    <div className="text-[#B8863B] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
+                    <div className="text-[#12483A] font-sans text-base font-medium">{t.common.hoursDaily}</div>
+                    <div className="text-[#12150F]/45 font-sans text-sm mt-0.5">{t.common.eveningEvents}</div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-10 pt-10 border-t border-[#17463A]/10">
-                <div className="text-[#1F2420]/40 text-xs font-sans tracking-wider uppercase mb-4">{c.social}</div>
+              <div className="mt-10 pt-10 border-t border-[#12483A]/10">
+                <div className="text-[#12150F]/40 text-xs font-sans tracking-wider uppercase mb-4">{c.social}</div>
                 <SocialLinks dark={false} />
               </div>
             </div>
@@ -84,65 +84,65 @@ export default function Contact() {
             <div className="bg-white p-8 rounded-3xl shadow-sm">
               {submitted ? (
                 <div className="text-center py-16">
-                  <div className="w-12 h-1 rounded-full bg-[#C8963C] mx-auto mb-8" />
-                  <h3 className="font-display text-2xl font-semibold text-[#17463A] mb-3">{c.form.sentTitle}</h3>
-                  <p className="text-[#1F2420]/60 font-sans text-sm leading-relaxed">{c.form.sentText}</p>
+                  <div className="w-12 h-1 rounded-full bg-[#B8863B] mx-auto mb-8" />
+                  <h3 className="font-display text-2xl font-semibold text-[#12483A] mb-3">{c.form.sentTitle}</h3>
+                  <p className="text-[#12150F]/60 font-sans text-sm leading-relaxed">{c.form.sentText}</p>
                 </div>
               ) : (
                 <>
-                  <h2 className="font-display text-2xl font-semibold text-[#17463A] mb-7">{c.form.title}</h2>
+                  <h2 className="font-display text-2xl font-semibold text-[#12483A] mb-7">{c.form.title}</h2>
                   <form onSubmit={handleSubmit} className="space-y-5">
                     {/* hidden from people; spam bots fill it in */}
                     <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                     <div>
-                      <label className="block text-xs font-sans font-semibold text-[#17463A]/70 tracking-wider uppercase mb-2">{c.form.name}</label>
+                      <label className="block text-xs font-sans font-semibold text-[#12483A]/70 tracking-wider uppercase mb-2">{c.form.name}</label>
                       <input
                         required
                         type="text"
                         value={form.name}
                         onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="w-full rounded-xl border border-[#17463A]/20 focus:border-[#17463A] px-4 py-3 font-sans text-sm text-[#1F2420] outline-none transition-colors bg-[#F4EEE2]"
+                        className="w-full rounded-xl border border-[#12483A]/20 focus:border-[#12483A] px-4 py-3 font-sans text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
                         placeholder={c.form.namePlaceholder}
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-sans font-semibold text-[#17463A]/70 tracking-wider uppercase mb-2">{c.form.phone}</label>
+                      <label className="block text-xs font-sans font-semibold text-[#12483A]/70 tracking-wider uppercase mb-2">{c.form.phone}</label>
                       <input
                         type="tel"
                         value={form.phone}
                         onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="w-full rounded-xl border border-[#17463A]/20 focus:border-[#17463A] px-4 py-3 font-sans text-sm text-[#1F2420] outline-none transition-colors bg-[#F4EEE2]"
+                        className="w-full rounded-xl border border-[#12483A]/20 focus:border-[#12483A] px-4 py-3 font-sans text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
                         placeholder="+251..."
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-sans font-semibold text-[#17463A]/70 tracking-wider uppercase mb-2">{c.form.email}</label>
+                      <label className="block text-xs font-sans font-semibold text-[#12483A]/70 tracking-wider uppercase mb-2">{c.form.email}</label>
                       <input
                         required
                         type="email"
                         value={form.email}
                         onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="w-full rounded-xl border border-[#17463A]/20 focus:border-[#17463A] px-4 py-3 font-sans text-sm text-[#1F2420] outline-none transition-colors bg-[#F4EEE2]"
+                        className="w-full rounded-xl border border-[#12483A]/20 focus:border-[#12483A] px-4 py-3 font-sans text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
                         placeholder="your@email.com"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-sans font-semibold text-[#17463A]/70 tracking-wider uppercase mb-2">{c.form.message}</label>
+                      <label className="block text-xs font-sans font-semibold text-[#12483A]/70 tracking-wider uppercase mb-2">{c.form.message}</label>
                       <textarea
                         required
                         rows={5}
                         value={form.message}
                         onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        className="w-full rounded-xl border border-[#17463A]/20 focus:border-[#17463A] px-4 py-3 font-sans text-sm text-[#1F2420] outline-none transition-colors bg-[#F4EEE2] resize-none"
+                        className="w-full rounded-xl border border-[#12483A]/20 focus:border-[#12483A] px-4 py-3 font-sans text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8] resize-none"
                         placeholder={c.form.messagePlaceholder}
                       />
                     </div>
-                    {failed && <p role="alert" className="text-sm font-sans text-[#A85436]">{t.common.formError}</p>}
+                    {failed && <p role="alert" className="text-sm font-sans text-[#12483A]">{t.common.formError}</p>}
                     <button
                       type="submit"
                       disabled={sending}
                       aria-busy={sending}
-                      className="w-full bg-[#C8963C] hover:bg-[#d9af65] text-[#17463A] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
+                      className="w-full bg-[#B8863B] hover:bg-[#d9af65] text-[#12483A] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
                     >
                       {c.form.submit}
                     </button>

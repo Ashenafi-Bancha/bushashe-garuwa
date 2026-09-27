@@ -86,7 +86,7 @@ export default function WelcomeTyper({ className = '', nameClassName = 'text-whi
       <span className="sr-only">{spoken}</span>
       <span aria-hidden="true" lang={greeting.lang} className="inline">
         {render(visiblePieces(greeting.pieces, count))}
-        <span className="inline-block w-[2px] h-[0.95em] translate-y-[0.1em] ml-1 bg-[#E7C074] animate-caret" />
+        <span className="inline-block w-[2px] h-[0.95em] translate-y-[0.1em] ml-1 bg-[#D8B778] animate-caret" />
       </span>
     </p>
   );
