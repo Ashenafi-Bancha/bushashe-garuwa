@@ -160,56 +160,92 @@ export default function Home() {
     <>
       <main className="pb-24 lg:pb-0">
 
-        {/* ═════════ HERO ═════════ */}
-        <section className="relative h-[100svh] min-h-[640px] overflow-hidden bg-[#071F16]" aria-label={h.hero.title}>
-          <div className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(0, ${scrollY * 0.35}px, 0)` }}>
-          {heroVideo && (
-            <video
-              src={videos.heroLoop}
-              poster={photos[heroSlides[0]!.key]}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
-              aria-hidden="true"
-              className="absolute inset-0 w-full h-full object-cover z-[1]"
-            />
-          )}
-          {heroSlides.map(({ key, pos }, i) => (
-            <img
-              key={key}
-              src={photos[key]}
-              alt={t.photos[key]}
-              fetchPriority={i === 0 ? 'high' : 'auto'}
-              className={`absolute inset-0 w-full h-full object-cover ${pos} transition-opacity duration-[1600ms] ease-in-out ${
-                i === heroIdx ? 'opacity-100 animate-ken-burns' : 'opacity-0'
-              }`}
-            />
-          ))}
-          </div>
-          {/* header stays readable over a bright sky */}
-          <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#071F16]/70 to-transparent" />
-          {/* the words sit on this: heavier on phones, where the photo is closest to the text */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#071F16] via-[#071F16]/75 to-[#071F16]/25 sm:via-[#071F16]/45 sm:to-transparent" />
-          <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#071F16]/80 via-[#071F16]/20 to-transparent" />
+        {/* ═════════ HERO ═════════
+            Phones: the photographs come first in their own panel, then the words
+            beneath them. Desktop: the words sit on the photograph, as before. */}
+        <section className="relative bg-[#071F16] lg:h-[100svh] lg:min-h-[640px] overflow-hidden" aria-label={h.hero.title}>
 
+          {/* The photographs */}
+          <div className="relative h-[46svh] min-h-[300px] sm:h-[56svh] overflow-hidden rounded-b-[2rem] lg:rounded-none lg:absolute lg:inset-0 lg:h-auto lg:min-h-0">
+            <div className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(0, ${scrollY * 0.35}px, 0)` }}>
+              {heroVideo && (
+                <video
+                  src={videos.heroLoop}
+                  poster={photos[heroSlides[0]!.key]}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="none"
+                  aria-hidden="true"
+                  className="absolute inset-0 w-full h-full object-cover z-[1]"
+                />
+              )}
+              {heroSlides.map(({ key, pos }, i) => (
+                <img
+                  key={key}
+                  src={photos[key]}
+                  alt={t.photos[key]}
+                  fetchPriority={i === 0 ? 'high' : 'auto'}
+                  className={`absolute inset-0 w-full h-full object-cover ${pos} transition-opacity duration-[1600ms] ease-in-out ${
+                    i === heroIdx ? 'opacity-100 animate-ken-burns' : 'opacity-0'
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* header stays readable over a bright sky */}
+            <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#071F16]/70 to-transparent" />
+            {/* the photographs sink into the dark below them on phones, and carry the words on desktop */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#071F16] via-transparent to-transparent lg:via-[#071F16]/45" />
+            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#071F16]/80 via-[#071F16]/20 to-transparent" />
+
+            {/* Which photograph is showing */}
+            <div className="absolute bottom-5 inset-x-0 z-10 lg:bottom-7">
+              <div className="max-w-screen-xl mx-auto px-5 sm:px-8 flex items-center justify-between">
+                <div className="flex gap-2">
+                  {heroSlides.map((s, i) => (
+                    // the bar stays thin; the padding gives a finger something to hit
+                    <button
+                      key={s.key}
+                      onClick={() => setHeroIdx(i)}
+                      className="hit-slim group w-10 sm:w-14 py-4 -my-4"
+                      aria-label={fmt(h.hero.slide, { n: i + 1 })}
+                      aria-current={i === heroIdx}
+                    >
+                      <span className="relative block h-1 w-full rounded-full bg-white/25 overflow-hidden transition-colors group-hover:bg-white/40">
+                        {i === heroIdx && <span key={heroIdx} className="absolute inset-0 bg-[#C8963C] rounded-full animate-progress" />}
+                        {i < heroIdx && <span className="absolute inset-0 bg-white/70 rounded-full" />}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+                <div className="hidden sm:flex items-center gap-2 text-white/50 text-xs font-medium tracking-[0.14em] uppercase">
+                  {h.hero.scroll}
+                  <span className="block w-px h-7 bg-gradient-to-b from-white/60 to-transparent animate-scroll-bounce" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* The words */}
           <div
-            className="relative z-10 h-full max-w-screen-xl mx-auto px-5 sm:px-8 flex flex-col justify-end pb-24 sm:pb-28 will-change-transform"
+            className="relative z-10 max-w-screen-xl mx-auto px-5 sm:px-8 pt-7 sm:pt-8 pb-14 sm:pb-16 lg:pt-0 lg:pb-24 lg:h-full lg:flex lg:flex-col lg:justify-end will-change-transform"
             style={{ transform: `translate3d(0, ${scrollY * -0.12}px, 0)`, opacity: Math.max(0, 1 - scrollY / 700) }}
           >
             <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
               <div className="max-w-4xl">
+                {/* on phones the greeting lifts onto the edge of the photograph above it */}
                 <WelcomeTyper
                   className="glow-welcome font-display italic text-[#E7C074] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] leading-tight animate-fade-up delay-75
-                    static mb-4 sm:mb-5
-                    lg:absolute lg:top-28 xl:top-32 lg:right-0 lg:w-[46%] lg:mb-0"
+                    absolute -top-[4.5rem] sm:-top-24 inset-x-5 sm:inset-x-8
+                    lg:top-28 xl:top-32 lg:inset-x-auto lg:right-0 lg:w-[46%]"
                   nameClassName="text-white"
                 />
-                <h1 className="glow-title font-display text-white text-[clamp(3.25rem,9.5vw,8rem)] leading-[0.95] animate-fade-up delay-100">
+                <h1 className="glow-title font-display text-white text-[clamp(3rem,9.5vw,8rem)] leading-[0.95] animate-fade-up delay-100">
                   {h.hero.title}
                 </h1>
-                <p className="mt-5 sm:mt-6 font-display font-normal text-xl sm:text-3xl text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
+                <p className="mt-4 sm:mt-6 font-display font-normal text-xl sm:text-3xl text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
                   {h.hero.subtitle}
                 </p>
                 <p className="mt-5 sm:mt-6 pl-4 sm:pl-5 border-l-2 border-[#C8963C] max-w-xl font-display italic font-medium text-lg sm:text-2xl leading-snug text-white/90 animate-fade-up delay-300">
@@ -217,7 +253,7 @@ export default function Home() {
                   {h.hero.sloganB}{' '}
                   <span className="text-white/75">{h.hero.sloganC}</span>
                 </p>
-                <div className="flex flex-col sm:flex-row gap-3 mt-8 sm:mt-10 animate-fade-up delay-400">
+                <div className="flex flex-col sm:flex-row gap-3 mt-7 sm:mt-10 animate-fade-up delay-400">
                   <Link to="/discover" className="btn-primary justify-center">
                     {h.hero.explore}
                   </Link>
@@ -245,33 +281,6 @@ export default function Home() {
                     ))}
                   </div>
                 </Tilt>
-              </div>
-            </div>
-          </div>
-
-          {/* Slide progress + scroll hint */}
-          <div className="absolute bottom-7 inset-x-0 z-10">
-            <div className="max-w-screen-xl mx-auto px-5 sm:px-8 flex items-center justify-between">
-              <div className="flex gap-2">
-                {heroSlides.map((s, i) => (
-                  // the bar stays thin; the padding gives a finger something to hit
-                  <button
-                    key={s.key}
-                    onClick={() => setHeroIdx(i)}
-                    className="hit-slim group w-10 sm:w-14 py-4 -my-4"
-                    aria-label={fmt(h.hero.slide, { n: i + 1 })}
-                    aria-current={i === heroIdx}
-                  >
-                    <span className="relative block h-1 w-full rounded-full bg-white/25 overflow-hidden transition-colors group-hover:bg-white/40">
-                      {i === heroIdx && <span key={heroIdx} className="absolute inset-0 bg-[#C8963C] rounded-full animate-progress" />}
-                      {i < heroIdx && <span className="absolute inset-0 bg-white/70 rounded-full" />}
-                    </span>
-                  </button>
-                ))}
-              </div>
-              <div className="hidden sm:flex items-center gap-2 text-white/50 text-xs font-medium tracking-[0.14em] uppercase">
-                {h.hero.scroll}
-                <span className="block w-px h-7 bg-gradient-to-b from-white/60 to-transparent animate-scroll-bounce" />
               </div>
             </div>
           </div>

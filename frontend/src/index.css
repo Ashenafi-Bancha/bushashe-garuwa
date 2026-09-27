@@ -406,11 +406,28 @@ body {
 }
 .reveal.in-view { opacity: 1; transform: none; }
 
-/* On phones the sections simply rise and fade: the 3D tilt widened them
-   mid-animation, which made the page slide sideways and the browser zoom out. */
+/* Movement is smoother when the browser knows it is coming, and is dropped
+   again afterwards so phones are not left holding layers they do not need. */
+.fade-section:not(.in-view),
+.reveal:not(.in-view) { will-change: transform, opacity; }
+.fade-section.in-view,
+.reveal.in-view { will-change: auto; }
+
+/* On phones the sections come up with a gentler version of the same movement:
+   a small lift, a slight tilt away from the reader, and a touch of scale. The
+   page itself is clipped sideways (see `overflow-x: clip` below), so the tilt
+   can no longer widen the page the way it once did. */
 @media (max-width: 767px) {
-  .fade-section { transform: translateY(28px); }
-  .reveal       { transform: translateY(32px); }
+  .fade-section {
+    transform: perspective(900px) translateY(34px) rotateX(5deg) scale(0.985);
+    transform-origin: 50% 100%;
+    transition-duration: 0.95s, 1.15s;
+  }
+  .reveal {
+    transform: perspective(900px) translateY(38px) rotateX(4deg);
+    transform-origin: 50% 100%;
+    transition-duration: 0.95s, 1.15s;
+  }
   .heritage-card:hover { transform: translateY(-4px); }
 }
 
