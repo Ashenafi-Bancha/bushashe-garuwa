@@ -205,8 +205,8 @@ export default function Home() {
                 </span>
                 <WelcomeTyper
                   className="glow-welcome font-display italic text-[#E7C074] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] leading-tight animate-fade-up delay-75
-                    absolute top-20 sm:top-24 inset-x-0 px-5 sm:px-8
-                    lg:top-28 xl:top-32 lg:inset-x-auto lg:right-0 lg:w-[46%] lg:px-0"
+                    static mb-4 sm:mb-5
+                    lg:absolute lg:top-28 xl:top-32 lg:right-0 lg:w-[46%] lg:mb-0"
                   nameClassName="text-white"
                 />
                 <h1 className="glow-title font-display text-white text-[clamp(3.25rem,9.5vw,8rem)] leading-[0.95] animate-fade-up delay-100">
@@ -633,39 +633,28 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═════════ LIBRARY ═════════ */}
+        {/* ═════════ THE READING PLACE ═════════ */}
         <section className="py-20 sm:py-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
             <FadeSection>
-              <span className="eyebrow bg-[#A85436]/10 text-[#A85436] mb-5">{h.library.eyebrow}</span>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0D2A1E] leading-[1.05] mb-7">{h.library.title}</h2>
-              <p className="text-[#1F2420]/65 text-lg leading-relaxed mb-8">{h.library.desc}</p>
+              <span className="eyebrow bg-[#A85436]/10 text-[#A85436] mb-5">{h.reading.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0D2A1E] leading-[1.05] mb-7">{h.reading.title}</h2>
+              <p className="text-[#1F2420]/65 text-lg leading-relaxed mb-6">{h.reading.desc}</p>
+              <p className="text-[#1F2420]/55 text-base leading-relaxed mb-8">{h.reading.mountain}</p>
               <div className="flex flex-wrap gap-2 mb-10">
-                {h.library.categories.map((cat, i) => (
-                  <span key={i} className="rounded-full bg-white border border-[#0D2A1E]/8 text-[#0D2A1E]/80 text-sm px-4 py-2 shadow-sm">{cat}</span>
+                {h.reading.qualities.map((quality, i) => (
+                  <span key={i} className="rounded-full bg-white border border-[#0D2A1E]/8 text-[#0D2A1E]/80 text-sm px-4 py-2 shadow-sm">{quality}</span>
                 ))}
               </div>
-              <Link to="/library" className="btn-primary">{h.library.cta}</Link>
+              <Link to="/visit" className="btn-primary">{h.reading.cta}</Link>
             </FadeSection>
 
-            <FadeSection delay={100}>
-              <div className="grid grid-cols-2 gap-4">
-                {h.library.books.map((book, i) => (
-                  <div key={i} className={`book-3d group ${i % 2 === 1 ? 'mt-10' : ''}`}>
-                    <div className={`book aspect-[3/4] p-5 pl-7 flex flex-col justify-between overflow-hidden ${
-                      ['bg-[#0D2A1E]', 'bg-[#A85436]', 'bg-[#17463A]', 'bg-[#C8963C]'][i]
-                    }`}>
-                      <div className="absolute inset-0 opacity-25 bg-[radial-gradient(circle_at_75%_15%,white,transparent_55%)]"/>
-                      <span className={`relative text-[10px] font-semibold tracking-[0.12em] uppercase ${i === 3 ? 'text-[#0D2A1E]/70' : 'text-white/60'}`}>{book.cat}</span>
-                      <div className="relative">
-                        <div className={`w-8 h-px mb-3 ${i === 3 ? 'bg-[#0D2A1E]/40' : 'bg-white/40'}`}/>
-                        <span className={`block font-display text-lg sm:text-xl font-bold leading-tight ${i === 3 ? 'text-[#0D2A1E]' : 'text-white'}`}>{book.title}</span>
-                        <span className={`block mt-2 text-xs ${i === 3 ? 'text-[#0D2A1E]/60' : 'text-white/50'}`}>{bookYears[i]}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <FadeSection delay={100} className="relative rounded-[2rem] overflow-hidden img-zoom photo-3d min-h-[340px] lg:min-h-[460px]">
+              <img src={photos.gardens} alt={t.photos.gardens} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#071F16]/80 via-transparent to-transparent" />
+              <span className="absolute left-6 right-6 bottom-6 text-white font-display text-xl sm:text-2xl leading-tight">
+                {h.reading.caption}
+              </span>
             </FadeSection>
           </div>
         </section>

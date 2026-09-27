@@ -9,7 +9,6 @@ import Experiences from './pages/Experiences';
 import Events from './pages/Events';
 import Stay from './pages/Stay';
 import Dine from './pages/Dine';
-import Library from './pages/Library';
 import Visit from './pages/Visit';
 import Contact from './pages/Contact';
 import About from './pages/About';
@@ -63,7 +62,6 @@ function AppLayout() {
         <Route path="/events" element={<Events />} />
         <Route path="/stay" element={<Stay />} />
         <Route path="/dine" element={<Dine />} />
-        <Route path="/library" element={<Library />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/visit" element={<Visit />} />
         <Route path="/contact" element={<Contact />} />

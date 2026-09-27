@@ -14,14 +14,13 @@ const navRoutes = [
   { key: 'events', to: '/events' },
   { key: 'stay', to: '/stay' },
   { key: 'dine', to: '/dine' },
-  { key: 'library', to: '/library' },
   { key: 'gallery', to: '/gallery' },
   { key: 'visit', to: '/visit' },
   { key: 'contact', to: '/contact' },
 ] as const;
 
 /* The desktop bar shows every page; the full-screen menu (tablet and phone) lists them too. */
-const barKeys = ['home', 'about', 'discover', 'heritage', 'experiences', 'events', 'stay', 'dine', 'library', 'gallery', 'visit', 'contact'] as const;
+const barKeys = ['home', 'about', 'discover', 'heritage', 'experiences', 'events', 'stay', 'dine', 'gallery', 'visit', 'contact'] as const;
 
 export default function Navbar() {
   const [scrolled, setScrolled]     = useState(false);

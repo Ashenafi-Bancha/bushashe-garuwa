@@ -22,7 +22,7 @@ const offerItems = [
   { id: 'trees' },
   { id: 'artifacts' },
   { id: 'performances' },
-  { id: 'library' },
+  { id: 'reading' },
   { id: 'food' },
   { id: 'coffee' },
   { id: 'guesthouse' },

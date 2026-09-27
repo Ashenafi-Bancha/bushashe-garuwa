@@ -110,11 +110,13 @@ Folder: `people/` · Priority 1
 | Old family photographs | Photograph or scan them flat. Even one old picture of Bushaashe, Alambo or Garedew would be priceless on the history page |
 | Staff at work | Guides, cooks, gardeners |
 
-## Library and archive
+## The reading place
 
-Folder: `library/` · Priority 3
+Folder: `reading-place/` · Priority 2
 
-The shelves · someone reading · documents and old books open on a table.
+The quiet corner in the gardens where visitors sit and read · someone reading there ·
+and, most important, **the view of Mount Damota from that spot**, shot in clear morning
+light so the mountain is sharp behind the gardens.
 
 ## Trees, plants, coffee
 
