@@ -10,6 +10,7 @@ import StoryFilm from '../components/StoryFilm';
 import PhotoRing from '../components/PhotoRing';
 import WelcomeTyper from '../components/WelcomeTyper';
 import QuickLinks from '../components/QuickLinks';
+import PhotoCard from '../components/PhotoCard';
 import { useHeroVideo } from '../lib/heroVideo';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 
@@ -99,8 +100,12 @@ function Heading({ eyebrow, title, desc, dark = false, center = false, action }:
   return (
     <FadeSection className={`mb-12 sm:mb-16 ${action ? 'flex flex-col md:flex-row md:items-end justify-between gap-6' : ''}`}>
       <div className={center ? 'text-center mx-auto max-w-3xl' : 'max-w-3xl'}>
-        <span className={`eyebrow mb-5 ${dark ? 'bg-white/8 text-[#B8863B]' : 'bg-[#0E6B63]/10 text-[#0E6B63]'}`}>{eyebrow}</span>
-        <h2 className={`font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] ${dark ? 'text-white' : 'text-[#12150F]'}`}>
+        {/* a short line, then the label, then the heading: the rhythm of the reference sites */}
+        <span className={`block w-10 h-px mb-4 bg-[#B8863B] ${center ? 'mx-auto' : ''}`} />
+        <span className={`block text-xs font-bold tracking-[0.2em] uppercase mb-4 ${dark ? 'text-[#D8B778]' : 'text-[#0E6B63]'}`}>
+          {eyebrow}
+        </span>
+        <h2 className={`font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.05] ${dark ? 'text-white' : 'text-[#12150F]'}`}>
           {title}
         </h2>
         {desc && <p className={`mt-5 text-base sm:text-lg leading-relaxed ${center ? 'mx-auto' : ''} max-w-2xl ${dark ? 'text-white/60' : 'text-[#12150F]/60'}`}>{desc}</p>}
@@ -246,8 +251,7 @@ export default function Home() {
             className="relative z-10 max-w-screen-xl mx-auto px-5 sm:px-8 pt-7 sm:pt-8 pb-14 sm:pb-16 lg:pt-0 lg:pb-24 lg:h-full lg:flex lg:flex-col lg:justify-end will-change-transform"
             style={{ transform: `translate3d(0, ${drift * -0.12}px, 0)`, opacity: Math.max(0, 1 - drift / 700) }}
           >
-            <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
-              <div className="max-w-4xl">
+            <div className="max-w-4xl">
                 {/* on phones the greeting lifts onto the edge of the photograph above it */}
                 <WelcomeTyper
                   className="glow-welcome font-display italic text-[#D8B778] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] leading-tight animate-fade-up delay-75
@@ -274,27 +278,6 @@ export default function Home() {
                     {t.common.planVisit}
                   </Link>
                 </div>
-              </div>
-
-              {/* Stats card */}
-              <div className="hidden lg:block animate-fade-up delay-400 [perspective:1000px]">
-                <Tilt className="rounded-3xl" max={10}>
-                  <div className="grid grid-cols-3 glass rounded-3xl p-2 animate-float shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
-                    {stats.map((s, i) => (
-                      <div key={i} className={`px-6 py-5 flex flex-col justify-center ${i > 0 ? 'border-l border-white/15' : ''}`}>
-                        {s.phrase ? (
-                          <div className="font-display text-2xl leading-tight text-[#D8B778] max-w-[9rem]">{s.phrase}</div>
-                        ) : (
-                          <>
-                            <div className="font-display text-4xl font-bold text-white">{s.value}</div>
-                            <div className="text-xs text-white/60 mt-1 whitespace-nowrap">{s.label}</div>
-                          </>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                </Tilt>
-              </div>
             </div>
           </div>
         </section>
@@ -367,10 +350,10 @@ export default function Home() {
         </section>
 
         {/* ═════════ EXPLORE — bento ═════════ */}
-        <section className="relative bg-[#0A2E2A] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
+        <section className="relative bg-[#EDF5F1] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
           <div className="absolute -top-40 -right-32 w-[36rem] h-[36rem] glow-gold pointer-events-none"/>
           <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading eyebrow={h.explore.eyebrow} title={h.explore.title} dark />
+            <Heading eyebrow={h.explore.eyebrow} title={h.explore.title} center />
             <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[640px]">
               {exploreCards.map((card, i) => {
                 const text = h.explore.cards[card.id];
@@ -487,27 +470,13 @@ export default function Home() {
         {/* ═════════ EXPERIENCES ═════════ */}
         <section className="py-20 sm:py-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading
-              eyebrow={h.experiences.eyebrow}
-              title={h.experiences.title}
-              action={<TextLink to="/experiences">{t.common.exploreAll}</TextLink>}
-            />
+            <Heading eyebrow={h.experiences.eyebrow} title={h.experiences.title} center />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {experiences.map((exp, i) => {
                 const text = h.experiences.items[exp.id];
                 return (
                   <FadeSection key={exp.id} delay={(i % 3) * 80}>
-                    <Tilt className="h-full rounded-3xl">
-                    <Link to={exp.to} className="group heritage-card bg-white block h-full">
-                      <div className="img-zoom relative aspect-[16/11] bg-[#0E6B63]/8">
-                        <Photo src={'img' in exp ? exp.img : undefined} alt={text.title} label={text.title} className="w-full h-full object-cover"/>
-                      </div>
-                      <div className="p-6">
-                        <h3 className="font-display text-xl font-bold text-[#12150F] mb-2">{text.title}</h3>
-                        <p className="text-[#12150F]/60 text-sm leading-relaxed line-clamp-2">{text.desc}</p>
-                      </div>
-                    </Link>
-                    </Tilt>
+                    <PhotoCard to={exp.to} photo={'img' in exp ? exp.img : undefined} title={text.title} desc={text.desc} ratio="aspect-[4/3]" />
                   </FadeSection>
                 );
               })}
@@ -528,20 +497,7 @@ export default function Home() {
                   const room = h.stay.rooms[id];
                   return (
                     <FadeSection key={id} delay={i * 90} className="snap-start w-[78vw] sm:w-auto flex-shrink-0">
-                      <Tilt className="h-full rounded-3xl">
-                      <Link to="/stay" className="group heritage-card bg-white block h-full">
-                        <div className="img-zoom relative aspect-[4/3] bg-[#0E6B63]/8">
-                          <Photo alt={room.name} label={room.name} className="w-full h-full object-cover"/>
-                        </div>
-                        <div className="p-6">
-                          <h3 className="font-display text-xl font-bold text-[#12150F] mb-2">{room.name}</h3>
-                          <p className="text-[#12150F]/60 text-sm leading-relaxed mb-5 line-clamp-2">{room.desc}</p>
-                          <span className="text-sm font-semibold text-[#0E6B63] underline decoration-[#0E6B63]/30 underline-offset-4 transition-colors group-hover:decoration-[#0E6B63]">
-                            {h.stay.viewRoom}
-                          </span>
-                        </div>
-                      </Link>
-                      </Tilt>
+                      <PhotoCard to="/stay" title={room.name} desc={room.desc} meta={h.stay.viewRoom} ratio="aspect-[4/3]" />
                     </FadeSection>
                   );
                 })}
@@ -583,7 +539,7 @@ export default function Home() {
         {/* ═════════ FACILITIES & SERVICES ═════════ */}
         <section className="pb-20 sm:pb-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading eyebrow={h.facilities.eyebrow} title={h.facilities.title} desc={h.facilities.desc} />
+            <Heading eyebrow={h.facilities.eyebrow} title={h.facilities.title} desc={h.facilities.desc} center />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {facilities.map((id, i) => {
                 const item = h.facilities.items[id];
