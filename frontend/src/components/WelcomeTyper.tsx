@@ -14,7 +14,7 @@ type Piece = { text: string; name?: boolean };
 const GREETINGS: { lang: Lang; pieces: Piece[] }[] = [
   { lang: 'en', pieces: [{ text: 'Welcome to ' }, { text: 'Bushaashe Garuwa', name: true }] },
   { lang: 'am', pieces: [{ text: 'እንኳን ወደ ' }, { text: 'ቡሻሼ ጋሯ', name: true }, { text: ' በደህና መጡ' }] },
-  { lang: 'wal', pieces: [{ text: 'Hashshu Saro Yeeta!', name: true }] },
+  { lang: 'wal', pieces: [{ text: 'Hashshu ' }, { text: 'Saro Yeeta!', name: true }] },
 ];
 
 const TYPE_MS = 65;
