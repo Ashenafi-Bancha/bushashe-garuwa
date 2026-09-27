@@ -33,7 +33,7 @@ html {
 
 body {
   font-family: var(--font-sans);
-  background-color: #FAFAF8;
+  background-color: #FFFFFF;
   color: #12150F;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -181,9 +181,7 @@ html, body { overflow-x: clip; }
 /* Gallery white: a plain, bright ground so the photographs carry the colour.
    The only texture is a whisper of warmth at the very top of the page. */
 body {
-  background-color: #FAFAF8;
-  background-image: radial-gradient(120% 50% at 50% 0%, rgba(184, 134, 59, 0.045), transparent 60%);
-  background-attachment: fixed;
+  background-color: #FFFFFF;
 }
 
 /* On touch screens every button is at least a finger wide, so nothing is

@@ -350,29 +350,15 @@ export default function Home() {
         </section>
 
         {/* ═════════ EXPLORE — bento ═════════ */}
-        <section className="relative bg-[#EDF5F1] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
-          <div className="absolute -top-40 -right-32 w-[36rem] h-[36rem] glow-gold pointer-events-none"/>
+        <section className="relative py-20 sm:py-28">
           <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
             <Heading eyebrow={h.explore.eyebrow} title={h.explore.title} center />
-            <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:h-[640px]">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
               {exploreCards.map((card, i) => {
                 const text = h.explore.cards[card.id];
                 return (
-                  <FadeSection key={card.id} delay={i * 90} className={`${card.span} min-h-[320px] md:min-h-0`}>
-                    <Tilt className="h-full rounded-[1.75rem]" max={5}>
-                    <Link to={card.to} className="group relative block h-full rounded-[1.75rem] overflow-hidden">
-                      <Photo
-                        src={card.img}
-                        alt={text.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#061C1A]/90 via-[#061C1A]/20 to-transparent"/>
-                      <div className="absolute bottom-0 inset-x-0 p-6 sm:p-7">
-                        <h3 className={`font-display font-bold text-white mb-2 ${i === 0 ? 'text-3xl sm:text-5xl' : 'text-2xl sm:text-3xl'}`}>{text.title}</h3>
-                        <p className="text-white/70 text-sm sm:text-base leading-relaxed max-w-md line-clamp-2">{text.sub}</p>
-                      </div>
-                    </Link>
-                    </Tilt>
+                  <FadeSection key={card.id} delay={i * 80}>
+                    <PhotoCard to={card.to} photo={card.img} title={text.title} desc={text.sub} />
                   </FadeSection>
                 );
               })}
@@ -383,31 +369,13 @@ export default function Home() {
         {/* ═════════ LIVING HERITAGE ═════════ */}
         <section className="py-20 sm:py-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading
-              eyebrow={h.living.eyebrow}
-              title={h.living.title}
-              action={<TextLink to="/heritage">{t.common.exploreAll}</TextLink>}
-            />
+            <Heading eyebrow={h.living.eyebrow} title={h.living.title} center />
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {livingHeritage.map((item, i) => {
                 const text = h.living.items[item.id];
                 return (
                   <FadeSection key={item.id} delay={i * 80}>
-                    <Tilt className="h-full rounded-3xl">
-                    <Link to="/heritage" className="group heritage-card bg-white flex flex-col h-full">
-                      <div className="img-zoom relative aspect-[4/3] bg-[#0E6B63]/8">
-                        <Photo src={'img' in item ? item.img : undefined} alt={text.title} label={text.title} className="w-full h-full object-cover"/>
-                        <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-xs font-bold text-[#12150F] tabular-nums">0{i + 1}</span>
-                      </div>
-                      <div className="p-6 flex flex-col flex-1">
-                        <h3 className="font-display text-xl font-bold text-[#12150F] mb-2">{text.title}</h3>
-                        <p className="text-[#12150F]/60 text-sm leading-relaxed mb-6 flex-1">{text.desc}</p>
-                        <span className="text-sm font-semibold text-[#0E6B63] underline decoration-[#0E6B63]/30 underline-offset-4 transition-colors group-hover:decoration-[#0E6B63]">
-                          {t.common.explore}
-                        </span>
-                      </div>
-                    </Link>
-                    </Tilt>
+                    <PhotoCard to="/heritage" photo={'img' in item ? item.img : undefined} title={text.title} desc={text.desc} />
                   </FadeSection>
                 );
               })}
@@ -419,28 +387,22 @@ export default function Home() {
         <PhotoRing />
 
         {/* ═════════ TIMELINE ═════════ */}
-        <section className="relative bg-[#0A4F45] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
-          <div className="absolute -bottom-48 -left-40 w-[40rem] h-[40rem] glow-forest pointer-events-none"/>
+        <section className="relative py-20 sm:py-28">
           <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading
-              eyebrow={h.timeline.eyebrow}
-              title={h.timeline.title}
-              dark
-              action={<TextLink to="/heritage/timeline" dark>{h.timeline.cta}</TextLink>}
-            />
+            <Heading eyebrow={h.timeline.eyebrow} title={h.timeline.title} center />
 
             {/* Desktop: horizontal */}
             <div className="hidden lg:block relative">
-              <div className="absolute top-[7px] left-0 right-0 h-px bg-gradient-to-r from-[#B8863B]/60 via-[#B8863B]/30 to-transparent"/>
+              <div className="absolute top-[7px] left-0 right-0 h-px bg-[#12150F]/10"/>
               <div className="grid grid-cols-5 gap-5">
                 {h.timeline.items.map((item, i) => (
                   <FadeSection key={i} delay={i * 90}>
-                    <div className="w-3.5 h-3.5 rounded-full bg-[#B8863B] ring-8 ring-[#B8863B]/15 mb-8"/>
+                    <div className="w-3.5 h-3.5 rounded-full bg-[#0E6B63] ring-8 ring-[#0E6B63]/10 mb-8"/>
                     <Tilt className="rounded-3xl h-full" max={8}>
-                    <div className="rounded-3xl bg-white/[0.04] border border-white/10 p-6 h-full hover:bg-white/[0.07] hover:border-[#B8863B]/30 transition-colors duration-500">
-                      <div className="font-display text-2xl font-bold text-[#B8863B] mb-3">{item.period}</div>
-                      <div className="font-display text-lg font-semibold text-white mb-2">{item.label}</div>
-                      <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+                    <div className="rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-1 p-6 h-full transition-transform duration-300 hover:-translate-y-1">
+                      <div className="font-display text-2xl font-bold text-[#0E6B63] mb-3">{item.period}</div>
+                      <div className="font-display text-sm font-bold tracking-[0.06em] uppercase text-[#12150F] mb-2">{item.label}</div>
+                      <p className="text-[#12150F]/55 text-sm leading-relaxed">{item.desc}</p>
                     </div>
                     </Tilt>
                   </FadeSection>
@@ -450,15 +412,15 @@ export default function Home() {
 
             {/* Mobile: vertical */}
             <div className="lg:hidden relative pl-8">
-              <div className="absolute left-[6px] top-2 bottom-2 w-px bg-gradient-to-b from-[#B8863B]/60 to-[#B8863B]/10"/>
+              <div className="absolute left-[6px] top-2 bottom-2 w-px bg-[#12150F]/10"/>
               <div className="space-y-5">
                 {h.timeline.items.map((item, i) => (
                   <FadeSection key={i} delay={i * 60} className="relative">
-                    <div className="absolute -left-8 top-6 w-3.5 h-3.5 rounded-full bg-[#B8863B] ring-4 ring-[#B8863B]/15"/>
-                    <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-                      <div className="font-display text-xl font-bold text-[#B8863B] mb-1">{item.period}</div>
-                      <div className="font-display text-base font-semibold text-white mb-1">{item.label}</div>
-                      <p className="text-white/50 text-sm leading-relaxed">{item.desc}</p>
+                    <div className="absolute -left-8 top-6 w-3.5 h-3.5 rounded-full bg-[#0E6B63] ring-4 ring-[#0E6B63]/10"/>
+                    <div className="rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-1 p-5">
+                      <div className="font-display text-xl font-bold text-[#0E6B63] mb-1">{item.period}</div>
+                      <div className="font-display text-sm font-bold tracking-[0.06em] uppercase text-[#12150F] mb-1">{item.label}</div>
+                      <p className="text-[#12150F]/55 text-sm leading-relaxed">{item.desc}</p>
                     </div>
                   </FadeSection>
                 ))}
@@ -504,7 +466,7 @@ export default function Home() {
               </div>
             </div>
             <FadeSection className="text-center mt-12">
-              <Link to="/stay" className="btn-primary bg-[#0A4F45] border-[#12150F] text-white hover:bg-[#0E6B63] hover:border-[#0E6B63]">
+              <Link to="/stay" className="btn-primary">
                 {h.stay.cta}
               </Link>
             </FadeSection>
@@ -518,14 +480,14 @@ export default function Home() {
               <FadeSection className="relative min-h-[360px] lg:min-h-[520px] rounded-[2rem] overflow-hidden img-zoom photo-3d">
                 <img src={photos.food} alt={t.photos.food} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
               </FadeSection>
-              <FadeSection delay={120} className="rounded-[2rem] bg-[#0A4F45] p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative overflow-hidden">
-                <div className="absolute -top-32 -right-24 w-80 h-80 glow-gold pointer-events-none"/>
-                <span className="relative eyebrow bg-white/8 text-[#B8863B] mb-5 self-start">{h.restaurant.eyebrow}</span>
-                <h2 className="relative font-display text-4xl sm:text-5xl font-bold text-white leading-[1.05] mb-6">{h.restaurant.title}</h2>
-                <p className="relative text-white/65 text-base sm:text-lg leading-relaxed mb-8">{h.restaurant.desc}</p>
+              <FadeSection delay={120} className="rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-1 p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative overflow-hidden">
+                <span className="relative block w-10 h-px bg-[#B8863B] mb-4" />
+                <span className="relative block text-xs font-bold tracking-[0.2em] uppercase text-[#0E6B63] mb-4">{h.restaurant.eyebrow}</span>
+                <h2 className="relative font-display text-4xl sm:text-5xl font-extrabold text-[#12150F] leading-[1.05] mb-6">{h.restaurant.title}</h2>
+                <p className="relative text-[#12150F]/60 text-base sm:text-lg leading-relaxed mb-8">{h.restaurant.desc}</p>
                 <div className="relative flex flex-wrap gap-2 mb-10">
                   {h.restaurant.categories.map((cat, i) => (
-                    <span key={i} className="rounded-full border border-white/15 bg-white/5 text-white/80 text-sm px-4 py-2">{cat}</span>
+                    <span key={i} className="rounded-full border border-[#12150F]/12 text-[#12150F]/70 text-sm px-4 py-2">{cat}</span>
                   ))}
                 </div>
                 <Link to="/dine" className="relative btn-primary self-start">
@@ -545,13 +507,11 @@ export default function Home() {
                 const item = h.facilities.items[id];
                 return (
                   <FadeSection key={id} delay={(i % 3) * 80}>
-                    <Tilt className="h-full rounded-3xl" max={6}>
-                      <div className="heritage-card bg-white h-full p-7 sm:p-8 flex flex-col">
-                        <span className="text-[#B8863B] text-sm font-semibold tabular-nums mb-5">0{i + 1}</span>
-                        <h3 className="font-display text-2xl font-semibold text-[#12150F] mb-3">{item.title}</h3>
-                        <p className="text-[#12150F]/60 text-sm leading-relaxed">{item.desc}</p>
-                      </div>
-                    </Tilt>
+                    <div className="rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-1 h-full p-7 sm:p-8 flex flex-col transition-transform duration-300 hover:-translate-y-1">
+                      <span className="text-[#B8863B] text-sm font-semibold tabular-nums mb-5">0{i + 1}</span>
+                      <h3 className="font-display text-sm font-bold tracking-[0.06em] uppercase text-[#0E6B63] mb-3">{item.title}</h3>
+                      <p className="text-[#12150F]/55 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
                   </FadeSection>
                 );
               })}
@@ -560,19 +520,18 @@ export default function Home() {
         </section>
 
         {/* ═════════ ORAL HISTORY ═════════ */}
-        <section className="relative bg-[#0E6B63] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
-          <div className="absolute -bottom-40 -right-40 w-[36rem] h-[36rem] glow-gold opacity-70 pointer-events-none"/>
+        <section className="relative py-20 sm:py-28">
           <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
             <FadeSection className="relative">
-              <div className="rounded-[2rem] overflow-hidden aspect-[4/5] sm:aspect-[5/5] lg:aspect-[4/5]">
+              <div className="rounded-[1.25rem] overflow-hidden elev-1 aspect-[4/5] sm:aspect-[5/5] lg:aspect-[4/5]">
                 <Photo alt={h.stories.elderAlt} label={h.stories.elderAlt} className="w-full h-full object-cover"/>
               </div>
               {/* Audio player */}
-              <div className="relative -mt-24 mx-4 sm:mx-8 glass rounded-3xl p-5 sm:p-6 shadow-2xl">
+              <div className="relative -mt-24 mx-4 sm:mx-8 rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-2 p-5 sm:p-6">
                 <div className="flex items-center gap-4">
                   <button
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-14 h-14 flex-shrink-0 rounded-full bg-[#B8863B] text-[#12150F] flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
+                    className="w-14 h-14 flex-shrink-0 rounded-full bg-[#0E6B63] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
                     aria-label={isPlaying ? h.stories.pause : h.stories.play}
                   >
                     {isPlaying
@@ -580,16 +539,16 @@ export default function Home() {
                       : <svg className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>}
                   </button>
                   <div className="min-w-0 flex-1">
-                    <div className="text-[#B8863B] text-[11px] font-semibold tracking-[0.12em] uppercase mb-1">{h.stories.nowPlaying}</div>
-                    <div className="font-display text-white font-semibold truncate">{h.stories.storyTitle}</div>
-                    <div className="text-white/50 text-xs mt-0.5">{h.stories.meta}</div>
+                    <div className="text-[#0E6B63] text-[11px] font-bold tracking-[0.12em] uppercase mb-1">{h.stories.nowPlaying}</div>
+                    <div className="font-display text-[#12150F] font-bold truncate">{h.stories.storyTitle}</div>
+                    <div className="text-[#12150F]/50 text-xs mt-0.5">{h.stories.meta}</div>
                   </div>
                 </div>
                 <div className="flex items-end gap-[3px] h-10 mt-5">
                   {Array.from({ length: 42 }, (_, i) => (
                     <span
                       key={i}
-                      className={`flex-1 rounded-full ${isPlaying ? 'bg-[#B8863B] animate-wave' : 'bg-white/25'}`}
+                      className={`flex-1 rounded-full ${isPlaying ? 'bg-[#0E6B63] animate-wave' : 'bg-[#12150F]/12'}`}
                       style={{
                         height: `${30 + Math.abs(Math.sin(i * 0.7) * 55 + Math.cos(i * 1.9) * 15)}%`,
                         animationDelay: `${(i % 7) * 90}ms`,
@@ -610,7 +569,7 @@ export default function Home() {
                   <span key={i} className="rounded-full bg-white/8 border border-white/10 text-white/80 text-sm px-4 py-2">{l}</span>
                 ))}
               </div>
-              <TextLink to="/heritage/stories" dark>{h.stories.cta}</TextLink>
+              <TextLink to="/heritage/stories">{h.stories.cta}</TextLink>
             </FadeSection>
           </div>
         </section>
