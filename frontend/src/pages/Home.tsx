@@ -200,9 +200,6 @@ export default function Home() {
           >
             <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
               <div className="max-w-4xl">
-                <span className="eyebrow glass text-white mb-6 sm:mb-8 animate-fade-up">
-                  {h.hero.eyebrow}
-                </span>
                 <WelcomeTyper
                   className="glow-welcome font-display italic text-[#E7C074] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] leading-tight animate-fade-up delay-75
                     static mb-4 sm:mb-5

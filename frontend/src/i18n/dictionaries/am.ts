@@ -145,7 +145,6 @@ export const am: Dictionary = {
 
   home: {
     hero: {
-      eyebrow: 'ቡሻሼ ጋሯ · ወላይታ፣ ኢትዮጵያ',
       title: 'ቡሻሼ ጋሯ',
       subtitle: 'የወላይታ ባህል፣ ወግና ቅርስ ሕያው ሆኖ የሚኖርበት።',
       sloganA: 'አባቶቻችንን እናከብራለን፣',

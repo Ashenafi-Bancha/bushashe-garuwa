@@ -147,7 +147,6 @@ export const en = {
 
   home: {
     hero: {
-      eyebrow: 'Bushaashe Garuwa · Wolaita, Ethiopia',
       title: 'Bushaashe Garuwa',
       subtitle: 'Where Wolaita Culture, Traditions & Heritage Live On.',
       sloganA: 'Honoring Our Ancestors,',
