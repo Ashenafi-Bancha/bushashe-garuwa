@@ -17,7 +17,7 @@ export default function VisitsView() {
 
   return (
     <div className="space-y-4">
-      <label className="inline-flex items-center gap-2 text-sm text-[#12483A] cursor-pointer">
+      <label className="inline-flex items-center gap-2 text-sm text-[#0E6B63] cursor-pointer">
         <input
           type="checkbox"
           checked={upcomingOnly}
@@ -25,7 +25,7 @@ export default function VisitsView() {
             setPage(1);
             setUpcomingOnly(e.target.checked);
           }}
-          className="w-4 h-4 accent-[#12483A]"
+          className="w-4 h-4 accent-[#0E6B63]"
         />
         Upcoming visits only
       </label>
@@ -38,7 +38,7 @@ export default function VisitsView() {
 
       {data && data.total > 0 && (
         <Panel>
-          <ul className="divide-y divide-[#12483A]/10">
+          <ul className="divide-y divide-[#0E6B63]/10">
             {data.items.map((visit) => (
               <li key={visit.id} className="py-5 first:pt-0 last:pb-0">
                 <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
@@ -82,7 +82,7 @@ export default function VisitsView() {
                 {visit.experiences.length > 0 && (
                   <div className="flex flex-wrap gap-2 mb-2">
                     {visit.experiences.map((experience) => (
-                      <span key={experience} className="rounded-full bg-[#12483A]/8 text-[#12483A] text-xs px-3 py-1">
+                      <span key={experience} className="rounded-full bg-[#0E6B63]/8 text-[#0E6B63] text-xs px-3 py-1">
                         {experience}
                       </span>
                     ))}

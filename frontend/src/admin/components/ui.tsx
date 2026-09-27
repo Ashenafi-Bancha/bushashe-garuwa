@@ -5,7 +5,7 @@ import { BOOKING_STATUSES, BOOKING_STATUS_LABELS, STATUSES, STATUS_LABELS, type 
 
 export function StatCard({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
   return (
-    <div className="rounded-2xl bg-white border border-[#12483A]/10 elev-1 p-4 sm:p-5">
+    <div className="rounded-2xl bg-white border border-[#0E6B63]/10 elev-1 p-4 sm:p-5">
       <div className="text-[#B8863B] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1.5 sm:mb-2">{label}</div>
       <div className="font-display text-3xl sm:text-4xl text-[#12150F] leading-none">{value}</div>
       {hint && <div className="text-[#12150F]/45 text-xs mt-1.5 sm:mt-2">{hint}</div>}
@@ -15,9 +15,9 @@ export function StatCard({ label, value, hint }: { label: string; value: number 
 
 const STATUS_STYLES: Record<RequestStatus, string> = {
   new: 'bg-[#B8863B]/15 text-[#8a6620]',
-  in_progress: 'bg-[#12483A]/10 text-[#12483A]',
+  in_progress: 'bg-[#0E6B63]/10 text-[#0E6B63]',
   done: 'bg-emerald-500/12 text-emerald-700',
-  archived: 'bg-[#0F2A21]/8 text-[#12150F]/55',
+  archived: 'bg-[#0A2E2A]/8 text-[#12150F]/55',
 };
 
 export function StatusPill({ status }: { status: RequestStatus }) {
@@ -43,7 +43,7 @@ export function StatusSelect({
       disabled={busy}
       onChange={(e) => onChange(e.target.value as RequestStatus)}
       aria-label="Change status"
-      className="rounded-full border border-[#12483A]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#12483A] outline-none focus:border-[#12483A] disabled:opacity-50"
+      className="rounded-full border border-[#0E6B63]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#0E6B63] outline-none focus:border-[#0E6B63] disabled:opacity-50"
     >
       {STATUSES.map((s) => (
         <option key={s} value={s}>
@@ -57,8 +57,8 @@ export function StatusSelect({
 const BOOKING_STATUS_STYLES: Record<BookingStatus, string> = {
   pending: 'bg-[#B8863B]/15 text-[#8a6620]',
   confirmed: 'bg-emerald-500/12 text-emerald-700',
-  attended: 'bg-[#12483A]/10 text-[#12483A]',
-  cancelled: 'bg-[#0F2A21]/8 text-[#12150F]/50',
+  attended: 'bg-[#0E6B63]/10 text-[#0E6B63]',
+  cancelled: 'bg-[#0A2E2A]/8 text-[#12150F]/50',
 };
 
 /** Bookings move pending → confirmed → came, or are cancelled (which frees the places) */
@@ -77,7 +77,7 @@ export function BookingStatusSelect({
       disabled={busy}
       onChange={(e) => onChange(e.target.value as BookingStatus)}
       aria-label="Change booking status"
-      className={`rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2 focus:ring-[#12483A]/30 disabled:opacity-50 ${BOOKING_STATUS_STYLES[status]}`}
+      className={`rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2 focus:ring-[#0E6B63]/30 disabled:opacity-50 ${BOOKING_STATUS_STYLES[status]}`}
     >
       {BOOKING_STATUSES.map((s) => (
         <option key={s} value={s}>
@@ -119,11 +119,11 @@ export function Pager({
 }
 
 export function Panel({ children }: { children: ReactNode }) {
-  return <div className="rounded-3xl bg-white border border-[#12483A]/10 elev-2 p-5 sm:p-7">{children}</div>;
+  return <div className="rounded-3xl bg-white border border-[#0E6B63]/10 elev-2 p-5 sm:p-7">{children}</div>;
 }
 
 export function Notice({ kind = 'info', children }: { kind?: 'info' | 'error'; children: ReactNode }) {
-  const styles = kind === 'error' ? 'bg-[#12483A]/10 text-[#8c4227]' : 'bg-[#12483A]/6 text-[#12483A]/70';
+  const styles = kind === 'error' ? 'bg-[#0E6B63]/10 text-[#8c4227]' : 'bg-[#0E6B63]/6 text-[#0E6B63]/70';
   return (
     <p role={kind === 'error' ? 'alert' : undefined} className={`rounded-2xl px-4 py-3 text-sm ${styles}`}>
       {children}

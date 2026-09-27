@@ -20,7 +20,7 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
   const caption = t.photoCaptions[photo];
 
   return (
-    <section className="relative bg-[#FAFAF8] overflow-hidden lg:bg-[#0F2A21] lg:h-[92vh] lg:min-h-[640px] lg:max-h-[980px] lg:flex lg:items-end">
+    <section className="relative bg-[#FAFAF8] overflow-hidden lg:bg-[#0A2E2A] lg:h-[92vh] lg:min-h-[640px] lg:max-h-[980px] lg:flex lg:items-end">
       {/* Photo */}
       <div className="relative h-[52svh] min-h-[320px] sm:h-[60svh] overflow-hidden lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 photo-3d">
         <img
@@ -30,11 +30,11 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
           className={`absolute inset-0 w-full h-full object-cover ${pos} animate-hero-photo`}
         />
         {/* keeps the floating header readable over bright skies */}
-        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#0B0F0C]/45 to-transparent" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#061C1A]/45 to-transparent" />
         {/* desktop: shade only behind the text in the lower left */}
-        <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-[#0B0F0C]/90 via-[#0B0F0C]/25 via-45% to-transparent to-70%" />
-        <div className="hidden lg:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0B0F0C]/55 to-transparent" />
-        <span className="absolute left-4 bottom-4 sm:left-6 sm:bottom-6 lg:left-auto lg:right-8 lg:bottom-8 rounded-full bg-[#0B0F0C]/55 backdrop-blur-md border border-white/15 px-4 py-2 text-white text-xs sm:text-sm font-medium animate-fade-up delay-500">
+        <div className="hidden lg:block absolute inset-0 bg-gradient-to-tr from-[#061C1A]/90 via-[#061C1A]/25 via-45% to-transparent to-70%" />
+        <div className="hidden lg:block absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#061C1A]/55 to-transparent" />
+        <span className="absolute left-4 bottom-4 sm:left-6 sm:bottom-6 lg:left-auto lg:right-8 lg:bottom-8 rounded-full bg-[#061C1A]/55 backdrop-blur-md border border-white/15 px-4 py-2 text-white text-xs sm:text-sm font-medium animate-fade-up delay-500">
           {caption.title}
         </span>
       </div>
@@ -42,7 +42,7 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
       {/* Text */}
       <div className="relative z-10 w-full max-w-screen-xl mx-auto px-5 sm:px-8 pt-10 pb-12 sm:pt-12 lg:pt-0 lg:pb-14">
         <div className="max-w-xl">
-          <span className="eyebrow bg-[#12483A]/10 text-[#12483A] lg:bg-white/10 lg:text-white lg:backdrop-blur-md lg:border lg:border-white/20 mb-6 lg:mb-4 animate-fade-up">{eyebrow}</span>
+          <span className="eyebrow bg-[#0E6B63]/10 text-[#0E6B63] lg:bg-white/10 lg:text-white lg:backdrop-blur-md lg:border lg:border-white/20 mb-6 lg:mb-4 animate-fade-up">{eyebrow}</span>
           <h1 className="font-display text-5xl sm:text-6xl lg:text-[3.4rem] xl:text-[4rem] text-[#12150F] lg:text-white leading-[1.02] animate-fade-up delay-100 lg:[&_span]:text-[#D8B778]">
             {title}
           </h1>

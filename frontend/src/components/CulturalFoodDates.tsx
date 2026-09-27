@@ -20,8 +20,8 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
   return (
     <section className="relative mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden">
       <img src={photos.food} alt={t.photos.food} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-      <div className="absolute inset-0 bg-[#0B0F0C]/70" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0B0F0C] via-[#0B0F0C]/85 to-[#0B0F0C]/45" />
+      <div className="absolute inset-0 bg-[#061C1A]/70" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#061C1A] via-[#061C1A]/85 to-[#061C1A]/45" />
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
@@ -35,7 +35,7 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
           </div>
         </div>
 
-        <div className="rounded-3xl bg-[#0B0F0C]/70 border border-white/12 backdrop-blur-md p-6 sm:p-8 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]">
+        <div className="rounded-3xl bg-[#061C1A]/70 border border-white/12 backdrop-blur-md p-6 sm:p-8 shadow-[0_30px_60px_-30px_rgba(0,0,0,0.8)]">
           <div className="text-[#B8863B] text-xs font-semibold tracking-[0.16em] uppercase mb-5">{c.nextTitle}</div>
           {dates.length === 0 ? (
             <p className="text-white/60 text-sm leading-relaxed">{c.soon}</p>
@@ -57,7 +57,7 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
                         event.placesLeft === 0 || event.availability === 'full'
                           ? 'bg-white/10 text-white/50'
                           : event.availability === 'limited' || (event.placesLeft !== null && event.placesLeft <= 5)
-                            ? 'bg-[#12483A]/30 text-[#f0a584]'
+                            ? 'bg-[#0E6B63]/30 text-[#f0a584]'
                             : 'bg-emerald-400/15 text-emerald-300'
                       }`}
                     >

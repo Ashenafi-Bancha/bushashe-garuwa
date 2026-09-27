@@ -99,12 +99,12 @@ export default function Events() {
   const photoOf = (key?: string) => (key && key in photos ? photos[key as PhotoKey] : undefined);
   const availStyle = (kind: AvailKind, dark: boolean) =>
     kind === 'limited'
-      ? dark ? 'bg-[#12483A]/20 text-[#f0a584]' : 'bg-[#12483A]/10 text-[#12483A]'
+      ? dark ? 'bg-[#0E6B63]/20 text-[#f0a584]' : 'bg-[#0E6B63]/10 text-[#0E6B63]'
       : kind === 'full'
-        ? dark ? 'bg-white/10 text-white/50' : 'bg-[#0F2A21]/8 text-[#12150F]/50'
+        ? dark ? 'bg-white/10 text-white/50' : 'bg-[#0A2E2A]/8 text-[#12150F]/50'
         : kind === 'group'
-          ? 'bg-[#12483A]/10 text-[#12483A]'
-          : dark ? 'bg-[#12483A] text-[#B8863B]' : 'bg-[#B8863B]/10 text-[#B8863B]';
+          ? 'bg-[#0E6B63]/10 text-[#0E6B63]'
+          : dark ? 'bg-[#0E6B63] text-[#B8863B]' : 'bg-[#B8863B]/10 text-[#B8863B]';
 
   const bookButton = (event: Shown, dark: boolean) =>
     event.live?.bookable && event.availKind !== 'full' ? (
@@ -112,7 +112,7 @@ export default function Events() {
         type="button"
         onClick={() => setBooking(event.live ?? null)}
         className={`inline-flex items-center gap-2 text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors ${
-          dark ? 'bg-[#B8863B] hover:bg-[#d9af65] text-[#12483A]' : 'bg-[#12483A] hover:bg-[#1B5F4C] text-white'
+          dark ? 'bg-[#B8863B] hover:bg-[#d9af65] text-[#0E6B63]' : 'bg-[#0E6B63] hover:bg-[#12857B] text-white'
         }`}
       >
         {e.live.bookCta}
@@ -121,7 +121,7 @@ export default function Events() {
       <Link
         to="/contact"
         className={`inline-flex items-center gap-2 text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors ${
-          dark ? 'bg-[#B8863B] hover:bg-[#d9af65] text-[#12483A]' : 'bg-[#12483A] hover:bg-[#1B5F4C] text-white'
+          dark ? 'bg-[#B8863B] hover:bg-[#d9af65] text-[#0E6B63]' : 'bg-[#0E6B63] hover:bg-[#12857B] text-white'
         }`}
       >
         {t.common.reserveYourPlace}
@@ -152,13 +152,13 @@ export default function Events() {
 
       {/* Featured events */}
       {featured.length > 0 && (
-        <section className="bg-[#12483A] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+        <section className="bg-[#0E6B63] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
             <div className="text-[#B8863B] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-10">{e.featured}</div>
             <div className="grid md:grid-cols-2 gap-6">
               {featured.map((event) => (
-                <div key={event.key} className="group relative overflow-hidden flex flex-col rounded-3xl bg-[#0F2A21]/50 border border-white/10 hover:border-[#B8863B]/30 transition-all duration-300">
-                  <div className="img-zoom aspect-[16/9] bg-[#0F2A21]">
+                <div key={event.key} className="group relative overflow-hidden flex flex-col rounded-3xl bg-[#0A2E2A]/50 border border-white/10 hover:border-[#B8863B]/30 transition-all duration-300">
+                  <div className="img-zoom aspect-[16/9] bg-[#0A2E2A]">
                     <Photo src={photoOf(event.photo)} alt={event.name} label={event.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                   </div>
                   <div className="p-5 sm:p-7 flex-1 flex flex-col">
@@ -185,7 +185,7 @@ export default function Events() {
       <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between gap-6 mb-10 flex-wrap">
-            <h2 className="font-display text-3xl font-semibold text-[#12483A]">{e.upcoming}</h2>
+            <h2 className="font-display text-3xl font-semibold text-[#0E6B63]">{e.upcoming}</h2>
             <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <button
@@ -193,8 +193,8 @@ export default function Events() {
                   onClick={() => setActiveCat(cat)}
                   className={`text-xs font-sans font-semibold rounded-full px-4 py-2 transition-colors border ${
                     activeCat === cat
-                      ? 'bg-[#12483A] text-white border-[#12483A]'
-                      : 'border-[#12483A]/20 text-[#12483A]/60 hover:border-[#12483A]/50 hover:text-[#12483A]'
+                      ? 'bg-[#0E6B63] text-white border-[#0E6B63]'
+                      : 'border-[#0E6B63]/20 text-[#0E6B63]/60 hover:border-[#0E6B63]/50 hover:text-[#0E6B63]'
                   }`}
                 >
                   {e.categories[cat]}
@@ -206,7 +206,7 @@ export default function Events() {
           <div className="space-y-4">
             {filtered.map((event) => (
               <div key={event.key} className="bg-white heritage-card flex flex-col sm:flex-row overflow-hidden">
-                <div className="img-zoom sm:w-48 flex-shrink-0 aspect-video sm:aspect-auto bg-[#12483A]/10">
+                <div className="img-zoom sm:w-48 flex-shrink-0 aspect-video sm:aspect-auto bg-[#0E6B63]/10">
                   <Photo src={photoOf(event.photo)} alt={event.name} label={event.name} className="w-full h-full object-cover" />
                 </div>
                 <div className="p-6 flex-1 flex flex-col sm:flex-row sm:items-center gap-4">
@@ -214,10 +214,10 @@ export default function Events() {
                     <div className="flex items-center gap-3 mb-2 flex-wrap">
                       <span className="text-[#B8863B] text-xs font-sans tracking-wider">{event.dateLabel}</span>
                       {event.time && <span className="text-[#12150F]/30 text-xs font-sans">{event.time}</span>}
-                      <span className="bg-[#FAFAF8] text-[#12483A] text-[10px] font-sans font-semibold uppercase tracking-wider rounded-full px-2.5 py-0.5">{e.categories[event.cat]}</span>
+                      <span className="bg-[#FAFAF8] text-[#0E6B63] text-[10px] font-sans font-semibold uppercase tracking-wider rounded-full px-2.5 py-0.5">{e.categories[event.cat]}</span>
                     </div>
-                    <h3 className="font-display text-xl font-semibold text-[#12483A] mb-2">{event.name}</h3>
-                    {event.partner && <p className="text-[#12483A] text-sm mb-2">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
+                    <h3 className="font-display text-xl font-semibold text-[#0E6B63] mb-2">{event.name}</h3>
+                    {event.partner && <p className="text-[#0E6B63] text-sm mb-2">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
                     <p className="text-[#12150F]/55 text-sm font-sans leading-relaxed">{event.desc}</p>
                   </div>
                   <div className="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-3 flex-shrink-0">

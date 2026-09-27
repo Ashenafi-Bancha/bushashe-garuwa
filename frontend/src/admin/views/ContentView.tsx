@@ -17,7 +17,7 @@ const LANGS: { code: Lang; name: string }[] = [
 ];
 const builtIn: Record<Lang, unknown> = { en, am, wal };
 
-const field = 'w-full rounded-xl border border-[#12483A]/20 focus:border-[#12483A] px-4 py-3 text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]';
+const field = 'w-full rounded-xl border border-[#0E6B63]/20 focus:border-[#0E6B63] px-4 py-3 text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]';
 
 /** Editing the words on the website, one page at a time, in each language. */
 export default function ContentView() {
@@ -92,7 +92,7 @@ export default function ContentView() {
             onClick={() => setLang(l.code)}
             aria-pressed={lang === l.code}
             className={`rounded-full px-4 py-2 text-sm font-semibold border transition-colors ${
-              lang === l.code ? 'bg-[#12483A] text-white border-[#12483A]' : 'border-[#12483A]/15 text-[#12483A]/70 hover:border-[#12483A]/50'
+              lang === l.code ? 'bg-[#0E6B63] text-white border-[#0E6B63]' : 'border-[#0E6B63]/15 text-[#0E6B63]/70 hover:border-[#0E6B63]/50'
             }`}
           >
             {l.name}
@@ -109,7 +109,7 @@ export default function ContentView() {
             onClick={() => setGroupId(g.id)}
             aria-pressed={g.id === groupId}
             className={`rounded-full px-4 py-2 text-xs font-semibold border transition-colors ${
-              g.id === groupId ? 'bg-[#B8863B] text-[#12483A] border-[#B8863B]' : 'border-[#12483A]/15 text-[#12483A]/60 hover:border-[#12483A]/40'
+              g.id === groupId ? 'bg-[#B8863B] text-[#0E6B63] border-[#B8863B]' : 'border-[#0E6B63]/15 text-[#0E6B63]/60 hover:border-[#0E6B63]/40'
             }`}
           >
             {g.title}
@@ -137,7 +137,7 @@ export default function ContentView() {
             return (
               <div key={f.path}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-                  <label htmlFor={`f-${f.path}`} className="text-xs font-semibold text-[#12483A]/70 tracking-wider uppercase">
+                  <label htmlFor={`f-${f.path}`} className="text-xs font-semibold text-[#0E6B63]/70 tracking-wider uppercase">
                     {f.label}
                     {f.shared && <span className="text-[#12150F]/35 normal-case tracking-normal"> · all languages</span>}
                   </label>
@@ -168,12 +168,12 @@ export default function ContentView() {
           })}
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[#12483A]/10">
+        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[#0E6B63]/10">
           <button
             type="button"
             onClick={save}
             disabled={!changed || saving}
-            className="rounded-full bg-[#B8863B] hover:bg-[#d9af65] text-[#12483A] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-50"
+            className="rounded-full bg-[#B8863B] hover:bg-[#d9af65] text-[#0E6B63] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving…' : 'Save changes'}
           </button>

@@ -28,7 +28,7 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
       }`}
       inert={!open}
     >
-      <button className="absolute inset-0 w-full h-full bg-[#0B0F0C]/80 backdrop-blur-sm" onClick={onClose} aria-label={texts.en.close} tabIndex={-1} />
+      <button className="absolute inset-0 w-full h-full bg-[#061C1A]/80 backdrop-blur-sm" onClick={onClose} aria-label={texts.en.close} tabIndex={-1} />
 
       <div
         role="dialog"
@@ -37,30 +37,30 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
         className={`relative w-full max-w-lg bg-[#FAFAF8] shadow-2xl transition-transform duration-500 ${open ? 'translate-y-0' : 'translate-y-4'}`}
         style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}
       >
-        <div className="h-1 bg-gradient-to-r from-[#12483A] via-[#B8863B] to-[#12483A]" />
-        <button onClick={onClose} className="absolute top-3 right-3 touch-target text-[#12483A]/40 hover:text-[#12483A]" aria-label={texts.en.close}>
+        <div className="h-1 bg-gradient-to-r from-[#0E6B63] via-[#B8863B] to-[#0E6B63]" />
+        <button onClick={onClose} className="absolute top-3 right-3 touch-target text-[#0E6B63]/40 hover:text-[#0E6B63]" aria-label={texts.en.close}>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" strokeWidth="1.5" /></svg>
         </button>
 
         <div className="px-6 sm:px-10 pt-9 pb-8">
-          <div className="text-[#12483A] text-[10px] font-sans font-semibold tracking-[0.16em] uppercase mb-3">Wolayttatto</div>
-          <h2 id="wal-notice-title" className="font-display text-3xl font-semibold text-[#12483A] leading-tight mb-1">{texts.en.title}</h2>
-          <div lang="am" className="font-display text-2xl font-semibold text-[#12483A]/80 leading-snug mb-5">{texts.am.title}</div>
+          <div className="text-[#0E6B63] text-[10px] font-sans font-semibold tracking-[0.16em] uppercase mb-3">Wolayttatto</div>
+          <h2 id="wal-notice-title" className="font-display text-3xl font-semibold text-[#0E6B63] leading-tight mb-1">{texts.en.title}</h2>
+          <div lang="am" className="font-display text-2xl font-semibold text-[#0E6B63]/80 leading-snug mb-5">{texts.am.title}</div>
 
           <p className="text-[#12150F]/70 font-sans text-sm leading-relaxed mb-2">{texts.en.body}</p>
           <p lang="am" className="text-[#12150F]/60 font-sans text-sm leading-relaxed mb-7">{texts.am.body}</p>
 
           <div className="grid sm:grid-cols-2 gap-3">
-            <button ref={firstButton} onClick={() => onChoose('en')} className="btn-primary justify-center bg-[#12483A] border-[#12483A] text-white hover:bg-[#1B5F4C]">
+            <button ref={firstButton} onClick={() => onChoose('en')} className="btn-primary justify-center bg-[#0E6B63] border-[#0E6B63] text-white hover:bg-[#12857B]">
               {texts.en.continueEn}
             </button>
-            <button lang="am" onClick={() => onChoose('am')} className="btn-outline justify-center border-[#12483A] text-[#12483A] hover:bg-[#12483A] hover:text-white">
+            <button lang="am" onClick={() => onChoose('am')} className="btn-outline justify-center border-[#0E6B63] text-[#0E6B63] hover:bg-[#0E6B63] hover:text-white">
               {texts.am.continueAm}
             </button>
           </div>
 
           {import.meta.env.DEV && (
-            <button onClick={() => onChoose('wal')} className="mt-5 w-full text-center text-[11px] font-sans text-[#12483A]/45 hover:text-[#12483A] underline underline-offset-4">
+            <button onClick={() => onChoose('wal')} className="mt-5 w-full text-center text-[11px] font-sans text-[#0E6B63]/45 hover:text-[#0E6B63] underline underline-offset-4">
               Preview the Wolaytta draft (development only)
             </button>
           )}

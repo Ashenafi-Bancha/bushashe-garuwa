@@ -101,7 +101,7 @@ export default function PhotoRing() {
 
   if (stillMode) {
     return (
-      <section className="py-20 sm:py-28 bg-[#0F2A21]">
+      <section className="py-20 sm:py-28 bg-[#0A2E2A]">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <h2 className="font-display text-4xl sm:text-5xl text-white mb-8">{ring.title}</h2>
           <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-4">
@@ -115,7 +115,7 @@ export default function PhotoRing() {
   }
 
   return (
-    <section className="relative py-20 sm:py-28 bg-[#0F2A21] overflow-hidden">
+    <section className="relative py-20 sm:py-28 bg-[#0A2E2A] overflow-hidden">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#B8863B]/40 to-transparent" />
       <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[46rem] h-[26rem] glow-gold opacity-40 pointer-events-none" />
 
@@ -157,7 +157,7 @@ export default function PhotoRing() {
                 draggable={false}
                 className="w-full h-full object-cover pointer-events-none"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#0B0F0C]/80 via-transparent to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#061C1A]/80 via-transparent to-transparent" />
               <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">
                 {t.photoCaptions[key].title}
               </figcaption>

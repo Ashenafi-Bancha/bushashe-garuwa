@@ -86,7 +86,7 @@ export default function Gallery() {
                 aria-pressed={filter === f}
                 className={`text-sm font-semibold rounded-full px-5 py-2.5 border transition-all duration-300 ${
                   filter === f
-                    ? 'bg-[#0F2A21] text-white border-[#12150F]'
+                    ? 'bg-[#0A2E2A] text-white border-[#12150F]'
                     : 'border-[#12150F]/15 text-[#12150F]/70 hover:border-[#12150F]/50 hover:text-[#12150F]'
                 }`}
               >
@@ -104,10 +104,10 @@ export default function Gallery() {
                 <Tilt key={item.key} className={`rounded-2xl sm:rounded-3xl ${filter === 'all' ? item.span : spans[i % spans.length]}`} max={5}>
                   <button
                     onClick={() => setOpenIdx(i)}
-                    className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#12483A]/8"
+                    className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#0E6B63]/8"
                   >
                     <img src={photos[item.key]} alt={t.photos[item.key]} loading="lazy" className="w-full h-full object-cover" />
-                    <span className="absolute inset-0 bg-gradient-to-t from-[#0B0F0C]/85 via-[#0B0F0C]/15 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-[#061C1A]/85 via-[#061C1A]/15 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5 text-left">
                       <span className="block font-display text-base sm:text-xl text-white leading-tight">{t.photoCaptions[item.key].title}</span>
                       <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{t.photoCaptions[item.key].desc}</span>

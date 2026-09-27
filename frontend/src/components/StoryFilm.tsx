@@ -19,12 +19,12 @@ export default function StoryFilm() {
     <section className="py-20 sm:py-28">
       <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
         <div className="max-w-2xl mb-10">
-          <span className="eyebrow bg-[#12483A]/10 text-[#12483A] mb-5">{film.eyebrow}</span>
+          <span className="eyebrow bg-[#0E6B63]/10 text-[#0E6B63] mb-5">{film.eyebrow}</span>
           <h2 className="font-display text-4xl sm:text-5xl text-[#12150F] leading-[1.05] mb-4">{film.title}</h2>
           <p className="text-[#12150F]/65 text-base sm:text-lg leading-relaxed">{film.desc}</p>
         </div>
 
-        <div className="relative rounded-[2rem] overflow-hidden bg-[#0B0F0C] aspect-video shadow-[0_40px_80px_-40px_rgba(14,40,32,0.6)]">
+        <div className="relative rounded-[2rem] overflow-hidden bg-[#061C1A] aspect-video shadow-[0_40px_80px_-40px_rgba(14,40,32,0.6)]">
           {playing ? (
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${videos.story}?autoplay=1&rel=0&modestbranding=1`}
@@ -41,7 +41,7 @@ export default function StoryFilm() {
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
               />
-              <span className="absolute inset-0 bg-[#0B0F0C]/35 group-hover:bg-[#0B0F0C]/25 transition-colors" />
+              <span className="absolute inset-0 bg-[#061C1A]/35 group-hover:bg-[#061C1A]/25 transition-colors" />
               <span className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                 <span className="w-20 h-20 rounded-full bg-[#B8863B] text-[#12150F] flex items-center justify-center shadow-[0_20px_40px_-12px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:scale-110">
                   <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="currentColor">

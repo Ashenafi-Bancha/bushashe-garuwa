@@ -34,8 +34,8 @@ export default function Dine() {
                 onClick={() => setActiveMenu(cat)}
                 className={`text-xs font-sans font-semibold rounded-full px-6 py-3 transition-colors border ${
                   activeMenu === cat
-                    ? 'bg-[#12483A] text-white border-[#12483A]'
-                    : 'border-[#12483A]/20 text-[#12483A]/60 hover:border-[#12483A]/50 hover:text-[#12483A]'
+                    ? 'bg-[#0E6B63] text-white border-[#0E6B63]'
+                    : 'border-[#0E6B63]/20 text-[#0E6B63]/60 hover:border-[#0E6B63]/50 hover:text-[#0E6B63]'
                 }`}
               >
                 {dn.categories[cat]}
@@ -46,11 +46,11 @@ export default function Dine() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {Object.entries(dn.menu[activeMenu]).map(([id, item]) => (
               <div key={id} className="bg-white heritage-card overflow-hidden">
-                <div className="img-zoom aspect-video bg-[#12483A]/10">
+                <div className="img-zoom aspect-video bg-[#0E6B63]/10">
                   <Photo src={dishPhotos[id]} alt={item.name} label={item.name} className="w-full h-full object-cover"/>
                 </div>
                 <div className="p-5">
-                  <h3 className="font-display text-lg font-semibold text-[#12483A] mb-2">{item.name}</h3>
+                  <h3 className="font-display text-lg font-semibold text-[#0E6B63] mb-2">{item.name}</h3>
                   <p className="text-[#12150F]/55 text-xs font-sans leading-relaxed">{item.desc}</p>
                 </div>
               </div>
@@ -58,7 +58,7 @@ export default function Dine() {
           </div>
 
           <div className="mt-14 text-center">
-            <Link to="/events" className="inline-flex items-center gap-2 bg-[#12483A] hover:bg-[#1B5F4C] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
+            <Link to="/events" className="inline-flex items-center gap-2 bg-[#0E6B63] hover:bg-[#12857B] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
               {dn.joinEvent}
             </Link>
           </div>
@@ -68,7 +68,7 @@ export default function Dine() {
       {/* Bar section */}
       <section id="bar" className="relative mx-2 sm:mx-3 rounded-[2rem] py-24 lg:py-32 overflow-hidden">
         <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-[#0F2A21]/88"/>
+        <div className="absolute inset-0 bg-[#0A2E2A]/88"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
