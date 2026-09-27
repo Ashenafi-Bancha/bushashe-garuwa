@@ -86,7 +86,7 @@ export default function Gallery() {
                 aria-pressed={filter === f}
                 className={`text-sm font-semibold rounded-full px-5 py-2.5 border transition-all duration-300 ${
                   filter === f
-                    ? 'bg-[#0A2E2A] text-white border-[#12150F]'
+                    ? 'bg-[#0A4F45] text-white border-[#12150F]'
                     : 'border-[#12150F]/15 text-[#12150F]/70 hover:border-[#12150F]/50 hover:text-[#12150F]'
                 }`}
               >

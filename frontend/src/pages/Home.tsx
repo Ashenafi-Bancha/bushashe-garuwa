@@ -122,7 +122,7 @@ function TextLink({ to, children, dark = false }: { to: string; children: ReactN
       className={`inline-flex items-center text-sm font-semibold rounded-full px-6 py-3 border transition-all duration-500 hover:-translate-y-0.5 ${
         dark
           ? 'border-white/20 text-white hover:bg-white hover:text-[#12150F]'
-          : 'border-[#12150F]/15 text-[#12150F] hover:bg-[#0A2E2A] hover:text-white'
+          : 'border-[#12150F]/15 text-[#12150F] hover:bg-[#0A4F45] hover:text-white'
       }`}
     >
       {children}
@@ -259,7 +259,7 @@ export default function Home() {
                     lg:top-28 xl:top-32 lg:inset-x-auto lg:right-0 lg:w-[46%]"
                   nameClassName="text-white"
                 />
-                <h1 className="glow-title font-display text-white text-[clamp(3rem,9.5vw,8rem)] leading-[0.95] animate-fade-up delay-100">
+                <h1 className="glow-title font-display font-bold text-white text-[clamp(2.5rem,6.6vw,5rem)] leading-[1.06] tracking-[-0.01em] animate-fade-up delay-100">
                   {h.hero.title}
                 </h1>
                 <p className="mt-4 sm:mt-6 font-display font-normal text-xl sm:text-3xl text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
@@ -342,7 +342,7 @@ export default function Home() {
                 <img src={photos.gifaataa2} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy"/>
               </div>
               <div className="absolute top-6 right-3 sm:-right-6 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#0A2E2A] text-[#B8863B] flex items-center justify-center font-display text-xl font-bold">4+</div>
+                <div className="w-12 h-12 rounded-xl bg-[#0A4F45] text-[#B8863B] flex items-center justify-center font-display text-xl font-bold">4+</div>
                 <div className="text-sm font-semibold text-[#12150F] leading-tight">{h.intro.generations}</div>
               </div>
             </FadeSection>
@@ -419,7 +419,7 @@ export default function Home() {
         <PhotoRing />
 
         {/* ═════════ TIMELINE ═════════ */}
-        <section className="relative bg-[#0A2E2A] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
+        <section className="relative bg-[#0A4F45] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[2.5rem] py-20 sm:py-28 overflow-hidden">
           <div className="absolute -bottom-48 -left-40 w-[40rem] h-[40rem] glow-forest pointer-events-none"/>
           <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
             <Heading
@@ -504,7 +504,7 @@ export default function Home() {
               </div>
             </div>
             <FadeSection className="text-center mt-12">
-              <Link to="/stay" className="btn-primary bg-[#0A2E2A] border-[#12150F] text-white hover:bg-[#0E6B63] hover:border-[#0E6B63]">
+              <Link to="/stay" className="btn-primary bg-[#0A4F45] border-[#12150F] text-white hover:bg-[#0E6B63] hover:border-[#0E6B63]">
                 {h.stay.cta}
               </Link>
             </FadeSection>
@@ -518,7 +518,7 @@ export default function Home() {
               <FadeSection className="relative min-h-[360px] lg:min-h-[520px] rounded-[2rem] overflow-hidden img-zoom photo-3d">
                 <img src={photos.food} alt={t.photos.food} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
               </FadeSection>
-              <FadeSection delay={120} className="rounded-[2rem] bg-[#0A2E2A] p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative overflow-hidden">
+              <FadeSection delay={120} className="rounded-[2rem] bg-[#0A4F45] p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative overflow-hidden">
                 <div className="absolute -top-32 -right-24 w-80 h-80 glow-gold pointer-events-none"/>
                 <span className="relative eyebrow bg-white/8 text-[#B8863B] mb-5 self-start">{h.restaurant.eyebrow}</span>
                 <h2 className="relative font-display text-4xl sm:text-5xl font-bold text-white leading-[1.05] mb-6">{h.restaurant.title}</h2>

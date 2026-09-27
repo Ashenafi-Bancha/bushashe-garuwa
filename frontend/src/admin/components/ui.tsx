@@ -17,7 +17,7 @@ const STATUS_STYLES: Record<RequestStatus, string> = {
   new: 'bg-[#B8863B]/15 text-[#8a6620]',
   in_progress: 'bg-[#0E6B63]/10 text-[#0E6B63]',
   done: 'bg-emerald-500/12 text-emerald-700',
-  archived: 'bg-[#0A2E2A]/8 text-[#12150F]/55',
+  archived: 'bg-[#0A4F45]/8 text-[#12150F]/55',
 };
 
 export function StatusPill({ status }: { status: RequestStatus }) {
@@ -58,7 +58,7 @@ const BOOKING_STATUS_STYLES: Record<BookingStatus, string> = {
   pending: 'bg-[#B8863B]/15 text-[#8a6620]',
   confirmed: 'bg-emerald-500/12 text-emerald-700',
   attended: 'bg-[#0E6B63]/10 text-[#0E6B63]',
-  cancelled: 'bg-[#0A2E2A]/8 text-[#12150F]/50',
+  cancelled: 'bg-[#0A4F45]/8 text-[#12150F]/50',
 };
 
 /** Bookings move pending → confirmed → came, or are cancelled (which frees the places) */

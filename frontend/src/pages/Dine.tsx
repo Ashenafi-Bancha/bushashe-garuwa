@@ -68,7 +68,7 @@ export default function Dine() {
       {/* Bar section */}
       <section id="bar" className="relative mx-2 sm:mx-3 rounded-[2rem] py-24 lg:py-32 overflow-hidden">
         <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-[#0A2E2A]/88"/>
+        <div className="absolute inset-0 bg-[#0A4F45]/88"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>

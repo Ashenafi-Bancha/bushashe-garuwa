@@ -146,7 +146,7 @@ export default function Heritage() {
             <div className="grid grid-cols-2 gap-3">
               {hg.family.generations.map((gen, i) => (
                 <Link key={i} to="/about#family" className="heritage-card bg-white p-6 flex items-center gap-4">
-                  <span className="w-12 h-12 rounded-full bg-[#0A2E2A] text-[#B8863B] flex items-center justify-center font-display text-2xl flex-shrink-0">{i + 1}</span>
+                  <span className="w-12 h-12 rounded-full bg-[#0A4F45] text-[#B8863B] flex items-center justify-center font-display text-2xl flex-shrink-0">{i + 1}</span>
                   <span className="font-display text-2xl text-[#12150F]">{gen}</span>
                 </Link>
               ))}

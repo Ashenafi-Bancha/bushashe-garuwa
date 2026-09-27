@@ -15,7 +15,7 @@ const footerRoutes = {
 export default function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="bg-[#0A2E2A] text-white">
+    <footer className="bg-[#0A4F45] text-white">
       {/* Pattern accent */}
       <div className="h-px bg-gradient-to-r from-transparent via-[#B8863B] to-transparent opacity-40"/>
 

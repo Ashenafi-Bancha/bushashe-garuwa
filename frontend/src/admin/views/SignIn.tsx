@@ -30,7 +30,7 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-[100svh] bg-[#0A2E2A] lg:grid lg:grid-cols-[1.1fr_1fr]">
+    <div className="min-h-[100svh] bg-[#0A4F45] lg:grid lg:grid-cols-[1.1fr_1fr]">
       {/* Photo, on larger screens only */}
       <div className="relative hidden lg:block overflow-hidden">
         <img src={photos.house} alt="" className="absolute inset-0 w-full h-full object-cover" />

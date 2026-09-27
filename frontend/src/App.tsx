@@ -81,7 +81,7 @@ export default function App() {
           <Route
             path="/admin/*"
             element={
-              <Suspense fallback={<div className="min-h-screen bg-[#0A2E2A]" />}>
+              <Suspense fallback={<div className="min-h-screen bg-[#0A4F45]" />}>
                 <AdminApp />
               </Suspense>
             }

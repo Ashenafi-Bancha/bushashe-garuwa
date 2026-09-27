@@ -48,7 +48,7 @@ export default function QuickLinks() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className="flex-shrink-0 w-7 h-7 rounded-full bg-[#0A2E2A]/5 text-[#0E6B63] grid place-items-center transition-colors group-hover:bg-[#B8863B] group-hover:text-[#12150F]"
+                  className="flex-shrink-0 w-7 h-7 rounded-full bg-[#0A4F45]/5 text-[#0E6B63] grid place-items-center transition-colors group-hover:bg-[#B8863B] group-hover:text-[#12150F]"
                 >
                   ›
                 </span>

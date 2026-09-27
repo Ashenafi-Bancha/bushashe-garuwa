@@ -55,7 +55,7 @@ export default function Navbar() {
           className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full pl-2 pr-2 sm:pl-3 transition-all duration-500 ${
             transparent
               ? 'bg-white/10 border border-white/15 backdrop-blur-md'
-              : 'bg-[#0A2E2A]/85 border border-white/10 backdrop-blur-xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]'
+              : 'bg-[#0A4F45]/85 border border-white/10 backdrop-blur-xl shadow-[0_12px_40px_-12px_rgba(0,0,0,0.45)]'
           } ${scrolled ? 'h-14' : 'h-16'}`}
         >
           {/* ── Logo ── */}
@@ -138,7 +138,7 @@ export default function Navbar() {
         className={`menu-panel fixed inset-x-0 top-0 z-[45] px-3 sm:px-4 pt-[76px] pointer-events-none`}
       >
         <div
-          className={`mx-auto max-w-screen-xl rounded-[1.75rem] bg-[#0A2E2A]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-3 origin-top transition-all duration-500 max-h-[calc(100svh-96px)] overflow-y-auto ${
+          className={`mx-auto max-w-screen-xl rounded-[1.75rem] bg-[#0A4F45]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-3 origin-top transition-all duration-500 max-h-[calc(100svh-96px)] overflow-y-auto ${
             mobileOpen ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-y-3 scale-[0.98]'
           }`}
           style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}

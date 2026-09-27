@@ -101,7 +101,7 @@ export default function Events() {
     kind === 'limited'
       ? dark ? 'bg-[#0E6B63]/20 text-[#f0a584]' : 'bg-[#0E6B63]/10 text-[#0E6B63]'
       : kind === 'full'
-        ? dark ? 'bg-white/10 text-white/50' : 'bg-[#0A2E2A]/8 text-[#12150F]/50'
+        ? dark ? 'bg-white/10 text-white/50' : 'bg-[#0A4F45]/8 text-[#12150F]/50'
         : kind === 'group'
           ? 'bg-[#0E6B63]/10 text-[#0E6B63]'
           : dark ? 'bg-[#0E6B63] text-[#B8863B]' : 'bg-[#B8863B]/10 text-[#B8863B]';
@@ -157,8 +157,8 @@ export default function Events() {
             <div className="text-[#B8863B] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-10">{e.featured}</div>
             <div className="grid md:grid-cols-2 gap-6">
               {featured.map((event) => (
-                <div key={event.key} className="group relative overflow-hidden flex flex-col rounded-3xl bg-[#0A2E2A]/50 border border-white/10 hover:border-[#B8863B]/30 transition-all duration-300">
-                  <div className="img-zoom aspect-[16/9] bg-[#0A2E2A]">
+                <div key={event.key} className="group relative overflow-hidden flex flex-col rounded-3xl bg-[#0A4F45]/50 border border-white/10 hover:border-[#B8863B]/30 transition-all duration-300">
+                  <div className="img-zoom aspect-[16/9] bg-[#0A4F45]">
                     <Photo src={photoOf(event.photo)} alt={event.name} label={event.name} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" />
                   </div>
                   <div className="p-5 sm:p-7 flex-1 flex flex-col">

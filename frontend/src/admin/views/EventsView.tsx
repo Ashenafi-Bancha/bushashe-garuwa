@@ -84,7 +84,7 @@ export default function EventsView() {
         <button
           type="button"
           onClick={() => setEditing({ id: null, values: emptyEvent() })}
-          className="rounded-full bg-[#0A2E2A] text-white text-sm font-semibold px-5 py-2.5 hover:bg-[#12857B] transition-colors"
+          className="rounded-full bg-[#0A4F45] text-white text-sm font-semibold px-5 py-2.5 hover:bg-[#12857B] transition-colors"
         >
           Add an event
         </button>
@@ -108,9 +108,9 @@ export default function EventsView() {
                   <div className="min-w-0">
                     <div className="flex flex-wrap items-center gap-2 mb-1">
                       <h3 className="font-display text-xl text-[#12150F]">{event.translations.en.name}</h3>
-                      {!event.published && <span className="rounded-full bg-[#0A2E2A]/8 text-[#12150F]/55 text-xs font-semibold px-2.5 py-0.5">Draft</span>}
+                      {!event.published && <span className="rounded-full bg-[#0A4F45]/8 text-[#12150F]/55 text-xs font-semibold px-2.5 py-0.5">Draft</span>}
                       {event.featured && <span className="rounded-full bg-[#B8863B]/15 text-[#8a6620] text-xs font-semibold px-2.5 py-0.5">On the home page</span>}
-                      {event.date < today && <span className="rounded-full bg-[#0A2E2A]/8 text-[#12150F]/55 text-xs font-semibold px-2.5 py-0.5">Past</span>}
+                      {event.date < today && <span className="rounded-full bg-[#0A4F45]/8 text-[#12150F]/55 text-xs font-semibold px-2.5 py-0.5">Past</span>}
                     </div>
                     <div className="text-sm text-[#12150F]/60">
                       {formatDate(event.date)}
