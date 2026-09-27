@@ -172,6 +172,10 @@ export const am: Dictionary = {
       cta: 'ጋለሪውን ይክፈቱ',
       hint: 'ይጎትቱ፣ ያንሸራትቱ ወይም ቀስቶቹን ይጠቀሙ',
     },
+    quick: {
+      eyebrow: 'መንገድዎን ያግኙ',
+      title: 'በቡሻሼ ጋሯ ያለው ሁሉ',
+    },
     facts: {
       items: [
         { value: '18ኛው ክ/ዘ', label: 'ታሪኩ የጀመረበት' },

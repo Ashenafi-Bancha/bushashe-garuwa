@@ -187,6 +187,10 @@ export const wal: DeepPartial<Dictionary> = {
       cta: 'Open the gallery',
       hint: 'Drag, swipe, or use the arrows',
     },
+    quick: {
+      eyebrow: 'Find your way',
+      title: 'Everything at Bushaashe Garuwa',
+    },
     facts: {
       items: [
         { value: '18th c.', label: 'Where the story begins' },

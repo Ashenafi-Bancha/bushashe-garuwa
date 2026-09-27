@@ -9,6 +9,7 @@ import { videos } from '../assets/videos';
 import StoryFilm from '../components/StoryFilm';
 import PhotoRing from '../components/PhotoRing';
 import WelcomeTyper from '../components/WelcomeTyper';
+import QuickLinks from '../components/QuickLinks';
 import { useHeroVideo } from '../lib/heroVideo';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 
@@ -131,6 +132,9 @@ export default function Home() {
   const [isPlaying, setIsPlaying] = useState(false);
   const { events: siteEvents } = useSiteEvents();
   const heroVideo = useHeroVideo();
+  // the hero only drifts with the scroll on desktop, where the words lie on the
+  // photograph; on phones they sit below it and must stay put
+  const [wideScreen, setWideScreen] = useState(false);
   const [showStickyCta, setShowStickyCta] = useState(false);
 
   useEffect(() => {
@@ -149,6 +153,15 @@ export default function Home() {
   }, []);
 
   const scrollY = useScrollY(1400);
+  const drift = wideScreen ? scrollY : 0;
+
+  useEffect(() => {
+    const wide = window.matchMedia('(min-width: 1024px)');
+    const sync = () => setWideScreen(wide.matches);
+    sync();
+    wide.addEventListener('change', sync);
+    return () => wide.removeEventListener('change', sync);
+  }, []);
 
   const stats: { value?: string; label?: string; phrase?: string }[] = [
     { value: '4+', label: h.hero.statGenerations },
@@ -166,8 +179,8 @@ export default function Home() {
         <section className="relative bg-[#071F16] lg:h-[100svh] lg:min-h-[640px] overflow-hidden" aria-label={h.hero.title}>
 
           {/* The photographs */}
-          <div className="relative h-[46svh] min-h-[300px] sm:h-[56svh] overflow-hidden rounded-b-[2rem] lg:rounded-none lg:absolute lg:inset-0 lg:h-auto lg:min-h-0">
-            <div className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(0, ${scrollY * 0.35}px, 0)` }}>
+          <div className="relative h-[60svh] min-h-[380px] sm:h-[62svh] overflow-hidden rounded-b-[1rem] lg:rounded-none lg:absolute lg:inset-0 lg:h-auto lg:min-h-0">
+            <div className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(0, ${drift * 0.35}px, 0)` }}>
               {heroVideo && (
                 <video
                   src={videos.heroLoop}
@@ -231,7 +244,7 @@ export default function Home() {
           {/* The words */}
           <div
             className="relative z-10 max-w-screen-xl mx-auto px-5 sm:px-8 pt-7 sm:pt-8 pb-14 sm:pb-16 lg:pt-0 lg:pb-24 lg:h-full lg:flex lg:flex-col lg:justify-end will-change-transform"
-            style={{ transform: `translate3d(0, ${scrollY * -0.12}px, 0)`, opacity: Math.max(0, 1 - scrollY / 700) }}
+            style={{ transform: `translate3d(0, ${drift * -0.12}px, 0)`, opacity: Math.max(0, 1 - drift / 700) }}
           >
             <div className="grid lg:grid-cols-[1fr_auto] gap-10 items-end">
               <div className="max-w-4xl">
@@ -290,16 +303,18 @@ export default function Home() {
         <StoryFilm />
 
         {/* ═════════ THE PLACE IN NUMBERS ═════════ */}
-        <div className="bg-[#C8963C] text-[#0D2A1E]">
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-7 sm:py-9">
-            <ul className="grid grid-cols-2 lg:grid-cols-5 gap-y-7 gap-x-6 text-center lg:text-left">
+        <div className="bg-[#C8963C]">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-7 sm:py-10">
+            <ul className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
               {h.facts.items.map((fact, i) => (
                 <li
                   key={fact.label}
-                  className={`lg:pl-6 ${i > 0 ? 'lg:border-l lg:border-[#0D2A1E]/20' : ''} ${i === 4 ? 'col-span-2 lg:col-span-1' : ''}`}
+                  className={`rounded-2xl bg-[#F4EEE2]/85 border border-white/60 shadow-[0_10px_24px_-14px_rgba(13,42,30,0.5)] px-4 py-4 sm:px-5 sm:py-5 text-center lg:text-left transition-transform duration-300 hover:-translate-y-0.5 ${
+                    i === 4 ? 'col-span-2 lg:col-span-1' : ''
+                  }`}
                 >
-                  <div className="font-display text-3xl sm:text-4xl leading-none">{fact.value}</div>
-                  <div className="text-xs font-semibold tracking-[0.14em] uppercase mt-2 text-[#0D2A1E]/70">
+                  <div className="font-display text-3xl sm:text-4xl leading-none text-[#0D2A1E]">{fact.value}</div>
+                  <div className="text-[11px] sm:text-xs font-semibold tracking-[0.14em] uppercase mt-2 text-[#0D2A1E]/65 leading-snug">
                     {fact.label}
                   </div>
                 </li>
@@ -307,6 +322,9 @@ export default function Home() {
             </ul>
           </div>
         </div>
+
+        {/* ═════════ QUICK LINKS (phones) ═════════ */}
+        <QuickLinks />
 
         {/* ═════════ INTRO ═════════ */}
         <section className="relative py-20 sm:py-28 lg:py-32 overflow-hidden">
