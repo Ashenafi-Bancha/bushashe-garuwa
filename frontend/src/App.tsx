@@ -36,10 +36,10 @@ function NotFound() {
   return (
     <main className="pt-20 min-h-screen bg-[#FAFAF8] flex items-center justify-center">
       <div className="text-center px-6">
-        <div className="font-display text-8xl text-[#0E6B63]/20 mb-6">404</div>
-        <h1 className="font-display text-3xl font-semibold text-[#0E6B63] mb-4">{t.notFound.title}</h1>
+        <div className="font-display text-8xl text-[#35723A]/20 mb-6">404</div>
+        <h1 className="font-display text-3xl font-semibold text-[#35723A] mb-4">{t.notFound.title}</h1>
         <p className="text-[#12150F]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
-        <a href="/" className="inline-flex items-center gap-2 bg-[#0E6B63] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#12857B]">
+        <a href="/" className="inline-flex items-center gap-2 bg-[#35723A] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#43884A]">
           {t.notFound.button}
         </a>
       </div>
@@ -49,7 +49,9 @@ function NotFound() {
 
 function AppLayout() {
   return (
-    <>
+    <div className="min-h-screen bg-[#2F4A2B] p-2 sm:p-3">
+      {/* the whole site is a white sheet floating on the green canvas */}
+      <div className="bg-white rounded-[1.25rem] sm:rounded-[2rem] overflow-hidden">
       <ScrollToTop />
       <Navbar />
       <Routes>
@@ -69,7 +71,8 @@ function AppLayout() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-    </>
+      </div>
+    </div>
   );
 }
 
@@ -81,7 +84,7 @@ export default function App() {
           <Route
             path="/admin/*"
             element={
-              <Suspense fallback={<div className="min-h-screen bg-[#0A4F45]" />}>
+              <Suspense fallback={<div className="min-h-screen bg-[#2F4A2B]" />}>
                 <AdminApp />
               </Suspense>
             }

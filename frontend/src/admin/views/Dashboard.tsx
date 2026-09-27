@@ -44,7 +44,7 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
-      <header className="bg-[#0A4F45] text-white">
+      <header className="bg-[#2F4A2B] text-white">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <img src={logo} alt="" className="w-10 h-10 rounded-full bg-white/90 object-contain p-0.5" />
@@ -89,7 +89,7 @@ export default function Dashboard() {
                 aria-pressed={tab === id}
                 className={`flex-shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold border transition-colors ${
                   tab === id
-                    ? 'bg-[#0A4F45] text-white border-[#12150F]'
+                    ? 'bg-[#2F4A2B] text-white border-[#12150F]'
                     : 'border-[#12150F]/15 text-[#12150F]/70 hover:border-[#12150F]/50 hover:text-[#12150F]'
                 }`}
               >

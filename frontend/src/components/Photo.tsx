@@ -21,16 +21,16 @@ export default function Photo({ src, alt, label, className = '', ...rest }: Phot
   // three quiet variations, picked from the name, so a row of panels is not identical
   const variant = [...(label ?? alt)].reduce((sum, ch) => sum + ch.charCodeAt(0), 0) % 3;
   const wash = [
-    'bg-gradient-to-br from-[#12857B]/70 via-transparent to-[#061C1A]/70',
-    'bg-gradient-to-tr from-[#061C1A]/75 via-transparent to-[#12857B]/55',
-    'bg-gradient-to-b from-[#12857B]/60 via-transparent to-[#061C1A]/80',
+    'bg-gradient-to-br from-[#43884A]/70 via-transparent to-[#16250F]/70',
+    'bg-gradient-to-tr from-[#16250F]/75 via-transparent to-[#43884A]/55',
+    'bg-gradient-to-b from-[#43884A]/60 via-transparent to-[#16250F]/80',
   ][variant];
 
   return (
     <div
       role="img"
       aria-label={`${alt} (${t.common.photoComingSoon})`}
-      className={`${className} relative overflow-hidden bg-[#0E6B63] woven-panel woven-${variant + 1}`}
+      className={`${className} relative overflow-hidden bg-[#35723A] woven-panel woven-${variant + 1}`}
     >
       <span className={`absolute inset-0 ${wash}`} />
       {label && (

@@ -18,7 +18,7 @@ export default function MessagesView() {
 
   return (
     <Panel>
-      <ul className="divide-y divide-[#0E6B63]/10">
+      <ul className="divide-y divide-[#35723A]/10">
         {data?.items.map((message) => (
           <li key={message.id} className="py-5 first:pt-0 last:pb-0">
             <div className="flex flex-wrap items-start justify-between gap-3 mb-2">

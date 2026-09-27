@@ -56,7 +56,7 @@ export default function Visit() {
       <PageHero photo="lawn" pos="object-[center_62%]" eyebrow={v.hero.eyebrow} title={v.hero.title} desc={t.common.locationLine} />
 
       {/* Info strip */}
-      <section className="bg-[#0E6B63] mx-2 sm:mx-3 rounded-[2rem] py-10">
+      <section className="bg-[#35723A] mx-2 sm:mx-3 rounded-[2rem] py-10">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
@@ -89,8 +89,8 @@ export default function Visit() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
             <div>
-              <div className="text-[#0E6B63] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{v.booking.eyebrow}</div>
-              <h2 className="font-display text-4xl font-semibold text-[#0E6B63] leading-tight mb-6">{v.booking.title}</h2>
+              <div className="text-[#35723A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{v.booking.eyebrow}</div>
+              <h2 className="font-display text-4xl font-semibold text-[#35723A] leading-tight mb-6">{v.booking.title}</h2>
               <p className="text-[#12150F]/60 font-sans text-sm leading-relaxed mb-8">{v.booking.desc}</p>
 
               {/* Experience selector */}
@@ -103,8 +103,8 @@ export default function Visit() {
                     onClick={() => toggleExp(exp.id)}
                     className={`p-4 text-left rounded-2xl border transition-all duration-200 ${
                       selectedExp.includes(exp.id)
-                        ? 'border-[#0E6B63] bg-[#0E6B63] text-white'
-                        : 'border-[#0E6B63]/20 bg-white hover:border-[#0E6B63]/50 text-[#0E6B63]'
+                        ? 'border-[#35723A] bg-[#35723A] text-white'
+                        : 'border-[#35723A]/20 bg-white hover:border-[#35723A]/50 text-[#35723A]'
                     }`}
                   >
                     <div className="font-sans font-semibold text-xs mb-1">{v.types[exp.id].label}</div>
@@ -115,13 +115,13 @@ export default function Visit() {
 
               {/* Getting here */}
               <div>
-                <h3 className="font-display text-2xl font-semibold text-[#0E6B63] mb-5">{v.gettingHere.title}</h3>
+                <h3 className="font-display text-2xl font-semibold text-[#35723A] mb-5">{v.gettingHere.title}</h3>
                 <div className="space-y-4">
                   {v.gettingHere.routes.map((route, i) => (
                     <div key={i} className="flex gap-4">
                       <div className="w-2 h-2 bg-[#B8863B] mt-2 flex-shrink-0"/>
                       <div>
-                        <div className="font-sans font-semibold text-sm text-[#0E6B63] mb-1">{route.from}</div>
+                        <div className="font-sans font-semibold text-sm text-[#35723A] mb-1">{route.from}</div>
                         <div className="font-sans text-xs text-[#12150F]/60 leading-relaxed">{route.dir}</div>
                       </div>
                     </div>
@@ -136,94 +136,94 @@ export default function Visit() {
                 {submitted ? (
                   <div className="text-center py-12">
                     <div className="w-12 h-1 rounded-full bg-[#B8863B] mx-auto mb-8" />
-                    <h3 className="font-display text-2xl font-semibold text-[#0E6B63] mb-3">{v.form.thanksTitle}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-[#35723A] mb-3">{v.form.thanksTitle}</h3>
                     <p className="text-[#12150F]/60 font-sans text-sm leading-relaxed">{v.form.thanksText}</p>
                   </div>
                 ) : (
                   <>
-                    <h3 className="font-display text-2xl font-semibold text-[#0E6B63] mb-6">{v.form.title}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-[#35723A] mb-6">{v.form.title}</h3>
                     <form onSubmit={handleSubmit} className="space-y-4">
                       {/* hidden from people; spam bots fill it in */}
                       <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-sans font-semibold text-[#0E6B63]/70 tracking-wider uppercase mb-2">{v.form.name}</label>
+                          <label className="block text-xs font-sans font-semibold text-[#35723A]/70 tracking-wider uppercase mb-2">{v.form.name}</label>
                           <input
                             required
                             type="text"
                             value={form.name}
                             onChange={(e) => setForm({ ...form, name: e.target.value })}
-                            className="w-full rounded-xl border border-[#0E6B63]/20 focus:border-[#0E6B63] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
+                            className="w-full rounded-xl border border-[#35723A]/20 focus:border-[#35723A] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
                             placeholder={v.form.namePlaceholder}
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-sans font-semibold text-[#0E6B63]/70 tracking-wider uppercase mb-2">{v.form.phone}</label>
+                          <label className="block text-xs font-sans font-semibold text-[#35723A]/70 tracking-wider uppercase mb-2">{v.form.phone}</label>
                           <input
                             required
                             type="tel"
                             value={form.phone}
                             onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                            className="w-full rounded-xl border border-[#0E6B63]/20 focus:border-[#0E6B63] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
+                            className="w-full rounded-xl border border-[#35723A]/20 focus:border-[#35723A] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
                             placeholder="+251..."
                           />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-sans font-semibold text-[#0E6B63]/70 tracking-wider uppercase mb-2">{v.form.email}</label>
+                        <label className="block text-xs font-sans font-semibold text-[#35723A]/70 tracking-wider uppercase mb-2">{v.form.email}</label>
                         <input
                           type="email"
                           value={form.email}
                           onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          className="w-full rounded-xl border border-[#0E6B63]/20 focus:border-[#0E6B63] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
+                          className="w-full rounded-xl border border-[#35723A]/20 focus:border-[#35723A] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
                           placeholder="your@email.com"
                         />
                       </div>
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-sans font-semibold text-[#0E6B63]/70 tracking-wider uppercase mb-2">{v.form.date}</label>
+                          <label className="block text-xs font-sans font-semibold text-[#35723A]/70 tracking-wider uppercase mb-2">{v.form.date}</label>
                           <input
                             required
                             type="date"
                             value={form.date}
                             onChange={(e) => setForm({ ...form, date: e.target.value })}
-                            className="w-full rounded-xl border border-[#0E6B63]/20 focus:border-[#0E6B63] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
+                            className="w-full rounded-xl border border-[#35723A]/20 focus:border-[#35723A] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8]"
                           />
                         </div>
                         <div>
-                          <label className="block text-xs font-sans font-semibold text-[#0E6B63]/70 tracking-wider uppercase mb-2">{v.form.visitors}</label>
+                          <label className="block text-xs font-sans font-semibold text-[#35723A]/70 tracking-wider uppercase mb-2">{v.form.visitors}</label>
                           <select
                             value={form.visitors}
                             onChange={(e) => setForm({ ...form, visitors: e.target.value })}
-                            className="w-full rounded-xl border border-[#0E6B63]/20 focus:border-[#0E6B63] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8] appearance-none"
+                            className="w-full rounded-xl border border-[#35723A]/20 focus:border-[#35723A] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8] appearance-none"
                           >
                             {['1', '2', '3–5', '6–10', '11–20', '21–50', '50+'].map((n) => <option key={n} value={n}>{n === '1' ? v.form.visitorOne : fmt(v.form.visitorMany, { count: n })}</option>)}
                           </select>
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-sans font-semibold text-[#0E6B63]/70 tracking-wider uppercase mb-2">{v.form.message}</label>
+                        <label className="block text-xs font-sans font-semibold text-[#35723A]/70 tracking-wider uppercase mb-2">{v.form.message}</label>
                         <textarea
                           rows={3}
                           value={form.message}
                           onChange={(e) => setForm({ ...form, message: e.target.value })}
-                          className="w-full rounded-xl border border-[#0E6B63]/20 focus:border-[#0E6B63] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8] resize-none"
+                          className="w-full rounded-xl border border-[#35723A]/20 focus:border-[#35723A] px-4 py-3 font-sans text-base text-[#12150F] outline-none transition-colors bg-[#FAFAF8] resize-none"
                           placeholder={v.form.messagePlaceholder}
                         />
                       </div>
                       {selectedExp.length > 0 && (
                         <div className="flex flex-wrap gap-2 pt-2">
                           {selectedExp.map((id) => (
-                            <span key={id} className="bg-[#0E6B63]/10 text-[#0E6B63] text-xs font-sans rounded-full px-3 py-1">{v.types[id].label}</span>
+                            <span key={id} className="bg-[#35723A]/10 text-[#35723A] text-xs font-sans rounded-full px-3 py-1">{v.types[id].label}</span>
                           ))}
                         </div>
                       )}
-                      {failed && <p role="alert" className="text-sm font-sans text-[#0E6B63]">{t.common.formError}</p>}
+                      {failed && <p role="alert" className="text-sm font-sans text-[#35723A]">{t.common.formError}</p>}
                       <button
                         type="submit"
                         disabled={sending}
                         aria-busy={sending}
-                        className="w-full bg-[#B8863B] hover:bg-[#d9af65] text-[#0E6B63] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
+                        className="w-full bg-[#B8863B] hover:bg-[#d9af65] text-[#35723A] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
                       >
                         {v.form.submit}
                       </button>

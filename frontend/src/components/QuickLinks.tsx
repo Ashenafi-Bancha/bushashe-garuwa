@@ -30,7 +30,7 @@ export default function QuickLinks() {
   return (
     <section className="lg:hidden py-10 sm:py-12">
       <div className="px-5 sm:px-8">
-        <span className="eyebrow bg-[#0E6B63]/10 text-[#0E6B63] mb-4">{q.eyebrow}</span>
+        <span className="eyebrow bg-[#35723A]/10 text-[#35723A] mb-4">{q.eyebrow}</span>
         <h2 className="font-display text-3xl sm:text-4xl text-[#12150F] leading-tight mb-6">{q.title}</h2>
 
         <ul className="grid grid-cols-2 gap-3">
@@ -48,7 +48,7 @@ export default function QuickLinks() {
                 </span>
                 <span
                   aria-hidden="true"
-                  className="flex-shrink-0 w-7 h-7 rounded-full bg-[#0A4F45]/5 text-[#0E6B63] grid place-items-center transition-colors group-hover:bg-[#B8863B] group-hover:text-[#12150F]"
+                  className="flex-shrink-0 w-7 h-7 rounded-full bg-[#2F4A2B]/5 text-[#35723A] grid place-items-center transition-colors group-hover:bg-[#B8863B] group-hover:text-[#12150F]"
                 >
                   ›
                 </span>

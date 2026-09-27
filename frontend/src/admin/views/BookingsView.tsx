@@ -18,7 +18,7 @@ export default function BookingsView() {
 
   return (
     <Panel>
-      <ul className="divide-y divide-[#0E6B63]/10">
+      <ul className="divide-y divide-[#35723A]/10">
         {data?.items.map((booking) => (
           <li key={booking.id} className="py-5 first:pt-0 last:pb-0">
             <div className="flex flex-wrap items-start justify-between gap-3 mb-2">
@@ -44,7 +44,7 @@ export default function BookingsView() {
               </div>
             </div>
 
-            <div className="text-sm text-[#0E6B63]">
+            <div className="text-sm text-[#35723A]">
               <span className="text-[#B8863B] text-[11px] uppercase tracking-wider mr-2">Event</span>
               {booking.eventName}
               {booking.eventDate ? ` · ${formatDate(booking.eventDate)}` : ''}

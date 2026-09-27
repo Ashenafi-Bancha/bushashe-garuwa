@@ -36,13 +36,13 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
 
         <div>
           <span className="block w-10 h-px bg-[#B8863B] mb-4" />
-          <span className="block text-xs font-bold tracking-[0.2em] uppercase text-[#0E6B63] mb-4">{c.eyebrow}</span>
+          <span className="block text-xs font-bold tracking-[0.2em] uppercase text-[#35723A] mb-4">{c.eyebrow}</span>
           <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#12150F] leading-[1.05] mb-5">{c.title}</h2>
           <p className="text-[#12150F]/60 text-base sm:text-lg leading-relaxed mb-5 max-w-lg">{c.desc}</p>
-          {partner && <p className="text-[#0E6B63] font-semibold mb-7">{fmt(c.partner, { partner })}</p>}
+          {partner && <p className="text-[#35723A] font-semibold mb-7">{fmt(c.partner, { partner })}</p>}
 
           <div className="rounded-[1.25rem] border border-[#12150F]/10 p-5 sm:p-6 mb-8">
-            <div className="text-xs font-bold tracking-[0.18em] uppercase text-[#0E6B63] mb-4">{c.nextTitle}</div>
+            <div className="text-xs font-bold tracking-[0.18em] uppercase text-[#35723A] mb-4">{c.nextTitle}</div>
             {dates.length === 0 ? (
               <p className="text-[#12150F]/55 text-sm leading-relaxed">{c.soon}</p>
             ) : (
@@ -62,7 +62,7 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
                           ? 'bg-[#12150F]/6 text-[#12150F]/45'
                           : event.availability === 'limited' || (event.placesLeft !== null && event.placesLeft <= 5)
                             ? 'bg-[#B8863B]/15 text-[#8A6428]'
-                            : 'bg-[#0E6B63]/10 text-[#0E6B63]'
+                            : 'bg-[#35723A]/10 text-[#35723A]'
                       }`}
                     >
                       {placeLabel(event)}
@@ -75,7 +75,7 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
 
           <div className="flex flex-wrap gap-3">
             <Link to="/events" className="btn-primary">{c.bookCta}</Link>
-            <Link to="/events" className="btn-outline text-[#0E6B63] border-[#12150F]/20">{c.allCta}</Link>
+            <Link to="/events" className="btn-outline text-[#35723A] border-[#12150F]/20">{c.allCta}</Link>
           </div>
         </div>
       </div>

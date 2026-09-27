@@ -21,8 +21,8 @@ export const emptyEvent = (): SaveEventInput => ({
   translations: { en: { name: '', desc: '' }, am: { name: '', desc: '' }, wal: { name: '', desc: '' } },
 });
 
-const field = 'w-full rounded-xl border border-[#0E6B63]/20 focus:border-[#0E6B63] px-4 py-3 text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]';
-const label = 'block text-xs font-semibold text-[#0E6B63]/70 tracking-wider uppercase mb-2';
+const field = 'w-full rounded-xl border border-[#35723A]/20 focus:border-[#35723A] px-4 py-3 text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]';
+const label = 'block text-xs font-semibold text-[#35723A]/70 tracking-wider uppercase mb-2';
 
 /** Add or change one event, with its words in each language. */
 export default function EventForm({
@@ -130,8 +130,8 @@ export default function EventForm({
             ['featured', 'Show on the home page'],
             ['bookable', 'People can reserve a place'],
           ] as const).map(([name, text]) => (
-            <label key={name} className="inline-flex items-center gap-2 text-sm text-[#0E6B63] cursor-pointer">
-              <input type="checkbox" checked={values[name]} onChange={(e) => set({ [name]: e.target.checked })} className="w-4 h-4 accent-[#0E6B63]" />
+            <label key={name} className="inline-flex items-center gap-2 text-sm text-[#35723A] cursor-pointer">
+              <input type="checkbox" checked={values[name]} onChange={(e) => set({ [name]: e.target.checked })} className="w-4 h-4 accent-[#35723A]" />
               {text}
             </label>
           ))}
@@ -139,7 +139,7 @@ export default function EventForm({
 
         <div className="space-y-5">
           {(['en', 'am', 'wal'] as const).map((lang) => (
-            <div key={lang} className="rounded-2xl border border-[#0E6B63]/10 p-4">
+            <div key={lang} className="rounded-2xl border border-[#35723A]/10 p-4">
               <div className="text-[#B8863B] text-[11px] font-semibold tracking-[0.16em] uppercase mb-3">
                 {lang === 'en' ? 'English (required)' : lang === 'am' ? 'Amharic' : 'Wolayttatto doonaa'}
               </div>
@@ -166,7 +166,7 @@ export default function EventForm({
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <button type="submit" disabled={saving} className="rounded-full bg-[#B8863B] hover:bg-[#d9af65] text-[#0E6B63] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-60">
+          <button type="submit" disabled={saving} className="rounded-full bg-[#B8863B] hover:bg-[#d9af65] text-[#35723A] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-60">
             {saving ? 'Saving…' : 'Save event'}
           </button>
           <button type="button" onClick={onCancel} className="inline-flex admin-btn-quiet">Cancel</button>

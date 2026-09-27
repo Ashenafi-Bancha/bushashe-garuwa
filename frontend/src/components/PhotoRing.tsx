@@ -121,7 +121,7 @@ export default function PhotoRing() {
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 text-center mb-10 sm:mb-14">
         <span className="block w-10 h-px bg-[#B8863B] mb-4 mx-auto" />
-        <span className="block text-xs font-bold tracking-[0.2em] uppercase text-[#0E6B63] mb-4">{ring.eyebrow}</span>
+        <span className="block text-xs font-bold tracking-[0.2em] uppercase text-[#35723A] mb-4">{ring.eyebrow}</span>
         <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-[#12150F] leading-[1.05]">{ring.title}</h2>
         <p className="text-[#12150F]/60 mt-4 max-w-xl mx-auto">{ring.desc}</p>
       </div>
@@ -158,7 +158,7 @@ export default function PhotoRing() {
                 draggable={false}
                 className="w-full h-full object-cover pointer-events-none"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#061C1A]/80 via-transparent to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#16250F]/80 via-transparent to-transparent" />
               <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">
                 {t.photoCaptions[key].title}
               </figcaption>
@@ -169,15 +169,15 @@ export default function PhotoRing() {
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
         <div className="flex items-center gap-3">
-          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-11 h-11 rounded-full border border-[#12150F]/15 text-[#0E6B63] hover:border-[#0E6B63] transition-colors">
+          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-11 h-11 rounded-full border border-[#12150F]/15 text-[#35723A] hover:border-[#35723A] transition-colors">
             ‹
           </button>
           <span className="text-[#12150F]/60 text-sm min-w-[12rem] text-center">{t.photoCaptions[facing].title}</span>
-          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-11 h-11 rounded-full border border-[#12150F]/15 text-[#0E6B63] hover:border-[#0E6B63] transition-colors">
+          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-11 h-11 rounded-full border border-[#12150F]/15 text-[#35723A] hover:border-[#35723A] transition-colors">
             ›
           </button>
         </div>
-        <Link to="/gallery" className="btn-outline text-[#0E6B63] border-[#12150F]/20">{ring.cta}</Link>
+        <Link to="/gallery" className="btn-outline text-[#35723A] border-[#12150F]/20">{ring.cta}</Link>
       </div>
       <p className="relative text-center text-[#12150F]/40 text-xs mt-5">{ring.hint}</p>
     </section>
