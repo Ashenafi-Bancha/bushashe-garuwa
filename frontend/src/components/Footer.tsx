@@ -15,9 +15,8 @@ const footerRoutes = {
 export default function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="bg-[#2F4A2B] text-white">
-      {/* Pattern accent */}
-      <div className="h-px bg-gradient-to-r from-transparent via-[#B8863B] to-transparent opacity-40"/>
+    <footer className="bg-[#0B0B0C] text-white">
+      <div className="h-px bg-white/10" />
 
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-8">
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1fr] gap-8 sm:gap-10 lg:gap-12 mb-10 sm:mb-16">
@@ -31,16 +30,16 @@ export default function Footer() {
               />
               <div className="leading-none">
                 <div className="font-display text-white text-lg font-bold tracking-tight">Bushaashe Garuwa</div>
-                <div className="text-[#B8863B] text-[10px] font-medium tracking-[0.18em] uppercase mt-1.5">Wolaita · Ethiopia</div>
+                <div className="text-white/40 text-[10px] font-medium tracking-[0.18em] uppercase mt-1.5">Wolaita · Ethiopia</div>
               </div>
             </div>
-            <p className="text-white/50 text-sm leading-relaxed font-sans mb-5">
+            <p className="text-white/55 text-sm leading-relaxed font-sans mb-5">
               {t.footer.tagline}
             </p>
 
             {/* Follow us (desktop; on smaller screens it closes the footer) */}
             <div className="hidden lg:block">
-              <div className="text-[#B8863B] text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-3">{t.footer.followUs}</div>
+              <div className="text-white/40 text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-3">{t.footer.followUs}</div>
               <SocialLinks small />
             </div>
           </div>
@@ -51,13 +50,13 @@ export default function Footer() {
             const routes: Record<string, string> = footerRoutes[col];
             return (
               <div key={col}>
-                <div className="text-[#B8863B] text-xs font-sans font-semibold tracking-[0.2em] uppercase mb-5">{column.title}</div>
+                <div className="text-white/40 text-xs font-sans font-semibold tracking-[0.2em] uppercase mb-5">{column.title}</div>
                 <ul className="space-y-3">
                   {Object.entries(column.links).map(([key, label]) => (
                     <li key={key}>
                       <Link
                         to={routes[key]}
-                        className="text-white/50 hover:text-white text-sm font-sans transition-colors duration-200"
+                        className="text-white/65 hover:text-white text-sm font-sans transition-colors duration-200"
                       >
                         {label}
                       </Link>
@@ -70,20 +69,20 @@ export default function Footer() {
         </div>
 
         {/* Contact row */}
-        <div className="border-t border-white/10 pt-6 sm:pt-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
-          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-6 text-white/40 text-xs font-sans text-center sm:text-left">
+        <div className="border-t border-white/12 pt-6 sm:pt-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-6 text-white/55 text-xs font-sans text-center sm:text-left">
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.address}</a>
             <span>+251932196502</span>
             <a href="mailto:info@bushaashegaruwa.com" className="hover:text-white transition-colors">info@bushaashegaruwa.com</a>
           </div>
-          <div className="text-white/25 text-xs font-sans">
+          <div className="text-white/35 text-xs font-sans">
             © {new Date().getFullYear()} {t.footer.rights}
           </div>
         </div>
 
         {/* Follow us, last on phones and tablets */}
-        <div className="lg:hidden border-t border-white/10 mt-6 pt-6 flex flex-col items-center gap-3">
-          <div className="text-[#B8863B] text-[10px] font-sans font-semibold tracking-[0.2em] uppercase">{t.footer.followUs}</div>
+        <div className="lg:hidden border-t border-white/12 mt-6 pt-6 flex flex-col items-center gap-3">
+          <div className="text-white/40 text-[10px] font-sans font-semibold tracking-[0.2em] uppercase">{t.footer.followUs}</div>
           <SocialLinks small />
         </div>
       </div>
