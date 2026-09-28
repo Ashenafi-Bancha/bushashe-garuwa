@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../assets/brand/logo.png';
 import { ApiError } from '../../lib/api';
 import { adminApi } from '../api/adminClient';
 import type { Summary } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
+import Sidebar, { type Section, type SectionId } from '../components/Sidebar';
 import { Notice, StatCard } from '../components/ui';
 import BookingsView from './BookingsView';
 import ContentView from './ContentView';
@@ -12,22 +11,22 @@ import EventsView from './EventsView';
 import MessagesView from './MessagesView';
 import VisitsView from './VisitsView';
 
-const TABS = [
-  { id: 'visits', label: 'Visit requests' },
-  { id: 'bookings', label: 'Event bookings' },
-  { id: 'messages', label: 'Messages' },
-  { id: 'events', label: 'Events' },
-  { id: 'content', label: 'Website text' },
-] as const;
+/** The words at the top of the work area, so staff always know where they are */
+const HEADINGS: Record<SectionId, { title: string; lead: string }> = {
+  overview: { title: 'Overview', lead: 'Everything waiting for you today.' },
+  visits: { title: 'Visit requests', lead: 'People who asked to come and see Bushaashe Garuwa.' },
+  bookings: { title: 'Event bookings', lead: 'Places reserved at the cultural food evenings and other events.' },
+  messages: { title: 'Messages', lead: 'Messages sent from the contact page.' },
+  events: { title: 'Events', lead: 'Add and change the events shown on the website.' },
+  content: { title: 'Website text', lead: 'Change the words on the website, in each language.' },
+};
 
-type Tab = (typeof TABS)[number]['id'];
-
-/** The staff dashboard: counts on top, then visit requests or messages. */
 export default function Dashboard() {
   const { key, signOut } = useAdminSession();
-  const [tab, setTab] = useState<Tab>('visits');
+  const [section, setSection] = useState<SectionId>('overview');
   const [summary, setSummary] = useState<Summary | null>(null);
   const [error, setError] = useState('');
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const loadSummary = useCallback(async () => {
     try {
@@ -42,72 +41,90 @@ export default function Dashboard() {
     void loadSummary();
   }, [loadSummary]);
 
+  const sections: Section[] = [
+    { id: 'overview', label: 'Overview', hint: 'The numbers at a glance' },
+    { id: 'visits', label: 'Visit requests', hint: 'People asking to visit', badge: summary?.visits.new },
+    { id: 'bookings', label: 'Event bookings', hint: 'Places reserved', badge: summary?.bookings.pending },
+    { id: 'messages', label: 'Messages', hint: 'From the contact page', badge: summary?.contact.new },
+    { id: 'events', label: 'Events', hint: 'Dates on the website' },
+    { id: 'content', label: 'Website text', hint: 'The words on the pages' },
+  ];
+
+  const heading = HEADINGS[section];
+
+  const figures = (
+    <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 [&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1">
+      <StatCard label="Upcoming events" value={summary?.events.upcoming ?? '–'} hint={`${summary?.events.drafts ?? 0} not published`} />
+      <StatCard label="Guests booked" value={summary?.bookings.guestsUpcoming ?? '–'} hint={`${summary?.bookings.pending ?? 0} to call back`} />
+      <StatCard label="Upcoming visits" value={summary?.visits.upcoming ?? '–'} hint={`${summary?.visits.new ?? 0} not handled`} />
+      <StatCard label="New messages" value={summary?.contact.new ?? '–'} hint={`${summary?.contact.last7Days ?? 0} this week`} />
+      <StatCard label="Edited texts" value={summary?.content.edited ?? '–'} hint="Changed from here" />
+    </div>
+  );
+
   return (
     <div className="min-h-screen bg-[#FAFAF8]">
-      <header className="bg-[#0B0B0C] text-white">
-        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-5 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <img src={logo} alt="" className="w-10 h-10 rounded-full bg-white/90 object-contain p-0.5" />
-            <div>
-              <div className="font-display text-lg leading-none">Bushaashe Garuwa</div>
-              <div className="text-[#B8863B] text-[10px] tracking-[0.18em] uppercase mt-1">Staff area</div>
+      <Sidebar
+        sections={sections}
+        current={section}
+        onChoose={setSection}
+        onSignOut={signOut}
+        open={menuOpen}
+        onClose={() => setMenuOpen(false)}
+      />
+
+      <div className="lg:pl-[260px]">
+        {/* the bar above the work: where you are, and the way back to the menu on a phone */}
+        <header className="sticky top-0 z-30 bg-[#FAFAF8]/90 backdrop-blur border-b border-[#12150F]/8">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-8 py-4 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => setMenuOpen(true)}
+              aria-label="Open the menu"
+              className="lg:hidden flex-shrink-0 w-11 h-11 rounded-xl border border-[#12150F]/10 bg-white grid place-items-center text-[#12150F]"
+            >
+              <span className="w-[18px] flex flex-col gap-[5px]">
+                <span className="block h-[1.5px] rounded-full bg-current" />
+                <span className="block h-[1.5px] rounded-full bg-current" />
+                <span className="block h-[1.5px] rounded-full bg-current" />
+              </span>
+            </button>
+
+            <div className="min-w-0 flex-1">
+              <h1 className="font-display text-xl sm:text-2xl font-extrabold text-[#12150F] leading-tight truncate">{heading.title}</h1>
+              <p className="text-[#12150F]/50 text-xs sm:text-sm truncate">{heading.lead}</p>
             </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <Link to="/" className="inline-flex admin-btn-quiet on-dark">
-              View website
-            </Link>
-            <button type="button" onClick={signOut} className="inline-flex admin-btn-quiet on-dark">
-              Sign out
+
+            <button type="button" onClick={loadSummary} className="hidden sm:inline-flex admin-btn-quiet flex-shrink-0">
+              Refresh
             </button>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <main className="max-w-screen-xl mx-auto px-5 sm:px-8 py-8 sm:py-10">
-        {error && (
-          <div className="mb-6">
-            <Notice kind="error">{error}</Notice>
-          </div>
-        )}
+        <main className="max-w-screen-xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
+          {error && (
+            <div className="mb-6">
+              <Notice kind="error">{error}</Notice>
+            </div>
+          )}
 
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 mb-7 sm:mb-8 [&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1">
-          <StatCard label="Upcoming events" value={summary?.events.upcoming ?? '–'} hint={`${summary?.events.drafts ?? 0} draft(s)`} />
-          <StatCard label="Guests booked" value={summary?.bookings.guestsUpcoming ?? '–'} hint={`${summary?.bookings.pending ?? 0} to call back`} />
-          <StatCard label="Upcoming visits" value={summary?.visits.upcoming ?? '–'} hint={`${summary?.visits.new ?? 0} not handled`} />
-          <StatCard label="New messages" value={summary?.contact.new ?? '–'} hint={`${summary?.contact.last7Days ?? 0} this week`} />
-          <StatCard label="Edited texts" value={summary?.content.edited ?? '–'} hint="Words changed from the admin" />
-        </div>
+          {section === 'overview' && (
+            <div className="space-y-8">
+              {figures}
+              <div>
+                <h2 className="font-display text-lg font-bold text-[#12150F] mb-3">Waiting for you</h2>
+                <VisitsView />
+              </div>
+            </div>
+          )}
 
-        <div className="flex items-center gap-2 mb-5">
-          <div className="flex-1 min-w-0 flex gap-2 overflow-x-auto scroll-smooth-x pb-1 -mb-1">
-            {TABS.map(({ id, label }) => (
-              <button
-                key={id}
-                type="button"
-                onClick={() => setTab(id)}
-                aria-pressed={tab === id}
-                className={`flex-shrink-0 rounded-full px-5 py-2.5 text-sm font-semibold border transition-colors ${
-                  tab === id
-                    ? 'bg-[#0B0B0C] text-white border-[#12150F]'
-                    : 'border-[#12150F]/15 text-[#12150F]/70 hover:border-[#12150F]/50 hover:text-[#12150F]'
-                }`}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
-          <button type="button" onClick={loadSummary} className="admin-btn-quiet flex-shrink-0 hidden sm:inline-flex">
-            Refresh counts
-          </button>
-        </div>
-
-        {tab === 'visits' && <VisitsView />}
-        {tab === 'bookings' && <BookingsView />}
-        {tab === 'messages' && <MessagesView />}
-        {tab === 'events' && <EventsView />}
-        {tab === 'content' && <ContentView />}
-      </main>
+          {section === 'visits' && <VisitsView />}
+          {section === 'bookings' && <BookingsView />}
+          {section === 'messages' && <MessagesView />}
+          {section === 'events' && <EventsView />}
+          {section === 'content' && <ContentView />}
+        </main>
+      </div>
     </div>
   );
 }
