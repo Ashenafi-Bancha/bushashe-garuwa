@@ -242,7 +242,7 @@ export default function Home() {
                     lg:top-28 xl:top-32 lg:inset-x-auto lg:right-0 lg:w-[46%] lg:text-left"
                   nameClassName="text-white"
                 />
-                <h1 className="glow-title font-display font-bold text-white text-[2rem] sm:text-[clamp(2.5rem,6.6vw,5rem)] leading-[1.08] tracking-[-0.01em] animate-fade-up delay-100">
+                <h1 className="glow-title font-display font-bold text-[#4E9B4F] text-[2rem] sm:text-[clamp(2.5rem,6.6vw,5rem)] leading-[1.08] tracking-[-0.01em] animate-fade-up delay-100">
                   {h.hero.title}
                 </h1>
                 <p className="mt-4 sm:mt-6 font-display font-normal text-xl sm:text-3xl text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
