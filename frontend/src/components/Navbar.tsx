@@ -46,6 +46,8 @@ export default function Navbar() {
 
   // clear over the photograph at the top of any page; a solid white bar once scrolling starts
   const transparent = !scrolled && !mobileOpen;
+  // over the home page's photograph the name reads in the brand's dark green
+  const greenName = transparent && location.pathname === '/';
   const isActive = (to: string) => (to === '/' ? location.pathname === '/' : location.pathname.startsWith(to));
 
   return (
@@ -70,7 +72,7 @@ export default function Navbar() {
               }`}
             />
             <div className="leading-none">
-              <div className={`font-display text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${transparent ? 'text-white' : 'text-[#12150F]'}`}>Bushaashe Garuwa</div>
+              <div className={`font-display text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${greenName ? 'text-[#1B4D22] bg-white/85 backdrop-blur-md rounded-full px-3 py-1 -mx-1 shadow-sm' : transparent ? 'text-white' : 'text-[#12150F]'}`}>Bushaashe Garuwa</div>
               <div className={`hidden xl:block text-[10px] font-medium tracking-[0.18em] uppercase mt-1 transition-colors duration-500 ${transparent ? 'text-white/70' : 'text-[#B8863B]'}`}>Wolaita · Ethiopia</div>
             </div>
           </Link>
