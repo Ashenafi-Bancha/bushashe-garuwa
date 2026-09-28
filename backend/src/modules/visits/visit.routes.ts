@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import type { Guards } from '../../http/guards.js';
-import { PaginationQuery } from '../../http/pagination.js';
+import { PaginationQuery, SearchQuery } from '../../http/pagination.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
@@ -9,6 +9,7 @@ import { CreateVisitRequest, UpdateVisitStatus } from './visit.schema.js';
 import type { VisitService } from './visit.service.js';
 
 const ListQuery = PaginationQuery.extend({
+  q: SearchQuery,
   upcoming: z
     .enum(['true', 'false'])
     .optional()
@@ -29,8 +30,8 @@ export function visitRoutes(service: VisitService, guards: Guards) {
   });
 
   router.get('/', ...guards.admin, validateQuery(ListQuery), (_req, res) => {
-    const { upcoming, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
-    sendData(res, service.list(pagination, { upcoming }));
+    const { upcoming, q, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
+    sendData(res, service.list(pagination, { upcoming, search: q }));
   });
 
   router.patch('/:id/status', ...guards.admin, validateBody(UpdateVisitStatus), (req, res) => {

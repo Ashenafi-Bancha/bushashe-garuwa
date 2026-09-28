@@ -37,8 +37,14 @@ export default function Dashboard() {
     }
   }, [key]);
 
+  // the counts follow the work: fresh on every section change, and once a minute
   useEffect(() => {
     void loadSummary();
+  }, [loadSummary, section]);
+
+  useEffect(() => {
+    const timer = setInterval(() => void loadSummary(), 60_000);
+    return () => clearInterval(timer);
   }, [loadSummary]);
 
   const sections: Section[] = [
@@ -52,8 +58,14 @@ export default function Dashboard() {
 
   const heading = HEADINGS[section];
 
+  // requests, bookings and messages moved on from "new" since midnight
+  const handledToday = summary
+    ? summary.visits.handledToday + summary.bookings.handledToday + summary.contact.handledToday
+    : undefined;
+
   const figures = (
-    <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4 [&>*:last-child]:col-span-2 lg:[&>*:last-child]:col-span-1">
+    <div className="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
+      <StatCard label="Handled today" value={handledToday ?? '–'} hint={handledToday ? 'Well done' : 'Nothing handled yet'} />
       <StatCard label="Upcoming events" value={summary?.events.upcoming ?? '–'} hint={`${summary?.events.drafts ?? 0} not published`} />
       <StatCard label="Guests booked" value={summary?.bookings.guestsUpcoming ?? '–'} hint={`${summary?.bookings.pending ?? 0} to call back`} />
       <StatCard label="Upcoming visits" value={summary?.visits.upcoming ?? '–'} hint={`${summary?.visits.new ?? 0} not handled`} />

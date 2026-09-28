@@ -19,7 +19,7 @@ export function contactService(repo: ContactRepository) {
       return message;
     },
 
-    list: (pagination: Pagination) => repo.list(pagination),
+    list: (pagination: Pagination, filter?: { search?: string }) => repo.list(pagination, filter),
 
     setStatus(id: number, status: RequestStatus) {
       const updated = repo.updateStatus(id, status);

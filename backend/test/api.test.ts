@@ -128,7 +128,7 @@ describe('admin dashboard', () => {
     assert.equal(data.contact.total, 1);
     assert.equal(data.contact.new, 0); // the one message was marked done above
     assert.equal(data.contact.last7Days, 1);
-    assert.deepEqual(data.visits, { total: 1, new: 1, upcoming: 1 });
+    assert.deepEqual(data.visits, { total: 1, new: 1, upcoming: 1, handledToday: 0 });
   });
 });
 

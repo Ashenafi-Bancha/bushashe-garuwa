@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import type { Guards } from '../../http/guards.js';
-import { PaginationQuery } from '../../http/pagination.js';
+import { PaginationQuery, SearchQuery } from '../../http/pagination.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
@@ -24,6 +24,7 @@ import type { EventService } from './event.service.js';
 const BookingListQuery = PaginationQuery.extend({
   eventId: z.coerce.number().int().min(1).optional(),
   status: BookingStatus.optional(),
+  q: SearchQuery,
 });
 
 export function eventRoutes(service: EventService, bookings: BookingService, guards: Guards) {
@@ -31,8 +32,8 @@ export function eventRoutes(service: EventService, bookings: BookingService, gua
 
   // bookings are listed before /admin/:id so "bookings" is not read as an id
   router.get('/admin/bookings', ...guards.admin, validateQuery(BookingListQuery), (_req, res) => {
-    const { eventId, status, ...pagination } = res.locals.query as z.infer<typeof BookingListQuery>;
-    sendData(res, bookings.list(pagination, { eventId, status }));
+    const { eventId, status, q, ...pagination } = res.locals.query as z.infer<typeof BookingListQuery>;
+    sendData(res, bookings.list(pagination, { eventId, status, search: q }));
   });
 
   router.patch('/admin/bookings/:id/status', ...guards.admin, validateBody(UpdateBookingStatus), (req, res) => {

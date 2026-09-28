@@ -39,10 +39,10 @@ export type VisitRequest = {
 };
 
 export type Summary = {
-  contact: { total: number; new: number; last7Days: number };
-  visits: { total: number; new: number; upcoming: number };
+  contact: { total: number; new: number; last7Days: number; handledToday: number };
+  visits: { total: number; new: number; upcoming: number; handledToday: number };
   events: { total: number; upcoming: number; drafts: number };
-  bookings: { total: number; pending: number; guestsUpcoming: number };
+  bookings: { total: number; pending: number; guestsUpcoming: number; handledToday: number };
   content: { edited: number; lastUpdatedAt: string | null };
   generatedAt: string;
 };

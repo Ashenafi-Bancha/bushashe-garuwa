@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { BOOKING_STATUSES, BOOKING_STATUS_LABELS, STATUSES, STATUS_LABELS, type BookingStatus, type RequestStatus } from '../api/types';
 
 /** Small building blocks shared by the admin views. */
@@ -135,3 +135,51 @@ export const formatDateTime = (iso: string) =>
   new Date(iso).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' });
 
 export const formatDate = (value: string) => new Date(value).toLocaleDateString(undefined, { dateStyle: 'full' });
+
+/**
+ * Search box for the staff lists. It waits until typing pauses before asking
+ * the API, so each keystroke does not send a request.
+ */
+export function SearchBox({
+  value,
+  onChange,
+  placeholder,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+}) {
+  return (
+    <label className="relative block">
+      <span className="sr-only">{placeholder}</span>
+      <svg
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#12150F]/35 pointer-events-none"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="7.5" />
+        <path d="m20.5 20.5-4.2-4.2" strokeLinecap="round" />
+      </svg>
+      <input
+        type="search"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full rounded-full border border-[#12150F]/12 bg-white pl-11 pr-4 py-3 text-sm text-[#12150F] outline-none placeholder:text-[#12150F]/35 focus:border-[#35723A] transition-colors"
+      />
+    </label>
+  );
+}
+
+/** A value that follows another one, but only once it has stopped changing for `delay` ms */
+export function useDebounced<T>(value: T, delay = 300): T {
+  const [settled, setSettled] = useState(value);
+  useEffect(() => {
+    const timer = setTimeout(() => setSettled(value), delay);
+    return () => clearTimeout(timer);
+  }, [value, delay]);
+  return settled;
+}

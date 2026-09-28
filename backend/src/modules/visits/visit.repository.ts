@@ -54,33 +54,42 @@ export function visitRepository(db: Database) {
     },
 
     /** Upcoming visits first when `upcoming` is set, otherwise newest requests first */
-    list({ page, pageSize }: Pagination, { upcoming = false } = {}): Page<VisitRequest> {
-      const where = upcoming ? `WHERE visit_date >= date('now') AND status != 'archived'` : '';
+    list({ page, pageSize }: Pagination, { upcoming = false, search }: { upcoming?: boolean; search?: string } = {}): Page<VisitRequest> {
+      const clauses: string[] = [];
+      if (upcoming) clauses.push(`visit_date >= date('now') AND status != 'archived'`);
+      if (search) clauses.push('(name LIKE ?1 OR phone LIKE ?1 OR email LIKE ?1 OR message LIKE ?1)');
+      const where = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
+      const params = search ? [`%${search}%`] : [];
       const order = upcoming ? 'visit_date ASC, id ASC' : 'created_at DESC, id DESC';
       const rows = db
         .prepare(`SELECT * FROM visit_requests ${where} ORDER BY ${order} LIMIT ? OFFSET ?`)
-        .all(pageSize, (page - 1) * pageSize) as Row[];
-      const { total } = db.prepare(`SELECT COUNT(*) AS total FROM visit_requests ${where}`).get() as { total: number };
+        .all(...params, pageSize, (page - 1) * pageSize) as Row[];
+      const { total } = db.prepare(`SELECT COUNT(*) AS total FROM visit_requests ${where}`).get(...params) as { total: number };
       return { items: rows.map(toVisit), page, pageSize, total };
     },
 
     /** Counts for the admin dashboard */
-    stats(): { total: number; new: number; upcoming: number } {
+    stats(): { total: number; new: number; upcoming: number; handledToday: number } {
       const row = db
         .prepare(
           `SELECT COUNT(*) AS total,
                   SUM(status = 'new') AS fresh,
-                  SUM(visit_date >= date('now') AND status != 'archived') AS upcoming
+                  SUM(visit_date >= date('now') AND status != 'archived') AS upcoming,
+                  SUM(date(handled_at) = date('now')) AS handled
            FROM visit_requests`,
         )
-        .get() as { total: number; fresh: number | null; upcoming: number | null };
-      return { total: row.total, new: row.fresh ?? 0, upcoming: row.upcoming ?? 0 };
+        .get() as { total: number; fresh: number | null; upcoming: number | null; handled: number | null };
+      return { total: row.total, new: row.fresh ?? 0, upcoming: row.upcoming ?? 0, handledToday: row.handled ?? 0 };
     },
 
     updateStatus(id: number, status: RequestStatus): VisitRequest | undefined {
-      const row = db.prepare('UPDATE visit_requests SET status = ? WHERE id = ? RETURNING *').get(status, id) as
-        | Row
-        | undefined;
+      const row = db
+        .prepare(
+          `UPDATE visit_requests
+              SET status = ?, handled_at = CASE WHEN ? = 'new' THEN NULL ELSE strftime('%Y-%m-%dT%H:%M:%fZ', 'now') END
+            WHERE id = ? RETURNING *`,
+        )
+        .get(status, status, id) as Row | undefined;
       return row && toVisit(row);
     },
   };

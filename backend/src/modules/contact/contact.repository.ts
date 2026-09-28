@@ -38,31 +38,40 @@ export function contactRepository(db: Database) {
       return toMessage(row);
     },
 
-    list({ page, pageSize }: Pagination): Page<ContactMessage> {
+    /** `search` looks through the name, the email, the phone and the message itself */
+    list({ page, pageSize }: Pagination, { search }: { search?: string } = {}): Page<ContactMessage> {
+      const where = search ? 'WHERE name LIKE ?1 OR email LIKE ?1 OR phone LIKE ?1 OR message LIKE ?1' : '';
+      const params = search ? [`%${search}%`] : [];
       const rows = db
-        .prepare('SELECT * FROM contact_messages ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?')
-        .all(pageSize, (page - 1) * pageSize) as Row[];
-      const { total } = db.prepare('SELECT COUNT(*) AS total FROM contact_messages').get() as { total: number };
+        .prepare(`SELECT * FROM contact_messages ${where} ORDER BY created_at DESC, id DESC LIMIT ? OFFSET ?`)
+        .all(...params, pageSize, (page - 1) * pageSize) as Row[];
+      const { total } = db.prepare(`SELECT COUNT(*) AS total FROM contact_messages ${where}`).get(...params) as { total: number };
       return { items: rows.map(toMessage), page, pageSize, total };
     },
 
     /** Counts for the admin dashboard */
-    stats(): { total: number; new: number; last7Days: number } {
+    stats(): { total: number; new: number; last7Days: number; handledToday: number } {
       const row = db
         .prepare(
           `SELECT COUNT(*) AS total,
                   SUM(status = 'new') AS unread,
-                  SUM(created_at >= datetime('now', '-7 days')) AS recent
+                  SUM(created_at >= datetime('now', '-7 days')) AS recent,
+                  SUM(date(handled_at) = date('now')) AS handled
            FROM contact_messages`,
         )
-        .get() as { total: number; unread: number | null; recent: number | null };
-      return { total: row.total, new: row.unread ?? 0, last7Days: row.recent ?? 0 };
+        .get() as { total: number; unread: number | null; recent: number | null; handled: number | null };
+      return { total: row.total, new: row.unread ?? 0, last7Days: row.recent ?? 0, handledToday: row.handled ?? 0 };
     },
 
     updateStatus(id: number, status: RequestStatus): ContactMessage | undefined {
-      const row = db.prepare('UPDATE contact_messages SET status = ? WHERE id = ? RETURNING *').get(status, id) as
-        | Row
-        | undefined;
+      // handling means moving it off 'new'; going back to 'new' clears the mark
+      const row = db
+        .prepare(
+          `UPDATE contact_messages
+              SET status = ?, handled_at = CASE WHEN ? = 'new' THEN NULL ELSE strftime('%Y-%m-%dT%H:%M:%fZ', 'now') END
+            WHERE id = ? RETURNING *`,
+        )
+        .get(status, status, id) as Row | undefined;
       return row && toMessage(row);
     },
   };

@@ -234,3 +234,33 @@ describe('booking a place at an event', () => {
     assert.equal((await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'done' }) })).status, 400, 'only booking statuses are allowed');
   });
 });
+
+describe('staff search and the handled-today count', () => {
+  it('finds a booking by its short code, name or phone', async () => {
+    const all = await read(await staff('/v1/events/admin/bookings'));
+    const one = all.data.items[0];
+    const byCode = await read(await staff(`/v1/events/admin/bookings?q=${encodeURIComponent(one.reference)}`));
+    assert.equal(byCode.data.total, 1);
+    assert.equal(byCode.data.items[0].id, one.id);
+
+    const byName = await read(await staff(`/v1/events/admin/bookings?q=${encodeURIComponent(one.name.split(' ')[0])}`));
+    assert.ok(byName.data.items.some((b: any) => b.id === one.id));
+
+    const nothing = await read(await staff('/v1/events/admin/bookings?q=nobody-by-this-name'));
+    assert.equal(nothing.data.total, 0);
+  });
+
+  it('counts what staff handled today, and forgets it when a booking goes back to pending', async () => {
+    // start from a booking put back to pending, so the test does not depend on the ones above
+    const any = await read(await staff('/v1/events/admin/bookings'));
+    const id = any.data.items[0].id;
+    await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'pending' }) });
+    const before = (await read(await staff('/v1/admin/summary'))).data.bookings.handledToday;
+
+    await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'confirmed' }) });
+    assert.equal((await read(await staff('/v1/admin/summary'))).data.bookings.handledToday, before + 1);
+
+    await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'pending' }) });
+    assert.equal((await read(await staff('/v1/admin/summary'))).data.bookings.handledToday, before);
+  });
+});

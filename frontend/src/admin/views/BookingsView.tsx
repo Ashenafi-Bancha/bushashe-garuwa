@@ -1,22 +1,40 @@
+import { useState } from 'react';
 import { adminApi } from '../api/adminClient';
 import type { Booking } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { useAdminList } from '../components/useAdminList';
-import { BookingStatusSelect, Notice, Pager, Panel, formatDate, formatDateTime } from '../components/ui';
+import { BookingStatusSelect, Notice, Pager, Panel, SearchBox, formatDate, formatDateTime, useDebounced } from '../components/ui';
 
 /** Places reserved at events, newest first. */
 export default function BookingsView() {
   const { key } = useAdminSession();
+  const [search, setSearch] = useState('');
+  const query = useDebounced(search.trim());
   const { page, setPage, data, error, loading, busyId, changeStatus } = useAdminList<Booking>(
-    (p) => adminApi.bookings(key, p),
+    (p) => adminApi.bookings(key, p, query),
     (id, status) => adminApi.setBookingStatus(key, id, status),
+    [query],
   );
 
-  if (error) return <Notice kind="error">{error}</Notice>;
-  if (loading && !data) return <Notice>Loading bookings…</Notice>;
-  if (data && data.total === 0) return <Notice>No bookings yet.</Notice>;
+  const box = (
+    <SearchBox
+      value={search}
+      onChange={(value) => {
+        setPage(1);
+        setSearch(value);
+      }}
+      placeholder="Search by booking number (BG-…), name or phone"
+    />
+  );
+  const nothing = query ? `Nothing matches "${query}".` : 'No bookings yet.';
+
+  if (error) return <div className="space-y-4">{box}<Notice kind="error">{error}</Notice></div>;
+  if (loading && !data) return <div className="space-y-4">{box}<Notice>Loading bookings…</Notice></div>;
+  if (data && data.total === 0) return <div className="space-y-4">{box}<Notice>{nothing}</Notice></div>;
 
   return (
+    <div className="space-y-4">
+    {box}
     <Panel>
       <ul className="divide-y divide-[#35723A]/10">
         {data?.items.map((booking) => (
@@ -56,5 +74,6 @@ export default function BookingsView() {
       </ul>
       {data && <Pager page={page} pageSize={data.pageSize} total={data.total} onPage={setPage} />}
     </Panel>
+    </div>
   );
 }

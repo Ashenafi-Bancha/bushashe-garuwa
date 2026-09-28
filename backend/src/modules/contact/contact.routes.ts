@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import type { Guards } from '../../http/guards.js';
-import { PaginationQuery, type Pagination } from '../../http/pagination.js';
+import { z } from 'zod';
+import { PaginationQuery, SearchQuery } from '../../http/pagination.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
@@ -9,9 +10,11 @@ import type { ContactService } from './contact.service.js';
 
 /**
  * POST  /contact              public: the Contact page form
- * GET   /contact              staff: list messages (?page, ?pageSize)
+ * GET   /contact              staff: list messages (?page, ?pageSize, ?q to search)
  * PATCH /contact/:id/status   staff: mark as in_progress / done / archived
  */
+const ListQuery = PaginationQuery.extend({ q: SearchQuery });
+
 export function contactRoutes(service: ContactService, guards: Guards) {
   const router = Router();
 
@@ -20,8 +23,9 @@ export function contactRoutes(service: ContactService, guards: Guards) {
     sendData(res, { id: message?.id ?? null, received: true }, 201);
   });
 
-  router.get('/', ...guards.admin, validateQuery(PaginationQuery), (_req, res) => {
-    sendData(res, service.list(res.locals.query as Pagination));
+  router.get('/', ...guards.admin, validateQuery(ListQuery), (_req, res) => {
+    const { q, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
+    sendData(res, service.list(pagination, { search: q }));
   });
 
   router.patch('/:id/status', ...guards.admin, validateBody(UpdateContactStatus), (req, res) => {

@@ -105,4 +105,13 @@ export const migrations: { id: number; name: string; sql: string }[] = [
        WHERE reference IS NULL;
     `,
   },
+  {
+    id: 5,
+    name: 'remember when each request was handled',
+    sql: `
+      ALTER TABLE contact_messages ADD COLUMN handled_at TEXT;
+      ALTER TABLE visit_requests   ADD COLUMN handled_at TEXT;
+      ALTER TABLE event_bookings   ADD COLUMN handled_at TEXT;
+    `,
+  },
 ];

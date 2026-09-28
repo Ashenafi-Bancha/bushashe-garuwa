@@ -92,7 +92,10 @@ export function bookingRepository(db: Database) {
     },
 
     /** Bookings with their event, newest first; `eventId` narrows it to one event */
-    list({ page, pageSize }: Pagination, filter: { eventId?: number; status?: BookingStatus } = {}): Page<Booking> {
+    list(
+      { page, pageSize }: Pagination,
+      filter: { eventId?: number; status?: BookingStatus; search?: string } = {},
+    ): Page<Booking> {
       const where: string[] = [];
       const params: (string | number)[] = [];
       if (filter.eventId) {
@@ -102,6 +105,12 @@ export function bookingRepository(db: Database) {
       if (filter.status) {
         where.push('b.status = ?');
         params.push(filter.status);
+      }
+      if (filter.search) {
+        // the name, the phone, the email, the note, or the booking's short code
+        where.push('(b.name LIKE ? OR b.phone LIKE ? OR b.email LIKE ? OR b.message LIKE ? OR b.reference LIKE ?)');
+        const like = `%${filter.search}%`;
+        params.push(like, like, like, like, like);
       }
       const clause = where.length ? `WHERE ${where.join(' AND ')}` : '';
       const rows = db
@@ -118,9 +127,14 @@ export function bookingRepository(db: Database) {
     },
 
     updateStatus(id: number, status: BookingStatus): Booking | undefined {
-      const row = db.prepare('UPDATE event_bookings SET status = ? WHERE id = ? RETURNING *').get(status, id) as
-        | Row
-        | undefined;
+      // handled means moved off 'pending'; back to pending clears the mark
+      const row = db
+        .prepare(
+          `UPDATE event_bookings
+              SET status = ?, handled_at = CASE WHEN ? = 'pending' THEN NULL ELSE strftime('%Y-%m-%dT%H:%M:%fZ', 'now') END
+            WHERE id = ? RETURNING *`,
+        )
+        .get(status, status, id) as Row | undefined;
       return row && toBooking(row);
     },
 
@@ -132,16 +146,17 @@ export function bookingRepository(db: Database) {
       return row.guests;
     },
 
-    stats(): { total: number; pending: number; guestsUpcoming: number } {
+    stats(): { total: number; pending: number; guestsUpcoming: number; handledToday: number } {
       const row = db
         .prepare(
           `SELECT COUNT(*) AS total,
                   SUM(b.status = 'pending') AS pending,
+                  SUM(date(b.handled_at) = date('now')) AS handled,
                   COALESCE(SUM(CASE WHEN e.event_date >= date('now') AND b.status != 'cancelled' THEN b.guests END), 0) AS guests
            FROM event_bookings b JOIN events e ON e.id = b.event_id`,
         )
-        .get() as { total: number; pending: number | null; guests: number };
-      return { total: row.total, pending: row.pending ?? 0, guestsUpcoming: row.guests };
+        .get() as { total: number; pending: number | null; handled: number | null; guests: number };
+      return { total: row.total, pending: row.pending ?? 0, guestsUpcoming: row.guests, handledToday: row.handled ?? 0 };
     },
   };
 }

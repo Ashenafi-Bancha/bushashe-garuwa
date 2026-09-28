@@ -3,20 +3,30 @@ import { adminApi } from '../api/adminClient';
 import type { VisitRequest } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { useAdminList } from '../components/useAdminList';
-import { Notice, Pager, Panel, StatusSelect, formatDate, formatDateTime } from '../components/ui';
+import { Notice, Pager, Panel, SearchBox, StatusSelect, formatDate, formatDateTime, useDebounced } from '../components/ui';
 
 /** Requests sent from the Plan Your Visit page. */
 export default function VisitsView() {
   const { key } = useAdminSession();
   const [upcomingOnly, setUpcomingOnly] = useState(true);
+  const [search, setSearch] = useState('');
+  const query = useDebounced(search.trim());
   const { page, setPage, data, error, loading, busyId, changeStatus } = useAdminList<VisitRequest>(
-    (p) => adminApi.visits(key, p, { upcoming: upcomingOnly }),
+    (p) => adminApi.visits(key, p, { upcoming: upcomingOnly, search: query }),
     (id, status) => adminApi.setVisitStatus(key, id, status),
-    [upcomingOnly],
+    [upcomingOnly, query],
   );
 
   return (
     <div className="space-y-4">
+      <SearchBox
+        value={search}
+        onChange={(value) => {
+          setPage(1);
+          setSearch(value);
+        }}
+        placeholder="Search by name, phone, email or note"
+      />
       <label className="inline-flex items-center gap-2 text-sm text-[#35723A] cursor-pointer">
         <input
           type="checkbox"
@@ -33,7 +43,7 @@ export default function VisitsView() {
       {error && <Notice kind="error">{error}</Notice>}
       {loading && !data && <Notice>Loading visit requests…</Notice>}
       {data?.total === 0 && !error && (
-        <Notice>{upcomingOnly ? 'No upcoming visits.' : 'No visit requests yet.'}</Notice>
+        <Notice>{query ? `Nothing matches "${query}".` : upcomingOnly ? 'No upcoming visits.' : 'No visit requests yet.'}</Notice>
       )}
 
       {data && data.total > 0 && (

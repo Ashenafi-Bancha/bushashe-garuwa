@@ -8,3 +8,11 @@ export const PaginationQuery = z.object({
 export type Pagination = z.infer<typeof PaginationQuery>;
 
 export type Page<T> = { items: T[]; page: number; pageSize: number; total: number };
+
+/** ?q=… on the staff lists: trimmed, and ignored when empty */
+export const SearchQuery = z
+  .string()
+  .trim()
+  .max(80)
+  .optional()
+  .transform((value) => (value ? value : undefined));

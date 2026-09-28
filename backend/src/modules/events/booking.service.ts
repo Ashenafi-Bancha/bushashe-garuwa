@@ -64,7 +64,7 @@ export function bookingService(bookings: BookingRepository, events: EventReposit
       return booking;
     },
 
-    list: (pagination: Pagination, filter?: { eventId?: number; status?: BookingStatus }) =>
+    list: (pagination: Pagination, filter?: { eventId?: number; status?: BookingStatus; search?: string }) =>
       bookings.list(pagination, filter),
 
     placesLeftFor: (eventId: number) => {

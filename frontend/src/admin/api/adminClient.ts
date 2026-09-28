@@ -38,13 +38,13 @@ export const adminApi = {
 
   summary: (key: string) => request<Summary>(key, '/v1/admin/summary'),
 
-  messages: (key: string, page: number, pageSize = 20) =>
-    request<Page<ContactMessage>>(key, `/v1/contact${list({ page, pageSize })}`),
+  messages: (key: string, page: number, search = '') =>
+    request<Page<ContactMessage>>(key, `/v1/contact${list({ page, pageSize: 20, q: search })}`),
 
-  visits: (key: string, page: number, options: { upcoming?: boolean; pageSize?: number } = {}) =>
+  visits: (key: string, page: number, options: { upcoming?: boolean; pageSize?: number; search?: string } = {}) =>
     request<Page<VisitRequest>>(
       key,
-      `/v1/visits${list({ page, pageSize: options.pageSize ?? 20, upcoming: options.upcoming || undefined })}`,
+      `/v1/visits${list({ page, pageSize: options.pageSize ?? 20, upcoming: options.upcoming || undefined, q: options.search })}`,
     ),
 
   setMessageStatus: (key: string, id: number, status: RequestStatus) =>
@@ -66,8 +66,8 @@ export const adminApi = {
     request<{ removed: true }>(key, `/v1/events/admin/${id}`, { method: 'DELETE' }),
 
   // ── Bookings ──
-  bookings: (key: string, page: number, eventId?: number) =>
-    request<Page<Booking>>(key, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId })}`),
+  bookings: (key: string, page: number, search = '', eventId?: number) =>
+    request<Page<Booking>>(key, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId, q: search })}`),
 
   setBookingStatus: (key: string, id: number, status: BookingStatus) =>
     request<Booking>(key, `/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
