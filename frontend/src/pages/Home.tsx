@@ -218,27 +218,10 @@ export default function Home() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-transparent to-transparent lg:via-[#0A0A0B]/45" />
             <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#0A0A0B]/80 via-[#0A0A0B]/20 to-transparent" />
 
-            {/* Which photograph is showing */}
-            <div className="absolute bottom-5 inset-x-0 z-10 lg:bottom-7">
-              <div className="max-w-screen-xl mx-auto px-5 sm:px-8 flex items-center justify-between">
-                <div className="flex gap-2">
-                  {heroSlides.map((s, i) => (
-                    // the bar stays thin; the padding gives a finger something to hit
-                    <button
-                      key={s.key}
-                      onClick={() => setHeroIdx(i)}
-                      className="hit-slim group w-10 sm:w-14 py-4 -my-4"
-                      aria-label={fmt(h.hero.slide, { n: i + 1 })}
-                      aria-current={i === heroIdx}
-                    >
-                      <span className="relative block h-1 w-full rounded-full bg-white/25 overflow-hidden transition-colors group-hover:bg-white/40">
-                        {i === heroIdx && <span key={heroIdx} className="absolute inset-0 bg-[#B8863B] rounded-full animate-progress" />}
-                        {i < heroIdx && <span className="absolute inset-0 bg-white/70 rounded-full" />}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-                <div className="hidden sm:flex items-center gap-2 text-white/50 text-xs font-medium tracking-[0.14em] uppercase">
+            {/* scroll hint, desktop only */}
+            <div className="hidden lg:block absolute bottom-7 inset-x-0 z-10">
+              <div className="max-w-screen-xl mx-auto px-8 flex items-center justify-end">
+                <div className="flex items-center gap-2 text-white/50 text-xs font-medium tracking-[0.14em] uppercase">
                   {h.hero.scroll}
                   <span className="block w-px h-7 bg-gradient-to-b from-white/60 to-transparent animate-scroll-bounce" />
                 </div>
@@ -252,14 +235,14 @@ export default function Home() {
             style={{ transform: `translate3d(0, ${drift * -0.12}px, 0)`, opacity: Math.max(0, 1 - drift / 700) }}
           >
             <div className="max-w-4xl">
-                {/* on phones the greeting lifts onto the edge of the photograph above it */}
+                {/* on phones the greeting sits in the middle of the photograph above the words */}
                 <WelcomeTyper
                   className="glow-welcome font-display italic text-[#D8B778] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] leading-tight animate-fade-up delay-75
-                    absolute -top-[4.5rem] sm:-top-24 inset-x-5 sm:inset-x-8
-                    lg:top-28 xl:top-32 lg:inset-x-auto lg:right-0 lg:w-[46%]"
+                    absolute -top-[33svh] sm:-top-[34svh] inset-x-5 sm:inset-x-8 text-center
+                    lg:top-28 xl:top-32 lg:inset-x-auto lg:right-0 lg:w-[46%] lg:text-left"
                   nameClassName="text-white"
                 />
-                <h1 className="glow-title font-display font-bold text-white text-[clamp(2.5rem,6.6vw,5rem)] leading-[1.06] tracking-[-0.01em] animate-fade-up delay-100">
+                <h1 className="glow-title font-display font-bold text-white text-[2rem] sm:text-[clamp(2.5rem,6.6vw,5rem)] leading-[1.08] tracking-[-0.01em] animate-fade-up delay-100">
                   {h.hero.title}
                 </h1>
                 <p className="mt-4 sm:mt-6 font-display font-normal text-xl sm:text-3xl text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
