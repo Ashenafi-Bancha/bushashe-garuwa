@@ -13,6 +13,8 @@ import { eventRepository } from './modules/events/event.repository.js';
 import { eventService } from './modules/events/event.service.js';
 import { visitRepository } from './modules/visits/visit.repository.js';
 import { visitService } from './modules/visits/visit.service.js';
+import { mailerFor, type Mailer } from './modules/notifications/mailer.js';
+import { notifier } from './modules/notifications/notifier.js';
 
 const MINUTE = 60 * 1000;
 
@@ -21,7 +23,9 @@ const MINUTE = 60 * 1000;
  * Repositories talk to the database, services hold the rules, guards protect
  * the routes. `app.ts` only mounts routers onto what this returns.
  */
-export function createContainer(env: Env, db: Database) {
+export function createContainer(env: Env, db: Database, options: { mailer?: Mailer } = {}) {
+  const notify = notifier(options.mailer ?? mailerFor(env), env);
+
   const repositories = {
     contact: contactRepository(db),
     visits: visitRepository(db),
@@ -31,11 +35,11 @@ export function createContainer(env: Env, db: Database) {
   };
 
   const services = {
-    contact: contactService(repositories.contact),
-    visits: visitService(repositories.visits),
+    contact: contactService(repositories.contact, notify),
+    visits: visitService(repositories.visits, notify),
     content: contentService(repositories.content),
     events: eventService(repositories.events),
-    bookings: bookingService(repositories.bookings, repositories.events),
+    bookings: bookingService(repositories.bookings, repositories.events, notify),
   };
 
   const guards: Guards = {

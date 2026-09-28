@@ -12,18 +12,21 @@
     "build": "tsc -p tsconfig.build.json",
     "start": "node --env-file-if-exists=.env dist/server.js",
     "typecheck": "tsc --noEmit -p .",
-    "test": "node --import tsx --test test/*.test.ts"
+    "test": "node --import tsx --test test/*.test.ts",
+    "email:preview": "tsx scripts/preview-emails.ts"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
+    "nodemailer": "^7.0.13",
     "zod": "^4.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/node": "^22.18.0",
+    "@types/nodemailer": "^8.0.2",
     "tsx": "^4.20.0",
     "typescript": "^5.7.0"
   }

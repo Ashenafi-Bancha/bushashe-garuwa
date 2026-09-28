@@ -4,9 +4,10 @@ import type { Pagination } from '../../http/pagination.js';
 import type { RequestStatus } from '../shared/schemas.js';
 import type { ContactRepository } from './contact.repository.js';
 import type { CreateContactMessage } from './contact.schema.js';
+import type { Notifier } from '../notifications/notifier.js';
 
-/** What happens with contact messages. (Email notifications to staff would be added here.) */
-export function contactService(repo: ContactRepository) {
+/** What happens with contact messages: saved, then the sender and the staff are told by email. */
+export function contactService(repo: ContactRepository, notify?: Notifier) {
   return {
     /** Returns null for spam caught by the hidden field: nothing is saved, but the sender sees success. */
     submit({ website, ...input }: CreateContactMessage) {
@@ -16,6 +17,7 @@ export function contactService(repo: ContactRepository) {
       }
       const message = repo.create(input);
       logger.info('contact: new message', { id: message.id, language: message.language });
+      notify?.messageReceived(message);
       return message;
     },
 

@@ -4,9 +4,10 @@ import type { Pagination } from '../../http/pagination.js';
 import type { RequestStatus } from '../shared/schemas.js';
 import type { VisitRepository } from './visit.repository.js';
 import type { CreateVisitRequest } from './visit.schema.js';
+import type { Notifier } from '../notifications/notifier.js';
 
-/** What happens with visit requests. (Confirmation messages to guests would be added here.) */
-export function visitService(repo: VisitRepository) {
+/** What happens with visit requests: saved, then the guest and the staff are told by email. */
+export function visitService(repo: VisitRepository, notify?: Notifier) {
   return {
     /** Returns null for spam caught by the hidden field: nothing is saved, but the sender sees success. */
     submit({ website, ...input }: CreateVisitRequest) {
@@ -16,6 +17,7 @@ export function visitService(repo: VisitRepository) {
       }
       const visit = repo.create(input);
       logger.info('visits: new request', { id: visit.id, date: visit.date, visitors: visit.visitors });
+      notify?.visitReceived(visit);
       return visit;
     },
 

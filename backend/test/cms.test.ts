@@ -4,6 +4,7 @@ import { after, before, describe, it } from 'node:test';
 import { createApp } from '../src/app.js';
 import { loadEnv } from '../src/config/env.js';
 import { openDatabase } from '../src/db/database.js';
+import { memoryMailer } from '../src/modules/notifications/mailer.js';
 
 process.env.NODE_ENV = 'test'; // keeps the logger quiet
 
@@ -12,12 +13,14 @@ const inTwoWeeks = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString()
 const lastYear = '2020-05-01';
 
 let base = '';
+/** emails the API would have sent, kept in memory */
+const outbox = memoryMailer();
 let close: () => void;
 
 before(async () => {
-  const env = loadEnv({ NODE_ENV: 'test', ADMIN_API_KEY: ADMIN_KEY, FORM_RATE_LIMIT: '50' });
+  const env = loadEnv({ NODE_ENV: 'test', ADMIN_API_KEY: ADMIN_KEY, FORM_RATE_LIMIT: '50', STAFF_EMAIL: 'staff@bushaashegaruwa.com' });
   const db = openDatabase(':memory:');
-  const server = createApp(env, db).listen(0);
+  const server = createApp(env, db, { mailer: outbox }).listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api`;
   close = () => {
@@ -262,5 +265,64 @@ describe('staff search and the handled-today count', () => {
 
     await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'pending' }) });
     assert.equal((await read(await staff('/v1/admin/summary'))).data.bookings.handledToday, before);
+  });
+});
+
+describe('emails', () => {
+  const settle = () => new Promise((resolve) => setTimeout(resolve, 30));
+
+  it('sends the guest their booking number, and tells the staff', async () => {
+    outbox.sent.length = 0;
+    const list = await read(await staff('/v1/events/admin'));
+    const event = list.data.items.find((e: any) => e.translations.en.name === 'Wolaita Cultural Food Evening');
+    // make room so the booking goes through
+    await staff(`/v1/events/admin/${event.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ ...culturalFood, capacity: 200, translations: event.translations }),
+    });
+    const res = await post(`/v1/events/${event.id}/bookings`, {
+      name: 'Mekdes <b>Haile</b>',
+      phone: '0988 77 66 55',
+      email: 'mekdes@example.com',
+      guests: 2,
+      language: 'am',
+    });
+    const { reference } = (await read(res)).data;
+    await settle();
+
+    const guest = outbox.sent.find((m) => m.kind === 'booking-received');
+    assert.ok(guest, 'the guest gets an email');
+    assert.equal(guest.to, 'mekdes@example.com');
+    assert.ok(guest.subject.includes(reference), 'the subject carries the booking number');
+    assert.ok(guest.subject.startsWith('ቦታዎ ተይዟል'), 'written in the language the guest used');
+    assert.ok(guest.html.includes('Mekdes &lt;b&gt;Haile&lt;/b&gt;'), 'what a guest types is escaped');
+    assert.ok(!guest.html.includes('<b>Haile</b>'));
+    assert.ok(guest.text.includes(reference), 'a plain-text copy is included');
+
+    const staffNotice = outbox.sent.find((m) => m.kind === 'staff-new-booking');
+    assert.equal(staffNotice?.to, 'staff@bushaashegaruwa.com');
+  });
+
+  it('tells the guest once when their booking is confirmed', async () => {
+    const found = await read(await staff('/v1/events/admin/bookings?q=Mekdes'));
+    const id = found.data.items[0].id;
+    outbox.sent.length = 0;
+
+    await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'confirmed' }) });
+    await staff(`/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'confirmed' }) });
+    await settle();
+
+    const confirmations = outbox.sent.filter((m) => m.kind === 'booking-confirmed');
+    assert.equal(confirmations.length, 1, 'setting confirmed twice sends one email');
+  });
+
+  it('skips the guest email when no address was given', async () => {
+    outbox.sent.length = 0;
+    const list = await read(await staff('/v1/events/admin'));
+    const event = list.data.items.find((e: any) => e.translations.en.name === 'Wolaita Cultural Food Evening');
+    await post(`/v1/events/${event.id}/bookings`, { name: 'No Email', phone: '0977 11 22 33', guests: 1 });
+    await settle();
+    assert.equal(outbox.sent.filter((m) => m.kind === 'booking-received').length, 0);
+    assert.equal(outbox.sent.filter((m) => m.kind === 'staff-new-booking').length, 1);
   });
 });

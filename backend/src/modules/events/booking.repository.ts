@@ -86,6 +86,11 @@ export function bookingRepository(db: Database) {
       return row && toBooking(row);
     },
 
+    findById(id: number): Booking | undefined {
+      const row = db.prepare('SELECT * FROM event_bookings WHERE id = ?').get(id) as Row | undefined;
+      return row && toBooking(row);
+    },
+
     findByReference(reference: string): Booking | undefined {
       const row = db.prepare('SELECT * FROM event_bookings WHERE reference = ?').get(reference) as Row | undefined;
       return row && toBooking(row);

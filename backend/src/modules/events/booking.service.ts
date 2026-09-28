@@ -5,12 +5,13 @@ import type { BookingRepository } from './booking.repository.js';
 import type { BookingStatus, CreateBooking } from './booking.schema.js';
 import type { EventRepository } from './event.repository.js';
 import type { EventRecord } from './event.schema.js';
+import type { Notifier } from '../notifications/notifier.js';
 
 /** A second request from the same phone within this many hours is the same booking, not a new one */
 const REPEAT_WINDOW_HOURS = 24;
 
 /** Rules for reserving a place at an event. */
-export function bookingService(bookings: BookingRepository, events: EventRepository) {
+export function bookingService(bookings: BookingRepository, events: EventRepository, notify?: Notifier) {
   /** Places still free, or null when the event has no limit */
   function placesLeft(event: EventRecord): number | null {
     if (event.capacity === null) return null;
@@ -61,6 +62,7 @@ export function bookingService(bookings: BookingRepository, events: EventReposit
 
       const booking = bookings.create(eventId, input);
       logger.info('bookings: new booking', { id: booking.id, reference: booking.reference, eventId, guests: booking.guests });
+      notify?.bookingReceived(booking, event, placesLeft(event));
       return booking;
     },
 
@@ -77,9 +79,16 @@ export function bookingService(bookings: BookingRepository, events: EventReposit
      * so the next guest can take them; the booking itself is kept for the record.
      */
     setStatus(id: number, status: BookingStatus) {
+      const before = bookings.findById(id);
       const updated = bookings.updateStatus(id, status);
       if (!updated) throw HttpError.notFound('Booking not found');
       logger.info('bookings: status changed', { id, status, reference: updated.reference });
+
+      // the guest hears once, when the booking first becomes confirmed
+      if (status === 'confirmed' && before?.status !== 'confirmed') {
+        const event = events.find(updated.eventId);
+        if (event) notify?.bookingConfirmed(updated, event);
+      }
       return updated;
     },
 

@@ -78,6 +78,28 @@ curl -H "Authorization: Bearer $ADMIN_API_KEY" "http://localhost:4000/api/v1/vis
   places back to the event straight away; the booking itself is kept for the record.
 - Bookings are refused for events that are unpublished, past, or not open for bookings.
 
+## Emails
+
+The API sends branded emails in the guest's language (English or Amharic; Wolaytta
+falls back to English), plus a notice to the staff inbox:
+
+| When | Guest (if they gave an email) | Staff (`STAFF_EMAIL`) |
+| --- | --- | --- |
+| A place is booked at an event | Booking number and details | New booking |
+| Staff set a booking to *confirmed* (once) | Confirmation with directions | |
+| A visit request arrives | Acknowledgement | New visit request |
+| A contact message arrives | Acknowledgement with their words | New message |
+
+- The design lives in `src/modules/notifications/templates/`: `layout.ts` is the shared
+  frame (white card on black, logo, gold line, green button, address), `messages.ts` the words.
+- Sending happens in the background: a mail problem is logged and never undoes a booking.
+- Without `SMTP_HOST`, every email is saved as an .html file in `MAIL_OUTBOX` instead of
+  being sent, which is handy while developing.
+- `pnpm email:preview` writes every email, filled with sample details, to
+  `data/email-previews/` so the designs can be checked in a browser.
+- For `info@bushaashegaruwa.com`, set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER` and `SMTP_PASS`
+  to the values from the mail provider (Google Workspace, Zoho, or the hosting company).
+
 ## Protection
 
 - Every field is validated; invalid requests get a 400 with the fields to fix.

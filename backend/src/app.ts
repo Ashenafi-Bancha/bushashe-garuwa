@@ -3,6 +3,7 @@ import express from 'express';
 import helmet from 'helmet';
 import type { Env } from './config/env.js';
 import { createContainer } from './container.js';
+import type { Mailer } from './modules/notifications/mailer.js';
 import type { Database } from './db/database.js';
 import { errorHandler, notFound } from './http/error-handler.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
@@ -23,8 +24,8 @@ import { visitRoutes } from './modules/visits/visit.routes.js';
  *   /api/v1/events       events, and reserving a place at one
  *   /api/v1/admin        staff dashboard: session check and counts
  */
-export function createApp(env: Env, db: Database) {
-  const { services, repositories, guards } = createContainer(env, db);
+export function createApp(env: Env, db: Database, options: { mailer?: Mailer } = {}) {
+  const { services, repositories, guards } = createContainer(env, db, options);
   const app = express();
 
   app.disable('x-powered-by');
