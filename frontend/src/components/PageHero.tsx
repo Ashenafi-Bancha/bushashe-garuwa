@@ -20,7 +20,7 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
   const caption = t.photoCaptions[photo];
 
   return (
-    <section className="relative bg-[#FAFAF8] overflow-hidden lg:bg-[#0B0B0C] lg:h-[92vh] lg:min-h-[640px] lg:max-h-[980px] lg:flex lg:items-end">
+    <section className="relative bg-[#F3ECE0] overflow-hidden lg:bg-[#0B0B0C] lg:h-[92vh] lg:min-h-[640px] lg:max-h-[980px] lg:flex lg:items-end">
       {/* Photo */}
       <div className="relative h-[52svh] min-h-[320px] sm:h-[60svh] overflow-hidden lg:absolute lg:inset-0 lg:h-auto lg:min-h-0 photo-3d">
         <img

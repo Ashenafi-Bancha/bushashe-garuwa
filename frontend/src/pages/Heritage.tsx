@@ -40,7 +40,7 @@ export default function Heritage() {
       <PageHero photo="house" eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
 
       {/* Heritage categories grid */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
             {categories.map((cat) => {
@@ -130,7 +130,7 @@ export default function Heritage() {
       </section>
 
       {/* Family history CTA */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div>

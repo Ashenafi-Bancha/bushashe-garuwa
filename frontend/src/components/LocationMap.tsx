@@ -7,7 +7,7 @@ export default function LocationMap({ id = 'map' }: { id?: string }) {
   const m = t.common.map;
 
   return (
-    <section id={id} className="py-16 sm:py-24 bg-[#FAFAF8]">
+    <section id={id} className="py-16 sm:py-24 bg-[#F3ECE0]">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_1.6fr] gap-10 lg:gap-14 items-center">
         <div>
           <span className="eyebrow bg-[#35723A]/10 text-[#35723A] mb-5">{m.eyebrow}</span>

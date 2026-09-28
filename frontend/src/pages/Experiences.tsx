@@ -29,7 +29,7 @@ export default function Experiences() {
 
 
       {/* Experience cards */}
-      <section className="bg-[#FAFAF8] pb-12 sm:pb-20">
+      <section className="bg-[#F3ECE0] pb-12 sm:pb-20">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {experiences.map(({ id, img }, i) => {

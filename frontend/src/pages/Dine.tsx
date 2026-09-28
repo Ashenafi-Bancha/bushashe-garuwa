@@ -24,7 +24,7 @@ export default function Dine() {
       <PageHero photo="food" eyebrow={dn.hero.eyebrow} title={dn.hero.title} desc={dn.hero.desc} />
 
       {/* Menu */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           {/* Category tabs */}
           <div className="flex flex-wrap gap-2 mb-8 sm:mb-14">

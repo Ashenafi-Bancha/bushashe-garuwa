@@ -33,7 +33,7 @@ export default function Stay() {
       <PageHero photo="pavilions" eyebrow={st.hero.eyebrow} title={st.hero.title} desc={st.hero.desc} />
 
       {/* Room cards */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="space-y-12">
             {rooms.map(({ id, size, amenities }, i) => {
@@ -105,7 +105,7 @@ export default function Stay() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 text-center">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 text-center">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <h2 className="font-display text-4xl font-semibold text-[#35723A] mb-4">{st.cta.title}</h2>
           <p className="text-[#12150F]/55 font-sans text-base max-w-xl mx-auto mb-10">{st.cta.desc}</p>

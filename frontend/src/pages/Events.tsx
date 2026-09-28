@@ -135,7 +135,7 @@ export default function Events() {
 
       {/* Booking form, opened from any bookable event */}
       {booking && (
-        <section id="book" className="bg-[#FAFAF8] pt-12 sm:pt-16">
+        <section id="book" className="bg-[#F3ECE0] pt-12 sm:pt-16">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6">
             <EventBooking
               event={booking}
@@ -182,7 +182,7 @@ export default function Events() {
       )}
 
       {/* All events */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between gap-6 mb-10 flex-wrap">
             <h2 className="font-display text-3xl font-semibold text-[#35723A]">{e.upcoming}</h2>

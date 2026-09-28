@@ -43,7 +43,7 @@ export default function About() {
         title={<>{a.hero.titleA}<br /><span className="text-[#35723A]">{a.hero.titleB}</span></>} />
 
       {/* Who we are */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div>
@@ -152,7 +152,7 @@ export default function About() {
       </section>
 
       {/* Our Values */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
             <div className="text-[#35723A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.values.eyebrow}</div>
@@ -232,7 +232,7 @@ export default function About() {
       </section>
 
       {/* Milestones */}
-      <section className="bg-[#FAFAF8] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
             <div className="text-[#35723A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.milestones.eyebrow}</div>

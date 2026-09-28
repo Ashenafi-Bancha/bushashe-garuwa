@@ -269,7 +269,7 @@ export default function Home() {
         <StoryFilm />
 
         {/* ═════════ THE PLACE IN NUMBERS ═════════ */}
-        <div className="border-y border-[#12150F]/8 bg-white/70">
+        <div>
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-7 sm:py-10">
             <ul className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
               {h.facts.items.map((fact, i) => (
@@ -281,7 +281,7 @@ export default function Home() {
                 >
                   {/* the gold appears only as this hairline */}
                   <span className="block w-7 h-px bg-[#B8863B] mb-4 mx-auto lg:mx-0 transition-all duration-300 group-hover:w-12" />
-                  <div className="font-display text-3xl sm:text-4xl leading-none text-[#12150F]">{fact.value}</div>
+                  <div className="font-display text-[1.75rem] sm:text-4xl leading-none whitespace-nowrap text-[#12150F]">{fact.value}</div>
                   <div className="text-[11px] sm:text-xs font-semibold tracking-[0.14em] uppercase mt-2 text-[#12150F]/50 leading-snug">
                     {fact.label}
                   </div>
@@ -321,7 +321,7 @@ export default function Home() {
               <div className="img-zoom rounded-[2rem] aspect-[4/5] bg-[#35723A]/10 shadow-2xl shadow-[#12150F]/20">
                 <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover object-[center_60%]"/>
               </div>
-              <div className="hidden sm:block absolute -bottom-10 -left-10 w-[48%] aspect-square rounded-[1.75rem] overflow-hidden border-8 border-[#FAFAF8] shadow-xl">
+              <div className="hidden sm:block absolute -bottom-10 -left-10 w-[48%] aspect-square rounded-[1.75rem] overflow-hidden border-8 border-[#F3ECE0] shadow-xl">
                 <img src={photos.gifaataa2} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy"/>
               </div>
               <div className="absolute top-6 right-3 sm:-right-6 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-4">
