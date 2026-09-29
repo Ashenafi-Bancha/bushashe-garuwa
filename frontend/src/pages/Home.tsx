@@ -8,7 +8,6 @@ import { useSiteEvents } from '../lib/events';
 import { videos } from '../assets/videos';
 import StoryFilm from '../components/StoryFilm';
 import PhotoRing from '../components/PhotoRing';
-import WelcomeTyper from '../components/WelcomeTyper';
 import QuickLinks from '../components/QuickLinks';
 import PhotoCard from '../components/PhotoCard';
 import { useHeroVideo } from '../lib/heroVideo';
@@ -134,6 +133,7 @@ export default function Home() {
   const { t } = useI18n();
   const h = t.home;
   const [heroIdx, setHeroIdx] = useState(0);
+  const prevIdx = (heroIdx - 1 + heroSlides.length) % heroSlides.length;
   const [isPlaying, setIsPlaying] = useState(false);
   const { events: siteEvents } = useSiteEvents();
   const heroVideo = useHeroVideo();
@@ -180,11 +180,12 @@ export default function Home() {
 
         {/* ═════════ HERO ═════════
             Phones: the photographs come first in their own panel, then the words
-            beneath them. Desktop: the words sit on the photograph, as before. */}
+            beneath them. Desktop: the words on the left half, the photographs on
+            the right, each new one sliding in from the left. */}
         <section className="relative bg-[#0A0A0B] lg:h-[100svh] lg:min-h-[640px] overflow-hidden" aria-label={h.hero.title}>
 
           {/* The photographs */}
-          <div className="relative h-[60svh] min-h-[380px] sm:h-[62svh] overflow-hidden rounded-b-[1rem] lg:rounded-none lg:absolute lg:inset-0 lg:h-auto lg:min-h-0">
+          <div className="relative h-[60svh] min-h-[380px] sm:h-[62svh] overflow-hidden rounded-b-[1rem] lg:rounded-none lg:absolute lg:inset-y-0 lg:right-0 lg:left-1/2 lg:h-auto lg:min-h-0">
             <div className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(0, ${drift * 0.35}px, 0)` }}>
               {heroVideo && (
                 <video
@@ -199,24 +200,34 @@ export default function Home() {
                   className="absolute inset-0 w-full h-full object-cover z-[1]"
                 />
               )}
-              {heroSlides.map(({ key, pos }, i) => (
-                <img
-                  key={key}
-                  src={photos[key]}
-                  alt={t.photos[key]}
-                  fetchPriority={i === 0 ? 'high' : 'auto'}
-                  className={`absolute inset-0 w-full h-full object-cover ${pos} transition-opacity duration-[1600ms] ease-in-out ${
-                    i === heroIdx ? 'opacity-100 animate-ken-burns' : 'opacity-0'
-                  }`}
-                />
-              ))}
+              {heroSlides.map(({ key, pos }, i) => {
+                // phones cross-fade; on desktop the new photograph slides in from
+                // the left and pushes the last one out to the right
+                const state = i === heroIdx ? 'current' : i === prevIdx ? 'leaving' : 'waiting';
+                return (
+                  <img
+                    key={key}
+                    src={photos[key]}
+                    alt={t.photos[key]}
+                    fetchPriority={i === 0 ? 'high' : 'auto'}
+                    className={`absolute inset-0 w-full h-full object-cover ${pos} ease-in-out transition-[opacity,translate] duration-[1600ms] lg:duration-[1300ms] ${
+                      state === 'current'
+                        ? 'opacity-100 animate-ken-burns lg:translate-x-0'
+                        : state === 'leaving'
+                          ? 'opacity-0 lg:opacity-100 lg:translate-x-full'
+                          : 'opacity-0 lg:-translate-x-full lg:transition-none'
+                    }`}
+                  />
+                );
+              })}
             </div>
 
             {/* header stays readable over a bright sky */}
             <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0A0A0B]/70 to-transparent" />
             {/* the photographs sink into the dark below them on phones, and carry the words on desktop */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-transparent to-transparent lg:via-[#0A0A0B]/45" />
-            <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#0A0A0B]/80 via-[#0A0A0B]/20 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-transparent to-transparent lg:from-[#0A0A0B]/60 lg:via-transparent" />
+            {/* desktop: the photographs fade into the dark half where the words are */}
+            <div className="hidden lg:block absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-[#0A0A0B] via-[#0A0A0B]/40 to-transparent" />
 
             {/* scroll hint, desktop only */}
             <div className="hidden lg:block absolute bottom-7 inset-x-0 z-10">
@@ -231,24 +242,17 @@ export default function Home() {
 
           {/* The words */}
           <div
-            className="relative z-10 max-w-screen-xl mx-auto px-5 sm:px-8 pt-7 sm:pt-8 pb-14 sm:pb-16 lg:pt-0 lg:pb-24 lg:h-full lg:flex lg:flex-col lg:justify-end will-change-transform"
+            className="relative z-10 max-w-screen-xl mx-auto px-5 sm:px-8 pt-7 sm:pt-8 pb-14 sm:pb-16 lg:mx-0 lg:max-w-none lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2 lg:pt-24 lg:pb-16 lg:pr-12 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] lg:flex lg:flex-col lg:justify-center will-change-transform"
             style={{ transform: `translate3d(0, ${drift * -0.12}px, 0)`, opacity: Math.max(0, 1 - drift / 700) }}
           >
-            <div className="max-w-4xl">
-                {/* on phones the greeting sits in the middle of the photograph above the words */}
-                <WelcomeTyper
-                  className="glow-welcome font-display italic text-[#D8B778] text-3xl sm:text-4xl lg:text-5xl xl:text-[3.4rem] leading-tight animate-fade-up delay-75
-                    absolute -top-[33svh] sm:-top-[34svh] inset-x-5 sm:inset-x-8 text-center
-                    lg:top-28 xl:top-32 lg:inset-x-auto lg:right-0 lg:w-[46%] lg:text-left"
-                  nameClassName="text-white"
-                />
-                <h1 className="glow-title font-display font-bold text-[#4E9B4F] text-[2rem] sm:text-[clamp(2.5rem,6.6vw,5rem)] leading-[1.08] tracking-[-0.01em] animate-fade-up delay-100">
+            <div className="max-w-4xl lg:max-w-none">
+                <h1 className="glow-title font-display font-bold text-[#4E9B4F] text-[2rem] sm:text-[clamp(2.5rem,6.6vw,5rem)] lg:text-[clamp(2.75rem,3.9vw,3.6rem)] leading-[1.08] tracking-[-0.01em] animate-fade-up delay-100">
                   {h.hero.title}
                 </h1>
-                <p className="mt-4 sm:mt-6 font-display font-normal text-xl sm:text-3xl text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
+                <p className="mt-4 sm:mt-6 font-display font-normal text-xl sm:text-3xl lg:text-2xl xl:text-[1.7rem] text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
                   {h.hero.subtitle}
                 </p>
-                <p className="mt-5 sm:mt-6 pl-4 sm:pl-5 border-l-2 border-[#B8863B] max-w-xl font-display italic font-semibold text-lg sm:text-2xl leading-snug text-white/90 animate-fade-up delay-300">
+                <p className="mt-5 sm:mt-6 pl-4 sm:pl-5 border-l-2 border-[#B8863B] max-w-xl font-display italic font-semibold text-lg sm:text-2xl lg:text-xl xl:text-[1.35rem] leading-snug text-white/90 animate-fade-up delay-300">
                   <span className="text-[#D8B778]">{h.hero.sloganA}</span>{' '}
                   {h.hero.sloganB}{' '}
                   <span className="text-white/75">{h.hero.sloganC}</span>

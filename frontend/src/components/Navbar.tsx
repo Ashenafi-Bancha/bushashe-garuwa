@@ -72,7 +72,7 @@ export default function Navbar() {
               }`}
             />
             <div className="leading-none">
-              <div className={`font-display text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${greenName ? 'text-[#1B4D22] bg-white/85 backdrop-blur-md rounded-full px-3 py-1 shadow-sm' : transparent ? 'text-white' : 'text-[#12150F]'}`}>Bushaashe Garuwa</div>
+              <div className={`font-display text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${greenName ? 'text-[#4E9B4F]' : transparent ? 'text-white' : 'text-[#12150F]'}`}>Bushaashe Garuwa</div>
             </div>
           </Link>
 
