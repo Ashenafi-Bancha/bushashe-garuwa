@@ -116,11 +116,6 @@ a, button {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-/* Audio waveform bars */
-@keyframes wave {
-  0%, 100% { transform: scaleY(0.35); }
-  50%      { transform: scaleY(1); }
-}
 /* Slide progress indicator */
 @keyframes progress {
   from { transform: scaleX(0); }
@@ -134,7 +129,6 @@ a, button {
 .animate-scroll-bounce { animation: scrollBounce 1.8s ease-in-out infinite; }
 .animate-ken-burns   { animation: kenBurns 14s ease-out both; }
 .animate-marquee     { animation: marquee 38s linear infinite; }
-.animate-wave        { animation: wave 1.1s ease-in-out infinite; transform-origin: bottom; }
 .animate-progress    { animation: progress 6.5s linear both; transform-origin: left; }
 /* Page banner photo: settles in from a gentle zoom */
 @keyframes heroPhoto {

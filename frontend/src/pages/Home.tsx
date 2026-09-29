@@ -134,7 +134,6 @@ export default function Home() {
   const h = t.home;
   const [heroIdx, setHeroIdx] = useState(0);
   const prevIdx = (heroIdx - 1 + heroSlides.length) % heroSlides.length;
-  const [isPlaying, setIsPlaying] = useState(false);
   const { events: siteEvents } = useSiteEvents();
   const heroVideo = useHeroVideo();
   // the hero only drifts with the scroll on desktop, where the words lie on the
@@ -513,47 +512,16 @@ export default function Home() {
               <div className="rounded-[1.25rem] overflow-hidden elev-1 aspect-[4/5] sm:aspect-[5/5] lg:aspect-[4/5]">
                 <Photo alt={h.stories.elderAlt} label={h.stories.elderAlt} className="w-full h-full object-cover"/>
               </div>
-              {/* Audio player */}
-              <div className="relative -mt-24 mx-4 sm:mx-8 rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-2 p-5 sm:p-6">
-                <div className="flex items-center gap-4">
-                  <button
-                    onClick={() => setIsPlaying(!isPlaying)}
-                    className="w-14 h-14 flex-shrink-0 rounded-full bg-[#35723A] text-white flex items-center justify-center hover:scale-105 active:scale-95 transition-transform"
-                    aria-label={isPlaying ? h.stories.pause : h.stories.play}
-                  >
-                    {isPlaying
-                      ? <span className="flex gap-1"><span className="w-1 h-4 rounded bg-current"/><span className="w-1 h-4 rounded bg-current"/></span>
-                      : <svg className="w-5 h-5 ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>}
-                  </button>
-                  <div className="min-w-0 flex-1">
-                    <div className="text-[#35723A] text-[11px] font-bold tracking-[0.12em] uppercase mb-1">{h.stories.nowPlaying}</div>
-                    <div className="font-display text-[#12150F] font-bold truncate">{h.stories.storyTitle}</div>
-                    <div className="text-[#12150F]/50 text-xs mt-0.5">{h.stories.meta}</div>
-                  </div>
-                </div>
-                <div className="flex items-end gap-[3px] h-10 mt-5">
-                  {Array.from({ length: 42 }, (_, i) => (
-                    <span
-                      key={i}
-                      className={`flex-1 rounded-full ${isPlaying ? 'bg-[#35723A] animate-wave' : 'bg-[#12150F]/12'}`}
-                      style={{
-                        height: `${30 + Math.abs(Math.sin(i * 0.7) * 55 + Math.cos(i * 1.9) * 15)}%`,
-                        animationDelay: `${(i % 7) * 90}ms`,
-                      }}
-                    />
-                  ))}
-                </div>
-              </div>
             </FadeSection>
 
             <FadeSection delay={120}>
-              <span className="eyebrow bg-white/8 text-[#B8863B] mb-5">{h.stories.eyebrow}</span>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] mb-7">{h.stories.title}</h2>
-              <p className="text-white/70 text-lg leading-relaxed mb-5">{h.stories.p1}</p>
-              <p className="text-white/50 text-base leading-relaxed mb-8">{h.stories.p2}</p>
+              <span className="eyebrow bg-[#35723A]/10 text-[#35723A] mb-5">{h.stories.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#12150F] leading-[1.05] mb-7">{h.stories.title}</h2>
+              <p className="text-[#12150F]/70 text-lg leading-relaxed mb-5">{h.stories.p1}</p>
+              <p className="text-[#12150F]/55 text-base leading-relaxed mb-8">{h.stories.p2}</p>
               <div className="flex flex-wrap gap-2 mb-10">
                 {h.stories.languages.map((l, i) => (
-                  <span key={i} className="rounded-full bg-white/8 border border-white/10 text-white/80 text-sm px-4 py-2">{l}</span>
+                  <span key={i} className="rounded-full bg-white border border-[#12150F]/8 text-[#12150F]/80 text-sm px-4 py-2 shadow-sm">{l}</span>
                 ))}
               </div>
               <TextLink to="/heritage/stories">{h.stories.cta}</TextLink>
