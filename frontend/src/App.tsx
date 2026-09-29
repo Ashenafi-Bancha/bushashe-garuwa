@@ -18,6 +18,8 @@ import { scrollToHash, scrollToTop, startSmoothScroll, useAutoReveal } from './l
 
 /** Staff area: loaded only when someone opens /admin, so visitors never download it */
 const AdminApp = lazy(() => import('./admin/AdminApp'));
+/** Design directions for the client to choose from; hidden, not linked */
+const Directions = lazy(() => import('./pages/Directions'));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -86,6 +88,14 @@ export default function App() {
             element={
               <Suspense fallback={<div className="min-h-screen bg-[#0B0B0C]" />}>
                 <AdminApp />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/directions"
+            element={
+              <Suspense fallback={<div className="min-h-screen bg-[#0B0B0C]" />}>
+                <Directions />
               </Suspense>
             }
           />
