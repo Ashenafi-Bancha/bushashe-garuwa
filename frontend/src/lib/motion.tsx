@@ -135,3 +135,32 @@ export function useAutoReveal(pathname: string) {
     return () => obs.disconnect();
   }, [pathname]);
 }
+
+/**
+ * Reveals every element marked `data-reveal` inside the returned container as
+ * it scrolls into view (adds `in-view`; style the start state with `.fade-section`).
+ */
+export function useRevealChildren<T extends HTMLElement>() {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+    const els = Array.from(root.querySelectorAll<HTMLElement>('[data-reveal]'));
+    if (reducedMotion()) {
+      els.forEach((el) => el.classList.add('in-view'));
+      return;
+    }
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in-view');
+          obs.unobserve(e.target);
+        }
+      }),
+      { rootMargin: '0px 0px -6% 0px', threshold: 0.08 },
+    );
+    els.forEach((el) => obs.observe(el));
+    return () => obs.disconnect();
+  }, []);
+  return ref;
+}

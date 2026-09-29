@@ -104,6 +104,8 @@ export const en = {
     suggestions: ['Cultural Houses', 'Heritage Trees', 'Traditional Food', 'Guesthouse', 'Cultural Events', 'Oral Histories', 'The Reading Place', 'Heritage Tour'],
     language: 'Language',
     wolayttaSoon: 'coming soon',
+    menu: 'Menu',
+    close: 'Close',
   },
 
   notice: {
@@ -116,6 +118,7 @@ export const en = {
 
   footer: {
     tagline: 'Where Wolaita Heritage Lives. A living cultural heritage destination in Wolaita, Ethiopia.',
+    headline: 'Spend a day where Wolaita heritage lives.',
     followUs: 'Follow Us',
     columns: {
       explore: {
@@ -158,6 +161,8 @@ export const en = {
       statGenerations: 'Generations',
       statYears: 'Years of heritage',
       sinceCentury: 'Since the 18th century',
+      badge: 'WOLAITA · HERITAGE · NATURE · CULTURE · ',
+      lead: 'A family heritage place in Damot Sore, near Gununo, kept for four generations.',
     },
     film: {
       eyebrow: 'Watch',
@@ -177,7 +182,19 @@ export const en = {
     quick: {
       eyebrow: 'Find your way',
       title: 'Everything at Bushaashe Garuwa',
+      desc: 'Every part of Bushaashe Garuwa, one step away.',
+      items: {
+        heritage: 'Cultural houses, ancient trees and the family story.',
+        experiences: 'Food, coffee, music, dance and guided tours.',
+        events: 'Cultural food evenings twice a month, and Gifaataa.',
+        stay: 'Quiet rooms in the guesthouse, among the gardens.',
+        dine: 'Wolaita and Ethiopian dishes, cooked with care.',
+        visit: 'Opening hours, directions and booking a visit.',
+        gallery: 'The grounds, the houses and the celebrations in photos.',
+        about: 'Who we are and why we keep this place.',
+      },
     },
+    marquee: ['Heritage', 'Nature', 'Culture', 'Food', 'Gifaataa', 'Stay'],
     facts: {
       items: [
         { value: '18th c.', label: 'Where the story begins' },

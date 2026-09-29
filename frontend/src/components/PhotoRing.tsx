@@ -103,7 +103,7 @@ export default function PhotoRing() {
     return (
       <section className="py-20 sm:py-28">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#12150F] mb-8">{ring.title}</h2>
+          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] mb-8">{ring.title}</h2>
           <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {RING.map((key) => (
               <img key={key} src={photos[key]} alt={t.photos[key]} loading="lazy" className="rounded-2xl aspect-[3/4] object-cover" />
@@ -120,10 +120,9 @@ export default function PhotoRing() {
       
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 text-center mb-10 sm:mb-14">
-        <span className="block w-10 h-px bg-[#B8863B] mb-4 mx-auto" />
-        <span className="block text-xs font-bold tracking-[0.2em] uppercase text-[#35723A] mb-4">{ring.eyebrow}</span>
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold text-[#12150F] leading-[1.05]">{ring.title}</h2>
-        <p className="text-[#12150F]/60 mt-4 max-w-xl mx-auto">{ring.desc}</p>
+        <span className="eyebrow mb-5">{ring.eyebrow}</span>
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98]">{ring.title}</h2>
+        <p className="text-[#1E3A29]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{ring.desc}</p>
       </div>
 
       <div
@@ -148,7 +147,7 @@ export default function PhotoRing() {
           {RING.map((key, i) => (
             <figure
               key={key}
-              className="absolute inset-0 rounded-[1.5rem] overflow-hidden shadow-[0_40px_80px_-30px_rgba(0,0,0,0.8)] ring-1 ring-white/10"
+              className="absolute inset-0 rounded-[1.75rem] overflow-hidden shadow-[0_40px_80px_-34px_rgba(19,38,26,0.7)]"
               style={{ transform: `rotateY(${i * step}deg) translateZ(${radius}px)` }}
             >
               <img
@@ -158,7 +157,7 @@ export default function PhotoRing() {
                 draggable={false}
                 className="w-full h-full object-cover pointer-events-none"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/80 via-transparent to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-[#13261A]/80 via-transparent to-transparent" />
               <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">
                 {t.photoCaptions[key].title}
               </figcaption>
@@ -169,17 +168,17 @@ export default function PhotoRing() {
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
         <div className="flex items-center gap-3">
-          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-11 h-11 rounded-full border border-[#12150F]/15 text-[#35723A] hover:border-[#35723A] transition-colors">
+          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#1E3A29] hover:text-[#F4EFE4] transition-colors">
             ‹
           </button>
-          <span className="text-[#12150F]/60 text-sm min-w-[12rem] text-center">{t.photoCaptions[facing].title}</span>
-          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-11 h-11 rounded-full border border-[#12150F]/15 text-[#35723A] hover:border-[#35723A] transition-colors">
+          <span className="text-[#1E3A29]/60 text-sm min-w-[12rem] text-center">{t.photoCaptions[facing].title}</span>
+          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#1E3A29] hover:text-[#F4EFE4] transition-colors">
             ›
           </button>
         </div>
-        <Link to="/gallery" className="btn-outline text-[#35723A] border-[#12150F]/20">{ring.cta}</Link>
+        <Link to="/gallery" className="btn-primary">{ring.cta}</Link>
       </div>
-      <p className="relative text-center text-[#12150F]/40 text-xs mt-5">{ring.hint}</p>
+      <p className="relative text-center text-[#1E3A29]/40 text-xs mt-5">{ring.hint}</p>
     </section>
   );
 }

@@ -18,8 +18,6 @@ import { scrollToHash, scrollToTop, startSmoothScroll, useAutoReveal } from './l
 
 /** Staff area: loaded only when someone opens /admin, so visitors never download it */
 const AdminApp = lazy(() => import('./admin/AdminApp'));
-/** Design directions for the client to choose from; hidden, not linked */
-const Directions = lazy(() => import('./pages/Directions'));
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -36,12 +34,12 @@ function ScrollToTop() {
 function NotFound() {
   const { t } = useI18n();
   return (
-    <main className="pt-20 min-h-screen bg-[#F3ECE0] flex items-center justify-center">
+    <main className="pt-20 min-h-screen bg-[#F4EFE4] flex items-center justify-center">
       <div className="text-center px-6">
-        <div className="font-display text-8xl text-[#35723A]/20 mb-6">404</div>
-        <h1 className="font-display text-3xl font-semibold text-[#35723A] mb-4">{t.notFound.title}</h1>
-        <p className="text-[#12150F]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
-        <a href="/" className="inline-flex items-center gap-2 bg-[#35723A] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#43884A]">
+        <div className="font-display text-8xl text-[#1E3A29]/20 mb-6">404</div>
+        <h1 className="font-display text-3xl font-semibold text-[#1E3A29] mb-4">{t.notFound.title}</h1>
+        <p className="text-[#1E3A29]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
+        <a href="/" className="inline-flex items-center gap-2 bg-[#1E3A29] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#2D5239]">
           {t.notFound.button}
         </a>
       </div>
@@ -51,9 +49,7 @@ function NotFound() {
 
 function AppLayout() {
   return (
-    <div className="min-h-screen bg-[#0B0B0C] p-1 sm:p-1.5">
-      {/* the whole site is a white sheet floating on the green canvas */}
-      <div className="bg-[#F3ECE0] rounded-[0.9rem] sm:rounded-[1.4rem] overflow-hidden">
+    <div className="min-h-screen bg-[#F4EFE4]">
       <ScrollToTop />
       <Navbar />
       <Routes>
@@ -73,7 +69,6 @@ function AppLayout() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-      </div>
     </div>
   );
 }
@@ -86,16 +81,8 @@ export default function App() {
           <Route
             path="/admin/*"
             element={
-              <Suspense fallback={<div className="min-h-screen bg-[#0B0B0C]" />}>
+              <Suspense fallback={<div className="min-h-screen bg-[#13261A]" />}>
                 <AdminApp />
-              </Suspense>
-            }
-          />
-          <Route
-            path="/directions"
-            element={
-              <Suspense fallback={<div className="min-h-screen bg-[#0B0B0C]" />}>
-                <Directions />
               </Suspense>
             }
           />

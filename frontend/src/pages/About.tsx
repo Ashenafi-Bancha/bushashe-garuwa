@@ -40,43 +40,43 @@ export default function About() {
 
       {/* Hero */}
       <PageHero photo="gifaataa2" pos="object-bottom" eyebrow={a.hero.eyebrow} desc={t.common.slogan}
-        title={<>{a.hero.titleA}<br /><span className="text-[#35723A]">{a.hero.titleB}</span></>} />
+        title={<>{a.hero.titleA}<br /><span className="text-[#1E3A29]">{a.hero.titleB}</span></>} />
 
       {/* Who we are */}
-      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div>
-              <div className="text-[#35723A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.who.eyebrow}</div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#35723A] leading-tight mb-6 gold-underline">
+              <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.who.eyebrow}</div>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight mb-6 gold-underline">
                 {a.who.title}
               </h2>
-              <p className="text-[#12150F]/70 font-sans text-base leading-relaxed mb-5">
+              <p className="text-[#1E3A29]/70 font-sans text-base leading-relaxed mb-5">
                 {a.who.p1}
               </p>
-              <p className="text-[#12150F]/60 font-sans text-base leading-relaxed mb-5">
+              <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed mb-5">
                 {a.who.name}
               </p>
-              <p className="text-[#12150F]/60 font-sans text-base leading-relaxed mb-5">
+              <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed mb-5">
                 {a.who.p2}
               </p>
-              <p className="text-[#12150F]/60 font-sans text-base leading-relaxed mb-5">
+              <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed mb-5">
                 {a.who.p3}
               </p>
-              <p className="text-[#12150F]/60 font-sans text-base leading-relaxed">
+              <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed">
                 {a.who.festival}
               </p>
             </div>
             <div className="relative">
-              <div className="img-zoom aspect-[4/5] rounded-[2rem] bg-[#35723A]/10">
+              <div className="img-zoom aspect-[4/5] rounded-[2rem] bg-[#1E3A29]/10">
                 <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -bottom-5 -left-5 bg-[#35723A] rounded-2xl shadow-xl p-6 hidden lg:block">
-                <div className="text-[#B8863B] font-display text-3xl font-semibold">4+</div>
+              <div className="absolute -bottom-5 -left-5 bg-[#1E3A29] rounded-2xl shadow-xl p-6 hidden lg:block">
+                <div className="text-[#B9D38A] font-display text-3xl font-semibold">4+</div>
                 <div className="text-white/50 font-sans text-xs tracking-wider uppercase mt-1">{a.who.generations}</div>
               </div>
-              <div className="absolute -top-5 -right-5 bg-[#B8863B] rounded-2xl shadow-xl px-6 py-5 hidden lg:block max-w-[12rem]">
-                <div className="text-[#35723A] font-display text-2xl font-semibold leading-tight">{a.who.since}</div>
+              <div className="absolute -top-5 -right-5 bg-[#C4622D] rounded-2xl shadow-xl px-6 py-5 hidden lg:block max-w-[12rem]">
+                <div className="text-white font-display text-2xl font-semibold leading-tight">{a.who.since}</div>
               </div>
             </div>
           </div>
@@ -86,25 +86,25 @@ export default function About() {
       {/* Ultimate goal */}
       <section className="py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
-          <span className="eyebrow bg-[#35723A]/10 text-[#35723A] mb-7">{t.common.goal.eyebrow}</span>
-          <p className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#12150F] leading-[1.2]">{t.common.goal.text}</p>
+          <span className="eyebrow bg-[#1E3A29]/10 text-[#1E3A29] mb-7">{t.common.goal.eyebrow}</span>
+          <p className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#1E3A29] leading-[1.2]">{t.common.goal.text}</p>
         </div>
       </section>
 
       {/* Mission & Vision */}
-      <section className="bg-[#35723A] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#1E3A29] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
-            <div className="text-[#B8863B] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.purpose.eyebrow}</div>
+            <div className="text-[#B9D38A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.purpose.eyebrow}</div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight">{a.purpose.title}</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             {/* Mission */}
-            <div className="bg-[#0B0B0C] rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 border-r border-t border-[#B8863B]/10" />
-              <div className="text-[#B8863B] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
-                <div className="w-6 h-px bg-[#B8863B]" />
+            <div className="bg-[#13261A] rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 border-r border-t border-[#C4622D]/10" />
+              <div className="text-[#B9D38A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
+                <div className="w-6 h-px bg-[#C4622D]" />
                 {a.purpose.missionLabel}
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-semibold text-white leading-snug mb-6">
@@ -117,17 +117,17 @@ export default function About() {
                 {a.purpose.missionP2}
               </p>
               <div className="mt-8 pt-8 border-t border-white/10">
-                <p className="text-[#B8863B] font-display text-lg italic font-semibold">
+                <p className="text-[#B9D38A] font-display text-lg italic font-semibold">
                   “{t.common.slogan}”
                 </p>
               </div>
             </div>
 
             {/* Vision */}
-            <div className="bg-[#43884A] rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
-              <div className="absolute bottom-0 left-0 w-32 h-32 border-l border-b border-[#B8863B]/10" />
-              <div className="text-[#B8863B] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
-                <div className="w-6 h-px bg-[#B8863B]" />
+            <div className="bg-[#2D5239] rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
+              <div className="absolute bottom-0 left-0 w-32 h-32 border-l border-b border-[#C4622D]/10" />
+              <div className="text-[#B9D38A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
+                <div className="w-6 h-px bg-[#C4622D]" />
                 {a.purpose.visionLabel}
               </div>
               <h3 className="font-display text-2xl sm:text-3xl font-semibold text-white leading-snug mb-6">
@@ -142,7 +142,7 @@ export default function About() {
               <div className="mt-8 pt-8 border-t border-white/10">
                 <div className="flex flex-wrap gap-3">
                   {a.purpose.tags.map((tag, i) => (
-                    <span key={i} className="border border-[#B8863B]/30 text-[#B8863B]/70 text-xs font-sans rounded-full px-3 py-1">{tag}</span>
+                    <span key={i} className="border border-[#B9D38A]/30 text-[#B9D38A]/80 text-xs font-sans rounded-full px-3 py-1">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -152,17 +152,17 @@ export default function About() {
       </section>
 
       {/* Our Values */}
-      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
-            <div className="text-[#35723A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.values.eyebrow}</div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#35723A] leading-tight">{a.values.title}</h2>
+            <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.values.eyebrow}</div>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{a.values.title}</h2>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {values.map((val) => (
               <div key={val.id} className="bg-white heritage-card p-7">
-                <h3 className="font-display text-xl font-semibold text-[#35723A] mb-3">{a.values.items[val.id].title}</h3>
-                <p className="text-[#12150F]/60 font-sans text-sm leading-relaxed">{a.values.items[val.id].desc}</p>
+                <h3 className="font-display text-xl font-semibold text-[#1E3A29] mb-3">{a.values.items[val.id].title}</h3>
+                <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{a.values.items[val.id].desc}</p>
               </div>
             ))}
           </div>
@@ -170,18 +170,18 @@ export default function About() {
       </section>
 
       {/* Family line: Bushaashe -> Alambo -> Garedew -> today */}
-      <section id="family" className="bg-[#0B0B0C] mx-2 sm:mx-3 rounded-[2rem] py-16 sm:py-24 overflow-hidden">
+      <section id="family" className="bg-[#13261A] mx-2 sm:mx-3 rounded-[2rem] py-16 sm:py-24 overflow-hidden">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="max-w-3xl mb-12">
-            <span className="eyebrow bg-white/8 text-[#B8863B] mb-5">{a.lineage.eyebrow}</span>
+            <span className="eyebrow bg-white/10 text-[#B9D38A] mb-5">{a.lineage.eyebrow}</span>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.05] mb-5">{a.lineage.title}</h2>
             <p className="text-white/55 text-base sm:text-lg leading-relaxed">{a.lineage.desc}</p>
           </div>
 
           <div className="relative">
             {/* connecting line */}
-            <div className="hidden lg:block absolute top-[76px] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-[#B8863B]/80 via-[#B8863B]/40 to-[#B8863B]/80" />
-            <div className="lg:hidden absolute left-[52px] top-10 bottom-10 w-px bg-[#B8863B]/40" />
+            <div className="hidden lg:block absolute top-[76px] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-[#C4622D]/80 via-[#C4622D]/40 to-[#C4622D]/80" />
+            <div className="lg:hidden absolute left-[52px] top-10 bottom-10 w-px bg-[#C4622D]/40" />
 
             <div className="grid lg:grid-cols-4 gap-3 lg:gap-6">
               {lineage.map((id, i) => {
@@ -193,18 +193,18 @@ export default function About() {
                     onClick={() => setPerson(id)}
                     aria-pressed={active}
                     className={`relative flex lg:flex-col items-center lg:text-center gap-5 lg:gap-4 rounded-3xl p-4 lg:p-6 text-left transition-all duration-500 ${
-                      active ? 'bg-white/[0.07] ring-1 ring-[#B8863B]/50' : 'hover:bg-white/[0.04]'
+                      active ? 'bg-white/[0.07] ring-1 ring-[#C4622D]/50' : 'hover:bg-white/[0.04]'
                     }`}
                   >
                     <span
                       className={`relative z-10 w-[72px] h-[72px] lg:w-[104px] lg:h-[104px] flex-shrink-0 rounded-full flex items-center justify-center font-display text-3xl lg:text-5xl transition-all duration-500 ${
-                        active ? 'bg-[#B8863B] text-[#12150F] shadow-[0_0_0_8px_rgba(201,154,69,0.15)]' : 'bg-[#35723A] text-[#B8863B] ring-4 ring-[#12150F]'
+                        active ? 'bg-[#86A94F] text-[#13261A] shadow-[0_0_0_8px_rgba(134,169,79,0.2)]' : 'bg-[#1E3A29] text-[#B9D38A] ring-4 ring-[#1E3A29]'
                       }`}
                     >
                       {i + 1}
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[#B8863B] text-[11px] font-semibold tracking-[0.12em] uppercase mb-1.5">{p.generation}</span>
+                      <span className="block text-[#B9D38A] text-[11px] font-semibold tracking-[0.12em] uppercase mb-1.5">{p.generation}</span>
                       <span className="block font-display text-2xl lg:text-3xl text-white">{p.name}</span>
                       {p.period && <span className="block text-white/45 text-sm mt-1">{p.period}</span>}
                     </span>
@@ -218,7 +218,7 @@ export default function About() {
           <div key={person} className="mt-10 rounded-3xl bg-white/[0.04] border border-white/10 p-7 sm:p-10 animate-fade-up">
             <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-5">
               <h3 className="font-display text-3xl sm:text-4xl text-white">{selected.name}</h3>
-              <span className="text-[#B8863B] text-sm">{selected.generation}{selected.period ? ` · ${selected.period}` : ''}</span>
+              <span className="text-[#B9D38A] text-sm">{selected.generation}{selected.period ? ` · ${selected.period}` : ''}</span>
             </div>
             {selected.story.trim() ? (
               selected.story.split(/\n\s*\n/).map((para, i) => (
@@ -232,25 +232,25 @@ export default function About() {
       </section>
 
       {/* Milestones */}
-      <section className="bg-[#F3ECE0] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
-            <div className="text-[#35723A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.milestones.eyebrow}</div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#35723A] leading-tight">{a.milestones.title}</h2>
+            <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.milestones.eyebrow}</div>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{a.milestones.title}</h2>
           </div>
           <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-[#B8863B] via-[#B8863B]/40 to-transparent hidden md:block ml-[5.5rem]" />
+            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-[#C4622D] via-[#C4622D]/40 to-transparent hidden md:block ml-[5.5rem]" />
             <div className="space-y-6">
               {a.milestones.items.map((m, i) => (
                 <div key={i} className="flex items-start gap-8">
                   <div className="flex-shrink-0 w-20 text-right">
-                    <span className="text-[#B8863B] font-sans text-xs font-semibold tracking-wider">{m.year}</span>
+                    <span className="text-[#C4622D] font-sans text-xs font-semibold tracking-wider">{m.year}</span>
                   </div>
                   <div className="relative flex-shrink-0 hidden md:flex items-center justify-center">
-                    <div className="w-3 h-3 border-2 border-[#B8863B] bg-[#FAFAF8] z-10" />
+                    <div className="w-3 h-3 border-2 border-[#C4622D] bg-[#F4EFE4] z-10" />
                   </div>
-                  <div className="bg-white rounded-2xl border border-[#35723A]/10 hover:border-[#B8863B]/30 px-4 sm:px-6 py-4 flex-1 transition-colors">
-                    <p className="text-[#35723A] font-sans text-sm leading-relaxed">{m.event}</p>
+                  <div className="bg-white rounded-2xl border border-[#1E3A29]/10 hover:border-[#C4622D]/30 px-4 sm:px-6 py-4 flex-1 transition-colors">
+                    <p className="text-[#1E3A29] font-sans text-sm leading-relaxed">{m.event}</p>
                   </div>
                 </div>
               ))}
@@ -260,15 +260,15 @@ export default function About() {
       </section>
 
       {/* What we offer summary */}
-      <section className="bg-[#35723A] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#1E3A29] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
-            <div className="text-[#B8863B] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.offer.eyebrow}</div>
+            <div className="text-[#B9D38A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.offer.eyebrow}</div>
             <h2 className="font-display text-4xl font-semibold text-white">{a.offer.title}</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {offerItems.map((item) => (
-              <div key={item.id} className="rounded-2xl border border-white/10 hover:border-[#B8863B]/40 p-5 text-center transition-colors duration-200">
+              <div key={item.id} className="rounded-2xl border border-white/10 hover:border-[#C4622D]/40 p-5 text-center transition-colors duration-200">
                 <div className="text-white/70 font-sans text-xs leading-snug">{a.offer.items[item.id]}</div>
               </div>
             ))}
@@ -279,7 +279,7 @@ export default function About() {
       {/* CTA */}
       <section className="relative mx-2 sm:mx-3 rounded-[2rem] py-28 overflow-hidden">
         <img src={photos.pavilions} alt={t.photos.pavilions} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-[#0B0B0C]/82" />
+        <div className="absolute inset-0 bg-[#13261A]/82" />
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4">
             {t.common.comeBePart}
@@ -288,7 +288,7 @@ export default function About() {
             {a.cta.desc}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/visit" className="inline-flex items-center gap-2 bg-[#B8863B] hover:bg-[#d9af65] text-[#35723A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/visit" className="inline-flex items-center gap-2 bg-[#86A94F] hover:bg-[#B9D38A] text-[#13261A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
               {t.common.planVisit}
             </Link>
             <Link to="/contact" className="inline-flex items-center gap-2 border border-white/40 hover:border-white text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">

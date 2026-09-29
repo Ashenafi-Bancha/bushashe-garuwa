@@ -1,231 +1,177 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../assets/brand/logo.png';
+import { photos } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import LanguageSwitcher from './LanguageSwitcher';
+import SocialLinks from './SocialLinks';
 import { lockScroll } from '../lib/motion';
 
-const navRoutes = [
-  { key: 'home', to: '/' },
-  { key: 'about', to: '/about' },
-  { key: 'discover', to: '/discover' },
-  { key: 'heritage', to: '/heritage' },
-  { key: 'experiences', to: '/experiences' },
-  { key: 'events', to: '/events' },
-  { key: 'stay', to: '/stay' },
-  { key: 'dine', to: '/dine' },
-  { key: 'gallery', to: '/gallery' },
-  { key: 'visit', to: '/visit' },
-  { key: 'contact', to: '/contact' },
-] as const;
+type NavKey = 'home' | 'about' | 'discover' | 'heritage' | 'experiences' | 'events' | 'stay' | 'dine' | 'gallery' | 'visit' | 'contact';
 
-/* The desktop bar shows every page; the full-screen menu (tablet and phone) lists them too. */
-const barKeys = ['home', 'about', 'discover', 'heritage', 'experiences', 'events', 'stay', 'dine', 'gallery', 'visit', 'contact'] as const;
+const routes: Record<NavKey, string> = {
+  home: '/',
+  about: '/about',
+  discover: '/discover',
+  heritage: '/heritage',
+  experiences: '/experiences',
+  events: '/events',
+  stay: '/stay',
+  dine: '/dine',
+  gallery: '/gallery',
+  visit: '/visit',
+  contact: '/contact',
+};
+
+/* the few places most visitors want, always in view on a computer */
+const barKeys: NavKey[] = ['about', 'heritage', 'experiences', 'events', 'stay'];
+/* every page, in the full-screen menu */
+const menuKeys: NavKey[] = ['home', 'about', 'discover', 'heritage', 'experiences', 'events', 'stay', 'dine', 'gallery', 'visit', 'contact'];
 
 export default function Navbar() {
-  const [scrolled, setScrolled]     = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [open, setOpen] = useState(false);
   const location = useLocation();
   const { t } = useI18n();
-  const navLinks = navRoutes.map((r) => ({ key: r.key, to: r.to, label: t.nav.links[r.key] }));
-  const barLinks = navLinks.filter((l) => (barKeys as readonly string[]).includes(l.key));
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => { setMobileOpen(false); setSearchOpen(false); }, [location.pathname]);
+  useEffect(() => setOpen(false), [location.pathname]);
 
   useEffect(() => {
-    lockScroll(mobileOpen || searchOpen);
-    return () => lockScroll(false);
-  }, [mobileOpen, searchOpen]);
+    lockScroll(open);
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => { lockScroll(false); window.removeEventListener('keydown', onKey); };
+  }, [open]);
 
-  // clear over the photograph at the top of any page; a solid white bar once scrolling starts
-  const transparent = !scrolled && !mobileOpen;
-  // over the home page's photograph the name reads in the brand's dark green
-  const greenName = transparent && location.pathname === '/';
   const isActive = (to: string) => (to === '/' ? location.pathname === '/' : location.pathname.startsWith(to));
 
   return (
     <>
-      <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
-          transparent ? 'bg-transparent' : 'bg-white/95 backdrop-blur-xl border-b border-[#12150F]/8 shadow-[0_10px_30px_-18px_rgba(22,37,15,0.35)]'
-        }`}
-      >
+      <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-5 pt-3">
+        {/* at the top the bar sits on the page; once scrolling it floats as a frosted pill */}
         <div
-          className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 px-3 sm:px-6 transition-all duration-500 ${
-            scrolled ? 'h-16' : 'h-20'
+          className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full transition-all duration-500 ${
+            scrolled && !open
+              ? 'bg-white/80 backdrop-blur-xl shadow-[0_12px_40px_-18px_rgba(30,58,41,0.35)] border border-white/60 h-14 sm:h-16 pl-2 pr-2 sm:pl-3'
+              : 'h-16 sm:h-[72px] pl-1 pr-1'
           }`}
         >
-          {/* ── Logo ── */}
-          <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group" aria-label={t.nav.homeAria}>
+          <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group relative z-[60]" aria-label={t.nav.homeAria}>
             <img
               src={logo}
-              alt="Bushaashe Garuwa Lodge"
-              className={`rounded-full object-contain bg-white/90 p-0.5 transition-all duration-500 group-hover:scale-105 ${
-                scrolled ? 'w-9 h-9' : 'w-11 h-11'
-              }`}
+              alt="Bushaashe Garuwa"
+              className={`rounded-full object-contain bg-white p-0.5 shadow-sm transition-all duration-500 group-hover:scale-105 ${scrolled ? 'w-10 h-10' : 'w-11 h-11 sm:w-12 sm:h-12'}`}
             />
-            <div className="leading-none">
-              <div className={`font-display text-[13px] sm:text-[15px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${greenName ? 'text-[#4E9B4F]' : transparent ? 'text-white' : 'text-[#12150F]'}`}>Bushaashe Garuwa</div>
-            </div>
+            <span className={`font-display text-[15px] sm:text-[17px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${open ? 'text-[#F4EFE4]' : 'text-[#1E3A29]'}`}>
+              Bushaashe Garuwa
+            </span>
           </Link>
 
-          {/* ── Desktop links ── */}
-          <nav className="hidden lg:flex items-center gap-0.5 min-w-0" aria-label={t.nav.mainNav}>
-            {barLinks.map((link) => (
+          <nav className={`hidden lg:flex items-center gap-1 transition-opacity duration-300 ${open ? 'opacity-0 pointer-events-none' : ''}`} aria-label={t.nav.mainNav}>
+            {barKeys.map((key) => (
               <Link
-                key={link.to}
-                to={link.to}
-                className={`px-[5px] xl:px-3 py-2 rounded-full text-[11.5px] xl:text-[13px] font-medium whitespace-nowrap transition-colors duration-300 ${
-                  isActive(link.to)
-                    ? transparent
-                      ? 'bg-white/20 text-white backdrop-blur-sm'
-                      : 'bg-[#35723A] text-white'
-                    : transparent
-                      ? 'text-white/85 hover:text-white hover:bg-white/12'
-                      : 'text-[#12150F]/70 hover:text-[#35723A] hover:bg-[#35723A]/8'
+                key={key}
+                to={routes[key]}
+                className={`relative px-4 py-2 rounded-full text-[14px] font-semibold whitespace-nowrap transition-colors duration-300 ${
+                  isActive(routes[key]) ? 'bg-[#1E3A29] text-[#F4EFE4]' : 'text-[#1E3A29]/75 hover:text-[#1E3A29] hover:bg-[#1E3A29]/6'
                 }`}
               >
-                {link.label}
+                {t.nav.links[key]}
               </Link>
             ))}
           </nav>
 
-          {/* ── Right controls ── */}
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-1 sm:gap-2 relative z-[60]">
+            <div className={open ? 'hidden' : ''}>
+              <LanguageSwitcher variant="bar" onDark={false} />
+            </div>
+            {/* wrapped: the button's own display would otherwise beat `hidden` */}
+            <span className={`hidden ${open ? '' : 'md:block'}`}>
+              <Link to="/visit" className="btn-primary nav-cta whitespace-nowrap">{t.common.planVisit}</Link>
+            </span>
             <button
-              onClick={() => setSearchOpen(true)}
-              className={`search-toggle touch-target rounded-full transition-colors duration-500 ${
-                transparent ? 'text-white/80 hover:text-white hover:bg-white/12' : 'text-[#12150F]/60 hover:text-[#35723A] hover:bg-[#35723A]/8'
+              onClick={() => setOpen(!open)}
+              aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
+              aria-expanded={open}
+              aria-controls="site-menu"
+              className={`flex items-center gap-2.5 rounded-full pl-4 pr-1.5 py-1.5 text-[13px] font-bold transition-colors duration-300 ${
+                open ? 'bg-[#F4EFE4] text-[#1E3A29]' : 'bg-white text-[#1E3A29] shadow-sm hover:bg-[#1E3A29] hover:text-[#F4EFE4]'
               }`}
-              aria-label={t.nav.search}
             >
-              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2" strokeLinecap="round"/>
-              </svg>
-            </button>
-
-            <LanguageSwitcher variant="bar" onDark={transparent} />
-
-
-            {/* Menu — phones and tablets */}
-            <button
-              className={`menu-toggle touch-target rounded-full transition-colors duration-500 ${
-                transparent ? 'text-white hover:bg-white/12' : 'text-[#12150F]/75 hover:text-[#35723A] hover:bg-[#35723A]/8'
-              } ${mobileOpen ? 'bg-[#35723A]/10 text-[#35723A]' : ''}`}
-              onClick={() => setMobileOpen(!mobileOpen)}
-              aria-label={mobileOpen ? t.nav.closeMenu : t.nav.openMenu}
-              aria-expanded={mobileOpen}
-              aria-controls="mobile-menu"
-            >
-              <div className="w-[18px] flex flex-col gap-[5px]">
-                <span className={`block h-[1.5px] rounded-full bg-current transition-all duration-400 origin-center ${mobileOpen ? 'rotate-45 translate-y-[6.5px]' : ''}`}/>
-                <span className={`block h-[1.5px] rounded-full bg-current transition-all duration-300 ${mobileOpen ? 'opacity-0 scale-x-0' : ''}`}/>
-                <span className={`block h-[1.5px] rounded-full bg-current transition-all duration-400 origin-center ${mobileOpen ? '-rotate-45 -translate-y-[6.5px]' : ''}`}/>
-              </div>
+              <span className="hidden sm:inline">{open ? t.nav.close : t.nav.menu}</span>
+              <span className={`grid place-items-center w-8 h-8 rounded-full ${open ? 'bg-[#1E3A29] text-[#F4EFE4]' : 'bg-[#86A94F] text-[#13261A]'}`}>
+                <span className="relative block w-3.5 h-2.5">
+                  <span className={`absolute left-0 right-0 h-[1.5px] rounded bg-current transition-all duration-500 ${open ? 'top-1 rotate-45' : 'top-0'}`} />
+                  <span className={`absolute left-0 right-0 h-[1.5px] rounded bg-current transition-all duration-500 ${open ? 'top-1 -rotate-45' : 'top-2'}`} />
+                </span>
+              </span>
             </button>
           </div>
         </div>
       </header>
 
-      {/* ── Mobile menu: drops down from the header, same glass style ── */}
+      {/* ── Full-screen menu: every page in large type, with a photograph and the contacts ── */}
       <div
-        className={`menu-panel fixed inset-0 z-40 bg-[#0A0A0B]/40 backdrop-blur-[2px] transition-opacity duration-400 ${
-          mobileOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setMobileOpen(false)}
-        aria-hidden="true"
-      />
-      <div
-        id="mobile-menu"
+        id="site-menu"
         role="dialog"
         aria-modal="true"
         aria-label={t.nav.menuLabel}
-        inert={!mobileOpen}
-        className={`menu-panel fixed inset-x-0 top-0 z-[45] px-3 sm:px-4 pt-[76px] pointer-events-none`}
+        inert={!open}
+        data-lenis-prevent
+        className={`site-menu fixed inset-0 z-[45] bg-[#13261A] text-[#F4EFE4] overflow-y-auto ${open ? 'is-open' : 'pointer-events-none'}`}
       >
-        <div
-          className={`mx-auto max-w-screen-xl rounded-[1.75rem] bg-[#0B0B0C]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.6)] p-3 origin-top transition-all duration-500 max-h-[calc(100svh-96px)] overflow-y-auto ${
-            mobileOpen ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto' : 'opacity-0 -translate-y-3 scale-[0.98]'
-          }`}
-          style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}
-          data-lenis-prevent
-        >
-          <nav className="grid grid-cols-2 gap-1" aria-label={t.nav.mobileNav}>
-            {navLinks.map((link, i) => (
-              <Link
-                key={link.to}
-                to={link.to}
-                className={`rounded-2xl px-4 py-3.5 text-[15px] font-medium transition-all duration-300 ${
-                  isActive(link.to) ? 'bg-[#B8863B] text-[#12150F]' : 'text-white/85 hover:bg-white/10 hover:text-white'
-                }`}
-                style={{
-                  opacity: mobileOpen ? 1 : 0,
-                  transform: mobileOpen ? 'translateY(0)' : 'translateY(-6px)',
-                  transition: `opacity 0.4s ease ${i * 25}ms, transform 0.5s var(--ease-out-expo) ${i * 25}ms, background-color 0.25s ease, color 0.25s ease`,
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 pt-28 sm:pt-32 pb-12 grid lg:grid-cols-[1.4fr_1fr] gap-12 lg:gap-16 min-h-full">
+          <nav aria-label={t.nav.mobileNav}>
+            <ul className="grid sm:grid-cols-2 gap-x-10">
+              {menuKeys.map((key, i) => (
+                <li
+                  key={key}
+                  className="border-b border-white/10"
+                  style={{
+                    opacity: open ? 1 : 0,
+                    transform: open ? 'none' : 'translateY(24px)',
+                    transition: `opacity .6s ease ${150 + i * 45}ms, transform .8s var(--ease-out-expo) ${150 + i * 45}ms`,
+                  }}
+                >
+                  <Link
+                    to={routes[key]}
+                    className={`group flex items-baseline gap-4 py-3.5 sm:py-4 ${isActive(routes[key]) ? 'text-[#B9D38A]' : 'text-[#F4EFE4] hover:text-[#B9D38A]'}`}
+                  >
+                    <span className="text-xs font-semibold text-white/35 tabular-nums w-6">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="font-display text-3xl sm:text-4xl font-bold tracking-tight transition-transform duration-500 group-hover:translate-x-2">
+                      {t.nav.links[key]}
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </nav>
-          <div className="mt-3 pt-3 border-t border-white/10">
-            <Link to="/visit" className="btn-primary w-full justify-center">
+
+          <aside
+            className="flex flex-col gap-6"
+            style={{ opacity: open ? 1 : 0, transform: open ? 'none' : 'translateY(24px)', transition: 'opacity .7s ease .35s, transform .9s var(--ease-out-expo) .35s' }}
+          >
+            <div className="hidden lg:block rounded-[1.75rem] overflow-hidden aspect-[4/3]">
+              <img src={photos.home} alt={t.photos.home} className="w-full h-full object-cover" loading="lazy" />
+            </div>
+            <div className="lg:hidden"><LanguageSwitcher variant="menu" /></div>
+            <Link to="/visit" className="btn-primary btn-on-dark self-start">
               {t.common.planVisit}
             </Link>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Search overlay ── */}
-      <div
-        inert={!searchOpen}
-        className={`fixed inset-0 z-[55] transition-all duration-400 ${
-          searchOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-        }`}
-        style={{ backdropFilter: searchOpen ? 'blur(20px) saturate(1.2)' : 'none', background: 'rgba(10,31,25,0.94)' }}
-      >
-        <button
-          onClick={() => setSearchOpen(false)}
-          className="absolute inset-0 w-full h-full"
-          aria-label={t.nav.closeSearch}
-          tabIndex={-1}
-        />
-        <div className="relative z-10 flex items-start justify-center pt-28 sm:pt-36 px-5">
-          <div className="w-full max-w-2xl">
-            <div className="flex items-center gap-3 rounded-full bg-white/8 border border-white/15 pl-6 pr-2 py-2 mb-10 focus-within:border-[#B8863B]/60 transition-colors">
-              <svg className="w-5 h-5 text-[#B8863B] flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="7.5"/><path d="m20.5 20.5-4.2-4.2" strokeLinecap="round"/>
-              </svg>
-              <input
-                type="search"
-                placeholder={t.nav.searchPlaceholder}
-                className="flex-1 bg-transparent text-white text-lg sm:text-xl font-display placeholder-white/30 outline-none py-2"
-              />
-              <button onClick={() => setSearchOpen(false)} className="touch-target rounded-full text-white/50 hover:text-white hover:bg-white/10" aria-label={t.nav.closeSearch}>
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path d="M18 6L6 18M6 6l12 12" strokeWidth="1.6" strokeLinecap="round"/>
-                </svg>
-              </button>
+            <div className="text-sm text-white/65 leading-relaxed space-y-1">
+              <p>{t.common.locationLine}</p>
+              <p><a href="tel:+251932196502" className="hover:text-white">+251 932 196 502</a></p>
+              <p><a href="mailto:info@bushaashegaruwa.com" className="hover:text-white">info@bushaashegaruwa.com</a></p>
             </div>
-            <div className="text-white/35 text-xs font-medium tracking-[0.14em] uppercase mb-4">{t.nav.suggested}</div>
-            <div className="flex flex-wrap gap-2">
-              {t.nav.suggestions.map((s) => (
-                <button
-                  key={s}
-                  className="rounded-full border border-white/15 bg-white/5 text-white/70 hover:border-[#B8863B] hover:text-[#B8863B] text-sm px-4 py-2 transition-all duration-300 active:scale-95"
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
+            <SocialLinks small />
+          </aside>
         </div>
       </div>
     </>

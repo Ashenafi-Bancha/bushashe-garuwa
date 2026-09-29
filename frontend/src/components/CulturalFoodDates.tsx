@@ -4,8 +4,8 @@ import { fmt, useI18n } from '../i18n/I18nProvider';
 import { eventText, type SiteEvent } from '../lib/events';
 
 /**
- * The twice-monthly cultural food evening on the home page: the photograph on
- * one side, the dates staff set on the other, on white like every other section.
+ * The twice-monthly cultural food evening on the home page: a deep forest panel
+ * with the photograph, the words and the next dates staff have set.
  */
 export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
   const { t, lang } = useI18n();
@@ -13,8 +13,8 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
   const dates = events.filter((event) => event.category === 'food').slice(0, 4);
   const partner = dates.find((event) => event.partner)?.partner;
 
-  const dayLabel = (iso: string) =>
-    new Date(iso).toLocaleDateString(lang === 'am' ? 'am-ET' : 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  const day = (iso: string) => new Date(iso).toLocaleDateString(lang === 'am' ? 'am-ET' : 'en-GB', { day: 'numeric' });
+  const month = (iso: string) => new Date(iso).toLocaleDateString(lang === 'am' ? 'am-ET' : 'en-GB', { month: 'short', year: 'numeric' });
 
   const placeLabel = (event: SiteEvent) =>
     event.placesLeft === 0 || event.availability === 'full'
@@ -28,54 +28,60 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
           : t.events.live.open;
 
   return (
-    <section className="py-20 sm:py-28">
-      <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        <div className="img-zoom rounded-[1.25rem] overflow-hidden elev-1 aspect-[4/3] lg:aspect-[5/4]">
-          <img src={photos.food} alt={t.photos.food} loading="lazy" className="w-full h-full object-cover" />
-        </div>
-
-        <div>
-          <span className="block w-10 h-px bg-[#B8863B] mb-4" />
-          <span className="block text-xs font-bold tracking-[0.2em] uppercase text-[#35723A] mb-4">{c.eyebrow}</span>
-          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#12150F] leading-[1.05] mb-5">{c.title}</h2>
-          <p className="text-[#12150F]/60 text-base sm:text-lg leading-relaxed mb-5 max-w-lg">{c.desc}</p>
-          {partner && <p className="text-[#35723A] font-semibold mb-7">{fmt(c.partner, { partner })}</p>}
-
-          <div className="rounded-[1.25rem] border border-[#12150F]/10 p-5 sm:p-6 mb-8">
-            <div className="text-xs font-bold tracking-[0.18em] uppercase text-[#35723A] mb-4">{c.nextTitle}</div>
-            {dates.length === 0 ? (
-              <p className="text-[#12150F]/55 text-sm leading-relaxed">{c.soon}</p>
-            ) : (
-              <ul className="divide-y divide-[#12150F]/8">
-                {dates.map((event) => (
-                  <li key={event.id} className="py-3 first:pt-0 last:pb-0 flex items-start justify-between gap-4">
-                    <div>
-                      <div className="font-display text-lg font-bold text-[#12150F] leading-tight">{dayLabel(event.date)}</div>
-                      <div className="text-[#12150F]/55 text-sm mt-0.5">
-                        {eventText(event, lang).name}
-                        {event.time ? ` · ${event.time}` : ''}
-                      </div>
-                    </div>
-                    <span
-                      className={`flex-shrink-0 rounded-full px-3 py-1 text-[11px] font-semibold ${
-                        event.placesLeft === 0 || event.availability === 'full'
-                          ? 'bg-[#12150F]/6 text-[#12150F]/45'
-                          : event.availability === 'limited' || (event.placesLeft !== null && event.placesLeft <= 5)
-                            ? 'bg-[#B8863B]/15 text-[#8A6428]'
-                            : 'bg-[#35723A]/10 text-[#35723A]'
-                      }`}
-                    >
-                      {placeLabel(event)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+    <section className="px-2 sm:px-3 py-6">
+      <div className="bg-[#13261A] text-[#F4EFE4] rounded-[2rem] sm:rounded-[3rem] overflow-hidden">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          <div data-reveal className="fade-section relative">
+            <div className="img-zoom rounded-[1.75rem] overflow-hidden aspect-[4/3] lg:aspect-[4/5]">
+              <img src={photos.food} alt={t.photos.food} loading="lazy" className="w-full h-full object-cover" />
+            </div>
+            {partner && (
+              <div className="absolute -bottom-5 left-5 right-5 sm:left-auto sm:right-6 sm:max-w-xs rounded-2xl bg-[#F4EFE4] text-[#1E3A29] px-5 py-4 font-bold text-sm shadow-xl">
+                {fmt(c.partner, { partner })}
+              </div>
             )}
           </div>
 
-          <div className="flex flex-wrap gap-3">
-            <Link to="/events" className="btn-primary">{c.bookCta}</Link>
-            <Link to="/events" className="btn-outline text-[#35723A] border-[#12150F]/20">{c.allCta}</Link>
+          <div data-reveal className="fade-section">
+            <span className="eyebrow !bg-white/10 !text-[#B9D38A] mb-5">{c.eyebrow}</span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.98] mb-5">{c.title}</h2>
+            <p className="text-white/70 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">{c.desc}</p>
+
+            <div className="text-sm font-bold text-[#B9D38A] mb-4">{c.nextTitle}</div>
+            {dates.length === 0 ? (
+              <p className="rounded-2xl bg-white/[0.06] border border-white/10 p-5 text-white/65 text-sm leading-relaxed mb-8">{c.soon}</p>
+            ) : (
+              <ul className="space-y-3 mb-8">
+                {dates.map((event) => {
+                  const full = event.placesLeft === 0 || event.availability === 'full';
+                  const few = event.availability === 'limited' || (event.placesLeft !== null && event.placesLeft <= 5);
+                  return (
+                    <li key={event.id} className="flex items-center gap-4 rounded-2xl bg-white/[0.06] border border-white/10 p-3 pr-4">
+                      <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[#F4EFE4] text-[#1E3A29] grid place-items-center text-center leading-none">
+                        <div>
+                          <div className="font-display text-2xl font-extrabold">{day(event.date)}</div>
+                          <div className="text-[10px] font-bold mt-1 opacity-70">{month(event.date)}</div>
+                        </div>
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="font-bold leading-tight truncate">{eventText(event, lang).name}</div>
+                        {event.time && <div className="text-white/55 text-sm mt-1">{event.time}</div>}
+                      </div>
+                      <span className={`flex-shrink-0 rounded-full px-3 py-1 text-[11px] font-bold ${
+                        full ? 'bg-white/10 text-white/50' : few ? 'bg-[#C4622D] text-white' : 'bg-[#86A94F] text-[#13261A]'
+                      }`}>
+                        {placeLabel(event)}
+                      </span>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+
+            <div className="flex flex-wrap gap-3">
+              <Link to="/events" className="btn-primary btn-on-dark">{c.bookCta}</Link>
+              <Link to="/events" className="btn-glass">{c.allCta}</Link>
+            </div>
           </div>
         </div>
       </div>

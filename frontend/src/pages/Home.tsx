@@ -1,35 +1,25 @@
-import { useState, useEffect, useRef, type ReactNode } from 'react';
+import { useState, useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { photos, type PhotoKey } from '../assets/photos';
 import Photo from '../components/Photo';
-import { fmt, useI18n } from '../i18n/I18nProvider';
-import { Tilt, useScrollY } from '../lib/motion';
+import { useI18n } from '../i18n/I18nProvider';
+import { useRevealChildren } from '../lib/motion';
 import { useSiteEvents } from '../lib/events';
-import { videos } from '../assets/videos';
+import { DIRECTIONS_URL } from '../lib/location';
 import StoryFilm from '../components/StoryFilm';
 import PhotoRing from '../components/PhotoRing';
 import QuickLinks from '../components/QuickLinks';
 import PhotoCard from '../components/PhotoCard';
-import { useHeroVideo } from '../lib/heroVideo';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
-  { key: 'home',      pos: 'object-center' },
+  { key: 'home', pos: 'object-center' },
   { key: 'gifaataa1', pos: 'object-center' },
-  { key: 'house',     pos: 'object-center' },
-  { key: 'zigba',     pos: 'object-[center_40%]' },
-  { key: 'pavilions', pos: 'object-center' },
-  { key: 'lawn',      pos: 'object-[center_65%]' },
+  { key: 'house', pos: 'object-center' },
+  { key: 'zigba', pos: 'object-[center_40%]' },
+  { key: 'lawn', pos: 'object-[center_65%]' },
 ];
-const SLIDE_MS = 6500;
-
-/* Page structure — the text for each id lives in the translations (t.home.*) */
-const exploreCards = [
-  { id: 'heritage', img: photos.house, to: '/heritage', span: 'md:col-span-2 md:row-span-2' },
-  { id: 'nature', img: photos.lawn, to: '/heritage', span: 'md:col-span-2' },
-  { id: 'culture', img: photos.gifaataa1, to: '/experiences', span: '' },
-  { id: 'hospitality', img: photos.pavilions, to: '/stay', span: '' },
-] as const;
+const SLIDE_MS = 6000;
 
 const livingHeritage = [
   { id: 'houses', img: photos.house },
@@ -47,99 +37,87 @@ const experiences = [
   { id: 'photography', img: photos.gardens, to: '/experiences' },
 ] as const;
 
-const rooms = ['standard', 'family', 'heritage'] as const;
-
 const facilities = ['meetingHall', 'zoo', 'pool', 'orchard', 'horses', 'crocodile', 'fish', 'guesthouse', 'restaurant'] as const;
 
-const bookYears = ['2018', '2020', '2015', '2019'];
-
-/* Mosaic: spans fill a 4-column grid exactly (2 columns on mobile) */
-const galleryPhotos: { key: PhotoKey; span: string }[] = [
-  { key: 'home', span: 'col-span-2 row-span-2' },
-  { key: 'gifaataa1', span: '' },
-  { key: 'house', span: 'md:row-span-2' },
-  { key: 'gifaataa2', span: '' },
-  { key: 'pavilions', span: 'md:col-span-2' },
-  { key: 'gifaataa3', span: 'md:col-span-2' },
-  { key: 'gardens', span: 'md:col-span-2' },
-  { key: 'enset', span: '' },
-  { key: 'zigba', span: 'md:col-span-2' },
-  { key: 'lawn', span: 'col-span-2 md:col-span-3' },
-];
-
-/* ── Scroll reveal ── */
-function FadeSection({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(false);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { rootMargin: '-60px' }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
+/* ── Section heading: label, a large title, an optional line and action ── */
+function Heading({ eyebrow, title, desc, center = false, action, dark = false }: {
+  eyebrow: string; title: string; desc?: string; center?: boolean; action?: ReactNode; dark?: boolean;
+}) {
   return (
-    <div
-      ref={ref}
-      className={`fade-section ${inView ? 'in-view' : ''} ${className}`}
-      style={delay ? { transitionDelay: inView ? `${delay}ms` : '0ms' } : undefined}
-    >
-      {children}
+    <div data-reveal className={`fade-section mb-10 sm:mb-14 ${center ? 'text-center' : 'flex flex-col md:flex-row md:items-end justify-between gap-6'}`}>
+      <div className={center ? 'max-w-3xl mx-auto' : 'max-w-3xl'}>
+        <span className={`eyebrow mb-5 ${dark ? '!bg-white/10 !text-[#B9D38A]' : ''}`}>{eyebrow}</span>
+        <h2 className={`font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.98] ${dark ? 'text-[#F4EFE4]' : 'text-[#1E3A29]'}`}>{title}</h2>
+        {desc && <p className={`mt-5 text-base sm:text-lg leading-relaxed max-w-2xl ${center ? 'mx-auto' : ''} ${dark ? 'text-white/65' : 'text-[#1E3A29]/60'}`}>{desc}</p>}
+      </div>
+      {action}
     </div>
   );
 }
 
-/* ── Section heading ── */
-function Heading({ eyebrow, title, desc, dark = false, center = false, action }: {
-  eyebrow: string; title: string; desc?: string; dark?: boolean; center?: boolean; action?: ReactNode;
-}) {
-  return (
-    <FadeSection className={`mb-12 sm:mb-16 ${action ? 'flex flex-col md:flex-row md:items-end justify-between gap-6' : ''}`}>
-      <div className={center ? 'text-center mx-auto max-w-3xl' : 'max-w-3xl'}>
-        {/* a short line, then the label, then the heading: the rhythm of the reference sites */}
-        <span className={`block w-10 h-px mb-4 bg-[#B8863B] ${center ? 'mx-auto' : ''}`} />
-        <span className={`block text-xs font-bold tracking-[0.2em] uppercase mb-4 ${dark ? 'text-[#D8B778]' : 'text-[#35723A]'}`}>
-          {eyebrow}
-        </span>
-        <h2 className={`font-display text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold leading-[1.05] ${dark ? 'text-white' : 'text-[#12150F]'}`}>
-          {title}
-        </h2>
-        {desc && <p className={`mt-5 text-base sm:text-lg leading-relaxed ${center ? 'mx-auto' : ''} max-w-2xl ${dark ? 'text-white/60' : 'text-[#12150F]/60'}`}>{desc}</p>}
-      </div>
-      {action}
-    </FadeSection>
-  );
+/* ── A figure that counts up when it comes into view: "1,800+" counts to 1800 ── */
+function CountUp({ value }: { value: string }) {
+  const match = value.match(/^([^\d]*)([\d,]+)(.*)$/);
+  const target = match ? Number(match[2]!.replace(/,/g, '')) : 0;
+  const [shown, setShown] = useState(match ? 0 : target);
+  const ref = useRef<HTMLSpanElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !match) return;
+    const obs = new IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting) return;
+      obs.disconnect();
+      const start = performance.now();
+      const step = (now: number) => {
+        const p = Math.min(1, (now - start) / 1400);
+        setShown(Math.round(target * (1 - Math.pow(1 - p, 3))));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }, { threshold: 0.6 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [target]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (!match) return <span>{value}</span>;
+  return <span ref={ref}>{match[1]}{shown.toLocaleString('en-US')}{match[3]}</span>;
 }
 
-function TextLink({ to, children, dark = false }: { to: string; children: ReactNode; dark?: boolean }) {
-  return (
-    <Link
-      to={to}
-      className={`inline-flex items-center text-sm font-semibold rounded-full px-6 py-3 border transition-all duration-500 hover:-translate-y-0.5 ${
-        dark
-          ? 'border-white/20 text-white hover:bg-white hover:text-[#12150F]'
-          : 'border-[#12150F]/15 text-[#12150F] hover:bg-[#0B0B0C] hover:text-white'
-      }`}
-    >
-      {children}
-    </Link>
-  );
+/** Scroll progress (0 → 1) of the hero while it is pinned, as the CSS variable --p */
+function useHeroProgress() {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    let raf = 0;
+    let last = -1;
+    const tick = () => {
+      const el = ref.current;
+      if (el) {
+        const r = el.getBoundingClientRect();
+        const room = r.height - window.innerHeight;
+        const p = room > 0 ? Math.min(1, Math.max(0, -r.top / room)) : 0;
+        if (Math.abs(p - last) > 0.001) {
+          el.style.setProperty('--p', p.toFixed(4));
+          last = p;
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+  return ref;
 }
 
 export default function Home() {
   const { t } = useI18n();
   const h = t.home;
   const [heroIdx, setHeroIdx] = useState(0);
-  const prevIdx = (heroIdx - 1 + heroSlides.length) % heroSlides.length;
   const { events: siteEvents } = useSiteEvents();
-  const heroVideo = useHeroVideo();
-  // the hero only drifts with the scroll on desktop, where the words lie on the
-  // photograph; on phones they sit below it and must stay put
-  const [wideScreen, setWideScreen] = useState(false);
   const [showStickyCta, setShowStickyCta] = useState(false);
+  const hero = useHeroProgress();
+  const page = useRevealChildren<HTMLElement>();
+  const [firstWord, ...rest] = h.hero.title.split(' ');
 
   useEffect(() => {
     const timer = setTimeout(() => setHeroIdx((i) => (i + 1) % heroSlides.length), SLIDE_MS);
@@ -147,475 +125,330 @@ export default function Home() {
   }, [heroIdx]);
 
   useEffect(() => {
-    // shown after the hero, hidden again at the footer so it never covers the social icons
+    // shown after the hero, hidden again at the footer so it never covers the links there
     const onScroll = () => {
       const y = window.scrollY, vh = window.innerHeight;
-      setShowStickyCta(y > vh * 0.6 && y + vh < document.documentElement.scrollHeight - 520);
+      setShowStickyCta(y > vh * 0.8 && y + vh < document.documentElement.scrollHeight - 700);
     };
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const scrollY = useScrollY(1400);
-  const drift = wideScreen ? scrollY : 0;
-
-  useEffect(() => {
-    const wide = window.matchMedia('(min-width: 1024px)');
-    const sync = () => setWideScreen(wide.matches);
-    sync();
-    wide.addEventListener('change', sync);
-    return () => wide.removeEventListener('change', sync);
-  }, []);
-
-  const stats: { value?: string; label?: string; phrase?: string }[] = [
-    { value: '4+', label: h.hero.statGenerations },
-    { value: '200+', label: h.hero.statYears },
-    { phrase: h.hero.sinceCentury },
-  ];
-
   return (
     <>
-      <main className="pb-24 lg:pb-0">
+      <main ref={page} className="pb-24 lg:pb-0">
 
         {/* ═════════ HERO ═════════
-            Phones: the photographs come first in their own panel, then the words
-            beneath them. Desktop: the words on the left half, the photographs on
-            the right, each new one sliding in from the left. */}
-        <section className="relative bg-[#0A0A0B] lg:h-[100svh] lg:min-h-[640px] overflow-hidden" aria-label={h.hero.title}>
+            The name, large, with a few words and the buttons beside it; below, the
+            photographs. On computers the hero is pinned while the photograph opens
+            out to the edges as you scroll. */}
+        <section ref={hero} className="hero relative lg:h-[185vh]" aria-label={h.hero.title}>
+          <div className="lg:sticky lg:top-0 lg:h-[100svh] flex flex-col pt-24 sm:pt-28 lg:pt-28 pb-4 lg:pb-6 overflow-hidden">
+            <div className="max-w-screen-xl mx-auto w-full px-5 sm:px-8 flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 mb-7 lg:mb-8">
+              <h1 className="font-display font-extrabold text-[#1E3A29] text-[3.3rem] sm:text-[5.5rem] lg:text-[clamp(5.5rem,8.6vw,8.6rem)] leading-[0.9] tracking-[-0.05em]">
+                <span className="line-mask"><span>{firstWord}</span></span>
+                <span className="line-mask d2"><span className="text-[#6F9443]">{rest.join(' ')}</span></span>
+              </h1>
+              <div className="max-w-md lg:pb-3 animate-fade-up delay-300">
+                <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight mb-3">{h.hero.subtitle}</p>
+                <p className="text-[#1E3A29]/65 leading-relaxed mb-6">{h.hero.lead}</p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
+                  <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>
+                </div>
+              </div>
+            </div>
 
-          {/* The photographs */}
-          <div className="relative h-[60svh] min-h-[380px] sm:h-[62svh] overflow-hidden rounded-b-[1rem] lg:rounded-none lg:absolute lg:inset-y-0 lg:right-0 lg:left-1/2 lg:h-auto lg:min-h-0">
-            <div className="absolute inset-0 will-change-transform" style={{ transform: `translate3d(0, ${drift * 0.35}px, 0)` }}>
-              {heroVideo && (
-                <video
-                  src={videos.heroLoop}
-                  poster={photos[heroSlides[0]!.key]}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="none"
-                  aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-cover z-[1]"
-                />
-              )}
-              {heroSlides.map(({ key, pos }, i) => {
-                // phones cross-fade; on desktop the new photograph slides in from
-                // the left and pushes the last one out to the right
-                const state = i === heroIdx ? 'current' : i === prevIdx ? 'leaving' : 'waiting';
-                return (
+            {/* the photographs; the frame widens with the scroll on computers */}
+            <div className="relative mx-5 sm:mx-8 lg:mx-0 h-[58svh] min-h-[340px] sm:h-[62svh] lg:h-auto lg:min-h-0 lg:flex-1 animate-scale-in delay-200">
+              <div className="hero-frame absolute inset-0 overflow-hidden rounded-[1.75rem] sm:rounded-[2.5rem]">
+                {heroSlides.map(({ key, pos }, i) => (
                   <img
                     key={key}
                     src={photos[key]}
                     alt={t.photos[key]}
                     fetchPriority={i === 0 ? 'high' : 'auto'}
-                    className={`absolute inset-0 w-full h-full object-cover ${pos} ease-in-out transition-[opacity,translate] duration-[1600ms] lg:duration-[1300ms] ${
-                      state === 'current'
-                        ? 'opacity-100 animate-ken-burns lg:translate-x-0'
-                        : state === 'leaving'
-                          ? 'opacity-0 lg:opacity-100 lg:translate-x-full'
-                          : 'opacity-0 lg:-translate-x-full lg:transition-none'
+                    className={`hero-img absolute inset-0 w-full h-full object-cover ${pos} transition-opacity duration-[1400ms] ease-in-out ${
+                      i === heroIdx ? 'opacity-100 animate-ken-burns' : 'opacity-0'
                     }`}
                   />
-                );
-              })}
-            </div>
-
-            {/* header stays readable over a bright sky */}
-            <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#0A0A0B]/70 to-transparent" />
-            {/* the photographs sink into the dark below them on phones, and carry the words on desktop */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-transparent to-transparent lg:from-[#0A0A0B]/60 lg:via-transparent" />
-            {/* desktop: the photographs fade into the dark half where the words are */}
-            <div className="hidden lg:block absolute inset-y-0 left-0 w-2/5 bg-gradient-to-r from-[#0A0A0B] via-[#0A0A0B]/40 to-transparent" />
-
-            {/* scroll hint, desktop only */}
-            <div className="hidden lg:block absolute bottom-7 inset-x-0 z-10">
-              <div className="max-w-screen-xl mx-auto px-8 flex items-center justify-end">
-                <div className="flex items-center gap-2 text-white/50 text-xs font-medium tracking-[0.14em] uppercase">
-                  {h.hero.scroll}
-                  <span className="block w-px h-7 bg-gradient-to-b from-white/60 to-transparent animate-scroll-bounce" />
-                </div>
+                ))}
+                <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#13261A]/45 to-transparent" />
+                <span className="absolute left-5 bottom-5 sm:left-7 sm:bottom-7 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold">
+                  {t.photoCaptions[heroSlides[heroIdx]!.key].title}
+                </span>
               </div>
-            </div>
-          </div>
 
-          {/* The words */}
-          <div
-            className="relative z-10 max-w-screen-xl mx-auto px-5 sm:px-8 pt-7 sm:pt-8 pb-14 sm:pb-16 lg:mx-0 lg:max-w-none lg:absolute lg:inset-y-0 lg:left-0 lg:w-1/2 lg:pt-24 lg:pb-16 lg:pr-12 lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] lg:flex lg:flex-col lg:justify-center will-change-transform"
-            style={{ transform: `translate3d(0, ${drift * -0.12}px, 0)`, opacity: Math.max(0, 1 - drift / 700) }}
-          >
-            <div className="max-w-4xl lg:max-w-none">
-                <h1 className="glow-title font-display font-bold text-[#4E9B4F] text-[2rem] sm:text-[clamp(2.5rem,6.6vw,5rem)] lg:text-[clamp(2.75rem,3.9vw,3.6rem)] leading-[1.08] tracking-[-0.01em] animate-fade-up delay-100">
-                  {h.hero.title}
-                </h1>
-                <p className="mt-4 sm:mt-6 font-display font-normal text-xl sm:text-3xl lg:text-2xl xl:text-[1.7rem] text-white/85 leading-snug max-w-2xl animate-fade-up delay-200">
-                  {h.hero.subtitle}
-                </p>
-                <p className="mt-5 sm:mt-6 pl-4 sm:pl-5 border-l-2 border-[#B8863B] max-w-xl font-display italic font-semibold text-lg sm:text-2xl lg:text-xl xl:text-[1.35rem] leading-snug text-white/90 animate-fade-up delay-300">
-                  <span className="text-[#D8B778]">{h.hero.sloganA}</span>{' '}
-                  {h.hero.sloganB}{' '}
-                  <span className="text-white/75">{h.hero.sloganC}</span>
-                </p>
-                <div className="flex flex-col sm:flex-row gap-3 mt-7 sm:mt-10 animate-fade-up delay-400">
-                  <Link to="/discover" className="btn-primary justify-center">
-                    {h.hero.explore}
-                  </Link>
-                  <Link to="/visit" className="btn-glass justify-center">
-                    {t.common.planVisit}
-                  </Link>
-                </div>
+              {/* the turning badge */}
+              <svg className="hero-badge absolute -top-10 sm:-top-12 w-28 h-28 sm:w-36 sm:h-36 animate-spin-slow" viewBox="0 0 200 200" aria-hidden="true">
+                <defs><path id="hero-badge-circle" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" /></defs>
+                <circle cx="100" cy="100" r="98" fill="#F4EFE4" />
+                <text className="fill-[#1E3A29]" style={{ font: '700 15px var(--font-sans)' }}>
+                  <textPath href="#hero-badge-circle" textLength="468" lengthAdjust="spacing">{h.hero.badge}</textPath>
+                </text>
+                <circle cx="100" cy="100" r="30" fill="#C4622D" />
+              </svg>
             </div>
           </div>
         </section>
 
-        {/* ═════════ THE FILM (hidden until one is added) ═════════ */}
-        <StoryFilm />
-
         {/* ═════════ THE PLACE IN NUMBERS ═════════ */}
-        <div>
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-7 sm:py-10">
-            <ul className="grid grid-cols-2 lg:grid-cols-5 gap-3 sm:gap-4">
-              {h.facts.items.map((fact, i) => (
-                <li
-                  key={fact.label}
-                  className={`group rounded-2xl bg-white border border-[#12150F]/8 elev-1 px-4 py-5 sm:px-5 text-center lg:text-left transition-transform duration-300 hover:-translate-y-1 ${
-                    i === 4 ? 'col-span-2 lg:col-span-1' : ''
-                  }`}
-                >
-                  {/* the gold appears only as this hairline */}
-                  <span className="block w-7 h-px bg-[#B8863B] mb-4 mx-auto lg:mx-0 transition-all duration-300 group-hover:w-12" />
-                  <div className="font-display text-[1.75rem] sm:text-4xl leading-none whitespace-nowrap text-[#12150F]">{fact.value}</div>
-                  <div className="text-[11px] sm:text-xs font-semibold tracking-[0.14em] uppercase mt-2 text-[#12150F]/50 leading-snug">
-                    {fact.label}
-                  </div>
-                </li>
+        <section className="px-5 sm:px-8 pt-6 lg:pt-10">
+          <ul data-reveal className="fade-section max-w-screen-xl mx-auto grid grid-cols-2 lg:grid-cols-5 gap-px rounded-[1.75rem] sm:rounded-[2rem] overflow-hidden bg-[#1E3A29]/8 elev-1">
+            {h.facts.items.map((fact, i) => (
+              <li key={fact.label} className={`bg-white px-5 py-6 sm:px-7 sm:py-8 ${i === 4 ? 'col-span-2 lg:col-span-1' : ''}`}>
+                <span className="block w-2 h-2 rounded-full bg-[#86A94F] mb-5" />
+                <div className="font-display text-[2rem] sm:text-5xl font-extrabold leading-none tracking-[-0.04em] text-[#1E3A29] whitespace-nowrap">
+                  <CountUp value={fact.value} />
+                </div>
+                <div className="text-sm text-[#1E3A29]/60 mt-3 leading-snug">{fact.label}</div>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* ═════════ QUICK LINKS ═════════ */}
+        <QuickLinks />
+
+        {/* ═════════ A RUNNING BAND OF WORDS ═════════ */}
+        <div className="overflow-hidden py-6" aria-hidden="true">
+          <div className="bg-[#1E3A29] text-[#F4EFE4] py-5 sm:py-6 -rotate-2 scale-105">
+            <div className="flex w-max animate-marquee font-display font-bold text-3xl sm:text-5xl tracking-[-0.03em]">
+              {[0, 1].map((n) => (
+                <span key={n} className="flex items-center">
+                  {[...h.marquee, ...h.marquee].map((word, i) => (
+                    <span key={i} className="flex items-center">
+                      <span className="px-6 sm:px-8">{word}</span>
+                      <span className="text-[#86A94F]">✦</span>
+                    </span>
+                  ))}
+                </span>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
 
-        {/* ═════════ QUICK LINKS (phones) ═════════ */}
-        <QuickLinks />
-
-        {/* ═════════ INTRO ═════════ */}
-        <section className="relative py-20 sm:py-28 lg:py-32 overflow-hidden">
+        {/* ═════════ WHO WE ARE ═════════ */}
+        <section className="py-20 sm:py-28 lg:py-32">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
-            <FadeSection>
-              <span className="eyebrow bg-[#35723A]/10 text-[#35723A] mb-5">{h.intro.eyebrow}</span>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#12150F] leading-[1.05] mb-7">
-                {h.intro.title}
-              </h2>
-              <p className="text-lg sm:text-xl text-[#12150F]/75 leading-relaxed mb-5">{h.intro.p1}</p>
-              <p className="text-base text-[#12150F]/55 leading-relaxed mb-8">{h.intro.p2}</p>
-              <div className="border-l-2 border-[#B8863B] pl-5 mb-8">
-                <div className="text-[#35723A] text-xs font-semibold tracking-[0.14em] uppercase mb-2">{t.common.goal.eyebrow}</div>
-                <p className="font-display italic text-xl sm:text-2xl text-[#35723A] leading-snug">{t.common.goal.text}</p>
+            <div data-reveal className="fade-section relative order-2 lg:order-1">
+              <div className="img-zoom rounded-[2rem] aspect-[4/5] overflow-hidden elev-2">
+                <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover object-[center_60%]" loading="lazy" />
               </div>
-              <div className="flex flex-wrap gap-2">
-                {h.intro.pillars.map((pillar, i) => (
-                  <span key={i} className="inline-flex items-center gap-2 rounded-full bg-white border border-[#12150F]/8 px-4 py-2 text-sm font-medium text-[#12150F] shadow-sm">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#B8863B]"/>{pillar}
-                  </span>
+              <div className="hidden sm:block absolute -bottom-10 -right-6 lg:-right-10 w-[46%] aspect-square rounded-[1.75rem] overflow-hidden border-[6px] border-[#F4EFE4] elev-2">
+                <img src={photos.gifaataa2} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy" />
+              </div>
+              <div className="absolute top-6 -left-3 sm:-left-6 bg-white rounded-2xl elev-2 px-5 py-4 flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#86A94F] text-[#13261A] grid place-items-center font-display text-xl font-extrabold">4+</div>
+                <div className="text-sm font-bold text-[#1E3A29] leading-tight">{h.intro.generations}</div>
+              </div>
+            </div>
+
+            <div data-reveal className="fade-section order-1 lg:order-2">
+              <span className="eyebrow mb-5">{h.intro.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98] mb-7">{h.intro.title}</h2>
+              <p className="text-lg sm:text-xl text-[#1E3A29]/75 leading-relaxed mb-5">{h.intro.p1}</p>
+              <p className="text-base text-[#1E3A29]/60 leading-relaxed mb-8">{h.intro.p2}</p>
+              <blockquote className="rounded-[1.5rem] bg-white p-6 sm:p-7 mb-8 elev-1">
+                <div className="text-[#C4622D] text-sm font-bold mb-2">{t.common.goal.eyebrow}</div>
+                <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight">{t.common.goal.text}</p>
+              </blockquote>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link to="/about" className="btn-primary">{t.nav.links.about}</Link>
+                {h.intro.pillars.map((pillar) => (
+                  <span key={pillar} className="rounded-full border border-[#1E3A29]/15 px-4 py-2 text-sm font-semibold text-[#1E3A29]/80">{pillar}</span>
                 ))}
               </div>
-            </FadeSection>
-
-            <FadeSection delay={150} className="relative">
-              <div className="img-zoom rounded-[2rem] aspect-[4/5] bg-[#35723A]/10 shadow-2xl shadow-[#12150F]/20">
-                <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover object-[center_60%]"/>
-              </div>
-              <div className="hidden sm:block absolute -bottom-10 -left-10 w-[48%] aspect-square rounded-[1.75rem] overflow-hidden border-8 border-[#F3ECE0] shadow-xl">
-                <img src={photos.gifaataa2} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy"/>
-              </div>
-              <div className="absolute top-6 right-3 sm:-right-6 bg-white rounded-2xl shadow-xl px-5 py-4 flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#0B0B0C] text-[#B8863B] flex items-center justify-center font-display text-xl font-bold">4+</div>
-                <div className="text-sm font-semibold text-[#12150F] leading-tight">{h.intro.generations}</div>
-              </div>
-            </FadeSection>
-          </div>
-        </section>
-
-        {/* ═════════ EXPLORE — bento ═════════ */}
-        <section className="relative bg-[#EFF4EA] py-20 sm:py-28">
-          <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading eyebrow={h.explore.eyebrow} title={h.explore.title} center />
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
-              {exploreCards.map((card, i) => {
-                const text = h.explore.cards[card.id];
-                return (
-                  <FadeSection key={card.id} delay={i * 80}>
-                    <PhotoCard to={card.to} photo={card.img} title={text.title} desc={text.sub} />
-                  </FadeSection>
-                );
-              })}
             </div>
           </div>
         </section>
 
-        {/* ═════════ LIVING HERITAGE ═════════ */}
+        {/* ═════════ THE FILM (shown once one is added) ═════════ */}
+        <StoryFilm />
+
+        {/* ═════════ CULTURAL FOOD EVENINGS (dates from the staff area) ═════════ */}
+        <CulturalFoodDates events={siteEvents} />
+
+        {/* ═════════ LIVING HERITAGE: cards that stack as you scroll ═════════ */}
         <section className="py-20 sm:py-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <Heading eyebrow={h.living.eyebrow} title={h.living.title} center />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="max-w-5xl mx-auto">
               {livingHeritage.map((item, i) => {
                 const text = h.living.items[item.id];
                 return (
-                  <FadeSection key={item.id} delay={i * 80}>
-                    <PhotoCard to="/heritage" photo={'img' in item ? item.img : undefined} title={text.title} desc={text.desc} />
-                  </FadeSection>
+                  <div key={item.id} className="sticky mb-8 sm:mb-10" style={{ top: `calc(96px + ${i * 22}px)` } as CSSProperties}>
+                    <Link
+                      to="/heritage"
+                      className="group grid md:grid-cols-[1.1fr_1fr] bg-white rounded-[2rem] overflow-hidden shadow-[0_30px_70px_-40px_rgba(30,58,41,0.55)] border border-[#1E3A29]/5"
+                    >
+                      <div className="img-zoom aspect-[16/10] md:aspect-auto md:min-h-[380px]">
+                        <Photo src={'img' in item ? item.img : undefined} alt={text.title} label={text.title} className="w-full h-full object-cover" />
+                      </div>
+                      <div className="p-7 sm:p-10 lg:p-12 flex flex-col justify-center items-start">
+                        <span className="text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
+                        <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-none tracking-[-0.03em] mb-4">{text.title}</h3>
+                        <p className="text-[#1E3A29]/65 leading-relaxed mb-7">{text.desc}</p>
+                        <span className="inline-flex items-center gap-3 rounded-full bg-[#1E3A29] text-[#F4EFE4] text-[13px] font-bold pl-5 pr-1.5 py-1.5">
+                          {t.common.explore}
+                          <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-[#86A94F] text-[#13261A] transition-transform duration-500 group-hover:-rotate-45">→</span>
+                        </span>
+                      </div>
+                    </Link>
+                  </div>
                 );
               })}
             </div>
+          </div>
+        </section>
+
+        {/* ═════════ EXPERIENCES ═════════ */}
+        <section className="bg-[#E9EEDD] py-20 sm:py-28 rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-3">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading
+              eyebrow={h.experiences.eyebrow}
+              title={h.experiences.title}
+              action={<Link to="/experiences" className="btn-outline text-[#1E3A29] self-start md:self-auto">{t.common.exploreAll}</Link>}
+            />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {experiences.map((exp, i) => {
+                const text = h.experiences.items[exp.id];
+                return (
+                  <div key={exp.id} data-reveal className="fade-section" style={{ transitionDelay: `${(i % 3) * 80}ms` }}>
+                    <PhotoCard to={exp.to} photo={'img' in exp ? exp.img : undefined} title={text.title} desc={text.desc} />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ═════════ STAY AND DINE ═════════ */}
+        <section className="py-20 sm:py-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <div className="grid lg:grid-cols-2 gap-5 sm:gap-6">
+              {[
+                { to: '/stay', eyebrow: h.stay.eyebrow, title: h.stay.title, desc: h.stay.desc, cta: h.stay.cta, photo: undefined as string | undefined, chips: Object.values(h.stay.rooms).map((r) => r.name) },
+                { to: '/dine', eyebrow: h.restaurant.eyebrow, title: h.restaurant.title, desc: h.restaurant.desc, cta: h.restaurant.cta, photo: photos.food, chips: h.restaurant.categories },
+              ].map((card, i) => (
+                <div key={card.to} data-reveal className="fade-section" style={{ transitionDelay: `${i * 100}ms` }}>
+                  <Link to={card.to} className="group flex h-full flex-col bg-white rounded-[2rem] p-2.5 elev-1 transition-transform duration-500 hover:-translate-y-1.5">
+                    <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[16/10]">
+                      <Photo src={card.photo} alt={card.title} label={card.eyebrow} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="flex flex-1 flex-col items-start p-5 sm:p-8">
+                      <span className="eyebrow mb-4">{card.eyebrow}</span>
+                      <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-[1.02] tracking-[-0.03em] mb-4">{card.title}</h3>
+                      <p className="text-[#1E3A29]/65 leading-relaxed mb-6">{card.desc}</p>
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {card.chips.map((chip) => (
+                          <span key={chip} className="rounded-full bg-[#F4EFE4] px-3.5 py-1.5 text-[13px] font-semibold text-[#1E3A29]/75">{chip}</span>
+                        ))}
+                      </div>
+                      <span className="mt-auto inline-flex items-center gap-3 rounded-full bg-[#1E3A29] text-[#F4EFE4] text-[13px] font-bold pl-5 pr-1.5 py-1.5">
+                        {card.cta}
+                        <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-[#86A94F] text-[#13261A] transition-transform duration-500 group-hover:-rotate-45">→</span>
+                      </span>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
+
+            {/* what else is on the grounds */}
+            <div className="mt-20 sm:mt-28">
+              <Heading eyebrow={h.facilities.eyebrow} title={h.facilities.title} desc={h.facilities.desc} />
+              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
+                {facilities.map((id, i) => {
+                  const item = h.facilities.items[id];
+                  return (
+                    <li key={id} data-reveal className="fade-section border-t border-[#1E3A29]/12 py-6 flex gap-5" style={{ transitionDelay: `${(i % 3) * 60}ms` }}>
+                      <span className="text-[#C4622D] text-sm font-bold tabular-nums pt-1">{String(i + 1).padStart(2, '0')}</span>
+                      <div>
+                        <h3 className="font-display text-xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{item.title}</h3>
+                        <p className="text-[#1E3A29]/60 text-sm leading-relaxed">{item.desc}</p>
+                      </div>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ═════════ TIMELINE ═════════ */}
+        <section className="bg-[#13261A] text-[#F4EFE4] py-20 sm:py-28 rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-3">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <Heading eyebrow={h.timeline.eyebrow} title={h.timeline.title} dark />
+            <ol className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              {h.timeline.items.map((item, i) => (
+                <li key={i} data-reveal className="fade-section rounded-[1.5rem] bg-white/[0.06] border border-white/10 p-6 hover:bg-white/[0.1] transition-colors" style={{ transitionDelay: `${i * 70}ms` }}>
+                  <div className="font-display text-3xl font-extrabold text-[#B9D38A] tracking-tight mb-4">{item.period}</div>
+                  <div className="font-bold mb-2">{item.label}</div>
+                  <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
+        {/* ═════════ THE READING PLACE AND THE STORIES ═════════ */}
+        <section className="py-20 sm:py-28">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-5 sm:gap-6">
+            {[
+              { eyebrow: h.reading.eyebrow, title: h.reading.title, text: h.reading.desc, extra: h.reading.mountain, chips: h.reading.qualities, cta: h.reading.cta, to: '/visit', photo: photos.gardens as string | undefined, label: h.reading.caption },
+              { eyebrow: h.stories.eyebrow, title: h.stories.title, text: h.stories.p1, extra: h.stories.p2, chips: h.stories.languages, cta: h.stories.cta, to: '/heritage/stories', photo: undefined, label: h.stories.elderAlt },
+            ].map((card, i) => (
+              <article key={card.title} data-reveal className="fade-section flex flex-col bg-white rounded-[2rem] p-2.5 elev-1" style={{ transitionDelay: `${i * 100}ms` }}>
+                <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[16/10]">
+                  <Photo src={card.photo} alt={card.label} label={card.label} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="flex flex-1 flex-col items-start p-5 sm:p-8">
+                  <span className="eyebrow mb-4">{card.eyebrow}</span>
+                  <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-[1.02] tracking-[-0.03em] mb-4">{card.title}</h3>
+                  <p className="text-[#1E3A29]/70 leading-relaxed mb-3">{card.text}</p>
+                  <p className="text-[#1E3A29]/55 text-sm leading-relaxed mb-6">{card.extra}</p>
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {card.chips.map((chip) => (
+                      <span key={chip} className="rounded-full bg-[#F4EFE4] px-3.5 py-1.5 text-[13px] font-semibold text-[#1E3A29]/75">{chip}</span>
+                    ))}
+                  </div>
+                  <Link to={card.to} className="btn-primary mt-auto">{card.cta}</Link>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
         {/* ═════════ THE GROUNDS IN 3D ═════════ */}
         <PhotoRing />
 
-        {/* ═════════ TIMELINE ═════════ */}
-        <section className="relative py-20 sm:py-28">
-          <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading eyebrow={h.timeline.eyebrow} title={h.timeline.title} center />
-
-            {/* Desktop: horizontal */}
-            <div className="hidden lg:block relative">
-              <div className="absolute top-[7px] left-0 right-0 h-px bg-[#12150F]/10"/>
-              <div className="grid grid-cols-5 gap-5">
-                {h.timeline.items.map((item, i) => (
-                  <FadeSection key={i} delay={i * 90}>
-                    <div className="w-3.5 h-3.5 rounded-full bg-[#35723A] ring-8 ring-[#35723A]/10 mb-8"/>
-                    <Tilt className="rounded-3xl h-full" max={8}>
-                    <div className="rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-1 p-6 h-full transition-transform duration-300 hover:-translate-y-1">
-                      <div className="font-display text-2xl font-bold text-[#35723A] mb-3">{item.period}</div>
-                      <div className="font-display text-sm font-bold tracking-[0.06em] uppercase text-[#12150F] mb-2">{item.label}</div>
-                      <p className="text-[#12150F]/55 text-sm leading-relaxed">{item.desc}</p>
-                    </div>
-                    </Tilt>
-                  </FadeSection>
+        {/* ═════════ INVITATION ═════════ */}
+        <section className="px-2 sm:px-3 pb-6">
+          <div className="relative rounded-[2rem] sm:rounded-[3rem] overflow-hidden py-24 sm:py-32 lg:py-40">
+            <img src={photos.home} alt={t.photos.home} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#13261A] via-[#13261A]/65 to-[#13261A]/30" />
+            <div data-reveal className="fade-section relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
+              <span className="eyebrow !bg-white/15 !text-white backdrop-blur mb-6">{h.final.eyebrow}</span>
+              <h2 className="font-display text-5xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-[0.92] tracking-[-0.05em] mb-10">{h.final.title}</h2>
+              <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
+                {[t.common.locationLine, t.common.hoursDaily, '+251 932 196 502'].map((text) => (
+                  <span key={text} className="glass rounded-full px-5 py-2 text-white/90 text-sm">{text}</span>
                 ))}
               </div>
-            </div>
-
-            {/* Mobile: vertical */}
-            <div className="lg:hidden relative pl-8">
-              <div className="absolute left-[6px] top-2 bottom-2 w-px bg-[#12150F]/10"/>
-              <div className="space-y-5">
-                {h.timeline.items.map((item, i) => (
-                  <FadeSection key={i} delay={i * 60} className="relative">
-                    <div className="absolute -left-8 top-6 w-3.5 h-3.5 rounded-full bg-[#35723A] ring-4 ring-[#35723A]/10"/>
-                    <div className="rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-1 p-5">
-                      <div className="font-display text-xl font-bold text-[#35723A] mb-1">{item.period}</div>
-                      <div className="font-display text-sm font-bold tracking-[0.06em] uppercase text-[#12150F] mb-1">{item.label}</div>
-                      <p className="text-[#12150F]/55 text-sm leading-relaxed">{item.desc}</p>
-                    </div>
-                  </FadeSection>
-                ))}
+              <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+                <Link to="/visit" className="btn-primary btn-on-dark">{t.common.planVisit}</Link>
+                <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="btn-glass">{t.common.getDirections}</a>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ═════════ EXPERIENCES ═════════ */}
-        <section className="bg-[#EFF4EA] py-20 sm:py-28">
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading eyebrow={h.experiences.eyebrow} title={h.experiences.title} center />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {experiences.map((exp, i) => {
-                const text = h.experiences.items[exp.id];
-                return (
-                  <FadeSection key={exp.id} delay={(i % 3) * 80}>
-                    <PhotoCard to={exp.to} photo={'img' in exp ? exp.img : undefined} title={text.title} desc={text.desc} ratio="aspect-[4/3]" />
-                  </FadeSection>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* ═════════ CULTURAL FOOD EVENT (dates from the admin area) ═════════ */}
-        <CulturalFoodDates events={siteEvents} />
-
-        {/* ═════════ GUESTHOUSE ═════════ */}
-        <section className="py-20 sm:py-28">
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading eyebrow={h.stay.eyebrow} title={h.stay.title} desc={h.stay.desc} center />
-            <div className="scroll-smooth-x -mx-5 px-5 sm:mx-0 sm:px-0 sm:overflow-visible pb-4 sm:pb-0">
-              <div className="flex gap-5 sm:grid sm:grid-cols-3 w-max sm:w-auto">
-                {rooms.map((id, i) => {
-                  const room = h.stay.rooms[id];
-                  return (
-                    <FadeSection key={id} delay={i * 90} className="snap-start w-[78vw] sm:w-auto flex-shrink-0">
-                      <PhotoCard to="/stay" title={room.name} desc={room.desc} meta={h.stay.viewRoom} ratio="aspect-[4/3]" />
-                    </FadeSection>
-                  );
-                })}
-              </div>
-            </div>
-            <FadeSection className="text-center mt-12">
-              <Link to="/stay" className="btn-primary">
-                {h.stay.cta}
-              </Link>
-            </FadeSection>
-          </div>
-        </section>
-
-        {/* ═════════ RESTAURANT ═════════ */}
-        <section className="pb-20 sm:pb-28">
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <div className="grid lg:grid-cols-2 gap-6 items-stretch">
-              <FadeSection className="relative min-h-[360px] lg:min-h-[520px] rounded-[2rem] overflow-hidden img-zoom photo-3d">
-                <img src={photos.food} alt={t.photos.food} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
-              </FadeSection>
-              <FadeSection delay={120} className="rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-1 p-8 sm:p-12 lg:p-14 flex flex-col justify-center relative overflow-hidden">
-                <span className="relative block w-10 h-px bg-[#B8863B] mb-4" />
-                <span className="relative block text-xs font-bold tracking-[0.2em] uppercase text-[#35723A] mb-4">{h.restaurant.eyebrow}</span>
-                <h2 className="relative font-display text-4xl sm:text-5xl font-extrabold text-[#12150F] leading-[1.05] mb-6">{h.restaurant.title}</h2>
-                <p className="relative text-[#12150F]/60 text-base sm:text-lg leading-relaxed mb-8">{h.restaurant.desc}</p>
-                <div className="relative flex flex-wrap gap-2 mb-10">
-                  {h.restaurant.categories.map((cat, i) => (
-                    <span key={i} className="rounded-full border border-[#12150F]/12 text-[#12150F]/70 text-sm px-4 py-2">{cat}</span>
-                  ))}
-                </div>
-                <Link to="/dine" className="relative btn-primary self-start">
-                  {h.restaurant.cta}
-                </Link>
-              </FadeSection>
-            </div>
-          </div>
-        </section>
-
-        {/* ═════════ FACILITIES & SERVICES ═════════ */}
-        <section className="bg-[#EFF4EA] py-20 sm:py-28">
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading eyebrow={h.facilities.eyebrow} title={h.facilities.title} desc={h.facilities.desc} center />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {facilities.map((id, i) => {
-                const item = h.facilities.items[id];
-                return (
-                  <FadeSection key={id} delay={(i % 3) * 80}>
-                    <div className="rounded-[1.25rem] bg-white border border-[#12150F]/8 elev-1 h-full p-7 sm:p-8 flex flex-col transition-transform duration-300 hover:-translate-y-1">
-                      <span className="text-[#B8863B] text-sm font-semibold tabular-nums mb-5">0{i + 1}</span>
-                      <h3 className="font-display text-sm font-bold tracking-[0.06em] uppercase text-[#35723A] mb-3">{item.title}</h3>
-                      <p className="text-[#12150F]/55 text-sm leading-relaxed">{item.desc}</p>
-                    </div>
-                  </FadeSection>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* ═════════ ORAL HISTORY ═════════ */}
-        <section className="relative py-20 sm:py-28">
-          <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-            <FadeSection className="relative">
-              <div className="rounded-[1.25rem] overflow-hidden elev-1 aspect-[4/5] sm:aspect-[5/5] lg:aspect-[4/5]">
-                <Photo alt={h.stories.elderAlt} label={h.stories.elderAlt} className="w-full h-full object-cover"/>
-              </div>
-            </FadeSection>
-
-            <FadeSection delay={120}>
-              <span className="eyebrow bg-[#35723A]/10 text-[#35723A] mb-5">{h.stories.eyebrow}</span>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#12150F] leading-[1.05] mb-7">{h.stories.title}</h2>
-              <p className="text-[#12150F]/70 text-lg leading-relaxed mb-5">{h.stories.p1}</p>
-              <p className="text-[#12150F]/55 text-base leading-relaxed mb-8">{h.stories.p2}</p>
-              <div className="flex flex-wrap gap-2 mb-10">
-                {h.stories.languages.map((l, i) => (
-                  <span key={i} className="rounded-full bg-white border border-[#12150F]/8 text-[#12150F]/80 text-sm px-4 py-2 shadow-sm">{l}</span>
-                ))}
-              </div>
-              <TextLink to="/heritage/stories">{h.stories.cta}</TextLink>
-            </FadeSection>
-          </div>
-        </section>
-
-        {/* ═════════ THE READING PLACE ═════════ */}
-        <section className="py-20 sm:py-28">
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-            <FadeSection>
-              <span className="eyebrow bg-[#35723A]/10 text-[#35723A] mb-5">{h.reading.eyebrow}</span>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-bold text-[#12150F] leading-[1.05] mb-7">{h.reading.title}</h2>
-              <p className="text-[#12150F]/65 text-lg leading-relaxed mb-6">{h.reading.desc}</p>
-              <p className="text-[#12150F]/55 text-base leading-relaxed mb-8">{h.reading.mountain}</p>
-              <div className="flex flex-wrap gap-2 mb-10">
-                {h.reading.qualities.map((quality, i) => (
-                  <span key={i} className="rounded-full bg-white border border-[#12150F]/8 text-[#12150F]/80 text-sm px-4 py-2 shadow-sm">{quality}</span>
-                ))}
-              </div>
-              <Link to="/visit" className="btn-primary">{h.reading.cta}</Link>
-            </FadeSection>
-
-            <FadeSection delay={100} className="relative rounded-[2rem] overflow-hidden img-zoom photo-3d min-h-[340px] lg:min-h-[460px]">
-              <img src={photos.gardens} alt={t.photos.gardens} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/80 via-transparent to-transparent" />
-              <span className="absolute left-6 right-6 bottom-6 text-white font-display text-xl sm:text-2xl leading-tight">
-                {h.reading.caption}
-              </span>
-            </FadeSection>
-          </div>
-        </section>
-
-        {/* ═════════ GALLERY ═════════ */}
-        <section className="pb-20 sm:pb-28">
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading
-              eyebrow={h.gallery.eyebrow}
-              title={h.gallery.title}
-              action={<TextLink to="/gallery">{h.gallery.full}</TextLink>}
-            />
-            <div className="grid grid-cols-2 md:grid-cols-4 auto-rows-[160px] sm:auto-rows-[200px] lg:auto-rows-[230px] gap-3 sm:gap-4">
-              {galleryPhotos.map(({ key, span }) => (
-                <FadeSection key={key} className={`img-zoom group relative rounded-2xl sm:rounded-3xl bg-[#35723A]/8 ${span}`}>
-                  <Link to="/gallery" className="block w-full h-full">
-                    <img src={photos[key]} alt={t.photos[key]} className="w-full h-full object-cover" loading="lazy" />
-                    <span className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B]/85 via-[#0A0A0B]/10 to-transparent" />
-                    <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5">
-                      <span className="block font-display text-base sm:text-xl text-white leading-tight">{t.photoCaptions[key].title}</span>
-                      <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{t.photoCaptions[key].desc}</span>
-                    </span>
-                  </Link>
-                </FadeSection>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ═════════ FINAL CTA ═════════ */}
-        <section className="px-2 sm:px-3 pb-3">
-          <div className="relative rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden py-24 sm:py-32 lg:py-40">
-            <img src={photos.home} alt={t.photos.home} className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/70 to-[#0A0A0B]/40"/>
-            <div className="relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
-              <FadeSection>
-                <span className="eyebrow glass text-white mb-6">{h.final.eyebrow}</span>
-                <h2 className="font-display text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[0.98] tracking-[-0.04em] mb-10">
-                  {h.final.title}
-                </h2>
-                <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-10">
-                  {[t.common.locationLine, t.common.hoursDaily, '+251 XXX XXX XXX'].map((text, i) => (
-                    <span key={i} className="glass rounded-full px-5 py-2 text-white/85 text-sm">
-                      {text}
-                    </span>
-                  ))}
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Link to="/visit" className="btn-primary justify-center">{t.common.planVisit}</Link>
-                  <a href="#" className="btn-glass justify-center">{t.common.getDirections}</a>
-                </div>
-              </FadeSection>
             </div>
           </div>
         </section>
       </main>
 
-      {/* ── Mobile sticky CTA ── */}
+      {/* ── Phones: a small bar with the two main actions ── */}
       <div className={`mobile-sticky-cta lg:hidden ${showStickyCta ? '' : 'hidden-cta'}`} inert={!showStickyCta}>
-        <Link to="/visit" className="flex-1 btn-primary justify-center py-3 text-[13px] shadow-none">
-          {t.common.planVisit}
-        </Link>
-        <Link to="/contact" className="flex-1 btn-glass justify-center py-3 text-[13px]">
-          {t.common.contactUs}
-        </Link>
+        <Link to="/visit" className="flex-1 btn-primary btn-on-dark justify-center !py-1.5 !text-[13px] whitespace-nowrap shadow-none">{t.common.planVisit}</Link>
+        <Link to="/contact" className="flex-1 btn-glass justify-center !py-3 !text-[13px] whitespace-nowrap">{t.common.contactUs}</Link>
       </div>
     </>
   );

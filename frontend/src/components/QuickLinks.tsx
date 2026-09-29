@@ -1,58 +1,74 @@
 import { Link } from 'react-router-dom';
+import { photos, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
-import type { Dictionary } from '../i18n/dictionaries/en';
+import { Tilt, useRevealChildren } from '../lib/motion';
 
-type NavKey = keyof Dictionary['nav']['links'];
+type QuickKey = 'heritage' | 'experiences' | 'events' | 'stay' | 'dine' | 'visit' | 'gallery' | 'about';
 
-/** Where a phone visitor is most likely to want to go, in the order they usually ask */
-const LINKS: { key: NavKey; to: string }[] = [
-  { key: 'visit', to: '/visit' },
-  { key: 'events', to: '/events' },
-  { key: 'heritage', to: '/heritage' },
-  { key: 'experiences', to: '/experiences' },
-  { key: 'stay', to: '/stay' },
-  { key: 'dine', to: '/dine' },
-  { key: 'gallery', to: '/gallery' },
-  { key: 'discover', to: '/discover' },
-  { key: 'about', to: '/about' },
-  { key: 'contact', to: '/contact' },
+/* order and size on the grid; on computers the first card is the large one */
+const LINKS: { key: QuickKey; to: string; photo: PhotoKey; span: string }[] = [
+  { key: 'heritage', to: '/heritage', photo: 'house', span: 'md:col-span-2 md:row-span-2' },
+  { key: 'experiences', to: '/experiences', photo: 'gifaataa2', span: '' },
+  { key: 'events', to: '/events', photo: 'gifaataa1', span: '' },
+  { key: 'stay', to: '/stay', photo: 'pavilions', span: '' },
+  { key: 'dine', to: '/dine', photo: 'food', span: '' },
+  { key: 'visit', to: '/visit', photo: 'lawn', span: 'md:col-span-2' },
+  { key: 'gallery', to: '/gallery', photo: 'zigba', span: '' },
+  { key: 'about', to: '/about', photo: 'home', span: '' },
 ];
 
 /**
- * A short way into every part of the site, for phones: the menu is behind a
- * button up in the header, so this puts the same places a thumb's reach away,
- * right after the opening figures.
+ * A way into every part of the site: photo cards on a bento grid (a swipeable
+ * row on phones), each with a line about the place and an "Explore" button.
  */
 export default function QuickLinks() {
   const { t } = useI18n();
   const q = t.home.quick;
+  const ref = useRevealChildren<HTMLElement>();
 
   return (
-    <section className="lg:hidden py-10 sm:py-12">
-      <div className="px-5 sm:px-8">
-        <span className="eyebrow bg-[#35723A]/10 text-[#35723A] mb-4">{q.eyebrow}</span>
-        <h2 className="font-display text-3xl sm:text-4xl text-[#12150F] leading-tight mb-6">{q.title}</h2>
+    <section ref={ref} className="py-20 sm:py-28" aria-labelledby="quick-title">
+      <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+        <div data-reveal className="fade-section flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10 sm:mb-14">
+          <div>
+            <span className="eyebrow mb-5">{q.eyebrow}</span>
+            <h2 id="quick-title" className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98] max-w-2xl">
+              {q.title}
+            </h2>
+          </div>
+          <p className="text-[#1E3A29]/60 text-base sm:text-lg max-w-sm">{q.desc}</p>
+        </div>
+      </div>
 
-        <ul className="grid grid-cols-2 gap-3">
-          {LINKS.map(({ key, to }, i) => (
-            <li key={key}>
-              <Link
-                to={to}
-                className="group flex items-center justify-between gap-2 rounded-2xl bg-white border border-[#12150F]/8 elev-1 px-4 py-4 min-h-[60px] active:scale-[0.98] transition-transform"
-              >
-                <span className="flex flex-col">
-                  <span className="text-[10px] font-semibold tracking-[0.18em] text-[#B8863B] tabular-nums">
+      {/* phones: a row to swipe; tablets and computers: the bento grid */}
+      <div className="scroll-smooth-x md:overflow-visible px-5 sm:px-8 md:max-w-screen-xl md:mx-auto">
+        <ul className="flex md:grid md:grid-cols-4 md:auto-rows-[250px] lg:auto-rows-[270px] gap-4 sm:gap-5 w-max md:w-auto pb-2 md:pb-0">
+          {LINKS.map(({ key, to, photo, span }, i) => (
+            <li
+              key={key}
+              data-reveal
+              className={`fade-section snap-start w-[78vw] sm:w-[60vw] md:w-auto h-[430px] md:h-auto ${span}`}
+              style={{ transitionDelay: `${(i % 4) * 70}ms` }}
+            >
+              <Tilt className="h-full rounded-[1.75rem]" max={4}>
+                <Link to={to} className="group relative flex h-full flex-col justify-end overflow-hidden rounded-[1.75rem] img-zoom">
+                  <img src={photos[photo]} alt={t.photos[photo]} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                  <span className="absolute inset-0 bg-gradient-to-t from-[#13261A]/95 via-[#13261A]/50 via-45% to-transparent" />
+                  <span className="absolute top-4 left-4 rounded-full bg-white/85 backdrop-blur px-3 py-1 text-[11px] font-bold text-[#1E3A29] tabular-nums">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-display text-lg text-[#12150F] leading-tight">{t.nav.links[key]}</span>
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="flex-shrink-0 w-7 h-7 rounded-full bg-[#0B0B0C]/5 text-[#35723A] grid place-items-center transition-colors group-hover:bg-[#B8863B] group-hover:text-[#12150F]"
-                >
-                  ›
-                </span>
-              </Link>
+                  <span className="relative p-5 sm:p-6">
+                    <span className={`block font-display font-bold text-white leading-tight tracking-tight ${i === 0 ? 'text-3xl sm:text-4xl' : 'text-2xl'}`}>
+                      {t.nav.links[key]}
+                    </span>
+                    <span className={`block text-white/75 text-sm leading-relaxed mt-2 ${i === 0 ? 'max-w-sm' : 'line-clamp-2'}`}>{q.items[key]}</span>
+                    <span className="mt-4 inline-flex items-center gap-3 rounded-full bg-white text-[#1E3A29] text-[13px] font-bold pl-5 pr-1.5 py-1.5">
+                      {t.common.explore}
+                      <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-[#86A94F] text-[#13261A] transition-transform duration-500 group-hover:-rotate-45">→</span>
+                    </span>
+                  </span>
+                </Link>
+              </Tilt>
             </li>
           ))}
         </ul>

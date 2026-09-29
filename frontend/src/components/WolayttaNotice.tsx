@@ -28,39 +28,39 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
       }`}
       inert={!open}
     >
-      <button className="absolute inset-0 w-full h-full bg-[#0A0A0B]/80 backdrop-blur-sm" onClick={onClose} aria-label={texts.en.close} tabIndex={-1} />
+      <button className="absolute inset-0 w-full h-full bg-[#13261A]/80 backdrop-blur-sm" onClick={onClose} aria-label={texts.en.close} tabIndex={-1} />
 
       <div
         role="dialog"
         aria-modal="true"
         aria-labelledby="wal-notice-title"
-        className={`relative w-full max-w-lg bg-[#FAFAF8] shadow-2xl transition-transform duration-500 ${open ? 'translate-y-0' : 'translate-y-4'}`}
+        className={`relative w-full max-w-lg bg-[#F4EFE4] shadow-2xl transition-transform duration-500 ${open ? 'translate-y-0' : 'translate-y-4'}`}
         style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}
       >
-        <div className="h-1 bg-gradient-to-r from-[#35723A] via-[#B8863B] to-[#35723A]" />
-        <button onClick={onClose} className="absolute top-3 right-3 touch-target text-[#35723A]/40 hover:text-[#35723A]" aria-label={texts.en.close}>
+        <div className="h-1 bg-gradient-to-r from-[#1E3A29] via-[#C4622D] to-[#1E3A29]" />
+        <button onClick={onClose} className="absolute top-3 right-3 touch-target text-[#1E3A29]/40 hover:text-[#1E3A29]" aria-label={texts.en.close}>
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12" strokeWidth="1.5" /></svg>
         </button>
 
         <div className="px-6 sm:px-10 pt-9 pb-8">
-          <div className="text-[#35723A] text-[10px] font-sans font-semibold tracking-[0.16em] uppercase mb-3">Wolayttatto</div>
-          <h2 id="wal-notice-title" className="font-display text-3xl font-semibold text-[#35723A] leading-tight mb-1">{texts.en.title}</h2>
-          <div lang="am" className="font-display text-2xl font-semibold text-[#35723A]/80 leading-snug mb-5">{texts.am.title}</div>
+          <div className="text-[#1E3A29] text-[10px] font-sans font-semibold tracking-[0.16em] uppercase mb-3">Wolayttatto</div>
+          <h2 id="wal-notice-title" className="font-display text-3xl font-semibold text-[#1E3A29] leading-tight mb-1">{texts.en.title}</h2>
+          <div lang="am" className="font-display text-2xl font-semibold text-[#1E3A29]/80 leading-snug mb-5">{texts.am.title}</div>
 
-          <p className="text-[#12150F]/70 font-sans text-sm leading-relaxed mb-2">{texts.en.body}</p>
-          <p lang="am" className="text-[#12150F]/60 font-sans text-sm leading-relaxed mb-7">{texts.am.body}</p>
+          <p className="text-[#1E3A29]/70 font-sans text-sm leading-relaxed mb-2">{texts.en.body}</p>
+          <p lang="am" className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed mb-7">{texts.am.body}</p>
 
           <div className="grid sm:grid-cols-2 gap-3">
-            <button ref={firstButton} onClick={() => onChoose('en')} className="btn-primary justify-center bg-[#35723A] border-[#35723A] text-white hover:bg-[#43884A]">
+            <button ref={firstButton} onClick={() => onChoose('en')} className="btn-primary justify-center bg-[#1E3A29] border-[#1E3A29] text-white hover:bg-[#2D5239]">
               {texts.en.continueEn}
             </button>
-            <button lang="am" onClick={() => onChoose('am')} className="btn-outline justify-center border-[#35723A] text-[#35723A] hover:bg-[#35723A] hover:text-white">
+            <button lang="am" onClick={() => onChoose('am')} className="btn-outline justify-center border-[#1E3A29] text-[#1E3A29] hover:bg-[#1E3A29] hover:text-white">
               {texts.am.continueAm}
             </button>
           </div>
 
           {import.meta.env.DEV && (
-            <button onClick={() => onChoose('wal')} className="mt-5 w-full text-center text-[11px] font-sans text-[#35723A]/45 hover:text-[#35723A] underline underline-offset-4">
+            <button onClick={() => onChoose('wal')} className="mt-5 w-full text-center text-[11px] font-sans text-[#1E3A29]/45 hover:text-[#1E3A29] underline underline-offset-4">
               Preview the Wolaytta draft (development only)
             </button>
           )}

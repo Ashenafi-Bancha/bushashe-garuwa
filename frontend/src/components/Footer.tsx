@@ -15,49 +15,42 @@ const footerRoutes = {
 export default function Footer() {
   const { t } = useI18n();
   return (
-    <footer className="bg-[#0B0B0C] text-white">
-      <div className="h-px bg-white/10" />
+    <footer className="relative bg-[#13261A] text-[#F4EFE4] overflow-hidden rounded-t-[2rem] sm:rounded-t-[3rem]">
+      <div className="max-w-screen-xl mx-auto px-5 sm:px-8 pt-16 sm:pt-24">
+        {/* the invitation */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 pb-14 sm:pb-16 border-b border-white/10">
+          <h2 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[0.95] tracking-[-0.04em] max-w-3xl">
+            {t.footer.headline}
+          </h2>
+          <Link to="/visit" className="btn-primary btn-on-dark self-start lg:self-auto flex-shrink-0">
+            {t.common.planVisit}
+          </Link>
+        </div>
 
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 pt-12 sm:pt-16 pb-8">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.35fr_1fr_1fr_1fr_1fr] gap-8 sm:gap-10 lg:gap-12 mb-10 sm:mb-16">
-          {/* Brand column — full width on mobile */}
-          <div className="col-span-2 sm:col-span-2 md:col-span-3 lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6">
-              <img
-                src={logo}
-                alt="Bushaashe Garuwa Lodge"
-                className="w-14 h-14 rounded-full object-contain bg-white/90 p-0.5 flex-shrink-0"
-              />
-              <div className="leading-none min-w-0">
-                <div className="font-display text-white text-lg font-bold tracking-tight">Bushaashe Garuwa</div>
-                <div className="text-white/50 text-xs font-medium leading-snug mt-1.5">{t.common.locationLine}</div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-12 py-14 sm:py-16">
+          <div className="col-span-2 md:col-span-3 lg:col-span-1">
+            <div className="flex items-center gap-3 mb-5">
+              <img src={logo} alt="Bushaashe Garuwa" className="w-14 h-14 rounded-full object-contain bg-white p-0.5 flex-shrink-0" />
+              <div className="min-w-0">
+                <div className="font-display text-xl font-bold tracking-tight">Bushaashe Garuwa</div>
+                <div className="text-white/55 text-xs font-medium leading-snug mt-1">{t.common.locationLine}</div>
               </div>
             </div>
-            <p className="text-white/55 text-sm leading-relaxed font-sans mb-5">
-              {t.footer.tagline}
-            </p>
-
-            {/* Follow us (desktop; on smaller screens it closes the footer) */}
-            <div className="hidden lg:block">
-              <div className="text-white/40 text-[10px] font-sans font-semibold tracking-[0.2em] uppercase mb-3">{t.footer.followUs}</div>
-              <SocialLinks small />
-            </div>
+            <p className="text-white/60 text-sm leading-relaxed mb-6 max-w-sm">{t.footer.tagline}</p>
+            <div className="text-white/40 text-xs font-semibold mb-3">{t.footer.followUs}</div>
+            <SocialLinks small />
           </div>
 
-          {/* Link columns */}
           {(Object.keys(footerRoutes) as (keyof typeof footerRoutes)[]).map((col) => {
             const column = t.footer.columns[col];
             const routes: Record<string, string> = footerRoutes[col];
             return (
               <div key={col}>
-                <div className="text-white/40 text-xs font-sans font-semibold tracking-[0.2em] uppercase mb-5">{column.title}</div>
+                <div className="text-[#B9D38A] text-sm font-bold mb-5">{column.title}</div>
                 <ul className="space-y-3">
                   {Object.entries(column.links).map(([key, label]) => (
                     <li key={key}>
-                      <Link
-                        to={routes[key]}
-                        className="text-white/65 hover:text-white text-sm font-sans transition-colors duration-200"
-                      >
+                      <Link to={routes[key]} className="text-white/65 hover:text-white text-sm transition-colors duration-200">
                         {label}
                       </Link>
                     </li>
@@ -68,23 +61,19 @@ export default function Footer() {
           })}
         </div>
 
-        {/* Contact row */}
-        <div className="border-t border-white/12 pt-6 sm:pt-8 flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6">
-          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-3 sm:gap-6 text-white/55 text-xs font-sans text-center sm:text-left">
+        <div className="border-t border-white/10 py-7 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/50">
+          <div className="flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-6 text-center sm:text-left">
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">{t.footer.address}</a>
-            <span>+251932196502</span>
+            <a href="tel:+251932196502" className="hover:text-white transition-colors">+251 932 196 502</a>
             <a href="mailto:info@bushaashegaruwa.com" className="hover:text-white transition-colors">info@bushaashegaruwa.com</a>
           </div>
-          <div className="text-white/35 text-xs font-sans">
-            © {new Date().getFullYear()} {t.footer.rights}
-          </div>
+          <div>© {new Date().getFullYear()} {t.footer.rights}</div>
         </div>
+      </div>
 
-        {/* Follow us, last on phones and tablets */}
-        <div className="lg:hidden border-t border-white/12 mt-6 pt-6 flex flex-col items-center gap-3">
-          <div className="text-white/40 text-[10px] font-sans font-semibold tracking-[0.2em] uppercase">{t.footer.followUs}</div>
-          <SocialLinks small />
-        </div>
+      {/* the name, very large and very quiet, along the bottom */}
+      <div aria-hidden="true" className="pointer-events-none select-none font-display font-extrabold text-white/[0.05] whitespace-nowrap leading-[0.8] tracking-[-0.05em] text-[12vw] text-center -mb-[1.5vw]">
+        Bushaashe Garuwa
       </div>
     </footer>
   );

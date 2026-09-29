@@ -38,10 +38,10 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
             ? `text-[13px] px-3 py-2 ${
                 onDark
                   ? 'text-white/85 hover:text-white hover:bg-white/12'
-                  : 'text-[#12150F]/70 hover:text-[#35723A] hover:bg-[#35723A]/8'
+                  : 'text-[#1E3A29]/70 hover:text-[#1E3A29] hover:bg-[#1E3A29]/8'
               }`
             : 'text-sm px-4 py-2.5 text-white/80 bg-white/5 border border-white/10 hover:text-white'
-        } ${open ? (onDark ? 'bg-white/15 text-white' : 'bg-[#35723A]/10 text-[#35723A]') : ''}`}
+        } ${open ? (onDark ? 'bg-white/15 text-white' : 'bg-[#1E3A29]/10 text-[#1E3A29]') : ''}`}
       >
         {/* globe */}
         <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="1.6" viewBox="0 0 24 24" aria-hidden="true">
@@ -62,7 +62,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
         role="listbox"
         aria-label={t.nav.language}
         inert={!open}
-        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-[#0B0B0C]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_50px_-16px_rgba(0,0,0,0.6)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
+        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-[#13261A]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_50px_-16px_rgba(0,0,0,0.6)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
           open ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
         }`}
       >
@@ -80,16 +80,16 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
                 setOpen(false);
               }}
               className={`w-full flex items-center justify-between gap-3 rounded-xl px-3.5 py-2.5 text-left transition-colors duration-200 ${
-                active ? 'bg-[#B8863B] text-[#12150F]' : 'text-white/80 hover:bg-white/10 hover:text-white'
+                active ? 'bg-[#86A94F] text-[#13261A]' : 'text-white/80 hover:bg-white/10 hover:text-white'
               }`}
             >
               <span className="flex items-baseline gap-2.5 min-w-0">
-                <span className={`text-[11px] font-bold w-8 flex-shrink-0 ${active ? 'text-[#12150F]/70' : 'text-white/40'}`}>{l.short}</span>
+                <span className={`text-[11px] font-bold w-8 flex-shrink-0 ${active ? 'text-[#13261A]/70' : 'text-white/40'}`}>{l.short}</span>
                 <span className="text-sm font-medium">{l.name}</span>
               </span>
               {soon && (
                 <span className={`text-[10px] font-semibold rounded-full px-2 py-0.5 flex-shrink-0 ${
-                  active ? 'bg-[#0B0B0C]/15 text-[#12150F]' : 'bg-[#B8863B]/20 text-[#B8863B]'
+                  active ? 'bg-[#13261A]/15 text-[#13261A]' : 'bg-[#86A94F]/20 text-[#B9D38A]'
                 }`}>
                   {t.nav.wolayttaSoon}
                 </span>
