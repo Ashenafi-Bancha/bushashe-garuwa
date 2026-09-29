@@ -28,9 +28,9 @@ export default function Footer() {
                 alt="Bushaashe Garuwa Lodge"
                 className="w-14 h-14 rounded-full object-contain bg-white/90 p-0.5 flex-shrink-0"
               />
-              <div className="leading-none">
+              <div className="leading-none min-w-0">
                 <div className="font-display text-white text-lg font-bold tracking-tight">Bushaashe Garuwa</div>
-                <div className="text-white/40 text-[10px] font-medium tracking-[0.18em] uppercase mt-1.5">Wolaita · Ethiopia</div>
+                <div className="text-white/50 text-xs font-medium leading-snug mt-1.5">{t.common.locationLine}</div>
               </div>
             </div>
             <p className="text-white/55 text-sm leading-relaxed font-sans mb-5">
