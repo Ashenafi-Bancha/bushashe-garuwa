@@ -46,7 +46,7 @@ export default function Experiences() {
                       <p className="text-[#1E3A29] text-sm font-sans">{exp.sub}</p>
                     </div>
                     <div className="text-right flex-shrink-0">
-                      <div className="text-[#1E3A29]/40 text-xs font-sans mb-1">{x.duration}</div>
+                      <div className="text-[#1E3A29]/65 text-xs font-sans mb-1">{x.duration}</div>
                       <div className="text-[#1E3A29] text-sm font-sans font-semibold">{exp.duration}</div>
                     </div>
                   </div>
@@ -71,7 +71,7 @@ export default function Experiences() {
                   )}
 
                   <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#1E3A29]/10">
-                    <Link to="/visit" className="inline-flex items-center gap-2 bg-[#1E3A29] hover:bg-[#2D5239] text-white text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors">
+                    <Link to="/visit" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors">
                       {t.common.reserve}
                     </Link>
                   </div>
@@ -86,15 +86,15 @@ export default function Experiences() {
       {/* CTA */}
       <section className="relative mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24 overflow-hidden">
         <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-[#1E3A29]/85"/>
+        <div className="absolute inset-0 bg-[#E3EBD8]/92"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-6">{x.cta.title}</h2>
-          <p className="text-white/60 font-sans text-base max-w-xl mx-auto mb-10">{x.cta.desc}</p>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] mb-6">{x.cta.title}</h2>
+          <p className="text-[#1E3A29]/80 font-sans text-base max-w-xl mx-auto mb-10">{x.cta.desc}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#86A94F] hover:bg-[#B9D38A] text-[#13261A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
               {t.common.contactUs}
             </Link>
-            <Link to="/visit" className="inline-flex items-center gap-2 border border-white/40 hover:border-white text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/visit" className="inline-flex items-center gap-2 border border-[#1E3A29]/12 hover:border-white text-[#13261A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
               {t.common.planVisit}
             </Link>
           </div>

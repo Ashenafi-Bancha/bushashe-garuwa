@@ -24,7 +24,7 @@ export default function StoryFilm() {
           <p className="text-[#1E3A29]/65 text-base sm:text-lg leading-relaxed">{film.desc}</p>
         </div>
 
-        <div className="relative rounded-[2rem] overflow-hidden bg-[#13261A] aspect-video shadow-[0_40px_80px_-40px_rgba(14,40,32,0.6)]">
+        <div className="relative rounded-[2rem] overflow-hidden bg-[#E3EBD8] aspect-video shadow-[0_40px_80px_-40px_rgba(14,40,32,0.6)]">
           {playing ? (
             <iframe
               src={`https://www.youtube-nocookie.com/embed/${videos.story}?autoplay=1&rel=0&modestbranding=1`}
@@ -41,7 +41,7 @@ export default function StoryFilm() {
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] group-hover:scale-105"
               />
-              <span className="absolute inset-0 bg-[#13261A]/35 group-hover:bg-[#13261A]/25 transition-colors" />
+              <span className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors" />
               <span className="absolute inset-0 flex flex-col items-center justify-center gap-4">
                 <span className="w-20 h-20 rounded-full bg-[#86A94F] text-[#13261A] flex items-center justify-center shadow-[0_20px_40px_-12px_rgba(0,0,0,0.6)] transition-transform duration-300 group-hover:scale-110">
                   <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true" fill="currentColor">

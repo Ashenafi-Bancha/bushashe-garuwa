@@ -39,7 +39,7 @@ function NotFound() {
         <div className="font-display text-8xl text-[#1E3A29]/20 mb-6">404</div>
         <h1 className="font-display text-3xl font-semibold text-[#1E3A29] mb-4">{t.notFound.title}</h1>
         <p className="text-[#1E3A29]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
-        <a href="/" className="inline-flex items-center gap-2 bg-[#1E3A29] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#2D5239]">
+        <a href="/" className="inline-flex items-center gap-2 bg-[#0E8A50] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors hover:bg-[#0B7A45]">
           {t.notFound.button}
         </a>
       </div>
@@ -81,7 +81,7 @@ export default function App() {
           <Route
             path="/admin/*"
             element={
-              <Suspense fallback={<div className="min-h-screen bg-[#13261A]" />}>
+              <Suspense fallback={<div className="min-h-screen bg-[#F4EFE4]" />}>
                 <AdminApp />
               </Suspense>
             }

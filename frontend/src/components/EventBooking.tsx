@@ -126,7 +126,7 @@ export default function EventBooking({
         <button
           type="submit"
           disabled={sending}
-          className="flex-1 min-w-[12rem] bg-[#1E3A29] hover:bg-[#2D5239] text-[#F4EFE4] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
+          className="flex-1 min-w-[12rem] bg-[#0E8A50] hover:bg-[#0B7A45] text-[#F4EFE4] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
         >
           {sending ? b.sending : b.submit}
         </button>

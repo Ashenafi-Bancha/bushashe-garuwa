@@ -48,7 +48,7 @@ export default function SwipeRow({
       {items.length > 1 && (
         <div className={`md:hidden mt-5 mx-auto w-20 h-1 rounded-full overflow-hidden ${dark ? 'bg-white/15' : 'bg-[#1E3A29]/10'}`} aria-hidden="true">
           <span
-            className={`block h-full rounded-full transition-[margin] duration-150 ${dark ? 'bg-[#B9D38A]' : 'bg-[#1E3A29]'}`}
+            className={`block h-full rounded-full transition-[margin] duration-150 ${dark ? 'bg-[#B9D38A]' : 'bg-[#0E8A50]'}`}
             style={{ width: `${100 / Math.min(items.length, 4)}%`, marginLeft: `${progress * (100 - 100 / Math.min(items.length, 4))}%` }}
           />
         </div>

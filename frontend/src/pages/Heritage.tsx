@@ -81,7 +81,7 @@ export default function Heritage() {
 
       {/* Trees: the zigba line, planted by our forefathers and the current generation */}
       <section id="trees" className="mx-2 sm:mx-3">
-        <div className="rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#13261A]">
+        <div className="rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#E3EBD8]">
           {/* the photograph, clear, with nothing over it but its name */}
           <div className="relative h-[62svh] min-h-[360px] lg:h-[78svh]">
             <img src={photos.zigba} alt={t.photos.zigba} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-[center_40%]" />
@@ -92,16 +92,16 @@ export default function Heritage() {
 
           <div className="max-w-screen-xl mx-auto px-5 sm:px-10 py-10 sm:py-14 grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 lg:items-end">
             <div>
-              <span className="eyebrow !bg-white/10 !text-[#B9D38A] mb-5">{hg.trees.eyebrow}</span>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1]">{hg.trees.title}</h2>
+              <span className="eyebrow mb-5">{hg.trees.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#13261A] leading-[1]">{hg.trees.title}</h2>
             </div>
-            <div className="rounded-[1.75rem] bg-white/[0.06] border border-white/10 p-6 sm:p-7 text-white">
+            <div className="rounded-[1.75rem] bg-white border border-[#1E3A29]/12 p-6 sm:p-7 text-[#13261A]">
               <div className="flex items-baseline justify-between gap-4 mb-1">
-                <div className="font-display text-3xl font-extrabold text-[#B9D38A] tracking-tight">{ZIGBA.wolaytta}</div>
-                <div className="text-white/50 text-xs italic">{ZIGBA.scientific}</div>
+                <div className="font-display text-3xl font-extrabold text-[#0B6E40] tracking-tight">{ZIGBA.wolaytta}</div>
+                <div className="text-[#1E3A29]/70 text-xs italic">{ZIGBA.scientific}</div>
               </div>
-              <div className="text-white/80 text-sm font-semibold mb-4">{hg.trees.items.zigba.name}</div>
-              <p className="text-white/75 text-sm sm:text-base leading-relaxed mb-5">{hg.trees.items.zigba.sig}</p>
+              <div className="text-[#1E3A29]/80 text-sm font-semibold mb-4">{hg.trees.items.zigba.name}</div>
+              <p className="text-[#1E3A29]/80 text-sm sm:text-base leading-relaxed mb-5">{hg.trees.items.zigba.sig}</p>
               <span className="inline-flex rounded-full bg-[#86A94F] text-[#13261A] text-xs font-bold px-3.5 py-1.5">{hg.trees.items.zigba.age}</span>
             </div>
           </div>
@@ -119,7 +119,7 @@ export default function Heritage() {
               <p className="text-[#1E3A29]/70 font-sans text-base leading-relaxed mb-8">
                 {hg.family.desc}
               </p>
-              <Link to="/about#family" className="inline-flex items-center gap-2 bg-[#1E3A29] hover:bg-[#2D5239] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
+              <Link to="/about#family" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
                 {hg.family.cta}
               </Link>
             </div>

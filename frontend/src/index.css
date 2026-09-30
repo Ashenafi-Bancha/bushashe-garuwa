@@ -265,8 +265,8 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   display: inline-flex;
   align-items: center;
   gap: 14px;
-  color: #F4EFE4;
-  background: #1E3A29;
+  color: #FFFFFF;
+  background: #0E8A50;
   font-family: var(--font-sans);
   font-size: 14px;
   font-weight: 700;
@@ -274,7 +274,7 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   border-radius: 999px;
   border: 0;
   transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
-  box-shadow: 0 14px 30px -18px rgba(30, 58, 41, 0.7);
+  box-shadow: 0 14px 30px -18px rgba(14, 138, 80, 0.7);
 }
 .btn-primary::after {
   content: '→';
@@ -284,12 +284,12 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   border-radius: 999px;
   display: grid;
   place-items: center;
-  background: #86A94F;
-  color: #13261A;
+  background: #FFFFFF;
+  color: #0E8A50;
   font-size: 16px;
   transition: transform 0.4s var(--ease-soft);
 }
-.btn-primary:hover { background: #2D5239; }
+.btn-primary:hover { background: #0B7A45; }
 .btn-primary:hover::after { transform: rotate(-45deg); }
 .btn-primary:active { transform: scale(0.98); }
 .btn-primary.justify-center { justify-content: space-between; }
@@ -298,9 +298,10 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 .btn-primary.nav-cta { font-size: 13px; padding: 5px 5px 5px 18px; gap: 10px; box-shadow: none; }
 .btn-primary.nav-cta::after { width: 30px; height: 30px; font-size: 14px; }
 /* on the forest: moss pill, forest circle */
-.btn-primary.btn-on-dark { background: #86A94F; color: #13261A; }
-.btn-primary.btn-on-dark::after { background: #13261A; color: #F4EFE4; }
-.btn-primary.btn-on-dark:hover { background: #B9D38A; }
+/* on a photograph: a white pill with an emerald circle */
+.btn-primary.btn-on-dark { background: #FFFFFF; color: #0B6E40; }
+.btn-primary.btn-on-dark::after { background: #0E8A50; color: #FFFFFF; }
+.btn-primary.btn-on-dark:hover { background: #E3EBD8; }
 
 /* the full-screen menu opens downward like a curtain */
 .site-menu {
@@ -388,11 +389,12 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   z-index: 30;
   padding: 6px;
   margin-bottom: env(safe-area-inset-bottom, 0px);
-  background: rgba(19, 38, 26, 0.92);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border-radius: 999px;
-  box-shadow: 0 20px 40px -12px rgba(19, 38, 26, 0.5);
+  box-shadow: 0 20px 40px -14px rgba(30, 58, 41, 0.35);
+  border: 1px solid rgba(30, 58, 41, 0.08);
   display: flex;
   gap: 6px;
   align-items: center;

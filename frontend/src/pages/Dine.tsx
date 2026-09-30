@@ -34,7 +34,7 @@ export default function Dine() {
                 onClick={() => setActiveMenu(cat)}
                 className={`text-xs font-sans font-semibold rounded-full px-6 py-3 transition-colors border ${
                   activeMenu === cat
-                    ? 'bg-[#1E3A29] text-white border-[#1E3A29]'
+                    ? 'bg-[#0E8A50] text-white border-[#0E8A50]'
                     : 'border-[#1E3A29]/20 text-[#1E3A29]/60 hover:border-[#1E3A29]/50 hover:text-[#1E3A29]'
                 }`}
               >
@@ -58,7 +58,7 @@ export default function Dine() {
           </div>
 
           <div className="mt-14 text-center">
-            <Link to="/events" className="inline-flex items-center gap-2 bg-[#1E3A29] hover:bg-[#2D5239] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
+            <Link to="/events" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
               {dn.joinEvent}
             </Link>
           </div>
@@ -68,23 +68,23 @@ export default function Dine() {
       {/* Bar section */}
       <section id="bar" className="relative mx-2 sm:mx-3 rounded-[2rem] py-24 lg:py-32 overflow-hidden">
         <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-[#13261A]/88"/>
+        <div className="absolute inset-0 bg-[#E3EBD8]/92"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <div className="text-[#B9D38A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{dn.bar.eyebrow}</div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight mb-6">{dn.bar.title}</h2>
-              <p className="text-white/65 font-sans text-base leading-relaxed mb-8">
+              <div className="text-[#0B6E40] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{dn.bar.eyebrow}</div>
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] leading-tight mb-6">{dn.bar.title}</h2>
+              <p className="text-[#1E3A29]/80 font-sans text-base leading-relaxed mb-8">
                 {dn.bar.desc}
               </p>
-              <div className="grid grid-cols-2 gap-4 mb-8 text-white/60 font-sans text-sm">
-                <div><div className="text-[#B9D38A] text-xs tracking-wider uppercase mb-1">{dn.bar.weekdays}</div>14:00 – 22:00</div>
-                <div><div className="text-[#B9D38A] text-xs tracking-wider uppercase mb-1">{dn.bar.weekends}</div>12:00 – 23:00</div>
+              <div className="grid grid-cols-2 gap-4 mb-8 text-[#1E3A29]/80 font-sans text-sm">
+                <div><div className="text-[#0B6E40] text-xs tracking-wider uppercase mb-1">{dn.bar.weekdays}</div>14:00 – 22:00</div>
+                <div><div className="text-[#0B6E40] text-xs tracking-wider uppercase mb-1">{dn.bar.weekends}</div>12:00 – 23:00</div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               {dn.bar.drinks.map((drink, i) => (
-                <div key={i} className="rounded-2xl border border-white/10 p-4 text-white/60 font-sans text-sm hover:border-[#C4622D]/30 hover:text-white/80 transition-colors">
+                <div key={i} className="rounded-2xl border border-[#1E3A29]/12 p-4 text-[#1E3A29]/80 font-sans text-sm hover:border-[#C4622D]/30 hover:text-[#1E3A29]/80 transition-colors">
                   {drink}
                 </div>
               ))}

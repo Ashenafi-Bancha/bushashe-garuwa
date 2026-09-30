@@ -40,10 +40,10 @@ export default function Discover() {
 
           {/* Mission & Vision */}
           <div className="grid md:grid-cols-2 gap-8 mb-12 sm:mb-20">
-            <div className="bg-[#1E3A29] rounded-3xl p-6 sm:p-10">
-              <div className="text-[#C4622D] text-xs font-sans tracking-wider uppercase mb-4">{d.mission.label}</div>
+            <div className="bg-[#0E8A50] rounded-3xl p-6 sm:p-10">
+              <div className="text-white/85 text-xs font-sans font-semibold tracking-wider uppercase mb-4">{d.mission.label}</div>
               <h3 className="font-display text-xl sm:text-2xl font-semibold text-white mb-4">{d.mission.title}</h3>
-              <p className="text-white/60 font-sans text-sm leading-relaxed">
+              <p className="text-white/90 font-sans text-sm leading-relaxed">
                 {d.mission.text}
               </p>
             </div>
@@ -74,15 +74,15 @@ export default function Discover() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#1E3A29] mx-2 sm:mx-3 rounded-[2rem] py-20 text-center">
+      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-20 text-center">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-white mb-4">{t.common.comeBePart}</h2>
-          <p className="text-white/55 font-sans text-base max-w-xl mx-auto mb-10">{d.cta.desc}</p>
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#13261A] mb-4">{t.common.comeBePart}</h2>
+          <p className="text-[#1E3A29]/80 font-sans text-base max-w-xl mx-auto mb-10">{d.cta.desc}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/visit" className="inline-flex items-center gap-2 bg-[#86A94F] hover:bg-[#B9D38A] text-[#13261A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/visit" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
               {t.common.planVisit}
             </Link>
-            <Link to="/heritage" className="inline-flex items-center gap-2 border border-white/40 hover:border-white text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/heritage" className="inline-flex items-center gap-2 border border-[#1E3A29]/12 hover:border-white text-[#13261A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
               {d.cta.explore}
             </Link>
           </div>

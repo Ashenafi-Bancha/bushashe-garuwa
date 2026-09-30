@@ -87,7 +87,7 @@ export default function Gallery() {
                 aria-pressed={filter === f}
                 className={`text-sm font-semibold rounded-full px-5 py-2.5 border transition-all duration-300 ${
                   filter === f
-                    ? 'bg-[#13261A] text-white border-[#1E3A29]'
+                    ? 'bg-[#0E8A50] text-white border-[#0E8A50]'
                     : 'border-[#1E3A29]/15 text-[#1E3A29]/70 hover:border-[#1E3A29]/50 hover:text-[#1E3A29]'
                 }`}
               >
@@ -108,7 +108,7 @@ export default function Gallery() {
                     className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#1E3A29]/8"
                   >
                     <img src={photos[item.key]} alt={t.photos[item.key]} loading="lazy" className="w-full h-full object-cover" />
-                    <span className="absolute inset-0 bg-gradient-to-t from-[#13261A]/85 via-[#13261A]/15 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
+                    <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5 text-left">
                       <span className="block font-display text-base sm:text-xl text-white leading-tight">{t.photoCaptions[item.key].title}</span>
                       <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{t.photoCaptions[item.key].desc}</span>

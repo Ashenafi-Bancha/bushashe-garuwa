@@ -57,7 +57,7 @@ export default function Stay() {
                   <p className="text-[#1E3A29]/65 font-sans text-sm leading-relaxed mb-6 flex-1">{room.desc}</p>
 
                   <div className="mb-6">
-                    <div className="text-[#1E3A29]/40 text-xs font-sans tracking-wider uppercase mb-3">{st.amenitiesLabel}</div>
+                    <div className="text-[#1E3A29]/65 text-xs font-sans tracking-wider uppercase mb-3">{st.amenitiesLabel}</div>
                     <div className="flex flex-wrap gap-2">
                       {amenities.map((a) => (
                         <span key={a} className="flex items-center gap-1.5 text-xs font-sans text-[#1E3A29]/70 rounded-full border border-[#1E3A29]/15 px-3 py-1.5">
@@ -70,11 +70,11 @@ export default function Stay() {
                   <div className="flex gap-3">
                     <button
                       onClick={() => setSelectedRoom(selectedRoom === i ? null : i)}
-                      className="flex-1 border border-[#1E3A29] text-[#1E3A29] hover:bg-[#1E3A29] hover:text-white text-xs font-sans font-semibold rounded-full py-3.5 transition-colors"
+                      className="flex-1 border border-[#1E3A29] text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50] text-xs font-sans font-semibold rounded-full py-3.5 transition-colors"
                     >
                       {st.viewDetails}
                     </button>
-                    <Link to="/contact" className="flex-1 bg-[#1E3A29] hover:bg-[#2D5239] text-[#F4EFE4] text-xs font-sans font-semibold rounded-full py-3.5 transition-colors text-center">
+                    <Link to="/contact" className="flex-1 bg-[#0E8A50] hover:bg-[#0B7A45] text-[#F4EFE4] text-xs font-sans font-semibold rounded-full py-3.5 transition-colors text-center">
                       {st.bookRoom}
                     </Link>
                   </div>
@@ -87,17 +87,17 @@ export default function Stay() {
       </section>
 
       {/* Why stay */}
-      <section className="bg-[#1E3A29] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
-            <h2 className="font-display text-4xl font-semibold text-white mb-4">{st.why.title}</h2>
-            <p className="text-white/55 font-sans text-base max-w-xl mx-auto">{st.why.desc}</p>
+            <h2 className="font-display text-4xl font-semibold text-[#13261A] mb-4">{st.why.title}</h2>
+            <p className="text-[#1E3A29]/80 font-sans text-base max-w-xl mx-auto">{st.why.desc}</p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {whyStay.map((item) => (
               <div key={item.id} className="text-center">
-                <h3 className="text-white font-display text-lg mb-2">{st.why.items[item.id].title}</h3>
-                <p className="text-white/45 font-sans text-sm leading-relaxed">{st.why.items[item.id].desc}</p>
+                <h3 className="text-[#13261A] font-display text-lg mb-2">{st.why.items[item.id].title}</h3>
+                <p className="text-[#1E3A29]/70 font-sans text-sm leading-relaxed">{st.why.items[item.id].desc}</p>
               </div>
             ))}
           </div>
@@ -110,10 +110,10 @@ export default function Stay() {
           <h2 className="font-display text-4xl font-semibold text-[#1E3A29] mb-4">{st.cta.title}</h2>
           <p className="text-[#1E3A29]/55 font-sans text-base max-w-xl mx-auto mb-10">{st.cta.desc}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#1E3A29] hover:bg-[#2D5239] text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
               {st.cta.book}
             </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 border border-[#1E3A29] text-[#1E3A29] hover:bg-[#1E3A29] hover:text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/contact" className="inline-flex items-center gap-2 border border-[#1E3A29] text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
               {st.cta.ask}
             </Link>
           </div>

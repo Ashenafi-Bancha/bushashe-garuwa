@@ -62,7 +62,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
         role="listbox"
         aria-label={t.nav.language}
         inert={!open}
-        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-[#13261A]/95 backdrop-blur-xl border border-white/10 shadow-[0_24px_50px_-16px_rgba(0,0,0,0.6)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
+        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-white border border-[#1E3A29]/8 shadow-[0_24px_50px_-20px_rgba(30,58,41,0.35)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
           open ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
         }`}
       >
@@ -80,16 +80,16 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
                 setOpen(false);
               }}
               className={`w-full flex items-center justify-between gap-3 rounded-xl px-3.5 py-2.5 text-left transition-colors duration-200 ${
-                active ? 'bg-[#86A94F] text-[#13261A]' : 'text-white/80 hover:bg-white/10 hover:text-white'
+                active ? 'bg-[#0E8A50] text-white' : 'text-[#13261A] hover:bg-[#E3EBD8]'
               }`}
             >
               <span className="flex items-baseline gap-2.5 min-w-0">
-                <span className={`text-[11px] font-bold w-8 flex-shrink-0 ${active ? 'text-[#13261A]/70' : 'text-white/40'}`}>{l.short}</span>
+                <span className={`text-[11px] font-bold w-8 flex-shrink-0 ${active ? 'text-white/80' : 'text-[#1E3A29]/55'}`}>{l.short}</span>
                 <span className="text-sm font-medium">{l.name}</span>
               </span>
               {soon && (
                 <span className={`text-[10px] font-semibold rounded-full px-2 py-0.5 flex-shrink-0 ${
-                  active ? 'bg-[#13261A]/15 text-[#13261A]' : 'bg-[#86A94F]/20 text-[#B9D38A]'
+                  active ? 'bg-white/20 text-white' : 'bg-[#E3EBD8] text-[#0B6E40]'
                 }`}>
                   {t.nav.wolayttaSoon}
                 </span>

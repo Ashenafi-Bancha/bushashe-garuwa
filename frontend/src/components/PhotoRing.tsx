@@ -157,7 +157,7 @@ export default function PhotoRing() {
                 draggable={false}
                 className="w-full h-full object-cover pointer-events-none"
               />
-              <span className="absolute inset-0 bg-gradient-to-t from-[#13261A]/80 via-transparent to-transparent" />
+              <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
               <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">
                 {t.photoCaptions[key].title}
               </figcaption>
@@ -168,11 +168,11 @@ export default function PhotoRing() {
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
         <div className="flex items-center gap-3">
-          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#1E3A29] hover:text-[#F4EFE4] transition-colors">
+          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#0E8A50] hover:text-white transition-colors">
             ‹
           </button>
           <span className="text-[#1E3A29]/60 text-sm min-w-[12rem] text-center">{t.photoCaptions[facing].title}</span>
-          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#1E3A29] hover:text-[#F4EFE4] transition-colors">
+          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#0E8A50] hover:text-white transition-colors">
             ›
           </button>
         </div>

@@ -53,7 +53,7 @@ export default function QuickLinks() {
               <Tilt className="h-full rounded-[1.75rem]" max={4}>
                 <Link to={to} className="group relative flex h-full flex-col justify-end overflow-hidden rounded-[1.75rem] img-zoom">
                   <img src={photos[photo]} alt={t.photos[photo]} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-                  <span className="absolute inset-0 bg-gradient-to-t from-[#13261A]/95 via-[#13261A]/50 via-45% to-transparent" />
+                  <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 via-45% to-transparent" />
                   <span className="absolute top-4 left-4 rounded-full bg-white/85 backdrop-blur px-3 py-1 text-[11px] font-bold text-[#1E3A29] tabular-nums">
                     {String(i + 1).padStart(2, '0')}
                   </span>
@@ -64,7 +64,7 @@ export default function QuickLinks() {
                     <span className={`block text-white/75 text-sm leading-relaxed mt-2 ${i === 0 ? 'max-w-sm' : 'line-clamp-2'}`}>{q.items[key]}</span>
                     <span className="mt-4 inline-flex items-center gap-3 rounded-full bg-white text-[#1E3A29] text-[13px] font-bold pl-5 pr-1.5 py-1.5">
                       {t.common.explore}
-                      <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-[#86A94F] text-[#13261A] transition-transform duration-500 group-hover:-rotate-45">→</span>
+                      <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-white text-[#0E8A50] transition-transform duration-500 group-hover:-rotate-45">→</span>
                     </span>
                   </span>
                 </Link>

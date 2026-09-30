@@ -136,7 +136,7 @@ export default function Home() {
             follow just below. Swipe on phones. */}
         <section className="relative" aria-label={h.hero.title}>
           <div
-            className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[100svh] lg:min-h-[560px] overflow-hidden bg-[#13261A]"
+            className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[100svh] lg:min-h-[560px] overflow-hidden bg-[#E3EBD8]"
             onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
             onTouchEnd={(e) => {
               const start = touchX.current; touchX.current = null;
@@ -160,7 +160,7 @@ export default function Home() {
             </div>
 
             {/* a faint shade only behind the header words at the very top */}
-            <span className="hidden lg:block absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#13261A]/50 via-[#13261A]/20 to-transparent z-[3]" />
+            <span className="hidden lg:block absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-black/40 via-black/15 to-transparent z-[3]" />
             {/* only a thin soft edge joins the photograph to the page; nothing lies over it */}
             <span className="absolute inset-x-0 bottom-0 h-6 lg:h-20 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
 
@@ -174,7 +174,7 @@ export default function Home() {
                 type="button"
                 onClick={() => goTo(heroIdx + 1)}
                 aria-label={h.hero.next}
-                className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-[#1E3A29] hover:text-white transition-colors"
+                className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50] transition-colors"
               >
                 →
               </button>
@@ -222,7 +222,7 @@ export default function Home() {
 
         {/* ═════════ A RUNNING BAND OF WORDS ═════════ */}
         <div className="overflow-hidden py-6" aria-hidden="true">
-          <div className="bg-[#1E3A29] text-[#F4EFE4] py-5 sm:py-6 -rotate-2 scale-105">
+          <div className="bg-[#0E8A50] text-[#F4EFE4] py-5 sm:py-6 -rotate-2 scale-105">
             <div className="flex w-max animate-marquee font-display font-bold text-3xl sm:text-5xl tracking-[-0.03em]">
               {[0, 1].map((n) => (
                 <span key={n} className="flex items-center">
@@ -299,9 +299,9 @@ export default function Home() {
                         <span className="text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
                         <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-none tracking-[-0.03em] mb-4">{text.title}</h3>
                         <p className="text-[#1E3A29]/65 leading-relaxed mb-7">{text.desc}</p>
-                        <span className="inline-flex items-center gap-3 rounded-full bg-[#1E3A29] text-[#F4EFE4] text-[13px] font-bold pl-5 pr-1.5 py-1.5">
+                        <span className="inline-flex items-center gap-3 rounded-full bg-[#0E8A50] text-white text-[13px] font-bold pl-5 pr-1.5 py-1.5">
                           {t.common.explore}
-                          <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-[#86A94F] text-[#13261A] transition-transform duration-500 group-hover:-rotate-45">→</span>
+                          <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-white text-[#0E8A50] transition-transform duration-500 group-hover:-rotate-45">→</span>
                         </span>
                       </div>
                     </Link>
@@ -355,9 +355,9 @@ export default function Home() {
                           <span key={chip} className="rounded-full bg-[#F4EFE4] px-3.5 py-1.5 text-[13px] font-semibold text-[#1E3A29]/75">{chip}</span>
                         ))}
                       </div>
-                      <span className="mt-auto inline-flex items-center gap-3 rounded-full bg-[#1E3A29] text-[#F4EFE4] text-[13px] font-bold pl-5 pr-1.5 py-1.5">
+                      <span className="mt-auto inline-flex items-center gap-3 rounded-full bg-[#0E8A50] text-white text-[13px] font-bold pl-5 pr-1.5 py-1.5">
                         {card.cta}
-                        <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-[#86A94F] text-[#13261A] transition-transform duration-500 group-hover:-rotate-45">→</span>
+                        <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-white text-[#0E8A50] transition-transform duration-500 group-hover:-rotate-45">→</span>
                       </span>
                     </div>
                   </Link>
@@ -387,15 +387,15 @@ export default function Home() {
         </section>
 
         {/* ═════════ TIMELINE ═════════ */}
-        <section className="bg-[#13261A] text-[#F4EFE4] py-20 sm:py-28 rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-3">
+        <section className="bg-[#E3EBD8] text-[#13261A] py-20 sm:py-28 rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-3">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <Heading eyebrow={h.timeline.eyebrow} title={h.timeline.title} dark />
-            <SwipeRow grid="md:grid-cols-3 lg:grid-cols-5" item="w-[66vw] sm:w-[42vw]" dark>
+            <Heading eyebrow={h.timeline.eyebrow} title={h.timeline.title} />
+            <SwipeRow grid="md:grid-cols-3 lg:grid-cols-5" item="w-[66vw] sm:w-[42vw]">
               {h.timeline.items.map((item, i) => (
-                <div key={i} data-reveal className="fade-section h-full rounded-[1.5rem] bg-white/[0.06] border border-white/10 p-6 hover:bg-white/[0.1] transition-colors" style={{ transitionDelay: `${i * 70}ms` }}>
-                  <div className="font-display text-3xl font-extrabold text-[#B9D38A] tracking-tight mb-4">{item.period}</div>
+                <div key={i} data-reveal className="fade-section h-full rounded-[1.5rem] bg-white border border-[#1E3A29]/12 p-6 hover:bg-white/80 transition-colors" style={{ transitionDelay: `${i * 70}ms` }}>
+                  <div className="font-display text-3xl font-extrabold text-[#0B6E40] tracking-tight mb-4">{item.period}</div>
                   <div className="font-bold mb-2">{item.label}</div>
-                  <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
+                  <p className="text-[#1E3A29]/80 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
             </SwipeRow>
@@ -439,7 +439,7 @@ export default function Home() {
         <section className="px-2 sm:px-3 pb-6">
           <div className="relative rounded-[2rem] sm:rounded-[3rem] overflow-hidden py-24 sm:py-32 lg:py-40">
             <img src={photos.home} alt={t.photos.home} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#13261A] via-[#13261A]/65 to-[#13261A]/30" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/10" />
             <div data-reveal className="fade-section relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
               <span className="eyebrow !bg-white/15 !text-white backdrop-blur mb-6">{h.final.eyebrow}</span>
               <h2 className="font-display text-5xl sm:text-6xl lg:text-8xl font-extrabold text-white leading-[0.92] tracking-[-0.05em] mb-10">{h.final.title}</h2>
@@ -459,8 +459,8 @@ export default function Home() {
 
       {/* ── Phones: a small bar with the two main actions ── */}
       <div className={`mobile-sticky-cta lg:hidden ${showStickyCta ? '' : 'hidden-cta'}`} inert={!showStickyCta}>
-        <Link to="/visit" className="flex-1 btn-primary btn-on-dark justify-center !py-1.5 !text-[13px] whitespace-nowrap shadow-none">{t.common.planVisit}</Link>
-        <Link to="/contact" className="flex-1 btn-glass justify-center !py-3 !text-[13px] whitespace-nowrap">{t.common.contactUs}</Link>
+        <Link to="/visit" className="flex-1 btn-primary justify-center !py-1.5 !text-[13px] whitespace-nowrap shadow-none">{t.common.planVisit}</Link>
+        <Link to="/contact" className="flex-1 btn-outline justify-center !py-3 !text-[13px] whitespace-nowrap text-[#13261A] bg-white">{t.common.contactUs}</Link>
       </div>
     </>
   );
