@@ -14,6 +14,7 @@ import CulturalFoodDates from '../components/CulturalFoodDates';
 import SwipeRow from '../components/SwipeRow';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
+  { key: 'gate', pos: 'object-[center_35%]' },
   { key: 'home', pos: 'object-center' },
   { key: 'gifaataa1', pos: 'object-[center_40%]' },
   { key: 'house', pos: 'object-center' },
@@ -128,10 +129,10 @@ export default function Home() {
 
         {/* ═════════ HERO ═════════
             The photographs come first and fill the whole screen, edge to edge, on
-            phones and computers alike. Each new photograph sweeps in from the right
-            like a curtain while settling from a slight zoom; the one before drifts
-            away underneath. The bottom of the photograph melts into the page, and
-            the name and the words begin inside that fade. Swipe on phones. */}
+            phones and computers alike, shown clearly with nothing laid over them.
+            Each new photograph sweeps in from the right like a curtain while it
+            settles; the one before drifts away underneath. The name and the words
+            follow just below. Swipe on phones. */}
         <section className="relative" aria-label={h.hero.title}>
           <div
             className="relative h-[100svh] min-h-[560px] overflow-hidden bg-[#13261A]"
@@ -157,19 +158,9 @@ export default function Home() {
               />
             </div>
 
-            {/* the photograph melts into the page below */}
-            <span className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#13261A]/35 to-transparent z-[3]" />
-            <span className="absolute inset-x-0 bottom-0 h-[62%] sm:h-[58%] bg-gradient-to-t from-[#F4EFE4] from-[18%] via-[#F4EFE4]/80 via-[42%] to-transparent z-[3]" />
+            {/* only a thin soft edge joins the photograph to the page; nothing lies over it */}
+            <span className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
 
-            {/* the turning badge, in the corner of the photograph (computers) */}
-            <svg className="hidden lg:block absolute z-[4] right-8 top-[152px] w-32 h-32 animate-spin-slow" viewBox="0 0 200 200" aria-hidden="true">
-              <defs><path id="hero-badge-circle" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" /></defs>
-              <circle cx="100" cy="100" r="98" fill="#F4EFE4" />
-              <text className="fill-[#1E3A29]" style={{ font: '700 15px var(--font-sans)' }}>
-                <textPath href="#hero-badge-circle" textLength="468" lengthAdjust="spacing">{h.hero.badge}</textPath>
-              </text>
-              <circle cx="100" cy="100" r="30" fill="#C4622D" />
-            </svg>
 
             {/* the name of the place in the photograph, and the way to the next one */}
             <div className="absolute z-[4] right-4 sm:right-8 top-[88px] sm:top-[104px] flex items-center gap-2">
@@ -187,18 +178,19 @@ export default function Home() {
             </div>
           </div>
 
-          {/* the words, rising out of the fade */}
-          <div className="relative z-[5] -mt-[27svh] sm:-mt-[30svh] max-w-screen-xl mx-auto px-5 sm:px-8 pb-6 flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12">
-            <h1 className="font-display font-extrabold text-[#1E3A29] text-[3.3rem] sm:text-[5.5rem] lg:text-[clamp(5.5rem,8.6vw,8.6rem)] leading-[0.9] tracking-[-0.05em]">
+          {/* the words, just below the photograph */}
+          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12">
+            {/* the name in the lettering of the main gate */}
+            <h1 className="brand-sign text-[2.7rem] sm:text-[4.6rem] lg:text-[clamp(4.6rem,7.2vw,7.4rem)] leading-[0.95]">
               <span className="line-mask"><span>{firstWord}</span></span>
-              <span className="line-mask d2"><span className="text-[#6F9443]">{rest.join(' ')}</span></span>
+              <span className="line-mask d2"><span>{rest.join(' ')}</span></span>
             </h1>
             <div className="max-w-md lg:pb-3 animate-fade-up delay-300">
               <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight mb-3">{h.hero.subtitle}</p>
               <p className="text-[#1E3A29]/70 leading-relaxed mb-6">{h.hero.lead}</p>
               <div className="flex flex-wrap items-center gap-3">
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
-                <Link to="/visit" className="btn-outline text-[#1E3A29] bg-white/40">{t.common.planVisit}</Link>
+                <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>
               </div>
             </div>
 

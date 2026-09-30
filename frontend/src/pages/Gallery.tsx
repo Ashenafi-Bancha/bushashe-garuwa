@@ -11,7 +11,8 @@ type Filter = Category | 'all';
 /** Every real photo, with the category it belongs to. Add new ones here as they are registered in photos.ts. */
 /* `span` is the tile size in the full mosaic (All); it fills the 4-column grid exactly. */
 const items: { key: PhotoKey; cat: Category; span: string }[] = [
-  { key: 'home', cat: 'grounds', span: 'sm:col-span-2 sm:row-span-2' },
+  { key: 'gate', cat: 'grounds', span: 'sm:col-span-2 sm:row-span-2' },
+  { key: 'home', cat: 'grounds', span: 'col-span-2' },
   { key: 'gifaataa1', cat: 'culture', span: '' },
   { key: 'house', cat: 'grounds', span: 'sm:row-span-2' },
   { key: 'gifaataa2', cat: 'culture', span: '' },

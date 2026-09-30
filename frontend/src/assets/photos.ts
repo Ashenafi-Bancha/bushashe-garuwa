@@ -10,6 +10,7 @@
  */
 
 // grounds — landscape, gardens, buildings
+import gateImg from './photos/grounds/main-gate.jpg';
 import overviewImg from './photos/grounds/overview.jpg';
 import houseImg from './photos/grounds/traditional-house.jpg';
 import pavilionsImg from './photos/grounds/thatched-pavilions.jpg';
@@ -29,6 +30,8 @@ import gifaataa2Img from './photos/events/gifaataa/gifaataa-02.jpg';
 import gifaataa3Img from './photos/events/gifaataa/gifaataa-03.jpg';
 
 export const photos = {
+  /** The main gate: carved tree-trunk pillars, the welcome sign and the bamboo doors (landscape) */
+  gate: gateImg,
   /** Wide view: thatched house, fountain, flags and gardens (landscape) */
   home: overviewImg,
   /** Traditional thatched house, flags and Ge'ez signage (landscape) */

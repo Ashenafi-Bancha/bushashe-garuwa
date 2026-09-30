@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@800;900&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 /* Living Earth: warm paper, deep forest, fresh moss, a touch of clay. */
@@ -145,6 +145,21 @@ a, button {
   html { scroll-behavior: auto; }
 }
 
+/* ── The name as it stands on the main gate: heavy capitals in bright emerald
+   green, with a darker green edge so the letters look raised ── */
+.brand-sign {
+  font-family: 'Montserrat', 'Noto Sans Ethiopic', system-ui, sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: #15A864;
+  text-shadow:
+    1px 1px 0 #0E8a52,
+    2px 2px 0 #0C7A48,
+    3px 3px 0 #0A6B3F,
+    4px 5px 14px rgba(10, 60, 36, 0.28);
+}
+
 /* ── Home hero slides ──
    The new photograph opens from the right like a curtain while it settles from
    a slight zoom; the one before drifts left and darkens underneath it. */
@@ -152,18 +167,27 @@ a, button {
 .hero-slide-first { z-index: 2; animation: fadeIn 1.2s ease both; }
 .hero-slide-in { z-index: 2; animation: heroWipe 1.5s cubic-bezier(0.77, 0, 0.18, 1) both; }
 .hero-slide-out { z-index: 1; animation: heroAway 1.5s cubic-bezier(0.77, 0, 0.18, 1) both; }
-.hero-slide-img { animation: heroSettle 7.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+.hero-slide-img { animation: heroSettle 5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
 @keyframes heroWipe {
   from { clip-path: inset(0 0 0 100%); }
   to   { clip-path: inset(0 0 0 0); }
 }
 @keyframes heroSettle {
-  from { transform: scale(1.22); }
-  to   { transform: scale(1.02); }
+  from { transform: scale(1.06); }
+  to   { transform: scale(1); }
 }
 @keyframes heroAway {
   from { transform: translateX(0); filter: brightness(1); }
   to   { transform: translateX(-14%); filter: brightness(0.6); }
+}
+/* phones: a tall screen shows only a slice of a wide photograph, so it drifts
+   slowly across, letting the whole scene (and the gate's sign) pass by */
+@media (max-width: 767px) {
+  .hero-slide-img { animation: heroSettle 5s cubic-bezier(0.2, 0.8, 0.2, 1) both, heroPan 9s ease-in-out both; }
+}
+@keyframes heroPan {
+  from { object-position: 22% 40%; }
+  to   { object-position: 78% 40%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-slide-in, .hero-slide-out { animation: fadeIn 0.6s ease both; }

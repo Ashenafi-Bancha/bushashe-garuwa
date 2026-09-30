@@ -12,7 +12,7 @@ const LINKS: { key: QuickKey; to: string; photo: PhotoKey; span: string }[] = [
   { key: 'events', to: '/events', photo: 'gifaataa1', span: '' },
   { key: 'stay', to: '/stay', photo: 'pavilions', span: '' },
   { key: 'dine', to: '/dine', photo: 'food', span: '' },
-  { key: 'visit', to: '/visit', photo: 'lawn', span: 'md:col-span-2' },
+  { key: 'visit', to: '/visit', photo: 'gate', span: 'md:col-span-2' },
   { key: 'gallery', to: '/gallery', photo: 'zigba', span: '' },
   { key: 'about', to: '/about', photo: 'home', span: '' },
 ];

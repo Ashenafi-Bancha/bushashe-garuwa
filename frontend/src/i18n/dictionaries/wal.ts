@@ -63,6 +63,7 @@ export const wal: DeepPartial<Dictionary> = {
   },
 
   photos: {
+    gate: 'Bushaashe Garuwa: the main gate with its carved tree-trunk pillars and the welcome sign',
     house: 'Bushaashe Garuwa: traditional thatched house, flags and grounds',
     pavilions: 'Bushaashe Garuwa: thatched pavilions and lush gardens',
     gardens: 'Bushaashe Garuwa: gardens and recreational grounds',
@@ -77,6 +78,7 @@ export const wal: DeepPartial<Dictionary> = {
   },
 
   photoCaptions: {
+    gate: { title: 'The Main Gate', desc: 'Two carved tree-trunk pillars, the welcome sign and the bamboo doors: the way into Bushaashe Garuwa.' },
     home: { title: 'The Heart of the Grounds', desc: 'The great traditional house, the fountain and the flags, set among the gardens.' },
     gifaataa1: { title: 'Arriving for Gifaataa', desc: 'Guests in traditional Wolaita dress walk through the heritage gate for the new year celebration.' },
     house: { title: 'The Traditional House', desc: 'A traditional Wolaita house with its thatched roof, beside the path and the Ge\'ez letters of the name.' },

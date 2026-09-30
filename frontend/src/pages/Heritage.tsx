@@ -81,19 +81,21 @@ export default function Heritage() {
 
       {/* Trees: the zigba line, planted by our forefathers and the current generation */}
       <section id="trees" className="mx-2 sm:mx-3">
-        <div className="relative rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#13261A] min-h-[640px] sm:min-h-[620px] lg:min-h-[720px] flex items-end">
-          <img src={photos.zigba} alt={t.photos.zigba} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-[center_40%]" />
-          <span className="absolute inset-0 bg-gradient-to-t from-[#13261A] via-[#13261A]/55 via-45% to-transparent" />
-          <span className="absolute left-5 top-5 sm:left-8 sm:top-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold">
-            {t.photoCaptions.zigba.title}
-          </span>
+        <div className="rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#13261A]">
+          {/* the photograph, clear, with nothing over it but its name */}
+          <div className="relative h-[62svh] min-h-[360px] lg:h-[78svh]">
+            <img src={photos.zigba} alt={t.photos.zigba} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-[center_40%]" />
+            <span className="absolute left-5 top-5 sm:left-8 sm:top-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold">
+              {t.photoCaptions.zigba.title}
+            </span>
+          </div>
 
-          <div className="relative w-full max-w-screen-xl mx-auto px-5 sm:px-10 pb-10 sm:pb-14 pt-40 grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 lg:items-end">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-10 py-10 sm:py-14 grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 lg:items-end">
             <div>
-              <span className="eyebrow !bg-white/15 !text-[#B9D38A] backdrop-blur mb-5">{hg.trees.eyebrow}</span>
+              <span className="eyebrow !bg-white/10 !text-[#B9D38A] mb-5">{hg.trees.eyebrow}</span>
               <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1]">{hg.trees.title}</h2>
             </div>
-            <div className="rounded-[1.75rem] bg-white/10 backdrop-blur-md border border-white/15 p-6 sm:p-7 text-white">
+            <div className="rounded-[1.75rem] bg-white/[0.06] border border-white/10 p-6 sm:p-7 text-white">
               <div className="flex items-baseline justify-between gap-4 mb-1">
                 <div className="font-display text-3xl font-extrabold text-[#B9D38A] tracking-tight">{ZIGBA.wolaytta}</div>
                 <div className="text-white/50 text-xs italic">{ZIGBA.scientific}</div>

@@ -53,7 +53,7 @@ export default function Visit() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo="lawn" pos="object-[center_62%]" eyebrow={v.hero.eyebrow} title={v.hero.title} desc={t.common.locationLine} />
+      <PageHero photo="gate" pos="object-[center_35%]" eyebrow={v.hero.eyebrow} title={v.hero.title} desc={t.common.locationLine} />
 
       {/* Info strip */}
       <section className="bg-[#1E3A29] mx-2 sm:mx-3 rounded-[2rem] py-10">

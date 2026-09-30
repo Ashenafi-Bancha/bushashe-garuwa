@@ -24,7 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SRC_DIR = ROOT / "photos-originals"
 OUT_DIR = ROOT / "src" / "assets" / "photos"
 MAX_SIDE = 1920
-QUALITY = 82
+QUALITY = 88
 EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
 SKIP_DIRS = {"brand"}  # logo master; the site uses src/assets/brand/logo.png
 
@@ -46,7 +46,7 @@ def convert(src: Path, dst: Path) -> None:
             im = im.convert("RGB")
         im.thumbnail((MAX_SIDE, MAX_SIDE), Image.LANCZOS)
         dst.parent.mkdir(parents=True, exist_ok=True)
-        im.save(dst, "JPEG", quality=QUALITY, optimize=True, progressive=True)
+        im.save(dst, "JPEG", quality=QUALITY, optimize=True, progressive=True, subsampling=0)
 
 
 def main() -> None:
