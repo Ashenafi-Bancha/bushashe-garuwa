@@ -125,7 +125,6 @@ export const en = {
 
   footer: {
     tagline: 'Where Wolaita Heritage Lives. A living cultural heritage destination in Wolaita, Ethiopia.',
-    headline: 'Spend a day where Wolaita heritage lives.',
     followUs: 'Follow Us',
     columns: {
       explore: {

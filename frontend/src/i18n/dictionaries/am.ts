@@ -123,7 +123,6 @@ export const am: Dictionary = {
 
   footer: {
     tagline: 'የወላይታ ቅርስ ሕያው የሆነበት። በወላይታ፣ ኢትዮጵያ የሚገኝ ሕያው የባህል ቅርስ መዳረሻ።',
-    headline: 'የወላይታ ቅርስ በሚኖርበት ስፍራ አንድ ቀን ያሳልፉ።',
     followUs: 'ይከተሉን',
     columns: {
       explore: {
