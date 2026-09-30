@@ -42,19 +42,19 @@ export default function Heritage() {
       {/* Heritage categories grid */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-7 sm:gap-7">
             {categories.map((cat) => {
               const text = hg.categories[cat.id];
               return (
               <Link key={cat.id} to={cat.to} className="group block">
-                <div className="img-zoom rounded-[1.25rem] overflow-hidden aspect-[4/5] bg-[#1E3A29]/10 elev-1">
+                <div className="img-zoom rounded-[1.25rem] sm:rounded-[1.5rem] overflow-hidden aspect-[4/5] bg-[#1E3A29]/10 elev-1">
                   <Photo src={'img' in cat ? cat.img : undefined} alt={text.label} label={text.label} className="w-full h-full object-cover"/>
                 </div>
-                <div className="mt-4 flex items-center justify-between gap-3 pb-3 border-b border-[#1E3A29]/12 group-hover:border-[#1E3A29] transition-colors">
-                  <h3 className="font-display text-sm font-bold tracking-[0.06em] uppercase text-[#1E3A29]">{text.label}</h3>
+                <div className="mt-3 sm:mt-4 flex items-center justify-between gap-2 pb-2 sm:pb-3 border-b border-[#1E3A29]/12 group-hover:border-[#1E3A29] transition-colors">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#1E3A29] leading-tight">{text.label}</h3>
                   <span aria-hidden="true" className="text-[#1E3A29] text-lg leading-none transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                 </div>
-                <p className="mt-3 text-[#1E3A29]/55 text-sm leading-relaxed">{text.desc}</p>
+                <p className="mt-2 sm:mt-3 text-[#1E3A29]/60 text-xs sm:text-sm leading-relaxed line-clamp-3 sm:line-clamp-none">{text.desc}</p>
                 <span className="mt-2 block text-[#C4622D] text-xs">{fmt(hg.itemCount, { count: cat.count })}</span>
               </Link>
               );
@@ -134,7 +134,7 @@ export default function Heritage() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div>
-              <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{hg.family.eyebrow}</div>
+              <span className="eyebrow mb-5">{hg.family.eyebrow}</span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight mb-6">{hg.family.title}</h2>
               <p className="text-[#1E3A29]/70 font-sans text-base leading-relaxed mb-8">
                 {hg.family.desc}
@@ -145,9 +145,9 @@ export default function Heritage() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               {hg.family.generations.map((gen, i) => (
-                <Link key={i} to="/about#family" className="heritage-card bg-white p-6 flex items-center gap-4">
-                  <span className="w-12 h-12 rounded-full bg-[#13261A] text-[#C4622D] flex items-center justify-center font-display text-2xl flex-shrink-0">{i + 1}</span>
-                  <span className="font-display text-2xl text-[#1E3A29]">{gen}</span>
+                <Link key={i} to="/about#family" className="heritage-card bg-white p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 min-w-0">
+                  <span className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#86A94F] text-[#13261A] flex items-center justify-center font-display text-lg sm:text-2xl font-extrabold flex-shrink-0">{i + 1}</span>
+                  <span className="font-display text-lg sm:text-2xl font-bold text-[#1E3A29] leading-tight">{gen}</span>
                 </Link>
               ))}
             </div>

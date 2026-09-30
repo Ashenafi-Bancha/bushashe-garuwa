@@ -11,6 +11,7 @@ import PhotoRing from '../components/PhotoRing';
 import QuickLinks from '../components/QuickLinks';
 import PhotoCard from '../components/PhotoCard';
 import CulturalFoodDates from '../components/CulturalFoodDates';
+import SwipeRow from '../components/SwipeRow';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
   { key: 'home', pos: 'object-center' },
@@ -322,28 +323,28 @@ export default function Home() {
               title={h.experiences.title}
               action={<Link to="/experiences" className="btn-outline text-[#1E3A29] self-start md:self-auto">{t.common.exploreAll}</Link>}
             />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <SwipeRow grid="md:grid-cols-2 lg:grid-cols-3">
               {experiences.map((exp, i) => {
                 const text = h.experiences.items[exp.id];
                 return (
-                  <div key={exp.id} data-reveal className="fade-section" style={{ transitionDelay: `${(i % 3) * 80}ms` }}>
+                  <div key={exp.id} data-reveal className="fade-section h-full" style={{ transitionDelay: `${(i % 3) * 80}ms` }}>
                     <PhotoCard to={exp.to} photo={'img' in exp ? exp.img : undefined} title={text.title} desc={text.desc} />
                   </div>
                 );
               })}
-            </div>
+            </SwipeRow>
           </div>
         </section>
 
         {/* ═════════ STAY AND DINE ═════════ */}
         <section className="py-20 sm:py-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <div className="grid lg:grid-cols-2 gap-5 sm:gap-6">
+            <SwipeRow grid="md:grid-cols-2" item="w-[84vw] sm:w-[64vw]">
               {[
                 { to: '/stay', eyebrow: h.stay.eyebrow, title: h.stay.title, desc: h.stay.desc, cta: h.stay.cta, photo: undefined as string | undefined, chips: Object.values(h.stay.rooms).map((r) => r.name) },
                 { to: '/dine', eyebrow: h.restaurant.eyebrow, title: h.restaurant.title, desc: h.restaurant.desc, cta: h.restaurant.cta, photo: photos.food, chips: h.restaurant.categories },
               ].map((card, i) => (
-                <div key={card.to} data-reveal className="fade-section" style={{ transitionDelay: `${i * 100}ms` }}>
+                <div key={card.to} data-reveal className="fade-section h-full" style={{ transitionDelay: `${i * 100}ms` }}>
                   <Link to={card.to} className="group flex h-full flex-col bg-white rounded-[2rem] p-2.5 elev-1 transition-transform duration-500 hover:-translate-y-1.5">
                     <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[16/10]">
                       <Photo src={card.photo} alt={card.title} label={card.eyebrow} className="w-full h-full object-cover" />
@@ -365,25 +366,25 @@ export default function Home() {
                   </Link>
                 </div>
               ))}
-            </div>
+            </SwipeRow>
 
             {/* what else is on the grounds */}
             <div className="mt-20 sm:mt-28">
               <Heading eyebrow={h.facilities.eyebrow} title={h.facilities.title} desc={h.facilities.desc} />
-              <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10">
+              <SwipeRow grid="md:grid-cols-2 lg:grid-cols-3" item="w-[70vw] sm:w-[46vw]" gap="gap-3 md:gap-x-10 md:gap-y-0">
                 {facilities.map((id, i) => {
                   const item = h.facilities.items[id];
                   return (
-                    <li key={id} data-reveal className="fade-section border-t border-[#1E3A29]/12 py-6 flex gap-5" style={{ transitionDelay: `${(i % 3) * 60}ms` }}>
+                    <div key={id} data-reveal className="fade-section h-full flex gap-5 rounded-[1.5rem] bg-white p-6 elev-1 md:bg-transparent md:shadow-none md:rounded-none md:p-0 md:py-6 md:border-t md:border-[#1E3A29]/12" style={{ transitionDelay: `${(i % 3) * 60}ms` }}>
                       <span className="text-[#C4622D] text-sm font-bold tabular-nums pt-1">{String(i + 1).padStart(2, '0')}</span>
                       <div>
                         <h3 className="font-display text-xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{item.title}</h3>
                         <p className="text-[#1E3A29]/60 text-sm leading-relaxed">{item.desc}</p>
                       </div>
-                    </li>
+                    </div>
                   );
                 })}
-              </ul>
+              </SwipeRow>
             </div>
           </div>
         </section>
@@ -392,26 +393,27 @@ export default function Home() {
         <section className="bg-[#13261A] text-[#F4EFE4] py-20 sm:py-28 rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-3">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <Heading eyebrow={h.timeline.eyebrow} title={h.timeline.title} dark />
-            <ol className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <SwipeRow grid="md:grid-cols-3 lg:grid-cols-5" item="w-[66vw] sm:w-[42vw]" dark>
               {h.timeline.items.map((item, i) => (
-                <li key={i} data-reveal className="fade-section rounded-[1.5rem] bg-white/[0.06] border border-white/10 p-6 hover:bg-white/[0.1] transition-colors" style={{ transitionDelay: `${i * 70}ms` }}>
+                <div key={i} data-reveal className="fade-section h-full rounded-[1.5rem] bg-white/[0.06] border border-white/10 p-6 hover:bg-white/[0.1] transition-colors" style={{ transitionDelay: `${i * 70}ms` }}>
                   <div className="font-display text-3xl font-extrabold text-[#B9D38A] tracking-tight mb-4">{item.period}</div>
                   <div className="font-bold mb-2">{item.label}</div>
                   <p className="text-white/60 text-sm leading-relaxed">{item.desc}</p>
-                </li>
+                </div>
               ))}
-            </ol>
+            </SwipeRow>
           </div>
         </section>
 
         {/* ═════════ THE READING PLACE AND THE STORIES ═════════ */}
         <section className="py-20 sm:py-28">
-          <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-5 sm:gap-6">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <SwipeRow grid="md:grid-cols-2" item="w-[84vw] sm:w-[64vw]">
             {[
               { eyebrow: h.reading.eyebrow, title: h.reading.title, text: h.reading.desc, extra: h.reading.mountain, chips: h.reading.qualities, cta: h.reading.cta, to: '/visit', photo: photos.gardens as string | undefined, label: h.reading.caption },
               { eyebrow: h.stories.eyebrow, title: h.stories.title, text: h.stories.p1, extra: h.stories.p2, chips: h.stories.languages, cta: h.stories.cta, to: '/heritage/stories', photo: undefined, label: h.stories.elderAlt },
             ].map((card, i) => (
-              <article key={card.title} data-reveal className="fade-section flex flex-col bg-white rounded-[2rem] p-2.5 elev-1" style={{ transitionDelay: `${i * 100}ms` }}>
+              <article key={card.title} data-reveal className="fade-section h-full flex flex-col bg-white rounded-[2rem] p-2.5 elev-1" style={{ transitionDelay: `${i * 100}ms` }}>
                 <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[16/10]">
                   <Photo src={card.photo} alt={card.label} label={card.label} className="w-full h-full object-cover" loading="lazy" />
                 </div>
@@ -429,6 +431,7 @@ export default function Home() {
                 </div>
               </article>
             ))}
+            </SwipeRow>
           </div>
         </section>
 

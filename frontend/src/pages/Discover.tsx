@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
+import SwipeRow from '../components/SwipeRow';
 
 const pillars = [
   { id: 'heritage' },
@@ -23,7 +24,7 @@ export default function Discover() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center mb-12 sm:mb-20">
             <div>
-              <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{d.story.eyebrow}</div>
+              <span className="eyebrow mb-5">{d.story.eyebrow}</span>
               <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#1E3A29] leading-tight mb-6">{d.story.title}</h2>
               <p className="text-[#1E3A29]/70 font-sans text-base leading-relaxed mb-5">
                 {d.story.p1}
@@ -57,17 +58,18 @@ export default function Discover() {
 
           {/* Four pillars */}
           <div className="text-center mb-12">
-            <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{d.pillars.eyebrow}</div>
+            <span className="eyebrow mb-5">{d.pillars.eyebrow}</span>
             <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#1E3A29]">{d.pillars.title}</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {pillars.map((pillar) => (
-              <div key={pillar.id} className="bg-white rounded-2xl border border-[#1E3A29]/10 p-7 hover:border-[#C4622D]/30 transition-colors">
-                <h3 className="font-display text-xl font-semibold text-[#1E3A29] mb-3">{d.pillars.items[pillar.id].title}</h3>
-                <p className="text-[#1E3A29]/55 font-sans text-sm leading-relaxed">{d.pillars.items[pillar.id].desc}</p>
+          <SwipeRow grid="md:grid-cols-2 lg:grid-cols-4" item="w-[74vw] sm:w-[48vw]">
+            {pillars.map((pillar, i) => (
+              <div key={pillar.id} className="h-full bg-white heritage-card p-7">
+                <span className="block text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="font-display text-2xl font-bold text-[#1E3A29] mb-3">{d.pillars.items[pillar.id].title}</h3>
+                <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{d.pillars.items[pillar.id].desc}</p>
               </div>
             ))}
-          </div>
+          </SwipeRow>
         </div>
       </section>
 

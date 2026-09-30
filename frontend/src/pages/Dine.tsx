@@ -43,14 +43,14 @@ export default function Dine() {
             ))}
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {Object.entries(dn.menu[activeMenu]).map(([id, item]) => (
               <div key={id} className="bg-white heritage-card overflow-hidden">
-                <div className="img-zoom aspect-video bg-[#1E3A29]/10">
+                <div className="img-zoom aspect-square sm:aspect-video bg-[#1E3A29]/10">
                   <Photo src={dishPhotos[id]} alt={item.name} label={item.name} className="w-full h-full object-cover"/>
                 </div>
-                <div className="p-5">
-                  <h3 className="font-display text-lg font-semibold text-[#1E3A29] mb-2">{item.name}</h3>
+                <div className="p-4 sm:p-5">
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#1E3A29] mb-1.5 sm:mb-2 leading-tight">{item.name}</h3>
                   <p className="text-[#1E3A29]/55 text-xs font-sans leading-relaxed">{item.desc}</p>
                 </div>
               </div>

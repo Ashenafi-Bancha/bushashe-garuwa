@@ -89,7 +89,7 @@ export default function Visit() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
             <div>
-              <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{v.booking.eyebrow}</div>
+              <span className="eyebrow mb-5">{v.booking.eyebrow}</span>
               <h2 className="font-display text-4xl font-semibold text-[#1E3A29] leading-tight mb-6">{v.booking.title}</h2>
               <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed mb-8">{v.booking.desc}</p>
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
+import SwipeRow from '../components/SwipeRow';
 
 /* Icons per item — the text lives in the translations (t.about.*) */
 /* The family line, oldest first — names, labels and histories live in the translations (t.about.lineage) */
@@ -47,7 +48,7 @@ export default function About() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div>
-              <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.who.eyebrow}</div>
+              <span className="eyebrow mb-5">{a.who.eyebrow}</span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight mb-6 gold-underline">
                 {a.who.title}
               </h2>
@@ -155,17 +156,18 @@ export default function About() {
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
-            <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.values.eyebrow}</div>
+            <span className="eyebrow mb-5">{a.values.eyebrow}</span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{a.values.title}</h2>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {values.map((val) => (
-              <div key={val.id} className="bg-white heritage-card p-7">
-                <h3 className="font-display text-xl font-semibold text-[#1E3A29] mb-3">{a.values.items[val.id].title}</h3>
+          <SwipeRow grid="md:grid-cols-2 lg:grid-cols-3" item="w-[74vw] sm:w-[48vw]">
+            {values.map((val, i) => (
+              <div key={val.id} className="h-full bg-white heritage-card p-7">
+                <span className="block text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="font-display text-2xl font-bold text-[#1E3A29] mb-3">{a.values.items[val.id].title}</h3>
                 <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{a.values.items[val.id].desc}</p>
               </div>
             ))}
-          </div>
+          </SwipeRow>
         </div>
       </section>
 
@@ -235,7 +237,7 @@ export default function About() {
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
-            <div className="text-[#1E3A29] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.milestones.eyebrow}</div>
+            <span className="eyebrow mb-5">{a.milestones.eyebrow}</span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{a.milestones.title}</h2>
           </div>
           <div className="relative">
