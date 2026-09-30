@@ -101,7 +101,6 @@ export default function Home() {
   const { events: siteEvents } = useSiteEvents();
   const [showStickyCta, setShowStickyCta] = useState(false);
   const page = useRevealChildren<HTMLElement>();
-  const [firstWord, ...rest] = h.hero.title.split(' ');
 
   useEffect(() => {
     const timer = setTimeout(() => goTo(heroIdx + 1), SLIDE_MS);
@@ -182,21 +181,22 @@ export default function Home() {
           </div>
 
           {/* the words, just below the photograph */}
-          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12">
-            {/* the name in the lettering of the main gate, raised in 3D */}
-            <h1 className="brand-sign brand-3d text-[2.7rem] sm:text-[4.6rem] lg:text-[clamp(4.6rem,7.2vw,7.4rem)] leading-[0.95]">
-              <span className="line-mask"><span>{firstWord}</span></span>
-              <span className="line-mask d2"><span>{rest.join(' ')}</span></span>
+          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6">
+            {/* the name in the lettering of the main gate, raised in 3D, on one line that
+                grows with the screen so it always fits */}
+            <h1 className="hero-name brand-sign brand-3d whitespace-nowrap leading-[1] mb-6 lg:mb-8">
+              <span className="line-mask"><span>{h.hero.title}</span></span>
             </h1>
-            <div className="max-w-md lg:pb-3 animate-fade-up delay-300">
-              <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight mb-3">{h.hero.subtitle}</p>
-              <p className="text-[#1E3A29]/70 leading-relaxed mb-6">{h.hero.lead}</p>
-              <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 animate-fade-up delay-300">
+              <div className="max-w-xl">
+                <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight mb-3">{h.hero.subtitle}</p>
+                <p className="text-[#1E3A29]/70 leading-relaxed">{h.hero.lead}</p>
+              </div>
+              <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
                 <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>
               </div>
             </div>
-
           </div>
         </section>
 
