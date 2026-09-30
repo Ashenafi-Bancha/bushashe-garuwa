@@ -60,6 +60,15 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [panel, setPanel] = useState<GroupKey | null>(null);
+  // computers show the photograph behind the header; phones show it below
+  const [wide, setWide] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const sync = () => setWide(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
   const navRef = useRef<HTMLElement>(null);
   const location = useLocation();
   const { t } = useI18n();
@@ -97,7 +106,7 @@ export default function Navbar() {
   const groupActive = (g: GroupKey) => groups[g].some((k) => isActive(routes[k]));
   // every page opens on a full-screen photograph; at the top the header is
   // written straight onto it (the 'page not found' screen has none, so it keeps the pill)
-  const onPhoto = hasPhotoHero(location.pathname) && !scrolled && !open;
+  const onPhoto = wide && hasPhotoHero(location.pathname) && !scrolled && !open;
   const linkTone = (active: boolean) =>
     active
       ? onPhoto ? 'bg-white/20 text-white backdrop-blur-sm' : 'bg-[#1E3A29] text-[#F4EFE4]'
@@ -190,7 +199,7 @@ export default function Navbar() {
               alt="Bushaashe Garuwa"
               className={`rounded-full object-contain bg-white p-0.5 shadow-sm transition-all duration-500 group-hover:scale-105 ${scrolled ? 'w-10 h-10' : 'w-11 h-11'}`}
             />
-            <span className={`font-display text-[15px] sm:text-[17px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${onPhoto ? 'text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.5)]' : 'text-[#1E3A29]'}`}>Bushaashe Garuwa</span>
+            <span className={`font-display text-[15px] sm:text-[17px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 text-[#15A864] ${onPhoto ? '[text-shadow:1px_1px_0_#0A5F38,0_0_3px_rgba(0,0,0,0.9),0_0_14px_rgba(0,0,0,0.7)]' : '[text-shadow:1px_1px_0_#0C7A48]'}`}>Bushaashe Garuwa</span>
           </Link>
 
           {/* computers: every way in, right in the bar */}

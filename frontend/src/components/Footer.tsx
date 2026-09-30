@@ -32,7 +32,7 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-5">
               <img src={logo} alt="Bushaashe Garuwa" className="w-14 h-14 rounded-full object-contain bg-white p-0.5 flex-shrink-0" />
               <div className="min-w-0">
-                <div className="font-display text-xl font-bold tracking-tight">Bushaashe Garuwa</div>
+                <div className="font-display text-xl font-bold tracking-tight text-[#15A864] [text-shadow:1px_1px_0_#0A5F38]">Bushaashe Garuwa</div>
                 <div className="text-white/55 text-xs font-medium leading-snug mt-1">{t.common.locationLine}</div>
               </div>
             </div>

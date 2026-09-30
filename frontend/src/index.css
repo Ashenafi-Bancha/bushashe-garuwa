@@ -160,6 +160,26 @@ a, button {
     4px 5px 14px rgba(10, 60, 36, 0.28);
 }
 
+/* The home name in 3D: the gate lettering pushed out into solid block letters,
+   each layer a shade darker, standing on a soft shadow. Sizes are in em so the
+   depth grows with the letters. */
+.brand-3d {
+  text-shadow:
+    0 0.012em 0 #13A05E,
+    0 0.024em 0 #119357,
+    0 0.036em 0 #10864F,
+    0 0.048em 0 #0E7947,
+    0 0.06em 0 #0C6C40,
+    0 0.072em 0 #0A5F38,
+    0 0.084em 0 #095330,
+    0 0.12em 0.05em rgba(8, 40, 24, 0.3),
+    0 0.2em 0.35em rgba(8, 40, 24, 0.25);
+  transform: perspective(900px) rotateX(10deg);
+  transform-origin: 50% 100%;
+}
+/* room under each line so the depth is not clipped by the rising mask */
+.brand-3d .line-mask { padding-bottom: 0.26em; margin-bottom: -0.2em; }
+
 /* ── Home hero slides ──
    The new photograph opens from the right like a curtain while it settles from
    a slight zoom; the one before drifts left and darkens underneath it. */
@@ -179,15 +199,6 @@ a, button {
 @keyframes heroAway {
   from { transform: translateX(0); filter: brightness(1); }
   to   { transform: translateX(-14%); filter: brightness(0.6); }
-}
-/* phones: a tall screen shows only a slice of a wide photograph, so it drifts
-   slowly across, letting the whole scene (and the gate's sign) pass by */
-@media (max-width: 767px) {
-  .hero-slide-img { animation: heroSettle 5s cubic-bezier(0.2, 0.8, 0.2, 1) both, heroPan 9s ease-in-out both; }
-}
-@keyframes heroPan {
-  from { object-position: 22% 40%; }
-  to   { object-position: 78% 40%; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-slide-in, .hero-slide-out { animation: fadeIn 0.6s ease both; }

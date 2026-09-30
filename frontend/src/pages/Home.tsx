@@ -128,14 +128,15 @@ export default function Home() {
       <main ref={page} className="pb-24 lg:pb-0">
 
         {/* ═════════ HERO ═════════
-            The photographs come first and fill the whole screen, edge to edge, on
-            phones and computers alike, shown clearly with nothing laid over them.
+            The photographs come first. Computers: the whole screen, edge to edge.
+            Phones and tablets: right under the header, whole, at their own shape,
+            so the name and the buttons are on the first screen too.
             Each new photograph sweeps in from the right like a curtain while it
             settles; the one before drifts away underneath. The name and the words
             follow just below. Swipe on phones. */}
         <section className="relative" aria-label={h.hero.title}>
           <div
-            className="relative h-[100svh] min-h-[560px] overflow-hidden bg-[#13261A]"
+            className="relative mt-[80px] sm:mt-[88px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[100svh] lg:min-h-[560px] overflow-hidden bg-[#13261A]"
             onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
             onTouchEnd={(e) => {
               const start = touchX.current; touchX.current = null;
@@ -159,13 +160,13 @@ export default function Home() {
             </div>
 
             {/* a faint shade only behind the header words at the very top */}
-            <span className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#13261A]/50 via-[#13261A]/20 to-transparent z-[3]" />
+            <span className="hidden lg:block absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#13261A]/50 via-[#13261A]/20 to-transparent z-[3]" />
             {/* only a thin soft edge joins the photograph to the page; nothing lies over it */}
-            <span className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
+            <span className="absolute inset-x-0 bottom-0 h-6 lg:h-20 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
 
 
             {/* the name of the place in the photograph, and the way to the next one */}
-            <div className="absolute z-[4] right-4 sm:right-8 top-[88px] sm:top-[104px] flex items-center gap-2">
+            <div className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:bottom-auto lg:right-8 lg:top-[104px] flex items-center gap-2">
               <span key={heroIdx} className="rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
                 {t.photoCaptions[heroSlides[heroIdx]!.key].title}
               </span>
@@ -182,8 +183,8 @@ export default function Home() {
 
           {/* the words, just below the photograph */}
           <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12">
-            {/* the name in the lettering of the main gate */}
-            <h1 className="brand-sign text-[2.7rem] sm:text-[4.6rem] lg:text-[clamp(4.6rem,7.2vw,7.4rem)] leading-[0.95]">
+            {/* the name in the lettering of the main gate, raised in 3D */}
+            <h1 className="brand-sign brand-3d text-[2.7rem] sm:text-[4.6rem] lg:text-[clamp(4.6rem,7.2vw,7.4rem)] leading-[0.95]">
               <span className="line-mask"><span>{firstWord}</span></span>
               <span className="line-mask d2"><span>{rest.join(' ')}</span></span>
             </h1>
