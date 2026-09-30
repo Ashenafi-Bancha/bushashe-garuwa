@@ -43,8 +43,8 @@ export default function Sidebar({
               onClose();
             }}
             aria-current={active ? 'page' : undefined}
-            className={`w-full text-left rounded-xl px-4 py-3 transition-colors ${
-              active ? 'bg-white/12 text-white' : 'text-white/65 hover:bg-white/6 hover:text-white'
+            className={`w-full text-left rounded-2xl px-4 py-3 transition-colors ${
+              active ? 'bg-[#86A94F] text-[#13261A]' : 'text-white/65 hover:bg-white/6 hover:text-white'
             }`}
           >
             <span className="flex items-center justify-between gap-3">
@@ -52,14 +52,14 @@ export default function Sidebar({
               {section.badge !== undefined && section.badge > 0 && (
                 <span
                   className={`flex-shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold tabular-nums ${
-                    active ? 'bg-[#35723A] text-white' : 'bg-white/12 text-white/80'
+                    active ? 'bg-[#13261A] text-white' : 'bg-white/12 text-white/80'
                   }`}
                 >
                   {section.badge}
                 </span>
               )}
             </span>
-            <span className="block text-[11px] leading-snug mt-1 text-white/40">{section.hint}</span>
+            <span className={`block text-[11px] leading-snug mt-1 ${active ? 'text-[#13261A]/65' : 'text-white/40'}`}>{section.hint}</span>
           </button>
         );
       })}
@@ -67,12 +67,12 @@ export default function Sidebar({
   );
 
   const panel = (
-    <div className="flex h-full flex-col bg-[#0B0B0C]">
+    <div className="flex h-full flex-col bg-[#13261A]">
       <div className="flex items-center gap-3 px-5 py-5 border-b border-white/10">
         <img src={logo} alt="" className="w-10 h-10 rounded-full bg-white/90 object-contain p-0.5 flex-shrink-0" />
         <div className="min-w-0">
           <div className="font-display text-white text-[15px] font-bold leading-none truncate">Bushaashe Garuwa</div>
-          <div className="text-white/40 text-[10px] tracking-[0.18em] uppercase mt-1.5">Staff area</div>
+          <div className="text-[#B9D38A] text-[10px] tracking-[0.18em] uppercase mt-1.5">Staff area</div>
         </div>
       </div>
 
@@ -106,7 +106,7 @@ export default function Sidebar({
         className={`lg:hidden fixed inset-0 z-50 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
         aria-hidden={!open}
       >
-        <button type="button" aria-label="Close the menu" onClick={onClose} className="absolute inset-0 bg-[#0B0B0C]/60 backdrop-blur-sm" />
+        <button type="button" aria-label="Close the menu" onClick={onClose} className="absolute inset-0 bg-[#13261A]/60 backdrop-blur-sm" />
         <div
           className={`absolute inset-y-0 left-0 w-[86%] max-w-[300px] shadow-2xl transition-transform duration-300 ${
             open ? 'translate-x-0' : '-translate-x-full'

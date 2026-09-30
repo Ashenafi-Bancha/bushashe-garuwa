@@ -257,7 +257,7 @@ export function contactReceived(m: MessageFacts, siteUrl: string): Rendered {
 
   const quote = `
     <div style="font-family:${fontFor(m.lang)};font-size:12px;${capsFor(m.lang, '0.08em')}color:${BRAND.muted};margin:0 0 8px;">${c.yours}</div>
-    <div style="background:${BRAND.soft};border-left:3px solid ${BRAND.gold};border-radius:10px;padding:14px 16px;margin:0 0 24px;font-family:${fontFor(m.lang)};font-size:14px;line-height:1.6;color:${BRAND.body};white-space:pre-line;">${escape(m.message)}</div>`;
+    <div style="background:${BRAND.soft};border-left:3px solid ${BRAND.gold};border-radius:0 14px 14px 0;padding:14px 16px;margin:0 0 24px;font-family:${fontFor(m.lang)};font-size:14px;line-height:1.6;color:${BRAND.body};white-space:pre-line;">${escape(m.message)}</div>`;
 
   return {
     subject: c.subject,
@@ -340,6 +340,6 @@ export function staffNewMessage(m: MessageFacts & { email: string; phone: string
       ['Phone', m.phone ?? ''],
       ['Language', m.lang === 'am' ? 'Amharic' : 'English'],
     ],
-    `<div style="background:${BRAND.soft};border-left:3px solid ${BRAND.gold};border-radius:10px;padding:14px 16px;margin:0 0 24px;font-family:${BRAND.font};font-size:14px;line-height:1.6;color:${BRAND.body};white-space:pre-line;">${escape(m.message)}</div>`,
+    `<div style="background:${BRAND.soft};border-left:3px solid ${BRAND.gold};border-radius:0 14px 14px 0;padding:14px 16px;margin:0 0 24px;font-family:${BRAND.font};font-size:14px;line-height:1.6;color:${BRAND.body};white-space:pre-line;">${escape(m.message)}</div>`,
   );
 }

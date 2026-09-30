@@ -30,11 +30,11 @@ export default function SignIn() {
   };
 
   return (
-    <div className="min-h-[100svh] bg-[#0B0B0C] lg:grid lg:grid-cols-[1.1fr_1fr]">
+    <div className="min-h-[100svh] bg-[#13261A] lg:grid lg:grid-cols-[1.1fr_1fr]">
       {/* Photo, on larger screens only */}
       <div className="relative hidden lg:block overflow-hidden">
         <img src={photos.house} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0B] via-[#0A0A0B]/55 to-[#0A0A0B]/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#13261A] via-[#13261A]/55 to-[#13261A]/20" />
         <div className="relative h-full flex flex-col justify-end p-12 xl:p-16">
           <h2 className="font-display text-4xl xl:text-5xl text-white leading-tight max-w-md">
             Keeping Wolaita heritage, one visitor at a time
@@ -51,7 +51,7 @@ export default function SignIn() {
           <img src={logo} alt="" className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/90 object-contain p-0.5 flex-shrink-0" />
           <div className="leading-none">
             <div className="font-display text-white text-lg sm:text-xl">Bushaashe Garuwa</div>
-            <div className="text-[#B8863B] text-[10px] tracking-[0.2em] uppercase mt-1.5">Staff area</div>
+            <div className="text-[#B9D38A] text-[10px] tracking-[0.2em] uppercase mt-1.5">Staff area</div>
           </div>
         </header>
 
@@ -63,7 +63,7 @@ export default function SignIn() {
             </p>
 
             {!apiEnabled && (
-              <p role="alert" className="rounded-2xl bg-[#35723A]/20 text-[#f0b79c] text-sm px-4 py-3 mb-5">
+              <p role="alert" className="rounded-2xl bg-[#1E3A29]/20 text-[#f0b79c] text-sm px-4 py-3 mb-5">
                 The API address is not set (VITE_API_URL), so there is nothing to sign in to.
               </p>
             )}
@@ -77,7 +77,7 @@ export default function SignIn() {
                   <button
                     type="button"
                     onClick={() => setShow((v) => !v)}
-                    className="text-[#B8863B] text-xs font-semibold hover:text-[#e0b877] focus-visible:underline"
+                    className="text-[#B9D38A] text-xs font-semibold hover:text-white focus-visible:underline"
                   >
                     {show ? 'Hide' : 'Show'}
                   </button>
@@ -97,7 +97,7 @@ export default function SignIn() {
                   aria-invalid={error !== ''}
                   aria-describedby={error ? 'admin-key-error' : undefined}
                   className={`w-full rounded-2xl bg-white/8 border px-4 py-4 text-base text-white placeholder:text-white/30 outline-none transition-colors ${
-                    error ? 'border-[#e08a66]' : 'border-white/15 focus:border-[#B8863B]'
+                    error ? 'border-[#e08a66]' : 'border-white/15 focus:border-[#86A94F]'
                   }`}
                   placeholder="Paste or type the key"
                 />
@@ -111,7 +111,7 @@ export default function SignIn() {
               <button
                 type="submit"
                 disabled={busy || !apiEnabled}
-                className="w-full min-h-[52px] bg-[#B8863B] hover:bg-[#d9af65] active:scale-[0.99] text-[#12150F] font-semibold rounded-full transition-all disabled:opacity-60 disabled:active:scale-100"
+                className="w-full min-h-[52px] bg-[#86A94F] hover:bg-[#B9D38A] active:scale-[0.99] text-[#13261A] font-semibold rounded-full transition-all disabled:opacity-60 disabled:active:scale-100"
               >
                 {busy ? 'Checking…' : 'Sign in'}
               </button>

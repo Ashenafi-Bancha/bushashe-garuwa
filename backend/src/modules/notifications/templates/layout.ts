@@ -1,22 +1,26 @@
 /**
  * The frame every Bushaashe Garuwa email sits in, drawn the way the website is:
- * a white card on black, the logo and name at the top, a short gold line, the
- * message, and the address and contacts at the foot.
+ * a white card on deep forest green, the logo and name at the top, a moss label,
+ * the message, and the address and contacts at the foot.
  *
  * Built from tables with inline styles on purpose: that is what Gmail, Outlook
  * and phone mail apps render reliably. No external CSS, no scripts.
  */
 
 export const BRAND = {
-  ink: '#12150F',
-  body: '#4A4E48',
-  muted: '#8A8E88',
-  green: '#35723A',
-  gold: '#B8863B',
-  canvas: '#0B0B0C',
-  line: '#ECEDEA',
-  soft: '#F4F7F2',
-  font: "'Plus Jakarta Sans', 'Segoe UI', Helvetica, Arial, sans-serif",
+  ink: '#1E3A29',
+  body: '#4B5C50',
+  muted: '#83907F',
+  green: '#1E3A29',
+  /** the accent: moss green, as on the website */
+  gold: '#86A94F',
+  mossText: '#5E7F35',
+  mossSoft: '#E6EDD8',
+  canvas: '#13261A',
+  line: '#ECE7DA',
+  soft: '#F4EFE4',
+  font: "'Manrope', 'Segoe UI', Helvetica, Arial, sans-serif",
+  display: "'Bricolage Grotesque', 'Manrope', 'Segoe UI', Helvetica, Arial, sans-serif",
   address: 'Damot Sore Woreda, Wolaita Zone, Ethiopia',
   phone: '+251 932 196 502',
   phoneHref: '+251932196502',
@@ -72,9 +76,9 @@ export function referenceBlock(label: string, code: string, note: string, lang: 
   return `
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 24px;">
     <tr>
-      <td align="center" style="background:${BRAND.soft};border-radius:14px;padding:22px 16px;">
-        <div style="font-family:${fontFor(lang)};font-size:${lang === 'am' ? '13px' : '11px'};${capsFor(lang)}font-weight:700;color:${BRAND.green};">${label}</div>
-        <div style="font-family:${BRAND.font};font-size:32px;font-weight:800;letter-spacing:0.06em;color:${BRAND.ink};margin:8px 0 6px;">${escape(code)}</div>
+      <td align="center" style="background:${BRAND.soft};border-radius:20px;padding:22px 16px;">
+        <div style="font-family:${fontFor(lang)};font-size:${lang === 'am' ? '13px' : '11px'};${capsFor(lang)}font-weight:700;color:${BRAND.mossText};">${label}</div>
+        <div style="font-family:${BRAND.display};font-size:34px;font-weight:800;letter-spacing:0.04em;color:${BRAND.ink};margin:8px 0 6px;">${escape(code)}</div>
         <div style="font-family:${fontFor(lang)};font-size:13px;color:${BRAND.muted};">${note}</div>
       </td>
     </tr>
@@ -86,8 +90,8 @@ export function button(href: string, label: string, lang: Lang = 'en'): string {
   return `
   <table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 8px;">
     <tr>
-      <td style="border-radius:999px;background:${BRAND.green};border:2px solid ${BRAND.gold};">
-        <a href="${escape(href)}" style="display:inline-block;padding:13px 26px;font-family:${fontFor(lang)};font-size:14px;font-weight:700;color:#FFFFFF;text-decoration:none;border-radius:999px;">${label}</a>
+      <td style="border-radius:999px;background:${BRAND.green};">
+        <a href="${escape(href)}" style="display:inline-block;padding:7px 7px 7px 24px;font-family:${fontFor(lang)};font-size:14px;font-weight:700;color:${BRAND.soft};text-decoration:none;border-radius:999px;line-height:34px;">${label}&nbsp;&nbsp;<span style="display:inline-block;width:34px;height:34px;line-height:34px;border-radius:999px;background:${BRAND.gold};color:${BRAND.canvas};text-align:center;font-size:16px;vertical-align:middle;">&rarr;</span></a>
       </td>
     </tr>
   </table>`;
@@ -118,7 +122,7 @@ export function layout(input: LayoutInput): string {
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="color-scheme" content="light only" />
   <title>${escape(input.title)}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body style="margin:0;padding:0;background:${BRAND.canvas};">
   <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escape(input.preheader)}</div>
@@ -129,7 +133,7 @@ export function layout(input: LayoutInput): string {
 
           <!-- the card -->
           <tr>
-            <td style="background:#FFFFFF;border-radius:18px;padding:0;">
+            <td style="background:#FFFFFF;border-radius:28px;padding:0;">
 
               <!-- logo and name -->
               <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
@@ -139,8 +143,8 @@ export function layout(input: LayoutInput): string {
                       <tr>
                         <td style="vertical-align:middle;"><img src="${logo}" width="44" height="44" alt="Bushaashe Garuwa" style="display:block;border-radius:50%;border:0;" /></td>
                         <td style="vertical-align:middle;padding-left:12px;">
-                          <div style="font-family:${BRAND.font};font-size:16px;font-weight:800;color:${BRAND.ink};letter-spacing:-0.01em;">Bushaashe Garuwa</div>
-                          <div style="font-family:${BRAND.font};font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:${BRAND.gold};margin-top:3px;">Wolaita · Ethiopia</div>
+                          <div style="font-family:${BRAND.display};font-size:18px;font-weight:800;color:${BRAND.ink};letter-spacing:-0.02em;">Bushaashe Garuwa</div>
+                          <div style="font-family:${BRAND.font};font-size:12px;color:${BRAND.muted};margin-top:3px;">Damot Sore · Wolaita · Ethiopia</div>
                         </td>
                       </tr>
                     </table>
@@ -150,9 +154,8 @@ export function layout(input: LayoutInput): string {
                 <!-- the message -->
                 <tr>
                   <td style="padding:30px 32px 10px;">
-                    <div style="width:40px;height:1px;background:${BRAND.gold};margin:0 0 16px;"></div>
-                    <div style="font-family:${font};font-size:${lang === 'am' ? '13px' : '11px'};${capsFor(lang, '0.2em')}font-weight:700;color:${BRAND.green};margin:0 0 10px;">${input.eyebrow}</div>
-                    <h1 style="margin:0 0 18px;font-family:${font};font-size:26px;line-height:1.3;font-weight:800;${lang === 'am' ? '' : 'letter-spacing:-0.02em;'}color:${BRAND.ink};">${input.title}</h1>
+                    <div style="margin:0 0 16px;"><span style="display:inline-block;background:${BRAND.mossSoft};color:${BRAND.ink};border-radius:999px;padding:6px 14px;font-family:${font};font-size:13px;font-weight:700;">${input.eyebrow}</span></div>
+                    <h1 style="margin:0 0 18px;font-family:${lang === 'am' ? font : BRAND.display};font-size:30px;font-weight:800;${lang === 'am' ? 'line-height:1.35;' : 'line-height:1.15;letter-spacing:-0.03em;'}color:${BRAND.ink};">${input.title}</h1>
                     ${input.body}
                   </td>
                 </tr>
@@ -175,13 +178,13 @@ export function layout(input: LayoutInput): string {
 
           <!-- below the card, on the black -->
           <tr>
-            <td align="center" style="padding:22px 16px 6px;font-family:${font};font-size:12px;line-height:1.7;color:#8C8C8C;">
+            <td align="center" style="padding:22px 16px 6px;font-family:${font};font-size:12px;line-height:1.7;color:#9DB09F;">
               ${input.footer.followUs}
               <a href="${BRAND.facebook}" style="color:#FFFFFF;text-decoration:none;">Facebook</a> ·
               <a href="${BRAND.telegram}" style="color:#FFFFFF;text-decoration:none;">Telegram</a> ·
               <a href="${BRAND.youtube}" style="color:#FFFFFF;text-decoration:none;">YouTube</a><br />
               <a href="${siteUrl}" style="color:#FFFFFF;text-decoration:none;">${siteUrl.replace(/^https?:\/\//, '')}</a><br />
-              <span style="color:#6C6C6C;">${input.footer.why}</span>
+              <span style="color:#71877A;">${input.footer.why}</span>
             </td>
           </tr>
         </table>

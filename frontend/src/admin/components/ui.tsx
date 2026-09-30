@@ -5,19 +5,21 @@ import { BOOKING_STATUSES, BOOKING_STATUS_LABELS, STATUSES, STATUS_LABELS, type 
 
 export function StatCard({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
   return (
-    <div className="rounded-2xl bg-white border border-[#35723A]/10 elev-1 p-4 sm:p-5">
-      <div className="text-[#B8863B] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1.5 sm:mb-2">{label}</div>
-      <div className="font-display text-3xl sm:text-4xl text-[#12150F] leading-none">{value}</div>
-      {hint && <div className="text-[#12150F]/45 text-xs mt-1.5 sm:mt-2">{hint}</div>}
+    <div className="rounded-[1.5rem] bg-white elev-1 p-4 sm:p-6">
+      <div className="flex items-center gap-2 text-[#1E3A29]/60 text-xs sm:text-sm font-semibold mb-3">
+        <span className="w-2 h-2 rounded-full bg-[#86A94F] flex-shrink-0" />{label}
+      </div>
+      <div className="font-display text-3xl sm:text-5xl font-extrabold tracking-[-0.04em] text-[#1E3A29] leading-none">{value}</div>
+      {hint && <div className="text-[#1E3A29]/45 text-xs mt-1.5 sm:mt-2">{hint}</div>}
     </div>
   );
 }
 
 const STATUS_STYLES: Record<RequestStatus, string> = {
-  new: 'bg-[#B8863B]/15 text-[#8a6620]',
-  in_progress: 'bg-[#35723A]/10 text-[#35723A]',
+  new: 'bg-[#C4622D]/12 text-[#9A4A20]',
+  in_progress: 'bg-[#1E3A29]/10 text-[#1E3A29]',
   done: 'bg-emerald-500/12 text-emerald-700',
-  archived: 'bg-[#0B0B0C]/8 text-[#12150F]/55',
+  archived: 'bg-[#13261A]/8 text-[#1E3A29]/55',
 };
 
 export function StatusPill({ status }: { status: RequestStatus }) {
@@ -43,7 +45,7 @@ export function StatusSelect({
       disabled={busy}
       onChange={(e) => onChange(e.target.value as RequestStatus)}
       aria-label="Change status"
-      className="rounded-full border border-[#35723A]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#35723A] outline-none focus:border-[#35723A] disabled:opacity-50"
+      className="rounded-full border border-[#1E3A29]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#1E3A29] outline-none focus:border-[#1E3A29] disabled:opacity-50"
     >
       {STATUSES.map((s) => (
         <option key={s} value={s}>
@@ -55,10 +57,10 @@ export function StatusSelect({
 }
 
 const BOOKING_STATUS_STYLES: Record<BookingStatus, string> = {
-  pending: 'bg-[#B8863B]/15 text-[#8a6620]',
+  pending: 'bg-[#C4622D]/12 text-[#9A4A20]',
   confirmed: 'bg-emerald-500/12 text-emerald-700',
-  attended: 'bg-[#35723A]/10 text-[#35723A]',
-  cancelled: 'bg-[#0B0B0C]/8 text-[#12150F]/50',
+  attended: 'bg-[#1E3A29]/10 text-[#1E3A29]',
+  cancelled: 'bg-[#13261A]/8 text-[#1E3A29]/50',
 };
 
 /** Bookings move pending → confirmed → came, or are cancelled (which frees the places) */
@@ -77,7 +79,7 @@ export function BookingStatusSelect({
       disabled={busy}
       onChange={(e) => onChange(e.target.value as BookingStatus)}
       aria-label="Change booking status"
-      className={`rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2 focus:ring-[#35723A]/30 disabled:opacity-50 ${BOOKING_STATUS_STYLES[status]}`}
+      className={`rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2 focus:ring-[#1E3A29]/30 disabled:opacity-50 ${BOOKING_STATUS_STYLES[status]}`}
     >
       {BOOKING_STATUSES.map((s) => (
         <option key={s} value={s}>
@@ -103,7 +105,7 @@ export function Pager({
   if (total === 0) return null;
   return (
     <div className="flex items-center justify-between gap-4 pt-5">
-      <span className="text-[#12150F]/50 text-xs">
+      <span className="text-[#1E3A29]/50 text-xs">
         {total} in total, page {page} of {pages}
       </span>
       <div className="flex gap-2">
@@ -119,11 +121,11 @@ export function Pager({
 }
 
 export function Panel({ children }: { children: ReactNode }) {
-  return <div className="rounded-3xl bg-white border border-[#35723A]/10 elev-2 p-5 sm:p-7">{children}</div>;
+  return <div className="rounded-3xl bg-white border border-[#1E3A29]/10 elev-2 p-5 sm:p-7">{children}</div>;
 }
 
 export function Notice({ kind = 'info', children }: { kind?: 'info' | 'error'; children: ReactNode }) {
-  const styles = kind === 'error' ? 'bg-[#35723A]/10 text-[#8c4227]' : 'bg-[#35723A]/6 text-[#35723A]/70';
+  const styles = kind === 'error' ? 'bg-[#1E3A29]/10 text-[#8c4227]' : 'bg-[#1E3A29]/6 text-[#1E3A29]/70';
   return (
     <p role={kind === 'error' ? 'alert' : undefined} className={`rounded-2xl px-4 py-3 text-sm ${styles}`}>
       {children}
@@ -153,7 +155,7 @@ export function SearchBox({
     <label className="relative block">
       <span className="sr-only">{placeholder}</span>
       <svg
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#12150F]/35 pointer-events-none"
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#1E3A29]/35 pointer-events-none"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
@@ -168,7 +170,7 @@ export function SearchBox({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-full border border-[#12150F]/12 bg-white pl-11 pr-4 py-3 text-sm text-[#12150F] outline-none placeholder:text-[#12150F]/35 focus:border-[#35723A] transition-colors"
+        className="w-full rounded-full border border-[#1E3A29]/12 bg-white pl-11 pr-4 py-3 text-sm text-[#1E3A29] outline-none placeholder:text-[#1E3A29]/35 focus:border-[#1E3A29] transition-colors"
       />
     </label>
   );

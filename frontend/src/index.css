@@ -418,16 +418,16 @@ html.lenis, html.lenis body { height: auto; }
      would stay on screen where we meant to hide it. Markup sets the display. */
   align-items: center;
   border-radius: 999px;
-  border: 1px solid rgba(23, 63, 53, 0.2);
+  border: 1px solid rgba(30, 58, 41, 0.2);
   background: #fff;
-  color: #35723A;
+  color: #1E3A29;
   font-family: var(--font-sans);
   font-size: 13px;
   font-weight: 600;
   padding: 8px 16px;
   transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 }
-.admin-btn-quiet:hover:not(:disabled) { border-color: rgba(23, 63, 53, 0.5); }
+.admin-btn-quiet:hover:not(:disabled) { border-color: rgba(30, 58, 41, 0.5); }
 .admin-btn-quiet:disabled { opacity: 0.4; }
 .admin-btn-quiet.on-dark {
   background: rgba(255, 255, 255, 0.08);

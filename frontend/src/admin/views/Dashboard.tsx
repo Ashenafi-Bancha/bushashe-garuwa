@@ -75,7 +75,7 @@ export default function Dashboard() {
   );
 
   return (
-    <div className="min-h-screen bg-[#FAFAF8]">
+    <div className="min-h-screen bg-[#F4EFE4]">
       <Sidebar
         sections={sections}
         current={section}
@@ -87,13 +87,13 @@ export default function Dashboard() {
 
       <div className="lg:pl-[260px]">
         {/* the bar above the work: where you are, and the way back to the menu on a phone */}
-        <header className="sticky top-0 z-30 bg-[#FAFAF8]/90 backdrop-blur border-b border-[#12150F]/8">
+        <header className="sticky top-0 z-30 bg-[#F4EFE4]/90 backdrop-blur border-b border-[#1E3A29]/8">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-8 py-4 flex items-center gap-3">
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="Open the menu"
-              className="lg:hidden flex-shrink-0 w-11 h-11 rounded-xl border border-[#12150F]/10 bg-white grid place-items-center text-[#12150F]"
+              className="lg:hidden flex-shrink-0 w-11 h-11 rounded-xl border border-[#1E3A29]/10 bg-white grid place-items-center text-[#1E3A29]"
             >
               <span className="w-[18px] flex flex-col gap-[5px]">
                 <span className="block h-[1.5px] rounded-full bg-current" />
@@ -103,8 +103,8 @@ export default function Dashboard() {
             </button>
 
             <div className="min-w-0 flex-1">
-              <h1 className="font-display text-xl sm:text-2xl font-extrabold text-[#12150F] leading-tight truncate">{heading.title}</h1>
-              <p className="text-[#12150F]/50 text-xs sm:text-sm truncate">{heading.lead}</p>
+              <h1 className="font-display text-xl sm:text-2xl font-extrabold text-[#1E3A29] leading-tight truncate">{heading.title}</h1>
+              <p className="text-[#1E3A29]/50 text-xs sm:text-sm truncate">{heading.lead}</p>
             </div>
 
             <button type="button" onClick={loadSummary} className="hidden sm:inline-flex admin-btn-quiet flex-shrink-0">
@@ -124,7 +124,7 @@ export default function Dashboard() {
             <div className="space-y-8">
               {figures}
               <div>
-                <h2 className="font-display text-lg font-bold text-[#12150F] mb-3">Waiting for you</h2>
+                <h2 className="font-display text-lg font-bold text-[#1E3A29] mb-3">Waiting for you</h2>
                 <VisitsView />
               </div>
             </div>

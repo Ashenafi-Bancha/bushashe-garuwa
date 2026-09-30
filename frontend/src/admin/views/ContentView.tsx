@@ -17,7 +17,7 @@ const LANGS: { code: Lang; name: string }[] = [
 ];
 const builtIn: Record<Lang, unknown> = { en, am, wal };
 
-const field = 'w-full rounded-xl border border-[#35723A]/20 focus:border-[#35723A] px-4 py-3 text-sm text-[#12150F] outline-none transition-colors bg-[#FAFAF8]';
+const field = 'w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]';
 
 /** Editing the words on the website, one page at a time, in each language. */
 export default function ContentView() {
@@ -92,7 +92,7 @@ export default function ContentView() {
             onClick={() => setLang(l.code)}
             aria-pressed={lang === l.code}
             className={`rounded-full px-4 py-2 text-sm font-semibold border transition-colors ${
-              lang === l.code ? 'bg-[#35723A] text-white border-[#35723A]' : 'border-[#35723A]/15 text-[#35723A]/70 hover:border-[#35723A]/50'
+              lang === l.code ? 'bg-[#1E3A29] text-white border-[#1E3A29]' : 'border-[#1E3A29]/15 text-[#1E3A29]/70 hover:border-[#1E3A29]/50'
             }`}
           >
             {l.name}
@@ -109,7 +109,7 @@ export default function ContentView() {
             onClick={() => setGroupId(g.id)}
             aria-pressed={g.id === groupId}
             className={`rounded-full px-4 py-2 text-xs font-semibold border transition-colors ${
-              g.id === groupId ? 'bg-[#B8863B] text-[#35723A] border-[#B8863B]' : 'border-[#35723A]/15 text-[#35723A]/60 hover:border-[#35723A]/40'
+              g.id === groupId ? 'bg-[#1E3A29] text-[#F4EFE4] border-[#1E3A29]' : 'border-[#1E3A29]/15 text-[#1E3A29]/60 hover:border-[#1E3A29]/40'
             }`}
           >
             {g.title}
@@ -123,8 +123,8 @@ export default function ContentView() {
 
       <Panel>
         <div className="mb-5">
-          <h2 className="font-display text-2xl text-[#12150F]">{group.title}</h2>
-          <p className="text-[#12150F]/50 text-sm mt-1">
+          <h2 className="font-display text-2xl text-[#1E3A29]">{group.title}</h2>
+          <p className="text-[#1E3A29]/50 text-sm mt-1">
             {group.note ?? 'Leave a box empty to go back to the words built into the website.'}
           </p>
         </div>
@@ -137,11 +137,11 @@ export default function ContentView() {
             return (
               <div key={f.path}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-                  <label htmlFor={`f-${f.path}`} className="text-xs font-semibold text-[#35723A]/70 tracking-wider uppercase">
+                  <label htmlFor={`f-${f.path}`} className="text-xs font-semibold text-[#1E3A29]/70 tracking-wider uppercase">
                     {f.label}
-                    {f.shared && <span className="text-[#12150F]/35 normal-case tracking-normal"> · all languages</span>}
+                    {f.shared && <span className="text-[#1E3A29]/35 normal-case tracking-normal"> · all languages</span>}
                   </label>
-                  {isEdited && <span className="text-[#B8863B] text-[11px] font-semibold uppercase tracking-wider">Edited</span>}
+                  {isEdited && <span className="text-[#C4622D] text-[11px] font-semibold uppercase tracking-wider">Edited</span>}
                 </div>
                 {f.multiline ? (
                   <textarea
@@ -162,18 +162,18 @@ export default function ContentView() {
                     className={field}
                   />
                 )}
-                {builtInText && <p className="text-[#12150F]/40 text-xs mt-1.5">Built in: {builtInText}</p>}
+                {builtInText && <p className="text-[#1E3A29]/40 text-xs mt-1.5">Built in: {builtInText}</p>}
               </div>
             );
           })}
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[#35723A]/10">
+        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[#1E3A29]/10">
           <button
             type="button"
             onClick={save}
             disabled={!changed || saving}
-            className="rounded-full bg-[#B8863B] hover:bg-[#d9af65] text-[#35723A] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-50"
+            className="rounded-full bg-[#1E3A29] hover:bg-[#2D5239] text-[#F4EFE4] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-50"
           >
             {saving ? 'Saving…' : 'Save changes'}
           </button>
