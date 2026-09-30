@@ -158,6 +158,8 @@ export default function Home() {
               />
             </div>
 
+            {/* a faint shade only behind the header words at the very top */}
+            <span className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#13261A]/35 to-transparent z-[3]" />
             {/* only a thin soft edge joins the photograph to the page; nothing lies over it */}
             <span className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
 

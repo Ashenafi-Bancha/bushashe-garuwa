@@ -22,10 +22,9 @@ const routes: Record<PageKey, string> = {
   visit: '/visit',
 };
 
-/* the two groups that open as small panels on computers and as headed lists on phones */
+/* Services opens as a small panel on computers and a headed list on phones */
 const groups = {
   services: ['experiences', 'stay', 'dine'],
-  about: ['about', 'discover', 'gallery', 'contact'],
 } as const satisfies Record<string, readonly PageKey[]>;
 
 type GroupKey = keyof typeof groups;
@@ -92,14 +91,18 @@ export default function Navbar() {
 
   const isActive = (to: string) => (to === '/' ? location.pathname === '/' : location.pathname.startsWith(to));
   const groupActive = (g: GroupKey) => groups[g].some((k) => isActive(routes[k]));
+  // at the top of the home page the header is written straight onto the photograph
+  const onPhoto = location.pathname === '/' && !scrolled && !open;
+  const linkTone = (active: boolean) =>
+    active
+      ? onPhoto ? 'bg-white/20 text-white backdrop-blur-sm' : 'bg-[#1E3A29] text-[#F4EFE4]'
+      : onPhoto ? 'text-white hover:bg-white/15 [text-shadow:0_1px_8px_rgba(0,0,0,0.45)]' : 'text-[#1E3A29]/75 hover:text-[#1E3A29] hover:bg-[#1E3A29]/6';
 
   const barLink = (key: PageKey) => (
     <Link
       key={key}
       to={routes[key]}
-      className={`px-4 py-2 rounded-full text-[14px] font-semibold whitespace-nowrap transition-colors duration-300 ${
-        isActive(routes[key]) ? 'bg-[#1E3A29] text-[#F4EFE4]' : 'text-[#1E3A29]/75 hover:text-[#1E3A29] hover:bg-[#1E3A29]/6'
-      }`}
+      className={`px-2.5 xl:px-4 py-2 rounded-full text-[14px] font-semibold whitespace-nowrap transition-colors duration-300 ${linkTone(isActive(routes[key]))}`}
     >
       {t.nav.links[key]}
     </Link>
@@ -112,9 +115,7 @@ export default function Navbar() {
         aria-expanded={panel === g}
         aria-haspopup="true"
         onClick={() => setPanel(panel === g ? null : g)}
-        className={`hit-slim flex items-center gap-1.5 px-4 py-2 rounded-full text-[14px] font-semibold whitespace-nowrap transition-colors duration-300 ${
-          groupActive(g) ? 'bg-[#1E3A29] text-[#F4EFE4]' : 'text-[#1E3A29]/75 hover:text-[#1E3A29] hover:bg-[#1E3A29]/6'
-        }`}
+        className={`hit-slim flex items-center gap-1.5 px-2.5 xl:px-4 py-2 rounded-full text-[14px] font-semibold whitespace-nowrap transition-colors duration-300 ${linkTone(groupActive(g))}`}
       >
         {t.nav.links[g]}
         <svg viewBox="0 0 24 24" className={`w-3.5 h-3.5 transition-transform duration-300 ${panel === g ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="m6 9 6 6 6-6" strokeLinecap="round" strokeLinejoin="round" /></svg>
@@ -171,11 +172,12 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-5 pt-3">
-        {/* a frosted pill that floats over the page and the photographs */}
+        {/* on the home photograph: no bar at all, just the words; everywhere else,
+            and once scrolling, a frosted pill that floats over the page */}
         <div
-          className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full bg-white/85 backdrop-blur-xl border border-white/60 shadow-[0_12px_40px_-18px_rgba(30,58,41,0.35)] pl-2 pr-2 sm:pl-3 transition-all duration-500 ${
-            scrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-[68px]'
-          }`}
+          className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full border pl-2 pr-2 sm:pl-3 transition-all duration-500 ${
+            onPhoto ? 'bg-transparent border-transparent' : 'bg-white/85 backdrop-blur-xl border-white/60 shadow-[0_12px_40px_-18px_rgba(30,58,41,0.35)]'
+          } ${scrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-[68px]'}`}
         >
           <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group" aria-label={t.nav.homeAria}>
             <img
@@ -183,7 +185,7 @@ export default function Navbar() {
               alt="Bushaashe Garuwa"
               className={`rounded-full object-contain bg-white p-0.5 shadow-sm transition-all duration-500 group-hover:scale-105 ${scrolled ? 'w-10 h-10' : 'w-11 h-11'}`}
             />
-            <span className="font-display text-[15px] sm:text-[17px] font-bold tracking-tight whitespace-nowrap text-[#1E3A29]">Bushaashe Garuwa</span>
+            <span className={`font-display text-[15px] sm:text-[17px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 ${onPhoto ? 'text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.5)]' : 'text-[#1E3A29]'}`}>Bushaashe Garuwa</span>
           </Link>
 
           {/* computers: every way in, right in the bar */}
@@ -192,13 +194,15 @@ export default function Navbar() {
             {barLink('events')}
             {barLink('heritage')}
             {barGroup('services')}
-            {barGroup('about')}
+            {barLink('about')}
+            {barLink('gallery')}
+            {barLink('contact')}
           </nav>
 
           <div className="flex items-center gap-1 sm:gap-2">
-            <LanguageSwitcher variant="bar" onDark={false} />
+            <LanguageSwitcher variant="bar" onDark={onPhoto} />
             {/* wrapped: the button's own display would otherwise beat `hidden` */}
-            <span className="hidden lg:block">
+            <span className="hidden xl:block">
               <Link to="/visit" className="btn-primary nav-cta whitespace-nowrap">{t.common.planVisit}</Link>
             </span>
             {/* phones and tablets: the hamburger */}
@@ -243,6 +247,13 @@ export default function Navbar() {
               <ul className="space-y-1">{groups[g].map((key) => menuRow(key, row++))}</ul>
             </div>
           ))}
+
+          <ul className="mt-5 space-y-1">
+            {menuRow('about', row++)}
+            {menuRow('discover', row++)}
+            {menuRow('gallery', row++)}
+            {menuRow('contact', row++)}
+          </ul>
 
           <div
             className="mt-7 rounded-[1.75rem] bg-[#13261A] text-[#F4EFE4] p-5"
