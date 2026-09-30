@@ -100,7 +100,6 @@ export default function Home() {
   };
   const { events: siteEvents } = useSiteEvents();
   const [firstWord, ...rest] = h.hero.title.split(' ');
-  const [showStickyCta, setShowStickyCta] = useState(false);
   const page = useRevealChildren<HTMLElement>();
 
   useEffect(() => {
@@ -113,19 +112,9 @@ export default function Home() {
     heroSlides.forEach(({ key }) => { const img = new Image(); img.src = photos[key]; });
   }, []);
 
-  useEffect(() => {
-    // shown after the hero, hidden again at the footer so it never covers the links there
-    const onScroll = () => {
-      const y = window.scrollY, vh = window.innerHeight;
-      setShowStickyCta(y > vh * 0.8 && y + vh < document.documentElement.scrollHeight - 700);
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   return (
     <>
-      <main ref={page} className="pb-24 lg:pb-0">
+      <main ref={page}>
 
         {/* ═════════ HERO ═════════
             The photographs come first. Computers: the whole screen, edge to edge.
@@ -456,12 +445,6 @@ export default function Home() {
           </div>
         </section>
       </main>
-
-      {/* ── Phones: a small bar with the two main actions ── */}
-      <div className={`mobile-sticky-cta lg:hidden ${showStickyCta ? '' : 'hidden-cta'}`} inert={!showStickyCta}>
-        <Link to="/visit" className="flex-1 btn-primary justify-center !py-1.5 !text-[13px] whitespace-nowrap shadow-none">{t.common.planVisit}</Link>
-        <Link to="/contact" className="flex-1 btn-outline justify-center !py-3 !text-[13px] whitespace-nowrap text-[#13261A] bg-white">{t.common.contactUs}</Link>
-      </div>
     </>
   );
 }

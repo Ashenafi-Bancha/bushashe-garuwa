@@ -380,28 +380,6 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 .fade-section:not(.in-view),
 .reveal:not(.in-view) { will-change: transform, opacity; }
 
-/* ── Mobile sticky CTA ── */
-.mobile-sticky-cta {
-  position: fixed;
-  bottom: 12px;
-  left: 12px;
-  right: 12px;
-  z-index: 30;
-  padding: 6px;
-  margin-bottom: env(safe-area-inset-bottom, 0px);
-  background: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 999px;
-  box-shadow: 0 20px 40px -14px rgba(30, 58, 41, 0.35);
-  border: 1px solid rgba(30, 58, 41, 0.08);
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  transition: transform 0.5s var(--ease-out-expo), opacity 0.4s ease;
-}
-.mobile-sticky-cta.hidden-cta { transform: translateY(140%); opacity: 0; }
-@media (min-width: 1024px) { .mobile-sticky-cta { display: none; } }
 
 /* ── Smooth page entry ── */
 @keyframes pageIn {
