@@ -30,6 +30,8 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
             className={`hero-slide-img w-full h-full object-cover ${pos}`}
           />
         </div>
+        {/* a faint shade only behind the header words at the very top */}
+        <span className="absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-[#13261A]/50 via-[#13261A]/20 to-transparent z-[3]" />
         {/* only a thin soft edge joins the photograph to the page; nothing lies over it */}
         <span className="absolute inset-x-0 bottom-0 h-16 sm:h-20 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
         <span className="absolute z-[4] right-4 sm:right-8 top-[88px] sm:top-[104px] rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">

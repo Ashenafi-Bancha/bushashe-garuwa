@@ -29,6 +29,10 @@ const groups = {
 
 type GroupKey = keyof typeof groups;
 
+/** The pages that open with a full-screen photograph */
+const hasPhotoHero = (path: string) =>
+  Object.values(routes).some((r) => (r === '/' ? path === '/' : path === r || path.startsWith(r + '/')));
+
 /* ── Line icons, one per page ── */
 const paths: Record<PageKey, ReactNode> = {
   home: <><path d="M3 11.5 12 4l9 7.5" /><path d="M5 10v10h14V10" /><path d="M10 20v-6h4v6" /></>,
@@ -91,8 +95,9 @@ export default function Navbar() {
 
   const isActive = (to: string) => (to === '/' ? location.pathname === '/' : location.pathname.startsWith(to));
   const groupActive = (g: GroupKey) => groups[g].some((k) => isActive(routes[k]));
-  // at the top of the home page the header is written straight onto the photograph
-  const onPhoto = location.pathname === '/' && !scrolled && !open;
+  // every page opens on a full-screen photograph; at the top the header is
+  // written straight onto it (the 'page not found' screen has none, so it keeps the pill)
+  const onPhoto = hasPhotoHero(location.pathname) && !scrolled && !open;
   const linkTone = (active: boolean) =>
     active
       ? onPhoto ? 'bg-white/20 text-white backdrop-blur-sm' : 'bg-[#1E3A29] text-[#F4EFE4]'
