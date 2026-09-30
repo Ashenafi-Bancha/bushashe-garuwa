@@ -63,7 +63,8 @@ const SOCIAL = [
   },
   {
     name: 'WhatsApp',
-    href: '', // e.g. 'https://wa.me/2519XXXXXXXX'
+    // opens a WhatsApp chat with +251 932 196 502
+    href: 'https://wa.me/251932196502',
     icon: (
       <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
         <circle cx="12" cy="12" r="12" fill="#25D366" />

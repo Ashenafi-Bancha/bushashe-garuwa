@@ -27,6 +27,7 @@ export const BRAND = {
   email: 'info@bushaashegaruwa.com',
   facebook: 'https://www.facebook.com/bushaashe.garuwa',
   telegram: 'https://t.me/bushaashegaruwafrist',
+  whatsapp: 'https://wa.me/251932196502',
   youtube: 'https://www.youtube.com/results?search_query=bushaashe+garuwa',
 } as const;
 
@@ -182,6 +183,7 @@ export function layout(input: LayoutInput): string {
               ${input.footer.followUs}
               <a href="${BRAND.facebook}" style="color:#FFFFFF;text-decoration:none;">Facebook</a> ·
               <a href="${BRAND.telegram}" style="color:#FFFFFF;text-decoration:none;">Telegram</a> ·
+              <a href="${BRAND.whatsapp}" style="color:#FFFFFF;text-decoration:none;">WhatsApp</a> ·
               <a href="${BRAND.youtube}" style="color:#FFFFFF;text-decoration:none;">YouTube</a><br />
               <a href="${siteUrl}" style="color:#FFFFFF;text-decoration:none;">${siteUrl.replace(/^https?:\/\//, '')}</a><br />
               <span style="color:#71877A;">${input.footer.why}</span>
