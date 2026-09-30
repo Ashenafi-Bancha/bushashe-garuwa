@@ -71,10 +71,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* the name, very large and very quiet, along the bottom */}
-      <div aria-hidden="true" className="pointer-events-none select-none font-display font-extrabold text-white/[0.05] whitespace-nowrap leading-[0.8] tracking-[-0.05em] text-[12vw] text-center -mb-[1.5vw]">
-        Bushaashe Garuwa
-      </div>
     </footer>
   );
 }

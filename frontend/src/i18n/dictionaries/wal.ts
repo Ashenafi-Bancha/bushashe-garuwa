@@ -102,7 +102,12 @@ export const wal: DeepPartial<Dictionary> = {
       dine: 'Dine',
       visit: 'Visit',
       gallery: 'Gallery',
+      services: 'Services',
       contact: 'Contact',
+    },
+    describe: {
+      discover: 'Our story, mission and vision.',
+      contact: 'Phone, email and a message form.',
     },
     homeAria: 'Bushaashe Garuwa home',
     mainNav: 'Main navigation',

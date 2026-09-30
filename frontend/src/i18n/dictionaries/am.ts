@@ -87,7 +87,12 @@ export const am: Dictionary = {
       dine: 'ምግብ',
       visit: 'ጉብኝት',
       gallery: 'የፎቶ ማዕከል',
+      services: 'አገልግሎቶች',
       contact: 'ያግኙን',
+    },
+    describe: {
+      discover: 'ታሪካችን፣ ተልዕኳችንና ራዕያችን።',
+      contact: 'ስልክ፣ ኢሜይልና የመልዕክት ቅጽ።',
     },
     homeAria: 'ቡሻሼ ጋሯ ዋና ገጽ',
     mainNav: 'ዋና ማውጫ',
