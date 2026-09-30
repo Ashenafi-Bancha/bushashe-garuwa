@@ -507,13 +507,9 @@ export const en = {
     },
     trees: {
       eyebrow: 'Living Memory',
-      title: 'Trees That Remember',
+      title: 'Trees Planted by Our Forefathers and the Current Generation',
       items: {
-        goba: { name: 'Wild Fig', age: '~200 years', sig: 'Sacred gathering place for elders and community decisions.' },
-        doro: { name: 'Acacia', age: '~150 years', sig: 'Planted at the founding of the family homestead.' },
-        wonka: { name: 'False Banana', age: 'Perennial', sig: 'Staple food crop and cultural symbol of Wolaita life.' },
-        zigba: { name: 'Zigba (African Yellowwood)', age: 'Planted by our forefathers', sig: 'Planted by the fathers of past generations and still standing on the grounds, one of the trees the family has protected ever since.' },
-        tigo: { name: 'African Olive', age: '~180 years', sig: 'Used in traditional medicine and ceremonial practices.' },
+        zigba: { name: 'Zigba (African Yellowwood)', age: 'Planted by our forefathers and the current generation', sig: 'The zigba trees stand in a long line across the grounds. Our forefathers planted the first of them, the family has protected them ever since, and the current generation keeps planting new ones beside them.' },
       },
       qr: "Scan QR codes on-site to discover each tree's full story",
     },

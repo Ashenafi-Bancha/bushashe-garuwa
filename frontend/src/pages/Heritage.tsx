@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import Photo from '../components/Photo';
 import { fmt, useI18n } from '../i18n/I18nProvider';
@@ -20,24 +19,18 @@ const categories = [
 /* The two traditional houses keep their Wolaytta names in every language */
 const houseNames = ['Gulanttaa Keettaa', 'Meesho Keettaa'];
 
-/* Wolaytta and scientific names stay the same in every language */
-const trees = [
-  { id: 'goba', wolaytta: 'Goba', scientific: 'Ficus sycomorus' },
-  { id: 'doro', wolaytta: 'Doro', scientific: 'Acacia abyssinica' },
-  { id: 'wonka', wolaytta: 'Wonka', scientific: 'Ensete ventricosum' },
-  { id: 'tigo', wolaytta: 'Tigo', scientific: 'Olea europaea subsp. africana' },
-  { id: 'zigba', wolaytta: 'Zigba', scientific: 'Podocarpus falcatus' },
-] as const;
+/* The zigba keeps its Wolaytta and scientific names in every language */
+const ZIGBA = { wolaytta: 'Zigba', scientific: 'Podocarpus falcatus' };
 
 export default function Heritage() {
   const { t } = useI18n();
   const hg = t.heritage;
-  const [activeTree, setActiveTree] = useState<number | null>(null);
+  const { pathname } = useLocation();
 
   return (
     <main>
       {/* Hero */}
-      <PageHero photo="house" eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
+      <PageHero photo={pathname.startsWith('/heritage/trees') ? 'zigba' : 'house'} eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
 
       {/* Heritage categories grid */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
@@ -86,47 +79,32 @@ export default function Heritage() {
         </div>
       </section>
 
-      {/* Trees section */}
-      <section className="bg-[#1E3A29] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="mb-8 sm:mb-12">
-            <div className="text-[#C4622D] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{hg.trees.eyebrow}</div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-tight">{hg.trees.title}</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {trees.map((tree, i) => {
-              const text = hg.trees.items[tree.id];
-              return (
-              <button
-                key={tree.id}
-                onClick={() => setActiveTree(activeTree === i ? null : i)}
-                className="text-left rounded-2xl border border-white/10 hover:border-[#C4622D]/40 p-6 transition-all duration-300"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div>
-                    <div className="text-[#C4622D] font-display text-2xl font-semibold mb-1">{tree.wolaytta}</div>
-                    <div className="text-white/70 font-sans text-sm mb-1">{text.name}</div>
-                    <div className="text-white/30 font-sans text-xs italic">{tree.scientific}</div>
-                  </div>
-                  <div className="text-right flex-shrink-0">
-                    <div className="text-white/40 text-xs font-sans">{text.age}</div>
-                  </div>
-                </div>
-                {activeTree === i && (
-                  <div className="mt-4 pt-4 border-t border-white/10 text-white/60 font-sans text-sm leading-relaxed">
-                    {text.sig}
-                  </div>
-                )}
-              </button>
-              );
-            })}
-          </div>
-          <div className="mt-10 text-center">
-            <div className="inline-flex items-center gap-3 rounded-full border border-[#C4622D]/30 text-[#C4622D] text-sm font-sans px-6 py-3">
-              {hg.trees.qr}
+      {/* Trees: the zigba line, planted by our forefathers and the current generation */}
+      <section id="trees" className="mx-2 sm:mx-3">
+        <div className="relative rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#13261A] min-h-[640px] sm:min-h-[620px] lg:min-h-[720px] flex items-end">
+          <img src={photos.zigba} alt={t.photos.zigba} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-[center_40%]" />
+          <span className="absolute inset-0 bg-gradient-to-t from-[#13261A] via-[#13261A]/55 via-45% to-transparent" />
+          <span className="absolute left-5 top-5 sm:left-8 sm:top-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold">
+            {t.photoCaptions.zigba.title}
+          </span>
+
+          <div className="relative w-full max-w-screen-xl mx-auto px-5 sm:px-10 pb-10 sm:pb-14 pt-40 grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-16 lg:items-end">
+            <div>
+              <span className="eyebrow !bg-white/15 !text-[#B9D38A] backdrop-blur mb-5">{hg.trees.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-[1]">{hg.trees.title}</h2>
+            </div>
+            <div className="rounded-[1.75rem] bg-white/10 backdrop-blur-md border border-white/15 p-6 sm:p-7 text-white">
+              <div className="flex items-baseline justify-between gap-4 mb-1">
+                <div className="font-display text-3xl font-extrabold text-[#B9D38A] tracking-tight">{ZIGBA.wolaytta}</div>
+                <div className="text-white/50 text-xs italic">{ZIGBA.scientific}</div>
+              </div>
+              <div className="text-white/80 text-sm font-semibold mb-4">{hg.trees.items.zigba.name}</div>
+              <p className="text-white/75 text-sm sm:text-base leading-relaxed mb-5">{hg.trees.items.zigba.sig}</p>
+              <span className="inline-flex rounded-full bg-[#86A94F] text-[#13261A] text-xs font-bold px-3.5 py-1.5">{hg.trees.items.zigba.age}</span>
             </div>
           </div>
         </div>
+        <p className="mt-5 text-center text-[#1E3A29]/55 text-sm px-5">{hg.trees.qr}</p>
       </section>
 
       {/* Family history CTA */}
