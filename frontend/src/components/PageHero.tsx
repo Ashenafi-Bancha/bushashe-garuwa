@@ -6,7 +6,7 @@ import { useI18n } from '../i18n/I18nProvider';
  * Opening section of the inner pages, drawn like the home page: the photograph
  * fills the whole screen, edge to edge, shown clearly with nothing laid over it;
  * the label, the title and the description follow just below. Any <span> inside
- * the title is picked out in moss green.
+ * the title stays part of it; the whole title is set in the gate's lettering.
  */
 export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-center' }: {
   eyebrow: string;
@@ -40,7 +40,8 @@ export default function PageHero({ eyebrow, title, desc, photo, pos = 'object-ce
       <div className="relative z-[5] pt-6 sm:pt-10 max-w-screen-xl mx-auto px-5 sm:px-8 pb-6 sm:pb-10 grid lg:grid-cols-[1.4fr_1fr] gap-5 lg:gap-16 lg:items-end">
         <div>
           <span className="eyebrow mb-5 animate-fade-up">{eyebrow}</span>
-          <h1 className="font-display text-[2.6rem] sm:text-6xl lg:text-7xl font-extrabold text-[#1E3A29] leading-[0.98] [&>span>span_span]:text-[#6F9443]">
+          {/* in the lettering of the main gate, like the home page */}
+          <h1 className="brand-sign text-[2rem] sm:text-5xl lg:text-[3.6rem] leading-[1.02]">
             <span className="line-mask"><span>{title}</span></span>
           </h1>
         </div>
