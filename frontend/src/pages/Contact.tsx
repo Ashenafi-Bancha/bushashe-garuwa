@@ -44,7 +44,7 @@ export default function Contact() {
                 <div className="flex items-start gap-5">
                   <div>
                     <div className="text-[#C4622D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.phone}</div>
-                    <div className="text-[#1E3A29] font-sans text-base font-medium">+251 XXX XXX XXX</div>
+                    <a href="tel:+251932196502" className="block text-[#1E3A29] font-sans text-base font-medium hover:text-[#C4622D] transition-colors">+251 932 196 502</a>
                     <div className="text-[#1E3A29]/45 font-sans text-sm mt-0.5">{c.phoneNote}</div>
                   </div>
                 </div>

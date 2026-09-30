@@ -75,9 +75,9 @@ export default function Visit() {
             </div>
             <div className="flex items-start gap-4">
               <div>
-                <div className="text-[#C4622D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
-                <div className="text-white font-sans text-sm">+251 XXX XXX XXX</div>
-                <a href="mailto:info@bushaashegaruwa.com" className="block text-white/60 font-sans text-xs hover:text-[#C4622D] transition-colors">info@bushaashegaruwa.com</a>
+                <div className="text-[#B9D38A] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
+                <a href="tel:+251932196502" className="block text-white font-sans text-sm hover:text-[#B9D38A] transition-colors">+251 932 196 502</a>
+                <a href="mailto:info@bushaashegaruwa.com" className="block text-white/60 font-sans text-xs hover:text-[#B9D38A] transition-colors">info@bushaashegaruwa.com</a>
               </div>
             </div>
           </div>
