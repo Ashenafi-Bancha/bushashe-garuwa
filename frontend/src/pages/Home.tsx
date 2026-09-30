@@ -14,10 +14,10 @@ import CulturalFoodDates from '../components/CulturalFoodDates';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
   { key: 'home', pos: 'object-center' },
-  { key: 'gifaataa1', pos: 'object-center' },
+  { key: 'gifaataa1', pos: 'object-[center_40%]' },
   { key: 'house', pos: 'object-center' },
   { key: 'zigba', pos: 'object-[center_40%]' },
-  { key: 'lawn', pos: 'object-[center_65%]' },
+  { key: 'gifaataa2', pos: 'object-[center_45%]' },
 ];
 const SLIDE_MS = 6000;
 
@@ -84,45 +84,32 @@ function CountUp({ value }: { value: string }) {
   return <span ref={ref}>{match[1]}{shown.toLocaleString('en-US')}{match[3]}</span>;
 }
 
-/** Scroll progress (0 → 1) of the hero while it is pinned, as the CSS variable --p */
-function useHeroProgress() {
-  const ref = useRef<HTMLElement>(null);
-  useEffect(() => {
-    let raf = 0;
-    let last = -1;
-    const tick = () => {
-      const el = ref.current;
-      if (el) {
-        const r = el.getBoundingClientRect();
-        const room = r.height - window.innerHeight;
-        const p = room > 0 ? Math.min(1, Math.max(0, -r.top / room)) : 0;
-        if (Math.abs(p - last) > 0.001) {
-          el.style.setProperty('--p', p.toFixed(4));
-          last = p;
-        }
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-  return ref;
-}
-
 export default function Home() {
   const { t } = useI18n();
   const h = t.home;
   const [heroIdx, setHeroIdx] = useState(0);
+  const [prevIdx, setPrevIdx] = useState<number | null>(null);
+  const touchX = useRef<number | null>(null);
+  const goTo = (next: number) => {
+    const n = (next + heroSlides.length) % heroSlides.length;
+    if (n === heroIdx) return;
+    setPrevIdx(heroIdx);
+    setHeroIdx(n);
+  };
   const { events: siteEvents } = useSiteEvents();
   const [showStickyCta, setShowStickyCta] = useState(false);
-  const hero = useHeroProgress();
   const page = useRevealChildren<HTMLElement>();
   const [firstWord, ...rest] = h.hero.title.split(' ');
 
   useEffect(() => {
-    const timer = setTimeout(() => setHeroIdx((i) => (i + 1) % heroSlides.length), SLIDE_MS);
+    const timer = setTimeout(() => goTo(heroIdx + 1), SLIDE_MS);
     return () => clearTimeout(timer);
-  }, [heroIdx]);
+  }, [heroIdx]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // have every photograph ready so each slide opens without a flash
+  useEffect(() => {
+    heroSlides.forEach(({ key }) => { const img = new Image(); img.src = photos[key]; });
+  }, []);
 
   useEffect(() => {
     // shown after the hero, hidden again at the footer so it never covers the links there
@@ -139,56 +126,81 @@ export default function Home() {
       <main ref={page} className="pb-24 lg:pb-0">
 
         {/* ═════════ HERO ═════════
-            The name, large, with a few words and the buttons beside it; below, the
-            photographs. On computers the hero is pinned while the photograph opens
-            out to the edges as you scroll. */}
-        <section ref={hero} className="hero relative lg:h-[185vh]" aria-label={h.hero.title}>
-          <div className="lg:sticky lg:top-0 lg:h-[100svh] flex flex-col pt-24 sm:pt-28 lg:pt-28 pb-4 lg:pb-6 overflow-hidden">
-            <div className="max-w-screen-xl mx-auto w-full px-5 sm:px-8 flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 mb-7 lg:mb-8">
-              <h1 className="font-display font-extrabold text-[#1E3A29] text-[3.3rem] sm:text-[5.5rem] lg:text-[clamp(5.5rem,8.6vw,8.6rem)] leading-[0.9] tracking-[-0.05em]">
-                <span className="line-mask"><span>{firstWord}</span></span>
-                <span className="line-mask d2"><span className="text-[#6F9443]">{rest.join(' ')}</span></span>
-              </h1>
-              <div className="max-w-md lg:pb-3 animate-fade-up delay-300">
-                <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight mb-3">{h.hero.subtitle}</p>
-                <p className="text-[#1E3A29]/65 leading-relaxed mb-6">{h.hero.lead}</p>
-                <div className="flex flex-wrap items-center gap-3">
-                  <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
-                  <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>
-                </div>
+            The photographs come first and fill the whole screen, edge to edge, on
+            phones and computers alike. Each new photograph sweeps in from the right
+            like a curtain while settling from a slight zoom; the one before drifts
+            away underneath. The bottom of the photograph melts into the page, and
+            the name and the words begin inside that fade. Swipe on phones. */}
+        <section className="relative" aria-label={h.hero.title}>
+          <div
+            className="relative h-[100svh] min-h-[560px] overflow-hidden bg-[#13261A]"
+            onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
+            onTouchEnd={(e) => {
+              const start = touchX.current; touchX.current = null;
+              const end = e.changedTouches[0]?.clientX;
+              if (start === null || end === undefined || Math.abs(end - start) < 50) return;
+              goTo(heroIdx + (end < start ? 1 : -1));
+            }}
+          >
+            {prevIdx !== null && (
+              <div key={`out-${prevIdx}-${heroIdx}`} className="hero-slide hero-slide-out">
+                <img src={photos[heroSlides[prevIdx]!.key]} alt="" className={`w-full h-full object-cover ${heroSlides[prevIdx]!.pos}`} />
+              </div>
+            )}
+            <div key={`in-${heroIdx}`} className={`hero-slide ${prevIdx === null ? 'hero-slide-first' : 'hero-slide-in'}`}>
+              <img
+                src={photos[heroSlides[heroIdx]!.key]}
+                alt={t.photos[heroSlides[heroIdx]!.key]}
+                fetchPriority="high"
+                className={`hero-slide-img w-full h-full object-cover ${heroSlides[heroIdx]!.pos}`}
+              />
+            </div>
+
+            {/* the photograph melts into the page below */}
+            <span className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-[#13261A]/35 to-transparent z-[3]" />
+            <span className="absolute inset-x-0 bottom-0 h-[62%] sm:h-[58%] bg-gradient-to-t from-[#F4EFE4] from-[18%] via-[#F4EFE4]/80 via-[42%] to-transparent z-[3]" />
+
+            {/* the turning badge, in the corner of the photograph (computers) */}
+            <svg className="hidden lg:block absolute z-[4] right-8 top-[152px] w-32 h-32 animate-spin-slow" viewBox="0 0 200 200" aria-hidden="true">
+              <defs><path id="hero-badge-circle" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" /></defs>
+              <circle cx="100" cy="100" r="98" fill="#F4EFE4" />
+              <text className="fill-[#1E3A29]" style={{ font: '700 15px var(--font-sans)' }}>
+                <textPath href="#hero-badge-circle" textLength="468" lengthAdjust="spacing">{h.hero.badge}</textPath>
+              </text>
+              <circle cx="100" cy="100" r="30" fill="#C4622D" />
+            </svg>
+
+            {/* the name of the place in the photograph, and the way to the next one */}
+            <div className="absolute z-[4] right-4 sm:right-8 top-[88px] sm:top-[104px] flex items-center gap-2">
+              <span key={heroIdx} className="rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
+                {t.photoCaptions[heroSlides[heroIdx]!.key].title}
+              </span>
+              <button
+                type="button"
+                onClick={() => goTo(heroIdx + 1)}
+                aria-label={h.hero.next}
+                className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-[#1E3A29] hover:text-white transition-colors"
+              >
+                →
+              </button>
+            </div>
+          </div>
+
+          {/* the words, rising out of the fade */}
+          <div className="relative z-[5] -mt-[27svh] sm:-mt-[30svh] max-w-screen-xl mx-auto px-5 sm:px-8 pb-6 flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12">
+            <h1 className="font-display font-extrabold text-[#1E3A29] text-[3.3rem] sm:text-[5.5rem] lg:text-[clamp(5.5rem,8.6vw,8.6rem)] leading-[0.9] tracking-[-0.05em]">
+              <span className="line-mask"><span>{firstWord}</span></span>
+              <span className="line-mask d2"><span className="text-[#6F9443]">{rest.join(' ')}</span></span>
+            </h1>
+            <div className="max-w-md lg:pb-3 animate-fade-up delay-300">
+              <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight mb-3">{h.hero.subtitle}</p>
+              <p className="text-[#1E3A29]/70 leading-relaxed mb-6">{h.hero.lead}</p>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
+                <Link to="/visit" className="btn-outline text-[#1E3A29] bg-white/40">{t.common.planVisit}</Link>
               </div>
             </div>
 
-            {/* the photographs; the frame widens with the scroll on computers */}
-            <div className="relative mx-5 sm:mx-8 lg:mx-0 h-[58svh] min-h-[340px] sm:h-[62svh] lg:h-auto lg:min-h-0 lg:flex-1 animate-scale-in delay-200">
-              <div className="hero-frame absolute inset-0 overflow-hidden rounded-[1.75rem] sm:rounded-[2.5rem]">
-                {heroSlides.map(({ key, pos }, i) => (
-                  <img
-                    key={key}
-                    src={photos[key]}
-                    alt={t.photos[key]}
-                    fetchPriority={i === 0 ? 'high' : 'auto'}
-                    className={`hero-img absolute inset-0 w-full h-full object-cover ${pos} transition-opacity duration-[1400ms] ease-in-out ${
-                      i === heroIdx ? 'opacity-100 animate-ken-burns' : 'opacity-0'
-                    }`}
-                  />
-                ))}
-                <span className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-[#13261A]/45 to-transparent" />
-                <span className="absolute left-5 bottom-5 sm:left-7 sm:bottom-7 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold">
-                  {t.photoCaptions[heroSlides[heroIdx]!.key].title}
-                </span>
-              </div>
-
-              {/* the turning badge */}
-              <svg className="hero-badge absolute -top-10 sm:-top-12 w-28 h-28 sm:w-36 sm:h-36 animate-spin-slow" viewBox="0 0 200 200" aria-hidden="true">
-                <defs><path id="hero-badge-circle" d="M100,100 m-76,0 a76,76 0 1,1 152,0 a76,76 0 1,1 -152,0" /></defs>
-                <circle cx="100" cy="100" r="98" fill="#F4EFE4" />
-                <text className="fill-[#1E3A29]" style={{ font: '700 15px var(--font-sans)' }}>
-                  <textPath href="#hero-badge-circle" textLength="468" lengthAdjust="spacing">{h.hero.badge}</textPath>
-                </text>
-                <circle cx="100" cy="100" r="30" fill="#C4622D" />
-              </svg>
-            </div>
           </div>
         </section>
 

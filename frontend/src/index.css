@@ -145,16 +145,28 @@ a, button {
   html { scroll-behavior: auto; }
 }
 
-/* ── Home hero: on computers the photograph opens from the middle to the edges
-   as the pinned hero is scrolled (--p runs 0 → 1, set in Home.tsx) ── */
-.hero-badge { right: 7%; }
-@media (min-width: 1024px) {
-  .hero-frame {
-    border-radius: 0;
-    clip-path: inset(0 calc(16% - var(--p, 0) * 16%) 0 calc(16% - var(--p, 0) * 16%) round calc(44px - var(--p, 0) * 16px));
-  }
-  .hero-img { scale: calc(1.16 - var(--p, 0) * 0.16); }
-  .hero-badge { right: calc(18% - var(--p, 0) * 14%); }
+/* ── Home hero slides ──
+   The new photograph opens from the right like a curtain while it settles from
+   a slight zoom; the one before drifts left and darkens underneath it. */
+.hero-slide { position: absolute; inset: 0; overflow: hidden; }
+.hero-slide-first { z-index: 2; animation: fadeIn 1.2s ease both; }
+.hero-slide-in { z-index: 2; animation: heroWipe 1.5s cubic-bezier(0.77, 0, 0.18, 1) both; }
+.hero-slide-out { z-index: 1; animation: heroAway 1.5s cubic-bezier(0.77, 0, 0.18, 1) both; }
+.hero-slide-img { animation: heroSettle 7.5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+@keyframes heroWipe {
+  from { clip-path: inset(0 0 0 100%); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+@keyframes heroSettle {
+  from { transform: scale(1.22); }
+  to   { transform: scale(1.02); }
+}
+@keyframes heroAway {
+  from { transform: translateX(0); filter: brightness(1); }
+  to   { transform: translateX(-14%); filter: brightness(0.6); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide-in, .hero-slide-out { animation: fadeIn 0.6s ease both; }
 }
 
 /* ── Photo placeholder: a calm sage panel with a small line drawing of the

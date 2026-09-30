@@ -175,6 +175,7 @@ export const wal: DeepPartial<Dictionary> = {
       statYears: 'Years of heritage',
       sinceCentury: 'Since the 18th century',
       badge: 'WOLAITA · HERITAGE · NATURE · CULTURE · ',
+      next: 'Next photograph',
       lead: 'A family heritage place in Damot Sore, near Gununo, kept for four generations.',
     },
     film: {

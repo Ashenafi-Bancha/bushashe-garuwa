@@ -55,12 +55,12 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-5 pt-3">
-        {/* at the top the bar sits on the page; once scrolling it floats as a frosted pill */}
+        {/* a frosted pill that floats over the page and the photographs */}
         <div
           className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full transition-all duration-500 ${
-            scrolled && !open
-              ? 'bg-white/80 backdrop-blur-xl shadow-[0_12px_40px_-18px_rgba(30,58,41,0.35)] border border-white/60 h-14 sm:h-16 pl-2 pr-2 sm:pl-3'
-              : 'h-16 sm:h-[72px] pl-1 pr-1'
+            open
+              ? 'h-16 sm:h-[72px] pl-1 pr-1'
+              : `bg-white/85 backdrop-blur-xl shadow-[0_12px_40px_-18px_rgba(30,58,41,0.35)] border border-white/60 pl-2 pr-2 sm:pl-3 ${scrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-[68px]'}`
           }`}
         >
           <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group relative z-[60]" aria-label={t.nav.homeAria}>

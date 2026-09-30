@@ -160,6 +160,7 @@ export const am: Dictionary = {
       statYears: 'ዓመታት የቆየ ቅርስ',
       sinceCentury: 'ከ18ኛው ክፍለ ዘመን ጀምሮ',
       badge: 'ወላይታ · ቅርስ · ተፈጥሮ · ባህል · ',
+      next: 'ቀጣዩ ፎቶ',
       lead: 'በዳሞት ሶሬ፣ በጉኑኖ አቅራቢያ፣ ለአራት ትውልዶች የተጠበቀ የቤተሰብ ቅርስ ስፍራ።',
     },
     film: {
