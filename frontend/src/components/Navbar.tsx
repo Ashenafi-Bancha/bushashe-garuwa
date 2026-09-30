@@ -185,21 +185,17 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 inset-x-0 z-50 px-3 sm:px-5 pt-3">
-        {/* on the home photograph: no bar at all, just the words; everywhere else,
-            and once scrolling, a frosted pill that floats over the page */}
-        <div
-          className={`mx-auto max-w-screen-xl flex items-center justify-between gap-3 rounded-full border pl-2 pr-2 sm:pl-3 transition-all duration-500 ${
-            onPhoto ? 'bg-transparent border-transparent' : 'bg-white/85 backdrop-blur-xl border-white/60 shadow-[0_12px_40px_-18px_rgba(30,58,41,0.35)]'
-          } ${scrolled ? 'h-14 sm:h-16' : 'h-16 sm:h-[68px]'}`}
-        >
+      {/* part of the page, not a separate bar: on a photograph just the words;
+          otherwise the page's own paper colour, edge to edge, no border or shadow */}
+      <header className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${onPhoto ? 'bg-transparent' : 'bg-[#F4EFE4]'}`}>
+        <div className="mx-auto max-w-screen-xl h-16 sm:h-[72px] px-4 sm:px-8 flex items-center justify-between gap-3">
           <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group" aria-label={t.nav.homeAria}>
             <img
               src={logo}
               alt="Bushaashe Garuwa"
-              className={`rounded-full object-contain bg-white p-0.5 shadow-sm transition-all duration-500 group-hover:scale-105 ${scrolled ? 'w-10 h-10' : 'w-11 h-11'}`}
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-contain bg-white p-0.5 transition-transform duration-500 group-hover:scale-105"
             />
-            <span className={`font-display text-[15px] sm:text-[17px] font-bold tracking-tight whitespace-nowrap transition-colors duration-500 text-[#15A864] ${onPhoto ? '[text-shadow:1px_1px_0_#0A5F38,0_0_3px_rgba(0,0,0,0.9),0_0_14px_rgba(0,0,0,0.7)]' : '[text-shadow:1px_1px_0_#0C7A48]'}`}>Bushaashe Garuwa</span>
+            <span className="font-display text-[16px] sm:text-[18px] font-bold tracking-tight whitespace-nowrap text-[#15A864]">Bushaashe Garuwa</span>
           </Link>
 
           {/* computers: every way in, right in the bar */}
@@ -226,12 +222,13 @@ export default function Navbar() {
               aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
               aria-expanded={open}
               aria-controls="site-menu"
-              className={`lg:hidden grid place-items-center w-11 h-11 rounded-full transition-colors duration-300 ${open ? 'bg-[#1E3A29] text-[#F4EFE4]' : 'bg-[#86A94F] text-[#13261A]'}`}
+              className="lg:hidden grid place-items-center w-11 h-11 -mr-2 text-[#1E3A29]"
             >
-              <span className="relative block w-[18px] h-3">
-                <span className={`absolute left-0 right-0 h-[2px] rounded bg-current transition-all duration-500 ${open ? 'top-[5px] rotate-45' : 'top-0'}`} />
-                <span className={`absolute left-0 right-0 top-[5px] h-[2px] rounded bg-current transition-opacity duration-300 ${open ? 'opacity-0' : ''}`} />
-                <span className={`absolute left-0 right-0 h-[2px] rounded bg-current transition-all duration-500 ${open ? 'top-[5px] -rotate-45' : 'top-[10px]'}`} />
+              {/* a plain three-line icon that turns into a cross */}
+              <span className="relative block w-6 h-[18px]">
+                <span className={`absolute left-0 right-0 h-[2.5px] rounded-full bg-current transition-all duration-500 ${open ? 'top-[8px] rotate-45' : 'top-0'}`} />
+                <span className={`absolute left-0 right-0 top-[8px] h-[2.5px] rounded-full bg-current transition-opacity duration-300 ${open ? 'opacity-0' : ''}`} />
+                <span className={`absolute left-0 right-0 h-[2.5px] rounded-full bg-current transition-all duration-500 ${open ? 'top-[8px] -rotate-45' : 'top-[16px]'}`} />
               </span>
             </button>
           </div>

@@ -99,6 +99,7 @@ export default function Home() {
     setHeroIdx(n);
   };
   const { events: siteEvents } = useSiteEvents();
+  const [firstWord, ...rest] = h.hero.title.split(' ');
   const [showStickyCta, setShowStickyCta] = useState(false);
   const page = useRevealChildren<HTMLElement>();
 
@@ -135,7 +136,7 @@ export default function Home() {
             follow just below. Swipe on phones. */}
         <section className="relative" aria-label={h.hero.title}>
           <div
-            className="relative mt-[80px] sm:mt-[88px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[100svh] lg:min-h-[560px] overflow-hidden bg-[#13261A]"
+            className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[100svh] lg:min-h-[560px] overflow-hidden bg-[#13261A]"
             onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
             onTouchEnd={(e) => {
               const start = touchX.current; touchX.current = null;
@@ -182,10 +183,11 @@ export default function Home() {
 
           {/* the words, just below the photograph */}
           <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6">
-            {/* the name in the lettering of the main gate, raised in 3D, on one line that
-                grows with the screen so it always fits */}
+            {/* the name in the lettering of the main gate, raised in 3D, sized to the screen */}
             <h1 className="hero-name brand-sign brand-3d whitespace-nowrap leading-[1] mb-6 lg:mb-8">
-              <span className="line-mask"><span>{h.hero.title}</span></span>
+              {/* phones and tablets: two lines; computers: one line */}
+              <span className="line-mask"><span>{firstWord}</span></span>{' '}
+              <span className="line-mask d2"><span>{rest.join(' ')}</span></span>
             </h1>
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 animate-fade-up delay-300">
               <div className="max-w-xl">
