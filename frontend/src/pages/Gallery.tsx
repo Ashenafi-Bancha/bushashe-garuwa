@@ -12,6 +12,7 @@ type Filter = Category | 'all';
 /* `span` is the tile size in the full mosaic (All); it fills the 4-column grid exactly. */
 const items: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'gate', cat: 'grounds', span: 'sm:col-span-2 sm:row-span-2' },
+  { key: 'meeshsho', cat: 'culture', span: 'col-span-2' },
   { key: 'home', cat: 'grounds', span: 'col-span-2' },
   { key: 'gifaataa1', cat: 'culture', span: '' },
   { key: 'house', cat: 'grounds', span: 'sm:row-span-2' },

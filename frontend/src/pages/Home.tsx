@@ -15,6 +15,7 @@ import SwipeRow from '../components/SwipeRow';
 
 const heroSlides: { key: PhotoKey; pos: string }[] = [
   { key: 'gate', pos: 'object-[center_35%]' },
+  { key: 'meeshsho', pos: 'object-[center_45%]' },
   { key: 'home', pos: 'object-center' },
   { key: 'gifaataa1', pos: 'object-[center_40%]' },
   { key: 'house', pos: 'object-center' },
@@ -24,7 +25,7 @@ const heroSlides: { key: PhotoKey; pos: string }[] = [
 const SLIDE_MS = 6000;
 
 const livingHeritage = [
-  { id: 'houses', img: photos.house },
+  { id: 'houses', img: photos.meeshsho },
   { id: 'trees', img: photos.enset },
   { id: 'animals' },
   { id: 'artifacts' },

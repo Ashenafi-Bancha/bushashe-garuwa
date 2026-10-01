@@ -63,6 +63,7 @@ export const wal: DeepPartial<Dictionary> = {
   },
 
   photos: {
+    meeshsho: 'Meeshsho Keettaa: a traditional Wolaita house with a thatched dome and a carved wooden door, among enset plants',
     gate: 'Bushaashe Garuwa: the main gate with its carved tree-trunk pillars and the welcome sign',
     house: 'Bushaashe Garuwa: traditional thatched house, flags and grounds',
     pavilions: 'Bushaashe Garuwa: thatched pavilions and lush gardens',
@@ -78,6 +79,7 @@ export const wal: DeepPartial<Dictionary> = {
   },
 
   photoCaptions: {
+    meeshsho: { title: 'Meeshsho Keettaa', desc: 'A traditional Wolaita house: a thatched dome, woven walls and a carved door, standing among the enset.' },
     gate: { title: 'The Main Gate', desc: 'Two carved tree-trunk pillars, the welcome sign and the bamboo doors: the way into Bushaashe Garuwa.' },
     home: { title: 'The Heart of the Grounds', desc: 'The great traditional house, the fountain and the flags, set among the gardens.' },
     gifaataa1: { title: 'Arriving for Gifaataa', desc: 'Guests in traditional Wolaita dress walk through the heritage gate for the new year celebration.' },
@@ -246,7 +248,7 @@ export const wal: DeepPartial<Dictionary> = {
       eyebrow: 'In Every Corner',
       title: 'A Living Heritage',
       items: {
-        houses: { title: 'Cultural Houses', desc: 'Gulanttaa Keettaa and Meesho Keettaa: two traditional Wolaita houses holding the tools of Wolaita life.' },
+        houses: { title: 'Cultural Houses', desc: 'Gulanttaa Keettaa and Meeshsho Keettaa: two traditional Wolaita houses holding the tools of Wolaita life.' },
         trees: { title: 'Trees, Plants & Orchards', desc: 'Mango, apple, papaya, banana, more than 1,800 coffee trees, enset and fragrant garden plants.' },
         animals: { title: 'Animals & Zoo', desc: 'A small zoo of animals kept on the heritage grounds, a favourite with families.' },
         artifacts: { title: 'Cultural Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },
@@ -503,7 +505,7 @@ export const wal: DeepPartial<Dictionary> = {
     intro: 'Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one.',
     itemCount: '{count} items',
     categories: {
-      houses: { label: 'Cultural Houses', desc: 'Two traditional Wolaita houses, Gulanttaa Keettaa and Meesho Keettaa, full of the traditional tools and instruments of the Wolaita people.' },
+      houses: { label: 'Cultural Houses', desc: 'Two traditional Wolaita houses, Gulanttaa Keettaa and Meeshsho Keettaa, full of the traditional tools and instruments of the Wolaita people.' },
       trees: { label: 'Trees & Plants', desc: 'Heritage trees, mango, apple, papaya and banana, more than 1,800 coffee trees, enset and fragrant traditional garden plants.' },
       animals: { label: 'Animals & Zoo', desc: 'A small zoo where visitors meet the animals kept on the heritage grounds of Bushaashe Garuwa.' },
       artifacts: { label: 'Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },

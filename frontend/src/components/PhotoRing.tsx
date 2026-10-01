@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { photos, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 
-const RING: PhotoKey[] = ['gate', 'home', 'house', 'gifaataa1', 'food', 'pavilions', 'gifaataa2', 'gardens', 'zigba', 'lawn', 'enset'];
+const RING: PhotoKey[] = ['gate', 'meeshsho', 'home', 'house', 'gifaataa1', 'food', 'pavilions', 'gifaataa2', 'gardens', 'zigba', 'lawn', 'enset'];
 
 /** Photograph width in the ring, per screen size */
 const cardWidth = (viewport: number) => (viewport < 640 ? 200 : viewport < 1024 ? 260 : 320);

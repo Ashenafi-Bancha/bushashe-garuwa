@@ -6,7 +6,7 @@ import PageHero from '../components/PageHero';
 
 /* Page structure — the text for each id lives in the translations (t.heritage.*) */
 const categories = [
-  { id: 'houses', img: photos.house, count: 2, to: '/heritage/houses' },
+  { id: 'houses', img: photos.meeshsho, count: 2, to: '/heritage/houses' },
   { id: 'trees', img: photos.enset, count: 24, to: '/heritage/trees' },
   { id: 'animals', count: 15, to: '/heritage/animals' },
   { id: 'artifacts', count: 120, to: '/heritage/artifacts' },
@@ -16,8 +16,12 @@ const categories = [
   { id: 'stories', count: 60, to: '/heritage/stories' },
 ] as const;
 
-/* The two traditional houses keep their Wolaytta names in every language */
-const houseNames = ['Gulanttaa Keettaa', 'Meesho Keettaa'];
+/* The two traditional houses keep their Wolaytta names in every language.
+   A house without `img` shows the placeholder until its photograph is added. */
+const houses: { name: string; img?: string }[] = [
+  { name: 'Meeshsho Keettaa', img: photos.meeshsho },
+  { name: 'Gulanttaa Keettaa' },
+];
 
 /* The zigba keeps its Wolaytta and scientific names in every language */
 const ZIGBA = { wolaytta: 'Zigba', scientific: 'Podocarpus falcatus' };
@@ -30,7 +34,7 @@ export default function Heritage() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo={pathname.startsWith('/heritage/trees') ? 'zigba' : 'house'} eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
+      <PageHero photo={pathname.startsWith('/heritage/trees') ? 'zigba' : 'meeshsho'} pos="object-[center_45%]" eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
 
       {/* Heritage categories grid */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
@@ -56,26 +60,35 @@ export default function Heritage() {
         </div>
       </section>
 
-      {/* The two traditional houses */}
-      <section className="py-12 sm:py-16 lg:py-20">
-        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          <div className="img-zoom rounded-[2rem] aspect-[4/3] bg-[#1E3A29]/10">
-            <img src={photos.house} alt={t.photos.house} className="w-full h-full object-cover" loading="lazy" />
-          </div>
-          <div>
-            <span className="eyebrow bg-[#1E3A29]/10 text-[#1E3A29] mb-5">{hg.houses.eyebrow}</span>
-            <h2 className="font-display text-4xl sm:text-5xl text-[#1E3A29] leading-[1.05] mb-5">{hg.houses.title}</h2>
-            <p className="text-[#1E3A29]/65 text-base sm:text-lg leading-relaxed mb-8">{hg.houses.desc}</p>
-            <div className="grid sm:grid-cols-2 gap-4 mb-6">
-              {houseNames.map((name) => (
-                <div key={name} className="heritage-card bg-white p-6">
-                  <div className="text-[#C4622D] text-[11px] font-semibold tracking-[0.12em] uppercase mb-2">{hg.houses.label}</div>
-                  <div lang="wal" className="font-display text-2xl text-[#1E3A29]">{name}</div>
-                </div>
-              ))}
+      {/* The two traditional houses, each with its own photograph */}
+      <section id="houses" className="py-12 sm:py-16 lg:py-20">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-5 lg:gap-16 lg:items-end mb-10 sm:mb-12">
+            <div>
+              <span className="eyebrow mb-5">{hg.houses.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[1]">{hg.houses.title}</h2>
             </div>
-            <p className="text-[#1E3A29]/55 text-sm leading-relaxed">{hg.houses.inside}</p>
+            <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{hg.houses.desc}</p>
           </div>
+
+          <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
+            {houses.map((house, i) => (
+              <article key={house.name} className="bg-white rounded-[2rem] p-2.5 elev-1">
+                <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
+                  <Photo src={house.img} alt={house.name} label={house.name} loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <div className="p-5 sm:p-7">
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-[#0B6E40] text-sm font-bold tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="text-[#1E3A29]/65 text-sm font-semibold">{hg.houses.label}</span>
+                  </div>
+                  <h3 lang="wal" className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] tracking-[-0.03em]">{house.name}</h3>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <p className="mt-8 rounded-[1.5rem] bg-[#E3EBD8] text-[#13261A] text-sm sm:text-base leading-relaxed p-5 sm:p-6">{hg.houses.inside}</p>
         </div>
       </section>
 
