@@ -1,5 +1,6 @@
 import { randomInt } from 'node:crypto';
-import type { Database } from '../../db/database.js';
+import type { Database, Queryable } from '../../db/database.js';
+import { TODAY, dayOf, isUniqueViolation } from '../../db/sql.js';
 import type { Page, Pagination } from '../../http/pagination.js';
 import type { Booking, BookingStatus, CreateBooking } from './booking.schema.js';
 
@@ -14,9 +15,10 @@ type Row = {
   message: string | null;
   language: string;
   status: BookingStatus;
-  created_at: string;
+  created_at: Date;
+  /** 'YYYY-MM-DD' */
   event_date?: string;
-  translations?: string;
+  translations?: { en?: { name?: string } };
 };
 
 const toBooking = (row: Row): Booking => ({
@@ -24,7 +26,7 @@ const toBooking = (row: Row): Booking => ({
   eventId: row.event_id,
   reference: row.reference,
   eventDate: row.event_date,
-  eventName: row.translations ? JSON.parse(row.translations).en?.name : undefined,
+  eventName: row.translations?.en?.name,
   name: row.name,
   phone: row.phone,
   email: row.email,
@@ -32,7 +34,7 @@ const toBooking = (row: Row): Booking => ({
   message: row.message,
   language: row.language,
   status: row.status,
-  createdAt: row.created_at,
+  createdAt: row.created_at.toISOString(),
 });
 
 /** Same number written differently (0911 22 33 44 / +251911223344) counts as the same guest */
@@ -42,126 +44,142 @@ export const normalizePhone = (phone: string) => phone.replace(/[^0-9]/g, '').re
 const ALPHABET = '23456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 const makeReference = () => `BG-${Array.from({ length: 4 }, () => ALPHABET[randomInt(ALPHABET.length)]).join('')}`;
 
+/** What asking for places can end in */
+export type Reservation =
+  | { kind: 'created'; booking: Booking }
+  /** the same phone asked again: the booking already made */
+  | { kind: 'repeat'; booking: Booking }
+  /** not enough places; `placesLeft` is 0 when the event is full */
+  | { kind: 'no_room'; placesLeft: number }
+  /** the event was removed while the guest was filling in the form */
+  | { kind: 'gone' };
+
+/** The same person asking twice for the same event, within the given hours */
+async function recentByPhone(db: Queryable, eventId: number, phone: string, withinHours: number): Promise<Booking | undefined> {
+  const [row] = await db.query<Row>(
+    `SELECT * FROM event_bookings
+     WHERE event_id = $1 AND status != 'cancelled'
+       AND regexp_replace(phone, '[^0-9]', '', 'g') LIKE $2
+       AND created_at >= now() - make_interval(hours => $3::int)
+     ORDER BY created_at DESC LIMIT 1`,
+    [eventId, `%${normalizePhone(phone).slice(-9)}`, withinHours],
+  );
+  return row && toBooking(row);
+}
+
+/** Places held for one event (everything except cancelled bookings) */
+async function guestsHeld(db: Queryable, eventId: number): Promise<number> {
+  const [row] = await db.query<{ guests: number }>(
+    `SELECT COALESCE(SUM(guests), 0)::int AS guests FROM event_bookings WHERE event_id = $1 AND status != 'cancelled'`,
+    [eventId],
+  );
+  return row!.guests;
+}
+
 /** All SQL for event bookings. */
 export function bookingRepository(db: Database) {
   return {
-    create(eventId: number, input: Omit<CreateBooking, 'website'>): Booking {
+    /**
+     * Takes places at an event, if there is room.
+     *
+     * The event's row is locked for the length of the check and the insert, so
+     * two guests booking the last places at the same moment are served one
+     * after the other and the event can never be overbooked. `closed` refuses
+     * new bookings outright (an event without a limit that staff marked full).
+     */
+    async reserve(
+      eventId: number,
+      input: Omit<CreateBooking, 'website'>,
+      options: { repeatWindowHours: number; closed?: boolean },
+    ): Promise<Reservation> {
       // a clash on the short code is rare; try again with a new one
       for (let attempt = 0; attempt < 5; attempt++) {
         try {
-          const row = db
-            .prepare(
+          return await db.transaction(async (tx): Promise<Reservation> => {
+            const [event] = await tx.query<{ capacity: number | null }>('SELECT capacity FROM events WHERE id = $1 FOR UPDATE', [eventId]);
+            if (!event) return { kind: 'gone' };
+
+            const existing = await recentByPhone(tx, eventId, input.phone, options.repeatWindowHours);
+            if (existing) return { kind: 'repeat', booking: existing };
+
+            if (options.closed) return { kind: 'no_room', placesLeft: 0 };
+            if (event.capacity !== null) {
+              const left = Math.max(0, event.capacity - (await guestsHeld(tx, eventId)));
+              if (input.guests > left) return { kind: 'no_room', placesLeft: left };
+            }
+
+            const [row] = await tx.query<Row>(
               `INSERT INTO event_bookings (event_id, reference, name, phone, email, guests, message, language, status)
-               VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'pending') RETURNING *`,
-            )
-            .get(
-              eventId,
-              makeReference(),
-              input.name,
-              input.phone,
-              input.email ?? null,
-              input.guests,
-              input.message ?? null,
-              input.language,
-            ) as Row;
-          return toBooking(row);
+               VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 'pending') RETURNING *`,
+              [eventId, makeReference(), input.name, input.phone, input.email ?? null, input.guests, input.message ?? null, input.language],
+            );
+            return { kind: 'created', booking: toBooking(row!) };
+          });
         } catch (error) {
-          if (attempt === 4 || !String(error).includes('UNIQUE')) throw error;
+          if (attempt === 4 || !isUniqueViolation(error)) throw error;
         }
       }
       throw new Error('Could not create a booking reference');
     },
 
-    /** The same person asking twice for the same event, within the given hours */
-    findRecentByPhone(eventId: number, phone: string, withinHours: number): Booking | undefined {
-      const row = db
-        .prepare(
-          `SELECT * FROM event_bookings
-           WHERE event_id = ? AND status != 'cancelled'
-             AND replace(replace(replace(replace(phone, ' ', ''), '-', ''), '(', ''), ')', '') LIKE ?
-             AND created_at >= datetime('now', ?)
-           ORDER BY created_at DESC LIMIT 1`,
-        )
-        .get(eventId, `%${normalizePhone(phone).slice(-9)}`, `-${withinHours} hours`) as Row | undefined;
+    async findById(id: number): Promise<Booking | undefined> {
+      const [row] = await db.query<Row>('SELECT * FROM event_bookings WHERE id = $1', [id]);
       return row && toBooking(row);
     },
 
-    findById(id: number): Booking | undefined {
-      const row = db.prepare('SELECT * FROM event_bookings WHERE id = ?').get(id) as Row | undefined;
-      return row && toBooking(row);
-    },
-
-    findByReference(reference: string): Booking | undefined {
-      const row = db.prepare('SELECT * FROM event_bookings WHERE reference = ?').get(reference) as Row | undefined;
+    async findByReference(reference: string): Promise<Booking | undefined> {
+      const [row] = await db.query<Row>('SELECT * FROM event_bookings WHERE reference = $1', [reference]);
       return row && toBooking(row);
     },
 
     /** Bookings with their event, newest first; `eventId` narrows it to one event */
-    list(
+    async list(
       { page, pageSize }: Pagination,
       filter: { eventId?: number; status?: BookingStatus; search?: string } = {},
-    ): Page<Booking> {
+    ): Promise<Page<Booking>> {
       const where: string[] = [];
       const params: (string | number)[] = [];
-      if (filter.eventId) {
-        where.push('b.event_id = ?');
-        params.push(filter.eventId);
-      }
-      if (filter.status) {
-        where.push('b.status = ?');
-        params.push(filter.status);
-      }
+      const param = (value: string | number) => `$${params.push(value)}`;
+      if (filter.eventId) where.push(`b.event_id = ${param(filter.eventId)}`);
+      if (filter.status) where.push(`b.status = ${param(filter.status)}`);
       if (filter.search) {
         // the name, the phone, the email, the note, or the booking's short code
-        where.push('(b.name LIKE ? OR b.phone LIKE ? OR b.email LIKE ? OR b.message LIKE ? OR b.reference LIKE ?)');
-        const like = `%${filter.search}%`;
-        params.push(like, like, like, like, like);
+        const like = param(`%${filter.search}%`);
+        where.push(`(b.name ILIKE ${like} OR b.phone ILIKE ${like} OR b.email ILIKE ${like} OR b.message ILIKE ${like} OR b.reference ILIKE ${like})`);
       }
       const clause = where.length ? `WHERE ${where.join(' AND ')}` : '';
-      const rows = db
-        .prepare(
-          `SELECT b.*, e.event_date, e.translations
-           FROM event_bookings b JOIN events e ON e.id = b.event_id
-           ${clause} ORDER BY b.created_at DESC, b.id DESC LIMIT ? OFFSET ?`,
-        )
-        .all(...params, pageSize, (page - 1) * pageSize) as Row[];
-      const { total } = db
-        .prepare(`SELECT COUNT(*) AS total FROM event_bookings b ${clause}`)
-        .get(...params) as { total: number };
-      return { items: rows.map(toBooking), page, pageSize, total };
+      const [count] = await db.query<{ total: number }>(`SELECT COUNT(*)::int AS total FROM event_bookings b ${clause}`, params);
+      const rows = await db.query<Row>(
+        `SELECT b.*, e.event_date, e.translations
+         FROM event_bookings b JOIN events e ON e.id = b.event_id
+         ${clause} ORDER BY b.created_at DESC, b.id DESC LIMIT ${param(pageSize)} OFFSET ${param((page - 1) * pageSize)}`,
+        params,
+      );
+      return { items: rows.map(toBooking), page, pageSize, total: count!.total };
     },
 
-    updateStatus(id: number, status: BookingStatus): Booking | undefined {
+    async updateStatus(id: number, status: BookingStatus): Promise<Booking | undefined> {
       // handled means moved off 'pending'; back to pending clears the mark
-      const row = db
-        .prepare(
-          `UPDATE event_bookings
-              SET status = ?, handled_at = CASE WHEN ? = 'pending' THEN NULL ELSE strftime('%Y-%m-%dT%H:%M:%fZ', 'now') END
-            WHERE id = ? RETURNING *`,
-        )
-        .get(status, status, id) as Row | undefined;
+      const [row] = await db.query<Row>(
+        `UPDATE event_bookings
+            SET status = $1, handled_at = CASE WHEN $1 = 'pending' THEN NULL ELSE now() END
+          WHERE id = $2 RETURNING *`,
+        [status, id],
+      );
       return row && toBooking(row);
     },
 
-    /** Places held for one event (everything except cancelled bookings) */
-    guestsForEvent(eventId: number): number {
-      const row = db
-        .prepare(`SELECT COALESCE(SUM(guests), 0) AS guests FROM event_bookings WHERE event_id = ? AND status != 'cancelled'`)
-        .get(eventId) as { guests: number };
-      return row.guests;
-    },
+    guestsForEvent: (eventId: number) => guestsHeld(db, eventId),
 
-    stats(): { total: number; pending: number; guestsUpcoming: number; handledToday: number } {
-      const row = db
-        .prepare(
-          `SELECT COUNT(*) AS total,
-                  SUM(b.status = 'pending') AS pending,
-                  SUM(date(b.handled_at) = date('now')) AS handled,
-                  COALESCE(SUM(CASE WHEN e.event_date >= date('now') AND b.status != 'cancelled' THEN b.guests END), 0) AS guests
-           FROM event_bookings b JOIN events e ON e.id = b.event_id`,
-        )
-        .get() as { total: number; pending: number | null; handled: number | null; guests: number };
-      return { total: row.total, pending: row.pending ?? 0, guestsUpcoming: row.guests, handledToday: row.handled ?? 0 };
+    async stats(): Promise<{ total: number; pending: number; guestsUpcoming: number; handledToday: number }> {
+      const [row] = await db.query<{ total: number; pending: number; handled: number; guests: number }>(
+        `SELECT COUNT(*)::int AS total,
+                COUNT(*) FILTER (WHERE b.status = 'pending')::int AS pending,
+                COUNT(*) FILTER (WHERE ${dayOf('b.handled_at')} = ${TODAY})::int AS handled,
+                COALESCE(SUM(b.guests) FILTER (WHERE e.event_date >= ${TODAY} AND b.status != 'cancelled'), 0)::int AS guests
+         FROM event_bookings b JOIN events e ON e.id = b.event_id`,
+      );
+      return { total: row!.total, pending: row!.pending, guestsUpcoming: row!.guests, handledToday: row!.handled };
     },
   };
 }

@@ -30,15 +30,16 @@ export function adminRoutes(
     sendData(res, { signedIn: true });
   });
 
-  router.get('/summary', (_req, res) => {
-    sendData(res, {
-      contact: repositories.contact.stats(),
-      visits: repositories.visits.stats(),
-      events: repositories.events.stats(),
-      bookings: repositories.bookings.stats(),
-      content: { edited: repositories.content.count(), lastUpdatedAt: repositories.content.lastUpdatedAt() },
-      generatedAt: new Date().toISOString(),
-    });
+  router.get('/summary', async (_req, res) => {
+    const [contact, visits, events, bookings, edited, lastUpdatedAt] = await Promise.all([
+      repositories.contact.stats(),
+      repositories.visits.stats(),
+      repositories.events.stats(),
+      repositories.bookings.stats(),
+      repositories.content.count(),
+      repositories.content.lastUpdatedAt(),
+    ]);
+    sendData(res, { contact, visits, events, bookings, content: { edited, lastUpdatedAt }, generatedAt: new Date().toISOString() });
   });
 
   return router;

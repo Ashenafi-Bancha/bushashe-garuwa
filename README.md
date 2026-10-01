@@ -15,7 +15,7 @@ bushaashe-garuwa/
 │   ├── photos-originals/  Full-size original photos, sorted by section
 │   ├── scripts/           optimize-photos.py (pnpm photos)
 │   └── public/            Favicon and icons
-├── backend/               The API (Node.js, Express, TypeScript, SQLite)
+├── backend/               The API (Node.js, Express, TypeScript, PostgreSQL)
 │   ├── src/
 │   │   ├── modules/       One folder per feature: contact, visits, admin, health
 │   │   ├── container.ts   Composition root: repositories, services, guards
@@ -31,7 +31,7 @@ bushaashe-garuwa/
 
 ## Requirements
 
-- Node.js 22.13 or newer (the backend uses Node's built-in SQLite)
+- Node.js 22 or newer (no database to install: the API runs an embedded PostgreSQL in development)
 - pnpm
 - Python 3 with Pillow, only for `pnpm photos`
 
@@ -90,5 +90,5 @@ correct even when the API is offline. Edits and events appear within a minute.
 ## Deployment
 
 - **Website:** Vercel builds it from GitHub using `vercel.json` (builds `frontend/`, publishes `frontend/dist`).
-- **API:** needs a Node.js host with a persistent disk for the SQLite file (for example Render, Railway, Fly.io or a VPS). See `backend/README.md`.
+- **API:** needs a Node.js host and a PostgreSQL database; set `DATABASE_URL` on the API to the database's address. See `backend/README.md`.
   Then set `VITE_API_URL` in Vercel to the API's public address and `CORS_ORIGINS` on the API to the website's address.

@@ -1,46 +1,144 @@
-import { mkdirSync } from 'node:fs';
-import { dirname } from 'node:path';
-import { DatabaseSync } from 'node:sqlite';
+import type { Env } from '../config/env.js';
 import { logger } from '../lib/logger.js';
 import { migrations } from './migrations.js';
 
-export type Database = DatabaseSync;
+/** Runs SQL: the database itself, or one open transaction */
+export interface Queryable {
+  /** Runs one statement and returns its rows */
+  query<T = Record<string, unknown>>(sql: string, params?: readonly unknown[]): Promise<T[]>;
+  /** Runs one statement and returns how many rows it changed */
+  execute(sql: string, params?: readonly unknown[]): Promise<number>;
+  /** Runs a script of several statements, without parameters (migrations) */
+  script(sql: string): Promise<void>;
+}
+
+export interface Database extends Queryable {
+  /** Everything inside `work` is saved together, or not at all */
+  transaction<T>(work: (tx: Queryable) => Promise<T>): Promise<T>;
+  close(): Promise<void>;
+}
+
+/** PostgreSQL's own type number for DATE: kept as the plain 'YYYY-MM-DD' text, never a JS Date */
+const DATE_TYPE = 1082;
+const dateAsText = (value: string) => value;
 
 /**
- * Opens the SQLite database (Node's built-in driver, no native add-ons to install)
- * and brings it up to date. Pass ':memory:' for a throwaway database in tests.
+ * Opens the PostgreSQL database and brings it up to date.
+ *
+ * With DATABASE_URL set, this connects to that PostgreSQL server (the hosted
+ * database). Without it, outside production, an embedded PostgreSQL keeps its
+ * files in DEV_DATABASE_DIR, so there is no database server to install on a
+ * developer's computer.
  */
-export function openDatabase(path: string): Database {
-  if (path !== ':memory:') mkdirSync(dirname(path), { recursive: true });
+export async function openDatabase(env: Env): Promise<Database> {
+  if (env.DATABASE_URL) return ready(await connectPostgres(env));
+  if (env.NODE_ENV === 'production') {
+    throw new Error('DATABASE_URL is not set: in production the API needs a PostgreSQL database');
+  }
+  logger.info(`database: no DATABASE_URL, using the embedded PostgreSQL in ${env.DEV_DATABASE_DIR}`);
+  return ready(await openEmbedded(env.DEV_DATABASE_DIR));
+}
 
-  const db = new DatabaseSync(path);
-  db.exec('PRAGMA journal_mode = WAL; PRAGMA foreign_keys = ON; PRAGMA busy_timeout = 5000;');
-  migrate(db);
+/** A throwaway PostgreSQL in memory, for tests */
+export async function openMemoryDatabase(): Promise<Database> {
+  return ready(await openEmbedded());
+}
+
+async function ready(db: Database): Promise<Database> {
+  await migrate(db);
   return db;
 }
 
-function migrate(db: Database): void {
-  db.exec(`CREATE TABLE IF NOT EXISTS schema_migrations (
-    id INTEGER PRIMARY KEY,
-    name TEXT NOT NULL,
-    applied_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ', 'now'))
-  )`);
+/* ── the hosted database: PostgreSQL over the network ── */
 
-  const applied = new Set(
-    (db.prepare('SELECT id FROM schema_migrations').all() as { id: number }[]).map((row) => row.id),
-  );
+async function connectPostgres(env: Env): Promise<Database> {
+  const { default: pg } = await import('pg');
+  pg.types.setTypeParser(DATE_TYPE, dateAsText);
 
-  for (const migration of migrations) {
-    if (applied.has(migration.id)) continue;
-    db.exec('BEGIN');
-    try {
-      db.exec(migration.sql);
-      db.prepare('INSERT INTO schema_migrations (id, name) VALUES (?, ?)').run(migration.id, migration.name);
-      db.exec('COMMIT');
+  const pool = new pg.Pool({
+    connectionString: env.DATABASE_URL,
+    ssl: env.DATABASE_SSL === 'off' ? false : { rejectUnauthorized: env.DATABASE_SSL === 'require' },
+    max: 10,
+    idleTimeoutMillis: 30_000,
+    connectionTimeoutMillis: 10_000,
+  });
+  // a dropped idle connection must not take the whole API down
+  pool.on('error', (error) => logger.error('database: idle connection error', { error: String(error) }));
+
+  type Runner = { query: (sql: string, params?: unknown[]) => Promise<{ rows: unknown[]; rowCount: number | null }> };
+  const wrap = (runner: Runner): Queryable => ({
+    query: async <T>(sql: string, params: readonly unknown[] = []) => (await runner.query(sql, [...params])).rows as T[],
+    execute: async (sql, params = []) => (await runner.query(sql, [...params])).rowCount ?? 0,
+    script: async (sql) => void (await runner.query(sql)),
+  });
+
+  await pool.query('SELECT 1'); // fail at start-up, with a clear error, if the database cannot be reached
+
+  return {
+    ...wrap(pool),
+    async transaction(work) {
+      const client = await pool.connect();
+      try {
+        await client.query('BEGIN');
+        const result = await work(wrap(client));
+        await client.query('COMMIT');
+        return result;
+      } catch (error) {
+        await client.query('ROLLBACK').catch(() => undefined);
+        throw error;
+      } finally {
+        client.release();
+      }
+    },
+    close: () => pool.end(),
+  };
+}
+
+/* ── development and tests: PostgreSQL inside this process (PGlite) ── */
+
+async function openEmbedded(dataDir?: string): Promise<Database> {
+  const { PGlite } = await import('@electric-sql/pglite');
+  const lite = new PGlite({ dataDir, parsers: { [DATE_TYPE]: dateAsText } });
+  await lite.waitReady;
+
+  type Runner = {
+    query: (sql: string, params?: unknown[]) => Promise<{ rows: unknown[]; affectedRows?: number }>;
+    exec: (sql: string) => Promise<unknown>;
+  };
+  const wrap = (runner: Runner): Queryable => ({
+    query: async <T>(sql: string, params: readonly unknown[] = []) => (await runner.query(sql, [...params])).rows as T[],
+    execute: async (sql, params = []) => (await runner.query(sql, [...params])).affectedRows ?? 0,
+    script: async (sql) => void (await runner.exec(sql)),
+  });
+
+  return {
+    ...wrap(lite),
+    transaction: <T>(work: (tx: Queryable) => Promise<T>) => lite.transaction((tx) => work(wrap(tx))) as Promise<T>,
+    close: () => lite.close(),
+  };
+}
+
+/* ── migrations ── */
+
+/** Any fixed number: two API instances starting together take turns instead of colliding */
+const MIGRATION_LOCK = 20261001;
+
+async function migrate(db: Database): Promise<void> {
+  await db.transaction(async (tx) => {
+    await tx.query('SELECT pg_advisory_xact_lock($1)', [MIGRATION_LOCK]);
+    await tx.script(`CREATE TABLE IF NOT EXISTS schema_migrations (
+      id          INTEGER PRIMARY KEY,
+      name        TEXT NOT NULL,
+      applied_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+    )`);
+
+    const applied = new Set((await tx.query<{ id: number }>('SELECT id FROM schema_migrations')).map((row) => row.id));
+
+    for (const migration of migrations) {
+      if (applied.has(migration.id)) continue;
+      await tx.script(migration.sql);
+      await tx.execute('INSERT INTO schema_migrations (id, name) VALUES ($1, $2)', [migration.id, migration.name]);
       logger.info(`database: applied migration ${migration.id} (${migration.name})`);
-    } catch (error) {
-      db.exec('ROLLBACK');
-      throw error;
     }
-  }
+  });
 }

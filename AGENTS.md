@@ -32,7 +32,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 - `backend/src/container.ts` - Composition root: repositories, services and route guards
 - `backend/src/http/` - Plumbing shared by modules: validate, error-handler, rate-limit, require-admin, guards, pagination, respond
 - `backend/src/modules/<feature>/` - `*.schema.ts` (zod), `*.repository.ts` (SQL), `*.service.ts` (rules), `*.routes.ts` (endpoints)
-- `backend/src/db/migrations.ts` - Append-only list of database changes
+- `backend/src/db/migrations.ts` - Append-only list of database changes (PostgreSQL); `db/database.ts` connects, `db/sql.ts` holds shared SQL
 - Modules: `contact`, `visits`, `content` (edited website text), `events` (events and bookings), `admin` (session and counts), `health`
 - `backend/test/` - API tests (`pnpm test`)
 
@@ -45,7 +45,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 ## Dependencies
 
 - Website: React 19, React Router 7, Lenis, Tailwind CSS v4 (`@tailwindcss/vite`), Vite 8, TypeScript 5.7, oxfmt
-- API: Express 5, zod 4, helmet, cors, Node's built-in `node:sqlite`, tsx for development
+- API: Express 5, zod 4, helmet, cors, PostgreSQL (`pg`; an embedded PGlite in development and tests), tsx for development
 
 ## Styling
 

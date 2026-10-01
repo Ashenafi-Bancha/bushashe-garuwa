@@ -3,7 +3,7 @@ import type { AddressInfo } from 'node:net';
 import { after, before, describe, it } from 'node:test';
 import { createApp } from '../src/app.js';
 import { loadEnv } from '../src/config/env.js';
-import { openDatabase } from '../src/db/database.js';
+import { openTestDatabase } from './helpers/database.js';
 import { memoryMailer } from '../src/modules/notifications/mailer.js';
 
 process.env.NODE_ENV = 'test'; // keeps the logger quiet
@@ -15,17 +15,17 @@ const lastYear = '2020-05-01';
 let base = '';
 /** emails the API would have sent, kept in memory */
 const outbox = memoryMailer();
-let close: () => void;
+let close: () => Promise<void>;
 
 before(async () => {
   const env = loadEnv({ NODE_ENV: 'test', ADMIN_API_KEY: ADMIN_KEY, FORM_RATE_LIMIT: '50', STAFF_EMAIL: 'staff@bushaashegaruwa.com' });
-  const db = openDatabase(':memory:');
+  const db = await openTestDatabase();
   const server = createApp(env, db, { mailer: outbox }).listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api`;
-  close = () => {
+  close = async () => {
     server.close();
-    db.close();
+    await db.close();
   };
 });
 after(() => close());
@@ -324,5 +324,28 @@ describe('emails', () => {
     await settle();
     assert.equal(outbox.sent.filter((m) => m.kind === 'booking-received').length, 0);
     assert.equal(outbox.sent.filter((m) => m.kind === 'staff-new-booking').length, 1);
+  });
+});
+
+describe('two guests asking at the same moment', () => {
+  it('never gives the last places out twice', async () => {
+    const created = await read(
+      await staff('/v1/events/admin', {
+        method: 'POST',
+        body: JSON.stringify({ ...culturalFood, capacity: 4, translations: { en: { name: 'Small evening' } } }),
+      }),
+    );
+    const id = created.data.id;
+
+    // six different guests, three places each, all sent at once: only one can fit
+    const answers = await Promise.all(
+      Array.from({ length: 6 }, (_, i) => post(`/v1/events/${id}/bookings`, { name: `Guest ${i}`, phone: `09220000${10 + i}`, guests: 3 })),
+    );
+    const statuses = answers.map((res) => res.status).sort();
+    assert.deepEqual(statuses, [201, 409, 409, 409, 409, 409]);
+
+    const events = await read(await staff('/v1/events/admin'));
+    const small = events.data.items.find((e: any) => e.id === id);
+    assert.equal(small.placesLeft, 1, 'three of the four places are taken, once');
   });
 });

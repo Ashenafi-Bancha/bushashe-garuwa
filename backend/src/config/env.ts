@@ -8,7 +8,12 @@ const EnvSchema = z.object({
     .string()
     .default('http://localhost:8443')
     .transform((value) => value.split(',').map((origin) => origin.trim()).filter(Boolean)),
-  DATABASE_PATH: z.string().min(1).default('./data/bushaashe.db'),
+  /** The PostgreSQL database, e.g. postgres://user:password@host:5432/bushaashe. Required in production. */
+  DATABASE_URL: z.string().trim().default(''),
+  /** off: no encryption (same private network); require: encrypted and the certificate checked; no-verify: encrypted, certificate not checked */
+  DATABASE_SSL: z.enum(['off', 'require', 'no-verify']).default('off'),
+  /** Development only: where the embedded PostgreSQL keeps its files while DATABASE_URL is empty */
+  DEV_DATABASE_DIR: z.string().min(1).default('./data/pgdata'),
   ADMIN_API_KEY: z
     .string()
     .default('')

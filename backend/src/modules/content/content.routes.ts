@@ -17,23 +17,23 @@ const PublicQuery = z.object({ lang: z.enum(['en', 'am', 'wal']).default('en') }
 export function contentRoutes(service: ContentService, guards: Guards) {
   const router = Router();
 
-  router.get('/', validateQuery(PublicQuery), (_req, res) => {
+  router.get('/', validateQuery(PublicQuery), async (_req, res) => {
     const { lang } = res.locals.query as z.infer<typeof PublicQuery>;
     res.setHeader('Cache-Control', 'public, max-age=60');
-    sendData(res, service.published(lang));
+    sendData(res, await service.published(lang));
   });
 
-  router.get('/admin', ...guards.admin, validateQuery(ContentQuery), (_req, res) => {
-    sendData(res, { items: service.list(res.locals.query as z.infer<typeof ContentQuery>) });
+  router.get('/admin', ...guards.admin, validateQuery(ContentQuery), async (_req, res) => {
+    sendData(res, { items: await service.list(res.locals.query as z.infer<typeof ContentQuery>) });
   });
 
-  router.put('/admin', ...guards.admin, validateBody(SaveContentBatch), (req, res) => {
-    sendData(res, { saved: service.save(req.body.entries) });
+  router.put('/admin', ...guards.admin, validateBody(SaveContentBatch), async (req, res) => {
+    sendData(res, { saved: await service.save(req.body.entries) });
   });
 
-  router.delete('/admin/:key', ...guards.admin, validateQuery(z.object({ lang: ContentLang })), (req, res) => {
+  router.delete('/admin/:key', ...guards.admin, validateQuery(z.object({ lang: ContentLang })), async (req, res) => {
     const { lang } = res.locals.query as { lang: z.infer<typeof ContentLang> };
-    service.reset(req.params.key as string, lang);
+    await service.reset(req.params.key as string, lang);
     sendData(res, { reset: true });
   });
 

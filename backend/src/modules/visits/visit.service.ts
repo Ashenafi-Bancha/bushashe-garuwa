@@ -10,12 +10,12 @@ import type { Notifier } from '../notifications/notifier.js';
 export function visitService(repo: VisitRepository, notify?: Notifier) {
   return {
     /** Returns null for spam caught by the hidden field: nothing is saved, but the sender sees success. */
-    submit({ website, ...input }: CreateVisitRequest) {
+    async submit({ website, ...input }: CreateVisitRequest) {
       if (website) {
         logger.warn('visits: spam submission ignored');
         return null;
       }
-      const visit = repo.create(input);
+      const visit = await repo.create(input);
       logger.info('visits: new request', { id: visit.id, date: visit.date, visitors: visit.visitors });
       notify?.visitReceived(visit);
       return visit;
@@ -23,8 +23,8 @@ export function visitService(repo: VisitRepository, notify?: Notifier) {
 
     list: (pagination: Pagination, options?: { upcoming?: boolean; search?: string }) => repo.list(pagination, options),
 
-    setStatus(id: number, status: RequestStatus) {
-      const updated = repo.updateStatus(id, status);
+    async setStatus(id: number, status: RequestStatus) {
+      const updated = await repo.updateStatus(id, status);
       if (!updated) throw HttpError.notFound('Visit request not found');
       return updated;
     },

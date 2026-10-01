@@ -10,12 +10,12 @@ import type { Notifier } from '../notifications/notifier.js';
 export function contactService(repo: ContactRepository, notify?: Notifier) {
   return {
     /** Returns null for spam caught by the hidden field: nothing is saved, but the sender sees success. */
-    submit({ website, ...input }: CreateContactMessage) {
+    async submit({ website, ...input }: CreateContactMessage) {
       if (website) {
         logger.warn('contact: spam submission ignored');
         return null;
       }
-      const message = repo.create(input);
+      const message = await repo.create(input);
       logger.info('contact: new message', { id: message.id, language: message.language });
       notify?.messageReceived(message);
       return message;
@@ -23,8 +23,8 @@ export function contactService(repo: ContactRepository, notify?: Notifier) {
 
     list: (pagination: Pagination, filter?: { search?: string }) => repo.list(pagination, filter),
 
-    setStatus(id: number, status: RequestStatus) {
-      const updated = repo.updateStatus(id, status);
+    async setStatus(id: number, status: RequestStatus) {
+      const updated = await repo.updateStatus(id, status);
       if (!updated) throw HttpError.notFound('Message not found');
       return updated;
     },

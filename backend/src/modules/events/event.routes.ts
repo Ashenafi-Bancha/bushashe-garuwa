@@ -31,46 +31,46 @@ export function eventRoutes(service: EventService, bookings: BookingService, gua
   const router = Router();
 
   // bookings are listed before /admin/:id so "bookings" is not read as an id
-  router.get('/admin/bookings', ...guards.admin, validateQuery(BookingListQuery), (_req, res) => {
+  router.get('/admin/bookings', ...guards.admin, validateQuery(BookingListQuery), async (_req, res) => {
     const { eventId, status, q, ...pagination } = res.locals.query as z.infer<typeof BookingListQuery>;
-    sendData(res, bookings.list(pagination, { eventId, status, search: q }));
+    sendData(res, await bookings.list(pagination, { eventId, status, search: q }));
   });
 
-  router.patch('/admin/bookings/:id/status', ...guards.admin, validateBody(UpdateBookingStatus), (req, res) => {
-    sendData(res, bookings.setStatus(parseId(req.params.id), req.body.status));
+  router.patch('/admin/bookings/:id/status', ...guards.admin, validateBody(UpdateBookingStatus), async (req, res) => {
+    sendData(res, await bookings.setStatus(parseId(req.params.id), req.body.status));
   });
 
-  router.post('/:id/bookings', ...guards.form, validateBody(CreateBooking), (req, res) => {
+  router.post('/:id/bookings', ...guards.form, validateBody(CreateBooking), async (req, res) => {
     const eventId = parseId(req.params.id);
-    const booking = bookings.book(eventId, req.body);
+    const booking = await bookings.book(eventId, req.body);
     // the reference is what the guest quotes when they call us
     sendData(
       res,
-      { id: booking?.id ?? null, reference: booking?.reference ?? null, received: true, placesLeft: bookings.placesLeftFor(eventId) },
+      { id: booking?.id ?? null, reference: booking?.reference ?? null, received: true, placesLeft: await bookings.placesLeftFor(eventId) },
       201,
     );
   });
 
-  router.get('/', (_req, res) => {
+  router.get('/', async (_req, res) => {
     // short: the places left change as people book
     res.setHeader('Cache-Control', 'public, max-age=15');
-    sendData(res, { items: service.published() });
+    sendData(res, { items: await service.published() });
   });
 
-  router.get('/admin', ...guards.admin, (_req, res) => {
-    sendData(res, { items: service.all() });
+  router.get('/admin', ...guards.admin, async (_req, res) => {
+    sendData(res, { items: await service.all() });
   });
 
-  router.post('/admin', ...guards.admin, validateBody(SaveEvent), (req, res) => {
-    sendData(res, service.create(req.body), 201);
+  router.post('/admin', ...guards.admin, validateBody(SaveEvent), async (req, res) => {
+    sendData(res, await service.create(req.body), 201);
   });
 
-  router.put('/admin/:id', ...guards.admin, validateBody(SaveEvent), (req, res) => {
-    sendData(res, service.update(parseId(req.params.id), req.body));
+  router.put('/admin/:id', ...guards.admin, validateBody(SaveEvent), async (req, res) => {
+    sendData(res, await service.update(parseId(req.params.id), req.body));
   });
 
-  router.delete('/admin/:id', ...guards.admin, (req, res) => {
-    service.remove(parseId(req.params.id));
+  router.delete('/admin/:id', ...guards.admin, async (req, res) => {
+    await service.remove(parseId(req.params.id));
     sendData(res, { removed: true });
   });
 

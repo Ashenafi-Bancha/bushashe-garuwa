@@ -1,7 +1,8 @@
 # Bushaashe Garuwa API
 
 Receives the website's forms and keeps them for the staff.
-Node.js 22.13+, Express 5, TypeScript, zod for validation, and Node's built-in SQLite (no database server to install).
+Node.js 22+, Express 5, TypeScript, zod for validation, and PostgreSQL. On a developer's computer an embedded
+PostgreSQL runs inside the API, so there is no database server to install.
 
 ## Structure
 
@@ -12,8 +13,9 @@ src/
 ├── container.ts           Composition root: builds repositories, services and guards
 ├── config/env.ts          Settings from environment variables, checked at start-up
 ├── db/
-│   ├── database.ts        Opens SQLite and applies migrations
-│   └── migrations.ts      Database changes, in order
+│   ├── database.ts        Connects to PostgreSQL and applies migrations
+│   ├── migrations.ts      Database changes, in order
+│   └── sql.ts             Shared SQL pieces ("today" in Ethiopia)
 ├── http/                  Plumbing shared by every module: validate, error-handler,
 │                          rate-limit, require-admin, guards, pagination, respond
 ├── lib/                   logger
@@ -116,5 +118,22 @@ pnpm test
 pnpm build && pnpm start # production
 ```
 
-The database file is created at `DATABASE_PATH` (default `./data/bushaashe.db`) and is not committed to Git.
-On a host, put it on a persistent disk and back it up.
+## Database
+
+PostgreSQL. The tables are created and kept up to date automatically when the API starts
+(`src/db/migrations.ts`).
+
+- **On a host:** set `DATABASE_URL` to the database's address (and `DATABASE_SSL` if the
+  provider asks for an encrypted connection). With `NODE_ENV=production` the API refuses to
+  start without it.
+- **On your computer:** leave `DATABASE_URL` empty. An embedded PostgreSQL keeps its files in
+  `DEV_DATABASE_DIR` (default `./data/pgdata`, not committed to Git).
+- **Tests:** `pnpm test` uses an in-memory PostgreSQL. To run them against a real server, give
+  an account that may create databases; each test file makes its own and removes it afterwards:
+
+  ```bash
+  TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5432/postgres pnpm test
+  ```
+
+Dates such as "today" and "handled today" follow the day in Ethiopia (Africa/Addis_Ababa),
+wherever the server runs.

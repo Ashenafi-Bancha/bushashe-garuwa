@@ -24,18 +24,18 @@ const ListQuery = PaginationQuery.extend({
 export function visitRoutes(service: VisitService, guards: Guards) {
   const router = Router();
 
-  router.post('/', ...guards.form, validateBody(CreateVisitRequest), (req, res) => {
-    const visit = service.submit(req.body);
+  router.post('/', ...guards.form, validateBody(CreateVisitRequest), async (req, res) => {
+    const visit = await service.submit(req.body);
     sendData(res, { id: visit?.id ?? null, received: true }, 201);
   });
 
-  router.get('/', ...guards.admin, validateQuery(ListQuery), (_req, res) => {
+  router.get('/', ...guards.admin, validateQuery(ListQuery), async (_req, res) => {
     const { upcoming, q, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
-    sendData(res, service.list(pagination, { upcoming, search: q }));
+    sendData(res, await service.list(pagination, { upcoming, search: q }));
   });
 
-  router.patch('/:id/status', ...guards.admin, validateBody(UpdateVisitStatus), (req, res) => {
-    sendData(res, service.setStatus(parseId(req.params.id), req.body.status));
+  router.patch('/:id/status', ...guards.admin, validateBody(UpdateVisitStatus), async (req, res) => {
+    sendData(res, await service.setStatus(parseId(req.params.id), req.body.status));
   });
 
   return router;

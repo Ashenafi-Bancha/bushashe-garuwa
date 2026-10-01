@@ -18,18 +18,18 @@ const ListQuery = PaginationQuery.extend({ q: SearchQuery });
 export function contactRoutes(service: ContactService, guards: Guards) {
   const router = Router();
 
-  router.post('/', ...guards.form, validateBody(CreateContactMessage), (req, res) => {
-    const message = service.submit(req.body);
+  router.post('/', ...guards.form, validateBody(CreateContactMessage), async (req, res) => {
+    const message = await service.submit(req.body);
     sendData(res, { id: message?.id ?? null, received: true }, 201);
   });
 
-  router.get('/', ...guards.admin, validateQuery(ListQuery), (_req, res) => {
+  router.get('/', ...guards.admin, validateQuery(ListQuery), async (_req, res) => {
     const { q, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
-    sendData(res, service.list(pagination, { search: q }));
+    sendData(res, await service.list(pagination, { search: q }));
   });
 
-  router.patch('/:id/status', ...guards.admin, validateBody(UpdateContactStatus), (req, res) => {
-    sendData(res, service.setStatus(parseId(req.params.id), req.body.status));
+  router.patch('/:id/status', ...guards.admin, validateBody(UpdateContactStatus), async (req, res) => {
+    sendData(res, await service.setStatus(parseId(req.params.id), req.body.status));
   });
 
   return router;

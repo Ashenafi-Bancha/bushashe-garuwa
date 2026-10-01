@@ -7,27 +7,27 @@ import type { ContentLang, SaveContentEntry } from './content.schema.js';
 export function contentService(repo: ContentRepository) {
   return {
     /** What the public website asks for: one flat map of key to text */
-    published(lang: Exclude<ContentLang, '*'>) {
-      return { lang, entries: repo.forLanguage(lang), updatedAt: repo.lastUpdatedAt() };
+    async published(lang: Exclude<ContentLang, '*'>) {
+      return { lang, entries: await repo.forLanguage(lang), updatedAt: await repo.lastUpdatedAt() };
     },
 
     list: (filter: { lang?: ContentLang; prefix?: string }) => repo.list(filter),
 
-    save(entries: SaveContentEntry[]) {
+    async save(entries: SaveContentEntry[]) {
       // an empty value means "use the website's built-in text again"
       const toRemove = entries.filter((entry) => entry.value.trim() === '');
       const toSave = entries.filter((entry) => entry.value.trim() !== '');
-      for (const entry of toRemove) repo.remove(entry.key, entry.lang);
-      const saved = toSave.length > 0 ? repo.saveMany(toSave) : [];
+      for (const entry of toRemove) await repo.remove(entry.key, entry.lang);
+      const saved = toSave.length > 0 ? await repo.saveMany(toSave) : [];
       logger.info('content: saved', { saved: saved.length, reset: toRemove.length });
       return saved;
     },
 
-    reset(key: string, lang: ContentLang) {
-      if (!repo.remove(key, lang)) throw HttpError.notFound('That text was not edited, so there is nothing to undo');
+    async reset(key: string, lang: ContentLang) {
+      if (!(await repo.remove(key, lang))) throw HttpError.notFound('That text was not edited, so there is nothing to undo');
     },
 
-    stats: () => ({ edited: repo.count(), lastUpdatedAt: repo.lastUpdatedAt() }),
+    stats: async () => ({ edited: await repo.count(), lastUpdatedAt: await repo.lastUpdatedAt() }),
   };
 }
 export type ContentService = ReturnType<typeof contentService>;

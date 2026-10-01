@@ -3,7 +3,7 @@ import type { AddressInfo } from 'node:net';
 import { after, before, describe, it } from 'node:test';
 import { createApp } from '../src/app.js';
 import { loadEnv } from '../src/config/env.js';
-import { openDatabase } from '../src/db/database.js';
+import { openTestDatabase } from './helpers/database.js';
 import { memoryMailer } from '../src/modules/notifications/mailer.js';
 
 process.env.NODE_ENV = 'test'; // keeps the logger quiet
@@ -14,17 +14,17 @@ const nextMonth = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().
 let base = '';
 /** emails the API would have sent, kept in memory */
 const outbox = memoryMailer();
-let close: () => void;
+let close: () => Promise<void>;
 
 before(async () => {
   const env = loadEnv({ NODE_ENV: 'test', ADMIN_API_KEY: ADMIN_KEY, FORM_RATE_LIMIT: '7' });
-  const db = openDatabase(':memory:');
+  const db = await openTestDatabase();
   const server = createApp(env, db, { mailer: outbox }).listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api`;
-  close = () => {
+  close = async () => {
     server.close();
-    db.close();
+    await db.close();
   };
 });
 after(() => close());

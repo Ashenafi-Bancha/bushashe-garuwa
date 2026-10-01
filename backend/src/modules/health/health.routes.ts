@@ -4,10 +4,10 @@ import type { Database } from '../../db/database.js';
 /** GET /health: for uptime checks and the hosting platform */
 export function healthRoutes(db: Database) {
   const router = Router();
-  router.get('/', (_req, res) => {
+  router.get('/', async (_req, res) => {
     let database = 'ok';
     try {
-      db.prepare('SELECT 1').get();
+      await db.query('SELECT 1');
     } catch {
       database = 'error';
     }

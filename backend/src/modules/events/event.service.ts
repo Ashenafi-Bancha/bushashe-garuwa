@@ -12,20 +12,20 @@ export function eventService(repo: EventRepository) {
     /** For the staff page: everything, including drafts and past events */
     all: () => repo.all(),
 
-    create(input: SaveEvent) {
-      const created = repo.create(input);
+    async create(input: SaveEvent) {
+      const created = await repo.create(input);
       logger.info('events: created', { id: created.id, date: created.date });
       return created;
     },
 
-    update(id: number, input: SaveEvent) {
-      const updated = repo.update(id, input);
+    async update(id: number, input: SaveEvent) {
+      const updated = await repo.update(id, input);
       if (!updated) throw HttpError.notFound('Event not found');
       return updated;
     },
 
-    remove(id: number) {
-      if (!repo.remove(id)) throw HttpError.notFound('Event not found');
+    async remove(id: number) {
+      if (!(await repo.remove(id))) throw HttpError.notFound('Event not found');
     },
 
     stats: () => repo.stats(),

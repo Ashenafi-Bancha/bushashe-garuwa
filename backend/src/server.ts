@@ -4,7 +4,7 @@ import { openDatabase } from './db/database.js';
 import { logger } from './lib/logger.js';
 
 const env = loadEnv();
-const db = openDatabase(env.DATABASE_PATH);
+const db = await openDatabase(env);
 const app = createApp(env, db);
 
 const server = app.listen(env.PORT, () => {
@@ -16,8 +16,7 @@ const server = app.listen(env.PORT, () => {
 function shutdown(signal: string) {
   logger.info(`${signal} received, shutting down`);
   server.close(() => {
-    db.close();
-    process.exit(0);
+    void db.close().finally(() => process.exit(0));
   });
   setTimeout(() => process.exit(1), 10_000).unref();
 }
