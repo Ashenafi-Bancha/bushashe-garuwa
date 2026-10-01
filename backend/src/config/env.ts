@@ -19,6 +19,11 @@ const EnvSchema = z.object({
     .default('')
     .refine((key) => key === '' || key.length >= 24, 'ADMIN_API_KEY must be at least 24 characters'),
   FORM_RATE_LIMIT: z.coerce.number().int().positive().default(10),
+  /**
+   * Folder holding the built website (frontend/dist). When set, the API also serves
+   * the website, so one app and one address carry both. Empty: the API only.
+   */
+  WEB_DIST: z.string().trim().default(''),
 
   // ── Email ──
   /** Outgoing mail server. Leave SMTP_HOST empty and emails are written to MAIL_OUTBOX instead. */

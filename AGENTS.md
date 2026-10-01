@@ -40,6 +40,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 
 - `package.json` / `pnpm-workspace.yaml` - Workspace scripts and members
 - `vercel.json` - Builds and deploys the website from `frontend/`
+- `Dockerfile` - One container for both: builds the website and the API; the API serves the website when `WEB_DIST` is set (`backend/src/http/website.ts`)
 - `.mise.toml` - Toolchain versions for Node.js and pnpm
 
 ## Dependencies

@@ -6,6 +6,7 @@ import { createContainer } from './container.js';
 import type { Mailer } from './modules/notifications/mailer.js';
 import type { Database } from './db/database.js';
 import { errorHandler, notFound } from './http/error-handler.js';
+import { website } from './http/website.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
 import { contactRoutes } from './modules/contact/contact.routes.js';
 import { contentRoutes } from './modules/content/content.routes.js';
@@ -23,6 +24,7 @@ import { visitRoutes } from './modules/visits/visit.routes.js';
  *   /api/v1/content      website text edited by staff
  *   /api/v1/events       events, and reserving a place at one
  *   /api/v1/admin        staff dashboard: session check and counts
+ *   everything else      the website itself, when WEB_DIST points at its built files
  */
 export function createApp(env: Env, db: Database, options: { mailer?: Mailer } = {}) {
   const { services, repositories, guards } = createContainer(env, db, options);
@@ -30,7 +32,23 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
 
   app.disable('x-powered-by');
   app.set('trust proxy', 1); // real visitor address behind the hosting proxy (used by the rate limit)
-  app.use(helmet());
+  app.use(
+    helmet({
+      // the website loads its fonts from Google and embeds the Google map and the YouTube film
+      contentSecurityPolicy: {
+        directives: {
+          'img-src': ["'self'", 'data:', 'blob:', 'https:'],
+          'frame-src': ["'self'", 'https://www.google.com', 'https://www.youtube-nocookie.com'],
+          'connect-src': ["'self'"],
+        },
+      },
+      // the logo is shown inside the emails, which are read on other sites
+      crossOriginResourcePolicy: { policy: 'cross-origin' },
+      // embedded services (the map, the film) are told which site they are on, never which page:
+      // the same as a browser's own default
+      referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+    }),
+  );
   app.use(cors({ origin: env.CORS_ORIGINS, methods: ['GET', 'POST', 'PATCH'] }));
   app.use(express.json({ limit: '32kb' }));
 
@@ -44,6 +62,7 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
   app.use('/api/health', healthRoutes(db));
   app.use('/api/v1', v1);
   app.use('/api', notFound);
+  if (env.WEB_DIST) app.use(website(env.WEB_DIST));
   app.use(errorHandler);
 
   return app;

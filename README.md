@@ -89,6 +89,14 @@ correct even when the API is offline. Edits and events appear within a minute.
 
 ## Deployment
 
+**One app (AletCloud, or any host that builds a `Dockerfile`).** The `Dockerfile` at the root builds the
+website and the API into one container: the API answers `/api/...` and serves the website for every
+other address, so the public site, the staff area and the API share one address. It needs a PostgreSQL
+database: set `DATABASE_URL` (and `ADMIN_API_KEY`, `SITE_URL`, and the mail settings) on the app.
+The host gives the app its `PORT`.
+
+**Or the two parts separately:**
+
 - **Website:** Vercel builds it from GitHub using `vercel.json` (builds `frontend/`, publishes `frontend/dist`).
 - **API:** needs a Node.js host and a PostgreSQL database; set `DATABASE_URL` on the API to the database's address. See `backend/README.md`.
   Then set `VITE_API_URL` in Vercel to the API's public address and `CORS_ORIGINS` on the API to the website's address.

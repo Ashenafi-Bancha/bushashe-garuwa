@@ -1,0 +1,14 @@
+# keep the build small and free of local files
+.git
+.claude
+**/node_modules
+**/dist
+**/.env
+**/.env.*
+!**/.env.example
+backend/data
+backend/test
+frontend/photos-originals
+frontend/media-originals
+*.log
+CONTENT-PLAN.md

@@ -1,4 +1,7 @@
 import assert from 'node:assert/strict';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import type { AddressInfo } from 'node:net';
 import { after, before, describe, it } from 'node:test';
 import { createApp } from '../src/app.js';
@@ -147,5 +150,49 @@ describe('protection', () => {
     const res = await fetch(base + '/v1/nothing');
     assert.equal(res.status, 404);
     assert.equal((await read(res)).error.code, 'not_found');
+  });
+});
+
+describe('serving the website from the same app', () => {
+  let site = '';
+  let stop: () => Promise<void>;
+
+  before(async () => {
+    const folder = mkdtempSync(join(tmpdir(), 'bushaashe-web-'));
+    mkdirSync(join(folder, 'assets'));
+    writeFileSync(join(folder, 'index.html'), '<!doctype html><title>Bushaashe Garuwa</title>');
+    writeFileSync(join(folder, 'assets', 'app-abc123.js'), 'console.log(1)');
+
+    const env = loadEnv({ NODE_ENV: 'test', WEB_DIST: folder });
+    const db = await openTestDatabase();
+    const server = createApp(env, db, { mailer: memoryMailer() }).listen(0);
+    await new Promise((resolve) => server.once('listening', resolve));
+    site = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    stop = async () => {
+      server.close();
+      await db.close();
+      rmSync(folder, { recursive: true, force: true });
+    };
+  });
+  after(() => stop());
+
+  it('answers every page address with the website, and keeps /api for the API', async () => {
+    for (const path of ['/', '/heritage', '/admin', '/events/anything']) {
+      const res = await fetch(site + path);
+      assert.equal(res.status, 200, path);
+      assert.match(await res.text(), /Bushaashe Garuwa/, path);
+      assert.equal(res.headers.get('cache-control'), 'no-cache', path);
+    }
+    assert.equal((await fetch(site + '/api/health')).status, 200);
+    const unknown = await fetch(site + '/api/nope');
+    assert.equal(unknown.status, 404);
+    assert.equal((await read(unknown)).error.code, 'not_found');
+  });
+
+  it('lets browsers keep fingerprinted assets, and says 404 for missing ones', async () => {
+    const asset = await fetch(site + '/assets/app-abc123.js');
+    assert.equal(asset.status, 200);
+    assert.match(asset.headers.get('cache-control') ?? '', /immutable/);
+    assert.equal((await fetch(site + '/assets/missing.js')).status, 404);
   });
 });
