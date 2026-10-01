@@ -8,7 +8,7 @@ import { Notice, Panel, formatDate } from '../components/ui';
 
 /** Events staff manage: the cultural food evenings and everything else. */
 export default function EventsView() {
-  const { key } = useAdminSession();
+  const { token } = useAdminSession();
   const [events, setEvents] = useState<AdminEvent[]>([]);
   const [editing, setEditing] = useState<{ id: number | null; values: SaveEventInput } | null>(null);
   const [error, setError] = useState('');
@@ -18,14 +18,14 @@ export default function EventsView() {
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      setEvents((await adminApi.events(key)).items);
+      setEvents((await adminApi.events(token)).items);
       setError('');
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Could not load the events');
     } finally {
       setLoading(false);
     }
-  }, [key]);
+  }, [token]);
 
   useEffect(() => {
     void refresh();
@@ -33,8 +33,8 @@ export default function EventsView() {
 
   const save = async (values: SaveEventInput) => {
     if (!editing) return;
-    if (editing.id === null) await adminApi.createEvent(key, values);
-    else await adminApi.updateEvent(key, editing.id, values);
+    if (editing.id === null) await adminApi.createEvent(token, values);
+    else await adminApi.updateEvent(token, editing.id, values);
     setEditing(null);
     await refresh();
   };
@@ -43,7 +43,7 @@ export default function EventsView() {
     if (!confirm(`Remove "${event.translations.en.name}"? This cannot be undone.`)) return;
     setBusyId(event.id);
     try {
-      await adminApi.deleteEvent(key, event.id);
+      await adminApi.deleteEvent(token, event.id);
       await refresh();
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Could not remove the event');
@@ -56,7 +56,7 @@ export default function EventsView() {
     setBusyId(event.id);
     try {
       const { id: _id, createdAt: _c, updatedAt: _u, placesLeft: _p, ...current } = event;
-      await adminApi.updateEvent(key, event.id, { ...current, ...change });
+      await adminApi.updateEvent(token, event.id, { ...current, ...change });
       await refresh();
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Could not save the change');

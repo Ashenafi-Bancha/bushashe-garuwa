@@ -11,7 +11,10 @@ import { memoryMailer } from '../src/modules/notifications/mailer.js';
 
 process.env.NODE_ENV = 'test'; // keeps the logger quiet
 
-const ADMIN_KEY = 'test-admin-key-0123456789abcdef';
+const STAFF_EMAIL = 'staff@bushaashegaruwa.test';
+const STAFF_PASSWORD = 'a-test-password-only';
+/** the session token the staff account gets when it signs in, set in before() */
+let staffToken = '';
 const nextMonth = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
 let base = '';
@@ -20,11 +23,20 @@ const outbox = memoryMailer();
 let close: () => Promise<void>;
 
 before(async () => {
-  const env = loadEnv({ NODE_ENV: 'test', ADMIN_API_KEY: ADMIN_KEY, FORM_RATE_LIMIT: '7' });
+  const env = loadEnv({ NODE_ENV: 'test', ADMIN_EMAIL: STAFF_EMAIL, ADMIN_PASSWORD: STAFF_PASSWORD, FORM_RATE_LIMIT: '7' });
   const db = await openTestDatabase();
-  const server = createApp(env, db, { mailer: outbox }).listen(0);
+  const app = createApp(env, db, { mailer: outbox });
+  await app.prepare(); // creates the staff account from the settings
+  const server = app.listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api`;
+
+  const signIn = await fetch(base + '/v1/admin/login', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ email: STAFF_EMAIL, password: STAFF_PASSWORD }),
+  });
+  staffToken = ((await signIn.json()) as { data: { token: string } }).data.token;
   close = async () => {
     server.close();
     await db.close();
@@ -40,7 +52,7 @@ const read = (res: Response): Promise<any> => res.json();
 const staff = (path: string, init: RequestInit = {}) =>
   fetch(base + path, {
     ...init,
-    headers: { authorization: `Bearer ${ADMIN_KEY}`, 'content-type': 'application/json', ...init.headers },
+    headers: { authorization: `Bearer ${staffToken}`, 'content-type': 'application/json', ...init.headers },
   });
 
 describe('health', () => {
@@ -150,6 +162,48 @@ describe('protection', () => {
     const res = await fetch(base + '/v1/nothing');
     assert.equal(res.status, 404);
     assert.equal((await read(res)).error.code, 'not_found');
+  });
+});
+
+describe('staff sign-in', () => {
+  const login = (body: unknown) => post('/v1/admin/login', body);
+
+  it('gives a session for the right email and password, whatever the capitals in the email', async () => {
+    const res = await login({ email: STAFF_EMAIL.toUpperCase(), password: STAFF_PASSWORD });
+    assert.equal(res.status, 200);
+    const { token, user, expiresAt } = (await read(res)).data;
+    assert.equal(user.email, STAFF_EMAIL);
+    assert.ok(token.length >= 40, 'a long random token');
+    assert.ok(new Date(expiresAt).getTime() > Date.now());
+
+    const session = await fetch(base + '/v1/admin/session', { headers: { authorization: `Bearer ${token}` } });
+    assert.equal(session.status, 200);
+    assert.equal((await read(session)).data.user.email, STAFF_EMAIL);
+  });
+
+  it('refuses a wrong password and an unknown email in the same way', async () => {
+    const wrong = await login({ email: STAFF_EMAIL, password: 'not-the-password' });
+    const unknown = await login({ email: 'nobody@bushaashegaruwa.test', password: STAFF_PASSWORD });
+    assert.equal(wrong.status, 401);
+    assert.equal(unknown.status, 401);
+    assert.equal((await read(wrong)).error.message, (await read(unknown)).error.message);
+  });
+
+  it('asks for both fields', async () => {
+    assert.equal((await login({ email: 'not-an-email', password: '' })).status, 400);
+  });
+
+  it('does not accept the password itself as a session', async () => {
+    const res = await fetch(base + '/v1/admin/session', { headers: { authorization: `Bearer ${STAFF_PASSWORD}` } });
+    assert.equal(res.status, 401);
+  });
+
+  it('ends the session on sign-out', async () => {
+    const { token } = (await read(await login({ email: STAFF_EMAIL, password: STAFF_PASSWORD }))).data;
+    const headers = { authorization: `Bearer ${token}` };
+    assert.equal((await fetch(base + '/v1/admin/logout', { method: 'POST', headers })).status, 200);
+    assert.equal((await fetch(base + '/v1/admin/session', { headers })).status, 401);
+    assert.equal((await staff('/v1/admin/session')).status, 200, 'other sessions carry on');
   });
 });
 

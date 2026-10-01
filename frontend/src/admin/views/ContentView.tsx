@@ -21,7 +21,7 @@ const field = 'w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A2
 
 /** Editing the words on the website, one page at a time, in each language. */
 export default function ContentView() {
-  const { key } = useAdminSession();
+  const { token } = useAdminSession();
   const [lang, setLang] = useState<Lang>('en');
   const [groupId, setGroupId] = useState(EDITABLE_GROUPS[0]!.id);
   const [saved, setSaved] = useState<ContentEntry[]>([]);
@@ -36,14 +36,14 @@ export default function ContentView() {
   const refresh = useCallback(async () => {
     setLoading(true);
     try {
-      setSaved((await adminApi.content(key)).items);
+      setSaved((await adminApi.content(token)).items);
       setError('');
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Could not load the saved text');
     } finally {
       setLoading(false);
     }
-  }, [key]);
+  }, [token]);
 
   useEffect(() => {
     void refresh();
@@ -71,7 +71,7 @@ export default function ContentView() {
         const [path, entryLang] = composite.split('|');
         return { key: path as string, lang: entryLang as string, value };
       });
-      await adminApi.saveContent(key, entries);
+      await adminApi.saveContent(token, entries);
       setDrafts({});
       await refresh();
       setStatus('Saved. The website shows the new words within a minute.');

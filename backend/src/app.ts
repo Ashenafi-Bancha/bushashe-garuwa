@@ -29,6 +29,8 @@ import { visitRoutes } from './modules/visits/visit.routes.js';
 export function createApp(env: Env, db: Database, options: { mailer?: Mailer } = {}) {
   const { services, repositories, guards } = createContainer(env, db, options);
   const app = express();
+  /** Creates or updates the staff account from the settings; call once before listening */
+  const prepare = () => services.staff.ensureAccount(env);
 
   app.disable('x-powered-by');
   app.set('trust proxy', 1); // real visitor address behind the hosting proxy (used by the rate limit)
@@ -57,7 +59,7 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
   v1.use('/visits', visitRoutes(services.visits, guards));
   v1.use('/content', contentRoutes(services.content, guards));
   v1.use('/events', eventRoutes(services.events, services.bookings, guards));
-  v1.use('/admin', adminRoutes(repositories, guards));
+  v1.use('/admin', adminRoutes(repositories, services.staff, guards));
 
   app.use('/api/health', healthRoutes(db));
   app.use('/api/v1', v1);
@@ -65,5 +67,5 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
   if (env.WEB_DIST) app.use(website(env.WEB_DIST));
   app.use(errorHandler);
 
-  return app;
+  return Object.assign(app, { prepare });
 }

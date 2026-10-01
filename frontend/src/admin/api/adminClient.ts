@@ -1,18 +1,24 @@
 import { API_BASE, ApiError } from '../../lib/api';
 import type { AdminEvent, Booking, BookingStatus, ContactMessage, ContentEntry, Page, RequestStatus, SaveEventInput, Summary, VisitRequest } from './types';
 
+/** Fired when the API answers that the session is no longer valid, so the staff area returns to the sign-in screen */
+export const SESSION_ENDED_EVENT = 'bg-admin-session-ended';
+
+export type SignedIn = { token: string; expiresAt: string; user: { id: number; email: string } };
+
 /**
- * Calls the staff endpoints of the API. Every call carries the staff key
- * as `Authorization: Bearer <key>`; the key never leaves the staff member's browser.
+ * Calls the staff endpoints of the API. Every call carries the session token
+ * the API gave this browser at sign-in, as `Authorization: Bearer <token>`.
+ * Pass an empty token for the sign-in call itself.
  */
-async function request<T>(key: string, path: string, init: RequestInit = {}): Promise<T> {
+async function request<T>(token: string, path: string, init: RequestInit = {}): Promise<T> {
   if (!API_BASE) throw new ApiError(0, 'not_configured', 'The API address (VITE_API_URL) is not set');
 
   let res: Response;
   try {
     res = await fetch(`${API_BASE}${path}`, {
       ...init,
-      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', ...init.headers },
+      headers: { ...(token ? { Authorization: `Bearer ${token}` } : {}), 'Content-Type': 'application/json', ...init.headers },
     });
   } catch {
     throw new ApiError(0, 'network_error', 'Could not reach the API. Is the backend running?');
@@ -20,6 +26,8 @@ async function request<T>(key: string, path: string, init: RequestInit = {}): Pr
 
   const json = await res.json().catch(() => null);
   if (!res.ok) {
+    // a signed-in request that is refused means the session ran out
+    if (res.status === 401 && token) window.dispatchEvent(new Event(SESSION_ENDED_EVENT));
     const error = json?.error ?? {};
     throw new ApiError(res.status, error.code ?? 'unknown', error.message ?? res.statusText, error.details ?? []);
   }
@@ -33,48 +41,51 @@ const list = (params: Record<string, string | number | boolean | undefined>) => 
 };
 
 export const adminApi = {
-  /** Used by the sign-in box to check the key before storing it */
-  checkKey: (key: string) => request<{ signedIn: true }>(key, '/v1/admin/session'),
+  /** Email and password in, a session out; throws a 401 ApiError when they are wrong */
+  signIn: (email: string, password: string) =>
+    request<SignedIn>('', '/v1/admin/login', { method: 'POST', body: JSON.stringify({ email, password }) }),
 
-  summary: (key: string) => request<Summary>(key, '/v1/admin/summary'),
+  signOut: (token: string) => request<{ signedOut: true }>(token, '/v1/admin/logout', { method: 'POST' }),
 
-  messages: (key: string, page: number, search = '') =>
-    request<Page<ContactMessage>>(key, `/v1/contact${list({ page, pageSize: 20, q: search })}`),
+  summary: (token: string) => request<Summary>(token, '/v1/admin/summary'),
 
-  visits: (key: string, page: number, options: { upcoming?: boolean; pageSize?: number; search?: string } = {}) =>
+  messages: (token: string, page: number, search = '') =>
+    request<Page<ContactMessage>>(token, `/v1/contact${list({ page, pageSize: 20, q: search })}`),
+
+  visits: (token: string, page: number, options: { upcoming?: boolean; pageSize?: number; search?: string } = {}) =>
     request<Page<VisitRequest>>(
-      key,
+      token,
       `/v1/visits${list({ page, pageSize: options.pageSize ?? 20, upcoming: options.upcoming || undefined, q: options.search })}`,
     ),
 
-  setMessageStatus: (key: string, id: number, status: RequestStatus) =>
-    request<ContactMessage>(key, `/v1/contact/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  setMessageStatus: (token: string, id: number, status: RequestStatus) =>
+    request<ContactMessage>(token, `/v1/contact/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
 
-  setVisitStatus: (key: string, id: number, status: RequestStatus) =>
-    request<VisitRequest>(key, `/v1/visits/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  setVisitStatus: (token: string, id: number, status: RequestStatus) =>
+    request<VisitRequest>(token, `/v1/visits/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
 
   // ── Events ──
-  events: (key: string) => request<{ items: AdminEvent[] }>(key, '/v1/events/admin'),
+  events: (token: string) => request<{ items: AdminEvent[] }>(token, '/v1/events/admin'),
 
-  createEvent: (key: string, input: SaveEventInput) =>
-    request<AdminEvent>(key, '/v1/events/admin', { method: 'POST', body: JSON.stringify(input) }),
+  createEvent: (token: string, input: SaveEventInput) =>
+    request<AdminEvent>(token, '/v1/events/admin', { method: 'POST', body: JSON.stringify(input) }),
 
-  updateEvent: (key: string, id: number, input: SaveEventInput) =>
-    request<AdminEvent>(key, `/v1/events/admin/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
+  updateEvent: (token: string, id: number, input: SaveEventInput) =>
+    request<AdminEvent>(token, `/v1/events/admin/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
 
-  deleteEvent: (key: string, id: number) =>
-    request<{ removed: true }>(key, `/v1/events/admin/${id}`, { method: 'DELETE' }),
+  deleteEvent: (token: string, id: number) =>
+    request<{ removed: true }>(token, `/v1/events/admin/${id}`, { method: 'DELETE' }),
 
   // ── Bookings ──
-  bookings: (key: string, page: number, search = '', eventId?: number) =>
-    request<Page<Booking>>(key, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId, q: search })}`),
+  bookings: (token: string, page: number, search = '', eventId?: number) =>
+    request<Page<Booking>>(token, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId, q: search })}`),
 
-  setBookingStatus: (key: string, id: number, status: BookingStatus) =>
-    request<Booking>(key, `/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  setBookingStatus: (token: string, id: number, status: BookingStatus) =>
+    request<Booking>(token, `/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
 
   // ── Website text ──
-  content: (key: string) => request<{ items: ContentEntry[] }>(key, '/v1/content/admin'),
+  content: (token: string) => request<{ items: ContentEntry[] }>(token, '/v1/content/admin'),
 
-  saveContent: (key: string, entries: { key: string; lang: string; value: string }[]) =>
-    request<{ saved: ContentEntry[] }>(key, '/v1/content/admin', { method: 'PUT', body: JSON.stringify({ entries }) }),
+  saveContent: (token: string, entries: { key: string; lang: string; value: string }[]) =>
+    request<{ saved: ContentEntry[] }>(token, '/v1/content/admin', { method: 'PUT', body: JSON.stringify({ entries }) }),
 };

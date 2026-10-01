@@ -57,13 +57,32 @@ All responses are JSON: `{ "data": … }` on success, `{ "error": { "code", "mes
 | GET | `/api/v1/events/admin/bookings` | staff | Bookings, newest first (`?eventId`) |
 | PATCH | `/api/v1/events/admin/bookings/:id/status` | staff | Handle a booking |
 
-Staff endpoints need the header `Authorization: Bearer <ADMIN_API_KEY>`.
-The staff pages of the website (`/admin`) use exactly these endpoints.
+### Staff sign-in
+
+Staff sign in with an email and a password:
+
+| Method | Path | Purpose |
+| --- | --- | --- |
+| POST | `/api/v1/admin/login` | `{ email, password }` in; `{ token, expiresAt, user }` out |
+| POST | `/api/v1/admin/logout` | Ends the session |
+| GET | `/api/v1/admin/session` | Who is signed in |
+
+Every staff endpoint then needs the header `Authorization: Bearer <token>`. A session lasts
+12 hours. The staff pages of the website (`/admin`) use exactly these endpoints.
+
+The account comes from the settings `ADMIN_EMAIL` and `ADMIN_PASSWORD`: when the API starts it
+creates that account, and if the password setting was changed it gives the account the new
+password and signs it out everywhere. Passwords are stored only as a salted scrypt hash, and
+only a hash of each session token is kept. Sign-in is limited to 10 tries per visitor per
+15 minutes.
 
 Example:
 
 ```bash
-curl -H "Authorization: Bearer $ADMIN_API_KEY" "http://localhost:4000/api/v1/visits?upcoming=true"
+TOKEN=$(curl -s -X POST http://localhost:4000/api/v1/admin/login \
+  -H "content-type: application/json" \
+  -d '{"email":"you@example.com","password":"your password"}' | node -pe "JSON.parse(require('fs').readFileSync(0)).data.token")
+curl -H "Authorization: Bearer $TOKEN" "http://localhost:4000/api/v1/visits?upcoming=true"
 ```
 
 ## How bookings work
@@ -112,7 +131,7 @@ falls back to English), plus a notice to the staff inbox:
 ## Running
 
 ```bash
-cp .env.example .env     # then fill in ADMIN_API_KEY
+cp .env.example .env     # then fill in ADMIN_EMAIL and ADMIN_PASSWORD
 pnpm dev                 # from this folder, or `pnpm dev:api` from the root
 pnpm test
 pnpm build && pnpm start # production

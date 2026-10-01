@@ -7,12 +7,12 @@ import { BookingStatusSelect, Notice, Pager, Panel, SearchBox, formatDate, forma
 
 /** Places reserved at events, newest first. */
 export default function BookingsView() {
-  const { key } = useAdminSession();
+  const { token } = useAdminSession();
   const [search, setSearch] = useState('');
   const query = useDebounced(search.trim());
   const { page, setPage, data, error, loading, busyId, changeStatus } = useAdminList<Booking>(
-    (p) => adminApi.bookings(key, p, query),
-    (id, status) => adminApi.setBookingStatus(key, id, status),
+    (p) => adminApi.bookings(token, p, query),
+    (id, status) => adminApi.setBookingStatus(token, id, status),
     [query],
   );
 

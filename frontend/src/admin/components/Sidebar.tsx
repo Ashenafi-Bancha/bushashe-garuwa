@@ -20,6 +20,7 @@ export default function Sidebar({
   current,
   onChoose,
   onSignOut,
+  email,
   open,
   onClose,
 }: {
@@ -27,6 +28,8 @@ export default function Sidebar({
   current: SectionId;
   onChoose: (id: SectionId) => void;
   onSignOut: () => void;
+  /** who is signed in */
+  email?: string;
   open: boolean;
   onClose: () => void;
 }) {
@@ -79,6 +82,12 @@ export default function Sidebar({
       {list}
 
       <div className="px-3 py-4 border-t border-white/10 space-y-1">
+        {email && (
+          <div className="px-4 pb-2">
+            <div className="text-white/40 text-[10px] tracking-[0.18em] uppercase">Signed in as</div>
+            <div className="text-white/85 text-sm font-semibold truncate" title={email}>{email}</div>
+          </div>
+        )}
         <a
           href="/"
           className="block rounded-xl px-4 py-2.5 text-sm font-semibold text-white/65 hover:bg-white/6 hover:text-white transition-colors"

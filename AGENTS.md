@@ -19,7 +19,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 - `frontend/src/pages/` - One component per page; `src/components/` holds shared pieces
 - `frontend/src/i18n/` - English, Amharic and Wolaytta text (`dictionaries/en.ts`, `am.ts`, `wal.ts`); every key added to `en.ts` must also go into `am.ts` and `wal.ts`
 - `frontend/src/lib/api.ts` - Client for the backend; forms send only when `VITE_API_URL` is set
-- `frontend/src/admin/` - Staff area at `/admin`, lazy-loaded and outside the public layout: `api/` (client and types), `auth/` (key session), `components/`, `content/editableFields.ts` (which texts staff may edit), `views/` (SignIn, Dashboard, Visits, Bookings, Messages, Events, Content); English only
+- `frontend/src/admin/` - Staff area at `/admin`, lazy-loaded and outside the public layout: `api/` (client and types), `auth/` (sign-in session), `components/`, `content/editableFields.ts` (which texts staff may edit), `views/` (SignIn, Dashboard, Visits, Bookings, Messages, Events, Content); English only
 - `frontend/src/lib/content.ts` - Staff text edits laid over the built-in dictionaries; `lib/events.ts` - events and bookings from the API, with the built-in schedule as fallback
 - `frontend/src/assets/photos.ts` - Photo registry; originals live in `frontend/photos-originals/`, optimized with `pnpm photos`
 - `frontend/src/index.css` - Global CSS entrypoint and Tailwind CSS v4 import
@@ -33,7 +33,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 - `backend/src/http/` - Plumbing shared by modules: validate, error-handler, rate-limit, require-admin, guards, pagination, respond
 - `backend/src/modules/<feature>/` - `*.schema.ts` (zod), `*.repository.ts` (SQL), `*.service.ts` (rules), `*.routes.ts` (endpoints)
 - `backend/src/db/migrations.ts` - Append-only list of database changes (PostgreSQL); `db/database.ts` connects, `db/sql.ts` holds shared SQL
-- Modules: `contact`, `visits`, `content` (edited website text), `events` (events and bookings), `admin` (session and counts), `health`
+- Modules: `contact`, `visits`, `content` (edited website text), `events` (events and bookings), `staff` (accounts, passwords, sign-in sessions), `admin` (login, session and counts), `health`
 - `backend/test/` - API tests (`pnpm test`)
 
 ### Root

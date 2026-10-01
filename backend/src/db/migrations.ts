@@ -82,4 +82,28 @@ export const migrations: { id: number; name: string; sql: string }[] = [
       CREATE INDEX idx_event_bookings_event ON event_bookings (event_id, created_at DESC);
     `,
   },
+  {
+    id: 2,
+    name: 'staff accounts and sign-in sessions',
+    sql: `
+      CREATE TABLE staff_users (
+        id             INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        -- always stored in lower case
+        email          TEXT        NOT NULL UNIQUE,
+        -- a salted scrypt hash; the password itself is never stored
+        password_hash  TEXT        NOT NULL,
+        created_at     TIMESTAMPTZ NOT NULL DEFAULT now(),
+        last_login_at  TIMESTAMPTZ
+      );
+
+      CREATE TABLE staff_sessions (
+        -- a hash of the token the browser holds, so this table alone cannot be used to sign in
+        token_hash  TEXT        PRIMARY KEY,
+        user_id     INTEGER     NOT NULL REFERENCES staff_users (id) ON DELETE CASCADE,
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        expires_at  TIMESTAMPTZ NOT NULL
+      );
+      CREATE INDEX idx_staff_sessions_user ON staff_sessions (user_id);
+    `,
+  },
 ];

@@ -13,7 +13,7 @@ export class HttpError extends Error {
   static badRequest(message: string, details?: unknown) {
     return new HttpError(400, 'bad_request', message, details);
   }
-  static unauthorized(message = 'A valid staff key is required') {
+  static unauthorized(message = 'Sign in to the staff area first') {
     return new HttpError(401, 'unauthorized', message);
   }
   static notFound(message = 'Not found') {

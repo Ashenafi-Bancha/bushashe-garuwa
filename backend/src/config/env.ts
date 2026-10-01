@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { Email } from '../modules/shared/schemas.js';
 
 /** All settings come from environment variables (see backend/.env.example), checked once at start-up. */
 const EnvSchema = z.object({
@@ -14,10 +15,15 @@ const EnvSchema = z.object({
   DATABASE_SSL: z.enum(['off', 'require', 'no-verify']).default('off'),
   /** Development only: where the embedded PostgreSQL keeps its files while DATABASE_URL is empty */
   DEV_DATABASE_DIR: z.string().min(1).default('./data/pgdata'),
-  ADMIN_API_KEY: z
+  /**
+   * The staff account. At start-up the API makes sure this email can sign in to
+   * the staff area with this password. Leave both empty and nobody can sign in.
+   */
+  ADMIN_EMAIL: z.union([Email, z.literal('')]).default(''),
+  ADMIN_PASSWORD: z
     .string()
     .default('')
-    .refine((key) => key === '' || key.length >= 24, 'ADMIN_API_KEY must be at least 24 characters'),
+    .refine((password) => password === '' || password.length >= 10, 'ADMIN_PASSWORD must be at least 10 characters'),
   FORM_RATE_LIMIT: z.coerce.number().int().positive().default(10),
   /**
    * Folder holding the built website (frontend/dist). When set, the API also serves

@@ -4,13 +4,18 @@ import { photos } from '../../assets/photos';
 import { ApiError, apiEnabled } from '../../lib/api';
 import { useAdminSession } from '../auth/AdminSession';
 
+const FIELD =
+  'w-full rounded-2xl bg-white/8 border px-4 py-4 text-base text-white placeholder:text-white/30 outline-none transition-colors';
+const LABEL = 'text-white/70 text-xs font-semibold tracking-[0.14em] uppercase';
+
 /**
- * Staff sign-in: one key, checked by the API before it is kept.
+ * Staff sign-in: email and password, checked by the API.
  * Phones get a single full-height column; larger screens add a photo beside it.
  */
 export default function SignIn() {
   const { signIn } = useAdminSession();
-  const [key, setKey] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [show, setShow] = useState(false);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
@@ -18,22 +23,35 @@ export default function SignIn() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (busy) return;
+    if (!email.trim() || !password) {
+      setError('Enter your email and your password.');
+      return;
+    }
     setBusy(true);
     setError('');
     try {
-      await signIn(key.trim());
+      await signIn(email.trim(), password);
     } catch (err) {
-      setError(err instanceof ApiError && err.status === 401 ? 'That key is not correct.' : (err as Error).message);
+      const status = err instanceof ApiError ? err.status : 0;
+      setError(
+        status === 401 || status === 400
+          ? 'That email or password is not correct.'
+          : status === 429
+            ? 'Too many tries. Please wait a few minutes and try again.'
+            : (err as Error).message,
+      );
     } finally {
       setBusy(false);
     }
   };
 
+  const border = error ? 'border-[#e08a66]' : 'border-white/15 focus:border-[#86A94F]';
+
   return (
     <div className="min-h-[100svh] bg-[#13261A] lg:grid lg:grid-cols-[1.1fr_1fr]">
       {/* Photo, on larger screens only */}
       <div className="relative hidden lg:block overflow-hidden">
-        <img src={photos.house} alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={photos.meeshsho} alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#13261A] via-[#13261A]/55 to-[#13261A]/20" />
         <div className="relative h-full flex flex-col justify-end p-12 xl:p-16">
           <h2 className="font-display text-4xl xl:text-5xl text-white leading-tight max-w-md">
@@ -59,7 +77,7 @@ export default function SignIn() {
           <div className="w-full max-w-sm mx-auto">
             <h1 className="font-display text-4xl sm:text-5xl text-white leading-[1.05] mb-3">Sign in</h1>
             <p className="text-white/55 text-[15px] leading-relaxed mb-8">
-              Enter the staff key to manage messages, visit requests and the website content.
+              Sign in with your staff email and password to manage messages, visit requests, bookings and the website content.
             </p>
 
             {!apiEnabled && (
@@ -70,9 +88,33 @@ export default function SignIn() {
 
             <form onSubmit={submit} noValidate className="space-y-4">
               <div>
+                <label htmlFor="admin-email" className={`block mb-2 ${LABEL}`}>
+                  Email
+                </label>
+                <input
+                  id="admin-email"
+                  name="email"
+                  type="email"
+                  inputMode="email"
+                  required
+                  autoFocus
+                  autoComplete="username"
+                  autoCapitalize="off"
+                  autoCorrect="off"
+                  spellCheck={false}
+                  enterKeyHint="next"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  aria-invalid={error !== ''}
+                  className={`${FIELD} ${border}`}
+                  placeholder="you@bushaashegaruwa.com"
+                />
+              </div>
+
+              <div>
                 <div className="flex items-baseline justify-between mb-2">
-                  <label htmlFor="admin-key" className="text-white/70 text-xs font-semibold tracking-[0.14em] uppercase">
-                    Staff key
+                  <label htmlFor="admin-password" className={LABEL}>
+                    Password
                   </label>
                   <button
                     type="button"
@@ -83,26 +125,23 @@ export default function SignIn() {
                   </button>
                 </div>
                 <input
-                  id="admin-key"
+                  id="admin-password"
+                  name="password"
                   type={show ? 'text' : 'password'}
                   required
-                  autoFocus
                   autoComplete="current-password"
                   autoCapitalize="off"
                   autoCorrect="off"
                   spellCheck={false}
                   enterKeyHint="go"
-                  value={key}
-                  onChange={(e) => setKey(e.target.value)}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   aria-invalid={error !== ''}
-                  aria-describedby={error ? 'admin-key-error' : undefined}
-                  className={`w-full rounded-2xl bg-white/8 border px-4 py-4 text-base text-white placeholder:text-white/30 outline-none transition-colors ${
-                    error ? 'border-[#e08a66]' : 'border-white/15 focus:border-[#86A94F]'
-                  }`}
-                  placeholder="Paste or type the key"
+                  aria-describedby={error ? 'admin-signin-error' : undefined}
+                  className={`${FIELD} ${border}`}
                 />
                 {error && (
-                  <p id="admin-key-error" role="alert" className="text-[#f0b79c] text-sm mt-2">
+                  <p id="admin-signin-error" role="alert" className="text-[#f0b79c] text-sm mt-2">
                     {error}
                   </p>
                 )}
@@ -113,12 +152,13 @@ export default function SignIn() {
                 disabled={busy || !apiEnabled}
                 className="w-full min-h-[52px] bg-[#86A94F] hover:bg-[#B9D38A] active:scale-[0.99] text-[#13261A] font-semibold rounded-full transition-all disabled:opacity-60 disabled:active:scale-100"
               >
-                {busy ? 'Checking…' : 'Sign in'}
+                {busy ? 'Signing in…' : 'Sign in'}
               </button>
             </form>
 
             <p className="text-white/35 text-xs leading-relaxed mt-6">
-              The key is kept only until this browser window is closed. Ask the site owner if you do not have one.
+              You stay signed in until you sign out or close this browser window, for up to 12 hours. Ask the site owner if you do not
+              have an account.
             </p>
           </div>
         </div>

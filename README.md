@@ -19,7 +19,7 @@ bushaashe-garuwa/
 │   ├── src/
 │   │   ├── modules/       One folder per feature: contact, visits, admin, health
 │   │   ├── container.ts   Composition root: repositories, services, guards
-│   │   ├── http/          Validation, errors, rate limit, staff key, responses
+│   │   ├── http/          Validation, errors, rate limit, staff sign-in check, responses
 │   │   ├── db/            Database connection and migrations
 │   │   ├── config/        Environment settings
 │   │   └── lib/           Logger
@@ -69,8 +69,8 @@ For local development:
 
 ## Staff area (/admin)
 
-Open http://localhost:8443/admin and sign in with the `ADMIN_API_KEY` from `backend/.env`.
-The key is kept only until the browser window closes.
+Open http://localhost:8443/admin and sign in with the `ADMIN_EMAIL` and `ADMIN_PASSWORD` from `backend/.env`.
+You stay signed in until you sign out or close the browser window, for up to 12 hours.
 
 From there staff can:
 
@@ -92,7 +92,7 @@ correct even when the API is offline. Edits and events appear within a minute.
 **One app (AletCloud, or any host that builds a `Dockerfile`).** The `Dockerfile` at the root builds the
 website and the API into one container: the API answers `/api/...` and serves the website for every
 other address, so the public site, the staff area and the API share one address. It needs a PostgreSQL
-database: set `DATABASE_URL` (and `ADMIN_API_KEY`, `SITE_URL`, and the mail settings) on the app.
+database: set `DATABASE_URL` (and `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `SITE_URL`, and the mail settings) on the app.
 The host gives the app its `PORT`.
 
 **Or the two parts separately:**

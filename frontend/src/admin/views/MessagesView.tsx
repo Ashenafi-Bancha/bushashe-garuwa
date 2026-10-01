@@ -7,12 +7,12 @@ import { Notice, Pager, Panel, SearchBox, StatusSelect, formatDateTime, useDebou
 
 /** Messages sent from the Contact page. */
 export default function MessagesView() {
-  const { key } = useAdminSession();
+  const { token } = useAdminSession();
   const [search, setSearch] = useState('');
   const query = useDebounced(search.trim());
   const { page, setPage, data, error, loading, busyId, changeStatus } = useAdminList<ContactMessage>(
-    (p) => adminApi.messages(key, p, query),
-    (id, status) => adminApi.setMessageStatus(key, id, status),
+    (p) => adminApi.messages(token, p, query),
+    (id, status) => adminApi.setMessageStatus(token, id, status),
     [query],
   );
 

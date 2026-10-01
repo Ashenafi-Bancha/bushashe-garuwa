@@ -22,7 +22,7 @@ const HEADINGS: Record<SectionId, { title: string; lead: string }> = {
 };
 
 export default function Dashboard() {
-  const { key, signOut } = useAdminSession();
+  const { token, email, signOut } = useAdminSession();
   const [section, setSection] = useState<SectionId>('overview');
   const [summary, setSummary] = useState<Summary | null>(null);
   const [error, setError] = useState('');
@@ -30,12 +30,12 @@ export default function Dashboard() {
 
   const loadSummary = useCallback(async () => {
     try {
-      setSummary(await adminApi.summary(key));
+      setSummary(await adminApi.summary(token));
       setError('');
     } catch (err) {
       setError(err instanceof ApiError ? err.message : 'Could not load the counts');
     }
-  }, [key]);
+  }, [token]);
 
   // the counts follow the work: fresh on every section change, and once a minute
   useEffect(() => {
@@ -81,6 +81,7 @@ export default function Dashboard() {
         current={section}
         onChoose={setSection}
         onSignOut={signOut}
+        email={email}
         open={menuOpen}
         onClose={() => setMenuOpen(false)}
       />

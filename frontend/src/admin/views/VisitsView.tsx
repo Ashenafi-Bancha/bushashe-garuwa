@@ -7,13 +7,13 @@ import { Notice, Pager, Panel, SearchBox, StatusSelect, formatDate, formatDateTi
 
 /** Requests sent from the Plan Your Visit page. */
 export default function VisitsView() {
-  const { key } = useAdminSession();
+  const { token } = useAdminSession();
   const [upcomingOnly, setUpcomingOnly] = useState(true);
   const [search, setSearch] = useState('');
   const query = useDebounced(search.trim());
   const { page, setPage, data, error, loading, busyId, changeStatus } = useAdminList<VisitRequest>(
-    (p) => adminApi.visits(key, p, { upcoming: upcomingOnly, search: query }),
-    (id, status) => adminApi.setVisitStatus(key, id, status),
+    (p) => adminApi.visits(token, p, { upcoming: upcomingOnly, search: query }),
+    (id, status) => adminApi.setVisitStatus(token, id, status),
     [upcomingOnly, query],
   );
 

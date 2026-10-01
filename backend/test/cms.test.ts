@@ -8,7 +8,10 @@ import { memoryMailer } from '../src/modules/notifications/mailer.js';
 
 process.env.NODE_ENV = 'test'; // keeps the logger quiet
 
-const ADMIN_KEY = 'test-admin-key-0123456789abcdef';
+const STAFF_EMAIL = 'staff@bushaashegaruwa.test';
+const STAFF_PASSWORD = 'a-test-password-only';
+/** the session token the staff account gets when it signs in, set in before() */
+let staffToken = '';
 const inTwoWeeks = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
 const lastYear = '2020-05-01';
 
@@ -18,11 +21,20 @@ const outbox = memoryMailer();
 let close: () => Promise<void>;
 
 before(async () => {
-  const env = loadEnv({ NODE_ENV: 'test', ADMIN_API_KEY: ADMIN_KEY, FORM_RATE_LIMIT: '50', STAFF_EMAIL: 'staff@bushaashegaruwa.com' });
+  const env = loadEnv({ NODE_ENV: 'test', ADMIN_EMAIL: STAFF_EMAIL, ADMIN_PASSWORD: STAFF_PASSWORD, FORM_RATE_LIMIT: '50', STAFF_EMAIL: 'staff@bushaashegaruwa.com' });
   const db = await openTestDatabase();
-  const server = createApp(env, db, { mailer: outbox }).listen(0);
+  const app = createApp(env, db, { mailer: outbox });
+  await app.prepare(); // creates the staff account from the settings
+  const server = app.listen(0);
   await new Promise((resolve) => server.once('listening', resolve));
   base = `http://127.0.0.1:${(server.address() as AddressInfo).port}/api`;
+
+  const signIn = await fetch(base + '/v1/admin/login', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ email: STAFF_EMAIL, password: STAFF_PASSWORD }),
+  });
+  staffToken = ((await signIn.json()) as { data: { token: string } }).data.token;
   close = async () => {
     server.close();
     await db.close();
@@ -34,7 +46,7 @@ const read = (res: Response): Promise<any> => res.json();
 const staff = (path: string, init: RequestInit = {}) =>
   fetch(base + path, {
     ...init,
-    headers: { authorization: `Bearer ${ADMIN_KEY}`, 'content-type': 'application/json', ...init.headers },
+    headers: { authorization: `Bearer ${staffToken}`, 'content-type': 'application/json', ...init.headers },
   });
 const post = (path: string, body: unknown) =>
   fetch(base + path, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });

@@ -1,17 +1,20 @@
-import { timingSafeEqual } from 'node:crypto';
 import type { RequestHandler } from 'express';
+import type { StaffService } from '../modules/staff/staff.service.js';
 import { HttpError } from './http-error.js';
 
-/** Staff-only endpoints: expects `Authorization: Bearer <ADMIN_API_KEY>`. */
-export function requireAdmin(adminKey: string): RequestHandler {
-  const expected = Buffer.from(adminKey);
+/** The session token from `Authorization: Bearer <token>`, or '' */
+export const bearerToken = (header: string | undefined) => (header?.startsWith('Bearer ') ? header.slice(7).trim() : '');
 
-  return (req, _res, next) => {
-    if (!adminKey) return next(HttpError.unavailable('Staff endpoints are turned off (ADMIN_API_KEY is not set)'));
-
-    const header = req.get('authorization') ?? '';
-    const given = Buffer.from(header.startsWith('Bearer ') ? header.slice(7) : '');
-    const ok = given.length === expected.length && timingSafeEqual(given, expected);
-    next(ok ? undefined : HttpError.unauthorized());
+/**
+ * Staff-only endpoints: expects the session token a member of staff was given
+ * when they signed in. The signed-in person is left in `res.locals.staff`.
+ */
+export function requireAdmin(staff: StaffService): RequestHandler {
+  return async (req, res, next) => {
+    const token = bearerToken(req.get('authorization'));
+    const user = token ? await staff.userFor(token) : undefined;
+    if (!user) return next(HttpError.unauthorized());
+    res.locals.staff = user;
+    next();
   };
 }

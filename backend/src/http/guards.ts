@@ -9,6 +9,8 @@ export type Guard = RequestHandler[];
 export type Guards = {
   /** Public form endpoints: limits how often one visitor may post */
   form: Guard;
-  /** Staff endpoints: slows down key guessing, then checks the staff key */
+  /** Staff endpoints: checks that the caller is signed in */
   admin: Guard;
+  /** The staff sign-in itself: a few tries per visitor, to stop password guessing */
+  signIn: Guard;
 };

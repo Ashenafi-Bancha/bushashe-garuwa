@@ -13,6 +13,8 @@ import { eventRepository } from './modules/events/event.repository.js';
 import { eventService } from './modules/events/event.service.js';
 import { visitRepository } from './modules/visits/visit.repository.js';
 import { visitService } from './modules/visits/visit.service.js';
+import { staffRepository } from './modules/staff/staff.repository.js';
+import { staffService } from './modules/staff/staff.service.js';
 import { mailerFor, type Mailer } from './modules/notifications/mailer.js';
 import { notifier } from './modules/notifications/notifier.js';
 
@@ -32,6 +34,7 @@ export function createContainer(env: Env, db: Database, options: { mailer?: Mail
     content: contentRepository(db),
     events: eventRepository(db),
     bookings: bookingRepository(db),
+    staff: staffRepository(db),
   };
 
   const services = {
@@ -40,11 +43,13 @@ export function createContainer(env: Env, db: Database, options: { mailer?: Mail
     content: contentService(repositories.content),
     events: eventService(repositories.events),
     bookings: bookingService(repositories.bookings, repositories.events, notify),
+    staff: staffService(repositories.staff),
   };
 
   const guards: Guards = {
     form: [rateLimit({ max: env.FORM_RATE_LIMIT, windowMs: 15 * MINUTE })],
-    admin: [rateLimit({ max: 120, windowMs: 5 * MINUTE }), requireAdmin(env.ADMIN_API_KEY)],
+    admin: [rateLimit({ max: 240, windowMs: 5 * MINUTE }), requireAdmin(services.staff)],
+    signIn: [rateLimit({ max: env.NODE_ENV === 'test' ? 1000 : 10, windowMs: 15 * MINUTE })],
   };
 
   return { db, env, repositories, services, guards };
