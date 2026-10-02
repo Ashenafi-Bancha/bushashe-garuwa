@@ -230,6 +230,24 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   mask-image: linear-gradient(180deg, transparent, #000 70%);
 }
 
+/* ── Phones: every photograph is shown whole, never cut ──
+   Framed photographs drop their fixed shape and take the photograph's own;
+   the opening photographs fit inside their frame; the gallery becomes one
+   column of whole photographs. */
+@media (max-width: 639px) {
+  .img-zoom { aspect-ratio: auto; height: auto; min-height: 0; }
+  .img-zoom > img { position: static; display: block; width: 100%; height: auto; }
+  /* a photograph still to come keeps a calm landscape shape */
+  .img-zoom > .photo-placeholder { aspect-ratio: 3 / 2; height: auto; }
+
+  .grid:has(> .tilt > button.img-zoom) { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
+  .grid:has(> .tilt > button.img-zoom) > .tilt { grid-column: auto; grid-row: auto; }
+}
+@media (max-width: 1023px) {
+  .hero-slide { background: #E3EBD8; }
+  .hero-slide > img { object-fit: contain; }
+}
+
 /* ── Image hover zoom ── */
 .img-zoom { overflow: hidden; }
 .img-zoom img {
@@ -260,48 +278,103 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 .gold-underline { position: relative; display: inline-block; }
 
 /* ── Buttons ──
-   Primary: a forest pill with a moss circle holding an arrow that turns on hover. */
-.btn-primary {
+   One clear shape everywhere: a solid pill with its words in the middle and
+   nothing else inside it. On phones every button fills the row, one under
+   another, the way buttons look in a mobile app. */
+.btn-primary,
+.btn-outline,
+.btn-glass {
   display: inline-flex;
   align-items: center;
-  gap: 14px;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 14px 30px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+.btn-primary:active,
+.btn-outline:active,
+.btn-glass:active { transform: scale(0.98); }
+.btn-primary:disabled,
+.btn-outline:disabled { opacity: 0.6; }
+
+.btn-primary {
   color: #FFFFFF;
   background: #0E8A50;
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 700;
-  padding: 7px 7px 7px 24px;
-  border-radius: 999px;
   border: 0;
-  transition: background 0.35s ease, transform 0.25s ease, box-shadow 0.35s ease;
   box-shadow: 0 14px 30px -18px rgba(14, 138, 80, 0.7);
 }
-.btn-primary::after {
-  content: '→';
-  flex: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 999px;
-  display: grid;
-  place-items: center;
-  background: #FFFFFF;
-  color: #0E8A50;
-  font-size: 16px;
-  transition: transform 0.4s var(--ease-soft);
+.btn-primary:hover { background: #0B7A45; }
+
+/* on a photograph: a white pill with green words */
+.btn-primary.btn-on-dark { background: #FFFFFF; color: #0B6E40; box-shadow: none; }
+.btn-primary.btn-on-dark:hover { background: #E3EBD8; }
+
+/* smaller: in the header and inside cards */
+.btn-sm,
+.btn-primary.nav-cta { min-height: 42px; padding: 10px 22px; font-size: 13px; box-shadow: none; }
+
+@media (max-width: 639px) {
+  .btn-primary,
+  .btn-outline,
+  .btn-glass { display: flex; width: 100%; }
+  .btn-sm { min-height: 46px; font-size: 14px; }
+}
+
+/* the full-screen menu opens downward like a curtain */
+.site-menu {
+  clip-path: inset(0 0 100% 0 round 0 0 2rem 2rem);
+  transition: clip-path 0.75s var(--ease-out-expo);
+}
+.site-menu.is-open { clip-path: inset(0 0 0 0 round 0); }
+
+.btn-outline {
+  background: transparent;
+  color: currentColor;
+  border: 1.5px solid rgba(30, 58, 41, 0.25);
+}
+.btn-outline:hover { border-color: #0E8A50; background: rgba(14, 138, 80, 0.08); }
+
+/* frosted pill for use on photographs */
+.btn-glass {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.btn-glass:hover { background: rgba(255, 255, 255, 0.22); }
+.btn-primary:disabled,
+.btn-outline:disabled { opacity: 0.6; }
+
+.btn-primary {
+  color: #FFFFFF;
+  background: #0E8A50;
+  border: 0;
+  box-shadow: 0 14px 30px -18px rgba(14, 138, 80, 0.7);
 }
 .btn-primary:hover { background: #0B7A45; }
-.btn-primary:hover::after { transform: rotate(-45deg); }
-.btn-primary:active { transform: scale(0.98); }
-.btn-primary.justify-center { justify-content: space-between; }
 
-/* smaller version in the header */
-.btn-primary.nav-cta { font-size: 13px; padding: 5px 5px 5px 18px; gap: 10px; box-shadow: none; }
-.btn-primary.nav-cta::after { width: 30px; height: 30px; font-size: 14px; }
-/* on the forest: moss pill, forest circle */
-/* on a photograph: a white pill with an emerald circle */
-.btn-primary.btn-on-dark { background: #FFFFFF; color: #0B6E40; }
-.btn-primary.btn-on-dark::after { background: #0E8A50; color: #FFFFFF; }
+/* on a photograph: a white pill with green words */
+.btn-primary.btn-on-dark { background: #FFFFFF; color: #0B6E40; box-shadow: none; }
 .btn-primary.btn-on-dark:hover { background: #E3EBD8; }
+
+/* smaller: in the header and inside cards */
+.btn-sm,
+.btn-primary.nav-cta { min-height: 42px; padding: 10px 22px; font-size: 13px; box-shadow: none; }
+
+@media (max-width: 639px) {
+  .btn-primary,
+  .btn-outline,
+  .btn-glass { display: flex; width: 100%; }
+  .btn-sm { min-height: 46px; font-size: 14px; }
+}
 
 /* the full-screen menu opens downward like a curtain */
 .site-menu {
@@ -327,7 +400,6 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 .btn-outline:hover { border-color: #1E3A29; background: rgba(30, 58, 41, 0.05); }
 .btn-outline:active { transform: scale(0.98); }
 
-/* frosted pill for use on photographs and on the forest */
 .btn-glass {
   display: inline-flex;
   align-items: center;
@@ -468,6 +540,10 @@ html.lenis, html.lenis body { height: auto; }
 .admin-btn:hover:not(:disabled) { background: #0B7A45; }
 .admin-btn:active:not(:disabled) { transform: scale(0.98); }
 .admin-btn:disabled { opacity: 0.5; }
+/* phones: the main action fills the row, as on the public site */
+@media (max-width: 639px) {
+  .admin-btn { width: 100%; min-height: 48px; font-size: 15px; }
+}
 
 /* text boxes in the staff forms */
 .admin-field {

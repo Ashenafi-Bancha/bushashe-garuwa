@@ -79,10 +79,10 @@ export default function Discover() {
           <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#13261A] mb-4">{t.common.comeBePart}</h2>
           <p className="text-[#1E3A29]/80 font-sans text-base max-w-xl mx-auto mb-10">{d.cta.desc}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/visit" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/visit" className="btn-primary">
               {t.common.planVisit}
             </Link>
-            <Link to="/heritage" className="inline-flex items-center gap-2 border border-[#1E3A29]/12 hover:border-white text-[#13261A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/heritage" className="btn-outline text-[#1E3A29]">
               {d.cta.explore}
             </Link>
           </div>

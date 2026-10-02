@@ -223,7 +223,7 @@ export default function Visit() {
                         type="submit"
                         disabled={sending}
                         aria-busy={sending}
-                        className="w-full bg-[#0E8A50] hover:bg-[#0B7A45] text-[#F4EFE4] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
+                        className="btn-primary w-full"
                       >
                         {v.form.submit}
                       </button>

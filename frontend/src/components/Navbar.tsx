@@ -270,8 +270,7 @@ export default function Navbar() {
             className="mt-7 rounded-[1.75rem] bg-[#E3EBD8] text-[#13261A] p-5"
             style={{ opacity: open ? 1 : 0, transform: open ? 'none' : 'translateY(14px)', transition: 'opacity .5s ease .45s, transform .7s var(--ease-out-expo) .45s' }}
           >
-            <Link to="/visit" className="btn-primary w-full justify-center">
-              <Icon page="visit" className="w-5 h-5" />
+            <Link to="/visit" className="btn-primary w-full">
               {t.common.planVisit}
             </Link>
             <div className="mt-5 text-sm text-[#1E3A29]/80 leading-relaxed space-y-1">

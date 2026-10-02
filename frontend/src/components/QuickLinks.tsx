@@ -47,25 +47,23 @@ export default function QuickLinks() {
             <li
               key={key}
               data-reveal
-              className={`fade-section snap-start w-[78vw] sm:w-[60vw] md:w-auto h-[430px] md:h-auto ${span}`}
+              className={`fade-section snap-start flex w-[82vw] sm:w-[60vw] md:w-auto sm:h-[430px] md:h-auto ${span}`}
               style={{ transitionDelay: `${(i % 4) * 70}ms` }}
             >
-              <Tilt className="h-full rounded-[1.75rem]" max={4}>
-                <Link to={to} className="group relative flex h-full flex-col justify-end overflow-hidden rounded-[1.75rem] img-zoom">
-                  <img src={photos[photo]} alt={t.photos[photo]} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
-                  <span className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 via-45% to-transparent" />
+              <Tilt className="w-full h-full rounded-[1.75rem]" max={4}>
+                <Link to={to} className="group relative flex h-full flex-col sm:justify-end overflow-hidden rounded-[1.75rem] img-zoom bg-white sm:bg-transparent elev-1 sm:shadow-none">
+                  <img src={photos[photo]} alt={t.photos[photo]} loading="lazy" className="sm:absolute sm:inset-0 w-full sm:h-full object-cover" />
+                  {/* phones: the whole photograph, the words beneath it; wider screens: the words on the photograph */}
+                  <span className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 via-45% to-transparent" />
                   <span className="absolute top-4 left-4 rounded-full bg-white/85 backdrop-blur px-3 py-1 text-[11px] font-bold text-[#1E3A29] tabular-nums">
                     {String(i + 1).padStart(2, '0')}
                   </span>
-                  <span className="relative p-5 sm:p-6">
-                    <span className={`block font-display font-bold text-white leading-tight tracking-tight ${i === 0 ? 'text-3xl sm:text-4xl' : 'text-2xl'}`}>
+                  <span className="relative flex flex-1 flex-col sm:block sm:flex-none p-5 sm:p-6">
+                    <span className={`block font-display font-bold text-[#1E3A29] sm:text-white leading-tight tracking-tight ${i === 0 ? 'text-2xl sm:text-4xl' : 'text-2xl'}`}>
                       {t.nav.links[key]}
                     </span>
-                    <span className={`block text-white/75 text-sm leading-relaxed mt-2 ${i === 0 ? 'max-w-sm' : 'line-clamp-2'}`}>{q.items[key]}</span>
-                    <span className="mt-4 inline-flex items-center gap-3 rounded-full bg-white text-[#1E3A29] text-[13px] font-bold pl-5 pr-1.5 py-1.5">
-                      {t.common.explore}
-                      <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-white text-[#0E8A50] transition-transform duration-500 group-hover:-rotate-45">→</span>
-                    </span>
+                    <span className={`block text-[#1E3A29]/65 sm:text-white/75 text-sm leading-relaxed mt-2 mb-4 sm:mb-0 ${i === 0 ? 'max-w-sm' : 'sm:line-clamp-2'}`}>{q.items[key]}</span>
+                    <span className="btn-primary btn-sm mt-auto sm:mt-4">{t.common.explore}</span>
                   </span>
                 </Link>
               </Tilt>

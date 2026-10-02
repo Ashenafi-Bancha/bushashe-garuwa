@@ -126,12 +126,12 @@ export default function EventBooking({
         <button
           type="submit"
           disabled={sending}
-          className="flex-1 min-w-[12rem] bg-[#0E8A50] hover:bg-[#0B7A45] text-[#F4EFE4] font-sans font-semibold text-sm rounded-full py-4 transition-colors disabled:opacity-60"
+          className="btn-primary flex-1 min-w-[12rem]"
         >
           {sending ? b.sending : b.submit}
         </button>
         {onClose && (
-          <button type="button" onClick={onClose} className="rounded-full border border-[#1E3A29]/20 px-6 py-4 text-sm font-sans font-semibold text-[#1E3A29] hover:border-[#1E3A29]/50 transition-colors">
+          <button type="button" onClick={onClose} className="btn-outline text-[#1E3A29]">
             {b.cancel}
           </button>
         )}

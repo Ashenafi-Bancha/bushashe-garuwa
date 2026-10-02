@@ -71,7 +71,7 @@ export default function Experiences() {
                   )}
 
                   <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#1E3A29]/10">
-                    <Link to="/visit" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors">
+                    <Link to="/visit" className="btn-primary btn-sm">
                       {t.common.reserve}
                     </Link>
                   </div>
@@ -91,10 +91,10 @@ export default function Experiences() {
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] mb-6">{x.cta.title}</h2>
           <p className="text-[#1E3A29]/80 font-sans text-base max-w-xl mx-auto mb-10">{x.cta.desc}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/contact" className="btn-primary">
               {t.common.contactUs}
             </Link>
-            <Link to="/visit" className="inline-flex items-center gap-2 border border-[#1E3A29]/12 hover:border-white text-[#13261A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/visit" className="btn-outline text-[#1E3A29]">
               {t.common.planVisit}
             </Link>
           </div>

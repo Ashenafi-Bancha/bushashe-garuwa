@@ -6,7 +6,9 @@ import { useI18n } from '../i18n/I18nProvider';
 const RING: PhotoKey[] = ['gate', 'meeshsho', 'home', 'house', 'gifaataa1', 'food', 'pavilions', 'gifaataa2', 'gardens', 'zigba', 'lawn', 'enset'];
 
 /** Photograph width in the ring, per screen size */
-const cardWidth = (viewport: number) => (viewport < 640 ? 200 : viewport < 1024 ? 260 : 320);
+const cardWidth = (viewport: number) => (viewport < 640 ? 250 : viewport < 1024 ? 260 : 320);
+/** Height of a card for its width: landscape on phones, so the whole photograph shows; portrait elsewhere */
+const cardShape = (viewport: number) => (viewport < 640 ? 2 / 3 : 1.45);
 
 /**
  * The grounds as a ring of photographs standing in 3D space: it turns by itself,
@@ -22,6 +24,7 @@ export default function PhotoRing() {
   const [dragging, setDragging] = useState(false);
   const [radius, setRadius] = useState(520);
   const [width, setWidth] = useState(320);
+  const [shape, setShape] = useState(1.45);
   const [stillMode, setStillMode] = useState(false);
   const drag = useRef<{ x: number; angle: number } | null>(null);
   const frame = useRef(0);
@@ -35,6 +38,7 @@ export default function PhotoRing() {
       const viewport = window.innerWidth;
       const w = cardWidth(viewport);
       setWidth(w);
+      setShape(cardShape(viewport));
       // the ring is wide enough that neighbouring photographs never overlap
       setRadius(Math.round((w * 1.25) / (2 * Math.tan(Math.PI / RING.length))));
     };
@@ -106,7 +110,7 @@ export default function PhotoRing() {
           <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] mb-8">{ring.title}</h2>
           <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {RING.map((key) => (
-              <img key={key} src={photos[key]} alt={t.photos[key]} loading="lazy" className="rounded-2xl aspect-[3/4] object-cover" />
+              <img key={key} src={photos[key]} alt={t.photos[key]} loading="lazy" className="rounded-2xl w-full sm:aspect-[3/4] sm:object-cover" />
             ))}
           </div>
         </div>
@@ -128,7 +132,7 @@ export default function PhotoRing() {
       <div
         ref={holder}
         className="relative select-none"
-        style={{ perspective: '1400px', height: `${Math.round(width * 1.45)}px` }}
+        style={{ perspective: '1400px', height: `${Math.round(width * shape)}px` }}
         onPointerDown={onPointerDown}
         onPointerMove={onPointerMove}
         onPointerUp={endDrag}
@@ -155,7 +159,7 @@ export default function PhotoRing() {
                 alt={t.photos[key]}
                 loading="lazy"
                 draggable={false}
-                className="w-full h-full object-cover pointer-events-none"
+                className="w-full h-full object-contain sm:object-cover bg-[#13261A] pointer-events-none"
               />
               <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
               <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">

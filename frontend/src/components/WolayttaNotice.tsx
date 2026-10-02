@@ -51,10 +51,10 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
           <p lang="am" className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed mb-7">{texts.am.body}</p>
 
           <div className="grid sm:grid-cols-2 gap-3">
-            <button ref={firstButton} onClick={() => onChoose('en')} className="btn-primary justify-center bg-[#0E8A50] border-[#1E3A29] text-white hover:bg-[#0B7A45]">
+            <button ref={firstButton} onClick={() => onChoose('en')} className="btn-primary">
               {texts.en.continueEn}
             </button>
-            <button lang="am" onClick={() => onChoose('am')} className="btn-outline justify-center border-[#1E3A29] text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50]">
+            <button lang="am" onClick={() => onChoose('am')} className="btn-outline text-[#1E3A29]">
               {texts.am.continueAm}
             </button>
           </div>

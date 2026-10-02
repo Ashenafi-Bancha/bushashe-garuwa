@@ -43,10 +43,7 @@ export default function PhotoCard({
         {desc && <p className="text-[#1E3A29]/60 text-sm leading-relaxed mb-5">{desc}</p>}
         {meta && <span className="text-[#C4622D] text-xs font-semibold mb-5">{meta}</span>}
 
-        <span className="mt-auto inline-flex w-fit items-center gap-3 rounded-full bg-[#0E8A50] text-white text-[13px] font-bold pl-5 pr-1.5 py-1.5">
-          {action ?? t.common.explore}
-          <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-white text-[#0E8A50] transition-transform duration-500 group-hover:-rotate-45">→</span>
-        </span>
+        <span className="mt-auto btn-primary btn-sm">{action ?? t.common.explore}</span>
       </div>
     </Link>
   );

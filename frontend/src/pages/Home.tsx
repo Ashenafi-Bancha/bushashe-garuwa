@@ -296,10 +296,7 @@ export default function Home() {
                         <span className="text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
                         <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-none tracking-[-0.03em] mb-4">{text.title}</h3>
                         <p className="text-[#1E3A29]/65 leading-relaxed mb-7">{text.desc}</p>
-                        <span className="inline-flex items-center gap-3 rounded-full bg-[#0E8A50] text-white text-[13px] font-bold pl-5 pr-1.5 py-1.5">
-                          {t.common.explore}
-                          <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-white text-[#0E8A50] transition-transform duration-500 group-hover:-rotate-45">→</span>
-                        </span>
+                        <span className="btn-primary btn-sm">{t.common.explore}</span>
                       </div>
                     </Link>
                   </div>
@@ -352,10 +349,7 @@ export default function Home() {
                           <span key={chip} className="rounded-full bg-[#F4EFE4] px-3.5 py-1.5 text-[13px] font-semibold text-[#1E3A29]/75">{chip}</span>
                         ))}
                       </div>
-                      <span className="mt-auto inline-flex items-center gap-3 rounded-full bg-[#0E8A50] text-white text-[13px] font-bold pl-5 pr-1.5 py-1.5">
-                        {card.cta}
-                        <span aria-hidden="true" className="grid place-items-center w-8 h-8 rounded-full bg-white text-[#0E8A50] transition-transform duration-500 group-hover:-rotate-45">→</span>
-                      </span>
+                      <span className="mt-auto btn-primary btn-sm">{card.cta}</span>
                     </div>
                   </Link>
                 </div>

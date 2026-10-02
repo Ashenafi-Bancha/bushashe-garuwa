@@ -67,14 +67,14 @@ export default function Stay() {
                     </div>
                   </div>
 
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <button
                       onClick={() => setSelectedRoom(selectedRoom === i ? null : i)}
-                      className="flex-1 border border-[#1E3A29] text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50] text-xs font-sans font-semibold rounded-full py-3.5 transition-colors"
+                      className="btn-outline btn-sm flex-1 text-[#1E3A29]"
                     >
                       {st.viewDetails}
                     </button>
-                    <Link to="/contact" className="flex-1 bg-[#0E8A50] hover:bg-[#0B7A45] text-[#F4EFE4] text-xs font-sans font-semibold rounded-full py-3.5 transition-colors text-center">
+                    <Link to="/contact" className="btn-primary btn-sm flex-1">
                       {st.bookRoom}
                     </Link>
                   </div>
@@ -110,10 +110,10 @@ export default function Stay() {
           <h2 className="font-display text-4xl font-semibold text-[#1E3A29] mb-4">{st.cta.title}</h2>
           <p className="text-[#1E3A29]/55 font-sans text-base max-w-xl mx-auto mb-10">{st.cta.desc}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/contact" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/contact" className="btn-primary">
               {st.cta.book}
             </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 border border-[#1E3A29] text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/contact" className="btn-outline text-[#1E3A29]">
               {st.cta.ask}
             </Link>
           </div>

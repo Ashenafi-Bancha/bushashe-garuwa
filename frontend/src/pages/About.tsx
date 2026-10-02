@@ -290,10 +290,10 @@ export default function About() {
             {a.cta.desc}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/visit" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/visit" className="btn-primary">
               {t.common.planVisit}
             </Link>
-            <Link to="/contact" className="inline-flex items-center gap-2 border border-[#1E3A29]/12 hover:border-white text-[#13261A] text-sm font-sans font-semibold rounded-full px-10 py-4 transition-colors">
+            <Link to="/contact" className="btn-outline text-[#1E3A29]">
               {t.common.getInTouch}
             </Link>
           </div>

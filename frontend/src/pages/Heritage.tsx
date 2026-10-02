@@ -96,8 +96,8 @@ export default function Heritage() {
       <section id="trees" className="mx-2 sm:mx-3">
         <div className="rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#E3EBD8]">
           {/* the photograph, clear, with nothing over it but its name */}
-          <div className="relative h-[62svh] min-h-[360px] lg:h-[78svh]">
-            <img src={photos.zigba} alt={t.photos.zigba} loading="lazy" className="absolute inset-0 w-full h-full object-cover object-[center_40%]" />
+          <div className="relative sm:h-[62svh] sm:min-h-[360px] lg:h-[78svh]">
+            <img src={photos.zigba} alt={t.photos.zigba} loading="lazy" className="block sm:absolute sm:inset-0 w-full sm:h-full object-cover object-[center_40%]" />
             <span className="absolute left-5 top-5 sm:left-8 sm:top-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold">
               {t.photoCaptions.zigba.title}
             </span>
@@ -132,7 +132,7 @@ export default function Heritage() {
               <p className="text-[#1E3A29]/70 font-sans text-base leading-relaxed mb-8">
                 {hg.family.desc}
               </p>
-              <Link to="/about#family" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
+              <Link to="/about#family" className="btn-primary">
                 {hg.family.cta}
               </Link>
             </div>

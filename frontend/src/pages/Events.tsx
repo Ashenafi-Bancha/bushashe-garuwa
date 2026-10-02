@@ -106,23 +106,19 @@ export default function Events() {
           ? 'bg-[#1E3A29]/10 text-[#1E3A29]'
           : dark ? 'bg-white/10 text-[#B9D38A]' : 'bg-[#C4622D]/10 text-[#C4622D]';
 
-  const bookButton = (event: Shown, dark: boolean) =>
+  const bookButton = (event: Shown) =>
     event.live?.bookable && event.availKind !== 'full' ? (
       <button
         type="button"
         onClick={() => setBooking(event.live ?? null)}
-        className={`inline-flex items-center gap-2 text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors ${
-          dark ? 'bg-[#0E8A50] hover:bg-[#0B7A45] text-white' : 'bg-[#0E8A50] hover:bg-[#0B7A45] text-white'
-        }`}
+        className="btn-primary btn-sm"
       >
         {e.live.bookCta}
       </button>
     ) : (
       <Link
         to="/contact"
-        className={`inline-flex items-center gap-2 text-xs font-sans font-semibold rounded-full px-5 py-3 transition-colors ${
-          dark ? 'bg-[#0E8A50] hover:bg-[#0B7A45] text-white' : 'bg-[#0E8A50] hover:bg-[#0B7A45] text-white'
-        }`}
+        className="btn-primary btn-sm"
       >
         {t.common.reserveYourPlace}
       </Link>
@@ -172,7 +168,7 @@ export default function Events() {
                     <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#13261A] mb-3">{event.name}</h2>
                     {event.partner && <p className="text-[#0B6E40] text-sm mb-3">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
                     <p className="text-[#1E3A29]/80 font-sans text-sm leading-relaxed mb-5 flex-1">{event.desc}</p>
-                    <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#1E3A29]/12">{bookButton(event, false)}</div>
+                    <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#1E3A29]/12">{bookButton(event)}</div>
                   </div>
                 </div>
               ))}
@@ -222,7 +218,7 @@ export default function Events() {
                   </div>
                   <div className="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-3 flex-shrink-0">
                     <span className={`text-xs font-sans rounded-full px-3 py-1 ${availStyle(event.availKind, false)}`}>{event.avail}</span>
-                    {bookButton(event, false)}
+                    {bookButton(event)}
                   </div>
                 </div>
               </div>

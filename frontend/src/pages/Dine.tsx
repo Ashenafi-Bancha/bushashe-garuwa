@@ -58,7 +58,7 @@ export default function Dine() {
           </div>
 
           <div className="mt-14 text-center">
-            <Link to="/events" className="inline-flex items-center gap-2 bg-[#0E8A50] hover:bg-[#0B7A45] text-white text-sm font-sans font-semibold rounded-full px-8 py-4 transition-colors">
+            <Link to="/events" className="btn-primary">
               {dn.joinEvent}
             </Link>
           </div>
