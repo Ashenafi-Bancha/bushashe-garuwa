@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { photos, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
-import { Tilt, useRevealChildren } from '../lib/motion';
+import { Tilt } from '../lib/motion';
 
 type QuickKey = 'heritage' | 'experiences' | 'events' | 'stay' | 'dine' | 'visit' | 'gallery' | 'about';
 
@@ -24,10 +24,9 @@ const LINKS: { key: QuickKey; to: string; photo: PhotoKey; span: string }[] = [
 export default function QuickLinks() {
   const { t } = useI18n();
   const q = t.home.quick;
-  const ref = useRevealChildren<HTMLElement>();
 
   return (
-    <section ref={ref} className="py-20 sm:py-28" aria-labelledby="quick-title">
+    <section className="py-20 sm:py-28" aria-labelledby="quick-title">
       <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
         <div data-reveal className="fade-section flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10 sm:mb-14">
           <div>

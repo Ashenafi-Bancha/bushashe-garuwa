@@ -20,6 +20,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 - `frontend/src/i18n/` - English, Amharic and Wolaytta text (`dictionaries/en.ts`, `am.ts`, `wal.ts`); every key added to `en.ts` must also go into `am.ts` and `wal.ts`
 - `frontend/src/lib/api.ts` - Client for the backend; forms send only when `VITE_API_URL` is set
 - `frontend/src/admin/` - Staff area at `/admin`, lazy-loaded and outside the public layout: `api/` (client and types), `auth/` (sign-in session), `components/` (Sidebar, icons, PhotoForm, ui), `content/editableFields.ts` (which texts staff may edit), `media/` (shrinking a photo before upload, the photo library hook), `views/` (SignIn, Dashboard, Visits, Bookings, Messages, Events, Gallery, Hero, Content); English only
+- `frontend/src/components/PageTransition.tsx` - Fade between pages; gives each page its scroll effects from `lib/pageEffects.ts` (content rises into view; mark pieces with `data-reveal` to control the grouping). Both load after first paint; `lib/motion.tsx` holds the smooth scroll
 - `frontend/src/lib/content.ts` - Staff text edits laid over the built-in dictionaries; `lib/events.ts` - events and bookings from the API, with the built-in schedule as fallback; `lib/media.ts` - photos staff added (gallery photos and the pages' opening photos), with the built-in photos as fallback; `lib/heroSlots.ts` - each page's built-in opening photo
 - `frontend/src/assets/photos.ts` - Photo registry; originals live in `frontend/photos-originals/`, optimized with `pnpm photos`
 - `frontend/src/index.css` - Global CSS entrypoint and Tailwind CSS v4 import
@@ -45,7 +46,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 
 ## Dependencies
 
-- Website: React 19, React Router 7, Lenis, Tailwind CSS v4 (`@tailwindcss/vite`), Vite 8, TypeScript 5.7, oxfmt
+- Website: React 19, React Router 7, Lenis (smooth scroll), GSAP + ScrollTrigger (scroll effects), Motion (page transitions), Tailwind CSS v4 (`@tailwindcss/vite`), Vite 8, TypeScript 5.7, oxfmt
 - API: Express 5, zod 4, helmet, cors, PostgreSQL (`pg`; an embedded PGlite in development and tests), tsx for development
 
 ## Styling

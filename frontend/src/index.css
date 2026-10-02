@@ -92,10 +92,6 @@ a, button {
   from { transform: scale(1.02); }
   to   { transform: scale(1.1); }
 }
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
 @keyframes spin { to { rotate: 360deg; } }
 @keyframes heroPhoto {
   from { opacity: 0; transform: scale(1.08); }
@@ -112,7 +108,6 @@ a, button {
 .animate-scale-in      { animation: scaleIn 0.6s var(--ease-out-expo) both; }
 .animate-scroll-bounce { animation: scrollBounce 1.8s ease-in-out infinite; }
 .animate-ken-burns     { animation: kenBurns 14s ease-out both; }
-.animate-marquee       { animation: marquee 32s linear infinite; }
 .animate-spin-slow     { animation: spin 18s linear infinite; }
 .animate-hero-photo    { animation: heroPhoto 1.6s var(--ease-out-expo) both; }
 
@@ -189,10 +184,28 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 /* room under each line so the depth is not clipped by the rising mask */
 .brand-3d .line-mask { padding-bottom: 0.26em; margin-bottom: -0.2em; }
 
+/* ── Two rows of large words on the home page, sliding with the scroll ── */
+.word-strip {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  white-space: nowrap;
+  font-size: clamp(2.6rem, 9vw, 7rem);
+  will-change: transform;
+}
+.word-strip + .word-strip { margin-top: 0.12em; }
+/* the second row starts further along, so the two never line up */
+.word-strip[data-strip='right'] { transform: translateX(-22%); }
+/* every other word is drawn as an outline */
+/* the fill is the page colour and is painted over the inner half of the line, which keeps the outline clean */
+.word-outline { color: #F4EFE4; -webkit-text-stroke: 3px rgba(30, 58, 41, 0.4); paint-order: stroke fill; }
+html:lang(am) .word-strip { letter-spacing: 0; }
+
 /* ── Home hero slides ──
    The new photograph slides in from the right while the last one slides out to
    the left, both moving together, and it settles from a very slight zoom. */
-.hero-slide { position: absolute; inset: 0; overflow: hidden; }
+.hero-slide { position: absolute; inset: 0; overflow: hidden; translate: 0 var(--hero-y, 0); }
 .hero-slide-first { z-index: 2; animation: fadeIn 1.2s ease both; }
 .hero-slide-in { z-index: 2; animation: heroSlideIn 1.1s cubic-bezier(0.65, 0, 0.35, 1) both; }
 .hero-slide-out { z-index: 1; animation: heroSlideOut 1.1s cubic-bezier(0.65, 0, 0.35, 1) both; }
@@ -440,25 +453,11 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   color: #1E3A29;
 }
 
-/* ── Scroll reveal: a soft rise ── */
-.fade-section,
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s var(--ease-out-expo), transform 1.2s var(--ease-out-expo);
-}
-.fade-section.in-view,
-.reveal.in-view { opacity: 1; transform: none; }
-.fade-section:not(.in-view),
-.reveal:not(.in-view) { will-change: transform, opacity; }
+/* ── Scroll reveal ──
+   Content rises into view as it is reached: see src/lib/pageEffects.ts. The
+   start state is set there, so without scripts everything is simply visible. */
 
 
-/* ── Smooth page entry ── */
-@keyframes pageIn {
-  from { opacity: 0; transform: translateY(14px); }
-  to   { opacity: 1; transform: none; }
-}
-main { animation: pageIn 0.7s var(--ease-out-expo) both; }
 
 .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }

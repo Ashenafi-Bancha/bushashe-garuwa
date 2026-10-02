@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
-import { useRevealChildren } from '../lib/motion';
 import { useSiteEvents } from '../lib/events';
 import { heroPhotos, useSiteMedia } from '../lib/media';
 import { DIRECTIONS_URL } from '../lib/location';
@@ -96,7 +95,6 @@ export default function Home() {
   };
   const { events: siteEvents } = useSiteEvents();
   const [firstWord, ...rest] = h.hero.title.split(' ');
-  const page = useRevealChildren<HTMLElement>();
 
   useEffect(() => {
     const timer = setTimeout(() => goTo(heroIdx + 1), SLIDE_MS);
@@ -120,7 +118,7 @@ export default function Home() {
 
   return (
     <>
-      <main ref={page}>
+      <main>
 
         {/* ═════════ HERO ═════════
             The photographs come first. Computers: the whole screen, edge to edge.
@@ -217,22 +215,18 @@ export default function Home() {
         {/* ═════════ QUICK LINKS ═════════ */}
         <QuickLinks />
 
-        {/* ═════════ A RUNNING BAND OF WORDS ═════════ */}
-        <div className="overflow-hidden py-6" aria-hidden="true">
-          <div className="bg-[#0E8A50] text-[#F4EFE4] py-5 sm:py-6 -rotate-2 scale-105">
-            <div className="flex w-max animate-marquee font-display font-bold text-3xl sm:text-5xl tracking-[-0.03em]">
-              {[0, 1].map((n) => (
-                <span key={n} className="flex items-center">
-                  {[...h.marquee, ...h.marquee].map((word, i) => (
-                    <span key={i} className="flex items-center">
-                      <span className="px-6 sm:px-8">{word}</span>
-                      <span className="text-[#86A94F]">✦</span>
-                    </span>
-                  ))}
+        {/* ═════════ TWO ROWS OF LARGE WORDS that slide past each other as you scroll ═════════ */}
+        <div className="overflow-hidden py-10 sm:py-16 select-none" aria-hidden="true">
+          {(['left', 'right'] as const).map((direction, row) => (
+            <div key={direction} data-strip={direction} className="word-strip flex w-max items-center">
+              {[...h.marquee, ...h.marquee, ...h.marquee].map((word, i) => (
+                <span key={i} className="flex items-center">
+                  <span className={(i + row) % 2 === 0 ? 'text-[#1E3A29]' : 'word-outline'}>{word}</span>
+                  <span className="mx-5 sm:mx-9 w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#0E8A50]" />
                 </span>
               ))}
             </div>
-          </div>
+          ))}
         </div>
 
         {/* ═════════ WHO WE ARE ═════════ */}

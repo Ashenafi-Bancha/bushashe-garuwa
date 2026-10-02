@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -14,22 +14,12 @@ import Contact from './pages/Contact';
 import About from './pages/About';
 import Gallery from './pages/Gallery';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
-import { scrollToHash, scrollToTop, startSmoothScroll, useAutoReveal } from './lib/motion';
+import PageTransition from './components/PageTransition';
+import { startSmoothScroll } from './lib/motion';
 
 /** Staff area: loaded only when someone opens /admin, so visitors never download it */
 const AdminApp = lazy(() => import('./admin/AdminApp'));
 
-function ScrollToTop() {
-  const { pathname, hash } = useLocation();
-  useEffect(() => startSmoothScroll(), []);
-  useAutoReveal(pathname);
-  useEffect(() => {
-    if (!hash) return scrollToTop();
-    const timer = setTimeout(() => scrollToHash(hash), 300);
-    return () => clearTimeout(timer);
-  }, [pathname, hash]);
-  return null;
-}
 
 function NotFound() {
   const { t } = useI18n();
@@ -48,11 +38,16 @@ function NotFound() {
 }
 
 function AppLayout() {
+  useEffect(() => startSmoothScroll(), []);
+
   return (
     <div className="min-h-screen bg-[#F4EFE4]">
-      <ScrollToTop />
+      {/* a thin line across the top: how far down the page you are */}
+      <div id="scroll-progress" aria-hidden="true" className="fixed top-0 inset-x-0 z-[60] h-[3px] origin-left scale-x-0 bg-[#0E8A50]" />
       <Navbar />
-      <Routes>
+      <PageTransition>
+        {(location) => (
+      <Routes location={location}>
         <Route path="/" element={<Home />} />
         <Route path="/discover" element={<Discover />} />
         <Route path="/heritage" element={<Heritage />} />
@@ -68,6 +63,8 @@ function AppLayout() {
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+        )}
+      </PageTransition>
       <Footer />
     </div>
   );

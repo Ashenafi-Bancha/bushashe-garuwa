@@ -18,6 +18,11 @@ export function startSmoothScroll() {
   };
 }
 
+/** Tells `listener` each time the smooth scroll moves the page; returns a way to stop. */
+export function onSmoothScroll(listener: () => void): () => void {
+  return lenis ? lenis.on('scroll', listener) : () => {};
+}
+
 /** Jump to the top instantly (used on page change). */
 export function scrollToTop() {
   if (lenis) lenis.scrollTo(0, { immediate: true, force: true });
@@ -107,60 +112,4 @@ export function useScrollY(limit = Infinity) {
     };
   }, [limit]);
   return y;
-}
-
-/* ── Automatic scroll reveal for inner pages ───────────────── */
-
-/**
- * On every page except Home (which reveals its own content), each section after
- * the first rises into view in 3D as it is scrolled to.
- */
-export function useAutoReveal(pathname: string) {
-  useEffect(() => {
-    if (pathname === '/' || reducedMotion()) return;
-    const sections = Array.from(document.querySelectorAll<HTMLElement>('main > section:not(:first-child)'));
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in-view');
-          obs.unobserve(e.target);
-        }
-      }),
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
-    );
-    sections.forEach((el) => {
-      el.classList.add('reveal');
-      obs.observe(el);
-    });
-    return () => obs.disconnect();
-  }, [pathname]);
-}
-
-/**
- * Reveals every element marked `data-reveal` inside the returned container as
- * it scrolls into view (adds `in-view`; style the start state with `.fade-section`).
- */
-export function useRevealChildren<T extends HTMLElement>() {
-  const ref = useRef<T>(null);
-  useEffect(() => {
-    const root = ref.current;
-    if (!root) return;
-    const els = Array.from(root.querySelectorAll<HTMLElement>('[data-reveal]'));
-    if (reducedMotion()) {
-      els.forEach((el) => el.classList.add('in-view'));
-      return;
-    }
-    const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => {
-        if (e.isIntersecting) {
-          e.target.classList.add('in-view');
-          obs.unobserve(e.target);
-        }
-      }),
-      { rootMargin: '0px 0px -6% 0px', threshold: 0.08 },
-    );
-    els.forEach((el) => obs.observe(el));
-    return () => obs.disconnect();
-  }, []);
-  return ref;
 }
