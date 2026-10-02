@@ -55,8 +55,9 @@ async function connectPostgres(env: Env): Promise<Database> {
   const { default: pg } = await import('pg');
   pg.types.setTypeParser(DATE_TYPE, dateAsText);
 
+  logger.info(`database: connecting to PostgreSQL, DATABASE_SSL=${env.DATABASE_SSL}`);
   const pool = new pg.Pool({
-    connectionString: env.DATABASE_URL,
+    connectionString: withoutSslSettings(env.DATABASE_URL),
     ssl: env.DATABASE_SSL === 'off' ? false : { rejectUnauthorized: env.DATABASE_SSL === 'require' },
     max: 10,
     idleTimeoutMillis: 30_000,
@@ -92,6 +93,17 @@ async function connectPostgres(env: Env): Promise<Database> {
     },
     close: () => pool.end(),
   };
+}
+
+/**
+ * Drops sslmode and its relatives from the address: pg lets them override the
+ * `ssl` option, and DATABASE_SSL alone decides how the connection is encrypted.
+ */
+export function withoutSslSettings(databaseUrl: string): string {
+  const [address = '', query] = databaseUrl.split('?', 2);
+  if (!query) return databaseUrl;
+  const kept = query.split('&').filter((setting) => !/^(ssl|sslmode|sslcert|sslkey|sslrootcert|sslnegotiation|uselibpqcompat)=/i.test(setting));
+  return kept.length ? `${address}?${kept.join('&')}` : address;
 }
 
 /* ── development and tests: PostgreSQL inside this process (PGlite) ── */
