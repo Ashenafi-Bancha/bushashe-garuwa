@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
+import { lazy, Suspense, useState, useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import Photo from '../components/Photo';
@@ -12,6 +12,10 @@ import QuickLinks from '../components/QuickLinks';
 import PhotoCard from '../components/PhotoCard';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 import SwipeRow from '../components/SwipeRow';
+import { deviceTier, forcedTier, rememberSlow } from '../three/device';
+
+/** The 3D landscape opening, fetched only on the pages that use it */
+const LandscapeHero = lazy(() => import('../three/LandscapeHero'));
 
 const SLIDE_MS = 6000;
 
@@ -78,9 +82,20 @@ function CountUp({ value }: { value: string }) {
   return <span ref={ref}>{match[1]}{shown.toLocaleString('en-US')}{match[3]}</span>;
 }
 
-export default function Home() {
+export default function Home({ landscape = false }: { /** Open with the 3D landscape where the device can draw it */ landscape?: boolean }) {
   const { t, lang } = useI18n();
   const h = t.home;
+  // devices that cannot draw the landscape smoothly keep the photographs
+  const [tier, setTier] = useState(() => (landscape ? deviceTier() : 'none'));
+  useEffect(() => {
+    if (!landscape) return;
+    // a page under review: search engines are asked to leave it out
+    const meta = document.createElement('meta');
+    meta.name = 'robots';
+    meta.content = 'noindex';
+    document.head.append(meta);
+    return () => meta.remove();
+  }, [landscape]);
   // the built-in slides, or the ones staff added in the admin area (Page photos)
   const heroSlides = heroPhotos('home', useSiteMedia(), t, lang);
   const slideIds = heroSlides.map((slide) => slide.id).join(' ');
@@ -127,6 +142,18 @@ export default function Home() {
             Each new photograph sweeps in from the right like a curtain while it
             settles; the one before drifts away underneath. The name and the words
             follow just below. Swipe on phones. */}
+        {tier !== 'none' ? (
+          <Suspense fallback={<div className="h-[100svh] bg-[#E3EBD8]" />}>
+            <LandscapeHero
+              tier={tier}
+              watchSpeed={forcedTier() === null}
+              onTooSlow={() => {
+                rememberSlow();
+                setTier('none');
+              }}
+            />
+          </Suspense>
+        ) : (
         <section className="relative" aria-label={h.hero.title}>
           <div
             className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[100svh] lg:min-h-[560px] overflow-hidden bg-[#E3EBD8]"
@@ -196,6 +223,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        )}
 
         {/* ═════════ THE PLACE IN NUMBERS ═════════ */}
         <section className="px-5 sm:px-8 pt-6 lg:pt-10">

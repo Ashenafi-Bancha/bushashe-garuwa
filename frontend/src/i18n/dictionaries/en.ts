@@ -172,6 +172,9 @@ export const en = {
       badge: 'WOLAITA · HERITAGE · NATURE · CULTURE · ',
       next: 'Next photograph',
       lead: 'A family heritage place in Damot Sore, near Gununo, kept for four generations.',
+      walk: 'Walk the land of our forefathers',
+      book: 'Book Your Stay',
+      heritage: 'Explore Our Heritage',
     },
     film: {
       eyebrow: 'Watch',

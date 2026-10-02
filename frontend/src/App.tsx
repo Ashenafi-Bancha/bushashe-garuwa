@@ -49,6 +49,8 @@ function AppLayout() {
         {(location) => (
       <Routes location={location}>
         <Route path="/" element={<Home />} />
+        {/* not linked from anywhere: the home page with the 3D landscape opening, to be judged before it goes public */}
+        <Route path="/preview/hero" element={<Home landscape />} />
         <Route path="/discover" element={<Discover />} />
         <Route path="/heritage" element={<Heritage />} />
         <Route path="/heritage/*" element={<Heritage />} />

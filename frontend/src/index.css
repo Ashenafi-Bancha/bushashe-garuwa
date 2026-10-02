@@ -184,6 +184,22 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 /* room under each line so the depth is not clipped by the rising mask */
 .brand-3d .line-mask { padding-bottom: 0.26em; margin-bottom: -0.2em; }
 
+/* ── The 3D landscape opening of the home page (src/three/LandscapeHero.tsx) ──
+   The section is taller than the screen: the picture stays pinned while the
+   page is scrolled through it, and --journey (0 to 1) says how far. */
+.landscape-hero { height: 215svh; }
+@media (min-width: 1024px) { .landscape-hero { height: 235svh; } }
+/* the colours of the scene's first moment, until it has drawn itself */
+.landscape-poster {
+  background: linear-gradient(to bottom, #86B4D9 0%, #C9CFCB 30%, #F4D6BC 46%, #9DB37E 56%, #6DA643 100%);
+}
+/* the words fade and sink as the walk begins, leaving the whole picture */
+.journey-words {
+  opacity: calc(1 - var(--journey, 0) * 3.4);
+  transform: translateY(calc(var(--journey, 0) * 90px));
+}
+.landscape-hero[data-walking] .journey-words { visibility: hidden; }
+
 /* ── Two rows of large words on the home page, sliding with the scroll ── */
 .word-strip {
   font-family: var(--font-display);
