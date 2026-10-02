@@ -4,6 +4,7 @@ import { adminApi } from '../api/adminClient';
 import type { AdminEvent, SaveEventInput } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import EventForm, { emptyEvent } from '../components/EventForm';
+import { Icon } from '../components/icons';
 import { Notice, Panel, formatDate } from '../components/ui';
 
 /** Events staff manage: the cultural food evenings and everything else. */
@@ -84,11 +85,13 @@ export default function EventsView() {
         <button
           type="button"
           onClick={() => setEditing({ id: null, values: emptyEvent() })}
-          className="rounded-full bg-[#13261A] text-white text-sm font-semibold px-5 py-2.5 hover:bg-[#2D5239] transition-colors"
+          className="inline-flex admin-btn"
         >
+          <Icon name="plus" className="w-4 h-4" />
           Add an event
         </button>
         <button type="button" onClick={refresh} className="inline-flex admin-btn-quiet">
+          <Icon name="refresh" className="w-4 h-4" />
           Refresh
         </button>
       </div>
@@ -161,7 +164,7 @@ export default function EventsView() {
                     >
                       Edit
                     </button>
-                    <button type="button" disabled={busyId === event.id} onClick={() => remove(event)} className="inline-flex admin-btn-quiet">
+                    <button type="button" disabled={busyId === event.id} onClick={() => remove(event)} className="inline-flex admin-btn-quiet danger">
                       Remove
                     </button>
                   </div>

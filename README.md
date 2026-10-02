@@ -81,11 +81,18 @@ From there staff can:
 - **Event bookings**: see who reserved a place, for how many guests, with the booking number.
   Each one moves from "to call" to confirmed, came, or cancelled. Cancelling frees the places again.
   Events can have a limit, and the website counts down the places left and stops when it is full.
+- **Gallery**: add photos to the Gallery page, each with a heading, a description (in each
+  language) and a category. A photo can be hidden or removed again.
+- **Page photos**: change the large photograph that opens each page, with its own heading, or go
+  back to the built-in one. The home page takes several, shown as slides.
 - **Website text**: change headings, paragraphs, opening hours and contact details, per page and
   per language. An empty box puts the built-in words back.
 
-The public website always has its own built-in text and falls back to it, so the pages stay
-correct even when the API is offline. Edits and events appear within a minute.
+Photos are made smaller in the browser before they are sent, and are kept in the database, so
+there is no separate file storage to set up.
+
+The public website always has its own built-in text and photos and falls back to them, so the
+pages stay correct even when the API is offline. Edits, photos and events appear within a minute.
 
 ## Deployment
 

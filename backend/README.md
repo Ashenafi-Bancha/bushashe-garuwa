@@ -56,6 +56,11 @@ All responses are JSON: `{ "data": … }` on success, `{ "error": { "code", "mes
 | POST | `/api/v1/events/:id/bookings` | website | Reserve places (answers with a booking reference) |
 | GET | `/api/v1/events/admin/bookings` | staff | Bookings, newest first (`?eventId`) |
 | PATCH | `/api/v1/events/admin/bookings/:id/status` | staff | Handle a booking |
+| GET | `/api/v1/media` | website | Photos staff added: `gallery`, and `heroes` page by page |
+| GET | `/api/v1/media/:id/image` | website | The photograph itself |
+| GET | `/api/v1/media/admin` | staff | Every photo, hidden ones too |
+| POST | `/api/v1/media/admin/images` | staff | Add a photo: the body is the JPEG, PNG or WebP file (`?kind=gallery&category=` or `?kind=hero&slot=`) |
+| PUT/DELETE | `/api/v1/media/admin/:id` | staff | Save its heading, description and whether it shows; or remove it |
 
 ### Staff sign-in
 

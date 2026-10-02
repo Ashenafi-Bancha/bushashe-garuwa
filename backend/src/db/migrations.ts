@@ -106,4 +106,31 @@ export const migrations: { id: number; name: string; sql: string }[] = [
       CREATE INDEX idx_staff_sessions_user ON staff_sessions (user_id);
     `,
   },
+  {
+    id: 3,
+    name: 'photos added by staff: the gallery and the opening photos of the pages',
+    sql: `
+      CREATE TABLE media_images (
+        id            INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        -- 'gallery': a photo on the Gallery page; 'hero': the opening photo of a page
+        kind          TEXT        NOT NULL,
+        -- hero only: the page it opens (home, heritage, visit, ...)
+        slot          TEXT,
+        -- gallery only: the filter it is listed under (grounds, culture)
+        category      TEXT,
+        mime          TEXT        NOT NULL,
+        width         INTEGER,
+        height        INTEGER,
+        -- the photograph itself
+        bytes         BYTEA       NOT NULL,
+        -- heading and description per language: { "en": { "title": "", "desc": "" }, "am": { ... } }
+        translations  JSONB       NOT NULL DEFAULT '{"en":{"title":"","desc":""}}',
+        -- hidden until staff give it a heading
+        published     BOOLEAN     NOT NULL DEFAULT false,
+        created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at    TIMESTAMPTZ NOT NULL DEFAULT now()
+      );
+      CREATE INDEX idx_media_images_kind ON media_images (kind, slot);
+    `,
+  },
 ];

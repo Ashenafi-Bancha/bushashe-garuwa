@@ -11,6 +11,8 @@ import { bookingRepository } from './modules/events/booking.repository.js';
 import { bookingService } from './modules/events/booking.service.js';
 import { eventRepository } from './modules/events/event.repository.js';
 import { eventService } from './modules/events/event.service.js';
+import { mediaRepository } from './modules/media/media.repository.js';
+import { mediaService } from './modules/media/media.service.js';
 import { visitRepository } from './modules/visits/visit.repository.js';
 import { visitService } from './modules/visits/visit.service.js';
 import { staffRepository } from './modules/staff/staff.repository.js';
@@ -34,6 +36,7 @@ export function createContainer(env: Env, db: Database, options: { mailer?: Mail
     content: contentRepository(db),
     events: eventRepository(db),
     bookings: bookingRepository(db),
+    media: mediaRepository(db),
     staff: staffRepository(db),
   };
 
@@ -43,6 +46,7 @@ export function createContainer(env: Env, db: Database, options: { mailer?: Mail
     content: contentService(repositories.content),
     events: eventService(repositories.events),
     bookings: bookingService(repositories.bookings, repositories.events, notify),
+    media: mediaService(repositories.media),
     staff: staffService(repositories.staff),
   };
 

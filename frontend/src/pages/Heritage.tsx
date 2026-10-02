@@ -34,7 +34,7 @@ export default function Heritage() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo={pathname.startsWith('/heritage/trees') ? 'zigba' : 'meeshsho'} pos="object-[center_45%]" eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
+      <PageHero slot={pathname.startsWith('/heritage/trees') ? 'heritageTrees' : 'heritage'} eyebrow={hg.hero.eyebrow} title={hg.hero.title} desc={hg.intro} />
 
       {/* Heritage categories grid */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">

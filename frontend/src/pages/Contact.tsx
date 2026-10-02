@@ -31,7 +31,7 @@ export default function Contact() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo="gardens" eyebrow={c.hero.eyebrow} title={c.hero.title} desc={c.intro} />
+      <PageHero slot="contact" eyebrow={c.hero.eyebrow} title={c.hero.title} desc={c.intro} />
 
       {/* Contact content */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">

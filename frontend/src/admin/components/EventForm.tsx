@@ -21,7 +21,7 @@ export const emptyEvent = (): SaveEventInput => ({
   translations: { en: { name: '', desc: '' }, am: { name: '', desc: '' }, wal: { name: '', desc: '' } },
 });
 
-const field = 'w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]';
+const field = 'admin-field';
 const label = 'block text-xs font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2';
 
 /** Add or change one event, with its words in each language. */
@@ -166,7 +166,7 @@ export default function EventForm({
         </div>
 
         <div className="flex flex-wrap gap-3">
-          <button type="submit" disabled={saving} className="rounded-full bg-[#1E3A29] hover:bg-[#2D5239] text-[#F4EFE4] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-60">
+          <button type="submit" disabled={saving} className="inline-flex admin-btn">
             {saving ? 'Saving…' : 'Save event'}
           </button>
           <button type="button" onClick={onCancel} className="inline-flex admin-btn-quiet">Cancel</button>

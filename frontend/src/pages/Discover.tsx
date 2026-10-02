@@ -17,7 +17,7 @@ export default function Discover() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo="home" eyebrow={d.hero.eyebrow} title={d.hero.title} desc={t.common.goal.text} />
+      <PageHero slot="discover" eyebrow={d.hero.eyebrow} title={d.hero.title} desc={t.common.goal.text} />
 
       {/* Our story */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">

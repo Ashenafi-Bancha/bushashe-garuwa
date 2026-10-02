@@ -9,6 +9,7 @@ import type { ContactRepository } from '../contact/contact.repository.js';
 import type { ContentRepository } from '../content/content.repository.js';
 import type { BookingRepository } from '../events/booking.repository.js';
 import type { EventRepository } from '../events/event.repository.js';
+import type { MediaRepository } from '../media/media.repository.js';
 import type { VisitRepository } from '../visits/visit.repository.js';
 
 /**
@@ -26,6 +27,7 @@ export function adminRoutes(
     content: ContentRepository;
     events: EventRepository;
     bookings: BookingRepository;
+    media: MediaRepository;
   },
   staff: StaffService,
   guards: Guards,
@@ -50,15 +52,16 @@ export function adminRoutes(
   });
 
   router.get('/summary', async (_req, res) => {
-    const [contact, visits, events, bookings, edited, lastUpdatedAt] = await Promise.all([
+    const [contact, visits, events, bookings, media, edited, lastUpdatedAt] = await Promise.all([
       repositories.contact.stats(),
       repositories.visits.stats(),
       repositories.events.stats(),
       repositories.bookings.stats(),
+      repositories.media.stats(),
       repositories.content.count(),
       repositories.content.lastUpdatedAt(),
     ]);
-    sendData(res, { contact, visits, events, bookings, content: { edited, lastUpdatedAt }, generatedAt: new Date().toISOString() });
+    sendData(res, { contact, visits, events, bookings, media, content: { edited, lastUpdatedAt }, generatedAt: new Date().toISOString() });
   });
 
   return router;

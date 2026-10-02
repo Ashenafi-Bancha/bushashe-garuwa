@@ -17,7 +17,7 @@ const LANGS: { code: Lang; name: string }[] = [
 ];
 const builtIn: Record<Lang, unknown> = { en, am, wal };
 
-const field = 'w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]';
+const field = 'admin-field';
 
 /** Editing the words on the website, one page at a time, in each language. */
 export default function ContentView() {
@@ -118,7 +118,7 @@ export default function ContentView() {
       </div>
 
       {error && <Notice kind="error">{error}</Notice>}
-      {status && <Notice>{status}</Notice>}
+      {status && <Notice kind="success">{status}</Notice>}
       {loading && <Notice>Loading the website text…</Notice>}
 
       <Panel>
@@ -173,7 +173,7 @@ export default function ContentView() {
             type="button"
             onClick={save}
             disabled={!changed || saving}
-            className="rounded-full bg-[#1E3A29] hover:bg-[#2D5239] text-[#F4EFE4] font-semibold text-sm px-7 py-3 transition-colors disabled:opacity-50"
+            className="inline-flex admin-btn"
           >
             {saving ? 'Saving…' : 'Save changes'}
           </button>

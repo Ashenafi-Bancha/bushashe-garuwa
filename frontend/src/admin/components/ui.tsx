@@ -1,17 +1,42 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { BOOKING_STATUSES, BOOKING_STATUS_LABELS, STATUSES, STATUS_LABELS, type BookingStatus, type RequestStatus } from '../api/types';
+import { Icon, type IconName } from './icons';
 
 /** Small building blocks shared by the admin views. */
 
-export function StatCard({ label, value, hint }: { label: string; value: number | string; hint?: string }) {
-  return (
-    <div className="rounded-[1.5rem] bg-white elev-1 p-4 sm:p-6">
-      <div className="flex items-center gap-2 text-[#1E3A29]/60 text-xs sm:text-sm font-semibold mb-3">
-        <span className="w-2 h-2 rounded-full bg-[#86A94F] flex-shrink-0" />{label}
+export function StatCard({
+  label,
+  value,
+  hint,
+  icon,
+  onClick,
+}: {
+  label: string;
+  value: number | string;
+  hint?: string;
+  icon: IconName;
+  /** makes the card a way into the section its number comes from */
+  onClick?: () => void;
+}) {
+  const body = (
+    <>
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <span className="text-[#1E3A29]/60 text-[13px] font-semibold leading-snug">{label}</span>
+        <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#0E8A50]/10 text-[#0E8A50] flex-shrink-0">
+          <Icon name={icon} />
+        </span>
       </div>
-      <div className="font-display text-3xl sm:text-5xl font-extrabold tracking-[-0.04em] text-[#1E3A29] leading-none">{value}</div>
-      {hint && <div className="text-[#1E3A29]/45 text-xs mt-1.5 sm:mt-2">{hint}</div>}
-    </div>
+      <div className="font-display text-4xl font-extrabold tracking-[-0.04em] text-[#1E3A29] leading-none tabular-nums">{value}</div>
+      {hint && <div className="text-[#1E3A29]/45 text-xs mt-2">{hint}</div>}
+    </>
+  );
+  const card = 'block w-full text-left rounded-2xl bg-white border border-[#1E3A29]/8 p-5';
+  return onClick ? (
+    <button type="button" onClick={onClick} className={`${card} hover:border-[#0E8A50]/40 hover:-translate-y-0.5`}>
+      {body}
+    </button>
+  ) : (
+    <div className={card}>{body}</div>
   );
 }
 
@@ -121,11 +146,17 @@ export function Pager({
 }
 
 export function Panel({ children }: { children: ReactNode }) {
-  return <div className="rounded-3xl bg-white border border-[#1E3A29]/10 elev-2 p-5 sm:p-7">{children}</div>;
+  return <div className="rounded-2xl bg-white border border-[#1E3A29]/8 p-5 sm:p-7">{children}</div>;
 }
 
-export function Notice({ kind = 'info', children }: { kind?: 'info' | 'error'; children: ReactNode }) {
-  const styles = kind === 'error' ? 'bg-[#1E3A29]/10 text-[#8c4227]' : 'bg-[#1E3A29]/6 text-[#1E3A29]/70';
+const NOTICE_STYLES = {
+  info: 'bg-white border border-[#1E3A29]/8 text-[#1E3A29]/70',
+  success: 'bg-[#0E8A50]/10 text-[#0B6E40]',
+  error: 'bg-[#C4622D]/12 text-[#8c4227]',
+};
+
+export function Notice({ kind = 'info', children }: { kind?: keyof typeof NOTICE_STYLES; children: ReactNode }) {
+  const styles = NOTICE_STYLES[kind];
   return (
     <p role={kind === 'error' ? 'alert' : undefined} className={`rounded-2xl px-4 py-3 text-sm ${styles}`}>
       {children}
@@ -170,7 +201,7 @@ export function SearchBox({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-full border border-[#1E3A29]/12 bg-white pl-11 pr-4 py-3 text-sm text-[#1E3A29] outline-none placeholder:text-[#1E3A29]/35 focus:border-[#1E3A29] transition-colors"
+        className="w-full rounded-full border border-[#1E3A29]/12 bg-white pl-11 pr-4 py-3 text-sm text-[#1E3A29] outline-none placeholder:text-[#1E3A29]/35 focus:border-[#0E8A50] transition-colors"
       />
     </label>
   );

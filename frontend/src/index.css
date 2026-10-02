@@ -449,10 +449,46 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 
 /* ── Staff area (/admin) ── */
+/* the main action on a screen: the same emerald pill as the public site */
+.admin-btn {
+  /* no `display` here (see .admin-btn-quiet) */
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  border: 0;
+  background: #0E8A50;
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 20px;
+  transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+.admin-btn:hover:not(:disabled) { background: #0B7A45; }
+.admin-btn:active:not(:disabled) { transform: scale(0.98); }
+.admin-btn:disabled { opacity: 0.5; }
+
+/* text boxes in the staff forms */
+.admin-field {
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(30, 58, 41, 0.18);
+  background: #fff;
+  color: #1E3A29;
+  font-size: 14px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.admin-field::placeholder { color: rgba(30, 58, 41, 0.35); }
+.admin-field:focus { border-color: #0E8A50; box-shadow: 0 0 0 3px rgba(14, 138, 80, 0.14); }
+
 .admin-btn-quiet {
   /* no `display` here: it would beat Tailwind's `hidden` and the button
      would stay on screen where we meant to hide it. Markup sets the display. */
   align-items: center;
+  gap: 6px;
   border-radius: 999px;
   border: 1px solid rgba(30, 58, 41, 0.2);
   background: #fff;
@@ -464,6 +500,7 @@ html.lenis, html.lenis body { height: auto; }
   transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 }
 .admin-btn-quiet:hover:not(:disabled) { border-color: rgba(30, 58, 41, 0.5); }
+.admin-btn-quiet.danger:hover:not(:disabled) { border-color: #C4622D; color: #9A4A20; }
 .admin-btn-quiet:disabled { opacity: 0.4; }
 .admin-btn-quiet.on-dark {
   background: rgba(255, 255, 255, 0.08);

@@ -12,6 +12,7 @@ import { contactRoutes } from './modules/contact/contact.routes.js';
 import { contentRoutes } from './modules/content/content.routes.js';
 import { eventRoutes } from './modules/events/event.routes.js';
 import { healthRoutes } from './modules/health/health.routes.js';
+import { mediaRoutes } from './modules/media/media.routes.js';
 import { visitRoutes } from './modules/visits/visit.routes.js';
 
 /**
@@ -23,6 +24,7 @@ import { visitRoutes } from './modules/visits/visit.routes.js';
  *   /api/v1/visits       Plan Your Visit form, and the staff list of requests
  *   /api/v1/content      website text edited by staff
  *   /api/v1/events       events, and reserving a place at one
+ *   /api/v1/media        photos staff added: the gallery and the pages' opening photos
  *   /api/v1/admin        staff dashboard: session check and counts
  *   everything else      the website itself, when WEB_DIST points at its built files
  */
@@ -51,7 +53,7 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
       referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
     }),
   );
-  app.use(cors({ origin: env.CORS_ORIGINS, methods: ['GET', 'POST', 'PATCH'] }));
+  app.use(cors({ origin: env.CORS_ORIGINS, methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'] }));
   app.use(express.json({ limit: '32kb' }));
 
   const v1 = express.Router();
@@ -59,6 +61,7 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
   v1.use('/visits', visitRoutes(services.visits, guards));
   v1.use('/content', contentRoutes(services.content, guards));
   v1.use('/events', eventRoutes(services.events, services.bookings, guards));
+  v1.use('/media', mediaRoutes(services.media, guards));
   v1.use('/admin', adminRoutes(repositories, services.staff, guards));
 
   app.use('/api/health', healthRoutes(db));

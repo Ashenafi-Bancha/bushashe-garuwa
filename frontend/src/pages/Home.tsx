@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { photos, type PhotoKey } from '../assets/photos';
+import { photos } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import { useRevealChildren } from '../lib/motion';
 import { useSiteEvents } from '../lib/events';
+import { heroPhotos, useSiteMedia } from '../lib/media';
 import { DIRECTIONS_URL } from '../lib/location';
 import StoryFilm from '../components/StoryFilm';
 import PhotoRing from '../components/PhotoRing';
@@ -13,15 +14,6 @@ import PhotoCard from '../components/PhotoCard';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 import SwipeRow from '../components/SwipeRow';
 
-const heroSlides: { key: PhotoKey; pos: string }[] = [
-  { key: 'gate', pos: 'object-[center_35%]' },
-  { key: 'meeshsho', pos: 'object-[center_45%]' },
-  { key: 'home', pos: 'object-center' },
-  { key: 'gifaataa1', pos: 'object-[center_40%]' },
-  { key: 'house', pos: 'object-center' },
-  { key: 'zigba', pos: 'object-[center_40%]' },
-  { key: 'gifaataa2', pos: 'object-[center_45%]' },
-];
 const SLIDE_MS = 6000;
 
 const livingHeritage = [
@@ -88,8 +80,11 @@ function CountUp({ value }: { value: string }) {
 }
 
 export default function Home() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const h = t.home;
+  // the built-in slides, or the ones staff added in the admin area (Page photos)
+  const heroSlides = heroPhotos('home', useSiteMedia(), t, lang);
+  const slideIds = heroSlides.map((slide) => slide.id).join(' ');
   const [heroIdx, setHeroIdx] = useState(0);
   const [prevIdx, setPrevIdx] = useState<number | null>(null);
   const touchX = useRef<number | null>(null);
@@ -106,12 +101,22 @@ export default function Home() {
   useEffect(() => {
     const timer = setTimeout(() => goTo(heroIdx + 1), SLIDE_MS);
     return () => clearTimeout(timer);
-  }, [heroIdx]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [heroIdx, slideIds]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // a different set of slides starts again from its first photograph
+  const [shownIds, setShownIds] = useState(slideIds);
+  if (shownIds !== slideIds) {
+    setShownIds(slideIds);
+    setHeroIdx(0);
+    setPrevIdx(null);
+  }
+  const slide = heroSlides[heroIdx] ?? heroSlides[0]!;
+  const lastSlide = prevIdx === null ? undefined : heroSlides[prevIdx];
 
   // have every photograph ready so each slide opens without a flash
   useEffect(() => {
-    heroSlides.forEach(({ key }) => { const img = new Image(); img.src = photos[key]; });
-  }, []);
+    heroSlides.forEach(({ src }) => { const img = new Image(); img.src = src; });
+  }, [slideIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <>
@@ -135,17 +140,17 @@ export default function Home() {
               goTo(heroIdx + (end < start ? 1 : -1));
             }}
           >
-            {prevIdx !== null && (
-              <div key={`out-${prevIdx}-${heroIdx}`} className="hero-slide hero-slide-out">
-                <img src={photos[heroSlides[prevIdx]!.key]} alt="" className={`w-full h-full object-cover ${heroSlides[prevIdx]!.pos}`} />
+            {lastSlide && (
+              <div key={`out-${lastSlide.id}-${slide.id}`} className="hero-slide hero-slide-out">
+                <img src={lastSlide.src} alt="" className={`w-full h-full object-cover ${lastSlide.pos}`} />
               </div>
             )}
-            <div key={`in-${heroIdx}`} className={`hero-slide ${prevIdx === null ? 'hero-slide-first' : 'hero-slide-in'}`}>
+            <div key={`in-${slide.id}`} className={`hero-slide ${lastSlide ? 'hero-slide-in' : 'hero-slide-first'}`}>
               <img
-                src={photos[heroSlides[heroIdx]!.key]}
-                alt={t.photos[heroSlides[heroIdx]!.key]}
+                src={slide.src}
+                alt={slide.alt}
                 fetchPriority="high"
-                className={`hero-slide-img w-full h-full object-cover ${heroSlides[heroIdx]!.pos}`}
+                className={`hero-slide-img w-full h-full object-cover ${slide.pos}`}
               />
             </div>
 
@@ -157,17 +162,19 @@ export default function Home() {
 
             {/* the name of the place in the photograph, and the way to the next one */}
             <div className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:bottom-auto lg:right-8 lg:top-[104px] flex items-center gap-2">
-              <span key={heroIdx} className="rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
-                {t.photoCaptions[heroSlides[heroIdx]!.key].title}
+              <span key={slide.id} className="rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
+                {slide.title}
               </span>
-              <button
-                type="button"
-                onClick={() => goTo(heroIdx + 1)}
-                aria-label={h.hero.next}
-                className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50] transition-colors"
-              >
-                →
-              </button>
+              {heroSlides.length > 1 && (
+                <button
+                  type="button"
+                  onClick={() => goTo(heroIdx + 1)}
+                  aria-label={h.hero.next}
+                  className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50] transition-colors"
+                >
+                  →
+                </button>
+              )}
             </div>
           </div>
 

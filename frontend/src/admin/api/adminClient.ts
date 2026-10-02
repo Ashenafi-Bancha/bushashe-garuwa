@@ -1,5 +1,19 @@
 import { API_BASE, ApiError } from '../../lib/api';
-import type { AdminEvent, Booking, BookingStatus, ContactMessage, ContentEntry, Page, RequestStatus, SaveEventInput, Summary, VisitRequest } from './types';
+import type {
+  AdminEvent,
+  Booking,
+  BookingStatus,
+  ContactMessage,
+  ContentEntry,
+  GalleryCategory,
+  MediaImage,
+  Page,
+  RequestStatus,
+  SaveEventInput,
+  SaveMediaInput,
+  Summary,
+  VisitRequest,
+} from './types';
 
 /** Fired when the API answers that the session is no longer valid, so the staff area returns to the sign-in screen */
 export const SESSION_ENDED_EVENT = 'bg-admin-session-ended';
@@ -82,6 +96,21 @@ export const adminApi = {
 
   setBookingStatus: (token: string, id: number, status: BookingStatus) =>
     request<Booking>(token, `/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+
+  // ── Photos ──
+  media: (token: string) => request<{ items: MediaImage[] }>(token, '/v1/media/admin'),
+
+  /** Sends the photograph itself; it stays hidden until `saveMedia` gives it a heading */
+  uploadMedia: (
+    token: string,
+    file: Blob,
+    where: { kind: 'gallery' | 'hero'; slot?: string; category?: GalleryCategory; width?: number; height?: number },
+  ) => request<MediaImage>(token, `/v1/media/admin/images${list(where)}`, { method: 'POST', headers: { 'Content-Type': file.type }, body: file }),
+
+  saveMedia: (token: string, id: number, input: SaveMediaInput) =>
+    request<MediaImage>(token, `/v1/media/admin/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
+
+  deleteMedia: (token: string, id: number) => request<{ removed: true }>(token, `/v1/media/admin/${id}`, { method: 'DELETE' }),
 
   // ── Website text ──
   content: (token: string) => request<{ items: ContentEntry[] }>(token, '/v1/content/admin'),

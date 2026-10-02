@@ -361,3 +361,98 @@ describe('two guests asking at the same moment', () => {
     assert.equal(small.placesLeft, 1, 'three of the four places are taken, once');
   });
 });
+
+describe('photos added by staff', () => {
+  /** enough of a PNG for the API to recognise one: its signature, then filler */
+  const png = Buffer.concat([Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]), Buffer.alloc(64, 7)]);
+  const upload = (query: string, body: Buffer = png, type = 'image/png') =>
+    staff(`/v1/media/admin/images?${query}`, { method: 'POST', headers: { 'content-type': type }, body });
+  const details = (id: number, title: string, extra: Record<string, unknown> = {}) =>
+    staff(`/v1/media/admin/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ translations: { en: { title, desc: 'A description' }, am: { title: 'ርዕስ' } }, published: true, ...extra }),
+    });
+
+  it('keeps a new gallery photo hidden until it has a heading, then shows it', async () => {
+    const added = await upload('kind=gallery&category=culture&width=1600&height=1067');
+    assert.equal(added.status, 201);
+    const { id } = (await read(added)).data;
+
+    let site = (await read(await fetch(base + '/v1/media'))).data;
+    assert.equal(site.gallery.length, 0, 'not on the website yet');
+
+    const noHeading = await staff(`/v1/media/admin/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ translations: { en: { title: '' } }, published: true }),
+    });
+    assert.equal(noHeading.status, 400);
+
+    assert.equal((await details(id, 'Coffee ceremony')).status, 200);
+    site = (await read(await fetch(base + '/v1/media'))).data;
+    assert.equal(site.gallery.length, 1);
+    assert.equal(site.gallery[0].category, 'culture');
+    assert.equal(site.gallery[0].translations.en.title, 'Coffee ceremony');
+    assert.equal(site.gallery[0].translations.am.title, 'ርዕስ');
+    assert.equal(site.gallery[0].width, 1600);
+  });
+
+  it('serves the photograph itself, unchanged', async () => {
+    const { id } = (await read(await upload('kind=gallery'))).data;
+    const res = await fetch(`${base}/v1/media/${id}/image`);
+    assert.equal(res.status, 200);
+    assert.equal(res.headers.get('content-type'), 'image/png');
+    assert.match(res.headers.get('cache-control') ?? '', /immutable/);
+    assert.deepEqual(Buffer.from(await res.arrayBuffer()), png);
+    assert.equal((await fetch(`${base}/v1/media/999999/image`)).status, 404);
+  });
+
+  it('gives a page one opening photo, and the home page several', async () => {
+    const first = (await read(await upload('kind=hero&slot=visit'))).data.id;
+    await details(first, 'The gate at dawn');
+    const second = (await read(await upload('kind=hero&slot=visit'))).data.id;
+    await details(second, 'The gate at dusk');
+
+    for (const title of ['Slide one', 'Slide two']) {
+      const { id } = (await read(await upload('kind=hero&slot=home'))).data;
+      await details(id, title);
+    }
+
+    const { heroes } = (await read(await fetch(base + '/v1/media'))).data;
+    assert.deepEqual(heroes.visit.map((photo: any) => photo.translations.en.title), ['The gate at dusk']);
+    assert.deepEqual(heroes.home.map((photo: any) => photo.translations.en.title), ['Slide one', 'Slide two']);
+    assert.equal((await fetch(`${base}/v1/media/${first}/image`)).status, 404, 'the replaced photo is gone');
+  });
+
+  it('refuses files that are not photos, and a page photo without its page', async () => {
+    assert.equal((await upload('kind=gallery', Buffer.from('<script>alert(1)</script>'), 'image/png')).status, 400);
+    assert.equal((await upload('kind=gallery', png, 'application/pdf')).status, 400);
+    assert.equal((await upload('kind=hero')).status, 400);
+    assert.equal((await upload('kind=hero&slot=nowhere')).status, 400);
+  });
+
+  it('lets staff hide and remove a photo, and counts them on the dashboard', async () => {
+    const { id } = (await read(await upload('kind=gallery'))).data;
+    await details(id, 'To be removed');
+    const before = (await read(await staff('/v1/admin/summary'))).data.media;
+
+    await details(id, 'To be removed', { published: false });
+    const hidden = (await read(await staff('/v1/admin/summary'))).data.media;
+    assert.equal(hidden.gallery, before.gallery - 1);
+    assert.equal(hidden.hidden, before.hidden + 1);
+
+    assert.equal((await staff(`/v1/media/admin/${id}`, { method: 'DELETE' })).status, 200);
+    assert.equal((await staff(`/v1/media/admin/${id}`, { method: 'DELETE' })).status, 404);
+    const all = (await read(await staff('/v1/media/admin'))).data.items;
+    assert.ok(!all.some((photo: any) => photo.id === id));
+  });
+
+  it('is for staff only', async () => {
+    const asVisitor = (path: string, init: RequestInit = {}) => fetch(base + path, init);
+    assert.equal((await asVisitor('/v1/media/admin')).status, 401);
+    assert.equal(
+      (await asVisitor('/v1/media/admin/images?kind=gallery', { method: 'POST', headers: { 'content-type': 'image/png' }, body: png })).status,
+      401,
+    );
+    assert.equal((await asVisitor('/v1/media/admin/1', { method: 'DELETE' })).status, 401);
+  });
+});

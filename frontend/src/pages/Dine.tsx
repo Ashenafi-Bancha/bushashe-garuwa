@@ -21,7 +21,7 @@ export default function Dine() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo="food" eyebrow={dn.hero.eyebrow} title={dn.hero.title} desc={dn.hero.desc} />
+      <PageHero slot="dine" eyebrow={dn.hero.eyebrow} title={dn.hero.title} desc={dn.hero.desc} />
 
       {/* Menu */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">

@@ -30,7 +30,7 @@ export default function Stay() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo="pavilions" eyebrow={st.hero.eyebrow} title={st.hero.title} desc={st.hero.desc} />
+      <PageHero slot="stay" eyebrow={st.hero.eyebrow} title={st.hero.title} desc={st.hero.desc} />
 
       {/* Room cards */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { photos, type PhotoKey } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
+import { captionFor, mediaUrl, useSiteMedia } from '../lib/media';
 import { lockScroll, Tilt } from '../lib/motion';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
@@ -8,9 +9,9 @@ import PageHero from '../components/PageHero';
 type Category = Exclude<keyof Dictionary['gallery']['filters'], 'all'>;
 type Filter = Category | 'all';
 
-/** Every real photo, with the category it belongs to. Add new ones here as they are registered in photos.ts. */
+/** The photos built into the website, with the category each belongs to. Staff add more from the admin area (Gallery). */
 /* `span` is the tile size in the full mosaic (All); it fills the 4-column grid exactly. */
-const items: { key: PhotoKey; cat: Category; span: string }[] = [
+const builtIn: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'gate', cat: 'grounds', span: 'sm:col-span-2 sm:row-span-2' },
   { key: 'meeshsho', cat: 'culture', span: 'col-span-2' },
   { key: 'home', cat: 'grounds', span: 'col-span-2' },
@@ -40,11 +41,39 @@ const spans = [
   'sm:col-span-2',
 ];
 
+/** A photo ready to draw, whether built in or added by staff */
+type Item = { id: string; cat: Category; span: string; src: string; alt: string; title: string; desc: string };
+
 export default function Gallery() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const g = t.gallery;
+  const media = useSiteMedia();
   const [filter, setFilter] = useState<Filter>('all');
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+
+  const items: Item[] = [
+    ...builtIn.map(({ key, cat, span }) => ({
+      id: key,
+      cat,
+      span,
+      src: photos[key],
+      alt: t.photos[key],
+      title: t.photoCaptions[key].title,
+      desc: t.photoCaptions[key].desc,
+    })),
+    // staff photos follow the built-in mosaic, in the repeating pattern
+    ...media.gallery.map((photo, i) => {
+      const caption = captionFor(photo, lang);
+      return {
+        id: `m${photo.id}`,
+        cat: (photo.category ?? 'grounds') as Category,
+        span: spans[i % spans.length]!,
+        src: mediaUrl(photo.id),
+        alt: caption.desc || caption.title,
+        ...caption,
+      };
+    }),
+  ];
 
   const shown = filter === 'all' ? items : items.filter((i) => i.cat === filter);
   const current = openIdx === null ? null : shown[openIdx];
@@ -75,7 +104,7 @@ export default function Gallery() {
     <>
     <main>
       {/* Hero */}
-      <PageHero photo="home" eyebrow={g.hero.eyebrow} title={g.hero.title} desc={g.intro} />
+      <PageHero slot="gallery" eyebrow={g.hero.eyebrow} title={g.hero.title} desc={g.intro} />
 
       {/* Filters + grid */}
       <section className="py-14 sm:py-20">
@@ -103,16 +132,16 @@ export default function Gallery() {
           ) : (
             <div className="grid grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[210px] lg:auto-rows-[240px] gap-3 sm:gap-4">
               {shown.map((item, i) => (
-                <Tilt key={item.key} className={`rounded-2xl sm:rounded-3xl ${filter === 'all' ? item.span : spans[i % spans.length]}`} max={5}>
+                <Tilt key={item.id} className={`rounded-2xl sm:rounded-3xl ${filter === 'all' ? item.span : spans[i % spans.length]}`} max={5}>
                   <button
                     onClick={() => setOpenIdx(i)}
                     className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#1E3A29]/8"
                   >
-                    <img src={photos[item.key]} alt={t.photos[item.key]} loading="lazy" className="w-full h-full object-cover" />
+                    <img src={item.src} alt={item.alt} loading="lazy" className="w-full h-full object-cover" />
                     <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5 text-left">
-                      <span className="block font-display text-base sm:text-xl text-white leading-tight">{t.photoCaptions[item.key].title}</span>
-                      <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{t.photoCaptions[item.key].desc}</span>
+                      <span className="block font-display text-base sm:text-xl text-white leading-tight">{item.title}</span>
+                      <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{item.desc}</span>
                     </span>
                   </button>
                 </Tilt>
@@ -157,14 +186,14 @@ export default function Gallery() {
             {current && (
               <>
                 <img
-                  key={current.key}
-                  src={photos[current.key]}
-                  alt={t.photos[current.key]}
+                  key={current.id}
+                  src={current.src}
+                  alt={current.alt}
                   className="max-h-[75vh] max-w-full object-contain rounded-2xl shadow-2xl animate-scale-in"
                 />
                 <figcaption className="text-center max-w-2xl">
-                  <span className="block font-display text-2xl sm:text-3xl text-white">{t.photoCaptions[current.key].title}</span>
-                  <span className="block text-white/65 text-sm sm:text-base mt-2 leading-relaxed">{t.photoCaptions[current.key].desc}</span>
+                  <span className="block font-display text-2xl sm:text-3xl text-white">{current.title}</span>
+                  <span className="block text-white/65 text-sm sm:text-base mt-2 leading-relaxed">{current.desc}</span>
                 </figcaption>
               </>
             )}

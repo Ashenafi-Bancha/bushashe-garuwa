@@ -3,11 +3,14 @@ import { ApiError } from '../../lib/api';
 import { adminApi } from '../api/adminClient';
 import type { Summary } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
-import Sidebar, { type Section, type SectionId } from '../components/Sidebar';
+import Sidebar, { type SectionGroup, type SectionId } from '../components/Sidebar';
+import { Icon, type IconName } from '../components/icons';
 import { Notice, StatCard } from '../components/ui';
 import BookingsView from './BookingsView';
 import ContentView from './ContentView';
 import EventsView from './EventsView';
+import GalleryView from './GalleryView';
+import HeroView from './HeroView';
 import MessagesView from './MessagesView';
 import VisitsView from './VisitsView';
 
@@ -18,8 +21,12 @@ const HEADINGS: Record<SectionId, { title: string; lead: string }> = {
   bookings: { title: 'Event bookings', lead: 'Places reserved at the cultural food evenings and other events.' },
   messages: { title: 'Messages', lead: 'Messages sent from the contact page.' },
   events: { title: 'Events', lead: 'Add and change the events shown on the website.' },
+  gallery: { title: 'Gallery', lead: 'Add photos to the Gallery page, each with a heading and a description.' },
+  hero: { title: 'Page photos', lead: 'The large photograph that opens each page.' },
   content: { title: 'Website text', lead: 'Change the words on the website, in each language.' },
 };
+
+const plural = (count: number, one: string, many: string) => `${count} ${count === 1 ? one : many}`;
 
 export default function Dashboard() {
   const { token, email, signOut } = useAdminSession();
@@ -47,13 +54,25 @@ export default function Dashboard() {
     return () => clearInterval(timer);
   }, [loadSummary]);
 
-  const sections: Section[] = [
-    { id: 'overview', label: 'Overview', hint: 'The numbers at a glance' },
-    { id: 'visits', label: 'Visit requests', hint: 'People asking to visit', badge: summary?.visits.new },
-    { id: 'bookings', label: 'Event bookings', hint: 'Places reserved', badge: summary?.bookings.pending },
-    { id: 'messages', label: 'Messages', hint: 'From the contact page', badge: summary?.contact.new },
-    { id: 'events', label: 'Events', hint: 'Dates on the website' },
-    { id: 'content', label: 'Website text', hint: 'The words on the pages' },
+  const groups: SectionGroup[] = [
+    { sections: [{ id: 'overview', label: 'Overview', icon: 'overview' }] },
+    {
+      title: 'Requests',
+      sections: [
+        { id: 'visits', label: 'Visit requests', icon: 'visits', badge: summary?.visits.new },
+        { id: 'bookings', label: 'Event bookings', icon: 'bookings', badge: summary?.bookings.pending },
+        { id: 'messages', label: 'Messages', icon: 'messages', badge: summary?.contact.new },
+      ],
+    },
+    {
+      title: 'Website',
+      sections: [
+        { id: 'events', label: 'Events', icon: 'events' },
+        { id: 'gallery', label: 'Gallery', icon: 'gallery' },
+        { id: 'hero', label: 'Page photos', icon: 'hero' },
+        { id: 'content', label: 'Website text', icon: 'text' },
+      ],
+    },
   ];
 
   const heading = HEADINGS[section];
@@ -64,20 +83,68 @@ export default function Dashboard() {
     : undefined;
 
   const figures = (
-    <div className="grid grid-cols-2 lg:grid-cols-6 gap-3 sm:gap-4">
-      <StatCard label="Handled today" value={handledToday ?? '–'} hint={handledToday ? 'Well done' : 'Nothing handled yet'} />
-      <StatCard label="Upcoming events" value={summary?.events.upcoming ?? '–'} hint={`${summary?.events.drafts ?? 0} not published`} />
-      <StatCard label="Guests booked" value={summary?.bookings.guestsUpcoming ?? '–'} hint={`${summary?.bookings.pending ?? 0} to call back`} />
-      <StatCard label="Upcoming visits" value={summary?.visits.upcoming ?? '–'} hint={`${summary?.visits.new ?? 0} not handled`} />
-      <StatCard label="New messages" value={summary?.contact.new ?? '–'} hint={`${summary?.contact.last7Days ?? 0} this week`} />
-      <StatCard label="Edited texts" value={summary?.content.edited ?? '–'} hint="Changed from here" />
+    <div className="grid grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+      <StatCard
+        icon="visits"
+        label="Upcoming visits"
+        value={summary?.visits.upcoming ?? '–'}
+        hint={`${summary?.visits.new ?? 0} not handled`}
+        onClick={() => setSection('visits')}
+      />
+      <StatCard
+        icon="guests"
+        label="Guests booked"
+        value={summary?.bookings.guestsUpcoming ?? '–'}
+        hint={`${summary?.bookings.pending ?? 0} to call back`}
+        onClick={() => setSection('bookings')}
+      />
+      <StatCard
+        icon="messages"
+        label="New messages"
+        value={summary?.contact.new ?? '–'}
+        hint={`${summary?.contact.last7Days ?? 0} this week`}
+        onClick={() => setSection('messages')}
+      />
+      <StatCard icon="checkCircle" label="Handled today" value={handledToday ?? '–'} hint={handledToday ? 'Well done' : 'Nothing handled yet'} />
     </div>
   );
+
+  /** The parts of the website staff look after, each a way into its section */
+  const website: { id: SectionId; icon: IconName; title: string; text: string; state: string }[] = [
+    {
+      id: 'gallery',
+      icon: 'gallery',
+      title: 'Gallery',
+      text: 'Add photos with a heading and a description.',
+      state: summary?.media ? plural(summary.media.gallery, 'photo added', 'photos added') : '',
+    },
+    {
+      id: 'hero',
+      icon: 'hero',
+      title: 'Page photos',
+      text: 'Change the photograph that opens a page.',
+      state: summary?.media ? plural(summary.media.heroes, 'photo of yours', 'photos of yours') : '',
+    },
+    {
+      id: 'events',
+      icon: 'events',
+      title: 'Events',
+      text: 'Add the next cultural food evening.',
+      state: summary ? `${summary.events.upcoming} upcoming, ${plural(summary.events.drafts, 'draft', 'drafts')}` : '',
+    },
+    {
+      id: 'content',
+      icon: 'text',
+      title: 'Website text',
+      text: 'Change the words, in each language.',
+      state: summary ? plural(summary.content.edited, 'text edited', 'texts edited') : '',
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-[#F4EFE4]">
       <Sidebar
-        sections={sections}
+        groups={groups}
         current={section}
         onChoose={setSection}
         onSignOut={signOut}
@@ -86,21 +153,17 @@ export default function Dashboard() {
         onClose={() => setMenuOpen(false)}
       />
 
-      <div className="lg:pl-[260px]">
+      <div className="lg:pl-[264px]">
         {/* the bar above the work: where you are, and the way back to the menu on a phone */}
         <header className="sticky top-0 z-30 bg-[#F4EFE4]/90 backdrop-blur border-b border-[#1E3A29]/8">
-          <div className="max-w-screen-xl mx-auto px-4 sm:px-8 py-4 flex items-center gap-3">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-8 h-[72px] flex items-center gap-3">
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="Open the menu"
               className="lg:hidden flex-shrink-0 w-11 h-11 rounded-xl border border-[#1E3A29]/10 bg-white grid place-items-center text-[#1E3A29]"
             >
-              <span className="w-[18px] flex flex-col gap-[5px]">
-                <span className="block h-[1.5px] rounded-full bg-current" />
-                <span className="block h-[1.5px] rounded-full bg-current" />
-                <span className="block h-[1.5px] rounded-full bg-current" />
-              </span>
+              <Icon name="menu" />
             </button>
 
             <div className="min-w-0 flex-1">
@@ -108,9 +171,17 @@ export default function Dashboard() {
               <p className="text-[#1E3A29]/50 text-xs sm:text-sm truncate">{heading.lead}</p>
             </div>
 
-            <button type="button" onClick={loadSummary} className="hidden sm:inline-flex admin-btn-quiet flex-shrink-0">
-              Refresh
-            </button>
+            {/* the other sections have their own Refresh, beside their lists */}
+            {section === 'overview' && (
+              <button type="button" onClick={loadSummary} className="hidden sm:inline-flex admin-btn-quiet flex-shrink-0">
+                <Icon name="refresh" className="w-4 h-4" />
+                Refresh
+              </button>
+            )}
+            <a href="/" target="_blank" rel="noreferrer" className="hidden md:inline-flex admin-btn-quiet flex-shrink-0">
+              <Icon name="external" className="w-4 h-4" />
+              View the website
+            </a>
           </div>
         </header>
 
@@ -122,12 +193,37 @@ export default function Dashboard() {
           )}
 
           {section === 'overview' && (
-            <div className="space-y-8">
+            <div className="space-y-10">
               {figures}
-              <div>
+
+              <section>
+                <h2 className="font-display text-lg font-bold text-[#1E3A29] mb-3">Your website</h2>
+                <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 sm:gap-4">
+                  {website.map((part) => (
+                    <button
+                      key={part.id}
+                      type="button"
+                      onClick={() => setSection(part.id)}
+                      className="group text-left rounded-2xl bg-white border border-[#1E3A29]/8 p-5 hover:border-[#0E8A50]/40 hover:-translate-y-0.5"
+                    >
+                      <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#1E3A29] text-white mb-4 group-hover:bg-[#0E8A50] transition-colors">
+                        <Icon name={part.icon} />
+                      </span>
+                      <span className="flex items-center gap-1.5 font-display text-lg text-[#1E3A29]">
+                        {part.title}
+                        <Icon name="arrowRight" className="w-4 h-4 text-[#0E8A50] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                      </span>
+                      <span className="block text-[#1E3A29]/55 text-sm mt-1">{part.text}</span>
+                      <span className="block text-[#0B6E40] text-xs font-bold mt-3 min-h-4">{part.state}</span>
+                    </button>
+                  ))}
+                </div>
+              </section>
+
+              <section>
                 <h2 className="font-display text-lg font-bold text-[#1E3A29] mb-3">Waiting for you</h2>
                 <VisitsView />
-              </div>
+              </section>
             </div>
           )}
 
@@ -135,6 +231,8 @@ export default function Dashboard() {
           {section === 'bookings' && <BookingsView />}
           {section === 'messages' && <MessagesView />}
           {section === 'events' && <EventsView />}
+          {section === 'gallery' && <GalleryView />}
+          {section === 'hero' && <HeroView />}
           {section === 'content' && <ContentView />}
         </main>
       </div>

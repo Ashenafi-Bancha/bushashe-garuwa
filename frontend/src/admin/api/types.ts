@@ -43,6 +43,7 @@ export type Summary = {
   visits: { total: number; new: number; upcoming: number; handledToday: number };
   events: { total: number; upcoming: number; drafts: number };
   bookings: { total: number; pending: number; guestsUpcoming: number; handledToday: number };
+  media: { gallery: number; heroes: number; hidden: number };
   content: { edited: number; lastUpdatedAt: string | null };
   generatedAt: string;
 };
@@ -92,5 +93,35 @@ export type Booking = {
   status: BookingStatus;
   createdAt: string;
 };
+
+// ── Photos staff add: the gallery, and the pages' opening photos ──
+export type MediaCaption = { title: string; desc: string };
+export type MediaLang = 'en' | 'am' | 'wal';
+export type MediaTranslations = { en: MediaCaption; am?: MediaCaption; wal?: MediaCaption };
+export type GalleryCategory = 'grounds' | 'culture';
+
+export const GALLERY_CATEGORY_LABELS: Record<GalleryCategory, string> = {
+  grounds: 'Grounds & Nature',
+  culture: 'Culture & Events',
+};
+
+export type MediaImage = {
+  id: number;
+  kind: 'gallery' | 'hero';
+  /** hero only: the page it opens (see src/lib/heroSlots.ts) */
+  slot: string | null;
+  category: GalleryCategory | null;
+  mime: string;
+  width: number | null;
+  height: number | null;
+  /** size of the stored file, in bytes */
+  size: number;
+  translations: MediaTranslations;
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type SaveMediaInput = { translations: MediaTranslations; category?: GalleryCategory; published: boolean };
 
 export type ContentEntry = { key: string; lang: 'en' | 'am' | 'wal' | '*'; value: string; updatedAt: string };

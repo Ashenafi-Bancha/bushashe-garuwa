@@ -131,7 +131,7 @@ export default function Events() {
   return (
     <main>
       {/* Hero */}
-      <PageHero photo="gifaataa3" eyebrow={e.hero.eyebrow} title={<>{e.hero.titleA}<br />{e.hero.titleB}</>} />
+      <PageHero slot="events" eyebrow={e.hero.eyebrow} title={<>{e.hero.titleA}<br />{e.hero.titleB}</>} />
 
       {/* Booking form, opened from any bookable event */}
       {booking && (
