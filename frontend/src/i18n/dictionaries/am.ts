@@ -806,6 +806,66 @@ export const am: Dictionary = {
     },
   },
 
+  immersive: {
+    loading: '3D እይታው እየተዘጋጀ ነው…',
+    drag: 'ለማዞር ይጎትቱ',
+    lookAround: 'ዙሪያውን ለማየት ይጎትቱ',
+    close: 'ዝጋ',
+    house: {
+      eyebrow: 'በ3D ይመልከቱ',
+      title: 'ባህላዊውን ቤት ዙሪያውን ይመልከቱ',
+      placeholder: 'ይህ ጊዜያዊ ሞዴል ነው። የእውነተኛው ቤት ቅጂ ሲዘጋጅ ይተካል።',
+      stepInside: 'ወደ ውስጥ ይግቡ',
+      spots: {
+        roof: { label: 'የሳር ክዳን', text: '[HOTSPOT TEXT NEEDED: the roof]' },
+        wall: { label: 'የተጠለፉ ግድግዳዎች', text: '[HOTSPOT TEXT NEEDED: the walls]' },
+        door: { label: 'የተቀረጸ በር', text: '[HOTSPOT TEXT NEEDED: the door]' },
+        inside: { label: 'የቤቱ ውስጥ' },
+      },
+    },
+    tour: {
+      eyebrow: 'የ360° ጉብኝት',
+      title: 'ቡሻሼ ጋሯን ዙሪያውን ይመልከቱ',
+      desc: 'ቦታ ይምረጡ፣ ከዚያ በሁሉም አቅጣጫ ለማየት ይጎትቱ።',
+      open: 'የ360° እይታውን ይክፈቱ',
+      needed: '[360° PHOTO NEEDED]',
+      scenes: {
+        gate: 'ዋናው በር',
+        meeshsho: 'የMeeshsho Keettaa ውስጥ',
+        gulanttaa: 'የGulanttaa Keettaa ውስጥ',
+        lawn: 'ትልቁ መስክ',
+        zigba: 'የዝግባ ዛፎች',
+      },
+    },
+    museum: {
+      eyebrow: 'ስብስቡ',
+      title: 'በባህላዊ ቤቶቹ ውስጥ የተቀመጡ ቁሳቁሶች',
+      desc: 'አልፈው ለመሄድ ወደ ታች ይሸብልሉ። አንዱን መርጠው ያዙሩት።',
+      closer: 'ቀረብ ብለው ይመልከቱ',
+      modelNeeded: '[OBJECT MODEL NEEDED]',
+      storyNeeded: '[OBJECT STORY NEEDED]',
+      items: {
+        wotta: 'ባህላዊ ወፍጮ (ዎጣ)',
+        cotton: 'የጥጥ መፍተያና የሽመና መሣሪያዎች',
+        household: 'የቤት ቁሳቁሶች',
+        instruments: 'ባህላዊ መሣሪያዎች',
+      },
+    },
+    map: {
+      eyebrow: 'የግቢው ካርታ',
+      title: 'በግቢው ውስጥ መንገድዎን ያግኙ',
+      desc: 'እዚያ ምን እንዳለ ለማየት አንድ ነጥብ ይምረጡ።',
+      layoutNeeded: '[MAP LAYOUT NEEDED] The points are not yet in their true places.',
+      more: 'ተጨማሪ ይመልከቱ',
+      points: {
+        gate: 'ዋናው በር',
+        meeshsho: 'Meeshsho Keettaa',
+        gulanttaa: 'Gulanttaa Keettaa',
+        zigba: 'የዝግባ ዛፎች',
+      },
+    },
+  },
+
   contact: {
     hero: { eyebrow: 'መገናኛ', title: 'ከእርስዎ መስማት እንወዳለን' },
     intro: 'ጉብኝት እያቀዱ፣ ተሞክሮ እያስያዙ፣ ክፍል እየያዙ ወይም ስለ ቡሻሼ ጋሯ ለማወቅ ብቻ ቢፈልጉ፣ ልንረዳዎ ዝግጁ ነን።',

@@ -808,6 +808,66 @@ export const en = {
     },
   },
 
+  immersive: {
+    loading: 'Preparing the 3D view…',
+    drag: 'Drag to turn',
+    lookAround: 'Drag to look around',
+    close: 'Close',
+    house: {
+      eyebrow: 'Explore in 3D',
+      title: 'Walk Around a Traditional House',
+      placeholder: 'A simple stand-in model. A scan of the real house will take its place.',
+      stepInside: 'Step inside',
+      spots: {
+        roof: { label: 'Thatched dome', text: '[HOTSPOT TEXT NEEDED: the roof]' },
+        wall: { label: 'Woven walls', text: '[HOTSPOT TEXT NEEDED: the walls]' },
+        door: { label: 'Carved door', text: '[HOTSPOT TEXT NEEDED: the door]' },
+        inside: { label: 'Inside the house' },
+      },
+    },
+    tour: {
+      eyebrow: '360° Tour',
+      title: 'Look Around Bushaashe Garuwa',
+      desc: 'Choose a place, then drag to look in every direction.',
+      open: 'Open the 360° view',
+      needed: '[360° PHOTO NEEDED]',
+      scenes: {
+        gate: 'The main gate',
+        meeshsho: 'Inside Meeshsho Keettaa',
+        gulanttaa: 'Inside Gulanttaa Keettaa',
+        lawn: 'The great lawn',
+        zigba: 'The zigba trees',
+      },
+    },
+    museum: {
+      eyebrow: 'The Collection',
+      title: 'Objects Kept in the Cultural Houses',
+      desc: 'Scroll to walk past them. Choose one to turn it around.',
+      closer: 'Look closer',
+      modelNeeded: '[OBJECT MODEL NEEDED]',
+      storyNeeded: '[OBJECT STORY NEEDED]',
+      items: {
+        wotta: 'Grinding stone (wotta)',
+        cotton: 'Tools for spinning and weaving cotton',
+        household: 'Household goods',
+        instruments: 'Traditional instruments',
+      },
+    },
+    map: {
+      eyebrow: 'Map of the Grounds',
+      title: 'Find Your Way Around',
+      desc: 'Choose a point to see what is there.',
+      layoutNeeded: '[MAP LAYOUT NEEDED] The points are not yet in their true places.',
+      more: 'See more',
+      points: {
+        gate: 'The main gate',
+        meeshsho: 'Meeshsho Keettaa',
+        gulanttaa: 'Gulanttaa Keettaa',
+        zigba: 'The zigba trees',
+      },
+    },
+  },
+
   contact: {
     hero: { eyebrow: 'Contact', title: "We'd Love to Hear From You" },
     intro: "Whether you're planning a visit, reserving an experience, booking a room, or simply curious about Bushaashe Garuwa, we're here to help.",

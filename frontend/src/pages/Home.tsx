@@ -12,6 +12,7 @@ import QuickLinks from '../components/QuickLinks';
 import PhotoCard from '../components/PhotoCard';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 import SwipeRow from '../components/SwipeRow';
+import { useNoIndex } from '../lib/noindex';
 import { deviceTier, forcedTier, rememberSlow } from '../three/device';
 
 /** The 3D landscape opening, fetched only on the pages that use it */
@@ -87,15 +88,8 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
   const h = t.home;
   // devices that cannot draw the landscape smoothly keep the photographs
   const [tier, setTier] = useState(() => (landscape ? deviceTier() : 'none'));
-  useEffect(() => {
-    if (!landscape) return;
-    // a page under review: search engines are asked to leave it out
-    const meta = document.createElement('meta');
-    meta.name = 'robots';
-    meta.content = 'noindex';
-    document.head.append(meta);
-    return () => meta.remove();
-  }, [landscape]);
+  // with the landscape it is a page under review
+  useNoIndex(landscape);
   // the built-in slides, or the ones staff added in the admin area (Page photos)
   const heroSlides = heroPhotos('home', useSiteMedia(), t, lang);
   const slideIds = heroSlides.map((slide) => slide.id).join(' ');

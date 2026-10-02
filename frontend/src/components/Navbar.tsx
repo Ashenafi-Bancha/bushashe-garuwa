@@ -31,7 +31,7 @@ type GroupKey = keyof typeof groups;
 
 /** The pages that open with a full-screen photograph */
 const hasPhotoHero = (path: string) =>
-  path.startsWith('/preview/') || Object.values(routes).some((r) => (r === '/' ? path === '/' : path === r || path.startsWith(r + '/')));
+  path === '/preview/hero' || Object.values(routes).some((r) => (r === '/' ? path === '/' : path === r || path.startsWith(r + '/')));
 
 /* ── Line icons, one per page ── */
 const paths: Record<PageKey, ReactNode> = {

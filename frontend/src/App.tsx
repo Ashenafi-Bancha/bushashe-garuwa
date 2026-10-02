@@ -19,6 +19,8 @@ import { startSmoothScroll } from './lib/motion';
 
 /** Staff area: loaded only when someone opens /admin, so visitors never download it */
 const AdminApp = lazy(() => import('./admin/AdminApp'));
+/** Pages under review, not linked from the site */
+const Preview = lazy(() => import('./pages/Preview'));
 
 
 function NotFound() {
@@ -51,6 +53,17 @@ function AppLayout() {
         <Route path="/" element={<Home />} />
         {/* not linked from anywhere: the home page with the 3D landscape opening, to be judged before it goes public */}
         <Route path="/preview/hero" element={<Home landscape />} />
+        {(['index', 'heritage', 'map'] as const).map((view) => (
+          <Route
+            key={view}
+            path={view === 'index' ? '/preview' : `/preview/${view}`}
+            element={
+              <Suspense fallback={<main className="min-h-screen" />}>
+                <Preview view={view} />
+              </Suspense>
+            }
+          />
+        ))}
         <Route path="/discover" element={<Discover />} />
         <Route path="/heritage" element={<Heritage />} />
         <Route path="/heritage/*" element={<Heritage />} />

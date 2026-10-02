@@ -200,6 +200,79 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 }
 .landscape-hero[data-walking] .journey-words { visibility: hidden; }
 
+/* ── Markers laid over the 3D scenes (src/three) ── */
+/* a round marker on the 3D house: a white ring with a green heart */
+.hotspot {
+  display: block;
+  width: 34px;
+  height: 34px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid #0E8A50;
+  box-shadow: 0 4px 14px rgba(19, 38, 26, 0.25);
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.hotspot::after {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border-radius: 9999px;
+  background: #0E8A50;
+}
+@media (pointer: coarse) {
+  .hotspot { width: 38px; height: 38px; }
+  .hotspot::after { inset: 10px; }
+}
+.hotspot:hover { box-shadow: 0 0 0 6px rgba(14, 138, 80, 0.22), 0 4px 14px rgba(19, 38, 26, 0.25); }
+.hotspot[aria-pressed='true'] { background: #0E8A50; }
+.hotspot[aria-pressed='true']::after { background: #fff; }
+/* a numbered pin on the map of the grounds */
+.map-pin {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
+  background: #fff;
+  color: #13261A;
+  border: 2px solid #0E8A50;
+  box-shadow: 0 4px 12px rgba(19, 38, 26, 0.28);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+.map-pin:hover { box-shadow: 0 0 0 5px rgba(14, 138, 80, 0.22), 0 4px 12px rgba(19, 38, 26, 0.28); }
+.map-pin[aria-pressed='true'] { background: #0E8A50; color: #fff; box-shadow: 0 0 0 6px rgba(14, 138, 80, 0.3), 0 4px 12px rgba(19, 38, 26, 0.28); }
+/* the name under each stand of the collection */
+.exhibit-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 190px;
+  text-align: center;
+  font-family: var(--font-display);
+  color: #1E3A29;
+  font-size: 15px;
+  line-height: 1.2;
+}
+.exhibit-label button {
+  border-radius: 9999px;
+  background: #0E8A50;
+  color: #fff;
+  font-family: var(--font-sans, inherit);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 9px 18px;
+  cursor: pointer;
+}
+.exhibit-label button:hover { background: #0B7A45; }
+/* the collection is walked past by scrolling: the section is taller than the screen */
+.museum-walk { height: 300svh; }
+
 /* ── Two rows of large words on the home page, sliding with the scroll ── */
 .word-strip {
   font-family: var(--font-display);
