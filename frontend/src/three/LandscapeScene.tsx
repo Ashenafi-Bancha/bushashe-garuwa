@@ -2,6 +2,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { useEffect, useMemo, useRef, type RefObject } from 'react';
 import * as THREE from 'three';
 import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
+import { Birds, Fireflies, Leaves } from './Atmosphere';
 import type { Tier } from './device';
 import { CLEARING, HOME, HOUSES, WALK, clamp, groundHeight, mix, scatterEnset, scatterTrees, seeded, smooth, walkX, type Plant } from './land';
 import PlaceholderHouse from './PlaceholderHouse';
@@ -29,8 +30,8 @@ type Props = {
 };
 
 const QUALITY = {
-  high: { ground: 128, trees: 300, enset: 54, mist: 7, clouds: 8, dpr: 1.75 },
-  low: { ground: 88, trees: 170, enset: 40, mist: 4, clouds: 5, dpr: 1.5 },
+  high: { ground: 128, trees: 300, enset: 54, mist: 7, clouds: 8, birds: 7, leaves: 40, fireflies: 46, dpr: 1.75 },
+  low: { ground: 88, trees: 170, enset: 40, mist: 4, clouds: 5, birds: 5, leaves: 22, fireflies: 26, dpr: 1.5 },
 } as const;
 
 /* ── The light at three moments of the day ── */
@@ -557,6 +558,9 @@ function World({ track, tier, watchSpeed, onReady, onTooSlow }: Omit<Props, 'act
       <primitive object={parts.trees} />
       <primitive object={parts.mist} />
       <primitive object={parts.clouds} />
+      <Birds count={quality.birds} />
+      <Leaves count={quality.leaves} journey={walk} />
+      <Fireflies count={quality.fireflies} journey={walk} />
     </>
   );
 }

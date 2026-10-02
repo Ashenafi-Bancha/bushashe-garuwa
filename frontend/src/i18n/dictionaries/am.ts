@@ -8,6 +8,7 @@ export const am: Dictionary = {
 
   common: {
     brand: 'ቡሻሼ ጋሯ',
+    call: 'ይደውሉልን',
     planVisit: 'ጉብኝትዎን ያቅዱ',
     contactUs: 'ያግኙን',
     getInTouch: 'ያነጋግሩን',
@@ -173,7 +174,9 @@ export const am: Dictionary = {
       walk: 'በአባቶቻችን ምድር ይራመዱ',
       book: 'ማረፊያዎን ያስይዙ',
       heritage: 'ቅርሳችንን ያስሱ',
+      sound: 'የተፈጥሮ ድምፅ',
     },
+    testimonials: { eyebrow: 'እንግዶች', title: 'እንግዶቻችን ምን ይላሉ' },
     film: {
       eyebrow: 'ይመልከቱ',
       title: 'የቡሻሼ ጋሯ ፊልም',
@@ -713,6 +716,25 @@ export const am: Dictionary = {
         access: { title: 'ሙሉ የባህል ተሞክሮ', desc: 'እንግዶቻችን በሁሉም የቅርስ ተሞክሮዎች ቅድሚያ ያገኛሉ።' },
         coffee: { title: 'የጠዋት ቡና ሥነ ሥርዓት', desc: 'እያንዳንዱን ጠዋት በባህላዊው የኢትዮጵያ የቡና ሥነ ሥርዓት ይጀምሩ።' },
       },
+    },
+    inquiry: {
+      title: 'ማረፊያ ይጠይቁ',
+      desc: 'መቼ መምጣት እንደሚፈልጉ ይንገሩን። ክፍሉንና ዋጋውን ለማረጋገጥ እንደውልልዎታለን።',
+      note: 'ይህ ጥያቄ ነው፤ ገና የተረጋገጠ ቦታ ማስያዝ አይደለም።',
+      or: 'ወይም በቀጥታ ያግኙን',
+      arrival: 'የመድረሻ ቀን *',
+      nights: 'የሌሊቶች ብዛት',
+      nightOne: '1 ሌሊት',
+      nightMany: '{count} ሌሊቶች',
+      guests: 'የእንግዶች ብዛት',
+      guestOne: '1 እንግዳ',
+      guestMany: '{count} እንግዶች',
+      room: 'ክፍል',
+      anyRoom: 'ማንኛውም ክፍል',
+      submit: 'ጥያቄዬን ላክ',
+      sending: 'በመላክ ላይ…',
+      thanksTitle: 'ጥያቄዎ ደርሶናል',
+      thanksText: 'እናመሰግናለን። በቡሻሼ ጋሯ ቆይታዎን ለማረጋገጥ በቅርቡ እንደውልልዎታለን።',
     },
     cta: {
       title: 'ማረፊያዎን ለማስያዝ ዝግጁ ነዎት?',

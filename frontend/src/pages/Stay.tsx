@@ -5,6 +5,9 @@ import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
+import StayInquiry, { type RoomId } from '../components/StayInquiry';
+import StickyBook from '../components/StickyBook';
+import { scrollToHash } from '../lib/motion';
 
 type Amenity = keyof Dictionary['stay']['amenities'];
 
@@ -26,6 +29,12 @@ export default function Stay() {
   const { t } = useI18n();
   const st = t.stay;
   const [selectedRoom, setSelectedRoom] = useState<number | null>(null);
+  // the room asked about in the request form
+  const [wanted, setWanted] = useState<RoomId | ''>('');
+  const askFor = (room: RoomId | '') => {
+    setWanted(room);
+    scrollToHash('#book');
+  };
 
   return (
     <main>
@@ -74,9 +83,9 @@ export default function Stay() {
                     >
                       {st.viewDetails}
                     </button>
-                    <Link to="/contact" className="btn-primary btn-sm flex-1">
+                    <button type="button" onClick={() => askFor(id)} className="btn-primary btn-sm flex-1">
                       {st.bookRoom}
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -104,21 +113,25 @@ export default function Stay() {
         </div>
       </section>
 
+      {/* Request a stay: reaches the staff area */}
+      <StayInquiry room={wanted} onRoom={setWanted} />
+
       {/* CTA */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 text-center">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <h2 className="font-display text-4xl font-semibold text-[#1E3A29] mb-4">{st.cta.title}</h2>
           <p className="text-[#1E3A29]/55 font-sans text-base max-w-xl mx-auto mb-10">{st.cta.desc}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/contact" className="btn-primary">
+            <button type="button" onClick={() => askFor(wanted)} className="btn-primary">
               {st.cta.book}
-            </Link>
+            </button>
             <Link to="/contact" className="btn-outline text-[#1E3A29]">
               {st.cta.ask}
             </Link>
           </div>
         </div>
       </section>
+      <StickyBook />
     </main>
   );
 }

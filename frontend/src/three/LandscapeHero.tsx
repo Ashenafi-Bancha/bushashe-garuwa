@@ -1,6 +1,7 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useI18n } from '../i18n/I18nProvider';
+import { createAmbience, type Ambience } from './ambience';
 import type { Tier } from './device';
 // stills of the scene's first moment, shown at once while the scene itself is fetched.
 // If the scene changes, capture them again (the canvas alone, at 16:9 and on an upright phone).
@@ -35,6 +36,22 @@ export default function LandscapeHero({ tier, watchSpeed, onTooSlow }: Props) {
   const [ready, setReady] = useState(false);
   const [onScreen, setOnScreen] = useState(true);
   const [firstWord, ...rest] = h.title.split(' ');
+
+  // nature sounds: off until asked for, and silent again when the page is left or hidden
+  const [sound, setSound] = useState(false);
+  const ambience = useRef<Ambience | null>(null);
+  useEffect(() => {
+    if (!sound) return;
+    ambience.current ??= createAmbience();
+    const player = ambience.current;
+    player.start();
+    const onHide = () => (document.hidden ? player.stop() : player.start());
+    document.addEventListener('visibilitychange', onHide);
+    return () => {
+      document.removeEventListener('visibilitychange', onHide);
+      player.stop();
+    };
+  }, [sound]);
 
   // wait until the page itself has loaded before fetching the scene
   useEffect(() => {
@@ -79,6 +96,21 @@ export default function LandscapeHero({ tier, watchSpeed, onTooSlow }: Props) {
         {/* a faint shade behind the header words on computers */}
         <span className="hidden lg:block absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/30 via-black/10 to-transparent" />
 
+        {/* nature sounds, off until switched on */}
+        <button
+          type="button"
+          onClick={() => setSound((on) => !on)}
+          aria-pressed={sound}
+          aria-label={h.sound}
+          title={h.sound}
+          className="hit-slim absolute z-[2] right-3 top-3 sm:right-5 sm:top-5 lg:right-8 lg:top-[100px] grid place-items-center w-10 h-10 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-white transition-colors"
+        >
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M4 9.5v5h3.5L12 18V6L7.5 9.5H4Z" />
+            {sound ? <path d="M15.5 9a4.2 4.2 0 0 1 0 6M18 6.5a7.8 7.8 0 0 1 0 11" /> : <path d="m16 9.5 5 5m0-5-5 5" />}
+          </svg>
+        </button>
+
         {/* the words, on a wash of the page colour that rises from the bottom */}
         <div className="journey-words absolute inset-x-0 bottom-0">
           <span className="absolute inset-x-0 bottom-0 -top-28 bg-gradient-to-t from-[#F4EFE4] from-[58%] via-[#F4EFE4]/80 via-[78%] to-transparent" />
@@ -93,7 +125,7 @@ export default function LandscapeHero({ tier, watchSpeed, onTooSlow }: Props) {
                 <p className="hidden sm:block text-[#1E3A29]/70 leading-relaxed mt-3">{h.subtitle}</p>
               </div>
               <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
-                <Link to="/stay" className="btn-primary">{h.book}</Link>
+                <Link to="/stay#book" className="btn-primary">{h.book}</Link>
                 <Link to="/heritage" className="btn-outline text-[#1E3A29]">{h.heritage}</Link>
               </div>
             </div>

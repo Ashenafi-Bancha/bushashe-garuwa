@@ -16,6 +16,9 @@ export default defineConfig(({ mode }) => {
     build: {
       sourcemap: emitSourcemaps ? 'inline' : false,
       minify: !emitSourcemaps,
+      // the 3D library is one large file by nature; it is fetched only on pages with a
+      // 3D scene, after the page is up, and only by devices that can draw it
+      chunkSizeWarningLimit: 1000,
     },
     plugins: [
       react(),

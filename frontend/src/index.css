@@ -200,6 +200,24 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 }
 .landscape-hero[data-walking] .journey-words { visibility: hidden; }
 
+/* ── "Book Your Stay", within reach at the bottom corner on phones (StickyBook.tsx) ── */
+.sticky-book {
+  position: fixed;
+  right: 14px;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 40;
+  padding: 12px 20px;
+  border-radius: 9999px;
+  background: #0E8A50;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 10px 26px rgba(19, 38, 26, 0.28);
+  transition: opacity 0.3s ease, translate 0.3s ease;
+}
+@media (min-width: 1024px) { .sticky-book { display: none; } }
+
 /* ── Markers laid over the 3D scenes (src/three) ── */
 /* a round marker on the 3D house: a white ring with a green heart */
 .hotspot {

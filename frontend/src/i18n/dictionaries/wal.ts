@@ -23,6 +23,7 @@ export const wal: DeepPartial<Dictionary> = {
 
   common: {
     brand: 'Bushaashe Garuwa',
+    call: 'Call us',
     planVisit: 'Plan Your Visit',
     contactUs: 'Contact Us',
     getInTouch: 'Get in Touch',
@@ -188,7 +189,9 @@ export const wal: DeepPartial<Dictionary> = {
       walk: 'Walk the land of our forefathers',
       book: 'Book Your Stay',
       heritage: 'Explore Our Heritage',
+      sound: 'Nature sounds',
     },
+    testimonials: { eyebrow: 'Guests', title: 'What Our Guests Say' },
     film: {
       eyebrow: 'Watch',
       title: 'A Film of Bushaashe Garuwa',
@@ -728,6 +731,25 @@ export const wal: DeepPartial<Dictionary> = {
         access: { title: 'Full Cultural Access', desc: 'Guests enjoy priority access to all heritage experiences.' },
         coffee: { title: 'Morning Coffee Ceremony', desc: 'Begin every morning with the traditional Ethiopian coffee ritual.' },
       },
+    },
+    inquiry: {
+      title: 'Request Your Stay',
+      desc: 'Tell us when you would like to come. We will call you to confirm the room and the price.',
+      note: 'This is a request, not yet a confirmed booking.',
+      or: 'Or reach us directly',
+      arrival: 'Arrival date *',
+      nights: 'Nights',
+      nightOne: '1 night',
+      nightMany: '{count} nights',
+      guests: 'Guests',
+      guestOne: '1 guest',
+      guestMany: '{count} guests',
+      room: 'Room',
+      anyRoom: 'Any room',
+      submit: 'Send my request',
+      sending: 'Sending…',
+      thanksTitle: 'Request received',
+      thanksText: 'Thank you. We will call you shortly to confirm your stay at Bushaashe Garuwa.',
     },
     cta: {
       title: 'Ready to Book Your Stay?',

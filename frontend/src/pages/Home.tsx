@@ -12,6 +12,8 @@ import QuickLinks from '../components/QuickLinks';
 import PhotoCard from '../components/PhotoCard';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 import SwipeRow from '../components/SwipeRow';
+import StickyBook from '../components/StickyBook';
+import Testimonials from '../components/Testimonials';
 import { useNoIndex } from '../lib/noindex';
 import { deviceTier, forcedTier, rememberSlow } from '../three/device';
 
@@ -462,6 +464,9 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             </div>
           </div>
         </section>
+        {/* what guests say: appears once real words are added (lib/testimonials.ts) */}
+        <Testimonials />
+        {landscape && <StickyBook />}
       </main>
     </>
   );
