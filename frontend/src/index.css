@@ -177,9 +177,10 @@ a, button {
 .hero-name { font-size: min(12vw, 5.5rem); }
 html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 @media (min-width: 1024px) {
-  .hero-name { font-size: min(7vw, 6rem); }
+  /* also held to the screen's height, so the words fit on the first screen under the photographs */
+  .hero-name { font-size: min(7vw, 6rem, 11svh); }
   .hero-name .line-mask { display: inline-block; }
-  html:lang(am) .hero-name { font-size: min(13vw, 7.5rem); }
+  html:lang(am) .hero-name { font-size: min(13vw, 7.5rem, 12svh); }
 }
 /* room under each line so the depth is not clipped by the rising mask */
 .brand-3d .line-mask { padding-bottom: 0.26em; margin-bottom: -0.2em; }
