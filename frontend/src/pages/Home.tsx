@@ -145,11 +145,11 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
 
         {/* ═════════ HERO ═════════
             The photographs come first, and the name, the line and the buttons are
-            on the first screen with them. Every photograph is shown whole, never
-            cut. Computers: it stands in the upper part of the screen on a soft,
-            blurred spread of itself that runs edge to edge and up behind the header,
-            so the header lies on the picture and is not a strip of its own.
-            Phones and tablets: right under the header, at the photograph's own shape.
+            on the first screen with them. Computers: the photograph fills the upper
+            part of the screen from edge to edge and runs up behind the header, so the
+            header lies on the picture and is not a strip of its own; nothing else is
+            laid over it. Phones and tablets: right under the header, whole, at the
+            photograph's own shape.
             Each new photograph sweeps in from the right like a curtain while it
             settles; the one before drifts away underneath. The name and the words
             follow just below. Swipe on phones. */}
@@ -167,7 +167,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
         ) : (
         <section className="relative" aria-label={h.hero.title}>
           <div
-            className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[62svh] lg:min-h-[360px] overflow-hidden bg-[#E3EBD8]"
+            className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[70svh] lg:min-h-[400px] overflow-hidden bg-[#E3EBD8]"
             onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
             onTouchEnd={(e) => {
               const start = touchX.current; touchX.current = null;
@@ -178,17 +178,15 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           >
             {lastSlide && (
               <div key={`out-${lastSlide.id}-${slide.id}`} className="hero-slide hero-slide-out">
-                <img {...picture(lastSlide.src)} alt="" aria-hidden="true" className="hero-back hidden lg:block absolute inset-0 w-full h-full" />
-                <img {...picture(lastSlide.src)} alt="" className="hero-whole relative w-full h-full" />
+                <img {...picture(lastSlide.src)} alt="" className={`w-full h-full object-cover ${lastSlide.pos}`} />
               </div>
             )}
             <div key={`in-${slide.id}`} className={`hero-slide ${lastSlide ? 'hero-slide-in' : 'hero-slide-first'}`}>
-              <img {...picture(slide.src)} alt="" aria-hidden="true" className="hero-back hidden lg:block absolute inset-0 w-full h-full" />
               <img
                 {...picture(slide.src)}
                 alt={slide.alt}
                 fetchPriority="high"
-                className="hero-slide-img hero-whole relative w-full h-full"
+                className={`hero-slide-img w-full h-full object-cover ${slide.pos}`}
               />
             </div>
 
@@ -218,9 +216,9 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           </div>
 
           {/* the words, just below the photograph */}
-          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 lg:pt-5 pb-6">
+          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 lg:pt-3 pb-6">
             {/* the name in the lettering of the main gate, raised in 3D, sized to the screen */}
-            <h1 className="hero-name brand-sign brand-3d whitespace-nowrap leading-[1] mb-6 lg:mb-5">
+            <h1 className="hero-name brand-sign brand-3d whitespace-nowrap leading-[1] mb-6 lg:mb-4">
               {/* phones and tablets: two lines; computers: one line */}
               <span className="line-mask"><span>{firstWord}</span></span>{' '}
               <span className="line-mask d2"><span>{rest.join(' ')}</span></span>

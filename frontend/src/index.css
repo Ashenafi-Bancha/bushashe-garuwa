@@ -178,9 +178,9 @@ a, button {
 html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 @media (min-width: 1024px) {
   /* also held to the screen's height, so the words fit on the first screen under the photographs */
-  .hero-name { font-size: min(7vw, 6rem, 11svh); }
+  .hero-name { font-size: min(7vw, 6rem, 10svh); }
   .hero-name .line-mask { display: inline-block; }
-  html:lang(am) .hero-name { font-size: min(13vw, 7.5rem, 12svh); }
+  html:lang(am) .hero-name { font-size: min(13vw, 7.5rem, 9.5svh); }
 }
 /* room under each line so the depth is not clipped by the rising mask */
 .brand-3d .line-mask { padding-bottom: 0.26em; margin-bottom: -0.2em; }
@@ -321,22 +321,6 @@ html:lang(am) .word-strip { letter-spacing: 0; }
 .hero-slide-in { z-index: 2; animation: heroSlideIn 1.1s cubic-bezier(0.65, 0, 0.35, 1) both; }
 .hero-slide-out { z-index: 1; animation: heroSlideOut 1.1s cubic-bezier(0.65, 0, 0.35, 1) both; }
 .hero-slide-img { animation: heroSettle 5s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
-/* the photograph itself: always whole, never cut. On computers it starts below the header. */
-.hero-whole { object-fit: contain; }
-/* computers: a soft, blurred spread of the same photograph behind it, edge to edge and up behind the header */
-.hero-back { object-fit: cover; filter: blur(34px) brightness(0.78) saturate(1.15); transform: scale(1.25); }
-@media (min-width: 1024px) {
-  /* sized by its height, so its corners can be rounded like a framed print */
-  .hero-whole {
-    display: block;
-    width: auto;
-    max-width: calc(100% - 48px);
-    height: calc(100% - 84px - 34px);
-    margin: 84px auto 0;
-    border-radius: 20px;
-    box-shadow: 0 24px 60px rgba(8, 24, 19, 0.35);
-  }
-}
 @keyframes heroSlideIn {
   from { transform: translateX(100%); }
   to   { transform: translateX(0); }

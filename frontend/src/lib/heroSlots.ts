@@ -31,7 +31,7 @@ export const HERO_SLOTS: Record<HeroSlot, { label: string; path: string; photos:
     label: 'Home',
     path: '/',
     photos: [
-      { key: 'gate', pos: 'object-[center_35%]' },
+      { key: 'gate', pos: 'object-[center_18%]' },
       { key: 'meeshsho', pos: 'object-[center_22%]' },
       { key: 'home', pos: 'object-center' },
       { key: 'gifaataa1', pos: 'object-[center_40%]' },
@@ -48,7 +48,7 @@ export const HERO_SLOTS: Record<HeroSlot, { label: string; path: string; photos:
   stay: { label: 'Stay', path: '/stay', photos: [{ key: 'pavilions', pos: 'object-center' }] },
   dine: { label: 'Dine', path: '/dine', photos: [{ key: 'food', pos: 'object-center' }] },
   gallery: { label: 'Gallery', path: '/gallery', photos: [{ key: 'home', pos: 'object-center' }] },
-  visit: { label: 'Visit', path: '/visit', photos: [{ key: 'gate', pos: 'object-[center_30%]' }] },
+  visit: { label: 'Visit', path: '/visit', photos: [{ key: 'gate', pos: 'object-[center_18%]' }] },
   contact: { label: 'Contact', path: '/contact', photos: [{ key: 'gardens', pos: 'object-center' }] },
   about: { label: 'About', path: '/about', photos: [{ key: 'gifaataa2', pos: 'object-[center_38%]' }] },
 };

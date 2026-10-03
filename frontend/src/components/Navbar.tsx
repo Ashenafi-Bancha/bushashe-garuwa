@@ -31,10 +31,8 @@ const groups = {
 type GroupKey = keyof typeof groups;
 
 /**
- * The pages that open with a picture running up behind the header, so the
- * header lies on the picture instead of being a strip of its own. The
- * photograph itself starts below the header (see .hero-whole), so nothing in it
- * is covered.
+ * The pages that open with a photograph running up behind the header, so the
+ * header lies on the picture instead of being a strip of its own.
  */
 const hasPhotoHero = (path: string) =>
   path === '/preview/hero' || Object.values(routes).some((r) => (r === '/' ? path === '/' : path === r || path.startsWith(r + '/')));

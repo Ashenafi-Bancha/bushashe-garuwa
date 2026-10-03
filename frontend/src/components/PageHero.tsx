@@ -6,10 +6,10 @@ import { heroPhotos, useSiteMedia } from '../lib/media';
 
 /**
  * Opening section of the inner pages, drawn like the home page: the photograph
- * comes first, shown whole and never cut; the label, the title and the
- * description follow just below, on the first screen with it. On computers the
- * photograph stands on a soft, blurred spread of itself that runs edge to edge
- * and up behind the header. Any <span> inside the title is picked out in moss green.
+ * comes first; the label, the title and the description follow just below, on
+ * the first screen with it. On computers the photograph fills the upper part of
+ * the screen from edge to edge and runs up behind the header; on phones it is
+ * shown whole. Any <span> inside the title is picked out in moss green.
  *
  * The photograph is the page's own (src/lib/heroSlots.ts), or the one staff
  * put in its place from the admin area.
@@ -26,14 +26,13 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
 
   return (
     <section className="relative">
-      <div className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[62svh] lg:min-h-[360px] overflow-hidden bg-[#E3EBD8]">
+      <div className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[66svh] lg:min-h-[380px] overflow-hidden bg-[#E3EBD8]">
         <div key={photo.id} className="hero-slide hero-slide-first">
-          <img {...picture(photo.src)} alt="" aria-hidden="true" className="hero-back hidden lg:block absolute inset-0 w-full h-full" />
           <img
             {...picture(photo.src)}
             alt={photo.alt}
             fetchPriority="high"
-            className="hero-slide-img hero-whole relative w-full h-full"
+            className={`hero-slide-img w-full h-full object-cover ${photo.pos}`}
           />
         </div>
         {/* a faint shade behind the header words at the very top */}
@@ -45,7 +44,7 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
         </span>
       </div>
 
-      <div className="relative z-[5] pt-6 sm:pt-10 lg:pt-5 max-w-screen-xl mx-auto px-5 sm:px-8 pb-6 sm:pb-10 grid lg:grid-cols-[1.4fr_1fr] gap-5 lg:gap-16 lg:items-end">
+      <div className="relative z-[5] pt-6 sm:pt-10 lg:pt-3 max-w-screen-xl mx-auto px-5 sm:px-8 pb-6 sm:pb-10 grid lg:grid-cols-[1.4fr_1fr] gap-5 lg:gap-16 lg:items-end">
         <div>
           <span className="eyebrow mb-5 lg:mb-4 animate-fade-up">{eyebrow}</span>
           <h1 className="font-display text-[2.6rem] sm:text-6xl lg:text-[min(3.75rem,8svh)] font-extrabold text-[#1E3A29] leading-[0.98] [&>span>span_span]:text-[#6F9443]">
