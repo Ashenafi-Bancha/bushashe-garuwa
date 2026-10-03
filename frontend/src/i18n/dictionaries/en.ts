@@ -424,21 +424,6 @@ export const en = {
         current: { name: 'The Current Generation', generation: 'Today · Commissioner Fiseha Garedew and family', period: '', story: '' },
       },
     },
-    milestones: {
-      eyebrow: 'Our Journey',
-      title: 'Key Milestones',
-      items: [
-        { year: 'The 1700s', event: 'The family’s roots in Wolaita reach back to the 18th century' },
-        { year: 'Early 1900s', event: 'Founding homestead established in Damot Sore' },
-        { year: '1940s', event: 'First cultural houses built; heritage trees planted' },
-        { year: '1970s', event: 'Oral history collection and artifact preservation begins' },
-        { year: '1995', event: 'Elders recorded and their stories written down' },
-        { year: '2010', event: 'First structured visitor experiences opened to the public' },
-        { year: '2018', event: 'Guesthouse and restaurant launched' },
-        { year: '2022', event: 'Heritage trails and visitor experiences opened' },
-        { year: 'Today', event: 'A living, growing cultural heritage destination for all' },
-      ],
-    },
     offer: {
       eyebrow: 'What We Offer',
       title: 'Everything in One Living Destination',

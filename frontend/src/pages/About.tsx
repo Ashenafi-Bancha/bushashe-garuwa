@@ -233,34 +233,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Milestones */}
-      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
-        <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="mb-8 sm:mb-12">
-            <span className="eyebrow mb-5">{a.milestones.eyebrow}</span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{a.milestones.title}</h2>
-          </div>
-          <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-[#C4622D] via-[#C4622D]/40 to-transparent hidden md:block ml-[5.5rem]" />
-            <div className="space-y-6">
-              {a.milestones.items.map((m, i) => (
-                <div key={i} className="flex items-start gap-8">
-                  <div className="flex-shrink-0 w-20 text-right">
-                    <span className="text-[#C4622D] font-sans text-xs font-semibold tracking-wider">{m.year}</span>
-                  </div>
-                  <div className="relative flex-shrink-0 hidden md:flex items-center justify-center">
-                    <div className="w-3 h-3 border-2 border-[#C4622D] bg-[#F4EFE4] z-10" />
-                  </div>
-                  <div className="bg-white rounded-2xl border border-[#1E3A29]/10 hover:border-[#C4622D]/30 px-4 sm:px-6 py-4 flex-1 transition-colors">
-                    <p className="text-[#1E3A29] font-sans text-sm leading-relaxed">{m.event}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* What we offer summary */}
       <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
