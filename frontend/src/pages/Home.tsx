@@ -478,7 +478,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
         </section>
         {/* what guests say: appears once real words are added (lib/testimonials.ts) */}
         <Testimonials />
-        {landscape && <StickyBook />}
+        <StickyBook />
       </main>
     </>
   );

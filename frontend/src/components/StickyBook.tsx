@@ -4,9 +4,10 @@ import { useI18n } from '../i18n/I18nProvider';
 import { scrollToHash } from '../lib/motion';
 
 /**
- * Phones only: one small "Book Now" button that stays within reach at the
- * bottom corner. It appears once the opening of the page has been scrolled past
- * and steps aside when the request form or the footer is on screen.
+ * One small "Book Now" button that stays within reach at the bottom corner, on
+ * phones and computers alike (home page and Stay page). It appears once the
+ * opening of the page has been scrolled past and steps aside when the request
+ * form or the footer is on screen.
  */
 export default function StickyBook() {
   const { t } = useI18n();
