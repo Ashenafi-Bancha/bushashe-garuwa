@@ -11,6 +11,7 @@ export const en = {
   common: {
     brand: 'Bushaashe Garuwa',
     call: 'Call us',
+    bookNow: 'Book Now',
     planVisit: 'Plan Your Visit',
     contactUs: 'Contact Us',
     getInTouch: 'Get in Touch',

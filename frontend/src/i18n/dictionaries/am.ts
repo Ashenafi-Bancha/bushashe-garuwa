@@ -9,6 +9,7 @@ export const am: Dictionary = {
   common: {
     brand: 'ቡሻሼ ጋሯ',
     call: 'ይደውሉልን',
+    bookNow: 'አሁን ያስይዙ',
     planVisit: 'ጉብኝትዎን ያቅዱ',
     contactUs: 'ያግኙን',
     getInTouch: 'ያነጋግሩን',
