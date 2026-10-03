@@ -216,6 +216,7 @@ describe('serving the website from the same app', () => {
     mkdirSync(join(folder, 'assets'));
     writeFileSync(join(folder, 'index.html'), '<!doctype html><title>Bushaashe Garuwa</title>');
     writeFileSync(join(folder, 'assets', 'app-abc123.js'), 'console.log(1)');
+    writeFileSync(join(folder, 'assets', 'big-abc123.js'), 'console.log("Bushaashe Garuwa");\n'.repeat(400));
 
     const env = loadEnv({ NODE_ENV: 'test', WEB_DIST: folder });
     const db = await openTestDatabase();
@@ -248,5 +249,13 @@ describe('serving the website from the same app', () => {
     assert.equal(asset.status, 200);
     assert.match(asset.headers.get('cache-control') ?? '', /immutable/);
     assert.equal((await fetch(site + '/assets/missing.js')).status, 404);
+  });
+
+  it('sends scripts compressed, and whole', async () => {
+    const asset = await fetch(site + '/assets/big-abc123.js', { headers: { 'accept-encoding': 'gzip' } });
+    assert.equal(asset.status, 200);
+    assert.equal(asset.headers.get('content-encoding'), 'gzip');
+    assert.match(asset.headers.get('cache-control') ?? '', /immutable/);
+    assert.equal((await asset.text()).length, 'console.log("Bushaashe Garuwa");\n'.length * 400);
   });
 });

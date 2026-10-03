@@ -24,7 +24,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 - `frontend/src/three/` - 3D scenes (React Three Fiber), fetched only where used: `device.ts` (can this device draw 3D? otherwise photographs; `?3d=none|low|high` forces it), `land.ts` (the shape of the drawn land), `LandscapeScene.tsx` + `LandscapeHero.tsx` (home page opening as a scroll journey; under review at the unlinked `/preview/hero`), `PlaceholderHouse.tsx` (stand-in until a scanned model exists); `Frame3D.tsx` (mounts a scene only near the screen), `Markers.tsx` (page buttons placed over a scene), `Dialog.tsx` (full-screen viewer); `house/` (house to walk around, with markers), `tour/` (360° viewer; add photos in `tour/scenes.ts`), `museum/` (collection walked past by scrolling), `map/` (map of the grounds; true positions go in `map/points.ts`). These are under review at the unlinked `/preview` pages (`pages/Preview.tsx`)
 - `frontend/src/components/StayInquiry.tsx` - Request for a stay (Stay page, `#book`); sent as a visit request marked `guesthouse`, so it shows in the staff area under Visits. `ContactButtons.tsx` (call, WhatsApp, Telegram), `StickyBook.tsx` (small "Book Your Stay" on phones), `Testimonials.tsx` (hidden until `lib/testimonials.ts` has real words)
 - `frontend/src/lib/content.ts` - Staff text edits laid over the built-in dictionaries; `lib/events.ts` - events and bookings from the API, with the built-in schedule as fallback; `lib/media.ts` - photos staff added (gallery photos and the pages' opening photos), with the built-in photos as fallback; `lib/heroSlots.ts` - each page's built-in opening photo
-- `frontend/src/assets/photos.ts` - Photo registry; originals live in `frontend/photos-originals/`, optimized with `pnpm photos`
+- `frontend/src/assets/photos.ts` - Photo registry; originals live in `frontend/photos-originals/`, optimized with `pnpm photos` into WebP in three sizes; `picture(src)` gives an `<img>` the right one for each screen (`<img {...picture(photos.gate)} />`)
 - `frontend/src/index.css` - Global CSS entrypoint and Tailwind CSS v4 import
 - `frontend/index.html` - Vite HTML shell containing the `#root` element and loading `src/main.tsx`
 - `frontend/vite.config.ts` - Vite configuration with React, Tailwind CSS v4, Figma Make plugins, the `@` alias for `src` and the `/api` dev proxy; reads `../.figma/make/site.json`
@@ -49,7 +49,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 ## Dependencies
 
 - Website: React 19, React Router 7, Lenis (smooth scroll), GSAP + ScrollTrigger (scroll effects), Motion (page transitions), three + React Three Fiber + drei (3D scenes), Tailwind CSS v4 (`@tailwindcss/vite`), Vite 8, TypeScript 5.7, oxfmt
-- API: Express 5, zod 4, helmet, cors, PostgreSQL (`pg`; an embedded PGlite in development and tests), tsx for development
+- API: Express 5, zod 4, helmet, cors, compression, PostgreSQL (`pg`; an embedded PGlite in development and tests), tsx for development
 
 ## Styling
 

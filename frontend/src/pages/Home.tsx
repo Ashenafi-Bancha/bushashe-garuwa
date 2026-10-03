@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState, useEffect, useRef, type CSSProperties, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import { photos } from '../assets/photos';
+import { photos, picture } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import { useSiteEvents } from '../lib/events';
@@ -123,8 +123,20 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
   const lastSlide = prevIdx === null ? undefined : heroSlides[prevIdx];
 
   // have every photograph ready so each slide opens without a flash
+  // (after the first has had time to arrive, so they do not slow it down on a phone)
   useEffect(() => {
-    heroSlides.forEach(({ src }) => { const img = new Image(); img.src = src; });
+    const timer = setTimeout(() => {
+      heroSlides.slice(1).forEach(({ src }) => {
+        const img = new Image();
+        const { srcSet, sizes } = picture(src);
+        if (srcSet && sizes) {
+          img.sizes = sizes;
+          img.srcset = srcSet;
+        }
+        img.src = src;
+      });
+    }, 2500);
+    return () => clearTimeout(timer);
   }, [slideIds]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -163,12 +175,12 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           >
             {lastSlide && (
               <div key={`out-${lastSlide.id}-${slide.id}`} className="hero-slide hero-slide-out">
-                <img src={lastSlide.src} alt="" className={`w-full h-full object-cover ${lastSlide.pos}`} />
+                <img {...picture(lastSlide.src)} alt="" className={`w-full h-full object-cover ${lastSlide.pos}`} />
               </div>
             )}
             <div key={`in-${slide.id}`} className={`hero-slide ${lastSlide ? 'hero-slide-in' : 'hero-slide-first'}`}>
               <img
-                src={slide.src}
+                {...picture(slide.src)}
                 alt={slide.alt}
                 fetchPriority="high"
                 className={`hero-slide-img w-full h-full object-cover ${slide.pos}`}
@@ -258,10 +270,10 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-16 lg:gap-20 items-center">
             <div data-reveal className="fade-section relative order-2 lg:order-1">
               <div className="img-zoom rounded-[2rem] aspect-[4/5] overflow-hidden elev-2">
-                <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover object-[center_60%]" loading="lazy" />
+                <img {...picture(photos.lawn)} alt={t.photos.lawn} className="w-full h-full object-cover object-[center_60%]" loading="lazy" />
               </div>
               <div className="hidden sm:block absolute -bottom-10 -right-6 lg:-right-10 w-[46%] aspect-square rounded-[1.75rem] overflow-hidden border-[6px] border-[#F4EFE4] elev-2">
-                <img src={photos.gifaataa2} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy" />
+                <img {...picture(photos.gifaataa2)} alt={t.photos.gifaataa2} className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="absolute top-6 -left-3 sm:-left-6 bg-white rounded-2xl elev-2 px-5 py-4 flex items-center gap-4">
                 <div className="w-12 h-12 rounded-full bg-[#86A94F] text-[#13261A] grid place-items-center font-display text-xl font-extrabold">4+</div>
@@ -447,7 +459,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
         {/* ═════════ INVITATION ═════════ */}
         <section className="px-2 sm:px-3 pb-6">
           <div className="relative rounded-[2rem] sm:rounded-[3rem] overflow-hidden py-24 sm:py-32 lg:py-40">
-            <img src={photos.home} alt={t.photos.home} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <img {...picture(photos.home)} alt={t.photos.home} className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/10" />
             <div data-reveal className="fade-section relative z-10 max-w-4xl mx-auto px-5 sm:px-8 text-center">
               <span className="eyebrow !bg-white/15 !text-white backdrop-blur mb-6">{h.final.eyebrow}</span>

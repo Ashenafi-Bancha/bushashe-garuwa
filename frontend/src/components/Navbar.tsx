@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, type ReactNode } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import logo from '../assets/brand/logo.png';
+// a light copy of the logo, sized for the header and footer (the full one is assets/brand/logo.png)
+import logo from '../assets/brand/logo-small.webp';
 import { useI18n } from '../i18n/I18nProvider';
 import LanguageSwitcher from './LanguageSwitcher';
 import SocialLinks from './SocialLinks';

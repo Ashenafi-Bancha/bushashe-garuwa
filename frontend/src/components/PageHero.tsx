@@ -1,3 +1,4 @@
+import { picture } from '../assets/photos';
 import type { ReactNode } from 'react';
 import { useI18n } from '../i18n/I18nProvider';
 import type { HeroSlot } from '../lib/heroSlots';
@@ -27,7 +28,7 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
       <div className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[100svh] lg:min-h-[560px] overflow-hidden bg-[#E3EBD8]">
         <div key={photo.id} className="hero-slide hero-slide-first">
           <img
-            src={photo.src}
+            {...picture(photo.src)}
             alt={photo.alt}
             fetchPriority="high"
             className={`hero-slide-img w-full h-full object-cover ${photo.pos}`}

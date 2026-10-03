@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { photos } from '../assets/photos';
+import { photos, picture } from '../assets/photos';
 import Photo from '../components/Photo';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
@@ -97,7 +97,7 @@ export default function Heritage() {
         <div className="rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#E3EBD8]">
           {/* the photograph, clear, with nothing over it but its name */}
           <div className="relative sm:h-[62svh] sm:min-h-[360px] lg:h-[78svh]">
-            <img src={photos.zigba} alt={t.photos.zigba} loading="lazy" className="block sm:absolute sm:inset-0 w-full sm:h-full object-cover object-[center_40%]" />
+            <img {...picture(photos.zigba)} alt={t.photos.zigba} loading="lazy" className="block sm:absolute sm:inset-0 w-full sm:h-full object-cover object-[center_40%]" />
             <span className="absolute left-5 top-5 sm:left-8 sm:top-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold">
               {t.photoCaptions.zigba.title}
             </span>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { photos, type PhotoKey } from '../assets/photos';
+import { photos, picture, type PhotoKey } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import { captionFor, mediaUrl, useSiteMedia } from '../lib/media';
 import { lockScroll, Tilt } from '../lib/motion';
@@ -137,7 +137,7 @@ export default function Gallery() {
                     onClick={() => setOpenIdx(i)}
                     className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#1E3A29]/8"
                   >
-                    <img src={item.src} alt={item.alt} loading="lazy" className="w-full h-full object-cover" />
+                    <img {...picture(item.src)} alt={item.alt} loading="lazy" className="w-full h-full object-cover" />
                     <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5 text-left">
                       <span className="block font-display text-base sm:text-xl text-white leading-tight">{item.title}</span>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { photos } from '../assets/photos';
+import { photos, picture } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
@@ -85,7 +85,7 @@ export default function Experiences() {
 
       {/* CTA */}
       <section className="relative mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24 overflow-hidden">
-        <img src={photos.gardens} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
+        <img {...picture(photos.gardens)} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-[#E3EBD8]/92"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] mb-6">{x.cta.title}</h2>

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { photos, type PhotoKey } from '../assets/photos';
+import { photos, picture, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 
 const RING: PhotoKey[] = ['gate', 'meeshsho', 'home', 'house', 'gifaataa1', 'food', 'pavilions', 'gifaataa2', 'gardens', 'zigba', 'lawn', 'enset'];
@@ -110,7 +110,7 @@ export default function PhotoRing() {
           <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] mb-8">{ring.title}</h2>
           <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {RING.map((key) => (
-              <img key={key} src={photos[key]} alt={t.photos[key]} loading="lazy" className="rounded-2xl w-full sm:aspect-[3/4] sm:object-cover" />
+              <img key={key} {...picture(photos[key])} alt={t.photos[key]} loading="lazy" className="rounded-2xl w-full sm:aspect-[3/4] sm:object-cover" />
             ))}
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function PhotoRing() {
               style={{ transform: `rotateY(${i * step}deg) translateZ(${radius}px)` }}
             >
               <img
-                src={photos[key]}
+                {...picture(photos[key])}
                 alt={t.photos[key]}
                 loading="lazy"
                 draggable={false}

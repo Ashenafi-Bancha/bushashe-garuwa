@@ -1,3 +1,4 @@
+import compression from 'compression';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
@@ -54,6 +55,9 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
     }),
   );
   app.use(cors({ origin: env.CORS_ORIGINS, methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'] }));
+  // text (the website's scripts and styles, the API's answers) travels compressed: about a third of
+  // the size, which matters most on phones. Photographs are already compressed and are left alone.
+  app.use(compression());
   app.use(express.json({ limit: '32kb' }));
 
   const v1 = express.Router();

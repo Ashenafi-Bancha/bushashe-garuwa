@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { photos } from '../assets/photos';
+import { photos, picture } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import { eventText, type SiteEvent } from '../lib/events';
 
@@ -33,7 +33,7 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div data-reveal className="fade-section relative">
             <div className="img-zoom rounded-[1.75rem] overflow-hidden aspect-[4/3] lg:aspect-[4/5]">
-              <img src={photos.food} alt={t.photos.food} loading="lazy" className="w-full h-full object-cover" />
+              <img {...picture(photos.food)} alt={t.photos.food} loading="lazy" className="w-full h-full object-cover" />
             </div>
             {partner && (
               <div className="absolute -bottom-5 left-5 right-5 sm:left-auto sm:right-6 sm:max-w-xs rounded-2xl bg-[#F4EFE4] text-[#1E3A29] px-5 py-4 font-bold text-sm shadow-xl">

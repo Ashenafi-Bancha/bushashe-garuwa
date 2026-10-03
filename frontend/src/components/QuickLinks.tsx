@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { photos, type PhotoKey } from '../assets/photos';
+import { photos, picture, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import { Tilt } from '../lib/motion';
 
@@ -40,7 +40,7 @@ export default function QuickLinks() {
       </div>
 
       {/* phones: a row to swipe; tablets and computers: the bento grid */}
-      <div className="scroll-smooth-x md:overflow-visible px-5 sm:px-8 md:max-w-screen-xl md:mx-auto">
+      <div className="scroll-smooth-x md:overflow-visible px-5 sm:px-8 scroll-px-5 sm:scroll-px-8 md:max-w-screen-xl md:mx-auto">
         <ul className="flex md:grid md:grid-cols-4 md:auto-rows-[250px] lg:auto-rows-[270px] gap-4 sm:gap-5 w-max md:w-auto pb-2 md:pb-0">
           {LINKS.map(({ key, to, photo, span }, i) => (
             <li
@@ -51,7 +51,7 @@ export default function QuickLinks() {
             >
               <Tilt className="w-full h-full rounded-[1.75rem]" max={4}>
                 <Link to={to} className="group relative flex h-full flex-col sm:justify-end overflow-hidden rounded-[1.75rem] img-zoom bg-white sm:bg-transparent elev-1 sm:shadow-none">
-                  <img src={photos[photo]} alt={t.photos[photo]} loading="lazy" className="sm:absolute sm:inset-0 w-full sm:h-full object-cover" />
+                  <img {...picture(photos[photo])} alt={t.photos[photo]} loading="lazy" className="sm:absolute sm:inset-0 w-full sm:h-full object-cover" />
                   {/* phones: the whole photograph, the words beneath it; wider screens: the words on the photograph */}
                   <span className="hidden sm:block absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 via-45% to-transparent" />
                   <span className="absolute top-4 left-4 rounded-full bg-white/85 backdrop-blur px-3 py-1 text-[11px] font-bold text-[#1E3A29] tabular-nums">

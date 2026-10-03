@@ -1,3 +1,4 @@
+import { picture } from '../assets/photos';
 import type { ImgHTMLAttributes } from 'react';
 import { useI18n } from '../i18n/I18nProvider';
 
@@ -17,7 +18,7 @@ type PhotoProps = Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' | 'alt'> & {
  */
 export default function Photo({ src, alt, label, className = '', ...rest }: PhotoProps) {
   const { t } = useI18n();
-  if (src) return <img src={src} alt={alt} className={className} {...rest} />;
+  if (src) return <img {...picture(src)} alt={alt} className={className} {...rest} />;
 
   return (
     <div

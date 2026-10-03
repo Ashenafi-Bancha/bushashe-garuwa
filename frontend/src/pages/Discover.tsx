@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { photos } from '../assets/photos';
+import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import SwipeRow from '../components/SwipeRow';
@@ -34,7 +34,7 @@ export default function Discover() {
               </p>
             </div>
             <div className="img-zoom aspect-[4/5] rounded-[2rem] bg-[#1E3A29]/10">
-              <img src={photos.lawn} alt={t.photos.lawn} className="w-full h-full object-cover"/>
+              <img {...picture(photos.lawn)} alt={t.photos.lawn} className="w-full h-full object-cover"/>
             </div>
           </div>
 
