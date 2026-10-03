@@ -5,10 +5,15 @@
  * "/api" while developing with `pnpm dev:all`, or "https://api.bushaashegaruwa.com/api"
  * in production. When it is not set, the forms keep working as before: they show
  * the thank-you message without sending anything.
+ *
+ * Built as one app with the API (`pnpm build`, which uses `--mode app`), the
+ * website is served by the API itself, so the API is at "/api" on the same address.
  */
 import type { Lang } from '../i18n/config';
 
-export const API_BASE = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '') ?? '';
+const SAME_ADDRESS = import.meta.env.MODE === 'app' ? '/api' : '';
+
+export const API_BASE = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '') ?? SAME_ADDRESS;
 
 export const apiEnabled = API_BASE !== '';
 

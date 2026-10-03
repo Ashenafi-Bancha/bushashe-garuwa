@@ -27,7 +27,8 @@ const EnvSchema = z.object({
   FORM_RATE_LIMIT: z.coerce.number().int().positive().default(10),
   /**
    * Folder holding the built website (frontend/dist). When set, the API also serves
-   * the website, so one app and one address carry both. Empty: the API only.
+   * the website, so one app and one address carry both. Empty: in production the
+   * website built beside the API is served if it is there; otherwise the API only.
    */
   WEB_DIST: z.string().trim().default(''),
 

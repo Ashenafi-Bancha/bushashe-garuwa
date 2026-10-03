@@ -43,7 +43,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 
 - `package.json` / `pnpm-workspace.yaml` - Workspace scripts and members
 - `vercel.json` - Builds and deploys the website from `frontend/`
-- `Dockerfile` - One container for both: builds the website and the API; the API serves the website when `WEB_DIST` is set (`backend/src/http/website.ts`)
+- One app for both, without Docker: `pnpm build` builds the website (`--mode app`, so it calls the API at `/api`) and the API; `pnpm start` runs the API, which serves the website built beside it in production (`backend/src/http/website.ts`). Do not add a `Dockerfile`: the host (AletCloud) builds with these two commands
 - `.mise.toml` - Toolchain versions for Node.js and pnpm
 
 ## Dependencies

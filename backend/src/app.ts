@@ -7,7 +7,7 @@ import { createContainer } from './container.js';
 import type { Mailer } from './modules/notifications/mailer.js';
 import type { Database } from './db/database.js';
 import { errorHandler, notFound } from './http/error-handler.js';
-import { website } from './http/website.js';
+import { website, websiteFolder } from './http/website.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
 import { contactRoutes } from './modules/contact/contact.routes.js';
 import { contentRoutes } from './modules/content/content.routes.js';
@@ -27,7 +27,7 @@ import { visitRoutes } from './modules/visits/visit.routes.js';
  *   /api/v1/events       events, and reserving a place at one
  *   /api/v1/media        photos staff added: the gallery and the pages' opening photos
  *   /api/v1/admin        staff dashboard: session check and counts
- *   everything else      the website itself, when WEB_DIST points at its built files
+ *   everything else      the website itself, when its built files are there (see websiteFolder)
  */
 export function createApp(env: Env, db: Database, options: { mailer?: Mailer } = {}) {
   const { services, repositories, guards } = createContainer(env, db, options);
@@ -71,7 +71,8 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
   app.use('/api/health', healthRoutes(db));
   app.use('/api/v1', v1);
   app.use('/api', notFound);
-  if (env.WEB_DIST) app.use(website(env.WEB_DIST));
+  const webDist = websiteFolder(env);
+  if (webDist) app.use(website(webDist));
   app.use(errorHandler);
 
   return Object.assign(app, { prepare });

@@ -43,7 +43,8 @@ bushaashe-garuwa/
 | `pnpm dev` | Website only, at http://localhost:8443 |
 | `pnpm dev:api` | API only, at http://localhost:4000 |
 | `pnpm dev:all` | Website and API together |
-| `pnpm build` | Build the website into `frontend/dist` |
+| `pnpm build` / `pnpm start` | Build the website and the API as one app, and run it (production) |
+| `pnpm build:web` | Build only the website into `frontend/dist` |
 | `pnpm build:api` / `pnpm start:api` | Build and run the API for production |
 | `pnpm typecheck` | Check the TypeScript in both parts |
 | `pnpm test` | Run the API tests |
@@ -96,10 +97,11 @@ pages stay correct even when the API is offline. Edits, photos and events appear
 
 ## Deployment
 
-**One app (AletCloud, or any host that builds a `Dockerfile`).** The `Dockerfile` at the root builds the
-website and the API into one container: the API answers `/api/...` and serves the website for every
-other address, so the public site, the staff area and the API share one address. It needs a PostgreSQL
-database: set `DATABASE_URL` (and `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `SITE_URL`, and the mail settings) on the app.
+**One app (AletCloud, or any Node.js host).** The host installs with `pnpm install --frozen-lockfile`,
+builds with `pnpm build` (the website and the API) and starts with `pnpm start`. The API answers
+`/api/...` and serves the website for every other address, so the public site, the staff area and the
+API share one address. There is no `Dockerfile`. It needs a PostgreSQL database: set `NODE_ENV=production`,
+`DATABASE_URL` (and `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `SITE_URL`, and the mail settings) on the app.
 The host gives the app its `PORT`.
 
 **Or the two parts separately:**

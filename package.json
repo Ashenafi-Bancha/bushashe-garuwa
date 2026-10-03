@@ -6,11 +6,14 @@
   "engines": {
     "node": ">=22.13"
   },
+  "packageManager": "pnpm@11.9.0",
   "scripts": {
     "dev": "pnpm --filter @bushaashe/frontend dev",
     "dev:api": "pnpm --filter @bushaashe/backend dev",
     "dev:all": "pnpm --parallel --filter \"./frontend\" --filter \"./backend\" dev",
-    "build": "pnpm --filter @bushaashe/frontend build",
+    "build": "pnpm --filter @bushaashe/frontend build:app && pnpm --filter @bushaashe/backend build",
+    "start": "node backend/dist/server.js",
+    "build:web": "pnpm --filter @bushaashe/frontend build",
     "build:api": "pnpm --filter @bushaashe/backend build",
     "start:api": "pnpm --filter @bushaashe/backend start",
     "typecheck": "pnpm -r typecheck",
