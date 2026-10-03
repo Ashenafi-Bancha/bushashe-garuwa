@@ -32,7 +32,7 @@ export const HERO_SLOTS: Record<HeroSlot, { label: string; path: string; photos:
     path: '/',
     photos: [
       { key: 'gate', pos: 'object-[center_35%]' },
-      { key: 'meeshsho', pos: 'object-[center_45%]' },
+      { key: 'meeshsho', pos: 'object-[center_22%]' },
       { key: 'home', pos: 'object-center' },
       { key: 'gifaataa1', pos: 'object-[center_40%]' },
       { key: 'house', pos: 'object-center' },
@@ -41,16 +41,16 @@ export const HERO_SLOTS: Record<HeroSlot, { label: string; path: string; photos:
     ],
   },
   discover: { label: 'Discover', path: '/discover', photos: [{ key: 'home', pos: 'object-center' }] },
-  heritage: { label: 'Heritage', path: '/heritage', photos: [{ key: 'meeshsho', pos: 'object-[center_45%]' }] },
+  heritage: { label: 'Heritage', path: '/heritage', photos: [{ key: 'meeshsho', pos: 'object-[center_22%]' }] },
   heritageTrees: { label: 'Heritage: trees and plants', path: '/heritage/trees', photos: [{ key: 'zigba', pos: 'object-[center_45%]' }] },
   experiences: { label: 'Experiences', path: '/experiences', photos: [{ key: 'gifaataa1', pos: 'object-[center_35%]' }] },
   events: { label: 'Events', path: '/events', photos: [{ key: 'gifaataa3', pos: 'object-center' }] },
   stay: { label: 'Stay', path: '/stay', photos: [{ key: 'pavilions', pos: 'object-center' }] },
   dine: { label: 'Dine', path: '/dine', photos: [{ key: 'food', pos: 'object-center' }] },
   gallery: { label: 'Gallery', path: '/gallery', photos: [{ key: 'home', pos: 'object-center' }] },
-  visit: { label: 'Visit', path: '/visit', photos: [{ key: 'gate', pos: 'object-[center_35%]' }] },
+  visit: { label: 'Visit', path: '/visit', photos: [{ key: 'gate', pos: 'object-[center_30%]' }] },
   contact: { label: 'Contact', path: '/contact', photos: [{ key: 'gardens', pos: 'object-center' }] },
-  about: { label: 'About', path: '/about', photos: [{ key: 'gifaataa2', pos: 'object-bottom' }] },
+  about: { label: 'About', path: '/about', photos: [{ key: 'gifaataa2', pos: 'object-[center_38%]' }] },
 };
 
 /** Slots that show every photo, one after another */

@@ -5,7 +5,6 @@ import logo from '../assets/brand/logo-small.webp';
 import { useI18n } from '../i18n/I18nProvider';
 import LanguageSwitcher from './LanguageSwitcher';
 import SocialLinks from './SocialLinks';
-import { deviceTier } from '../three/device';
 import { lockScroll } from '../lib/motion';
 
 type PageKey = 'home' | 'events' | 'heritage' | 'experiences' | 'stay' | 'dine' | 'about' | 'discover' | 'gallery' | 'contact' | 'visit';
@@ -32,13 +31,13 @@ const groups = {
 type GroupKey = keyof typeof groups;
 
 /**
- * The pages that open with a full-screen photograph, where the header lies over
- * it. Not the home page: its photographs start under the header, so the header
- * never covers what is in them (the sign over the main gate, for one).
+ * The pages that open with a picture running up behind the header, so the
+ * header lies on the picture instead of being a strip of its own. The
+ * photograph itself starts below the header (see .hero-whole), so nothing in it
+ * is covered.
  */
 const hasPhotoHero = (path: string) =>
-  (path === '/preview/hero' && deviceTier() !== 'none') ||
-  Object.values(routes).some((r) => r !== '/' && (path === r || path.startsWith(r + '/')));
+  path === '/preview/hero' || Object.values(routes).some((r) => (r === '/' ? path === '/' : path === r || path.startsWith(r + '/')));
 
 /* ── Line icons, one per page ── */
 const paths: Record<PageKey, ReactNode> = {
