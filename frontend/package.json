@@ -11,6 +11,8 @@
     "preview": "vite preview",
     "format": "oxfmt",
     "photos": "python scripts/optimize-photos.py",
+    "wolaytta": "node --experimental-strip-types --no-warnings scripts/wolaytta.mjs",
+    "wolaytta:sync": "node --experimental-strip-types --no-warnings scripts/wolaytta.mjs sync",
     "video": "python scripts/optimize-video.py"
   },
   "dependencies": {

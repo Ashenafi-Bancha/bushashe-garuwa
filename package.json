@@ -19,6 +19,8 @@
     "typecheck": "pnpm -r typecheck",
     "test": "pnpm --filter @bushaashe/backend test",
     "photos": "pnpm --filter @bushaashe/frontend photos",
+    "wolaytta": "pnpm --filter @bushaashe/frontend wolaytta",
+    "wolaytta:sync": "pnpm --filter @bushaashe/frontend wolaytta:sync",
     "format": "pnpm --filter @bushaashe/frontend format",
     "video": "pnpm --filter @bushaashe/frontend video"
   }
