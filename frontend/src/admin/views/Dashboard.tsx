@@ -153,39 +153,39 @@ export default function Dashboard() {
         onClose={() => setMenuOpen(false)}
       />
 
-      <div className="lg:pl-[264px]">
-        {/* the bar above the work: where you are, and the way back to the menu on a phone */}
-        <header className="sticky top-0 z-30 bg-[#F4EFE4]/90 backdrop-blur border-b border-[#1E3A29]/8">
+      <div className="lg:pl-[264px] min-h-screen flex flex-col">
+        {/* the bar above the work, in its own colour: where you are, and the way back to the menu on a phone */}
+        <header className="sticky top-0 z-30 bg-[#1E3A29] text-white shadow-[0_6px_18px_-10px_rgba(19,38,26,0.6)]">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-8 h-[72px] flex items-center gap-3">
             <button
               type="button"
               onClick={() => setMenuOpen(true)}
               aria-label="Open the menu"
-              className="lg:hidden flex-shrink-0 w-11 h-11 rounded-xl border border-[#1E3A29]/10 bg-white grid place-items-center text-[#1E3A29]"
+              className="lg:hidden flex-shrink-0 w-11 h-11 rounded-xl border border-white/20 bg-white/10 grid place-items-center text-white"
             >
               <Icon name="menu" />
             </button>
 
             <div className="min-w-0 flex-1">
-              <h1 className="font-display text-xl sm:text-2xl font-extrabold text-[#1E3A29] leading-tight truncate">{heading.title}</h1>
-              <p className="text-[#1E3A29]/50 text-xs sm:text-sm truncate">{heading.lead}</p>
+              <h1 className="font-display text-xl sm:text-2xl font-extrabold text-white leading-tight truncate">{heading.title}</h1>
+              <p className="text-white/65 text-xs sm:text-sm truncate">{heading.lead}</p>
             </div>
 
             {/* the other sections have their own Refresh, beside their lists */}
             {section === 'overview' && (
-              <button type="button" onClick={loadSummary} className="hidden sm:inline-flex admin-btn-quiet flex-shrink-0">
+              <button type="button" onClick={loadSummary} className="hidden sm:inline-flex admin-btn-quiet on-dark flex-shrink-0">
                 <Icon name="refresh" className="w-4 h-4" />
                 Refresh
               </button>
             )}
-            <a href="/" target="_blank" rel="noreferrer" className="hidden md:inline-flex admin-btn-quiet flex-shrink-0">
+            <a href="/" target="_blank" rel="noreferrer" className="hidden md:inline-flex admin-btn-quiet on-dark flex-shrink-0">
               <Icon name="external" className="w-4 h-4" />
               View the website
             </a>
           </div>
         </header>
 
-        <main className="max-w-screen-xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
+        <main className="flex-1 w-full max-w-screen-xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
           {error && (
             <div className="mb-6">
               <Notice kind="error">{error}</Notice>
@@ -235,6 +235,19 @@ export default function Dashboard() {
           {section === 'hero' && <HeroView />}
           {section === 'content' && <ContentView />}
         </main>
+
+        {/* the foot of the staff area, in the same colour as the bar above */}
+        <footer className="bg-[#1E3A29] text-white/70 text-xs sm:text-sm">
+          <div className="max-w-screen-xl mx-auto px-4 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+            <span>© {new Date().getFullYear()} Bushaashe Garuwa · Staff area</span>
+            <span className="flex items-center gap-4">
+              {email && <span className="truncate max-w-[60vw]">Signed in as {email}</span>}
+              <a href="/" target="_blank" rel="noreferrer" className="font-semibold text-white hover:text-[#B9D38A] transition-colors">
+                View the website
+              </a>
+            </span>
+          </div>
+        </footer>
       </div>
     </div>
   );

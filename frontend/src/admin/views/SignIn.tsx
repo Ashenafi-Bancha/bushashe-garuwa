@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import logo from '../../assets/brand/logo.png';
-import { photos } from '../../assets/photos';
 import { ApiError, apiEnabled } from '../../lib/api';
 import { useAdminSession } from '../auth/AdminSession';
+import { Icon } from '../components/icons';
 
 const FIELD =
   'w-full rounded-2xl bg-white border px-4 py-4 text-base text-[#1E3A29] placeholder:text-[#1E3A29]/30 outline-none transition-colors';
@@ -10,8 +10,9 @@ const LABEL = 'text-[#1E3A29]/65 text-xs font-bold tracking-[0.14em] uppercase';
 
 /**
  * Staff sign-in: email and password, checked by the API.
- * Phones get a single full-height column; larger screens add a photo beside it.
- * It wears the public site's colours: warm paper, forest words, an emerald button.
+ * One centred card on every screen: the logo on top, the name, who the page is
+ * for, then the form. A bar across the foot of the page, in its own colour,
+ * leads back to the website.
  */
 export default function SignIn() {
   const { signIn } = useAdminSession();
@@ -49,36 +50,23 @@ export default function SignIn() {
   const border = error ? 'border-[#C4622D]' : 'border-[#1E3A29]/15 focus:border-[#0E8A50]';
 
   return (
-    <div className="min-h-[100svh] bg-[#F4EFE4] lg:grid lg:grid-cols-[1.1fr_1fr]">
-      {/* Photo, on larger screens only */}
-      <div className="relative hidden lg:block overflow-hidden m-4 rounded-[2rem]">
-        <img src={photos.meeshsho} alt="" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#13261A]/90 via-[#13261A]/25 to-transparent" />
-        <div className="relative h-full flex flex-col justify-end p-12 xl:p-16">
-          <h2 className="font-display text-4xl xl:text-5xl text-white leading-tight max-w-md">
-            Keeping Wolaita heritage, one visitor at a time
-          </h2>
-          <p className="text-white/75 mt-4 max-w-sm">
-            Messages, visit requests, and the words and photographs on the website, all in one place.
-          </p>
-        </div>
-      </div>
-
-      {/* Sign-in column */}
-      <div className="min-h-[100svh] lg:min-h-0 flex flex-col px-5 sm:px-8 py-8 sm:py-10 pb-[max(2rem,env(safe-area-inset-bottom))]">
-        <header className="flex items-center gap-3">
-          <img src={logo} alt="" className="w-11 h-11 sm:w-12 sm:h-12 rounded-full object-contain flex-shrink-0" />
-          <div className="leading-none">
-            <div className="font-display text-[#1E3A29] text-lg sm:text-xl">Bushaashe Garuwa</div>
-            <div className="text-[#0E8A50] text-[10px] font-bold tracking-[0.2em] uppercase mt-1.5">Staff area</div>
+    <div className="min-h-[100svh] flex flex-col bg-[#F4EFE4]">
+      <main className="flex-1 flex items-center justify-center px-4 sm:px-6 py-10 sm:py-14">
+        <div className="w-full max-w-md">
+          {/* who this is: the logo, the name, and who the page is for */}
+          <div className="text-center mb-7">
+            <img src={logo} alt="" className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-contain bg-white p-1 shadow-[0_10px_30px_-12px_rgba(19,38,26,0.45)]" />
+            <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] tracking-tight mt-4">Bushaashe Garuwa</div>
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#E3EBD8] text-[#0B6E40] text-[11px] font-bold tracking-[0.18em] uppercase px-3.5 py-1.5 mt-3">
+              <Icon name="lock" className="w-3.5 h-3.5" />
+              Staff area
+            </div>
           </div>
-        </header>
 
-        <div className="flex-1 flex flex-col justify-center py-10 sm:py-12">
-          <div className="w-full max-w-sm mx-auto">
-            <h1 className="font-display text-4xl sm:text-5xl text-[#1E3A29] leading-[1.05] mb-3">Sign in</h1>
-            <p className="text-[#1E3A29]/60 text-[15px] leading-relaxed mb-8">
-              Sign in with your staff email and password to manage messages, visit requests, bookings and the website content.
+          <div className="bg-white rounded-[1.75rem] border border-[#1E3A29]/8 shadow-[0_24px_60px_-30px_rgba(19,38,26,0.35)] px-5 py-7 sm:px-9 sm:py-9">
+            <h1 className="font-display text-3xl font-extrabold text-[#1E3A29] text-center leading-tight">Sign in</h1>
+            <p className="text-[#1E3A29]/60 text-sm leading-relaxed text-center mt-2 mb-7">
+              For staff members of Bushaashe Garuwa only.
             </p>
 
             {!apiEnabled && (
@@ -113,34 +101,37 @@ export default function SignIn() {
               </div>
 
               <div>
-                <div className="flex items-baseline justify-between mb-2">
-                  <label htmlFor="admin-password" className={LABEL}>
-                    Password
-                  </label>
+                <label htmlFor="admin-password" className={`block mb-2 ${LABEL}`}>
+                  Password
+                </label>
+                <div className="relative">
+                  <input
+                    id="admin-password"
+                    name="password"
+                    type={show ? 'text' : 'password'}
+                    required
+                    autoComplete="current-password"
+                    autoCapitalize="off"
+                    autoCorrect="off"
+                    spellCheck={false}
+                    enterKeyHint="go"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    aria-invalid={error !== ''}
+                    aria-describedby={error ? 'admin-signin-error' : undefined}
+                    className={`${FIELD} ${border} pr-14`}
+                  />
+                  {/* the eye: show the password to check it, hide it again */}
                   <button
                     type="button"
                     onClick={() => setShow((v) => !v)}
-                    className="text-[#0E8A50] text-xs font-bold hover:text-[#0B6E40] focus-visible:underline"
+                    aria-label={show ? 'Hide the password' : 'Show the password'}
+                    aria-pressed={show}
+                    className="hit-slim absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center w-10 h-10 rounded-xl text-[#1E3A29]/55 hover:text-[#0B6E40] hover:bg-[#1E3A29]/5 transition-colors"
                   >
-                    {show ? 'Hide' : 'Show'}
+                    <Icon name={show ? 'eyeOff' : 'eye'} />
                   </button>
                 </div>
-                <input
-                  id="admin-password"
-                  name="password"
-                  type={show ? 'text' : 'password'}
-                  required
-                  autoComplete="current-password"
-                  autoCapitalize="off"
-                  autoCorrect="off"
-                  spellCheck={false}
-                  enterKeyHint="go"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  aria-invalid={error !== ''}
-                  aria-describedby={error ? 'admin-signin-error' : undefined}
-                  className={`${FIELD} ${border}`}
-                />
                 {error && (
                   <p id="admin-signin-error" role="alert" className="text-[#9A4A20] text-sm font-semibold mt-2">
                     {error}
@@ -156,20 +147,23 @@ export default function SignIn() {
                 {busy ? 'Signing in…' : 'Sign in'}
               </button>
             </form>
-
-            <p className="text-[#1E3A29]/45 text-xs leading-relaxed mt-6">
-              You stay signed in until you sign out or close this browser window, for up to 12 hours. Ask the site owner if you do not
-              have an account.
-            </p>
           </div>
-        </div>
 
-        <footer className="text-center">
-          <a href="/" className="text-[#1E3A29]/50 hover:text-[#0E8A50] text-sm font-semibold transition-colors">
+          <p className="text-[#1E3A29]/50 text-xs leading-relaxed text-center mt-6 px-4">
+            You stay signed in for up to 12 hours, or until you sign out. If you do not have an account, ask the site owner.
+          </p>
+        </div>
+      </main>
+
+      {/* the foot of the page, in its own colour */}
+      <footer className="bg-[#1E3A29] text-white/70 text-xs sm:text-sm">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+          <span>© {new Date().getFullYear()} Bushaashe Garuwa · Staff area</span>
+          <a href="/" className="font-semibold text-white hover:text-[#B9D38A] transition-colors">
             Back to the website
           </a>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </div>
   );
 }
