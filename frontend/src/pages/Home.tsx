@@ -366,7 +366,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <SwipeRow grid="md:grid-cols-2" item="w-[84vw] sm:w-[64vw]">
               {[
-                { to: '/stay', eyebrow: h.stay.eyebrow, title: h.stay.title, desc: h.stay.desc, cta: h.stay.cta, photo: undefined as string | undefined, chips: Object.values(h.stay.rooms).map((r) => r.name) },
+                { to: '/stay', eyebrow: h.stay.eyebrow, title: h.stay.title, desc: h.stay.desc, cta: h.stay.cta, photo: photos.vipDining as string | undefined, chips: [t.stay.comingSoon.badge] },
                 { to: '/dine', eyebrow: h.restaurant.eyebrow, title: h.restaurant.title, desc: h.restaurant.desc, cta: h.restaurant.cta, photo: photos.food, chips: h.restaurant.categories },
               ].map((card, i) => (
                 <div key={card.to} data-reveal className="fade-section h-full" style={{ transitionDelay: `${i * 100}ms` }}>

@@ -25,17 +25,21 @@ const page: DeepPartial<Dictionary> = {
     comingSoon: {
       // EN: Coming soon
       badge: "",
-      // EN: The Guest House Is Opening Soon
+      // EN: A guest house inside the heritage site is planned. It is not open yet.
+      lead: "",
+      // EN: The Guest House Is a Coming Service
       title: "",
-      // EN: The rooms are being made ready. Send us a request now and we will call you as soon as the guest house opens.
+      // EN: Bushaashe Garuwa is preparing a guest house so that visitors can stay overnight. It is still being finished and does not take guests yet. We will announce it here when it opens.
       text: "",
-      // EN: Send a Request
-      ask: "",
+      // EN: Questions in the Meantime?
+      askTitle: "",
+      // EN: Call or write to us and we will gladly tell you more.
+      askText: "",
     },
     vip: {
-      // EN: VIP Room
+      // EN: A First Look
       eyebrow: "",
-      // EN: A Room With Its Own Sitting and Dining Room
+      // EN: The VIP Room
       title: "",
       // EN: The VIP room has a bedroom with a carved wooden bed, and a separate room with sofas, a dining table, a kitchen counter and a fireplace.
       desc: "",

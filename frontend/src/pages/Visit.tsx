@@ -15,7 +15,6 @@ const experienceTypes: { id: ExperienceType }[] = [
   { id: 'cultural' },
   { id: 'food' },
   { id: 'restaurant' },
-  { id: 'guesthouse' },
   { id: 'group' },
   { id: 'education' },
   { id: 'meeting' },

@@ -125,7 +125,7 @@ export default function LandscapeHero({ tier, watchSpeed, onTooSlow }: Props) {
                 <p className="hidden sm:block text-[#1E3A29]/70 leading-relaxed mt-3">{h.subtitle}</p>
               </div>
               <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
-                <Link to="/stay#book" className="btn-primary">{h.book}</Link>
+                <Link to="/visit" className="btn-primary">{h.book}</Link>
                 <Link to="/heritage" className="btn-outline text-[#1E3A29]">{h.heritage}</Link>
               </div>
             </div>

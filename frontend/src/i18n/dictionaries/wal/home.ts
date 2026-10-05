@@ -98,7 +98,7 @@ const page: DeepPartial<Dictionary> = {
         experiences: "",
         // EN: Cultural food evenings twice a month, and Gifaataa.
         events: "",
-        // EN: Quiet rooms in the guesthouse, among the gardens.
+        // EN: A guest house among the gardens. Coming soon.
         stay: "",
         // EN: Wolaita and Ethiopian dishes, cooked with care.
         dine: "",
@@ -441,7 +441,7 @@ const page: DeepPartial<Dictionary> = {
         guesthouse: {
           // EN: Guesthouse
           title: "",
-          // EN: Comfortable rooms for an overnight stay inside the heritage site itself.
+          // EN: A planned service: rooms for an overnight stay inside the heritage site itself. Not open yet.
           desc: "",
         },
         restaurant: {
@@ -457,7 +457,7 @@ const page: DeepPartial<Dictionary> = {
       eyebrow: "",
       // EN: Stay Within the Story
       title: "",
-      // EN: Sleep where history breathes. Our rooms blend Wolaita warmth with the comfort you deserve.
+      // EN: A guest house inside the heritage site is planned, so that visitors can stay overnight. It is not open yet.
       desc: "",
       rooms: {
         standard: {

@@ -221,8 +221,6 @@ const page: DeepPartial<Dictionary> = {
           restaurant: "",
           // EN: Bar
           bar: "",
-          // EN: Book a Room
-          bookRoom: "",
           // EN: Cultural Food Events
           foodEvents: "",
         },
