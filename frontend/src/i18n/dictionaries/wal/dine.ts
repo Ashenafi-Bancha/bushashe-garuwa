@@ -145,20 +145,36 @@ const page: DeepPartial<Dictionary> = {
       weekdays: "",
       // EN: Weekends
       weekends: "",
-      drinks: [
-        // EN: Tej (Honey Wine)
-        "",
-        // EN: Tella (Sorghum Beer)
-        "",
-        // EN: Ethiopian Coffee
-        "",
-        // EN: Fresh Juices
-        "",
-        // EN: Local Spirits
-        "",
-        // EN: Soft Drinks
-        "",
-      ],
+      // EN: Opening Hours
+      hours: "",
+      cultural: {
+        // EN: Cultural Drinks
+        title: "",
+        // EN: Traditional drinks of Wolaita and Ethiopia.
+        desc: "",
+        items: [
+          // EN: Tej (Honey Wine)
+          "",
+          // EN: Tella (Sorghum Beer)
+          "",
+          // EN: Ethiopian Coffee
+          "",
+          // EN: Local Spirits
+          "",
+        ],
+      },
+      modern: {
+        // EN: Modern Drinks
+        title: "",
+        // EN: Juices and soft drinks, for every taste.
+        desc: "",
+        items: [
+          // EN: Fresh Juices
+          "",
+          // EN: Soft Drinks
+          "",
+        ],
+      },
     },
   },
 };

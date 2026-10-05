@@ -816,7 +816,17 @@ export const en = {
       desc: 'Our bar is where stories are shared, community is built, and the day slowly fades into the warmth of Wolaita evenings. Traditional drinks alongside modern refreshments, always served with genuine hospitality.',
       weekdays: 'Weekdays',
       weekends: 'Weekends',
-      drinks: ['Tej (Honey Wine)', 'Tella (Sorghum Beer)', 'Ethiopian Coffee', 'Fresh Juices', 'Local Spirits', 'Soft Drinks'],
+      hours: 'Opening Hours',
+      cultural: {
+        title: 'Cultural Drinks',
+        desc: 'Traditional drinks of Wolaita and Ethiopia.',
+        items: ['Tej (Honey Wine)', 'Tella (Sorghum Beer)', 'Ethiopian Coffee', 'Local Spirits'],
+      },
+      modern: {
+        title: 'Modern Drinks',
+        desc: 'Juices and soft drinks, for every taste.',
+        items: ['Fresh Juices', 'Soft Drinks'],
+      },
     },
   },
 

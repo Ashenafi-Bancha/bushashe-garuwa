@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { photos, picture } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
@@ -65,30 +64,59 @@ export default function Dine() {
         </div>
       </section>
 
-      {/* Bar section */}
-      <section id="bar" className="relative mx-2 sm:mx-3 rounded-[2rem] py-24 lg:py-32 overflow-hidden">
-        <img {...picture(photos.gardens)} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
-        <div className="absolute inset-0 bg-[#E3EBD8]/92"/>
-        <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      {/* Bar: what it is and when it is open, then its drinks in two kinds, cultural and modern */}
+      <section id="bar" className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[3rem] py-14 sm:py-20 lg:py-24 mb-12 sm:mb-16">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 lg:items-end mb-10 sm:mb-12">
             <div>
-              <div className="text-[#0B6E40] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{dn.bar.eyebrow}</div>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] leading-tight mb-6">{dn.bar.title}</h2>
-              <p className="text-[#1E3A29]/80 font-sans text-base leading-relaxed mb-8">
-                {dn.bar.desc}
-              </p>
-              <div className="grid grid-cols-2 gap-4 mb-8 text-[#1E3A29]/80 font-sans text-sm">
-                <div><div className="text-[#0B6E40] text-xs tracking-wider uppercase mb-1">{dn.bar.weekdays}</div>14:00 – 22:00</div>
-                <div><div className="text-[#0B6E40] text-xs tracking-wider uppercase mb-1">{dn.bar.weekends}</div>12:00 – 23:00</div>
+              <span className="eyebrow mb-5 !bg-white">{dn.bar.eyebrow}</span>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#13261A] leading-[1] mb-5">{dn.bar.title}</h2>
+              <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed max-w-xl">{dn.bar.desc}</p>
+            </div>
+            {/* opening hours */}
+            <div className="bg-white rounded-[1.5rem] p-5 sm:p-6">
+              <div className="flex items-center gap-2 text-[#0B6E40] text-xs font-bold tracking-[0.14em] uppercase mb-4">
+                <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M12 7v5l3 2" />
+                </svg>
+                {dn.bar.hours}
               </div>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {dn.bar.drinks.map((drink, i) => (
-                <div key={i} className="rounded-2xl border border-[#1E3A29]/12 p-4 text-[#1E3A29]/80 font-sans text-sm hover:border-[#C4622D]/30 hover:text-[#1E3A29]/80 transition-colors">
-                  {drink}
+              <dl className="grid grid-cols-2 gap-4">
+                <div>
+                  <dt className="text-[#1E3A29]/60 text-sm">{dn.bar.weekdays}</dt>
+                  <dd className="font-display text-xl sm:text-3xl font-extrabold text-[#1E3A29] tabular-nums whitespace-nowrap mt-1">14:00 – 22:00</dd>
                 </div>
-              ))}
+                <div>
+                  <dt className="text-[#1E3A29]/60 text-sm">{dn.bar.weekends}</dt>
+                  <dd className="font-display text-xl sm:text-3xl font-extrabold text-[#1E3A29] tabular-nums whitespace-nowrap mt-1">12:00 – 23:00</dd>
+                </div>
+              </dl>
             </div>
+          </div>
+
+          {/* the drinks: cultural ones and modern ones, each in its own card */}
+          <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
+            {([
+              { kind: dn.bar.cultural, accent: 'bg-[#C4622D]', mark: 'text-[#C4622D]' },
+              { kind: dn.bar.modern, accent: 'bg-[#0E8A50]', mark: 'text-[#0E8A50]' },
+            ] as const).map(({ kind, accent, mark }) => (
+              <div key={kind.title} className="bg-white rounded-[1.75rem] overflow-hidden elev-1">
+                <div className={`h-1.5 ${accent}`} />
+                <div className="p-6 sm:p-8">
+                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] tracking-tight">{kind.title}</h3>
+                  <p className="text-[#1E3A29]/65 text-sm sm:text-base mt-1.5 mb-5">{kind.desc}</p>
+                  <ul className="divide-y divide-[#1E3A29]/10">
+                    {kind.items.map((drink) => (
+                      <li key={drink} className="flex items-center gap-3 py-3.5 text-[#1E3A29] text-base sm:text-lg font-semibold">
+                        <span className={`text-xl leading-none ${mark}`} aria-hidden="true">•</span>
+                        {drink}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
