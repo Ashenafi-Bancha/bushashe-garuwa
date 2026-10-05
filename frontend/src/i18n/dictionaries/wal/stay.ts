@@ -22,6 +22,24 @@ const page: DeepPartial<Dictionary> = {
       // EN: Sleep where history breathes, in rooms that reflect the warmth and authenticity of Wolaita heritage.
       desc: "",
     },
+    comingSoon: {
+      // EN: Coming soon
+      badge: "",
+      // EN: The Guest House Is Opening Soon
+      title: "",
+      // EN: The rooms are being made ready. Send us a request now and we will call you as soon as the guest house opens.
+      text: "",
+      // EN: Send a Request
+      ask: "",
+    },
+    vip: {
+      // EN: VIP Room
+      eyebrow: "",
+      // EN: A Room With Its Own Sitting and Dining Room
+      title: "",
+      // EN: The VIP room has a bedroom with a carved wooden bed, and a separate room with sofas, a dining table, a kitchen counter and a fireplace.
+      desc: "",
+    },
     // EN: Amenities
     amenitiesLabel: "",
     // EN: View Details

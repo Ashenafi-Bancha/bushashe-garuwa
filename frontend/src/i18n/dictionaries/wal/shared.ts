@@ -111,7 +111,7 @@ const page: DeepPartial<Dictionary> = {
       experiences: "",
       // EN: Events
       events: "",
-      // EN: Stay
+      // EN: Guest House
       stay: "",
       // EN: Dine
       dine: "",

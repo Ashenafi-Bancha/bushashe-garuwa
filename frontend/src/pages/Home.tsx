@@ -393,6 +393,26 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             {/* what else is on the grounds */}
             <div className="mt-20 sm:mt-28">
               <Heading eyebrow={h.facilities.eyebrow} title={h.facilities.title} desc={h.facilities.desc} />
+              {/* two of them in photographs: the meeting hall, and the guest house that opens soon */}
+              <div className="grid md:grid-cols-2 gap-5 sm:gap-6 mb-10 sm:mb-14">
+                {([
+                  { key: 'meetingHall', item: h.facilities.items.meetingHall, to: '/contact', soon: false },
+                  { key: 'vipRoom', item: h.facilities.items.guesthouse, to: '/stay', soon: true },
+                ] as const).map(({ key, item, to, soon }) => (
+                  <Link key={key} to={to} data-reveal className="fade-section group block bg-white rounded-[2rem] p-2.5 elev-1">
+                    <div className="relative img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
+                      <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
+                      {soon && (
+                        <span className="absolute left-4 top-4 rounded-full bg-[#C4622D] text-white text-xs font-bold tracking-wider uppercase px-3.5 py-1.5">{t.stay.comingSoon.badge}</span>
+                      )}
+                    </div>
+                    <div className="px-4 py-5 sm:px-5">
+                      <h3 className="font-display text-2xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{item.title}</h3>
+                      <p className="text-[#1E3A29]/60 text-sm sm:text-base leading-relaxed">{item.desc}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
               <SwipeRow grid="md:grid-cols-2 lg:grid-cols-3" item="w-[70vw] sm:w-[46vw]" gap="gap-3 md:gap-x-10 md:gap-y-0">
                 {facilities.map((id, i) => {
                   const item = h.facilities.items[id];

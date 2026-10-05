@@ -26,6 +26,12 @@ const page: DeepPartial<Dictionary> = {
     gardens: "",
     // EN: Bushaashe Garuwa: open lawns, heritage tree and traditional house
     lawn: "",
+    // EN: The meeting hall at Bushaashe Garuwa: rows of chairs in white covers with bands of Wolaita pattern, under wood-panelled walls
+    meetingHall: "",
+    // EN: A VIP room in the guest house: a carved wooden bed with an embroidered white cover, and an armchair
+    vipRoom: "",
+    // EN: The sitting and dining room of a VIP room: sofas, a marble-topped table, a kitchen counter and a fireplace
+    vipDining: "",
     // EN: Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens
     home: "",
     // EN: Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture
@@ -119,6 +125,24 @@ const page: DeepPartial<Dictionary> = {
       // EN: The Great Lawn
       title: "",
       // EN: Open lawns and the great tree, with the traditional house in the distance.
+      desc: "",
+    },
+    meetingHall: {
+      // EN: The Meeting Hall
+      title: "",
+      // EN: Rows of chairs dressed in white with bands of Wolaita pattern, ready for a meeting or a training.
+      desc: "",
+    },
+    vipRoom: {
+      // EN: VIP Room
+      title: "",
+      // EN: A carved wooden bed with a hand-embroidered cover, in a VIP room of the guest house.
+      desc: "",
+    },
+    vipDining: {
+      // EN: VIP Sitting and Dining Room
+      title: "",
+      // EN: Sofas, a marble-topped table, a kitchen counter and a fireplace, in a VIP room of the guest house.
       desc: "",
     },
   },

@@ -31,6 +31,11 @@ import gifaataa1Img from './photos/events/gifaataa/gifaataa-01.webp';
 import gifaataa2Img from './photos/events/gifaataa/gifaataa-02.webp';
 import gifaataa3Img from './photos/events/gifaataa/gifaataa-03.webp';
 
+// meeting hall and guest house
+import meetingHallImg from './photos/meeting-hall/meeting-hall.webp';
+import vipRoomImg from './photos/vip-rooms/vip-room.webp';
+import vipDiningImg from './photos/vip-rooms/vip-dining-room.webp';
+
 export const photos = {
   /** The main gate: carved tree-trunk pillars, the welcome sign and the bamboo doors (landscape) */
   gate: gateImg,
@@ -58,6 +63,12 @@ export const photos = {
   gifaataa2: gifaataa2Img,
   /** Gifaataa — guests in traditional attire lined up on the grounds (landscape) */
   gifaataa3: gifaataa3Img,
+  /** Meeting hall: rows of chairs in white covers with Wolaita-pattern bands (landscape) */
+  meetingHall: meetingHallImg,
+  /** Guest house, VIP room: carved wooden bed with an embroidered cover (landscape) */
+  vipRoom: vipRoomImg,
+  /** Guest house, VIP room: sitting and dining room with sofas, table, kitchen counter and fireplace (landscape) */
+  vipDining: vipDiningImg,
 } as const;
 
 export type PhotoKey = keyof typeof photos;
