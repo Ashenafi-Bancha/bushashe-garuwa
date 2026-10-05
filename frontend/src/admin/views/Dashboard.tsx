@@ -30,7 +30,21 @@ const plural = (count: number, one: string, many: string) => `${count} ${count =
 
 export default function Dashboard() {
   const { token, email, signOut } = useAdminSession();
-  const [section, setSection] = useState<SectionId>('overview');
+  const [section, showSection] = useState<SectionId>('overview');
+  // the sections visited, so Back returns to the one before (or to the overview)
+  const [trail, setTrail] = useState<SectionId[]>([]);
+  const setSection = (next: SectionId) => {
+    if (next === section) return;
+    setTrail((visited) => [...visited, section]);
+    showSection(next);
+    window.scrollTo({ top: 0 });
+  };
+  const goBack = () => {
+    const previous = trail[trail.length - 1] ?? 'overview';
+    setTrail(trail.slice(0, -1));
+    showSection(previous === section ? 'overview' : previous);
+    window.scrollTo({ top: 0 });
+  };
   const [summary, setSummary] = useState<Summary | null>(null);
   const [error, setError] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -167,8 +181,9 @@ export default function Dashboard() {
             </button>
 
             <div className="min-w-0 flex-1">
-              <h1 className="font-display text-xl sm:text-2xl font-extrabold text-white leading-tight truncate">{heading.title}</h1>
-              <p className="text-white/65 text-xs sm:text-sm truncate">{heading.lead}</p>
+              <h1 className="font-display text-base sm:text-2xl font-extrabold text-white leading-tight">
+                Bushaashe Garuwa <span className="text-[#B9D38A]">Admin Dashboard</span>
+              </h1>
             </div>
 
             {/* the other sections have their own Refresh, beside their lists */}
@@ -186,6 +201,18 @@ export default function Dashboard() {
         </header>
 
         <main className="flex-1 w-full max-w-screen-xl mx-auto px-4 sm:px-8 py-6 sm:py-8">
+          {/* where you are: the way back, the page's name and what it is for */}
+          <div className="mb-6 sm:mb-8">
+            {section !== 'overview' && (
+              <button type="button" onClick={goBack} className="inline-flex admin-btn-quiet mb-4">
+                <Icon name="arrowLeft" className="w-4 h-4" />
+                Back
+              </button>
+            )}
+            <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-tight">{heading.title}</h2>
+            <p className="text-[#1E3A29]/60 text-sm sm:text-base mt-1">{heading.lead}</p>
+          </div>
+
           {error && (
             <div className="mb-6">
               <Notice kind="error">{error}</Notice>
