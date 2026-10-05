@@ -6,7 +6,7 @@ You only type Wolaytta text into prepared files.
 
 ## How it works
 
-- The website has about **835 lines of text**, split into **14 files, one per page**.
+- The website has about **835 lines of text**, split into **15 files, one per page**.
 - Each file shows the English line, and under it an empty place for the Wolaytta.
 - A line you have not translated yet simply shows in English on the site. Nothing breaks.
 - Visitors do not see Wolaytta until you publish it. Until then, choosing **WOL** on
@@ -27,7 +27,8 @@ frontend/src/i18n/dictionaries/wal/
 | 5 | `heritage.ts` | Heritage page | `/heritage` | 39 |
 | 6 | `experiences.ts` | Experiences page | `/experiences` | 67 |
 | 7 | `events.ts` | Events page | `/events` | 61 |
-| 8 | `stay.ts` | Stay page | `/stay` | 58 |
+| 8 | `vip.ts` | VIP Service page | `/vip` | 23 |
+| 8 | `stay.ts` | Guest House page (coming soon) | `/stay` | 60 |
 | 9 | `dine.ts` | Dine page | `/dine` | 49 |
 | 10 | `visit.ts` | Plan Your Visit page | `/visit` | 38 |
 | 11 | `contact.ts` | Contact page | `/contact` | 18 |
@@ -38,7 +39,7 @@ frontend/src/i18n/dictionaries/wal/
 Work in this order. `shared.ts` comes first because its words (menu, buttons)
 appear on every page, so it gives the biggest result for the least work.
 
-Do **not** edit `frontend/src/i18n/dictionaries/wal.ts`. It only joins the 14 files together.
+Do **not** edit `frontend/src/i18n/dictionaries/wal.ts`. It only joins those files together.
 
 ## How to translate a line
 
@@ -184,7 +185,7 @@ Sometimes new text is added to the website or an English line is reworded. Then 
 pnpm wolaytta:sync
 ```
 
-This rewrites the 14 files from the current English text. **Everything you have
+This rewrites the files from the current English text. **Everything you have
 already translated is kept.** New lines appear as empty `""` for you to fill in, and
 removed lines disappear. Afterwards, run `pnpm wolaytta` to see what is new.
 

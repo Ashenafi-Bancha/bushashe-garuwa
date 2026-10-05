@@ -113,6 +113,8 @@ const page: DeepPartial<Dictionary> = {
       events: "",
       // EN: Guest House
       stay: "",
+      // EN: VIP Service
+      vip: "",
       // EN: Dine
       dine: "",
       // EN: Visit
@@ -129,6 +131,8 @@ const page: DeepPartial<Dictionary> = {
       discover: "",
       // EN: Phone, email and a message form.
       contact: "",
+      // EN: Private rooms for a family: cook, eat, celebrate and stay.
+      vip: "",
     },
     // EN: Bushaashe Garuwa home
     homeAria: "",
@@ -215,7 +219,9 @@ const page: DeepPartial<Dictionary> = {
         // EN: Stay
         title: "",
         links: {
-          // EN: Guesthouse
+          // EN: VIP Service
+          vip: "",
+          // EN: Guesthouse (coming soon)
           guesthouse: "",
           // EN: Restaurant
           restaurant: "",

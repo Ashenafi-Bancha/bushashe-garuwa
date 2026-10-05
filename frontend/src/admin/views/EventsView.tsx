@@ -41,7 +41,7 @@ export default function EventsView() {
   };
 
   const remove = async (event: AdminEvent) => {
-    if (!confirm(`Remove "${event.translations.en.name}"? This cannot be undone.`)) return;
+    if (!confirm(`Delete "${event.translations.en.name}"? This cannot be undone.`)) return;
     setBusyId(event.id);
     try {
       await adminApi.deleteEvent(token, event.id);
@@ -165,7 +165,8 @@ export default function EventsView() {
                       Edit
                     </button>
                     <button type="button" disabled={busyId === event.id} onClick={() => remove(event)} className="inline-flex admin-btn-quiet danger">
-                      Remove
+                      <Icon name="trash" className="w-3.5 h-3.5" />
+                      Delete
                     </button>
                   </div>
                 </div>

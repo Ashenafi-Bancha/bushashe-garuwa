@@ -3,14 +3,14 @@ import { adminApi } from '../api/adminClient';
 import type { ContactMessage } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { useAdminList } from '../components/useAdminList';
-import { Notice, Pager, Panel, SearchBox, StatusSelect, formatDateTime, useDebounced } from '../components/ui';
+import { Notice, Pager, Panel, RowActions, SearchBox, StatusSelect, formatDateTime, useDebounced } from '../components/ui';
 
 /** Messages sent from the Contact page. */
 export default function MessagesView() {
   const { token } = useAdminSession();
   const [search, setSearch] = useState('');
   const query = useDebounced(search.trim());
-  const { page, setPage, data, error, loading, busyId, changeStatus } = useAdminList<ContactMessage>(
+  const { page, setPage, data, error, loading, busyId, changeStatus, act } = useAdminList<ContactMessage>(
     (p) => adminApi.messages(token, p, query),
     (id, status) => adminApi.setMessageStatus(token, id, status),
     [query],
@@ -28,13 +28,19 @@ export default function MessagesView() {
   );
   const nothing = query ? `Nothing matches "${query}".` : 'No messages yet.';
 
-  if (error) return <div className="space-y-4">{box}<Notice kind="error">{error}</Notice></div>;
+  const remove = (message: ContactMessage) => {
+    if (!confirm(`Delete the message from ${message.name}? This cannot be undone.`)) return;
+    void act(message.id, () => adminApi.deleteMessage(token, message.id), 'Could not delete the message');
+  };
+
+  if (error && !data) return <div className="space-y-4">{box}<Notice kind="error">{error}</Notice></div>;
   if (loading && !data) return <div className="space-y-4">{box}<Notice>Loading messages…</Notice></div>;
   if (data && data.total === 0) return <div className="space-y-4">{box}<Notice>{nothing}</Notice></div>;
 
   return (
     <div className="space-y-4">
     {box}
+    {error && <Notice kind="error">{error}</Notice>}
     <Panel>
       <ul className="divide-y divide-[#1E3A29]/10">
         {data?.items.map((message) => (
@@ -69,6 +75,8 @@ export default function MessagesView() {
             <div className="text-[11px] uppercase tracking-wider text-[#1E3A29]/35 mt-2">
               Written in {message.language}
             </div>
+            {/* a visitor's own words are kept as written: a message can be deleted, not rewritten */}
+            <RowActions busy={busyId === message.id} onDelete={() => remove(message)} />
           </li>
         ))}
       </ul>

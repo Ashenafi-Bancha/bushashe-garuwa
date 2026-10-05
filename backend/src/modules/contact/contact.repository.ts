@@ -73,6 +73,10 @@ export function contactRepository(db: Queryable) {
       );
       return row && toMessage(row);
     },
+
+    async remove(id: number): Promise<boolean> {
+      return (await db.execute('DELETE FROM contact_messages WHERE id = $1', [id])) > 0;
+    },
   };
 }
 export type ContactRepository = ReturnType<typeof contactRepository>;

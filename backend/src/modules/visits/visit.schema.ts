@@ -42,6 +42,24 @@ export type CreateVisitRequest = z.infer<typeof CreateVisitRequest>;
 
 export const UpdateVisitStatus = z.object({ status: RequestStatus });
 
+/**
+ * Body of PUT /api/v1/visits/:id: staff correcting a request after a phone call
+ * (a new date, a different number of guests, a note). The date may be in the
+ * past, so an old request can still be put right.
+ */
+export const UpdateVisitRequest = z.object({
+  name: text(120),
+  phone: Phone,
+  email: z.union([Email, z.literal('')]).optional().transform((value) => value || undefined),
+  date: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Use the format YYYY-MM-DD')
+    .refine((value) => !Number.isNaN(Date.parse(value)), 'Enter a real date'),
+  visitors: GroupSize,
+  message: optionalText(3000),
+});
+export type UpdateVisitRequest = z.infer<typeof UpdateVisitRequest>;
+
 export type VisitRequest = {
   id: number;
   name: string;

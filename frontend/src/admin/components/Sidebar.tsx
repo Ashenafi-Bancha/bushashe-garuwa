@@ -105,7 +105,7 @@ export default function Sidebar({
           <Icon name="external" />
           View the website
         </a>
-        <button type="button" onClick={onSignOut} className={`${ITEM} text-left ${QUIET}`}>
+        <button type="button" onClick={onSignOut} className={`${ITEM} text-left text-[#C62828] hover:bg-[#C62828]/8 hover:text-[#A31F1F]`}>
           <Icon name="signOut" />
           Sign out
         </button>

@@ -3,8 +3,9 @@ import { ApiError } from '../../lib/api';
 import type { Page } from '../api/types';
 
 /**
- * Loads one page of a staff list and keeps it in step with status changes.
- * Both list views (messages and visit requests) work the same way, so they share this.
+ * Loads one page of a staff list and keeps it in step with status changes,
+ * edits and deletions. The list views (visit requests, bookings, messages) work
+ * the same way, so they share this.
  */
 export function useAdminList<T extends { id: number; status: S }, S extends string = T['status']>(
   load: (page: number) => Promise<Page<T>>,
@@ -49,5 +50,24 @@ export function useAdminList<T extends { id: number; status: S }, S extends stri
     }
   };
 
-  return { page, setPage, data, error, loading, busyId, refresh, changeStatus };
+  /**
+   * Runs an edit or a deletion on one row, then loads the list again.
+   * Returns true when it went through, so a form knows it may close.
+   */
+  const act = async (id: number, action: () => Promise<unknown>, failed: string): Promise<boolean> => {
+    setBusyId(id);
+    setError('');
+    try {
+      await action();
+      await refresh();
+      return true;
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : failed);
+      return false;
+    } finally {
+      setBusyId(null);
+    }
+  };
+
+  return { page, setPage, data, error, loading, busyId, refresh, changeStatus, act };
 }

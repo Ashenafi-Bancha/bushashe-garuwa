@@ -222,6 +222,19 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   .sticky-book:hover { background: #0B7A45; }
 }
 
+/* ── "Coming soon", said large and bright (the guest house, which is not open yet) ── */
+.coming-soon-panel {
+  background: #FFF4E6;
+  border: 2px dashed rgba(224, 90, 26, 0.55);
+}
+.coming-soon-word {
+  display: block;
+  color: #E05A1A;
+  font-size: clamp(2.6rem, 9vw, 6rem);
+  letter-spacing: -0.02em;
+}
+html:lang(am) .coming-soon-word { letter-spacing: 0; font-size: clamp(2.2rem, 7.5vw, 5rem); line-height: 1.2; }
+
 /* ── Markers laid over the 3D scenes (src/three) ── */
 /* a round marker on the 3D house: a white ring with a green heart */
 .hotspot {
@@ -686,7 +699,9 @@ html.lenis, html.lenis body { height: auto; }
   transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
 }
 .admin-btn-quiet:hover:not(:disabled) { border-color: rgba(30, 58, 41, 0.5); }
-.admin-btn-quiet.danger:hover:not(:disabled) { border-color: #C4622D; color: #9A4A20; }
+/* deleting is red, so it is never mistaken for an ordinary button */
+.admin-btn-quiet.danger { color: #C62828; border-color: rgba(198, 40, 40, 0.4); }
+.admin-btn-quiet.danger:hover:not(:disabled) { background: #C62828; border-color: #C62828; color: #fff; }
 .admin-btn-quiet:disabled { opacity: 0.4; }
 .admin-btn-quiet.on-dark {
   background: rgba(255, 255, 255, 0.08);

@@ -7,6 +7,7 @@ import discover from './wal/discover';
 import heritage from './wal/heritage';
 import experiences from './wal/experiences';
 import events from './wal/events';
+import vip from './wal/vip';
 import stay from './wal/stay';
 import dine from './wal/dine';
 import visit from './wal/visit';
@@ -35,6 +36,7 @@ export const wal: DeepPartial<Dictionary> = {
   ...heritage,
   ...experiences,
   ...events,
+  ...vip,
   ...stay,
   ...dine,
   ...visit,

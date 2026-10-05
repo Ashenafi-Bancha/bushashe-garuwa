@@ -5,7 +5,7 @@ import { PaginationQuery, SearchQuery } from '../../http/pagination.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
-import { CreateVisitRequest, UpdateVisitStatus } from './visit.schema.js';
+import { CreateVisitRequest, UpdateVisitRequest, UpdateVisitStatus } from './visit.schema.js';
 import type { VisitService } from './visit.service.js';
 
 const ListQuery = PaginationQuery.extend({
@@ -20,6 +20,8 @@ const ListQuery = PaginationQuery.extend({
  * POST  /visits              public: the Plan Your Visit form
  * GET   /visits              staff: list requests (?page, ?pageSize, ?upcoming=true)
  * PATCH /visits/:id/status   staff: mark as in_progress / done / archived
+ * PUT   /visits/:id          staff: correct the details
+ * DELETE /visits/:id         staff: delete the request for good
  */
 export function visitRoutes(service: VisitService, guards: Guards) {
   const router = Router();
@@ -36,6 +38,15 @@ export function visitRoutes(service: VisitService, guards: Guards) {
 
   router.patch('/:id/status', ...guards.admin, validateBody(UpdateVisitStatus), async (req, res) => {
     sendData(res, await service.setStatus(parseId(req.params.id), req.body.status));
+  });
+
+  router.put('/:id', ...guards.admin, validateBody(UpdateVisitRequest), async (req, res) => {
+    sendData(res, await service.update(parseId(req.params.id), req.body));
+  });
+
+  router.delete('/:id', ...guards.admin, async (req, res) => {
+    await service.remove(parseId(req.params.id));
+    sendData(res, { removed: true });
   });
 
   return router;

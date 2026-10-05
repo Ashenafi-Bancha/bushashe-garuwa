@@ -28,6 +28,11 @@ export function contactService(repo: ContactRepository, notify?: Notifier) {
       if (!updated) throw HttpError.notFound('Message not found');
       return updated;
     },
+
+    async remove(id: number) {
+      if (!(await repo.remove(id))) throw HttpError.notFound('Message not found');
+      logger.info('contact: message deleted by staff', { id });
+    },
   };
 }
 export type ContactService = ReturnType<typeof contactService>;

@@ -33,7 +33,7 @@ export default function GalleryView() {
   };
 
   const remove = (photo: MediaImage) => {
-    if (!confirm(`Remove "${photo.translations.en.title || 'this photo'}" from the gallery? This cannot be undone.`)) return;
+    if (!confirm(`Delete "${photo.translations.en.title || 'this photo'}" from the gallery? This cannot be undone.`)) return;
     setStatus('');
     void library.remove(photo.id);
   };
@@ -135,7 +135,7 @@ export default function GalleryView() {
                     </button>
                     <button type="button" disabled={library.busyId === photo.id} onClick={() => remove(photo)} className="inline-flex admin-btn-quiet danger ml-auto">
                       <Icon name="trash" className="w-3.5 h-3.5" />
-                      Remove
+                      Delete
                     </button>
                   </div>
                 </div>

@@ -5,7 +5,7 @@ import { PaginationQuery, SearchQuery } from '../../http/pagination.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
-import { BookingStatus, CreateBooking, UpdateBookingStatus } from './booking.schema.js';
+import { BookingStatus, CreateBooking, UpdateBooking, UpdateBookingStatus } from './booking.schema.js';
 import type { BookingService } from './booking.service.js';
 import { SaveEvent } from './event.schema.js';
 import type { EventService } from './event.service.js';
@@ -38,6 +38,15 @@ export function eventRoutes(service: EventService, bookings: BookingService, gua
 
   router.patch('/admin/bookings/:id/status', ...guards.admin, validateBody(UpdateBookingStatus), async (req, res) => {
     sendData(res, await bookings.setStatus(parseId(req.params.id), req.body.status));
+  });
+
+  router.put('/admin/bookings/:id', ...guards.admin, validateBody(UpdateBooking), async (req, res) => {
+    sendData(res, await bookings.update(parseId(req.params.id), req.body));
+  });
+
+  router.delete('/admin/bookings/:id', ...guards.admin, async (req, res) => {
+    await bookings.remove(parseId(req.params.id));
+    sendData(res, { removed: true });
   });
 
   router.post('/:id/bookings', ...guards.form, validateBody(CreateBooking), async (req, res) => {

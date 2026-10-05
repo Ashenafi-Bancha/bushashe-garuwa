@@ -280,6 +280,69 @@ describe('staff search and the handled-today count', () => {
   });
 });
 
+describe('staff editing and deleting requests', () => {
+  it('corrects a visit request and deletes it', async () => {
+    await post('/v1/visits', { name: 'Dawit Alemu', phone: '+251 911 22 33 44', date: inTwoWeeks, visitors: '2', experiences: ['heritage'], language: 'en' });
+    const list = await read(await staff('/v1/visits?q=Dawit'));
+    const visit = list.data.items[0];
+
+    const changed = await read(
+      await staff(`/v1/visits/${visit.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ name: 'Dawit Alemu', phone: '+251 911 22 33 44', email: '', date: inTwoWeeks, visitors: '6–10', message: 'Called: coming with the family.' }),
+      }),
+    );
+    assert.equal(changed.data.visitors, '6–10');
+    assert.equal(changed.data.message, 'Called: coming with the family.');
+    assert.equal(changed.data.status, visit.status, 'editing does not change where the request stands');
+
+    const bad = await staff(`/v1/visits/${visit.id}`, { method: 'PUT', body: JSON.stringify({ name: '', phone: 'x', date: 'soon', visitors: '99' }) });
+    assert.equal(bad.status, 400);
+    assert.equal((await fetch(base + `/v1/visits/${visit.id}`, { method: 'DELETE' })).status, 401, 'only staff may delete');
+
+    assert.equal((await staff(`/v1/visits/${visit.id}`, { method: 'DELETE' })).status, 200);
+    assert.equal((await staff(`/v1/visits/${visit.id}`, { method: 'DELETE' })).status, 404);
+    assert.equal((await read(await staff('/v1/visits?q=Dawit'))).data.total, 0);
+  });
+
+  it('deletes a message', async () => {
+    await post('/v1/contact', { name: 'Hana Tesfaye', email: 'hana@example.com', message: 'Please delete me.', language: 'en' });
+    const message = (await read(await staff('/v1/contact?q=Hana'))).data.items[0];
+    assert.equal((await staff(`/v1/contact/${message.id}`, { method: 'DELETE' })).status, 200);
+    assert.equal((await staff(`/v1/contact/${message.id}`, { method: 'DELETE' })).status, 404);
+    assert.equal((await read(await staff('/v1/contact?q=Hana'))).data.total, 0);
+  });
+
+  it('corrects a booking within the room the event has, and deletes it', async () => {
+    const small = await read(
+      await staff('/v1/events/admin', { method: 'POST', body: JSON.stringify({ ...culturalFood, capacity: 6, translations: { en: { name: 'Small evening' } } }) }),
+    );
+    const eventId = small.data.id;
+    await post(`/v1/events/${eventId}/bookings`, { name: 'First Guest', phone: '+251 911 55 00 01', guests: 2, language: 'en' });
+    await post(`/v1/events/${eventId}/bookings`, { name: 'Second Guest', phone: '+251 911 55 00 02', guests: 3, language: 'en' });
+    const bookings = (await read(await staff(`/v1/events/admin/bookings?eventId=${eventId}`))).data.items;
+    const first = bookings.find((b: any) => b.name === 'First Guest');
+    const edit = (guests: number) =>
+      staff(`/v1/events/admin/bookings/${first.id}`, { method: 'PUT', body: JSON.stringify({ name: 'First Guest', phone: '+251 911 55 00 01', guests, message: 'Edited by staff' }) });
+
+    const tooMany = await edit(4);
+    assert.equal(tooMany.status, 409, 'six places, three taken by the other booking');
+    assert.equal((await read(tooMany)).error.details.placesLeft, 3);
+
+    const changed = await read(await edit(3));
+    assert.equal(changed.data.guests, 3);
+    assert.equal(changed.data.message, 'Edited by staff');
+    assert.equal(changed.data.reference, first.reference, 'the booking number stays');
+    assert.equal((await read(await fetch(base + '/v1/events'))).data.items.find((e: any) => e.id === eventId).placesLeft, 0);
+
+    assert.equal((await staff(`/v1/events/admin/bookings/${first.id}`, { method: 'DELETE' })).status, 200);
+    assert.equal((await staff(`/v1/events/admin/bookings/${first.id}`, { method: 'DELETE' })).status, 404);
+    assert.equal((await read(await fetch(base + '/v1/events'))).data.items.find((e: any) => e.id === eventId).placesLeft, 3, 'the places go back');
+
+    await staff(`/v1/events/admin/${eventId}`, { method: 'DELETE' });
+  });
+});
+
 describe('emails', () => {
   const settle = () => new Promise((resolve) => setTimeout(resolve, 30));
 

@@ -3,7 +3,7 @@ import { HttpError } from '../../http/http-error.js';
 import type { Pagination } from '../../http/pagination.js';
 import { logger } from '../../lib/logger.js';
 import type { BookingRepository } from './booking.repository.js';
-import type { BookingStatus, CreateBooking } from './booking.schema.js';
+import type { BookingStatus, CreateBooking, UpdateBooking } from './booking.schema.js';
 import type { EventRepository } from './event.repository.js';
 import type { EventRecord } from './event.schema.js';
 import type { Notifier } from '../notifications/notifier.js';
@@ -96,6 +96,25 @@ export function bookingService(bookings: BookingRepository, events: EventReposit
         if (event) notify?.bookingConfirmed(updated, event);
       }
       return updated;
+    },
+
+    /** Staff correct a booking; more guests only while the event has room */
+    async update(id: number, input: UpdateBooking) {
+      const result = await bookings.update(id, input);
+      if (result.kind === 'gone') throw HttpError.notFound('Booking not found');
+      if (result.kind === 'no_room') {
+        const left = result.placesLeft;
+        throw new HttpError(409, 'not_enough_places', `This event has room for ${left} ${left === 1 ? 'guest' : 'guests'} in this booking at most`, {
+          placesLeft: left,
+        });
+      }
+      logger.info('bookings: edited by staff', { id, reference: result.booking.reference });
+      return result.booking;
+    },
+
+    async remove(id: number) {
+      if (!(await bookings.remove(id))) throw HttpError.notFound('Booking not found');
+      logger.info('bookings: deleted by staff', { id });
     },
 
     findByReference: (reference: string) => bookings.findByReference(reference.trim().toUpperCase()),

@@ -201,7 +201,7 @@ export default function HeroView() {
                     Finish
                   </button>
                   <button type="button" disabled={library.busyId === photo.id} onClick={() => void library.remove(photo.id)} className="inline-flex admin-btn-quiet danger !py-1.5">
-                    Remove
+                    Delete
                   </button>
                 </div>
               ))}

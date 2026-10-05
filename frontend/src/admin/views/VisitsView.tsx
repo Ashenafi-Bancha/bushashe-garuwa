@@ -3,7 +3,10 @@ import { adminApi } from '../api/adminClient';
 import type { VisitRequest } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { useAdminList } from '../components/useAdminList';
-import { Notice, Pager, Panel, SearchBox, StatusSelect, formatDate, formatDateTime, useDebounced } from '../components/ui';
+import { EditButtons, EditField, Notice, Pager, Panel, RowActions, SearchBox, StatusSelect, formatDate, formatDateTime, useDebounced } from '../components/ui';
+
+const GROUP_SIZES = ['1', '2', '3–5', '6–10', '11–20', '21–50', '50+'];
+type Draft = { id: number; name: string; phone: string; email: string; date: string; visitors: string; message: string };
 
 /** Requests sent from the Plan Your Visit page. */
 export default function VisitsView() {
@@ -11,11 +14,24 @@ export default function VisitsView() {
   const [upcomingOnly, setUpcomingOnly] = useState(true);
   const [search, setSearch] = useState('');
   const query = useDebounced(search.trim());
-  const { page, setPage, data, error, loading, busyId, changeStatus } = useAdminList<VisitRequest>(
+  const [draft, setDraft] = useState<Draft | null>(null);
+  const { page, setPage, data, error, loading, busyId, changeStatus, act } = useAdminList<VisitRequest>(
     (p) => adminApi.visits(token, p, { upcoming: upcomingOnly, search: query }),
     (id, status) => adminApi.setVisitStatus(token, id, status),
     [upcomingOnly, query],
   );
+
+  const save = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!draft) return;
+    const { id, ...values } = draft;
+    if (await act(id, () => adminApi.updateVisit(token, id, values), 'Could not save the changes')) setDraft(null);
+  };
+
+  const remove = (visit: VisitRequest) => {
+    if (!confirm(`Delete the visit request from ${visit.name}? This cannot be undone.`)) return;
+    void act(visit.id, () => adminApi.deleteVisit(token, visit.id), 'Could not delete the request');
+  };
 
   return (
     <div className="space-y-4">
@@ -100,6 +116,44 @@ export default function VisitsView() {
                 )}
 
                 {visit.message && <p className="text-[#1E3A29]/75 leading-relaxed whitespace-pre-line">{visit.message}</p>}
+
+                {draft?.id === visit.id ? (
+                  <form onSubmit={save} className="mt-4 rounded-2xl bg-[#F4EFE4] p-4 sm:p-5 space-y-3">
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      <EditField label="Name">
+                        <input required value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} className="admin-field" />
+                      </EditField>
+                      <EditField label="Phone">
+                        <input required type="tel" value={draft.phone} onChange={(e) => setDraft({ ...draft, phone: e.target.value })} className="admin-field" />
+                      </EditField>
+                      <EditField label="Email">
+                        <input type="email" value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} className="admin-field" />
+                      </EditField>
+                      <EditField label="Visit date">
+                        <input required type="date" value={draft.date} onChange={(e) => setDraft({ ...draft, date: e.target.value })} className="admin-field" />
+                      </EditField>
+                      <EditField label="Guests">
+                        <select value={draft.visitors} onChange={(e) => setDraft({ ...draft, visitors: e.target.value })} className="admin-field">
+                          {GROUP_SIZES.map((size) => (
+                            <option key={size} value={size}>{size}</option>
+                          ))}
+                        </select>
+                      </EditField>
+                    </div>
+                    <EditField label="Note">
+                      <textarea rows={3} value={draft.message} onChange={(e) => setDraft({ ...draft, message: e.target.value })} className="admin-field resize-y" />
+                    </EditField>
+                    <EditButtons busy={busyId === visit.id} onCancel={() => setDraft(null)} />
+                  </form>
+                ) : (
+                  <RowActions
+                    busy={busyId === visit.id}
+                    onEdit={() =>
+                      setDraft({ id: visit.id, name: visit.name, phone: visit.phone, email: visit.email ?? '', date: visit.date, visitors: visit.visitors, message: visit.message ?? '' })
+                    }
+                    onDelete={() => remove(visit)}
+                  />
+                )}
               </li>
             ))}
           </ul>

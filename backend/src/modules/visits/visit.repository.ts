@@ -2,7 +2,7 @@ import type { Queryable } from '../../db/database.js';
 import { TODAY, dayOf } from '../../db/sql.js';
 import type { Page, Pagination } from '../../http/pagination.js';
 import type { RequestStatus } from '../shared/schemas.js';
-import type { CreateVisitRequest, VisitRequest } from './visit.schema.js';
+import type { CreateVisitRequest, UpdateVisitRequest, VisitRequest } from './visit.schema.js';
 
 type Row = {
   id: number;
@@ -93,6 +93,21 @@ export function visitRepository(db: Queryable) {
         [status, id],
       );
       return row && toVisit(row);
+    },
+
+    /** Staff corrections: who, when, how many, and the note */
+    async update(id: number, input: UpdateVisitRequest): Promise<VisitRequest | undefined> {
+      const [row] = await db.query<Row>(
+        `UPDATE visit_requests
+            SET name = $1, phone = $2, email = $3, visit_date = $4, visitors = $5, message = $6
+          WHERE id = $7 RETURNING *`,
+        [input.name, input.phone, input.email ?? null, input.date, input.visitors, input.message ?? null, id],
+      );
+      return row && toVisit(row);
+    },
+
+    async remove(id: number): Promise<boolean> {
+      return (await db.execute('DELETE FROM visit_requests WHERE id = $1', [id])) > 0;
     },
   };
 }

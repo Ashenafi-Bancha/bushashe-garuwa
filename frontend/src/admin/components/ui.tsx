@@ -216,3 +216,45 @@ export function useDebounced<T>(value: T, delay = 300): T {
   }, [value, delay]);
   return settled;
 }
+
+/** The pair of buttons at the foot of a row: Edit (when the row can be edited) and Delete, in red */
+export function RowActions({ onEdit, onDelete, busy = false }: { onEdit?: () => void; onDelete: () => void; busy?: boolean }) {
+  return (
+    <div className="flex flex-wrap gap-2 mt-4">
+      {onEdit && (
+        <button type="button" disabled={busy} onClick={onEdit} className="inline-flex admin-btn-quiet">
+          <Icon name="pencil" className="w-3.5 h-3.5" />
+          Edit
+        </button>
+      )}
+      <button type="button" disabled={busy} onClick={onDelete} className="inline-flex admin-btn-quiet danger">
+        <Icon name="trash" className="w-3.5 h-3.5" />
+        Delete
+      </button>
+    </div>
+  );
+}
+
+/** One labelled field of a small edit form inside a row */
+export function EditField({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <label className="block">
+      <span className="block text-[#1E3A29]/65 text-[11px] font-bold tracking-[0.12em] uppercase mb-1.5">{label}</span>
+      {children}
+    </label>
+  );
+}
+
+/** Save and Cancel under a small edit form */
+export function EditButtons({ busy, onCancel }: { busy: boolean; onCancel: () => void }) {
+  return (
+    <div className="flex flex-wrap gap-2 pt-1">
+      <button type="submit" disabled={busy} className="admin-btn">
+        {busy ? 'Saving…' : 'Save changes'}
+      </button>
+      <button type="button" disabled={busy} onClick={onCancel} className="inline-flex admin-btn-quiet">
+        Cancel
+      </button>
+    </div>
+  );
+}

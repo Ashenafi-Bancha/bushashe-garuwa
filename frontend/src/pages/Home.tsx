@@ -38,7 +38,7 @@ const experiences = [
   { id: 'photography', img: photos.gardens, to: '/experiences' },
 ] as const;
 
-const facilities = ['meetingHall', 'zoo', 'pool', 'orchard', 'horses', 'crocodile', 'fish', 'guesthouse', 'restaurant'] as const;
+const facilities = ['meetingHall', 'vip', 'zoo', 'pool', 'orchard', 'horses', 'crocodile', 'fish', 'restaurant', 'guesthouse'] as const;
 
 /* ── Section heading: label, a large title, an optional line and action ── */
 function Heading({ eyebrow, title, desc, center = false, action, dark = false }: {
@@ -366,7 +366,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <SwipeRow grid="md:grid-cols-2" item="w-[84vw] sm:w-[64vw]">
               {[
-                { to: '/stay', eyebrow: h.stay.eyebrow, title: h.stay.title, desc: h.stay.desc, cta: h.stay.cta, photo: photos.vipDining as string | undefined, chips: [t.stay.comingSoon.badge] },
+                { to: '/vip', eyebrow: t.vip.hero.eyebrow, title: t.vip.hero.title, desc: t.vip.hero.desc, cta: t.common.learnMore, photo: photos.vipDining as string | undefined, chips: [t.vip.features.kitchen.title, t.vip.features.fire.title, t.vip.features.rooms.title] },
                 { to: '/dine', eyebrow: h.restaurant.eyebrow, title: h.restaurant.title, desc: h.restaurant.desc, cta: h.restaurant.cta, photo: photos.food, chips: h.restaurant.categories },
               ].map((card, i) => (
                 <div key={card.to} data-reveal className="fade-section h-full" style={{ transitionDelay: `${i * 100}ms` }}>
@@ -393,25 +393,22 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             {/* what else is on the grounds */}
             <div className="mt-20 sm:mt-28">
               <Heading eyebrow={h.facilities.eyebrow} title={h.facilities.title} desc={h.facilities.desc} />
-              {/* two of them in photographs: the meeting hall, and the guest house that opens soon */}
+              {/* the meeting hall in a photograph, and beside it the guest house: not open yet, said large and bright */}
               <div className="grid md:grid-cols-2 gap-5 sm:gap-6 mb-10 sm:mb-14">
-                {([
-                  { key: 'meetingHall', item: h.facilities.items.meetingHall, to: '/contact', soon: false },
-                  { key: 'vipRoom', item: h.facilities.items.guesthouse, to: '/stay', soon: true },
-                ] as const).map(({ key, item, to, soon }) => (
-                  <Link key={key} to={to} data-reveal className="fade-section group block bg-white rounded-[2rem] p-2.5 elev-1">
-                    <div className="relative img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
-                      <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
-                      {soon && (
-                        <span className="absolute left-4 top-4 rounded-full bg-[#C4622D] text-white text-xs font-bold tracking-wider uppercase px-3.5 py-1.5">{t.stay.comingSoon.badge}</span>
-                      )}
-                    </div>
-                    <div className="px-4 py-5 sm:px-5">
-                      <h3 className="font-display text-2xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{item.title}</h3>
-                      <p className="text-[#1E3A29]/60 text-sm sm:text-base leading-relaxed">{item.desc}</p>
-                    </div>
-                  </Link>
-                ))}
+                <Link to="/contact" data-reveal className="fade-section group block bg-white rounded-[2rem] p-2.5 elev-1">
+                  <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
+                    <img {...picture(photos.meetingHall, '(max-width: 767px) 100vw, 50vw')} alt={t.photos.meetingHall} loading="lazy" className="w-full h-full object-cover" />
+                  </div>
+                  <div className="px-4 py-5 sm:px-5">
+                    <h3 className="font-display text-2xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{h.facilities.items.meetingHall.title}</h3>
+                    <p className="text-[#1E3A29]/60 text-sm sm:text-base leading-relaxed">{h.facilities.items.meetingHall.desc}</p>
+                  </div>
+                </Link>
+                <Link to="/stay" data-reveal className="fade-section coming-soon-panel flex flex-col items-center justify-center text-center rounded-[2rem] px-6 py-12">
+                  <span className="font-display text-xl sm:text-2xl font-bold text-[#13261A] mb-3">{h.facilities.items.guesthouse.title}</span>
+                  <span className="coming-soon-word font-display font-extrabold uppercase leading-[0.95]">{t.stay.comingSoon.badge}</span>
+                  <span className="text-[#1E3A29]/75 text-sm sm:text-base leading-relaxed max-w-sm mt-5">{t.stay.comingSoon.lead}</span>
+                </Link>
               </div>
               <SwipeRow grid="md:grid-cols-2 lg:grid-cols-3" item="w-[70vw] sm:w-[46vw]" gap="gap-3 md:gap-x-10 md:gap-y-0">
                 {facilities.map((id, i) => {

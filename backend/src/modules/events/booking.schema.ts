@@ -33,6 +33,19 @@ export type CreateBooking = z.infer<typeof CreateBooking>;
 
 export const UpdateBookingStatus = z.object({ status: BookingStatus });
 
+/** Body of PUT /api/v1/events/admin/bookings/:id: staff correcting a booking after a phone call */
+export const UpdateBooking = z.object({
+  name: text(120),
+  phone: Phone,
+  email: z
+    .union([Email, z.literal('')])
+    .optional()
+    .transform((value) => value || undefined),
+  guests: z.coerce.number().int().min(1, 'At least one guest').max(200, 'At most 200 guests'),
+  message: optionalText(2000),
+});
+export type UpdateBooking = z.infer<typeof UpdateBooking>;
+
 export type Booking = {
   id: number;
   eventId: number;

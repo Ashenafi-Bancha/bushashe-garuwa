@@ -28,9 +28,9 @@ const page: DeepPartial<Dictionary> = {
     lawn: "",
     // EN: The meeting hall at Bushaashe Garuwa: rows of chairs in white covers with bands of Wolaita pattern, under wood-panelled walls
     meetingHall: "",
-    // EN: A VIP room in the guest house: a carved wooden bed with an embroidered white cover, and an armchair
+    // EN: A VIP room for sleeping: a carved wooden bed with an embroidered white cover, and an armchair
     vipRoom: "",
-    // EN: The sitting and dining room of a VIP room: sofas, a marble-topped table, a kitchen counter and a fireplace
+    // EN: The VIP sitting and dining room: sofas, a marble-topped table, a kitchen counter and a fireplace
     vipDining: "",
     // EN: Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens
     home: "",
@@ -134,15 +134,15 @@ const page: DeepPartial<Dictionary> = {
       desc: "",
     },
     vipRoom: {
-      // EN: VIP Room
+      // EN: VIP Room for Sleeping
       title: "",
-      // EN: A carved wooden bed with a hand-embroidered cover, in a VIP room of the guest house.
+      // EN: A carved wooden bed with a hand-embroidered cover.
       desc: "",
     },
     vipDining: {
       // EN: VIP Sitting and Dining Room
       title: "",
-      // EN: Sofas, a marble-topped table, a kitchen counter and a fireplace, in a VIP room of the guest house.
+      // EN: Sofas, a marble-topped table, the kitchen counter and the fireplace.
       desc: "",
     },
   },

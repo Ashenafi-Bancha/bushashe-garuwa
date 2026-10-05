@@ -2,7 +2,7 @@ import type { Dictionary } from '../en';
 import type { DeepPartial } from '../../types';
 
 /**
- * WOLAYTTATTO · Stay page
+ * WOLAYTTATTO · Guest House page (coming soon)
  * See it on the site: /stay
  *
  * Under each "// EN:" line, type the Wolaytta between the two quotation marks.
@@ -35,14 +35,10 @@ const page: DeepPartial<Dictionary> = {
       askTitle: "",
       // EN: Call or write to us and we will gladly tell you more.
       askText: "",
-    },
-    vip: {
-      // EN: A First Look
-      eyebrow: "",
-      // EN: The VIP Room
-      title: "",
-      // EN: The VIP room has a bedroom with a carved wooden bed, and a separate room with sofas, a dining table, a kitchen counter and a fireplace.
-      desc: "",
+      // EN: Open Now: the VIP Service
+      vipTitle: "",
+      // EN: Families can already come to the VIP rooms to cook, eat, celebrate and stay the night.
+      vipText: "",
     },
     // EN: Amenities
     amenitiesLabel: "",

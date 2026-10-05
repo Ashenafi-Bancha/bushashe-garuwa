@@ -12,6 +12,7 @@ import type { ContactService } from './contact.service.js';
  * POST  /contact              public: the Contact page form
  * GET   /contact              staff: list messages (?page, ?pageSize, ?q to search)
  * PATCH /contact/:id/status   staff: mark as in_progress / done / archived
+ * DELETE /contact/:id         staff: delete the message for good
  */
 const ListQuery = PaginationQuery.extend({ q: SearchQuery });
 
@@ -30,6 +31,11 @@ export function contactRoutes(service: ContactService, guards: Guards) {
 
   router.patch('/:id/status', ...guards.admin, validateBody(UpdateContactStatus), async (req, res) => {
     sendData(res, await service.setStatus(parseId(req.params.id), req.body.status));
+  });
+
+  router.delete('/:id', ...guards.admin, async (req, res) => {
+    await service.remove(parseId(req.params.id));
+    sendData(res, { removed: true });
   });
 
   return router;

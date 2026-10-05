@@ -169,6 +169,38 @@ export function bookingRepository(db: Database) {
       return row && toBooking(row);
     },
 
+    /**
+     * Staff corrections to a booking. More guests are only taken while the
+     * event has room for them; the check and the change happen together, with
+     * the event's row locked, exactly as when a place is first reserved.
+     */
+    async update(
+      id: number,
+      input: { name: string; phone: string; email?: string; guests: number; message?: string },
+    ): Promise<{ kind: 'gone' } | { kind: 'no_room'; placesLeft: number } | { kind: 'updated'; booking: Booking }> {
+      return db.transaction(async (tx) => {
+        const [current] = await tx.query<Row>('SELECT * FROM event_bookings WHERE id = $1', [id]);
+        if (!current) return { kind: 'gone' as const };
+        const [event] = await tx.query<{ capacity: number | null }>('SELECT capacity FROM events WHERE id = $1 FOR UPDATE', [current.event_id]);
+        // a cancelled booking holds no places, so its number can be anything
+        if (event && event.capacity !== null && current.status !== 'cancelled' && input.guests > current.guests) {
+          const others = (await guestsHeld(tx, current.event_id)) - current.guests;
+          const left = Math.max(0, event.capacity - others);
+          if (input.guests > left) return { kind: 'no_room' as const, placesLeft: left };
+        }
+        const [row] = await tx.query<Row>(
+          `UPDATE event_bookings SET name = $1, phone = $2, email = $3, guests = $4, message = $5 WHERE id = $6 RETURNING *`,
+          [input.name, input.phone, input.email ?? null, input.guests, input.message ?? null, id],
+        );
+        return { kind: 'updated' as const, booking: toBooking(row!) };
+      });
+    },
+
+    /** Deleting a booking for good; its places go back to the event */
+    async remove(id: number): Promise<boolean> {
+      return (await db.execute('DELETE FROM event_bookings WHERE id = $1', [id])) > 0;
+    },
+
     guestsForEvent: (eventId: number) => guestsHeld(db, eventId),
 
     async stats(): Promise<{ total: number; pending: number; guestsUpcoming: number; handledToday: number }> {

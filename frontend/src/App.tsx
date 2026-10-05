@@ -8,6 +8,7 @@ import Heritage from './pages/Heritage';
 import Experiences from './pages/Experiences';
 import Events from './pages/Events';
 import Stay from './pages/Stay';
+import Vip from './pages/Vip';
 import Dine from './pages/Dine';
 import Visit from './pages/Visit';
 import Contact from './pages/Contact';
@@ -71,6 +72,7 @@ function AppLayout() {
         <Route path="/experiences/*" element={<Experiences />} />
         <Route path="/events" element={<Events />} />
         <Route path="/stay" element={<Stay />} />
+        <Route path="/vip" element={<Vip />} />
         <Route path="/dine" element={<Dine />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/visit" element={<Visit />} />

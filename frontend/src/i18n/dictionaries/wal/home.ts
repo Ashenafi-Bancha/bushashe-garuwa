@@ -438,6 +438,12 @@ const page: DeepPartial<Dictionary> = {
           // EN: A fish pond among the gardens, part of the working life of the grounds.
           desc: "",
         },
+        vip: {
+          // EN: VIP Service
+          title: "",
+          // EN: Private rooms for a family: a kitchen to cook in, a dining room, a fireplace and bedrooms.
+          desc: "",
+        },
         guesthouse: {
           // EN: Guesthouse
           title: "",

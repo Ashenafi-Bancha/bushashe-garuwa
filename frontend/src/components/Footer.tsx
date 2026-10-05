@@ -8,7 +8,7 @@ import { MAPS_URL } from '../lib/location';
 /** Routes per footer column; labels come from t.footer.columns. */
 const footerRoutes = {
   explore: { heritage: '/heritage', experiences: '/experiences', events: '/events', gallery: '/gallery' },
-  stay: { guesthouse: '/stay', restaurant: '/dine', bar: '/dine#bar', foodEvents: '/events' },
+  stay: { vip: '/vip', guesthouse: '/stay', restaurant: '/dine', bar: '/dine#bar', foodEvents: '/events' },
   discover: { story: '/discover', family: '/heritage/family', timeline: '/heritage/timeline', stories: '/heritage/stories' },
   visit: { plan: '/visit', contact: '/contact', education: '/experiences/education', groups: '/experiences', schools: '/experiences/education' },
 };

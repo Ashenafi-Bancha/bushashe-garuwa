@@ -75,6 +75,13 @@ export const adminApi = {
   setMessageStatus: (token: string, id: number, status: RequestStatus) =>
     request<ContactMessage>(token, `/v1/contact/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
 
+  deleteMessage: (token: string, id: number) => request<{ removed: true }>(token, `/v1/contact/${id}`, { method: 'DELETE' }),
+
+  updateVisit: (token: string, id: number, input: { name: string; phone: string; email: string; date: string; visitors: string; message: string }) =>
+    request<VisitRequest>(token, `/v1/visits/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
+
+  deleteVisit: (token: string, id: number) => request<{ removed: true }>(token, `/v1/visits/${id}`, { method: 'DELETE' }),
+
   setVisitStatus: (token: string, id: number, status: RequestStatus) =>
     request<VisitRequest>(token, `/v1/visits/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
 
@@ -93,6 +100,11 @@ export const adminApi = {
   // ── Bookings ──
   bookings: (token: string, page: number, search = '', eventId?: number) =>
     request<Page<Booking>>(token, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId, q: search })}`),
+
+  updateBooking: (token: string, id: number, input: { name: string; phone: string; email: string; guests: number; message: string }) =>
+    request<Booking>(token, `/v1/events/admin/bookings/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
+
+  deleteBooking: (token: string, id: number) => request<{ removed: true }>(token, `/v1/events/admin/bookings/${id}`, { method: 'DELETE' }),
 
   setBookingStatus: (token: string, id: number, status: BookingStatus) =>
     request<Booking>(token, `/v1/events/admin/bookings/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),

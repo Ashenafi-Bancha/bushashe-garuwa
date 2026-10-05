@@ -59,8 +59,8 @@ export const en = {
     gardens: 'Bushaashe Garuwa: gardens and recreational grounds',
     lawn: 'Bushaashe Garuwa: open lawns, heritage tree and traditional house',
     meetingHall: 'The meeting hall at Bushaashe Garuwa: rows of chairs in white covers with bands of Wolaita pattern, under wood-panelled walls',
-    vipRoom: 'A VIP room in the guest house: a carved wooden bed with an embroidered white cover, and an armchair',
-    vipDining: 'The sitting and dining room of a VIP room: sofas, a marble-topped table, a kitchen counter and a fireplace',
+    vipRoom: 'A VIP room for sleeping: a carved wooden bed with an embroidered white cover, and an armchair',
+    vipDining: 'The VIP sitting and dining room: sofas, a marble-topped table, a kitchen counter and a fireplace',
     home: 'Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens',
     enset: 'Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture',
     food: 'Traditional Wolaita dishes served in woven baskets inside a cultural house at Bushaashe Garuwa',
@@ -85,8 +85,8 @@ export const en = {
     zigba: { title: 'The Zigba Trees', desc: 'Zigba trees planted by the forefathers of the family, standing in a row like a peaceful procession.' },
     lawn: { title: 'The Great Lawn', desc: 'Open lawns and the great tree, with the traditional house in the distance.' },
     meetingHall: { title: 'The Meeting Hall', desc: 'Rows of chairs dressed in white with bands of Wolaita pattern, ready for a meeting or a training.' },
-    vipRoom: { title: 'VIP Room', desc: 'A carved wooden bed with a hand-embroidered cover, in a VIP room of the guest house.' },
-    vipDining: { title: 'VIP Sitting and Dining Room', desc: 'Sofas, a marble-topped table, a kitchen counter and a fireplace, in a VIP room of the guest house.' },
+    vipRoom: { title: 'VIP Room for Sleeping', desc: 'A carved wooden bed with a hand-embroidered cover.' },
+    vipDining: { title: 'VIP Sitting and Dining Room', desc: 'Sofas, a marble-topped table, the kitchen counter and the fireplace.' },
   },
 
   nav: {
@@ -98,6 +98,7 @@ export const en = {
       experiences: 'Experiences',
       events: 'Events',
       stay: 'Guest House',
+      vip: 'VIP Service',
       dine: 'Dine',
       visit: 'Visit',
       gallery: 'Gallery',
@@ -107,6 +108,7 @@ export const en = {
     describe: {
       discover: 'Our story, mission and vision.',
       contact: 'Phone, email and a message form.',
+      vip: 'Private rooms for a family: cook, eat, celebrate and stay.',
     },
     homeAria: 'Bushaashe Garuwa home',
     mainNav: 'Main navigation',
@@ -143,7 +145,7 @@ export const en = {
       },
       stay: {
         title: 'Stay',
-        links: { guesthouse: 'Guesthouse', restaurant: 'Restaurant', bar: 'Bar', foodEvents: 'Cultural Food Events' },
+        links: { vip: 'VIP Service', guesthouse: 'Guesthouse (coming soon)', restaurant: 'Restaurant', bar: 'Bar', foodEvents: 'Cultural Food Events' },
       },
       discover: {
         title: 'Discover',
@@ -310,6 +312,7 @@ export const en = {
         horses: { title: 'Horse Riding', desc: 'Horses wait on the great lawn for visitors who would like to ride.' },
         crocodile: { title: 'Crocodile Pond & Wildlife', desc: 'A properly fenced crocodile pond and an area where wild animals are cared for.' },
         fish: { title: 'Fish Pond', desc: 'A fish pond among the gardens, part of the working life of the grounds.' },
+        vip: { title: 'VIP Service', desc: 'Private rooms for a family: a kitchen to cook in, a dining room, a fireplace and bedrooms.' },
         guesthouse: { title: 'Guesthouse', desc: 'A planned service: rooms for an overnight stay inside the heritage site itself. Not open yet.' },
         restaurant: { title: 'Restaurant & Bar', desc: 'Wolaita and Ethiopian dishes, traditional drinks and the coffee ceremony, served all day.' },
       },
@@ -661,6 +664,32 @@ export const en = {
     },
   },
 
+  vip: {
+    hero: {
+      eyebrow: 'VIP Service',
+      title: 'A Private Place for Your Family',
+      desc: 'Come with your family, cook, eat and celebrate together, in rooms kept for you alone.',
+    },
+    intro: {
+      eyebrow: 'What It Is',
+      title: 'Your Own Rooms on the Heritage Grounds',
+      text: 'The VIP service is for families and small groups who want a private place. You can cook in the VIP kitchen, eat together, celebrate, sit by the fire, and stay the night in the VIP rooms.',
+    },
+    features: {
+      kitchen: { title: 'VIP Kitchen', desc: 'Cook your own food there, the way your family likes it.' },
+      dining: { title: 'Eat Together', desc: 'A sitting and dining room with sofas and a large table.' },
+      celebrate: { title: 'Celebrate', desc: 'Birthdays, family gatherings and other special days, in private.' },
+      fire: { title: 'Fireplace', desc: 'A fire in the VIP room to gather around.' },
+      rooms: { title: 'VIP Rooms for Sleeping', desc: 'Bedrooms where the family can stay the night.' },
+      restrooms: { title: 'VIP Rest Rooms', desc: 'Private rest rooms for VIP guests.' },
+    },
+    photosTitle: 'Inside the VIP Rooms',
+    cta: {
+      title: 'Would You Like to Use the VIP Service?',
+      text: 'Call or write to us with your date and the number of people, and we will arrange it.',
+    },
+  },
+
   stay: {
     hero: {
       eyebrow: 'Guesthouse',
@@ -674,11 +703,8 @@ export const en = {
       text: 'Bushaashe Garuwa is preparing a guest house so that visitors can stay overnight. It is still being finished and does not take guests yet. We will announce it here when it opens.',
       askTitle: 'Questions in the Meantime?',
       askText: 'Call or write to us and we will gladly tell you more.',
-    },
-    vip: {
-      eyebrow: 'A First Look',
-      title: 'The VIP Room',
-      desc: 'The VIP room has a bedroom with a carved wooden bed, and a separate room with sofas, a dining table, a kitchen counter and a fireplace.',
+      vipTitle: 'Open Now: the VIP Service',
+      vipText: 'Families can already come to the VIP rooms to cook, eat, celebrate and stay the night.',
     },
     amenitiesLabel: 'Amenities',
     viewDetails: 'View Details',
