@@ -43,7 +43,8 @@ Start with task-relevant files below. Only follow imports or inspect other files
 
 - `package.json` / `pnpm-workspace.yaml` - Workspace scripts and members
 - `vercel.json` - Builds and deploys the website from `frontend/`
-- One app for both, without Docker: `pnpm build` builds the website (`--mode app`, so it calls the API at `/api`) and the API; `pnpm start` runs the API, which serves the website built beside it in production (`backend/src/http/website.ts`). Do not add a `Dockerfile`: the host (AletCloud) builds with these two commands
+- One app for both, without Docker: the host (AletCloud) runs `pnpm build` then `pnpm start`; the API serves the website built beside it (`backend/src/http/website.ts`). Do not add a `Dockerfile`
+- **The built website (`frontend/dist`) is committed.** Building it needs over 500 MB of memory, more than the host's builder has, so host builds were failing. After ANY change under `frontend/` (or to `pnpm-lock.yaml` / `.figma/make/site.json`), run `pnpm web:prebuild` and commit `frontend/dist` with the change; `pnpm web:check` says whether it is up to date. On the host, `pnpm build` (`scripts/build.mjs`) uses the committed copy when its stamp matches the source and only builds the small API
 - `.mise.toml` - Toolchain versions for Node.js and pnpm
 
 ## Dependencies

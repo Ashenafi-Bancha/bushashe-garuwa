@@ -1,5 +1,7 @@
 node_modules/
 dist/
+# the built website is committed: the host has too little memory to build it (see scripts/build.mjs)
+!frontend/dist/
 build/
 .cache/
 .env*
