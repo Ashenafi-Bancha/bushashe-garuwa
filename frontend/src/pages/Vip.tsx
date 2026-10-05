@@ -30,7 +30,7 @@ export default function Vip() {
             <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{v.intro.text}</p>
           </div>
 
-          <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          <ul data-wave className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
             {FEATURES.map((id, i) => (
               <li key={id} data-reveal className="bg-white rounded-[1.5rem] p-6 sm:p-7 elev-1">
                 <span className="block text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>

@@ -133,7 +133,7 @@ export default function Gallery() {
           {shown.length === 0 ? (
             <p className="py-20 text-center text-[#1E3A29]/40">{g.empty}</p>
           ) : (
-            <div className="grid grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[210px] lg:auto-rows-[240px] gap-3 sm:gap-4">
+            <div data-wave className="grid grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[210px] lg:auto-rows-[240px] gap-3 sm:gap-4">
               {shown.map((item, i) => (
                 <Tilt key={item.id} className={`rounded-2xl sm:rounded-3xl ${filter === 'all' ? item.span : spans[i % spans.length]}`} max={5}>
                   <button

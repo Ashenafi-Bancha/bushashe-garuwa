@@ -39,7 +39,7 @@ export default function Heritage() {
       {/* Heritage categories grid */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-7 sm:gap-7">
+          <div data-wave className="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-7 sm:gap-7">
             {categories.map((cat) => {
               const text = hg.categories[cat.id];
               return (

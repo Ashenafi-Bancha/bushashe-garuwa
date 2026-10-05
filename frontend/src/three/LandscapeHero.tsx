@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import HeroName from '../components/HeroName';
 import { useI18n } from '../i18n/I18nProvider';
 import { createAmbience, type Ambience } from './ambience';
 import type { Tier } from './device';
@@ -35,7 +36,6 @@ export default function LandscapeHero({ tier, watchSpeed, onTooSlow }: Props) {
   const [fetch3d, setFetch3d] = useState(false);
   const [ready, setReady] = useState(false);
   const [onScreen, setOnScreen] = useState(true);
-  const [firstWord, ...rest] = h.title.split(' ');
 
   // nature sounds: off until asked for, and silent again when the page is left or hidden
   const [sound, setSound] = useState(false);
@@ -115,10 +115,7 @@ export default function LandscapeHero({ tier, watchSpeed, onTooSlow }: Props) {
         <div className="journey-words absolute inset-x-0 bottom-0">
           <span className="absolute inset-x-0 bottom-0 -top-28 bg-gradient-to-t from-[#F4EFE4] from-[58%] via-[#F4EFE4]/80 via-[78%] to-transparent" />
           <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 pb-6 sm:pb-9 lg:pb-10">
-            <h1 className="hero-name brand-sign brand-3d whitespace-nowrap leading-[1] mb-4 lg:mb-6">
-              <span className="line-mask"><span>{firstWord}</span></span>{' '}
-              <span className="line-mask d2"><span>{rest.join(' ')}</span></span>
-            </h1>
+            <HeroName title={h.title} className="mb-4 lg:mb-6" />
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 lg:gap-12 animate-fade-up delay-300">
               <div className="max-w-xl">
                 <p className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] leading-tight tracking-tight">{h.walk}</p>

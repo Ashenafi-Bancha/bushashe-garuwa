@@ -37,6 +37,7 @@ export default function SwipeRow({
       <div
         ref={ref}
         onScroll={onScroll}
+        data-wave
         className={`scroll-smooth-x flex md:grid md:overflow-visible -mx-5 px-5 sm:-mx-8 sm:px-8 md:mx-0 md:px-0 scroll-px-5 sm:scroll-px-8 ${gap} ${grid}`}
       >
         {items.map((child, i) => (

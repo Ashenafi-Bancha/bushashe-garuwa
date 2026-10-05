@@ -182,6 +182,9 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   .hero-name .line-mask { display: inline-block; }
   html:lang(am) .hero-name { font-size: min(13vw, 7.5rem, 9.5svh); }
 }
+/* the name's letters rise one by one (components/HeroName.tsx); until the script takes over, each line rises whole */
+.hero-letter { display: inline-block; will-change: transform; }
+.hero-name.by-letter .line-mask > span { animation: none; }
 /* room under each line so the depth is not clipped by the rising mask */
 .brand-3d .line-mask { padding-bottom: 0.26em; margin-bottom: -0.2em; }
 

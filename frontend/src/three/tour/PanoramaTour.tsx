@@ -32,7 +32,7 @@ export default function PanoramaTour({ open, onOpen }: Props) {
           <p className="text-[#1E3A29]/75 leading-relaxed">{words.desc}</p>
         </div>
 
-        <ul className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+        <ul data-wave className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
           {TOUR_SCENES.map((item) => (
             <li key={item.id} className="bg-white rounded-[1.75rem] p-2.5 elev-1 flex flex-col">
               <div className="img-zoom rounded-[1.25rem] overflow-hidden aspect-[3/2]">

@@ -1,3 +1,4 @@
+import { animate } from 'animejs';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { onSmoothScroll } from './motion';
@@ -10,7 +11,9 @@ const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)'
  * The scroll effects of one page, set up when the page appears and removed when
  * it leaves:
  *
- *   - content rises into view as it is reached, cards one after another
+ *   - content rises into view as it is reached
+ *   - rows and grids of cards and photographs (marked `data-wave`) arrive in a
+ *     wave, each a moment after its neighbour (anime.js)
  *   - on computers, the opening photograph and the photographs behind text
  *     drift more slowly than the page (parallax)
  *   - the two rows of large words slide in opposite directions with the scroll
@@ -29,6 +32,13 @@ export function pageEffects(root: HTMLElement): () => void {
   const media = gsap.matchMedia();
   const stopListening = onSmoothScroll(ScrollTrigger.update);
   const belowScreen = (el: Element) => el.getBoundingClientRect().top > window.innerHeight * 0.92;
+  // cards waiting for their wave, so their starting look can be taken off again when the page is left
+  const waiting: HTMLElement[] = [];
+  const settle = (el: HTMLElement) => {
+    el.style.opacity = '';
+    el.style.transform = '';
+    el.style.transition = '';
+  };
   const context = gsap.context(() => {
     /* ── content rises into view ── */
     const rise = (all: Element[], trigger: Element) => {
@@ -45,7 +55,7 @@ export function pageEffects(root: HTMLElement): () => void {
     };
 
     // pieces marked by the page itself, revealed in the groups they arrive in
-    const marked = gsap.utils.toArray<HTMLElement>('[data-reveal]').filter(belowScreen);
+    const marked = gsap.utils.toArray<HTMLElement>('[data-reveal]').filter((el) => !el.closest('[data-wave]') && belowScreen(el));
     if (marked.length > 0) {
       gsap.set(marked, { autoAlpha: 0, y: 36 });
       ScrollTrigger.batch(marked, {
@@ -59,8 +69,45 @@ export function pageEffects(root: HTMLElement): () => void {
     // every other section after the opening one: its blocks rise one after another
     gsap.utils.toArray<HTMLElement>('main > section').forEach((section, index) => {
       if (index === 0 || section.querySelector('[data-reveal]')) return;
-      const blocks = Array.from(section.querySelectorAll(':scope > div > *')).filter((el) => !el.matches('img, span'));
+      const blocks = Array.from(section.querySelectorAll(':scope > div > *')).filter((el) => !el.matches('img, span, [data-wave]'));
       rise(blocks.length > 0 ? blocks : [section], section);
+    });
+
+    /* ── rows and grids of cards: a wave from the first card outward ── */
+    gsap.utils.toArray<HTMLElement>('[data-wave]').forEach((group) => {
+      const cards = (Array.from(group.children) as HTMLElement[]).filter(belowScreen);
+      if (cards.length === 0) return;
+      cards.forEach((card) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(44px) scale(0.94)';
+        // a card's own hover transition would lag behind the wave, so it rests until the wave is done
+        card.style.transition = 'none';
+      });
+      waiting.push(...cards);
+      ScrollTrigger.create({
+        trigger: group,
+        start: 'top 88%',
+        once: true,
+        onEnter: () => {
+          // each card waits by how far it lies from the first one, across and down, whatever the layout:
+          // one row to swipe on a phone, columns on a computer, tiles of different sizes in the gallery
+          const first = cards[0]!.getBoundingClientRect();
+          const waits = cards.map((card) => {
+            const box = card.getBoundingClientRect();
+            const steps = (box.left - first.left) / Math.max(first.width, 1) + (box.top - first.top) / Math.max(first.height, 1);
+            return Math.min(900, Math.max(0, steps) * 110);
+          });
+          animate(cards, {
+            opacity: [0, 1],
+            y: [44, 0],
+            scale: [0.94, 1],
+            duration: 850,
+            ease: 'outExpo',
+            delay: (_card, index) => waits[index ?? 0] ?? 0,
+            onComplete: () => cards.forEach(settle),
+          });
+        },
+      });
     });
 
     /* ── the two rows of large words ── */
@@ -109,6 +156,7 @@ export function pageEffects(root: HTMLElement): () => void {
 
   return () => {
     stopListening();
+    waiting.forEach(settle);
     window.clearTimeout(timer);
     watcher.disconnect();
     media.revert();

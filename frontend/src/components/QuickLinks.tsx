@@ -41,7 +41,7 @@ export default function QuickLinks() {
 
       {/* phones: a row to swipe; tablets and computers: the bento grid */}
       <div className="scroll-smooth-x md:overflow-visible px-5 sm:px-8 scroll-px-5 sm:scroll-px-8 md:max-w-screen-xl md:mx-auto">
-        <ul className="flex md:grid md:grid-cols-4 md:auto-rows-[250px] lg:auto-rows-[270px] gap-4 sm:gap-5 w-max md:w-auto pb-2 md:pb-0">
+        <ul data-wave className="flex md:grid md:grid-cols-4 md:auto-rows-[250px] lg:auto-rows-[270px] gap-4 sm:gap-5 w-max md:w-auto pb-2 md:pb-0">
           {LINKS.map(({ key, to, photo, span }, i) => (
             <li
               key={key}

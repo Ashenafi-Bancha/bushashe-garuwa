@@ -48,7 +48,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 
 ## Dependencies
 
-- Website: React 19, React Router 7, Lenis (smooth scroll), GSAP + ScrollTrigger (scroll effects), Motion (page transitions), three + React Three Fiber + drei (3D scenes), Tailwind CSS v4 (`@tailwindcss/vite`), Vite 8, TypeScript 5.7, oxfmt
+- Website: React 19, React Router 7, Lenis (smooth scroll), GSAP + ScrollTrigger (scroll effects), Motion (page transitions), anime.js (the home page name rising letter by letter in `components/HeroName.tsx`; rows and grids marked `data-wave` arriving in a wave, in `lib/pageEffects.ts`), three + React Three Fiber + drei (3D scenes), Tailwind CSS v4 (`@tailwindcss/vite`), Vite 8, TypeScript 5.7, oxfmt
 - API: Express 5, zod 4, helmet, cors, compression, PostgreSQL (`pg`; an embedded PGlite in development and tests), tsx for development
 
 ## Styling

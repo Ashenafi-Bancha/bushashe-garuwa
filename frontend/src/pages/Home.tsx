@@ -12,6 +12,7 @@ import QuickLinks from '../components/QuickLinks';
 import PhotoCard from '../components/PhotoCard';
 import CulturalFoodDates from '../components/CulturalFoodDates';
 import SwipeRow from '../components/SwipeRow';
+import HeroName from '../components/HeroName';
 import StickyBook from '../components/StickyBook';
 import Testimonials from '../components/Testimonials';
 import { useNoIndex } from '../lib/noindex';
@@ -105,7 +106,6 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
     setHeroIdx(n);
   };
   const { events: siteEvents } = useSiteEvents();
-  const [firstWord, ...rest] = h.hero.title.split(' ');
 
   useEffect(() => {
     const timer = setTimeout(() => goTo(heroIdx + 1), SLIDE_MS);
@@ -218,11 +218,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           {/* the words, just below the photograph */}
           <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 lg:pt-3 pb-6">
             {/* the name in the lettering of the main gate, raised in 3D, sized to the screen */}
-            <h1 className="hero-name brand-sign brand-3d whitespace-nowrap leading-[1] mb-6 lg:mb-4">
-              {/* phones and tablets: two lines; computers: one line */}
-              <span className="line-mask"><span>{firstWord}</span></span>{' '}
-              <span className="line-mask d2"><span>{rest.join(' ')}</span></span>
-            </h1>
+            <HeroName title={h.hero.title} className="mb-6 lg:mb-4" />
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 animate-fade-up delay-300">
               <div className="max-w-xl">
                 <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight mb-3">{h.hero.subtitle}</p>
