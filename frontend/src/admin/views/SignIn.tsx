@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import logo from '../../assets/brand/logo.png';
+import { photos, picture } from '../../assets/photos';
 import { ApiError, apiEnabled } from '../../lib/api';
 import { useAdminSession } from '../auth/AdminSession';
 import { Icon } from '../components/icons';
@@ -55,7 +56,13 @@ export default function SignIn() {
         <div className="w-full max-w-md">
           {/* who this is: the logo, the name, and who the page is for */}
           <div className="text-center mb-7">
-            <img src={logo} alt="" className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-full object-contain bg-white p-1 shadow-[0_10px_30px_-12px_rgba(19,38,26,0.45)]" />
+            {/* phones: the photograph of Meeshsho Keettaa, the traditional house, stands in for the logo */}
+            <img
+              {...picture(photos.meeshsho, '176px')}
+              alt="Meeshsho Keettaa, the traditional Wolaita house at Bushaashe Garuwa"
+              className="sm:hidden w-44 aspect-[3/2] mx-auto rounded-2xl object-cover border-4 border-white shadow-[0_14px_34px_-14px_rgba(19,38,26,0.5)]"
+            />
+            <img src={logo} alt="" className="hidden sm:block w-24 h-24 mx-auto rounded-full object-contain bg-white p-1 shadow-[0_10px_30px_-12px_rgba(19,38,26,0.45)]" />
             <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] tracking-tight mt-4">Bushaashe Garuwa</div>
             <div className="inline-flex items-center gap-2 rounded-full bg-[#E3EBD8] text-[#0B6E40] text-[11px] font-bold tracking-[0.18em] uppercase px-3.5 py-1.5 mt-3">
               <Icon name="lock" className="w-3.5 h-3.5" />
