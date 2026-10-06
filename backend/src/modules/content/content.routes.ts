@@ -6,7 +6,7 @@ import { validateBody, validateQuery } from '../../http/validate.js';
 import { ContentLang, ContentQuery, SaveContentBatch } from './content.schema.js';
 import type { ContentService } from './content.service.js';
 
-const PublicQuery = z.object({ lang: z.enum(['en', 'am', 'wal']).default('en') });
+const PublicQuery = z.object({ lang: z.enum(['en', 'am', 'wol']).default('en') });
 
 /**
  * GET    /content?lang=en          public: the staff edits for one language

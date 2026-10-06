@@ -33,7 +33,7 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
       <div
         role="dialog"
         aria-modal="true"
-        aria-labelledby="wal-notice-title"
+        aria-labelledby="wol-notice-title"
         className={`relative w-full max-w-lg bg-[#F4EFE4] shadow-2xl transition-transform duration-500 ${open ? 'translate-y-0' : 'translate-y-4'}`}
         style={{ transitionTimingFunction: 'var(--ease-out-expo)' }}
       >
@@ -44,7 +44,7 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
 
         <div className="px-6 sm:px-10 pt-9 pb-8">
           <div className="text-[#1E3A29] text-[10px] font-sans font-semibold tracking-[0.16em] uppercase mb-3">Wolayttatto</div>
-          <h2 id="wal-notice-title" className="font-display text-3xl font-semibold text-[#1E3A29] leading-tight mb-1">{texts.en.title}</h2>
+          <h2 id="wol-notice-title" className="font-display text-3xl font-semibold text-[#1E3A29] leading-tight mb-1">{texts.en.title}</h2>
           <div lang="am" className="font-display text-2xl font-semibold text-[#1E3A29]/80 leading-snug mb-5">{texts.am.title}</div>
 
           <p className="text-[#1E3A29]/70 font-sans text-sm leading-relaxed mb-2">{texts.en.body}</p>
@@ -60,7 +60,7 @@ export default function WolayttaNotice({ open, onClose, onChoose, texts }: Props
           </div>
 
           {import.meta.env.DEV && (
-            <button onClick={() => onChoose('wal')} className="mt-5 w-full text-center text-[11px] font-sans text-[#1E3A29]/45 hover:text-[#1E3A29] underline underline-offset-4">
+            <button onClick={() => onChoose('wol')} className="mt-5 w-full text-center text-[11px] font-sans text-[#1E3A29]/45 hover:text-[#1E3A29] underline underline-offset-4">
               Preview the Wolaytta draft (development only)
             </button>
           )}

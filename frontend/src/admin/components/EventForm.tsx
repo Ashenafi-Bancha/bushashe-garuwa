@@ -18,7 +18,7 @@ export const emptyEvent = (): SaveEventInput => ({
   partner: 'Lidya Cultural Food',
   bookable: true,
   capacity: 40,
-  translations: { en: { name: '', desc: '' }, am: { name: '', desc: '' }, wal: { name: '', desc: '' } },
+  translations: { en: { name: '', desc: '' }, am: { name: '', desc: '' }, wol: { name: '', desc: '' } },
 });
 
 const field = 'admin-field';
@@ -41,7 +41,7 @@ export default function EventForm({
   const [saving, setSaving] = useState(false);
 
   const set = (change: Partial<SaveEventInput>) => setValues((current) => ({ ...current, ...change }));
-  const setText = (lang: 'en' | 'am' | 'wal', part: 'name' | 'desc', value: string) =>
+  const setText = (lang: 'en' | 'am' | 'wol', part: 'name' | 'desc', value: string) =>
     setValues((current) => ({
       ...current,
       translations: { ...current.translations, [lang]: { ...current.translations[lang], [part]: value } },
@@ -138,7 +138,7 @@ export default function EventForm({
         </div>
 
         <div className="space-y-5">
-          {(['en', 'am', 'wal'] as const).map((lang) => (
+          {(['en', 'am', 'wol'] as const).map((lang) => (
             <div key={lang} className="rounded-2xl border border-[#1E3A29]/10 p-4">
               <div className="text-[#C4622D] text-[11px] font-semibold tracking-[0.16em] uppercase mb-3">
                 {lang === 'en' ? 'English (required)' : lang === 'am' ? 'Amharic' : 'Wolayttatto doonaa'}

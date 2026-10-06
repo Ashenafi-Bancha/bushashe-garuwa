@@ -8,7 +8,7 @@ import { Notice, Panel } from './ui';
 const LANGS: { code: MediaLang; name: string; note?: string }[] = [
   { code: 'en', name: 'English' },
   { code: 'am', name: 'አማርኛ', note: 'Left empty, visitors reading Amharic see the English words.' },
-  { code: 'wal', name: 'Wolayttatto doonaa', note: 'Left empty, visitors reading Wolaytta see the English words.' },
+  { code: 'wol', name: 'Wolayttatto doonaa', note: 'Left empty, visitors reading Wolaytta see the English words.' },
 ];
 
 const LABEL = 'block text-xs font-bold text-[#1E3A29]/65 tracking-wider uppercase mb-2';
@@ -52,7 +52,7 @@ export default function PhotoForm({
   const [translations, setTranslations] = useState<Required<MediaTranslations>>({
     en: { title: initial?.translations.en.title ?? '', desc: initial?.translations.en.desc ?? '' },
     am: { title: initial?.translations.am?.title ?? '', desc: initial?.translations.am?.desc ?? '' },
-    wal: { title: initial?.translations.wal?.title ?? '', desc: initial?.translations.wal?.desc ?? '' },
+    wol: { title: initial?.translations.wol?.title ?? '', desc: initial?.translations.wol?.desc ?? '' },
   });
   const [category, setCategory] = useState<GalleryCategory>(initial?.category ?? 'grounds');
   const [published, setPublished] = useState(initial?.published ?? true);

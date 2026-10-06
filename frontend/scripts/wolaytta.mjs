@@ -6,7 +6,7 @@
  *                         keeping every Wolaytta line already written
  *
  * The English text is src/i18n/dictionaries/en.ts. The Wolaytta text is one file
- * per page in src/i18n/dictionaries/wal/. A line left empty ("") is not yet
+ * per page in src/i18n/dictionaries/wol/. A line left empty ("") is not yet
  * translated and shows in English on the site.
  */
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -15,7 +15,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const DICTIONARIES = join(HERE, '..', 'src', 'i18n', 'dictionaries');
-const WAL_DIR = join(DICTIONARIES, 'wal');
+const WOL_DIR = join(DICTIONARIES, 'wol');
 
 /**
  * The translation files, in the order to work through them: which parts of the
@@ -45,12 +45,12 @@ const placeholders = (text) => (text.match(/\{\w+\}/g) ?? []).sort().join(' ');
 
 /** Reads one translation file; explains a typing mistake in plain words instead of a stack trace. */
 async function readPage(page) {
-  const path = join(WAL_DIR, `${page.file}.ts`);
+  const path = join(WOL_DIR, `${page.file}.ts`);
   if (!existsSync(path)) return {};
   try {
     return (await load(path)).default ?? {};
   } catch (error) {
-    console.error(`\n✗ src/i18n/dictionaries/wal/${page.file}.ts cannot be read. There is a typing mistake in it:`);
+    console.error(`\n✗ src/i18n/dictionaries/wol/${page.file}.ts cannot be read. There is a typing mistake in it:`);
     console.error(`  ${String(error.message).split('\n')[0]}`);
     console.error('  Usual causes: a missing " at the end of a line, a missing comma after the closing ",');
     console.error('  or a " typed inside the text (write \\" instead). Fix it and run the command again.\n');
@@ -105,14 +105,14 @@ export default page;
 }
 
 function indexSource() {
-  const imports = PAGES.map((page) => `import ${page.file} from './wal/${page.file}';`).join('\n');
+  const imports = PAGES.map((page) => `import ${page.file} from './wol/${page.file}';`).join('\n');
   return `import type { Dictionary } from './en';
 import type { DeepPartial } from '../types';
 ${imports}
 
 /**
  * WOLAYTTATTO — the Wolaytta translation, put together from one file per page
- * in the wal/ folder beside this file. Translate there, not here.
+ * in the wol/ folder beside this file. Translate there, not here.
  *
  * Guide: docs/WOLAYTTA-TRANSLATION.md
  *   pnpm wolaytta        shows how far each page is and points out mistakes
@@ -122,7 +122,7 @@ ${imports}
  * published (WOLAYTTA_READY in src/i18n/config.ts), visitors who choose WOL see
  * a "coming soon" notice; on the local dev server the notice offers a preview.
  */
-export const wal: DeepPartial<Dictionary> = {
+export const wol: DeepPartial<Dictionary> = {
 ${PAGES.map((page) => `  ...${page.file},`).join('\n')}
 };
 `;
@@ -133,15 +133,15 @@ async function existingTranslation(en) {
   const found = {};
   for (const page of PAGES) Object.assign(found, await readPage(page));
   // the first time: lines in the old single file that are no longer plain English
-  const old = join(DICTIONARIES, 'wal.ts');
-  if (!existsSync(WAL_DIR) && existsSync(old)) {
-    const { wal } = await load(old);
+  const old = join(DICTIONARIES, 'wol.ts');
+  if (!existsSync(WOL_DIR) && existsSync(old)) {
+    const { wol } = await load(old);
     const keep = (english, wolaytta) => {
       if (isText(english)) return isText(wolaytta) && wolaytta !== english ? wolaytta : '';
       if (Array.isArray(english)) return english.map((item, i) => keep(item, wolaytta?.[i]));
       return Object.fromEntries(Object.keys(english).map((key) => [key, keep(english[key], wolaytta?.[key])]));
     };
-    Object.assign(found, keep(en, wal));
+    Object.assign(found, keep(en, wol));
   }
   return found;
 }
@@ -154,10 +154,10 @@ async function sync(en) {
     process.exit(1);
   }
   const existing = await existingTranslation(en);
-  mkdirSync(WAL_DIR, { recursive: true });
-  for (const page of PAGES) writeFileSync(join(WAL_DIR, `${page.file}.ts`), pageSource(page, en, existing));
-  writeFileSync(join(DICTIONARIES, 'wal.ts'), indexSource());
-  console.log(`✓ ${PAGES.length} translation files written to src/i18n/dictionaries/wal/ (Wolaytta already written is kept).`);
+  mkdirSync(WOL_DIR, { recursive: true });
+  for (const page of PAGES) writeFileSync(join(WOL_DIR, `${page.file}.ts`), pageSource(page, en, existing));
+  writeFileSync(join(DICTIONARIES, 'wol.ts'), indexSource());
+  console.log(`✓ ${PAGES.length} translation files written to src/i18n/dictionaries/wol/ (Wolaytta already written is kept).`);
 }
 
 /* ── checking ── */
@@ -185,7 +185,7 @@ function compare(english, wolaytta, path, result) {
 }
 
 async function check(en) {
-  if (!existsSync(WAL_DIR)) {
+  if (!existsSync(WOL_DIR)) {
     console.log('The translation files are not there yet. Run:  pnpm wolaytta:sync');
     process.exit(1);
   }
@@ -201,18 +201,18 @@ async function check(en) {
     total += result.total;
     done += result.done;
     if (result.missing.length > 0) outOfDate = true;
-    problems.push(...result.problems.map((problem) => `wal/${page.file}.ts  ${problem}`));
+    problems.push(...result.problems.map((problem) => `wol/${page.file}.ts  ${problem}`));
     const share = result.total ? Math.round((result.done / result.total) * 100) : 100;
     const bar = '█'.repeat(Math.round(share / 10)).padEnd(10, '·');
     const mark = result.done === result.total ? '✓' : ' ';
-    console.log(`  ${mark} ${`wal/${page.file}.ts`.padEnd(20)} ${bar} ${String(result.done).padStart(3)} of ${String(result.total).padEnd(3)}  ${page.title}`);
+    console.log(`  ${mark} ${`wol/${page.file}.ts`.padEnd(20)} ${bar} ${String(result.done).padStart(3)} of ${String(result.total).padEnd(3)}  ${page.title}`);
   }
   console.log(`\n  ${done} of ${total} lines translated (${Math.round((done / total) * 100)}%).`);
 
-  const strays = readdirSync(WAL_DIR).filter((name) => name.endsWith('.ts') && !PAGES.some((page) => `${page.file}.ts` === name));
-  if (strays.length > 0) problems.push(`wal/ holds files the site does not use: ${strays.join(', ')}`);
-  const index = readFileSync(join(DICTIONARIES, 'wal.ts'), 'utf8');
-  if (PAGES.some((page) => !index.includes(`./wal/${page.file}'`))) outOfDate = true;
+  const strays = readdirSync(WOL_DIR).filter((name) => name.endsWith('.ts') && !PAGES.some((page) => `${page.file}.ts` === name));
+  if (strays.length > 0) problems.push(`wol/ holds files the site does not use: ${strays.join(', ')}`);
+  const index = readFileSync(join(DICTIONARIES, 'wol.ts'), 'utf8');
+  if (PAGES.some((page) => !index.includes(`./wol/${page.file}'`))) outOfDate = true;
 
   if (outOfDate) console.log('\n  ! The English text has changed since the files were made. Run:  pnpm wolaytta:sync');
   if (problems.length > 0) {

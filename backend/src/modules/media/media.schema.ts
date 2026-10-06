@@ -44,7 +44,7 @@ const Caption = z.object({
 export const MediaTranslations = z.object({
   en: Caption.default({ title: '', desc: '' }),
   am: Caption.optional(),
-  wal: Caption.optional(),
+  wol: Caption.optional(),
 });
 export type MediaTranslations = z.infer<typeof MediaTranslations>;
 

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 /** Site languages, matching the website (frontend/src/i18n/config.ts) */
-export const Language = z.enum(['en', 'am', 'wal']).default('en');
+export const Language = z.enum(['en', 'am', 'wol']).default('en');
 
 /** Trimmed text with a length limit; empty strings become undefined when optional */
 export const text = (max: number) => z.string().trim().min(1, 'Required').max(max, `At most ${max} characters`);

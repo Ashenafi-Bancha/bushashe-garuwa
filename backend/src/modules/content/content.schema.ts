@@ -5,10 +5,10 @@ import { z } from 'zod';
  * a phone number, a link. The key is the path in the website's text files,
  * for example `home.hero.title` or `settings.phone`.
  *
- * `lang` is 'en', 'am' or 'wal' for text that differs per language, and '*'
+ * `lang` is 'en', 'am' or 'wol' for text that differs per language, and '*'
  * for values that are the same in every language (phone number, links, hours).
  */
-export const ContentLang = z.enum(['en', 'am', 'wal', '*']);
+export const ContentLang = z.enum(['en', 'am', 'wol', '*']);
 export type ContentLang = z.infer<typeof ContentLang>;
 
 export const ContentKey = z

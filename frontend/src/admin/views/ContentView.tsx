@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { am } from '../../i18n/dictionaries/am';
 import { en } from '../../i18n/dictionaries/en';
-import { wal } from '../../i18n/dictionaries/wal';
+import { wol } from '../../i18n/dictionaries/wol';
 import { ApiError } from '../../lib/api';
 import { adminApi } from '../api/adminClient';
 import type { ContentEntry } from '../api/types';
@@ -9,13 +9,13 @@ import { useAdminSession } from '../auth/AdminSession';
 import { EDITABLE_GROUPS, valueAtPath, type EditableField } from '../content/editableFields';
 import { Notice, Panel } from '../components/ui';
 
-type Lang = 'en' | 'am' | 'wal';
+type Lang = 'en' | 'am' | 'wol';
 const LANGS: { code: Lang; name: string }[] = [
   { code: 'en', name: 'English' },
   { code: 'am', name: 'አማርኛ' },
-  { code: 'wal', name: 'Wolayttatto doonaa' },
+  { code: 'wol', name: 'Wolayttatto doonaa' },
 ];
-const builtIn: Record<Lang, unknown> = { en, am, wal };
+const builtIn: Record<Lang, unknown> = { en, am, wol };
 
 const field = 'admin-field';
 

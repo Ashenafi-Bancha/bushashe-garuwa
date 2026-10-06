@@ -133,4 +133,23 @@ export const migrations: { id: number; name: string; sql: string }[] = [
       CREATE INDEX idx_media_images_kind ON media_images (kind, slot);
     `,
   },
+  {
+    id: 4,
+    name: 'Wolaytta is stored under the code "wol" instead of "wal"',
+    sql: `
+      UPDATE contact_messages SET language = 'wol' WHERE language = 'wal';
+      UPDATE visit_requests   SET language = 'wol' WHERE language = 'wal';
+      UPDATE event_bookings   SET language = 'wol' WHERE language = 'wal';
+      -- an edit already saved under "wol" wins; the old row is then dropped
+      DELETE FROM content_entries old
+       WHERE old.lang = 'wal' AND EXISTS (SELECT 1 FROM content_entries new WHERE new.key = old.key AND new.lang = 'wol');
+      UPDATE content_entries SET lang = 'wol' WHERE lang = 'wal';
+      UPDATE events
+         SET translations = (translations - 'wal') || jsonb_build_object('wol', translations -> 'wal')
+       WHERE jsonb_exists(translations, 'wal');
+      UPDATE media_images
+         SET translations = (translations - 'wal') || jsonb_build_object('wol', translations -> 'wal')
+       WHERE jsonb_exists(translations, 'wal');
+    `,
+  },
 ];

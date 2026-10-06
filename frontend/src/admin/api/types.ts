@@ -61,7 +61,7 @@ export type AdminEvent = {
   bookable: boolean;
   capacity: number | null;
   placesLeft?: number | null;
-  translations: { en: { name: string; desc?: string }; am?: { name?: string; desc?: string }; wal?: { name?: string; desc?: string } };
+  translations: { en: { name: string; desc?: string }; am?: { name?: string; desc?: string }; wol?: { name?: string; desc?: string } };
   createdAt: string;
   updatedAt: string;
 };
@@ -96,8 +96,8 @@ export type Booking = {
 
 // ── Photos staff add: the gallery, and the pages' opening photos ──
 export type MediaCaption = { title: string; desc: string };
-export type MediaLang = 'en' | 'am' | 'wal';
-export type MediaTranslations = { en: MediaCaption; am?: MediaCaption; wal?: MediaCaption };
+export type MediaLang = 'en' | 'am' | 'wol';
+export type MediaTranslations = { en: MediaCaption; am?: MediaCaption; wol?: MediaCaption };
 export type GalleryCategory = 'grounds' | 'culture';
 
 export const GALLERY_CATEGORY_LABELS: Record<GalleryCategory, string> = {
@@ -124,4 +124,4 @@ export type MediaImage = {
 
 export type SaveMediaInput = { translations: MediaTranslations; category?: GalleryCategory; published: boolean };
 
-export type ContentEntry = { key: string; lang: 'en' | 'am' | 'wal' | '*'; value: string; updatedAt: string };
+export type ContentEntry = { key: string; lang: 'en' | 'am' | 'wol' | '*'; value: string; updatedAt: string };

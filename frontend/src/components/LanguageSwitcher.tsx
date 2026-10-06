@@ -68,7 +68,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
       >
         {LANGUAGES.map((l) => {
           const active = lang === l.code;
-          const soon = l.code === 'wal' && !WOLAYTTA_READY;
+          const soon = l.code === 'wol' && !WOLAYTTA_READY;
           return (
             <button
               key={l.code}

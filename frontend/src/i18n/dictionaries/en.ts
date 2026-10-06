@@ -1,6 +1,6 @@
 /**
  * English — the base text of the website.
- * Amharic (am.ts) must match this structure exactly; Wolaytta (wal.ts) may be partial.
+ * Amharic (am.ts) must match this structure exactly; Wolaytta (the wol/ folder) may be partial.
  * `{name}` marks a value filled in by the page, e.g. '{count} items'.
  */
 export const en = {

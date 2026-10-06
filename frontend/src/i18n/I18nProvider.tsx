@@ -1,8 +1,8 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
-import { DEFAULT_LANG, WOLAYTTA_READY, type Lang } from './config';
+import { DEFAULT_LANG, HTML_LANG, WOLAYTTA_READY, type Lang } from './config';
 import { en, type Dictionary } from './dictionaries/en';
 import { am } from './dictionaries/am';
-import { wal } from './dictionaries/wal';
+import { wol } from './dictionaries/wol';
 import WolayttaNotice from '../components/WolayttaNotice';
 import { applyOverrides, cachedContent, fetchContent, type ContentOverrides } from '../lib/content';
 
@@ -40,14 +40,14 @@ function merge<T>(base: T, over: unknown): T {
   return base;
 }
 
-const walResolved = merge(en, wal);
-const dictionaries: Record<Lang, Dictionary> = { en, am, wal: walResolved };
+const wolResolved = merge(en, wol);
+const dictionaries: Record<Lang, Dictionary> = { en, am, wol: wolResolved };
 
 function readStoredLang(): Lang {
   try {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === 'en' || stored === 'am') return stored;
-    if (stored === 'wal' && (WOLAYTTA_READY || import.meta.env.DEV)) return stored;
+    if (stored === 'wol' && (WOLAYTTA_READY || import.meta.env.DEV)) return stored;
   } catch {
     /* storage unavailable — use default */
   }
@@ -72,7 +72,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
 
   const setLanguage = useCallback(
     (next: Lang) => {
-      if (next === 'wal' && !WOLAYTTA_READY) {
+      if (next === 'wol' && !WOLAYTTA_READY) {
         setNoticeOpen(true);
         return;
       }
@@ -95,7 +95,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const t = useMemo(() => applyOverrides(dictionaries[lang], overrides), [lang, overrides]);
 
   useEffect(() => {
-    document.documentElement.lang = lang;
+    document.documentElement.lang = HTML_LANG[lang];
     document.title = t.meta.title;
   }, [lang, t]);
 

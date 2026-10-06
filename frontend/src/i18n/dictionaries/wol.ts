@@ -1,24 +1,24 @@
 import type { Dictionary } from './en';
 import type { DeepPartial } from '../types';
-import shared from './wal/shared';
-import home from './wal/home';
-import about from './wal/about';
-import discover from './wal/discover';
-import heritage from './wal/heritage';
-import experiences from './wal/experiences';
-import events from './wal/events';
-import vip from './wal/vip';
-import stay from './wal/stay';
-import dine from './wal/dine';
-import visit from './wal/visit';
-import contact from './wal/contact';
-import gallery from './wal/gallery';
-import photos from './wal/photos';
-import immersive from './wal/immersive';
+import shared from './wol/shared';
+import home from './wol/home';
+import about from './wol/about';
+import discover from './wol/discover';
+import heritage from './wol/heritage';
+import experiences from './wol/experiences';
+import events from './wol/events';
+import vip from './wol/vip';
+import stay from './wol/stay';
+import dine from './wol/dine';
+import visit from './wol/visit';
+import contact from './wol/contact';
+import gallery from './wol/gallery';
+import photos from './wol/photos';
+import immersive from './wol/immersive';
 
 /**
  * WOLAYTTATTO — the Wolaytta translation, put together from one file per page
- * in the wal/ folder beside this file. Translate there, not here.
+ * in the wol/ folder beside this file. Translate there, not here.
  *
  * Guide: docs/WOLAYTTA-TRANSLATION.md
  *   pnpm wolaytta        shows how far each page is and points out mistakes
@@ -28,7 +28,7 @@ import immersive from './wal/immersive';
  * published (WOLAYTTA_READY in src/i18n/config.ts), visitors who choose WOL see
  * a "coming soon" notice; on the local dev server the notice offers a preview.
  */
-export const wal: DeepPartial<Dictionary> = {
+export const wol: DeepPartial<Dictionary> = {
   ...shared,
   ...home,
   ...about,

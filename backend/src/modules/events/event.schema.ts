@@ -25,7 +25,7 @@ const OptionalTranslation = z
 export const EventTranslations = z.object({
   en: Translation,
   am: OptionalTranslation,
-  wal: OptionalTranslation,
+  wol: OptionalTranslation,
 });
 
 export const SaveEvent = z.object({

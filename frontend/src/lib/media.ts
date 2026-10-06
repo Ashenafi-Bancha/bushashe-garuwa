@@ -23,7 +23,7 @@ export type MediaPhoto = {
   category: 'grounds' | 'culture' | null;
   width: number | null;
   height: number | null;
-  translations: { en: MediaCaption; am?: Partial<MediaCaption>; wal?: Partial<MediaCaption> };
+  translations: { en: MediaCaption; am?: Partial<MediaCaption>; wol?: Partial<MediaCaption> };
 };
 
 export type SiteMedia = { gallery: MediaPhoto[]; heroes: Partial<Record<HeroSlot, MediaPhoto[]>> };

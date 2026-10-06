@@ -6,7 +6,7 @@ You only type Wolaytta text into prepared files.
 
 ## How it works
 
-- The website has about **835 lines of text**, split into **15 files, one per page**.
+- The website has about **880 lines of text**, split into **15 files, one per page**.
 - Each file shows the English line, and under it an empty place for the Wolaytta.
 - A line you have not translated yet simply shows in English on the site. Nothing breaks.
 - Visitors do not see Wolaytta until you publish it. Until then, choosing **WOL** on
@@ -15,7 +15,7 @@ You only type Wolaytta text into prepared files.
 ## Where the files are
 
 ```
-frontend/src/i18n/dictionaries/wal/
+frontend/src/i18n/dictionaries/wol/
 ```
 
 | Order | File | What it holds | See it at | Lines |
@@ -39,7 +39,7 @@ frontend/src/i18n/dictionaries/wal/
 Work in this order. `shared.ts` comes first because its words (menu, buttons)
 appear on every page, so it gives the biggest result for the least work.
 
-Do **not** edit `frontend/src/i18n/dictionaries/wal.ts`. It only joins those files together.
+Do **not** edit `frontend/src/i18n/dictionaries/wol.ts`. It only joins those files together.
 
 ## How to translate a line
 
@@ -138,9 +138,9 @@ It prints how far each page is and lists anything that needs fixing:
 ```
 Wolaytta translation
 
-  ✓ wal/shared.ts        ██████████ 107 of 107  On every page: header menu, footer, buttons, notices
-    wal/home.ts          ████······  81 of 203  Home page
-    wal/about.ts         ··········   0 of 76   About page
+  ✓ wol/shared.ts        ██████████ 107 of 107  On every page: header menu, footer, buttons, notices
+    wol/home.ts          ████······  81 of 203  Home page
+    wol/about.ts         ··········   0 of 76   About page
     ...
 
   188 of 835 lines translated (23%).
@@ -202,7 +202,7 @@ pnpm wolaytta
 ```
 
 ```bash
-git add frontend/src/i18n/dictionaries/wal
+git add frontend/src/i18n/dictionaries/wol
 ```
 
 ```bash
@@ -251,7 +251,7 @@ area's Content page for that language.
 
 | I want to… | Do this |
 |---|---|
-| Translate | Open a file in `frontend/src/i18n/dictionaries/wal/`, type between the `""` |
+| Translate | Open a file in `frontend/src/i18n/dictionaries/wol/`, type between the `""` |
 | See progress and mistakes | `pnpm wolaytta` |
 | See it on the site | `pnpm dev`, choose WOL, click "Preview the Wolaytta draft" |
 | Pick up new English text | `pnpm wolaytta:sync` |
