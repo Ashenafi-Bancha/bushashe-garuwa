@@ -182,7 +182,7 @@ export default function Dashboard() {
 
             <div className="min-w-0 flex-1">
               <h1 className="font-display text-base sm:text-2xl font-extrabold text-white leading-tight">
-                Bushaashe Garuwa <span className="text-[#B9D38A]">Admin Dashboard</span>
+                <span className="text-[#15A864]">Bushaashe Garuwa</span> <span className="text-[#B9D38A]">Admin Dashboard</span>
               </h1>
             </div>
 

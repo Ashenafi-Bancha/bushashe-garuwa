@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import logo from '../../assets/brand/logo.png';
 import { photos, picture } from '../../assets/photos';
 import { ApiError, apiEnabled } from '../../lib/api';
 import { useAdminSession } from '../auth/AdminSession';
@@ -11,8 +10,8 @@ const LABEL = 'text-[#1E3A29]/65 text-xs font-bold tracking-[0.14em] uppercase';
 
 /**
  * Staff sign-in: email and password, checked by the API.
- * One centred card on every screen: the logo on top, the name, who the page is
- * for, then the form. A bar across the foot of the page, in its own colour,
+ * One centred card on every screen: the photograph of Meeshsho Keettaa on top,
+ * the name in the green of the home page, who the page is for, then the form. A bar across the foot of the page, in its own colour,
  * leads back to the website.
  */
 export default function SignIn() {
@@ -54,16 +53,16 @@ export default function SignIn() {
     <div className="min-h-[100svh] flex flex-col bg-[#F4EFE4]">
       <main className="flex-1 flex items-center justify-center px-4 sm:px-6 py-10 sm:py-14">
         <div className="w-full max-w-md">
-          {/* who this is: the logo, the name, and who the page is for */}
+          {/* who this is: the photograph, the name, and who the page is for */}
           <div className="text-center mb-7">
-            {/* phones: the photograph of Meeshsho Keettaa, the traditional house, stands in for the logo */}
+            {/* the photograph of Meeshsho Keettaa, the traditional house, on phones and computers alike */}
             <img
-              {...picture(photos.meeshsho, '176px')}
+              {...picture(photos.meeshsho, '(min-width: 640px) 240px, 176px')}
               alt="Meeshsho Keettaa, the traditional Wolaita house at Bushaashe Garuwa"
-              className="sm:hidden w-44 aspect-[3/2] mx-auto rounded-2xl object-cover border-4 border-white shadow-[0_14px_34px_-14px_rgba(19,38,26,0.5)]"
+              className="w-44 sm:w-60 aspect-[3/2] mx-auto rounded-2xl object-cover border-4 border-white shadow-[0_14px_34px_-14px_rgba(19,38,26,0.5)]"
             />
-            <img src={logo} alt="" className="hidden sm:block w-24 h-24 mx-auto rounded-full object-contain bg-white p-1 shadow-[0_10px_30px_-12px_rgba(19,38,26,0.45)]" />
-            <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] tracking-tight mt-4">Bushaashe Garuwa</div>
+            {/* the name in the green it has on the home page (.brand-sign) */}
+            <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#15A864] tracking-tight mt-4">Bushaashe Garuwa</div>
             <div className="inline-flex items-center gap-2 rounded-full bg-[#E3EBD8] text-[#0B6E40] text-[11px] font-bold tracking-[0.18em] uppercase px-3.5 py-1.5 mt-3">
               <Icon name="lock" className="w-3.5 h-3.5" />
               Staff area
