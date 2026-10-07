@@ -15,85 +15,85 @@ import type { DeepPartial } from '../../types';
 const page: DeepPartial<Dictionary> = {
   meta: {
     // EN: Bushaashe Garuwa | Where Wolaita Heritage Lives
-    title: "",
+    title: "Bushaashe Garuwa | Wolaytta Aqoy, Hayday,Dumma Dumma Woga Buquraynee Bayra Aawatu Laatay de'iyo Zannaqa Sohuwa,",
   },
 
   common: {
     // EN: Bushaashe Garuwa
-    brand: "",
+    brand: "Bushaashe Garuwa",
     // EN: Call us
-    call: "",
+    call: "Silkkiya Shoccite",
     // EN: Book Now
-    bookNow: "",
+    bookNow: "Sohuwa Oyqqa",
     // EN: Plan Your Visit
-    planVisit: "",
+    planVisit: "Xomoosonaw keeruwa Oyqqa",
     // EN: Contact Us
-    contactUs: "",
+    contactUs: "Nuna Demmanawu",
     // EN: Get in Touch
-    getInTouch: "",
+    getInTouch: "Nunaara Gayttite",
     // EN: Explore
     explore: "",
     // EN: Explore All
     exploreAll: "",
     // EN: Learn More
-    learnMore: "",
+    learnMore: "Aaruwa Erite",
     // EN: Reserve
-    reserve: "",
+    reserve: "Sohuwa Oyqqite",
     // EN: Reserve Your Place
-    reserveYourPlace: "",
+    reserveYourPlace: "Niyo Sohuwa Oyqqa",
     // EN: Get Directions
-    getDirections: "",
+    getDirections: "Gina Erite",
     // EN: We could not send your message. Please check your connection and try again, or call us.
-    formError: "",
+    formError: "Ne kiitaa yeddanawu danddayokko.Ane ne Intterneetee oottikko be'ada , zaarettada mala, woykko nuussi silkkiya shoca",
     // EN: Photo coming soon
-    photoComingSoon: "",
+    photoComingSoon: "Misilee matan Yees",
     // EN: Location
-    location: "",
+    location: "De'iyo Sohuwa",
     // EN: Opening Hours
-    openingHours: "",
+    openingHours: "Dooyettiyo Saatee",
     // EN: Contact
-    contact: "",
+    contact: "Nuna Demmanawu",
     // EN: Phone
-    phone: "",
+    phone: "Silkke Paydoy",
     // EN: Email
-    email: "",
+    email: "Iimayilee",
     // EN: Damot Sore Woreda, Wolaita Zone, Ethiopia
-    locationLine: "",
+    locationLine: "Daamoota Soore Allaana, Wolaytta Moottaa, Itoophiyaa",
     map: {
       // EN: Find Us
-      eyebrow: "",
+      eyebrow: "Nuna Demmite",
       // EN: Where Bushaashe Garuwa Is
-      title: "",
+      title: "Bushaashe Garoy Awan De'ii",
       // EN: Bushaashe Garuwa is near Gununo, in Damot Sore Woreda, Wolaita Zone. Open the map for directions from wherever you are.
-      desc: "",
+      desc: "Bushaashe Garoy Gununo Ambba Matan, Daamoota Soore Allaanan, Wolaytta Moottan de'ees. Ne de'iyoosan uttada  Bushaashe Garuwa gakkanaw efiya ogiya be'anawu Googiliya Karttaa dooya",
       // EN: On Google Maps
-      listedAs: "",
+      listedAs: "Googiliya Karttaa Bollan",
       // EN: Plus code
       plusCode: "",
       // EN: Get Directions
-      directions: "",
+      directions: "Ogiya Erite",
       // EN: Open in Google Maps
-      open: "",
+      open: "Googiliya Karttan Dooyite",
       // EN: Map showing the location of Bushaashe Garuwa
-      frameTitle: "",
+      frameTitle: "Bushaashe Garoy de'iyo sohuwa bessiya Karttaa",
     },
     // EN: Bushaashe Garuwa, Damot Sore Woreda
-    addressLine1: "",
+    addressLine1: "Bushaashe Garuwa, Daamoota Soore Allaana",
     // EN: Wolaita Zone, Ethiopia
     addressLine2: "",
     // EN: Daily 08:00 – 18:00
-    hoursDaily: "",
+    hoursDaily: "Ubbatookka 2:00 - 12:00",
     // EN: Evening events available by reservation
     eveningEvents: "",
     // EN: Honoring Our Ancestors, Preserving Our Heritage, and Passing It On to Future Generations.
-    slogan: "",
+    slogan: "Nu Aawata Bonchchoos, Nu Wogaanne Haydaa Naagoos, Qassikka Yelettaappe Yeletawu Aattoos",
     // EN: Come and Be Part of the Story
-    comeBePart: "",
+    comeBePart: "Yiite, Yiidi Ha Taarikkiya Shaakkite",
     goal: {
       // EN: Our Ultimate Goal
-      eyebrow: "",
+      eyebrow: "Nu Halchchoy",
       // EN: To keep and preserve the culture, traditions and heritage of Wolaita, and to pass them on to future generations.
-      text: "",
+      text: "Wolaytta Wogaa, Haydaa, Taarikkiya, Buquraanee Dummma Dumma Aqotata bonchchidi naagiyoogaanne, yeletaappe yeletawu Aattiyoogaa",
     },
   },
 
