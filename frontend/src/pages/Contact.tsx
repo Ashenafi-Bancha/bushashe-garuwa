@@ -52,7 +52,7 @@ export default function Contact() {
                 <div className="flex items-start gap-5">
                   <div>
                     <div className="text-[#C4622D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.email}</div>
-                    <a href="mailto:info@bushaashegaruwa.com" className="block text-[#1E3A29] font-sans text-base font-medium hover:text-[#C4622D] transition-colors">info@bushaashegaruwa.com</a>
+                    <a href="mailto:bushaashegaruwa@gmail.com" className="block text-[#1E3A29] font-sans text-base font-medium hover:text-[#C4622D] transition-colors">bushaashegaruwa@gmail.com</a>
                     <div className="text-[#1E3A29]/45 font-sans text-sm mt-0.5">{c.emailNote}</div>
                   </div>
                 </div>

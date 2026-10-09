@@ -282,7 +282,7 @@ export default function Navbar() {
             <div className="mt-5 text-sm text-[#1E3A29]/80 leading-relaxed space-y-1">
               <p>{t.common.locationLine}</p>
               <p><a href="tel:+251932196502" className="text-[#13261A] font-semibold">+251 932 196 502</a></p>
-              <p><a href="mailto:info@bushaashegaruwa.com" className="hover:text-[#0B6E40]">info@bushaashegaruwa.com</a></p>
+              <p><a href="mailto:bushaashegaruwa@gmail.com" className="hover:text-[#0B6E40]">bushaashegaruwa@gmail.com</a></p>
             </div>
             <div className="mt-4"><SocialLinks small /></div>
           </div>

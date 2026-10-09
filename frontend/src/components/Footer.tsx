@@ -57,7 +57,7 @@ export default function Footer() {
           <div className="flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-6 text-center sm:text-left">
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#0B6E40] transition-colors">{t.footer.address}</a>
             <a href="tel:+251932196502" className="hover:text-[#0B6E40] transition-colors">+251 932 196 502</a>
-            <a href="mailto:info@bushaashegaruwa.com" className="hover:text-[#0B6E40] transition-colors">info@bushaashegaruwa.com</a>
+            <a href="mailto:bushaashegaruwa@gmail.com" className="hover:text-[#0B6E40] transition-colors">bushaashegaruwa@gmail.com</a>
           </div>
           <div>© {new Date().getFullYear()} {t.footer.rights}</div>
         </div>

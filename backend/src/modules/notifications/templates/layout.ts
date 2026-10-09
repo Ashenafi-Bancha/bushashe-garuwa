@@ -24,7 +24,7 @@ export const BRAND = {
   address: 'Damot Sore Woreda, Wolaita Zone, Ethiopia',
   phone: '+251 932 196 502',
   phoneHref: '+251932196502',
-  email: 'info@bushaashegaruwa.com',
+  email: 'bushaashegaruwa@gmail.com',
   facebook: 'https://www.facebook.com/bushaashe.garuwa',
   telegram: 'https://t.me/bushaashegaruwafrist',
   whatsapp: 'https://wa.me/251932196502',

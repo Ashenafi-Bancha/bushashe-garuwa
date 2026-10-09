@@ -76,7 +76,7 @@ export default function Visit() {
               <div>
                 <div className="text-[#0B6E40] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
                 <a href="tel:+251932196502" className="block text-[#13261A] font-sans text-sm hover:text-[#0B6E40] transition-colors">+251 932 196 502</a>
-                <a href="mailto:info@bushaashegaruwa.com" className="block text-[#1E3A29]/80 font-sans text-xs hover:text-[#0B6E40] transition-colors">info@bushaashegaruwa.com</a>
+                <a href="mailto:bushaashegaruwa@gmail.com" className="block text-[#1E3A29]/80 font-sans text-xs hover:text-[#0B6E40] transition-colors">bushaashegaruwa@gmail.com</a>
               </div>
             </div>
           </div>
