@@ -7,6 +7,7 @@ export const am: Dictionary = {
   },
 
   common: {
+    back: 'ተመለስ',
     brand: 'ቡሻሼ ጋሯ',
     call: 'ይደውሉልን',
     bookNow: 'አሁን ያስይዙ',
@@ -179,7 +180,6 @@ export const am: Dictionary = {
       sinceCentury: 'ከ18ኛው ክፍለ ዘመን ጀምሮ',
       badge: 'ወላይታ · ቅርስ · ተፈጥሮ · ባህል · ',
       next: 'ቀጣዩ ፎቶ',
-      lead: 'በዳሞት ሶሬ፣ በጉኑኖ አቅራቢያ፣ ለአራት ትውልዶች የተጠበቀ የቤተሰብ ቅርስ ስፍራ።',
       walk: 'በአባቶቻችን ምድር ይራመዱ',
       book: 'ማረፊያዎን ያስይዙ',
       heritage: 'ቅርሳችንን ያስሱ',
@@ -220,6 +220,7 @@ export const am: Dictionary = {
     facts: {
       items: [
         { value: '18ኛው ክ/ዘ', label: 'ታሪኩ የጀመረበት' },
+        { value: '1940ዎቹ', label: 'የመጀመሪያዎቹ ባህላዊ ቤቶች የተሠሩበት' },
         { value: '4+', label: 'የቤተሰቡ ትውልዶች' },
         { value: '2', label: 'ባህላዊ የወላይታ ቤቶች' },
         { value: '1,800+', label: 'የቡና ዛፎች በግቢው' },

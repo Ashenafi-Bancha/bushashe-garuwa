@@ -9,6 +9,7 @@ export const en = {
   },
 
   common: {
+    back: 'Back',
     brand: 'Bushaashe Garuwa',
     call: 'Call us',
     bookNow: 'Book Now',
@@ -181,7 +182,6 @@ export const en = {
       sinceCentury: 'Since the 18th century',
       badge: 'WOLAITA · HERITAGE · NATURE · CULTURE · ',
       next: 'Next photograph',
-      lead: 'A family heritage place in Damot Sore, near Gununo, kept for four generations.',
       walk: 'Walk the land of our forefathers',
       book: 'Book Your Stay',
       heritage: 'Explore Our Heritage',
@@ -222,6 +222,7 @@ export const en = {
     facts: {
       items: [
         { value: '18th c.', label: 'Where the story begins' },
+        { value: '1940s', label: 'First cultural houses built' },
         { value: '4+', label: 'Generations of the family' },
         { value: '2', label: 'Traditional Wolaita houses' },
         { value: '1,800+', label: 'Coffee trees on the grounds' },

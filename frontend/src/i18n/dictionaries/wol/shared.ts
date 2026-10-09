@@ -19,6 +19,8 @@ const page: DeepPartial<Dictionary> = {
   },
 
   common: {
+    // EN: Back
+    back: "",
     // EN: Bushaashe Garuwa
     brand: "Bushaashe Garuwa",
     // EN: Call us

@@ -107,6 +107,62 @@ a, button {
 .animate-fade-in       { animation: fadeIn 0.6s ease both; }
 .animate-scale-in      { animation: scaleIn 0.6s var(--ease-out-expo) both; }
 .animate-scroll-bounce { animation: scrollBounce 1.8s ease-in-out infinite; }
+
+/* ── "Scroll to explore": a mouse whose wheel keeps rolling down ── */
+@keyframes scrollWheel {
+  0%   { opacity: 0; transform: translateY(0); }
+  25%  { opacity: 1; }
+  70%  { opacity: 1; transform: translateY(12px); }
+  100% { opacity: 0; transform: translateY(14px); }
+}
+.scroll-cue { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.scroll-cue-mouse {
+  width: 26px;
+  height: 42px;
+  border: 2px solid rgb(30 58 41 / 0.55);
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  padding-top: 7px;
+  animation: scrollBounce 2.4s ease-in-out infinite;
+}
+.scroll-cue-wheel {
+  width: 4px;
+  height: 8px;
+  border-radius: 2px;
+  background: #0E8A50;
+  animation: scrollWheel 1.6s ease-in-out infinite;
+}
+.scroll-cue-text {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgb(30 58 41 / 0.6);
+}
+
+/* ── The place in numbers: each figure on a card of its own ── */
+.fact-card {
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgb(30 58 41 / 0.1);
+  border-radius: 1.125rem;
+  padding: 1.125rem 1rem 1rem 1.125rem;
+  box-shadow: 0 10px 26px -18px rgb(19 38 26 / 0.45);
+}
+.fact-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(#15A864, #86A94F);
+}
+@media (min-width: 640px) {
+  .fact-card { padding: 1.5rem 1.25rem 1.375rem 1.5rem; }
+}
 .animate-ken-burns     { animation: kenBurns 14s ease-out both; }
 .animate-spin-slow     { animation: spin 18s linear infinite; }
 .animate-hero-photo    { animation: heroPhoto 1.6s var(--ease-out-expo) both; }
@@ -223,6 +279,31 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 @media (min-width: 1024px) {
   .sticky-book { right: 28px; bottom: 28px; padding: 15px 26px; font-size: 15px; }
   .sticky-book:hover { background: #0B7A45; }
+}
+
+/* ── "Back", at the bottom corner of every page but the home page; it stays over the footer too ── */
+.back-button {
+  position: fixed;
+  left: 14px;
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 40;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 18px 11px 14px;
+  border-radius: 9999px;
+  background: #fff;
+  color: #1E3A29;
+  border: 1px solid rgb(30 58 41 / 0.14);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  box-shadow: 0 10px 26px rgba(19, 38, 26, 0.28);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.back-button:hover { background: #0E8A50; color: #fff; }
+@media (min-width: 1024px) {
+  .back-button { left: 28px; bottom: 28px; padding: 14px 22px 14px 18px; font-size: 15px; }
 }
 
 /* ── "Coming soon", said large and bright (the guest house, which is not open yet) ── */

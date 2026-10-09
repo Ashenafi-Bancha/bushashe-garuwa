@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { lazy, Suspense, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import BackButton from './components/BackButton';
 import Home from './pages/Home';
 import Discover from './pages/Discover';
 import Heritage from './pages/Heritage';
@@ -48,6 +49,7 @@ function AppLayout() {
       {/* a thin line across the top: how far down the page you are */}
       <div id="scroll-progress" aria-hidden="true" className="fixed top-0 inset-x-0 z-[60] h-[3px] origin-left scale-x-0 bg-[#0E8A50]" />
       <Navbar />
+      <BackButton />
       <PageTransition>
         {(location) => (
       <Routes location={location}>

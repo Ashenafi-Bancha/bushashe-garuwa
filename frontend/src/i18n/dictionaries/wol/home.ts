@@ -41,8 +41,6 @@ const page: DeepPartial<Dictionary> = {
       badge: "",
       // EN: Next photograph
       next: "",
-      // EN: A family heritage place in Damot Sore, near Gununo, kept for four generations.
-      lead: "",
       // EN: Walk the land of our forefathers
       walk: "",
       // EN: Book Your Stay
@@ -130,6 +128,12 @@ const page: DeepPartial<Dictionary> = {
           // EN: 18th c.
           value: "",
           // EN: Where the story begins
+          label: "",
+        },
+        {
+          // EN: 1940s
+          value: "",
+          // EN: First cultural houses built
           label: "",
         },
         {

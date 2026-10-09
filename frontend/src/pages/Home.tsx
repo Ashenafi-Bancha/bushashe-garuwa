@@ -61,6 +61,7 @@ function Heading({ eyebrow, title, desc, center = false, action, dark = false }:
 function CountUp({ value }: { value: string }) {
   const match = value.match(/^([^\d]*)([\d,]+)(.*)$/);
   const target = match ? Number(match[2]!.replace(/,/g, '')) : 0;
+  const grouped = Boolean(match?.[2]!.includes(','));
   const [shown, setShown] = useState(match ? 0 : target);
   const ref = useRef<HTMLSpanElement>(null);
 
@@ -83,7 +84,7 @@ function CountUp({ value }: { value: string }) {
   }, [target]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!match) return <span>{value}</span>;
-  return <span ref={ref}>{match[1]}{shown.toLocaleString('en-US')}{match[3]}</span>;
+  return <span ref={ref}>{match[1]}{grouped ? shown.toLocaleString('en-US') : shown}{match[3]}</span>;
 }
 
 export default function Home({ landscape = false }: { /** Open with the 3D landscape where the device can draw it */ landscape?: boolean }) {
@@ -220,10 +221,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             {/* the name in the lettering of the main gate, raised in 3D, sized to the screen */}
             <HeroName title={h.hero.title} className="mb-6 lg:mb-4" />
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 animate-fade-up delay-300">
-              <div className="max-w-xl">
-                <p className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight mb-3">{h.hero.subtitle}</p>
-                <p className="text-[#1E3A29]/70 leading-relaxed">{h.hero.lead}</p>
-              </div>
+              <p className="max-w-xl font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight">{h.hero.subtitle}</p>
               <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
                 <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>
@@ -233,16 +231,23 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
         </section>
         )}
 
-        {/* ═════════ THE PLACE IN NUMBERS ═════════ */}
-        <section className="px-5 sm:px-8 pt-6 lg:pt-10">
-          <ul data-reveal className="fade-section max-w-screen-xl mx-auto grid grid-cols-2 lg:grid-cols-5 gap-px rounded-[1.75rem] sm:rounded-[2rem] overflow-hidden bg-[#1E3A29]/8 elev-1">
-            {h.facts.items.map((fact, i) => (
-              <li key={fact.label} className={`bg-white px-5 py-6 sm:px-7 sm:py-8 ${i === 4 ? 'col-span-2 lg:col-span-1' : ''}`}>
-                <span className="block w-2 h-2 rounded-full bg-[#86A94F] mb-5" />
-                <div className="font-display text-[2rem] sm:text-5xl font-extrabold leading-none tracking-[-0.04em] text-[#1E3A29] whitespace-nowrap">
+        {/* ═════════ THE WAY DOWN: a mouse whose wheel keeps rolling ═════════ */}
+        <div className="scroll-cue pt-4 sm:pt-6 lg:pt-0" aria-hidden="true">
+          <span className="scroll-cue-mouse">
+            <span className="scroll-cue-wheel" />
+          </span>
+          <span className="scroll-cue-text">{h.hero.scroll}</span>
+        </div>
+
+        {/* ═════════ THE PLACE IN NUMBERS: a card for each figure ═════════ */}
+        <section className="px-5 sm:px-8 pt-6 lg:pt-8">
+          <ul data-wave className="max-w-screen-xl mx-auto grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
+            {h.facts.items.map((fact) => (
+              <li key={fact.label} className="fact-card">
+                <div className="font-display text-[1.6rem] sm:text-4xl xl:text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-[#0B6E40] whitespace-nowrap">
                   <CountUp value={fact.value} />
                 </div>
-                <div className="text-sm text-[#1E3A29]/60 mt-3 leading-snug">{fact.label}</div>
+                <div className="text-[13px] sm:text-sm text-[#1E3A29]/65 mt-2.5 leading-snug">{fact.label}</div>
               </li>
             ))}
           </ul>

@@ -17,7 +17,7 @@ export default function Footer() {
   const { t } = useI18n();
   return (
     // a light sage green: clean and airy, part of the green heritage brand
-    <footer className="relative bg-[#E3EBD8] text-[#1E3A29] overflow-hidden rounded-t-[2rem] sm:rounded-t-[3rem]">
+    <footer className="relative bg-[#E3EBD8] text-[#1E3A29] overflow-hidden rounded-t-[2rem] sm:rounded-t-[3rem] pb-16">
       <div className="max-w-screen-xl mx-auto px-5 sm:px-8 pt-14 sm:pt-20">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-12 pb-12 sm:pb-16">
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
