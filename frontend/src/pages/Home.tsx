@@ -11,7 +11,7 @@ import PhotoRing from '../components/PhotoRing';
 import QuickLinks from '../components/QuickLinks';
 import PhotoCard from '../components/PhotoCard';
 import CulturalFoodDates from '../components/CulturalFoodDates';
-import SwipeRow from '../components/SwipeRow';
+import CardGrid from '../components/CardGrid';
 import HeroName from '../components/HeroName';
 import StickyBook from '../components/StickyBook';
 import Testimonials from '../components/Testimonials';
@@ -344,7 +344,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
               title={h.experiences.title}
               action={<Link to="/experiences" className="btn-outline text-[#1E3A29] self-start md:self-auto">{t.common.exploreAll}</Link>}
             />
-            <SwipeRow grid="md:grid-cols-2 lg:grid-cols-3">
+            <CardGrid grid="md:grid-cols-2 lg:grid-cols-3">
               {experiences.map((exp, i) => {
                 const text = h.experiences.items[exp.id];
                 return (
@@ -353,14 +353,14 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                   </div>
                 );
               })}
-            </SwipeRow>
+            </CardGrid>
           </div>
         </section>
 
         {/* ═════════ STAY AND DINE ═════════ */}
         <section className="py-20 sm:py-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <SwipeRow grid="md:grid-cols-2" item="w-[84vw] sm:w-[64vw]">
+            <CardGrid grid="md:grid-cols-2">
               {[
                 { to: '/vip', eyebrow: t.vip.hero.eyebrow, title: t.vip.hero.title, desc: t.vip.hero.desc, cta: t.common.learnMore, photo: photos.vipDining as string | undefined, chips: [t.vip.features.kitchen.title, t.vip.features.fire.title, t.vip.features.rooms.title] },
                 { to: '/dine', eyebrow: h.restaurant.eyebrow, title: h.restaurant.title, desc: h.restaurant.desc, cta: h.restaurant.cta, photo: photos.food, chips: h.restaurant.categories },
@@ -384,7 +384,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                   </Link>
                 </div>
               ))}
-            </SwipeRow>
+            </CardGrid>
 
             {/* what else is on the grounds */}
             <div className="mt-20 sm:mt-28">
@@ -406,7 +406,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                   <span className="text-[#1E3A29]/75 text-sm sm:text-base leading-relaxed max-w-sm mt-5">{t.stay.comingSoon.lead}</span>
                 </Link>
               </div>
-              <SwipeRow grid="md:grid-cols-2 lg:grid-cols-3" item="w-[70vw] sm:w-[46vw]" gap="gap-3 md:gap-x-10 md:gap-y-0">
+              <CardGrid grid="md:grid-cols-2 lg:grid-cols-3" gap="gap-3 md:gap-x-10 md:gap-y-0">
                 {facilities.map((id, i) => {
                   const item = h.facilities.items[id];
                   return (
@@ -419,7 +419,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                     </div>
                   );
                 })}
-              </SwipeRow>
+              </CardGrid>
             </div>
           </div>
         </section>
@@ -428,7 +428,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
         <section className="bg-[#E3EBD8] text-[#13261A] py-20 sm:py-28 rounded-[2rem] sm:rounded-[3rem] mx-2 sm:mx-3">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <Heading eyebrow={h.timeline.eyebrow} title={h.timeline.title} />
-            <SwipeRow grid="md:grid-cols-3 lg:grid-cols-5" item="w-[66vw] sm:w-[42vw]">
+            <CardGrid grid="md:grid-cols-3 lg:grid-cols-5">
               {h.timeline.items.map((item, i) => (
                 <div key={i} data-reveal className="fade-section h-full rounded-[1.5rem] bg-white border border-[#1E3A29]/12 p-6 hover:bg-white/80 transition-colors" style={{ transitionDelay: `${i * 70}ms` }}>
                   <div className="font-display text-3xl font-extrabold text-[#0B6E40] tracking-tight mb-4">{item.period}</div>
@@ -436,14 +436,14 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                   <p className="text-[#1E3A29]/80 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
-            </SwipeRow>
+            </CardGrid>
           </div>
         </section>
 
         {/* ═════════ THE READING PLACE AND THE STORIES ═════════ */}
         <section className="py-20 sm:py-28">
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-            <SwipeRow grid="md:grid-cols-2" item="w-[84vw] sm:w-[64vw]">
+            <CardGrid grid="md:grid-cols-2">
             {[
               { eyebrow: h.reading.eyebrow, title: h.reading.title, text: h.reading.desc, extra: h.reading.mountain, chips: h.reading.qualities, cta: h.reading.cta, to: '/visit', photo: photos.gardens as string | undefined, label: h.reading.caption },
               { eyebrow: h.stories.eyebrow, title: h.stories.title, text: h.stories.p1, extra: h.stories.p2, chips: h.stories.languages, cta: h.stories.cta, to: '/heritage/stories', photo: undefined, label: h.stories.elderAlt },
@@ -466,7 +466,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                 </div>
               </article>
             ))}
-            </SwipeRow>
+            </CardGrid>
           </div>
         </section>
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
-import SwipeRow from '../components/SwipeRow';
+import CardGrid from '../components/CardGrid';
 
 /* Icons per item — the text lives in the translations (t.about.*) */
 /* The family line, oldest first — names, labels and histories live in the translations (t.about.lineage) */
@@ -159,7 +159,7 @@ export default function About() {
             <span className="eyebrow mb-5">{a.values.eyebrow}</span>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{a.values.title}</h2>
           </div>
-          <SwipeRow grid="md:grid-cols-2 lg:grid-cols-3" item="w-[74vw] sm:w-[48vw]">
+          <CardGrid grid="md:grid-cols-2 lg:grid-cols-3">
             {values.map((val, i) => (
               <div key={val.id} className="h-full bg-white heritage-card p-7">
                 <span className="block text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
@@ -167,7 +167,7 @@ export default function About() {
                 <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{a.values.items[val.id].desc}</p>
               </div>
             ))}
-          </SwipeRow>
+          </CardGrid>
         </div>
       </section>
 

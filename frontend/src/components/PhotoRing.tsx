@@ -14,8 +14,9 @@ const cardShape = (viewport: number) => (viewport < 640 ? 2 / 3 : 1.45);
  * The grounds as a ring of photographs standing in 3D space: it turns by itself,
  * and can be dragged or swiped. The face nearest the viewer is the one in focus.
  *
- * Built from CSS 3D transforms, so it costs no extra download, and it settles
- * into a plain row of photographs when someone has asked for less motion.
+ * Built from CSS 3D transforms, so it costs no extra download. On phones, and
+ * when someone has asked for less motion, the photographs are laid out as a plain
+ * grid instead, so every one can be seen without swiping sideways.
  */
 export default function PhotoRing() {
   const { t } = useI18n();
@@ -26,6 +27,7 @@ export default function PhotoRing() {
   const [width, setWidth] = useState(320);
   const [shape, setShape] = useState(1.45);
   const [stillMode, setStillMode] = useState(false);
+  const [phone, setPhone] = useState(() => typeof window !== 'undefined' && window.innerWidth < 640);
   const drag = useRef<{ x: number; angle: number } | null>(null);
   const frame = useRef(0);
   const holder = useRef<HTMLDivElement>(null);
@@ -36,6 +38,7 @@ export default function PhotoRing() {
   useEffect(() => {
     const measure = () => {
       const viewport = window.innerWidth;
+      setPhone(viewport < 640);
       const w = cardWidth(viewport);
       setWidth(w);
       setShape(cardShape(viewport));
@@ -64,7 +67,7 @@ export default function PhotoRing() {
 
   // turns slowly on its own until someone takes hold of it
   useEffect(() => {
-    if (stillMode || dragging || !onScreen) return;
+    if (stillMode || phone || dragging || !onScreen) return;
     let last = performance.now();
     const tick = (now: number) => {
       const elapsed = now - last;
@@ -74,7 +77,7 @@ export default function PhotoRing() {
     };
     frame.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame.current);
-  }, [stillMode, dragging, onScreen]);
+  }, [stillMode, phone, dragging, onScreen]);
 
   const onPointerDown = useCallback(
     (e: React.PointerEvent) => {
@@ -103,15 +106,26 @@ export default function PhotoRing() {
     return RING[Math.round(normalized / step) % RING.length]!;
   }, [angle, step]);
 
-  if (stillMode) {
+  if (stillMode || phone) {
     return (
       <section className="py-20 sm:py-28">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] mb-8">{ring.title}</h2>
-          <div className="grid sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="text-center mb-10 sm:mb-14">
+            <span className="eyebrow mb-5">{ring.eyebrow}</span>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98]">{ring.title}</h2>
+            <p className="text-[#1E3A29]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{ring.desc}</p>
+          </div>
+          <div data-wave className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
             {RING.map((key) => (
-              <img key={key} {...picture(photos[key])} alt={t.photos[key]} loading="lazy" className="rounded-2xl w-full sm:aspect-[3/4] sm:object-cover" />
+              <figure key={key} className="relative rounded-2xl overflow-hidden bg-[#13261A]">
+                <img {...picture(photos[key], '(min-width: 640px) 33vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full aspect-[4/3] object-cover" />
+                <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
+                <figcaption className="absolute left-3 right-3 bottom-2.5 text-white font-display text-sm leading-tight">{t.photoCaptions[key].title}</figcaption>
+              </figure>
             ))}
+          </div>
+          <div className="mt-8 text-center">
+            <Link to="/gallery" className="btn-primary">{ring.cta}</Link>
           </div>
         </div>
       </section>
