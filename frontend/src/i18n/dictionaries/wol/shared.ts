@@ -15,26 +15,26 @@ import type { DeepPartial } from '../../types';
 const page: DeepPartial<Dictionary> = {
   meta: {
     // EN: Bushaashe Garuwa | Where Wolaita Heritage Lives
-    title: "Bushaashe Garuwa | Wolaytta Aqoy, Hayday,Dumma Dumma Woga Buquraynee Bayra Aawatu Laatay de'iyo Zannaqa Sohuwa,",
+    title: "Bushaashe Garuwa | Wolaytta Aqoy, Hayday, Dumma Dumma Woga Buquraynee Bayra Aawatu Laatay de'iyo Zannaqa Sohuwa,",
   },
 
   common: {
     // EN: Bushaashe Garuwa
     brand: "Bushaashe Garuwa",
     // EN: Call us
-    call: "Silkkiya Shoccite",
+    call: "Silkkiya Shocite",
     // EN: Book Now
-    bookNow: "Sohuwa Oyqqa",
+    bookNow: "Sohuwa Oyqqite",
     // EN: Plan Your Visit
-    planVisit: "Xomoosonaw keeruwa Oyqqa",
+    planVisit: "Xomoosanawu Keerite",
     // EN: Contact Us
     contactUs: "Nuna Demmanawu",
     // EN: Get in Touch
     getInTouch: "Nunaara Gayttite",
     // EN: Explore
-    explore: "",
+    explore: "Xeella",
     // EN: Explore All
-    exploreAll: "",
+    exploreAll: "Ubbaakka xeella",
     // EN: Learn More
     learnMore: "Aaruwa Erite",
     // EN: Reserve
@@ -42,7 +42,7 @@ const page: DeepPartial<Dictionary> = {
     // EN: Reserve Your Place
     reserveYourPlace: "Niyo Sohuwa Oyqqa",
     // EN: Get Directions
-    getDirections: "Gina Erite",
+    getDirections: "Ginaa Erite",
     // EN: We could not send your message. Please check your connection and try again, or call us.
     formError: "Ne kiitaa yeddanawu danddayokko.Ane ne Intterneetee oottikko be'ada , zaarettada mala, woykko nuussi silkkiya shoca",
     // EN: Photo coming soon
@@ -58,33 +58,33 @@ const page: DeepPartial<Dictionary> = {
     // EN: Email
     email: "Iimayilee",
     // EN: Damot Sore Woreda, Wolaita Zone, Ethiopia
-    locationLine: "Daamoota Soore Allaana, Wolaytta Moottaa, Itoophiyaa",
+    locationLine: "Daamoota Soore Allaana, Wolaytta Moottaa, Toophphiya",
     map: {
       // EN: Find Us
       eyebrow: "Nuna Demmite",
       // EN: Where Bushaashe Garuwa Is
       title: "Bushaashe Garoy Awan De'ii",
       // EN: Bushaashe Garuwa is near Gununo, in Damot Sore Woreda, Wolaita Zone. Open the map for directions from wherever you are.
-      desc: "Bushaashe Garoy Gununo Ambba Matan, Daamoota Soore Allaanan, Wolaytta Moottan de'ees. Ne de'iyoosan uttada  Bushaashe Garuwa gakkanaw efiya ogiya be'anawu Googiliya Karttaa dooya",
+      desc: "Bushaashe Garoy Gununo Ambba matan, Daamoota Soore Allaanan, Wolaytta Moottan de'ees. Ne de'iyoosan uttada  Bushaashe Garuwa gakkanaw efiya ginaa be'anawu Googiliya Karttaa dooya",
       // EN: On Google Maps
       listedAs: "Googiliya Karttaa Bollan",
       // EN: Plus code
-      plusCode: "",
+      plusCode: "Pilas Koode",
       // EN: Get Directions
-      directions: "Ogiya Erite",
+      directions: "Ginaa Erite",
       // EN: Open in Google Maps
       open: "Googiliya Karttan Dooyite",
       // EN: Map showing the location of Bushaashe Garuwa
-      frameTitle: "Bushaashe Garoy de'iyo sohuwa bessiya Karttaa",
+      frameTitle: "Bushaashe Garoy diyoosaa bessiya Karttaa",
     },
     // EN: Bushaashe Garuwa, Damot Sore Woreda
     addressLine1: "Bushaashe Garuwa, Daamoota Soore Allaana",
     // EN: Wolaita Zone, Ethiopia
-    addressLine2: "",
+    addressLine2: "Wolaytta Moottaa, Toophphiya",
     // EN: Daily 08:00 – 18:00
     hoursDaily: "Ubbatookka 2:00 - 12:00",
     // EN: Evening events available by reservation
-    eveningEvents: "",
+    eveningEvents: "Omarssi shiiqiyoogaassi kasetidi sohuwaa oyttana koshshees",
     // EN: Honoring Our Ancestors, Preserving Our Heritage, and Passing It On to Future Generations.
     slogan: "Nu Aawata Bonchchoos, Nu Wogaanne Haydaa Naagoos, Qassikka Yelettaappe Yeletawu Aattoos",
     // EN: Come and Be Part of the Story
@@ -100,42 +100,42 @@ const page: DeepPartial<Dictionary> = {
   nav: {
     links: {
       // EN: Home
-      home: "",
+      home: "Suwa", //Kase Sohuwa
       // EN: About
-      about: "",
+      about: "Nubaa",
       // EN: Discover
-      discover: "",
+      discover: "Xeella",
       // EN: Heritage
-      heritage: "",
+      heritage: "Laataa",
       // EN: Experiences
       experiences: "",
       // EN: Events
-      events: "",
+      events: "Giigissota",
       // EN: Guest House
-      stay: "",
+      stay: "Imatta Kifiliya",
       // EN: VIP Service
-      vip: "",
+      vip: "VIP Haggaaza",
       // EN: Dine
-      dine: "",
+      dine: "Qumaa",
       // EN: Visit
-      visit: "",
+      visit: "Xomoosa",
       // EN: Gallery
-      gallery: "",
+      gallery: "Misiliya",
       // EN: Services
-      services: "",
+      services: "Haggaazata",
       // EN: Contact
-      contact: "",
+      contact: "Nuna Demmanawu",
     },
     describe: {
       // EN: Our story, mission and vision.
-      discover: "",
+      discover: "Nu haydaa, kiitaa, ",
       // EN: Phone, email and a message form.
-      contact: "",
+      contact: "Silkke Paydoy, Iimayilee,  Qantta Xuufiyaa",
       // EN: Private rooms for a family: cook, eat, celebrate and stay.
-      vip: "",
+      vip: "So asaassi dumma kifiliya: Kattite, Miite, Bonchchite, Aqite",
     },
     // EN: Bushaashe Garuwa home
-    homeAria: "",
+    homeAria: "Bushaashe Garuwa Suwa",
     // EN: Main navigation
     mainNav: "",
     // EN: Mobile navigation
@@ -143,138 +143,138 @@ const page: DeepPartial<Dictionary> = {
     // EN: Navigation menu
     menuLabel: "",
     // EN: Open menu
-    openMenu: "",
+    openMenu: "Menu dooya",
     // EN: Close menu
-    closeMenu: "",
+    closeMenu: "Menu gordda",
     // EN: Search
-    search: "",
+    search: "Koya",
     // EN: Close search
-    closeSearch: "",
+    closeSearch: "Koshsha Gordda",
     // EN: Search Bushaashe Garuwa...
-    searchPlaceholder: "",
+    searchPlaceholder: "Bushaashe Garuwan koyite...",
     // EN: Suggested
-    suggested: "",
+    suggested: "Qofay shiiqis",
     suggestions: [
       // EN: Cultural Houses
-      "",
+      "Wogaa Keettata",
       // EN: Heritage Trees
-      "",
+      "Laata Mittata",
       // EN: Traditional Food
-      "",
+      "Wogaa Qumaa",
       // EN: Guesthouse
-      "",
+      "Imatta Keettaa",
       // EN: Cultural Events
-      "",
+      "Wogaa Giigissota",
       // EN: Oral Histories
-      "",
+      "Doonaa Haydata",
       // EN: The Reading Place
-      "",
+      "Nabbabbiyo Sohuwa",
       // EN: Heritage Tour
-      "",
+      "Buquraa Xomoosuwa",
     ],
     // EN: Language
-    language: "",
+    language: "Qaalaa",
     // EN: coming soon
-    wolayttaSoon: "",
+    wolayttaSoon: "Mata wodiyan...",
     // EN: Menu
-    menu: "",
+    menu: "Menu",
     // EN: Close
-    close: "",
+    close: "Gordda",
   },
 
   notice: {
     // EN: Wolaytta is coming soon
-    title: "",
+    title: "Wolayttattoy mata wodiyan gakkees",
     // EN: We are carefully translating every page into Wolayttatto. Until the full Wolaytta version is ready, please continue in English or Amharic.
     body: "",
     // EN: Continue in English
-    continueEn: "",
+    continueEn: "Ingiliizattuwan",
     // EN: Continue in Amharic
-    continueAm: "",
+    continueAm: "Amaarattuwan",
     // EN: Close
-    close: "",
+    close: "Gordda",
   },
 
   footer: {
     // EN: Where Wolaita Heritage Lives. A living cultural heritage destination in Wolaita, Ethiopia.
-    tagline: "",
+    tagline: "Wolaytta Buquray De'iyoosaa. Toophphiya, Wolaytta giddon wogaa buquray de'iyoosaa.",
     // EN: Follow Us
-    followUs: "",
+    followUs: "Nuna Kaallite",
     columns: {
       explore: {
         // EN: Explore
-        title: "",
+        title: "Yuuyyi Be'ite",
         links: {
           // EN: Heritage
-          heritage: "",
+          heritage: "Buquraa",
           // EN: Experiences
-          experiences: "",
+          experiences: "Eridobata",
           // EN: Events
-          events: "",
+          events: "Giigissota",
           // EN: Gallery
-          gallery: "",
+          gallery: "Misiliya Keettaa",
         },
       },
       stay: {
         // EN: Stay
-        title: "",
+        title: "Takkite",
         links: {
           // EN: VIP Service
-          vip: "",
+          vip: "VIP Haggaaza",
           // EN: Guesthouse (coming soon)
-          guesthouse: "",
+          guesthouse: "Imatta Keettaa (mata wodiyan...)",
           // EN: Restaurant
-          restaurant: "",
+          restaurant: "Katta Keettaa",
           // EN: Bar
-          bar: "",
+          bar: "Ushsha Keettaa",
           // EN: Cultural Food Events
-          foodEvents: "",
+          foodEvents: "Wogaa Qumaa Giigissota",
         },
       },
       discover: {
         // EN: Discover
-        title: "",
+        title: "Demma",
         links: {
           // EN: Our Story
-          story: "",
+          story: "Nu Taarikiyaa",
           // EN: Family History
-          family: "",
+          family: "Keettaa Asaa Taarikiya",
           // EN: Historical Timeline
           timeline: "",
           // EN: Oral Histories
-          stories: "",
+          stories: "Doonaa Taariketa",
         },
       },
       visit: {
         // EN: Visit
-        title: "",
+        title: "Xomoosite",
         links: {
           // EN: Plan Your Visit
-          plan: "",
+          plan: "Xomoosanawu Keerite",
           // EN: Contact Us
-          contact: "",
+          contact: "Nuna Demmanawu",
           // EN: Educational Visits
-          education: "",
+          education: "Luxetta Xomoosota",
           // EN: Group Tours
-          groups: "",
+          groups: "Citaa Xomoosota",
           // EN: School Visits
-          schools: "",
+          schools: "Luxetta Keettaa Xomoosota",
         },
       },
     },
     // EN: Bushaashe Garuwa, Damot Sore Woreda, Wolaita Zone, Ethiopia
-    address: "",
+    address: "Bushaasha Garuwa, Daamoota Soore Allaana, Wolaytta Moottaa, Toophphiya",
     // EN: Bushaashe Garuwa. Where Wolaita Heritage Lives.
-    rights: "",
+    rights: "Bushaashe Baruwaa. Wolaytta Buquray De'iyoosaa.",
   },
 
   notFound: {
     // EN: Page Not Found
-    title: "",
+    title: "Sinttay beettibeenna",
     // EN: The page you're looking for doesn't exist.
-    text: "",
+    text: "Intte koyiyoo sinttay de'enna.",
     // EN: Return Home
-    button: "",
+    button: "Suwakko Simma",
   },
 };
 
