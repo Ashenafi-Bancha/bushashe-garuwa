@@ -281,6 +281,16 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   .sticky-book:hover { background: #0B7A45; }
 }
 
+/* ── Wolaytta words are longer: the header's links sit closer, and its button waits for a wider screen ── */
+html:lang(wal) .site-nav a,
+html:lang(wal) .site-nav button { padding-left: 8px; padding-right: 8px; font-size: 13px; }
+html:lang(wal) .nav-cta-wrap { display: none; }
+@media (min-width: 1440px) {
+  html:lang(wal) .site-nav a,
+  html:lang(wal) .site-nav button { padding-left: 12px; padding-right: 12px; font-size: 14px; }
+  html:lang(wal) .nav-cta-wrap { display: block; }
+}
+
 /* ── "Back", at the bottom corner of every page but the home page; it stays over the footer too ── */
 .back-button {
   position: fixed;

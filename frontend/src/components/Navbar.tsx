@@ -201,11 +201,11 @@ export default function Navbar() {
               alt="Bushaashe Garuwa"
               className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-contain bg-white p-0.5 transition-transform duration-500 group-hover:scale-105"
             />
-            <span className="font-display text-[16px] sm:text-[18px] font-bold tracking-tight whitespace-nowrap text-[#15A864]">Bushaashe Garuwa</span>
+            <span className="font-display text-[16px] max-[379px]:text-[14px] sm:text-[18px] font-bold tracking-tight whitespace-nowrap text-[#15A864]">Bushaashe Garuwa</span>
           </Link>
 
           {/* computers: every way in, right in the bar */}
-          <nav ref={navRef} className="hidden lg:flex items-center gap-0.5" aria-label={t.nav.mainNav}>
+          <nav ref={navRef} className="site-nav hidden lg:flex items-center gap-0.5" aria-label={t.nav.mainNav}>
             {barLink('home')}
             {barLink('events')}
             {barLink('heritage')}
@@ -218,7 +218,7 @@ export default function Navbar() {
           <div className="flex items-center gap-1 sm:gap-2">
             <LanguageSwitcher variant="bar" onDark={onPhoto} />
             {/* wrapped: the button's own display would otherwise beat `hidden` */}
-            <span className="hidden xl:block">
+            <span className="nav-cta-wrap hidden xl:block">
               <Link to="/visit" className="btn-primary nav-cta whitespace-nowrap">{t.common.planVisit}</Link>
             </span>
             {/* phones and tablets: the hamburger */}

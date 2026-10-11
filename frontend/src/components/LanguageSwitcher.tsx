@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { LANGUAGES, WOLAYTTA_READY } from '../i18n/config';
+import { HTML_LANG, LANGUAGES, WOLAYTTA_READY } from '../i18n/config';
 import { useI18n } from '../i18n/I18nProvider';
 
 /**
@@ -35,7 +35,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
         aria-label={`${t.nav.language}: ${current.name}`}
         className={`flex items-center gap-2 rounded-full font-semibold transition-colors duration-300 ${
           variant === 'bar'
-            ? `text-[13px] px-3 py-2 ${
+            ? `text-[13px] px-3 max-[359px]:px-1.5 max-[359px]:gap-1.5 py-2 ${
                 onDark
                   ? 'text-white/85 hover:text-white hover:bg-white/12'
                   : 'text-[#1E3A29]/70 hover:text-[#1E3A29] hover:bg-[#1E3A29]/8'
@@ -49,9 +49,9 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
           <path d="M3.6 9h16.8M3.6 15h16.8" strokeLinecap="round" />
           <path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z" />
         </svg>
-        <span lang={current.code}>{current.short}</span>
+        <span lang={HTML_LANG[current.code]}>{current.short}</span>
         <svg
-          className={`w-3.5 h-3.5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
+          className={`max-[359px]:hidden w-3.5 h-3.5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
           fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" aria-hidden="true"
         >
           <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
@@ -62,7 +62,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
         role="listbox"
         aria-label={t.nav.language}
         inert={!open}
-        className={`absolute right-0 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-white border border-[#1E3A29]/8 shadow-[0_24px_50px_-20px_rgba(30,58,41,0.35)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
+        className={`absolute right-0 max-[379px]:-right-11 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-white border border-[#1E3A29]/8 shadow-[0_24px_50px_-20px_rgba(30,58,41,0.35)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
           open ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
         }`}
       >
@@ -74,7 +74,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
               key={l.code}
               role="option"
               aria-selected={active}
-              lang={l.code}
+              lang={HTML_LANG[l.code]}
               onClick={() => {
                 setLanguage(l.code);
                 setOpen(false);

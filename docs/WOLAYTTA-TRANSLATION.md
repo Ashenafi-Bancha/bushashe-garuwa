@@ -101,30 +101,6 @@ That is all. Save the file and move to the next pair.
 - **Use the spelling you would teach in school** (the Latin-based Wolaytta alphabet), and be consistent with double letters and apostrophes.
 - **Look at the page while you translate.** A word like "Stay" can be a noun (the guesthouse) or a verb. The page shows which.
 
-### Word list (fill this in as you go)
-
-Decide these once and keep them the same everywhere.
-
-| English | Wolaytta |
-|---|---|
-| Heritage | |
-| Culture | |
-| Visit / visitor | |
-| Book / reserve | |
-| Guesthouse / stay | |
-| Restaurant / dine | |
-| Events | |
-| Experiences | |
-| Gallery | |
-| Contact | |
-| Home (menu) | |
-| About | |
-| Learn more | |
-| Explore | |
-| Traditional house | |
-| Forefathers | |
-| Generation | |
-
 ## Checking your work
 
 Open a terminal in the project folder and run:
@@ -256,3 +232,75 @@ area's Content page for that language.
 | See it on the site | `pnpm dev`, choose WOL, click "Preview the Wolaytta draft" |
 | Pick up new English text | `pnpm wolaytta:sync` |
 | Publish | Set `WOLAYTTA_READY = true` in `frontend/src/i18n/config.ts`, commit, push |
+
+## English to Wolaytta word list
+Decide these once and keep them the same everywhere.
+
+| English | Wolaytta |
+|---|---|
+|About | Nubaa |
+|Age|Yeleta Layttaa; Bariya; Layttaa|
+|Contact | Nuna Demmanawu; Nunaara Gayttanawu |
+|Book / reserve | Bootaa oytta; oyqqa|
+|Cultural | - |
+|Cultural food ||
+|Century | Kifile Zemeniya |
+|Discover | Demma |
+|Events | Giigissota |
+|Experiences | Meezeta; Eridobata; Tamaaridobata; Luxidobata; Be'idobaba|
+|Explore | Xeella; Yuuyyi be'uwa; Koyya |
+|Family | Keettaa asaa, So asaa |
+|Forefather; ancestor| mayzzaa, ma"iya  |
+|Forefathers | Mayzza aawata |
+|For future| Wodenawu; Sinttanawu|
+|Gallery | Misiliya Keettaa|
+|Gathering | Shiiquwaa|
+|Geneology, study of the history of families | Mayzzaa taarikiya |
+|Generation | Yeletaa |
+|Guesthouse/stay | Imatta Keettaa; Takuwa, Tahuwaa, Takettaa |
+|Haydaa, Taarikiya | History |
+|Harvest | Kattaa cahaa; Kattaa shiishuwa; Cahaa
+|Home (menu) | Denddo; Suwa |
+|heritage | buqura |
+|Home | Denddo; Suwa | 
+|Learn more | Aaruwa Eranawu|
+|Living | paxa de'iya |
+|Museum | buqura keettaa|
+|Page | Sinttaa |
+|Restaurant / dine | Quma keettaa, Katta Keettaa |
+|Search| Koshshaa; Qaagettaa; Qaqqaasetaa; Baadettaa; Tattaafuwa|
+|Traditional | - |
+| Traditional house | Beni Keettaa |
+|tradition | - |
+|Visitor | Xomoosiyaagaa |
+|Where Wolaita Heritage Lives | Wolaytta Buquray De'iyoosaa.|
+|Zannaqa | Tourism |
+
+## Months in Wolaytta
+The Wolaita year starts around September with Gifaata (New Year). The 12 primary months and the 13th year-end month are:
+|M.P.| Wolaytta | English | Amharic |
+|-|---|---|---|
+|1| Gifaataa | corresponds roughly to September|መስከረም|
+|2| Gooluwaa | corresponds roughly to October|ጥቅምት|
+|3| Baraataa | corresponds roughly to November|ሕዳር|
+|4| Duubbalaa | corresponds roughly to December|ታህሳስ|
+|5| Shachchaa | corresponds roughly to January|ጥር|
+|6| Longgiyaa | corresponds roughly to February|የካቲት|
+|7| Bullaalaa | corresponds roughly to March|መጋቢት|
+|8| Gabbaa | corresponds roughly to April|ሚያዝያ|
+|9| Laabooshaa | corresponds roughly to May|ግንቦት|
+|10| Guuliyaa | corresponds roughly to June|ሰኔ|
+|11| Caljjuwaa | corresponds roughly to July|ሓምሌ|
+|12| Kuushshaa | corresponds roughly to August|ነሃሴ|
+|13| Nuucaa |Pagume / year-end days (5 or 6 days)|ጳጉሜ|
+
+## Days of Week in Wolaytta
+|M.P.| Wolaytta | English | Amharic |
+|-|-|---|---|
+|1| Saynno | Monday | ሰኞ |
+|2| Ciishshaa | Tuesday | ማክሰኞ |
+|3| Wolilaa | Wednesday | ረቡዕ |
+|4| Hamuusa | Thursday | ሐሙስ |
+|5| Bizzaa | Friday | ዓርብ |
+|6| Qeeraa | Saturday | ቅዳሜ |
+|7| Woggaa | Sunday | እሁድ |

@@ -13,7 +13,7 @@ export const HTML_LANG: Record<Lang, string> = { en: 'en', am: 'am', wol: 'wal' 
  * When the translation in `dictionaries/wol/` is finished, set this to `true` to publish it.
  * Any line left untranslated there falls back to English automatically.
  */
-export const WOLAYTTA_READY = false;
+export const WOLAYTTA_READY = true;
 
 export const LANGUAGES: { code: Lang; short: string; name: string }[] = [
   { code: 'en', short: 'EN', name: 'English' },
