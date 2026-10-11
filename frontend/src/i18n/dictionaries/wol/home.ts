@@ -386,7 +386,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: See all events
       allCta: "Ubba Giigissotakka Be'a.",
       // EN: The next dates will be announced here soon.
-      soon: "Kaalliya gallassata mata erissana.",
+      soon: "Kaalliya gallassata matan erissana.",
     },
     facilities: {
       // EN: On the Grounds

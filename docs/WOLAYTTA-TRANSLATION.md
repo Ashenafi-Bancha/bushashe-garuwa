@@ -271,6 +271,7 @@ Decide these once and keep them the same everywhere.
 | Page                                        | Sinttaa                                                   |
 | Restaurant / dine                           | Quma keettaa, Katta Keettaa                               |
 | Search                                      | Koshshaa; Qaagettaa; Qaqqaasetaa; Baadettaa; Tattaafuwa   |
+| Social Media                                | Coraa Gattiyaasaa                                         |
 | Traditional                                 | -                                                         |
 | Traditional house                           | Beni Keettaa                                              |
 | tradition                                   | -                                                         |
@@ -282,20 +283,20 @@ Decide these once and keep them the same everywhere.
 ## Months in Wolaytta
 The Wolaita year starts around September with Gifaata (New Year). The 12 primary months and the 13th year-end month are:
 |M.P.| Wolaytta | English | Amharic |
-|--|------------|--------------------------------|-------|
-|1 | Gifaataa   |corresponds roughly to September|መስከረም|
-|2 | Gooluwaa   |corresponds roughly to October|ጥቅምት|
-|3 | Baraataa   |corresponds roughly to November|ሕዳር|
-|4 | Duubbalaa  |corresponds roughly to December|ታህሳስ|
-|5 | Shachchaa  |corresponds roughly to January|ጥር|
-|6 | Longgiyaa  |corresponds roughly to February|የካቲት|
-|7 | Bullaalaa  |corresponds roughly to March|መጋቢት|
-|8 | Gabbaa     |corresponds roughly to April|ሚያዝያ|
-|9 | Laabooshaa |corresponds roughly to May|ግንቦት|
-|10| Guuliyaa   |corresponds roughly to June|ሰኔ|
-|11| Caljjuwaa  |corresponds roughly to July|ሓምሌ|
-|12| Kuushshaa  |corresponds roughly to August|ነሃሴ|
-|13| Nuucaa     |Pagume / year-end days (5 or 6 days)|ጳጉሜ|
+|--|------------|------------------------------------ |------|
+|1 | Gifaataa   |corresponds roughly to September     |መስከረም |
+|2 | Gooluwaa   |corresponds roughly to October       |ጥቅምት  |
+|3 | Baraataa   |corresponds roughly to November      |ሕዳር   |
+|4 | Duubbalaa  |corresponds roughly to December      |ታህሳስ   |
+|5 | Shachchaa  |corresponds roughly to January       |ጥር     |
+|6 | Longgiyaa  |corresponds roughly to February      |የካቲት   |
+|7 | Bullaalaa  |corresponds roughly to March         |መጋቢት  |
+|8 | Gabbaa     |corresponds roughly to April         |ሚያዝያ  |
+|9 | Laabooshaa |corresponds roughly to May           |ግንቦት   |
+|10| Guuliyaa   |corresponds roughly to June          |ሰኔ     |
+|11| Caljjuwaa  |corresponds roughly to July          |ሓምሌ   |
+|12| Kuushshaa  |corresponds roughly to August        |ነሃሴ   |
+|13| Nuucaa     |Pagume / year-end days (5 or 6 days) |ጳጉሜ   |
 
 ## Days of Week in Wolaytta
 | M.P. | Wolaytta  | English   | Amharic |
