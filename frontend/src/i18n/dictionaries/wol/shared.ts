@@ -88,7 +88,7 @@ const page: DeepPartial<Dictionary> = {
     // EN: Honoring Our Ancestors, Preserving Our Heritage, and Passing It On to Future Generations.
     slogan: "Nu Aawata Bonchchoos, Nu Wogaanne Haydaa Naagoos, Qassikka Yelettaappe Yeletawu Aattoos",
     // EN: Come and Be Part of the Story
-    comeBePart: "Yiite, Yiidi Ha Taarikkiya Shaakkite",
+    comeBePart: "Haayite, Yiidi Ha Taarikiya Shaakkite",
     goal: {
       // EN: Our Ultimate Goal
       eyebrow: "Nu Halchchoy",
@@ -106,11 +106,11 @@ const page: DeepPartial<Dictionary> = {
       // EN: Discover
       discover: "Xeella",
       // EN: Heritage
-      heritage: "Laataa",
+      heritage: "Buquraa",
       // EN: Experiences
       experiences: "",
       // EN: Events
-      events: "Giigissota",
+      events: "Makkisota",
       // EN: Guest House
       stay: "Imatta Kifiliya",
       // EN: VIP Service
@@ -128,7 +128,7 @@ const page: DeepPartial<Dictionary> = {
     },
     describe: {
       // EN: Our story, mission and vision.
-      discover: "Nu haydaa, kiitaa, ",
+      discover: "Nu haydaa, kiitaa, wode aymuwaa",
       // EN: Phone, email and a message form.
       contact: "Silkke Paydoy, Iimayilee,  Qantta Xuufiyaa",
       // EN: Private rooms for a family: cook, eat, celebrate and stay.

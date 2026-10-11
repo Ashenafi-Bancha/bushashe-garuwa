@@ -18,23 +18,23 @@ You only type Wolaytta text into prepared files.
 frontend/src/i18n/dictionaries/wol/
 ```
 
-| Order | File | What it holds | See it at | Lines |
-|---|---|---|---|---|
-| 1 | `shared.ts` | Header menu, footer, buttons, notices (on every page) | any page | 107 |
-| 2 | `home.ts` | Home page | `/` | 203 |
-| 3 | `about.ts` | About page | `/about` | 76 |
-| 4 | `discover.ts` | Discover page | `/discover` | 24 |
-| 5 | `heritage.ts` | Heritage page | `/heritage` | 39 |
-| 6 | `experiences.ts` | Experiences page | `/experiences` | 67 |
-| 7 | `events.ts` | Events page | `/events` | 61 |
-| 8 | `vip.ts` | VIP Service page | `/vip` | 23 |
-| 8 | `stay.ts` | Guest House page (coming soon) | `/stay` | 60 |
-| 9 | `dine.ts` | Dine page | `/dine` | 49 |
-| 10 | `visit.ts` | Plan Your Visit page | `/visit` | 38 |
-| 11 | `contact.ts` | Contact page | `/contact` | 18 |
-| 12 | `gallery.ts` | Gallery page | `/gallery` | 12 |
-| 13 | `photos.ts` | Photo descriptions and captions | `/gallery` | 39 |
-| 14 | `immersive.ts` | 3D pages still under review. **Translate last.** | `/preview` | 44 |
+| Order | File             | What it holds                                         | See it at      | Lines |
+|-------|------------------|-------------------------------------------------------|----------------|-------|
+| 1     | `shared.ts`      | Header menu, footer, buttons, notices (on every page) | any page       | 107   |
+| 2     | `home.ts`        | Home page                                             | `/`            | 203   |
+| 3     | `about.ts`       | About page                                            | `/about`       | 76    |
+| 4     | `discover.ts`    | Discover page                                         | `/discover`    | 24    |
+| 5     | `heritage.ts`    | Heritage page                                         | `/heritage`    | 39    |
+| 6     | `experiences.ts` | Experiences page                                      | `/experiences` | 67    |
+| 7     | `events.ts`      | Events page                                           | `/events`      | 61    |
+| 8     | `vip.ts`         | VIP Service page                                      | `/vip`         | 23    |
+| 8     | `stay.ts`        | Guest House page (coming soon)                        | `/stay`        | 60    |
+| 9     | `dine.ts`        | Dine page                                             | `/dine`        | 49    |
+| 10    | `visit.ts`       | Plan Your Visit page                                  | `/visit`       | 38    |
+| 11    | `contact.ts`     | Contact page                                          | `/contact`     | 18    |
+| 12    | `gallery.ts`     | Gallery page                                          | `/gallery`     | 12    |
+| 13    | `photos.ts`      | Photo descriptions and captions                       | `/gallery`     | 39    |
+| 14    | `immersive.ts`   | 3D pages still under review. **Translate last.**      | `/preview`     | 44    |
 
 Work in this order. `shared.ts` comes first because its words (menu, buttons)
 appear on every page, so it gives the biggest result for the least work.
@@ -124,12 +124,12 @@ Wolaytta translation
 
 Run it whenever you finish a sitting. It catches the usual mistakes:
 
-| Message | What happened | Fix |
-|---|---|---|
-| `cannot be read. There is a typing mistake in it` | A quotation mark or comma was deleted, or a `"` was typed inside a text | Go to that file, find the line you last changed, restore the `"` and the `,` (or write `\"`) |
-| `must keep {count} exactly as in the English` | A curly-bracket word was removed or changed | Put it back exactly as in the `// EN:` line |
-| `this line is not in the English text` | A word before a colon was changed by accident | Undo that change |
-| `The English text has changed since the files were made` | New text was added to the site | Run `pnpm wolaytta:sync` (see below) |
+| Message                                                  | What happened                                                           | Fix                                                                                          |
+|----------------------------------------------------------|-------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| `cannot be read. There is a typing mistake in it`        | A quotation mark or comma was deleted, or a `"` was typed inside a text | Go to that file, find the line you last changed, restore the `"` and the `,` (or write `\"`) |
+| `must keep {count} exactly as in the English`            | A curly-bracket word was removed or changed                             | Put it back exactly as in the `// EN:` line                                                  |
+| `this line is not in the English text`                   | A word before a colon was changed by accident                           | Undo that change                                                                             |
+| `The English text has changed since the files were made` | New text was added to the site                                          | Run `pnpm wolaytta:sync` (see below)                                                         |
 
 ## Seeing it on the site
 
@@ -225,82 +225,85 @@ area's Content page for that language.
 
 ## Quick reference
 
-| I want to… | Do this |
-|---|---|
-| Translate | Open a file in `frontend/src/i18n/dictionaries/wol/`, type between the `""` |
-| See progress and mistakes | `pnpm wolaytta` |
-| See it on the site | `pnpm dev`, choose WOL, click "Preview the Wolaytta draft" |
-| Pick up new English text | `pnpm wolaytta:sync` |
-| Publish | Set `WOLAYTTA_READY = true` in `frontend/src/i18n/config.ts`, commit, push |
+| I want to…                | Do this                                                                     |
+|---------------------------|-----------------------------------------------------------------------------|
+| Translate                 | Open a file in `frontend/src/i18n/dictionaries/wol/`, type between the `""` |
+| See progress and mistakes | `pnpm wolaytta`                                                             |
+| See it on the site        | `pnpm dev`, choose WOL, click "Preview the Wolaytta draft"                  |
+| Pick up new English text  | `pnpm wolaytta:sync`                                                        |
+| Publish                   | Set `WOLAYTTA_READY = true` in `frontend/src/i18n/config.ts`, commit, push  |
 
 ## English to Wolaytta word list
 Decide these once and keep them the same everywhere.
 
-| English | Wolaytta |
-|---|---|
-|About | Nubaa |
-|Age|Yeleta Layttaa; Bariya; Layttaa|
-|Contact | Nuna Demmanawu; Nunaara Gayttanawu |
-|Book / reserve | Bootaa oytta; oyqqa|
-|Cultural | - |
-|Cultural food ||
-|Century | Kifile Zemeniya |
-|Discover | Demma |
-|Events | Giigissota |
-|Experiences | Meezeta; Eridobata; Tamaaridobata; Luxidobata; Be'idobaba|
-|Explore | Xeella; Yuuyyi be'uwa; Koyya |
-|Family | Keettaa asaa, So asaa |
-|Forefather; ancestor| mayzzaa, ma"iya  |
-|Forefathers | Mayzza aawata |
-|For future| Wodenawu; Sinttanawu|
-|Gallery | Misiliya Keettaa|
-|Gathering | Shiiquwaa|
-|Geneology, study of the history of families | Mayzzaa taarikiya |
-|Generation | Yeletaa |
-|Guesthouse/stay | Imatta Keettaa; Takuwa, Tahuwaa, Takettaa |
-|Haydaa, Taarikiya | History |
-|Harvest | Kattaa cahaa; Kattaa shiishuwa; Cahaa
-|Home (menu) | Denddo; Suwa |
-|heritage | buqura |
-|Home | Denddo; Suwa | 
-|Learn more | Aaruwa Eranawu|
-|Living | paxa de'iya |
-|Museum | buqura keettaa|
-|Page | Sinttaa |
-|Restaurant / dine | Quma keettaa, Katta Keettaa |
-|Search| Koshshaa; Qaagettaa; Qaqqaasetaa; Baadettaa; Tattaafuwa|
-|Traditional | - |
-| Traditional house | Beni Keettaa |
-|tradition | - |
-|Visitor | Xomoosiyaagaa |
-|Where Wolaita Heritage Lives | Wolaytta Buquray De'iyoosaa.|
-|Zannaqa | Tourism |
+| English                                     | Wolaytta                                                  |
+|---------------------------------------------|-----------------------------------------------------------|
+| About                                       | Nubaa; Nuna Eranawu                                       |
+| Age                                         | Yeleta Layttaa; Bariya; Layttaa                           |
+| Contact                                     | Nuna Demmanawu; Nunaara Gayttanawu                        |
+| Book / reserve                              | Bootaa oytta; oyqqa                                       |
+| Cultural                                    | Wogaba                                                    |
+| Cultural food                               | Wogaa qumaa                                               |
+| Century                                     | Kifile Zemeniya                                           |
+| Discover                                    | Demma                                                     |
+| Events                                      | Giigissota                                                |
+| Experiences                                 | Meezeta; Eridobata; Tamaaridobata; Luxidobata; Be'idobaba |
+| Explore                                     | Xeella; Yuuyyi be'uwa; Koyya                              |
+| Family                                      | Keettaa asaa, So asaa                                     |
+| Family Line                                 | So Asaa                                                   |
+| Forefather; ancestor                        | mayzzaa, ma"iya                                           |
+| Forefathers                                 | Mayzza aawata                                             |
+| For future                                  | Wodenawu; Sinttanawu                                      |
+| Gallery                                     | Misiliya Keettaa                                          |
+| Gathering                                   | Shiiquwaa                                                 |
+| Geneology, study of the history of families | Mayzzaa taarikiya                                         |
+| Generation                                  | Yeletaa                                                   |
+| Guesthouse/stay                             | Imatta Keettaa; Takuwa, Tahuwaa, Takettaa                 |
+| Haydaa, Taarikiya                           | History                                                   |
+| Harvest                                     | Kattaa cahaa; Kattaa shiishuwa; Cahaa                     |
+| Home (menu)                                 | Denddo; Suwa                                              |
+| heritage                                    | buqura                                                    |
+| Home                                        | Denddo; Suwa                                              | 
+| Learn more                                  | Aaruwa Eranawu                                            |
+| Living                                      | paxa de'iya                                               |
+| Mission                                     | Kiitaa                                                    |
+| Museum                                      | buqura keettaa                                            |
+| Page                                        | Sinttaa                                                   |
+| Restaurant / dine                           | Quma keettaa, Katta Keettaa                               |
+| Search                                      | Koshshaa; Qaagettaa; Qaqqaasetaa; Baadettaa; Tattaafuwa   |
+| Traditional                                 | -                                                         |
+| Traditional house                           | Beni Keettaa                                              |
+| tradition                                   | -                                                         |
+| Vision                                      | Wodena Aymuwaa; Wodenaa Xeelaa; Sinttanaa Xeelaa          |
+| Visitor                                     | Xomoosiyaagaa                                             |
+| Where Wolaita Heritage Lives                | Wolaytta Buquray De'iyoosaa.                              |
+| Zannaqa                                     | Tourism                                                   |
 
 ## Months in Wolaytta
 The Wolaita year starts around September with Gifaata (New Year). The 12 primary months and the 13th year-end month are:
 |M.P.| Wolaytta | English | Amharic |
-|-|---|---|---|
-|1| Gifaataa | corresponds roughly to September|መስከረም|
-|2| Gooluwaa | corresponds roughly to October|ጥቅምት|
-|3| Baraataa | corresponds roughly to November|ሕዳር|
-|4| Duubbalaa | corresponds roughly to December|ታህሳስ|
-|5| Shachchaa | corresponds roughly to January|ጥር|
-|6| Longgiyaa | corresponds roughly to February|የካቲት|
-|7| Bullaalaa | corresponds roughly to March|መጋቢት|
-|8| Gabbaa | corresponds roughly to April|ሚያዝያ|
-|9| Laabooshaa | corresponds roughly to May|ግንቦት|
-|10| Guuliyaa | corresponds roughly to June|ሰኔ|
-|11| Caljjuwaa | corresponds roughly to July|ሓምሌ|
-|12| Kuushshaa | corresponds roughly to August|ነሃሴ|
-|13| Nuucaa |Pagume / year-end days (5 or 6 days)|ጳጉሜ|
+|--|------------|--------------------------------|-------|
+|1 | Gifaataa   |corresponds roughly to September|መስከረም|
+|2 | Gooluwaa   |corresponds roughly to October|ጥቅምት|
+|3 | Baraataa   |corresponds roughly to November|ሕዳር|
+|4 | Duubbalaa  |corresponds roughly to December|ታህሳስ|
+|5 | Shachchaa  |corresponds roughly to January|ጥር|
+|6 | Longgiyaa  |corresponds roughly to February|የካቲት|
+|7 | Bullaalaa  |corresponds roughly to March|መጋቢት|
+|8 | Gabbaa     |corresponds roughly to April|ሚያዝያ|
+|9 | Laabooshaa |corresponds roughly to May|ግንቦት|
+|10| Guuliyaa   |corresponds roughly to June|ሰኔ|
+|11| Caljjuwaa  |corresponds roughly to July|ሓምሌ|
+|12| Kuushshaa  |corresponds roughly to August|ነሃሴ|
+|13| Nuucaa     |Pagume / year-end days (5 or 6 days)|ጳጉሜ|
 
 ## Days of Week in Wolaytta
-|M.P.| Wolaytta | English | Amharic |
-|-|-|---|---|
-|1| Saynno | Monday | ሰኞ |
-|2| Ciishshaa | Tuesday | ማክሰኞ |
-|3| Wolilaa | Wednesday | ረቡዕ |
-|4| Hamuusa | Thursday | ሐሙስ |
-|5| Bizzaa | Friday | ዓርብ |
-|6| Qeeraa | Saturday | ቅዳሜ |
-|7| Woggaa | Sunday | እሁድ |
+| M.P. | Wolaytta  | English   | Amharic |
+|------|-----------|-----------|---------|
+| 1    | Saynno    | Monday    | ሰኞ      |
+| 2    | Ciishshaa | Tuesday   | ማክሰኞ    |
+| 3    | Wolilaa   | Wednesday | ረቡዕ     |
+| 4    | Hamuusa   | Thursday  | ሐሙስ     |
+| 5    | Bizzaa    | Friday    | ዓርብ     |
+| 6    | Qeeraa    | Saturday  | ቅዳሜ     |
+| 7    | Woggaa    | Sunday    | እሁድ     |
