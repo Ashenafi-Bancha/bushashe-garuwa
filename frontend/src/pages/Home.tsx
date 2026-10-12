@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import { heroPhotos, useSiteMedia } from '../lib/media';
-import QuickLinks from '../components/QuickLinks';
+import QuickLinks, { GuestHouseSoon } from '../components/QuickLinks';
+import CulturalFoodDates from '../components/CulturalFoodDates';
+import CardGrid from '../components/CardGrid';
+import { useSiteEvents } from '../lib/events';
 import HomeContact from '../components/HomeContact';
 import HeroName from '../components/HeroName';
 import StickyBook from '../components/StickyBook';
@@ -14,6 +17,9 @@ import { deviceTier, forcedTier, rememberSlow } from '../three/device';
 const LandscapeHero = lazy(() => import('../three/LandscapeHero'));
 
 const SLIDE_MS = 6000;
+
+/* What else is on the grounds; the words are in the translations (t.home.facilities.items) */
+const facilities = ['meetingHall', 'vip', 'zoo', 'pool', 'orchard', 'horses', 'crocodile', 'fish', 'restaurant'] as const;
 
 /* ── A figure that counts up when it comes into view: "1,800+" counts to 1800 ── */
 function CountUp({ value }: { value: string }) {
@@ -54,6 +60,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
   useNoIndex(landscape);
   // the built-in slides, or the ones staff added in the admin area (Page photos)
   const heroSlides = heroPhotos('home', useSiteMedia(), t, lang);
+  const { events: siteEvents } = useSiteEvents();
   const slideIds = heroSlides.map((slide) => slide.id).join(' ');
   const [heroIdx, setHeroIdx] = useState(0);
   const [prevIdx, setPrevIdx] = useState<number | null>(null);
@@ -212,6 +219,37 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
 
         {/* ═════════ EVERY PART OF THE SITE, in order, the Guest House (coming soon) last ═════════ */}
         <QuickLinks />
+
+        {/* ═════════ WHAT ELSE IS ON THE GROUNDS ═════════ */}
+        <section className="pt-6 sm:pt-10 pb-12 sm:pb-16" aria-labelledby="facilities-title">
+          <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+            <div data-reveal className="fade-section max-w-2xl mb-8 sm:mb-12">
+              <span className="eyebrow mb-5">{h.facilities.eyebrow}</span>
+              <h2 id="facilities-title" className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] leading-[1] mb-4">{h.facilities.title}</h2>
+              <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{h.facilities.desc}</p>
+            </div>
+            <CardGrid grid="md:grid-cols-2 lg:grid-cols-3">
+              {facilities.map((id, i) => {
+                const item = h.facilities.items[id];
+                return (
+                  <div key={id} className="h-full flex gap-4 rounded-[1.5rem] bg-white p-5 sm:p-6 elev-1">
+                    <span className="text-[#C4622D] text-sm font-bold tabular-nums pt-1">{String(i + 1).padStart(2, '0')}</span>
+                    <div>
+                      <h3 className="font-display text-xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{item.title}</h3>
+                      <p className="text-[#1E3A29]/60 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </CardGrid>
+          </div>
+        </section>
+
+        {/* ═════════ CULTURAL FOOD EVENINGS (dates from the staff area) ═════════ */}
+        <CulturalFoodDates events={siteEvents} />
+
+        {/* ═════════ LAST OF THE PLACES: the Guest House, coming soon ═════════ */}
+        <GuestHouseSoon />
 
         {/* ═════════ CONTACT: every way to reach us, and the map ═════════ */}
         <HomeContact />

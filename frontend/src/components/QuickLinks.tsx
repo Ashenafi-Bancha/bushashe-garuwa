@@ -95,8 +95,8 @@ const MORE: { key: 'gallery' | 'visit' | 'about'; to: string; photo: PhotoKey }[
 /**
  * The way into every part of the site, in order: the main pages each with a
  * large photograph and a list of what is found there (a small photograph beside
- * every item), then three smaller cards, and last the Guest House, which is not
- * open yet and says so across its photograph.
+ * every item), then three smaller cards. The Guest House, not open yet, comes
+ * last on the home page: `GuestHouseSoon` below.
  */
 export default function QuickLinks() {
   const { t } = useI18n();
@@ -104,7 +104,7 @@ export default function QuickLinks() {
   const rows = details(t);
 
   return (
-    <section className="py-16 sm:py-24" aria-labelledby="quick-title">
+    <section className="pt-16 sm:pt-24 pb-10 sm:pb-14" aria-labelledby="quick-title">
       <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
         <div data-reveal className="fade-section flex flex-col md:flex-row md:items-end justify-between gap-5 mb-10 sm:mb-14">
           <div>
@@ -177,17 +177,26 @@ export default function QuickLinks() {
             </li>
           ))}
         </ul>
+      </div>
+    </section>
+  );
+}
 
-        {/* last: the Guest House, not open yet, said large across its photograph */}
-        <Link to="/stay" data-reveal className="fade-section group relative mt-6 sm:mt-8 flex min-h-[340px] sm:min-h-[420px] items-center justify-center overflow-hidden rounded-[2rem] text-center">
-          <img {...picture(photos.pavilions)} alt={t.photos.pavilions} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <span className="absolute inset-0 bg-[#13261A]/60" />
-          <span className="relative flex flex-col items-center px-6 py-12">
-            <span className="rounded-full bg-white/90 px-4 py-1.5 text-sm font-bold text-[#1E3A29] mb-5">{t.nav.links.stay}</span>
-            <span className="coming-soon-word on-photo font-display font-extrabold uppercase leading-[0.95]">{t.stay.comingSoon.badge}</span>
-            <span className="text-white/90 text-base sm:text-lg leading-relaxed max-w-md mt-5">{t.stay.comingSoon.lead}</span>
-          </span>
-        </Link>
+/** The Guest House, not open yet: "Coming soon" said large across its photograph */
+export function GuestHouseSoon() {
+  const { t } = useI18n();
+  return (
+    <section className="pt-10 sm:pt-14 pb-16 sm:pb-24">
+      <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+    <Link to="/stay" data-reveal className="fade-section group relative flex min-h-[340px] sm:min-h-[420px] items-center justify-center overflow-hidden rounded-[2rem] text-center">
+      <img {...picture(photos.pavilions)} alt={t.photos.pavilions} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+      <span className="absolute inset-0 bg-[#13261A]/60" />
+      <span className="relative flex flex-col items-center px-6 py-12">
+        <span className="rounded-full bg-white/90 px-4 py-1.5 text-sm font-bold text-[#1E3A29] mb-5">{t.nav.links.stay}</span>
+        <span className="coming-soon-word on-photo font-display font-extrabold uppercase leading-[0.95]">{t.stay.comingSoon.badge}</span>
+        <span className="text-white/90 text-base sm:text-lg leading-relaxed max-w-md mt-5">{t.stay.comingSoon.lead}</span>
+      </span>
+    </Link>
       </div>
     </section>
   );
