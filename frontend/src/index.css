@@ -327,6 +327,7 @@ html:lang(wal) .nav-cta-wrap { display: none; }
   font-size: clamp(2.6rem, 9vw, 6rem);
   letter-spacing: -0.02em;
 }
+.coming-soon-word.on-photo { color: #FFB45C; text-shadow: 0 6px 30px rgb(0 0 0 / 0.45); }
 html:lang(am) .coming-soon-word { letter-spacing: 0; font-size: clamp(2.2rem, 7.5vw, 5rem); line-height: 1.2; }
 
 /* ── Markers laid over the 3D scenes (src/three) ── */
