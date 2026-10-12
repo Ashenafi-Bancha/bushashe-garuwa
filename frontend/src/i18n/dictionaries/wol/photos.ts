@@ -32,6 +32,24 @@ const page: DeepPartial<Dictionary> = {
     vipRoom: "",
     // EN: The VIP sitting and dining room: sofas, a marble-topped table, a kitchen counter and a fireplace
     vipDining: "",
+    // EN: The VIP kitchen: carved wooden cupboards above a marble counter with a sink, beside a panelled wooden door
+    vipKitchen: "",
+    // EN: The VIP cooking corner: a black double sink with running water and a two-ring electric stove on a wooden worktop
+    vipCooking: "",
+    // EN: A VIP rest room: a rain shower and a round mirror under three warm lamps, on marble-patterned tiles
+    vipShower: "",
+    // EN: A VIP rest room: a white washbasin with a chrome tap against marble-patterned tiles
+    vipBasin: "",
+    // EN: A VIP rest room: a white toilet in a room tiled from floor to ceiling
+    vipToilet: "",
+    // EN: Elders in traditional Wolaita dress seated under the great tree at Bushaashe Garuwa, in front of a thatched house and a welcome banner
+    eventElders: "",
+    // EN: A gathering at Bushaashe Garuwa: a man speaks into a microphone to guests seated at a long table covered in Wolaita cloth, under a tree
+    eventGathering: "",
+    // EN: A celebration at Bushaashe Garuwa: guests in Wolaita-pattern shirts clap around a cake with candles and a large traditional loaf
+    eventCelebration: "",
+    // EN: Guests in Wolaita-pattern shirts playing with a ball and laughing on the lawn at Bushaashe Garuwa
+    eventGames: "",
     // EN: Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens
     home: "",
     // EN: Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture
@@ -143,6 +161,60 @@ const page: DeepPartial<Dictionary> = {
       // EN: VIP Sitting and Dining Room
       title: "",
       // EN: Sofas, a marble-topped table, the kitchen counter and the fireplace.
+      desc: "",
+    },
+    vipKitchen: {
+      // EN: The VIP Kitchen
+      title: "",
+      // EN: Carved wooden cupboards, a marble counter and a sink: a kitchen of your own to cook in.
+      desc: "",
+    },
+    vipCooking: {
+      // EN: Cook It Yourself
+      title: "",
+      // EN: A double sink with running water and an electric stove, ready for the family meal.
+      desc: "",
+    },
+    vipShower: {
+      // EN: Shower Room
+      title: "",
+      // EN: A rain shower, a round mirror and warm lamps on marble-patterned tiles.
+      desc: "",
+    },
+    vipBasin: {
+      // EN: Washbasin
+      title: "",
+      // EN: A white basin and a bright tap, kept spotless for every guest.
+      desc: "",
+    },
+    vipToilet: {
+      // EN: Private Rest Room
+      title: "",
+      // EN: A clean, modern rest room, tiled from floor to ceiling.
+      desc: "",
+    },
+    eventElders: {
+      // EN: Elders Under the Great Tree
+      title: "",
+      // EN: Elders in traditional Wolaita dress sit in the shade before the thatched house, welcoming their guests.
+      desc: "",
+    },
+    eventGathering: {
+      // EN: A Meeting in the Open Air
+      title: "",
+      // EN: A speaker addresses guests at a long table dressed in Wolaita cloth, in the shade of a tree.
+      desc: "",
+    },
+    eventCelebration: {
+      // EN: A Day to Celebrate
+      title: "",
+      // EN: Friends clap around a cake and a great traditional loaf, with the thatched pavilion behind them.
+      desc: "",
+    },
+    eventGames: {
+      // EN: Games on the Lawn
+      title: "",
+      // EN: After the meal, guests play and laugh together on the wide green lawn.
       desc: "",
     },
   },

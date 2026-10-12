@@ -62,6 +62,15 @@ export const en = {
     meetingHall: 'The meeting hall at Bushaashe Garuwa: rows of chairs in white covers with bands of Wolaita pattern, under wood-panelled walls',
     vipRoom: 'A VIP room for sleeping: a carved wooden bed with an embroidered white cover, and an armchair',
     vipDining: 'The VIP sitting and dining room: sofas, a marble-topped table, a kitchen counter and a fireplace',
+    vipKitchen: 'The VIP kitchen: carved wooden cupboards above a marble counter with a sink, beside a panelled wooden door',
+    vipCooking: 'The VIP cooking corner: a black double sink with running water and a two-ring electric stove on a wooden worktop',
+    vipShower: 'A VIP rest room: a rain shower and a round mirror under three warm lamps, on marble-patterned tiles',
+    vipBasin: 'A VIP rest room: a white washbasin with a chrome tap against marble-patterned tiles',
+    vipToilet: 'A VIP rest room: a white toilet in a room tiled from floor to ceiling',
+    eventElders: 'Elders in traditional Wolaita dress seated under the great tree at Bushaashe Garuwa, in front of a thatched house and a welcome banner',
+    eventGathering: 'A gathering at Bushaashe Garuwa: a man speaks into a microphone to guests seated at a long table covered in Wolaita cloth, under a tree',
+    eventCelebration: 'A celebration at Bushaashe Garuwa: guests in Wolaita-pattern shirts clap around a cake with candles and a large traditional loaf',
+    eventGames: 'Guests in Wolaita-pattern shirts playing with a ball and laughing on the lawn at Bushaashe Garuwa',
     home: 'Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens',
     enset: 'Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture',
     food: 'Traditional Wolaita dishes served in woven baskets inside a cultural house at Bushaashe Garuwa',
@@ -88,6 +97,15 @@ export const en = {
     meetingHall: { title: 'The Meeting Hall', desc: 'Rows of chairs dressed in white with bands of Wolaita pattern, ready for a meeting or a training.' },
     vipRoom: { title: 'VIP Room for Sleeping', desc: 'A carved wooden bed with a hand-embroidered cover.' },
     vipDining: { title: 'VIP Sitting and Dining Room', desc: 'Sofas, a marble-topped table, the kitchen counter and the fireplace.' },
+    vipKitchen: { title: 'The VIP Kitchen', desc: 'Carved wooden cupboards, a marble counter and a sink: a kitchen of your own to cook in.' },
+    vipCooking: { title: 'Cook It Yourself', desc: 'A double sink with running water and an electric stove, ready for the family meal.' },
+    vipShower: { title: 'Shower Room', desc: 'A rain shower, a round mirror and warm lamps on marble-patterned tiles.' },
+    vipBasin: { title: 'Washbasin', desc: 'A white basin and a bright tap, kept spotless for every guest.' },
+    vipToilet: { title: 'Private Rest Room', desc: 'A clean, modern rest room, tiled from floor to ceiling.' },
+    eventElders: { title: 'Elders Under the Great Tree', desc: 'Elders in traditional Wolaita dress sit in the shade before the thatched house, welcoming their guests.' },
+    eventGathering: { title: 'A Meeting in the Open Air', desc: 'A speaker addresses guests at a long table dressed in Wolaita cloth, in the shade of a tree.' },
+    eventCelebration: { title: 'A Day to Celebrate', desc: 'Friends clap around a cake and a great traditional loaf, with the thatched pavilion behind them.' },
+    eventGames: { title: 'Games on the Lawn', desc: 'After the meal, guests play and laugh together on the wide green lawn.' },
   },
 
   nav: {
@@ -591,6 +609,12 @@ export const en = {
   },
 
   events: {
+    moments: {
+      eyebrow: 'Moments',
+      title: 'Gatherings at Bushaashe Garuwa',
+      desc: 'Elders, families and friends come here to meet, to celebrate and to play. A few moments from the grounds.',
+      cta: 'See the Gallery',
+    },
       booking: {
         title: 'Reserve your place',
         name: 'Full Name *',
@@ -685,6 +709,7 @@ export const en = {
       restrooms: { title: 'VIP Rest Rooms', desc: 'Private rest rooms for VIP guests.' },
     },
     photosTitle: 'Inside the VIP Rooms',
+    photosDesc: 'The sitting and dining room, the bedroom, the kitchen where you cook for yourselves, and the private rest rooms.',
     cta: {
       title: 'Would You Like to Use the VIP Service?',
       text: 'Call or write to us with your date and the number of people, and we will arrange it.',

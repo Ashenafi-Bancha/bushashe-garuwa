@@ -28,6 +28,12 @@ const builtIn: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'meetingHall', cat: 'grounds', span: 'col-span-2' },
   { key: 'vipDining', cat: 'grounds', span: '' },
   { key: 'vipRoom', cat: 'grounds', span: '' },
+  { key: 'eventElders', cat: 'culture', span: 'col-span-2' },
+  { key: 'eventGathering', cat: 'culture', span: 'col-span-2' },
+  { key: 'eventCelebration', cat: 'culture', span: '' },
+  { key: 'eventGames', cat: 'culture', span: '' },
+  { key: 'vipKitchen', cat: 'grounds', span: '' },
+  { key: 'vipShower', cat: 'grounds', span: '' },
 ];
 
 const filters: Filter[] = ['all', 'grounds', 'culture'];
@@ -133,7 +139,7 @@ export default function Gallery() {
           {shown.length === 0 ? (
             <p className="py-20 text-center text-[#1E3A29]/40">{g.empty}</p>
           ) : (
-            <div data-wave className="grid grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[210px] lg:auto-rows-[240px] gap-3 sm:gap-4">
+            <div data-wave className="grid grid-flow-row-dense grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[210px] lg:auto-rows-[240px] gap-3 sm:gap-4">
               {shown.map((item, i) => (
                 <Tilt key={item.id} className={`rounded-2xl sm:rounded-3xl ${filter === 'all' ? item.span : spans[i % spans.length]}`} max={5}>
                   <button

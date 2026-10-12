@@ -14,6 +14,16 @@ import type { DeepPartial } from '../../types';
  */
 const page: DeepPartial<Dictionary> = {
   events: {
+    moments: {
+      // EN: Moments
+      eyebrow: "",
+      // EN: Gatherings at Bushaashe Garuwa
+      title: "",
+      // EN: Elders, families and friends come here to meet, to celebrate and to play. A few moments from the grounds.
+      desc: "",
+      // EN: See the Gallery
+      cta: "",
+    },
     booking: {
       // EN: Reserve your place
       title: "",

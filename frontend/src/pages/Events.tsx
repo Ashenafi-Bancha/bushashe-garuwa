@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { photos, type PhotoKey } from '../assets/photos';
+import { photos, picture, type PhotoKey } from '../assets/photos';
 import EventBooking from '../components/EventBooking';
 import PageHero from '../components/PageHero';
 import Photo from '../components/Photo';
@@ -222,6 +222,33 @@ export default function Events() {
                   </div>
                 </div>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Moments from gatherings held on the grounds */}
+      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 mb-3 rounded-[2rem] sm:rounded-[3rem] py-12 sm:py-16 lg:py-20" aria-labelledby="moments-title">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8 sm:mb-10">
+            <div className="max-w-2xl">
+              <span className="eyebrow mb-5">{e.moments.eyebrow}</span>
+              <h2 id="moments-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#13261A] leading-[1.05] mb-3">{e.moments.title}</h2>
+              <p className="text-[#1E3A29]/70 leading-relaxed">{e.moments.desc}</p>
+            </div>
+            <Link to="/gallery" className="btn-outline text-[#1E3A29] self-start md:self-auto flex-shrink-0">{e.moments.cta}</Link>
+          </div>
+          <div data-wave className="grid md:grid-cols-2 gap-5 sm:gap-6">
+            {(['eventElders', 'eventGathering', 'eventCelebration', 'eventGames'] as const).map((key) => (
+              <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
+                <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
+                  <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <figcaption className="px-4 py-4 sm:px-5">
+                  <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions[key].title}</span>
+                  <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions[key].desc}</span>
+                </figcaption>
+              </figure>
             ))}
           </div>
         </div>

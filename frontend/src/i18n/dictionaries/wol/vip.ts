@@ -70,6 +70,8 @@ const page: DeepPartial<Dictionary> = {
     },
     // EN: Inside the VIP Rooms
     photosTitle: "",
+    // EN: The sitting and dining room, the bedroom, the kitchen where you cook for yourselves, and the private rest rooms.
+    photosDesc: "",
     cta: {
       // EN: Would You Like to Use the VIP Service?
       title: "",

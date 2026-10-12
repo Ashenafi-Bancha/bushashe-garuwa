@@ -31,10 +31,21 @@ import gifaataa1Img from './photos/events/gifaataa/gifaataa-01.webp';
 import gifaataa2Img from './photos/events/gifaataa/gifaataa-02.webp';
 import gifaataa3Img from './photos/events/gifaataa/gifaataa-03.webp';
 
+// events — gatherings and celebrations on the grounds
+import eventEldersImg from './photos/events/elders-in-bushaashe-garuwaa.webp';
+import eventGatheringImg from './photos/events/discussing-at-bushaashe-garuwa.webp';
+import eventCelebrationImg from './photos/events/celebreties-bushaashe-garuwa.webp';
+import eventGamesImg from './photos/events/play-in-bushaashe-garuwa.webp';
+
 // meeting hall and guest house
 import meetingHallImg from './photos/meeting-hall/meeting-hall.webp';
 import vipRoomImg from './photos/vip-rooms/vip-room.webp';
 import vipDiningImg from './photos/vip-rooms/vip-dining-room.webp';
+import vipKitchenImg from './photos/vip-rooms/kitchen-in-vip-room.webp';
+import vipCookingImg from './photos/vip-rooms/cooking-room.webp';
+import vipShowerImg from './photos/vip-rooms/bath-room.webp';
+import vipBasinImg from './photos/vip-rooms/bath1.webp';
+import vipToiletImg from './photos/vip-rooms/toilet-in-rest-room.webp';
 
 export const photos = {
   /** The main gate: carved tree-trunk pillars, the welcome sign and the bamboo doors (landscape) */
@@ -69,6 +80,24 @@ export const photos = {
   vipRoom: vipRoomImg,
   /** Guest house, VIP room: sitting and dining room with sofas, table, kitchen counter and fireplace (landscape) */
   vipDining: vipDiningImg,
+  /** VIP kitchen: carved wooden cupboards over a marble counter with a sink (landscape) */
+  vipKitchen: vipKitchenImg,
+  /** VIP cooking corner: black double sink with running water and a two-ring electric stove (landscape) */
+  vipCooking: vipCookingImg,
+  /** VIP rest room: rain shower, round mirror and lamps on marble-patterned tiles (landscape) */
+  vipShower: vipShowerImg,
+  /** VIP rest room: white washbasin with a chrome tap (landscape) */
+  vipBasin: vipBasinImg,
+  /** VIP rest room: the toilet, tiled from floor to ceiling (landscape) */
+  vipToilet: vipToiletImg,
+  /** Elders and women in traditional dress seated under the great tree, before the thatched house and a welcome banner (landscape) */
+  eventElders: eventEldersImg,
+  /** A speaker with a microphone addresses guests at a long table in Wolaita cloth, under a tree (landscape) */
+  eventGathering: eventGatheringImg,
+  /** Guests in Wolaita-pattern shirts clap around a cake and a large traditional loaf (landscape) */
+  eventCelebration: eventCelebrationImg,
+  /** Guests playing with a ball on the lawn, laughing (landscape) */
+  eventGames: eventGamesImg,
 } as const;
 
 export type PhotoKey = keyof typeof photos;

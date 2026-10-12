@@ -3,6 +3,17 @@ import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import ContactButtons from '../components/ContactButtons';
 
+/* The rooms in photographs: two large ones, then the kitchen, then the rest rooms; `span` is the width on the 6-column grid */
+const ROOMS = [
+  { key: 'vipDining', span: 'md:col-span-3' },
+  { key: 'vipRoom', span: 'md:col-span-3' },
+  { key: 'vipKitchen', span: 'md:col-span-3' },
+  { key: 'vipCooking', span: 'md:col-span-3' },
+  { key: 'vipShower', span: 'md:col-span-2' },
+  { key: 'vipBasin', span: 'md:col-span-2' },
+  { key: 'vipToilet', span: 'md:col-span-2' },
+] as const;
+
 /* What the VIP service offers; the words are in the translations (t.vip.features) */
 const FEATURES = ['kitchen', 'dining', 'celebrate', 'fire', 'rooms', 'restrooms'] as const;
 
@@ -45,10 +56,13 @@ export default function Vip() {
       {/* The rooms, in photographs */}
       <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[3rem] py-12 sm:py-16 lg:py-20" aria-labelledby="vip-photos">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-          <h2 id="vip-photos" className="font-display text-3xl sm:text-4xl font-extrabold text-[#13261A] leading-tight mb-8 sm:mb-10">{v.photosTitle}</h2>
-          <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
-            {(['vipDining', 'vipRoom'] as const).map((key) => (
-              <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
+          <div className="max-w-2xl mb-8 sm:mb-10">
+            <h2 id="vip-photos" className="font-display text-3xl sm:text-4xl font-extrabold text-[#13261A] leading-tight mb-3">{v.photosTitle}</h2>
+            <p className="text-[#1E3A29]/70 leading-relaxed">{v.photosDesc}</p>
+          </div>
+          <div data-wave className="grid md:grid-cols-6 gap-5 sm:gap-6">
+            {ROOMS.map(({ key, span }) => (
+              <figure key={key} className={`bg-white rounded-[2rem] p-2.5 elev-1 ${span}`}>
                 <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
                   <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
                 </div>
