@@ -22,6 +22,10 @@ import lawnImg from './photos/grounds/lawn-and-great-tree.webp';
 // trees & plants
 import ensetImg from './photos/trees-plants/enset-false-banana.webp';
 import zigbaImg from './photos/trees-plants/zigba-tree.webp';
+import gardenPlantImg from './photos/trees-plants/flower-like.webp';
+
+// animals
+import birdImg from './photos/animals/bird-in-bushaashe-garuwa.webp';
 
 // food
 import foodImg from './photos/food/cultural-food.webp';
@@ -66,6 +70,10 @@ export const photos = {
   enset: ensetImg,
   /** Row of zigba trees planted by the forefathers (landscape) */
   zigba: zigbaImg,
+  /** Red-and-green leaved garden plants along the path beside a thatched house (landscape) */
+  gardenPlant: gardenPlantImg,
+  /** A pigeon with a white head and a purple sheen on its neck, perched on a roof edge (landscape) */
+  bird: birdImg,
   /** Traditional Wolaita dishes served in baskets inside a cultural house (landscape) */
   food: foodImg,
   /** Gifaataa — guests in traditional dress walking through the heritage gate (landscape) */

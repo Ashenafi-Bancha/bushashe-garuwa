@@ -75,6 +75,8 @@ export const en = {
     enset: 'Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture',
     food: 'Traditional Wolaita dishes served in woven baskets inside a cultural house at Bushaashe Garuwa',
     zigba: 'The row of zigba trees at Bushaashe Garuwa, planted by the forefathers of the family',
+    gardenPlant: 'Plants with red and green leaves along a path at Bushaashe Garuwa, beside a thatched house and young trees',
+    bird: 'A pigeon with a white head and a purple sheen on its neck, perched on the edge of a roof at Bushaashe Garuwa',
     gifaataa1: 'Gifaataa celebration at Bushaashe Garuwa: guests in traditional Wolaita dress walking through the heritage gate',
     gifaataa2: 'Gifaataa celebration: women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn',
     gifaataa3: 'Gifaataa celebration: guests in traditional Wolaita attire on the Bushaashe Garuwa grounds',
@@ -93,6 +95,8 @@ export const en = {
     enset: { title: 'Enset, the False Banana', desc: 'Enset growing on the grounds: the staple plant at the heart of Wolaita food and culture.' },
     food: { title: 'The Taste of Wolaita', desc: 'Traditional Wolaita dishes, from enset to beans and greens, served in woven baskets inside a cultural house.' },
     zigba: { title: 'The Zigba Trees', desc: 'Zigba trees planted by the forefathers of the family, standing in a row like a peaceful procession.' },
+    gardenPlant: { title: 'Colours of the Garden', desc: 'Red-leaved plants line the path beside the thatched house, among young trees and green lawns.' },
+    bird: { title: 'A Resident of the Grounds', desc: 'A pigeon with a white head and a shining purple neck watches from the edge of a roof.' },
     lawn: { title: 'The Great Lawn', desc: 'Open lawns and the great tree, with the traditional house in the distance.' },
     meetingHall: { title: 'The Meeting Hall', desc: 'Rows of chairs dressed in white with bands of Wolaita pattern, ready for a meeting or a training.' },
     vipRoom: { title: 'VIP Room for Sleeping', desc: 'A carved wooden bed with a hand-embroidered cover.' },
@@ -508,6 +512,11 @@ export const en = {
   },
 
   heritage: {
+    nature: {
+      eyebrow: 'Living Nature',
+      title: 'Life Among the Houses',
+      desc: 'Birds on the roofs and bright plants along the paths: the grounds are alive in every season.',
+    },
     hero: { eyebrow: 'Wolaita Heritage', title: 'Explore Wolaita Heritage in Bushaashe Garuwa' },
     intro: 'Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one.',
     itemCount: '{count} items',

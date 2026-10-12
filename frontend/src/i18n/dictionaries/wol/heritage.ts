@@ -14,6 +14,14 @@ import type { DeepPartial } from '../../types';
  */
 const page: DeepPartial<Dictionary> = {
   heritage: {
+    nature: {
+      // EN: Living Nature
+      eyebrow: "",
+      // EN: Life Among the Houses
+      title: "",
+      // EN: Birds on the roofs and bright plants along the paths: the grounds are alive in every season.
+      desc: "",
+    },
     hero: {
       // EN: Wolaita Heritage
       eyebrow: "",

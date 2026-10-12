@@ -8,7 +8,7 @@ import PageHero from '../components/PageHero';
 const categories = [
   { id: 'houses', img: photos.meeshsho, count: 2, to: '/heritage/houses' },
   { id: 'trees', img: photos.enset, count: 24, to: '/heritage/trees' },
-  { id: 'animals', count: 15, to: '/heritage/animals' },
+  { id: 'animals', img: photos.bird, count: 15, to: '/heritage/animals' },
   { id: 'artifacts', count: 120, to: '/heritage/artifacts' },
   { id: 'clothing', img: photos.gifaataa2, count: 35, to: '/heritage/clothing' },
   { id: 'music', count: 18, to: '/heritage/music' },
@@ -120,6 +120,30 @@ export default function Heritage() {
           </div>
         </div>
         <p className="mt-5 text-center text-[#1E3A29]/55 text-sm px-5">{hg.trees.qr}</p>
+      </section>
+
+      {/* Living nature: a bird of the grounds and the plants along the paths */}
+      <section id="nature" className="pt-12 sm:pt-16 lg:pt-24" aria-labelledby="nature-title">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <div className="max-w-2xl mb-8 sm:mb-10">
+            <span className="eyebrow mb-5">{hg.nature.eyebrow}</span>
+            <h2 id="nature-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1E3A29] leading-[1.05] mb-3">{hg.nature.title}</h2>
+            <p className="text-[#1E3A29]/70 leading-relaxed">{hg.nature.desc}</p>
+          </div>
+          <div data-wave className="grid md:grid-cols-2 gap-5 sm:gap-6">
+            {(['gardenPlant', 'bird'] as const).map((key) => (
+              <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
+                <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
+                  <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <figcaption className="px-4 py-4 sm:px-5">
+                  <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions[key].title}</span>
+                  <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions[key].desc}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Family history CTA */}

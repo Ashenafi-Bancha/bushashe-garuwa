@@ -58,6 +58,10 @@ const page: DeepPartial<Dictionary> = {
     food: "",
     // EN: The row of zigba trees at Bushaashe Garuwa, planted by the forefathers of the family
     zigba: "",
+    // EN: Plants with red and green leaves along a path at Bushaashe Garuwa, beside a thatched house and young trees
+    gardenPlant: "",
+    // EN: A pigeon with a white head and a purple sheen on its neck, perched on the edge of a roof at Bushaashe Garuwa
+    bird: "",
     // EN: Gifaataa celebration at Bushaashe Garuwa: guests in traditional Wolaita dress walking through the heritage gate
     gifaataa1: "",
     // EN: Gifaataa celebration: women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn
@@ -137,6 +141,18 @@ const page: DeepPartial<Dictionary> = {
       // EN: The Zigba Trees
       title: "",
       // EN: Zigba trees planted by the forefathers of the family, standing in a row like a peaceful procession.
+      desc: "",
+    },
+    gardenPlant: {
+      // EN: Colours of the Garden
+      title: "",
+      // EN: Red-leaved plants line the path beside the thatched house, among young trees and green lawns.
+      desc: "",
+    },
+    bird: {
+      // EN: A Resident of the Grounds
+      title: "",
+      // EN: A pigeon with a white head and a shining purple neck watches from the edge of a roof.
       desc: "",
     },
     lawn: {

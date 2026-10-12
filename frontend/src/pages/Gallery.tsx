@@ -34,6 +34,8 @@ const builtIn: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'eventGames', cat: 'culture', span: '' },
   { key: 'vipKitchen', cat: 'grounds', span: '' },
   { key: 'vipShower', cat: 'grounds', span: '' },
+  { key: 'gardenPlant', cat: 'grounds', span: 'col-span-2' },
+  { key: 'bird', cat: 'grounds', span: 'col-span-2' },
 ];
 
 const filters: Filter[] = ['all', 'grounds', 'culture'];
