@@ -240,6 +240,7 @@ Decide these once and keep them the same everywhere.
 |---------------------------------------------|-----------------------------------------------------------|
 | About                                       | Nubaa; Nuna Eranawu                                       |
 | Age                                         | Yeleta Layttaa; Bariya; Layttaa                           |
+| Care, Careful                                | Akeekaa, Loddan, Leelan, Naagettidi
 | Contact                                     | Nuna Demmanawu; Nunaara Gayttanawu                        |
 | Book / reserve                              | Bootaa oytta; oyqqa                                       |
 | Cultural                                    | Wogaba                                                    |
@@ -272,6 +273,7 @@ Decide these once and keep them the same everywhere.
 | Restaurant / dine                           | Quma keettaa, Katta Keettaa                               |
 | Search                                      | Koshshaa; Qaagettaa; Qaqqaasetaa; Baadettaa; Tattaafuwa   |
 | Social Media                                | Coraa Gattiyaasaa                                         |
+| Soft                                        | Shugo
 | Traditional                                 | -                                                         |
 | Traditional house                           | Beni Keettaa                                              |
 | tradition                                   | -                                                         |
