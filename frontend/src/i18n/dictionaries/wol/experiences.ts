@@ -22,8 +22,6 @@ const page: DeepPartial<Dictionary> = {
     },
     // EN: Bushaashe Garuwa is not simply observed; it is experienced. Each of our visitor experiences is designed to create a genuine, respectful and memorable encounter with living Wolaita culture.
     intro: "",
-    // EN: Duration
-    duration: "",
     // EN: Coming soon
     soon: "",
     // EN: Planned. Not open yet.
@@ -38,8 +36,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: Taste authentic Wolaita cuisine
         sub: "",
-        // EN: 2–3 hours
-        duration: "",
         // EN: Gather around the communal table and experience traditional Wolaita cooking. Taste dishes prepared with ancient recipes, learn about the ingredients, and share a meal with our family.
         desc: "",
         includes: [
@@ -58,8 +54,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: The sacred Ethiopian ritual
         sub: "",
-        // EN: 1 hour
-        duration: "",
         // EN: Experience the Ethiopian coffee ceremony as it has been performed for generations. Our host will guide you through the roasting, brewing and serving ritual with authentic Wolaita hospitality.
         desc: "",
         includes: [
@@ -78,8 +72,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: Wolaita music, song and dance
         sub: "",
-        // EN: To be announced
-        duration: "",
         // EN: Traditional Wolaita music, song and ceremonial dance, performed on the grounds. The performances are planned and will be announced here when they begin.
         desc: "",
         includes: [
@@ -94,8 +86,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: Weaving and other Wolaita skills
         sub: "",
-        // EN: To be announced
-        duration: "",
         // EN: Hands-on workshops in weaving and other traditional Wolaita skills are being prepared. They are planned and not open yet.
         desc: "",
         includes: [
@@ -110,8 +100,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: A guided walk through history
         sub: "",
-        // EN: 3–4 hours
-        duration: "",
         // EN: Walk through the entire Bushaashe Garuwa heritage site with an expert guide. Visit cultural houses, ancient trees, the artifact collection, and hear the stories connected to each location.
         desc: "",
         includes: [
@@ -132,8 +120,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: Ride across the great lawn
         sub: "",
-        // EN: By arrangement
-        duration: "",
         // EN: Horses are kept at Bushaashe Garuwa and wait on the great lawn for visitors who would like to ride. Ask when you arrive, or tell us when you book your visit.
         desc: "",
         includes: [
@@ -148,8 +134,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: Learning through experience
         sub: "",
-        // EN: Half or full day
-        duration: "",
         // EN: Structured educational experiences for schools, universities and research groups. Tailored to different age groups and academic interests, with hands-on cultural activities.
         desc: "",
         includes: [
@@ -170,8 +154,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: Capture the living heritage
         sub: "",
-        // EN: 3 hours
-        duration: "",
         // EN: A guided photography experience through the most visually striking locations of Bushaashe Garuwa: cultural houses, heritage trees, cultural performances and authentic daily life.
         desc: "",
         includes: [
@@ -190,8 +172,6 @@ const page: DeepPartial<Dictionary> = {
         title: "",
         // EN: Discover the family story together
         sub: "",
-        // EN: 4 hours
-        duration: "",
         // EN: A special tour designed for families, blending storytelling, nature walks, cultural activities and food in a relaxed, multi-generational experience.
         desc: "",
         includes: [

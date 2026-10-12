@@ -17,8 +17,10 @@ const page: DeepPartial<Dictionary> = {
     hero: {
       // EN: Bushaashe Garuwa
       title: "Bushaashe Garuwa",
-      // EN: Where Wolaita Culture, Traditions & Heritage Live On.
-      subtitle: "Wolaytta Wogay, Mayzza Eeshshaynne Buquray De'iyoosaa.",
+      // EN: Stay close to nature.
+      subtitle: "",
+      // EN: Leave the city behind for fresh air, quiet gardens, and an unhurried stay in the green surroundings of Bushaashe Garuwa.
+      lead: "",
       // EN: Honoring Our Ancestors,
       sloganA: "Nu Mayzza Aawata Bonchchiyoogaa,",
       // EN: Preserving Our Heritage,

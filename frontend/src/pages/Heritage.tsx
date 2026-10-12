@@ -1,22 +1,22 @@
 import { Link, useLocation } from 'react-router-dom';
 import { photos, picture } from '../assets/photos';
 import Photo from '../components/Photo';
-import { fmt, useI18n } from '../i18n/I18nProvider';
+import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
 
 /* Page structure — the text for each id lives in the translations (t.heritage.*) */
-const categories: { id: keyof Dictionary['heritage']['categories']; img?: string; count?: number; to: string }[] = [
-  { id: 'houses', img: photos.meeshsho, count: 2, to: '/heritage/houses' },
-  { id: 'trees', img: photos.enset, count: 24, to: '/heritage/trees' },
+const categories: { id: keyof Dictionary['heritage']['categories']; img?: string; to: string }[] = [
+  { id: 'houses', img: photos.meeshsho, to: '/heritage/houses' },
+  { id: 'trees', img: photos.enset, to: '/heritage/trees' },
   { id: 'spices', to: '/heritage/spices' },
-  { id: 'animals', img: photos.bird, count: 15, to: '/heritage/animals' },
+  { id: 'animals', img: photos.bird, to: '/heritage/animals' },
   { id: 'crocodile', to: '/heritage/crocodile' },
-  { id: 'artifacts', count: 120, to: '/heritage/artifacts' },
-  { id: 'food', img: photos.food, count: 40, to: '/dine' },
-  { id: 'clothing', img: photos.gifaataa2, count: 35, to: '/heritage/clothing' },
-  { id: 'music', count: 18, to: '/heritage/music' },
-  { id: 'stories', img: photos.eventElders, count: 60, to: '/heritage/stories' },
+  { id: 'artifacts', to: '/heritage/artifacts' },
+  { id: 'food', img: photos.food, to: '/dine' },
+  { id: 'clothing', img: photos.gifaataa2, to: '/heritage/clothing' },
+  { id: 'music', to: '/heritage/music' },
+  { id: 'stories', img: photos.eventElders, to: '/heritage/stories' },
 ];
 
 /* The two traditional houses keep their Wolaytta names in every language.
@@ -55,7 +55,6 @@ export default function Heritage() {
                   <span aria-hidden="true" className="text-[#1E3A29] text-lg leading-none transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
                 </div>
                 <p className="mt-2 sm:mt-3 text-[#1E3A29]/60 text-xs sm:text-sm leading-relaxed line-clamp-3 sm:line-clamp-none">{text.desc}</p>
-                {cat.count !== undefined && <span className="mt-2 block text-[#C4622D] text-xs">{fmt(hg.itemCount, { count: cat.count })}</span>}
               </Link>
               );
             })}

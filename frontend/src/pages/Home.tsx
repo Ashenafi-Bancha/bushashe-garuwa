@@ -185,7 +185,10 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             {/* the name in the lettering of the main gate, raised in 3D, sized to the screen */}
             <HeroName title={h.hero.title} className="mb-6 lg:mb-4" />
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 animate-fade-up delay-300">
-              <p className="max-w-xl font-display text-xl sm:text-2xl font-bold text-[#1E3A29] leading-snug tracking-tight">{h.hero.subtitle}</p>
+              <div className="max-w-xl">
+                <p className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
+                <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
+              </div>
               <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
                 <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>

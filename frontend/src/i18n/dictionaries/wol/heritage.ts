@@ -30,8 +30,6 @@ const page: DeepPartial<Dictionary> = {
     },
     // EN: Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one.
     intro: "",
-    // EN: {count} items
-    itemCount: "",
     categories: {
       houses: {
         // EN: Cultural Houses

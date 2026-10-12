@@ -43,14 +43,10 @@ export default function Experiences() {
                   {soon && <span className="absolute top-4 left-4 rounded-full bg-[#E05A1A] text-white text-xs font-bold uppercase tracking-wide px-3.5 py-1.5">{x.soon}</span>}
                 </div>
                 <div className="p-5 sm:p-7">
-                  <div className="flex items-start justify-between gap-4 mb-4">
+                  <div className="mb-4">
                     <div>
                       <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#1E3A29] mb-1">{exp.title}</h2>
                       <p className="text-[#1E3A29] text-sm font-sans">{exp.sub}</p>
-                    </div>
-                    <div className="text-right flex-shrink-0">
-                      <div className="text-[#1E3A29]/65 text-xs font-sans mb-1">{x.duration}</div>
-                      <div className="text-[#1E3A29] text-sm font-sans font-semibold">{exp.duration}</div>
                     </div>
                   </div>
                   <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed mb-4">{exp.desc}</p>
