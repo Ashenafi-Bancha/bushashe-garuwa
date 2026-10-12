@@ -142,7 +142,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Our bar is where stories are shared, community is built, and the day slowly fades into the warmth of Wolaita evenings. Traditional drinks alongside modern refreshments, always served with genuine hospitality.
       desc: "Nu ushsha keettay haydati hara odettiyoo, gallassay loddan ho\"iyaa Wolaytta omarssawu laamettiyoo soho. Ubbatookka wozanappe haniyaa imattaa mohaara shiiqoosona.",
       // EN: Weekdays
-      weekdays: "Saynnoppe biidi Arbba",
+      weekdays: "Saynnoppe biidi Arbba gakkanawu",
       // EN: Weekends
       weekends: "Qeeraanne Woggaa",
       // EN: Opening Hours
