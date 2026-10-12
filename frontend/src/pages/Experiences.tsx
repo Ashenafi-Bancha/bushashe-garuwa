@@ -7,14 +7,16 @@ import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
 
 /* Order and photos — the text for each id lives in the translations (t.experiences.items) */
-const experiences: { id: keyof Dictionary['experiences']['items']; img?: string }[] = [
+const experiences: { id: keyof Dictionary['experiences']['items']; img?: string; soon?: boolean }[] = [
   { id: 'food', img: photos.food },
   { id: 'coffee' },
-  { id: 'performance' },
+  { id: 'performance', soon: true },
+  { id: 'workshop', soon: true },
   { id: 'tour', img: photos.house },
-  { id: 'education' },
-  { id: 'photography' },
-  { id: 'family' },
+  { id: 'horse', img: photos.lawn },
+  { id: 'education', img: photos.eventGathering },
+  { id: 'photography', img: photos.gardens },
+  { id: 'family', img: photos.eventElders },
 ];
 
 export default function Experiences() {
@@ -32,12 +34,13 @@ export default function Experiences() {
       <section className="bg-[#F4EFE4] pb-12 sm:pb-20">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {experiences.map(({ id, img }, i) => {
+            {experiences.map(({ id, img, soon }, i) => {
               const exp = x.items[id];
               return (
               <div key={id} className="bg-white heritage-card overflow-hidden">
-                <div className="img-zoom aspect-video bg-[#1E3A29]/10">
+                <div className="relative img-zoom aspect-video bg-[#1E3A29]/10">
                   <Photo src={img} alt={exp.title} label={exp.title} className="w-full h-full object-cover"/>
+                  {soon && <span className="absolute top-4 left-4 rounded-full bg-[#E05A1A] text-white text-xs font-bold uppercase tracking-wide px-3.5 py-1.5">{x.soon}</span>}
                 </div>
                 <div className="p-5 sm:p-7">
                   <div className="flex items-start justify-between gap-4 mb-4">
@@ -71,9 +74,13 @@ export default function Experiences() {
                   )}
 
                   <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#1E3A29]/10">
-                    <Link to="/visit" className="btn-primary btn-sm">
-                      {t.common.reserve}
-                    </Link>
+                    {soon ? (
+                      <span className="text-[#C4530F] text-sm font-bold">{x.soonNote}</span>
+                    ) : (
+                      <Link to="/visit" className="btn-primary btn-sm">
+                        {t.common.reserve}
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

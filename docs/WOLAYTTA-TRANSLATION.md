@@ -6,7 +6,7 @@ You only type Wolaytta text into prepared files.
 
 ## How it works
 
-- The website has about **880 lines of text**, split into **15 files, one per page**.
+- The website has about **880 lines of text**, split into **16 files, one per page**.
 - Each file shows the English line, and under it an empty place for the Wolaytta.
 - A line you have not translated yet simply shows in English on the site. Nothing breaks.
 - Visitors do not see Wolaytta until you publish it. Until then, choosing **WOL** on
@@ -28,6 +28,7 @@ frontend/src/i18n/dictionaries/wol/
 | 6     | `experiences.ts` | Experiences page                                      | `/experiences` | 67    |
 | 7     | `events.ts`      | Events page                                           | `/events`      | 61    |
 | 8     | `vip.ts`         | VIP Service page                                      | `/vip`         | 23    |
+| 8     | `meeting.ts`     | Meeting Hall page                                      | `/meeting-hall`         | 23    |
 | 8     | `stay.ts`        | Guest House page (coming soon)                        | `/stay`        | 60    |
 | 9     | `dine.ts`        | Dine page                                             | `/dine`        | 49    |
 | 10    | `visit.ts`       | Plan Your Visit page                                  | `/visit`       | 38    |

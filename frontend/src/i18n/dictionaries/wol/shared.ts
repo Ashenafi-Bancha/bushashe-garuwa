@@ -127,6 +127,10 @@ const page: DeepPartial<Dictionary> = {
       services: "Haggaazata",
       // EN: Contact
       contact: "Nuna Demmanawu",
+      // EN: Meeting Hall
+      meeting: "",
+      // EN: Family Stories
+      stories: "",
     },
     describe: {
       // EN: Our story, mission and vision.
@@ -135,6 +139,8 @@ const page: DeepPartial<Dictionary> = {
       contact: "Silkke Paydoy, Iimayilee,  Qantta Xuufiyaa",
       // EN: Private rooms for a family: cook, eat, celebrate and stay.
       vip: "So asaassi dumma kifiliya: Kattite, Miite, Bonchchite, Aqite",
+      // EN: For meetings, trainings, weddings and family days.
+      meeting: "",
     },
     // EN: Bushaashe Garuwa home
     homeAria: "Bushaashe Garuwa Suwa",

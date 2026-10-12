@@ -146,6 +146,35 @@ export default function Events() {
         </section>
       )}
 
+      {/* The three kinds of events held here */}
+      <section className="py-12 sm:py-16" aria-labelledby="kinds-title">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <div className="max-w-2xl mb-8 sm:mb-10">
+            <span className="eyebrow mb-5">{e.kinds.eyebrow}</span>
+            <h2 id="kinds-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1E3A29] leading-[1.05]">{e.kinds.title}</h2>
+          </div>
+          <ul data-wave className="grid md:grid-cols-3 gap-5 sm:gap-6">
+            {([
+              { id: 'food', photo: 'food' },
+              { id: 'gifaataa', photo: 'gifaataa1' },
+              { id: 'private', photo: 'eventCelebration' },
+            ] as const).map(({ id, photo }) => (
+              <li key={id} className="flex flex-col bg-white rounded-[2rem] p-2.5 elev-1">
+                <div className="relative img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
+                  <img {...picture(photos[photo], '(max-width: 767px) 100vw, 33vw')} alt={t.photos[photo]} loading="lazy" className="w-full h-full object-cover" />
+                  <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-xs font-bold text-[#1E3A29]">{e.kinds.items[id].when}</span>
+                </div>
+                <div className="flex flex-1 flex-col items-start px-4 py-5 sm:px-5">
+                  <h3 className="font-display text-2xl font-bold text-[#1E3A29] tracking-tight mb-2">{e.kinds.items[id].title}</h3>
+                  <p className="text-[#1E3A29]/65 text-sm sm:text-base leading-relaxed">{e.kinds.items[id].desc}</p>
+                  {id === 'private' && <Link to="/contact" className="btn-primary btn-sm mt-5">{e.kinds.ask}</Link>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
       {/* Featured events */}
       {featured.length > 0 && (
         <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">

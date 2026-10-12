@@ -3,16 +3,19 @@ import { photos, picture, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 
-/** One thing a visitor finds on a page: its name, and the photograph beside it */
-type Detail = { label: string; photo: PhotoKey };
+/** One thing a visitor finds on a page: its name, the photograph beside it (when there is one yet), and whether it is still to come */
+type Detail = { label: string; photo?: PhotoKey; soon?: boolean };
 
 /** The parts of the site shown in full: a large photograph, a line about the place, what is found there, and the way in */
 function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; title: string; desc: string; list: Detail[] }[] {
   const q = t.home.quick.items;
   const heritage = t.heritage.categories;
-  const doing = t.home.experiences.items;
+  const doing = t.experiences.items;
+  const held = t.events.kinds.items;
   const captions = t.photoCaptions;
   const vip = t.vip.features;
+  const hall = t.meeting.uses;
+  const visit = t.visit.types;
   const [wolaitaCuisine, , , specialEvents] = t.home.restaurant.categories;
 
   return [
@@ -25,10 +28,12 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       list: [
         { label: heritage.houses.label, photo: 'house' },
         { label: heritage.trees.label, photo: 'zigba' },
+        { label: heritage.spices.label },
         { label: heritage.animals.label, photo: 'bird' },
-        { label: heritage.clothing.label, photo: 'gifaataa2' },
+        { label: heritage.crocodile.label },
+        { label: heritage.artifacts.label },
         { label: heritage.food.label, photo: 'food' },
-        { label: heritage.stories.label, photo: 'eventElders' },
+        { label: heritage.clothing.label, photo: 'gifaataa2' },
       ],
     },
     {
@@ -39,9 +44,11 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       desc: q.experiences,
       list: [
         { label: doing.food.title, photo: 'food' },
-        { label: doing.performance.title, photo: 'gifaataa3' },
+        { label: doing.coffee.title },
+        { label: doing.performance.title, soon: true },
+        { label: doing.workshop.title, soon: true },
         { label: doing.tour.title, photo: 'pavilions' },
-        { label: doing.photography.title, photo: 'gardens' },
+        { label: doing.horse.title, photo: 'lawn' },
       ],
     },
     {
@@ -51,10 +58,9 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       title: t.nav.links.events,
       desc: q.events,
       list: [
-        { label: captions.gifaataa1.title, photo: 'gifaataa1' },
-        { label: captions.eventGathering.title, photo: 'eventGathering' },
-        { label: captions.eventCelebration.title, photo: 'eventCelebration' },
-        { label: captions.eventGames.title, photo: 'eventGames' },
+        { label: `${held.food.title} · ${held.food.when}`, photo: 'food' },
+        { label: `${held.gifaataa.title} · ${held.gifaataa.when}`, photo: 'gifaataa3' },
+        { label: held.private.title, photo: 'eventCelebration' },
       ],
     },
     {
@@ -71,6 +77,22 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       ],
     },
     {
+      key: 'meeting',
+      to: '/meeting-hall',
+      photo: 'meetingHall',
+      title: t.nav.links.meeting,
+      desc: q.meeting,
+      list: [
+        { label: hall.meetings.title, photo: 'meetingHall' },
+        { label: hall.trainings.title, photo: 'eventGathering' },
+        { label: hall.education.title },
+        { label: hall.weddings.title },
+        { label: hall.family.title, photo: 'eventElders' },
+        { label: hall.anniversaries.title, photo: 'eventCelebration' },
+        { label: hall.visitors.title, photo: 'gifaataa3' },
+      ],
+    },
+    {
       key: 'dine',
       to: '/dine',
       photo: 'food',
@@ -82,20 +104,35 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
         { label: specialEvents ?? captions.eventCelebration.title, photo: 'eventCelebration' },
       ],
     },
+    {
+      key: 'visit',
+      to: '/visit',
+      photo: 'gate',
+      title: t.nav.links.visit,
+      desc: q.visit,
+      list: [
+        { label: t.common.openingHours, photo: 'home' },
+        { label: t.visit.gettingHere.title, photo: 'gate' },
+        { label: visit.heritage.label, photo: 'meeshsho' },
+        { label: visit.group.label, photo: 'gifaataa1' },
+        { label: visit.education.label },
+        { label: visit.meeting.label, photo: 'meetingHall' },
+      ],
+    },
   ];
 }
 
 /** The remaining pages, as three smaller cards */
-const MORE: { key: 'gallery' | 'visit' | 'about'; to: string; photo: PhotoKey }[] = [
+const MORE: { key: 'stories' | 'gallery' | 'about'; to: string; photo: PhotoKey }[] = [
+  { key: 'stories', to: '/heritage/stories', photo: 'eventElders' },
   { key: 'gallery', to: '/gallery', photo: 'zigba' },
-  { key: 'visit', to: '/visit', photo: 'gate' },
   { key: 'about', to: '/about', photo: 'home' },
 ];
 
 /**
  * The way into every part of the site, in order: the main pages each with a
  * large photograph and a list of what is found there (a small photograph beside
- * every item), then three smaller cards. The Guest House, not open yet, comes
+ * every item that has one), then three smaller cards. The Guest House, not open yet, comes
  * last on the home page: `GuestHouseSoon` below.
  */
 export default function QuickLinks() {
@@ -135,15 +172,28 @@ export default function QuickLinks() {
                 <ul className="w-full grid sm:grid-cols-2 gap-2.5 sm:gap-3 mb-7">
                   {row.list.map((item) => (
                     <li key={item.label} className="flex items-center gap-3 rounded-2xl bg-[#F4EFE4] p-2 pr-4">
-                      <img
-                        {...picture(photos[item.photo], '64px')}
-                        alt=""
-                        loading="lazy"
-                        className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-xl object-cover"
-                      />
-                      <span className="flex items-center gap-2 min-w-0 text-sm sm:text-[15px] font-semibold text-[#1E3A29] leading-snug">
-                        <span className="w-1.5 h-1.5 flex-shrink-0 rounded-full bg-[#0E8A50]" aria-hidden="true" />
-                        {item.label}
+                      {item.photo ? (
+                        <img
+                          {...picture(photos[item.photo], '64px')}
+                          alt=""
+                          loading="lazy"
+                          className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-xl object-cover"
+                        />
+                      ) : (
+                        /* no photograph of this yet: a quiet tile holds its place */
+                        <span className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-xl bg-[#E3EBD8] grid place-items-center text-[#1E3A29]/35" aria-hidden="true">
+                          <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M4 20c0-9 5-15 16-16-1 11-7 16-16 16z" />
+                            <path d="M4 20 13 11" />
+                          </svg>
+                        </span>
+                      )}
+                      <span className="min-w-0 text-sm sm:text-[15px] font-semibold text-[#1E3A29] leading-snug">
+                        <span className="flex items-center gap-2">
+                          <span className="w-1.5 h-1.5 flex-shrink-0 rounded-full bg-[#0E8A50]" aria-hidden="true" />
+                          {item.label}
+                        </span>
+                        {item.soon && <span className="mt-1 ml-3.5 inline-block rounded-full bg-[#FFF4E6] text-[#C4530F] text-[11px] font-bold px-2 py-0.5">{t.experiences.soon}</span>}
                       </span>
                     </li>
                   ))}

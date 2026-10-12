@@ -45,6 +45,18 @@ const page: DeepPartial<Dictionary> = {
         // EN: Heritage trees, mango, apple, papaya and banana, more than 1,800 coffee trees, enset and fragrant traditional garden plants.
         desc: "",
       },
+      spices: {
+        // EN: Spices & Herbs
+        label: "",
+        // EN: The spices and herbs that give Wolaita food its taste, among the fragrant plants of the garden.
+        desc: "",
+      },
+      crocodile: {
+        // EN: Crocodile Pond
+        label: "",
+        // EN: A properly fenced crocodile pond, where visitors watch the crocodiles from a safe distance.
+        desc: "",
+      },
       animals: {
         // EN: Animals & Zoo
         label: "",
@@ -70,7 +82,7 @@ const page: DeepPartial<Dictionary> = {
         desc: "",
       },
       food: {
-        // EN: Traditional Food
+        // EN: Cultural Food
         label: "",
         // EN: Recipes passed through generations: the taste of Wolaita heritage.
         desc: "",

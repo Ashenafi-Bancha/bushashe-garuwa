@@ -14,6 +14,40 @@ import type { DeepPartial } from '../../types';
  */
 const page: DeepPartial<Dictionary> = {
   events: {
+    kinds: {
+      // EN: What We Hold
+      eyebrow: "",
+      // EN: Three Kinds of Events
+      title: "",
+      // EN: Ask About a Private Event
+      ask: "",
+      items: {
+        food: {
+          // EN: Cultural Food Event
+          title: "",
+          // EN: Twice a month
+          when: "",
+          // EN: An evening of traditional Wolaita food, coffee, music and storytelling in the cultural houses. Reserve your place below.
+          desc: "",
+        },
+        gifaataa: {
+          // EN: Gifaataa
+          title: "",
+          // EN: Once a year
+          when: "",
+          // EN: The Wolaita new year festival, celebrated on the grounds with traditional dress, food, song and dance.
+          desc: "",
+        },
+        private: {
+          // EN: Private Events
+          title: "",
+          // EN: When you choose
+          when: "",
+          // EN: Your own gathering, arranged the way you want it: a family day, an anniversary, a meeting or a celebration with friends.
+          desc: "",
+        },
+      },
+    },
     moments: {
       // EN: Moments
       eyebrow: "",

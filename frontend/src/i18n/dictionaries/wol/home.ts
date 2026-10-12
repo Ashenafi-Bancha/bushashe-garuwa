@@ -106,6 +106,10 @@ const page: DeepPartial<Dictionary> = {
         gallery: "Gadiya, keettatane and ufayssata misiletun",
         // EN: Who we are and why we keep this place.
         about: "Nu oonakkonne ayssi ha sohuwaa naagiyaakko.",
+        // EN: A hall for meetings, trainings, weddings and family days.
+        meeting: "",
+        // EN: The family history and the stories told by the elders.
+        stories: "",
       },
     },
     marquee: [

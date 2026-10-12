@@ -30,6 +30,7 @@ const PAGES = [
   { file: 'experiences', title: 'Experiences page', see: '/experiences', keys: ['experiences'] },
   { file: 'events', title: 'Events page', see: '/events', keys: ['events'] },
   { file: 'vip', title: 'VIP Service page', see: '/vip', keys: ['vip'] },
+  { file: 'meeting', title: 'Meeting Hall page', see: '/meeting-hall', keys: ['meeting'] },
   { file: 'stay', title: 'Guest House page (coming soon)', see: '/stay', keys: ['stay'] },
   { file: 'dine', title: 'Dine page', see: '/dine', keys: ['dine'] },
   { file: 'visit', title: 'Plan Your Visit page', see: '/visit', keys: ['visit'] },

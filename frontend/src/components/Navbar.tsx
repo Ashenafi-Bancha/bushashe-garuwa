@@ -7,7 +7,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import SocialLinks from './SocialLinks';
 import { lockScroll } from '../lib/motion';
 
-type PageKey = 'home' | 'events' | 'heritage' | 'experiences' | 'vip' | 'stay' | 'dine' | 'about' | 'discover' | 'gallery' | 'contact' | 'visit';
+type PageKey = 'home' | 'events' | 'heritage' | 'experiences' | 'vip' | 'meeting' | 'stay' | 'dine' | 'about' | 'discover' | 'gallery' | 'contact' | 'visit';
 
 const routes: Record<PageKey, string> = {
   home: '/',
@@ -15,6 +15,7 @@ const routes: Record<PageKey, string> = {
   heritage: '/heritage',
   experiences: '/experiences',
   vip: '/vip',
+  meeting: '/meeting-hall',
   stay: '/stay',
   dine: '/dine',
   about: '/about',
@@ -26,7 +27,7 @@ const routes: Record<PageKey, string> = {
 
 /* Services opens as a small panel on computers and a headed list on phones */
 const groups = {
-  services: ['experiences', 'vip', 'dine', 'stay'],
+  services: ['experiences', 'vip', 'meeting', 'dine', 'stay'],
 } as const satisfies Record<string, readonly PageKey[]>;
 
 type GroupKey = keyof typeof groups;
@@ -45,6 +46,7 @@ const paths: Record<PageKey, ReactNode> = {
   heritage: <><path d="M3 9 12 4l9 5" /><path d="M5 9.5v8.5M9.7 9.5v8.5M14.3 9.5v8.5M19 9.5v8.5" /><path d="M3 20.5h18" /></>,
   experiences: <><path d="M12 3l2.2 5.1 5.3.5-4 3.6 1.2 5.3L12 14.8 7.3 17.5l1.2-5.3-4-3.6 5.3-.5z" /></>,
   vip: <><path d="M4 18h16M5 18 3.5 8l5 4L12 5l3.5 7 5-4L19 18" /></>,
+  meeting: <><rect x="3.5" y="5" width="17" height="11" rx="2" /><path d="M7 20h10M12 16v4" /><path d="M8 12.5a4 4 0 0 1 8 0" /><circle cx="12" cy="8.6" r="1.4" /></>,
   stay: <><path d="M3 19V7M21 19v-5a3 3 0 0 0-3-3h-8v8" /><path d="M3 15h18" /><circle cx="6.5" cy="11" r="1.8" /></>,
   dine: <><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10" /><path d="M16 3c-1.7 1.5-2.5 3.5-2.5 6h3V21" /></>,
   about: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7.5v.5" /></>,
@@ -81,7 +83,7 @@ export default function Navbar() {
 
   // a line under each page name in the panels and the phone menu
   const describe = (key: PageKey): string | undefined => {
-    if (key === 'discover' || key === 'contact' || key === 'vip') return t.nav.describe[key];
+    if (key === 'discover' || key === 'contact' || key === 'vip' || key === 'meeting') return t.nav.describe[key];
     if (key === 'home') return undefined;
     return t.home.quick.items[key];
   };

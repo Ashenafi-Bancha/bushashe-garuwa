@@ -127,11 +127,14 @@ export const en = {
       gallery: 'Gallery',
       services: 'Services',
       contact: 'Contact',
+      meeting: 'Meeting Hall',
+      stories: 'Family Stories',
     },
     describe: {
       discover: 'Our story, mission and vision.',
       contact: 'Phone, email and a message form.',
       vip: 'Private rooms for a family: cook, eat, celebrate and stay.',
+      meeting: 'For meetings, trainings, weddings and family days.',
     },
     homeAria: 'Bushaashe Garuwa home',
     mainNav: 'Main navigation',
@@ -238,6 +241,8 @@ export const en = {
         visit: 'Opening hours, directions and booking a visit.',
         gallery: 'The grounds, the houses and the celebrations in photos.',
         about: 'Who we are and why we keep this place.',
+        meeting: 'A hall for meetings, trainings, weddings and family days.',
+        stories: 'The family history and the stories told by the elders.',
       },
     },
     marquee: ['Heritage', 'Nature', 'Culture', 'Food', 'Gifaataa', 'Stay'],
@@ -523,11 +528,13 @@ export const en = {
     categories: {
       houses: { label: 'Cultural Houses', desc: 'Two traditional Wolaita houses, Gulanttaa Keettaa and Meeshsho Keettaa, full of the traditional tools and instruments of the Wolaita people.' },
       trees: { label: 'Trees & Plants', desc: 'Heritage trees, mango, apple, papaya and banana, more than 1,800 coffee trees, enset and fragrant traditional garden plants.' },
+      spices: { label: 'Spices & Herbs', desc: 'The spices and herbs that give Wolaita food its taste, among the fragrant plants of the garden.' },
+      crocodile: { label: 'Crocodile Pond', desc: 'A properly fenced crocodile pond, where visitors watch the crocodiles from a safe distance.' },
       animals: { label: 'Animals & Zoo', desc: 'A small zoo where visitors meet the animals kept on the heritage grounds of Bushaashe Garuwa.' },
       artifacts: { label: 'Artifacts', desc: 'Treasured objects of Wolaita craft, ceremony and daily life.' },
       clothing: { label: 'Traditional Clothing', desc: 'Clothing that carries culture: the visual language of Wolaita identity.' },
       music: { label: 'Music & Dance', desc: 'Living traditions of Wolaita music, song, and ceremonial dance.' },
-      food: { label: 'Traditional Food', desc: 'Recipes passed through generations: the taste of Wolaita heritage.' },
+      food: { label: 'Cultural Food', desc: 'Recipes passed through generations: the taste of Wolaita heritage.' },
       stories: { label: 'Oral Histories', desc: 'Stories passed down in Wolaytta, Amharic and English.' },
     },
     houses: {
@@ -558,29 +565,38 @@ export const en = {
     hero: { eyebrow: 'Be Part of the Story', title: 'Experience Wolaita in Bushaashe Garuwa' },
     intro: 'Bushaashe Garuwa is not simply observed; it is experienced. Each of our visitor experiences is designed to create a genuine, respectful and memorable encounter with living Wolaita culture.',
     duration: 'Duration',
+    soon: 'Coming soon',
+    soonNote: 'Planned. Not open yet.',
     showIncluded: "What's included",
     hideDetails: 'Hide details',
     items: {
       food: {
-        title: 'Food Experience',
+        title: 'Cultural Food Experience',
         sub: 'Taste authentic Wolaita cuisine',
         duration: '2–3 hours',
         desc: 'Gather around the communal table and experience traditional Wolaita cooking. Taste dishes prepared with ancient recipes, learn about the ingredients, and share a meal with our family.',
         includes: ['Welcome coffee ceremony', 'Guided cooking demonstration', 'Full traditional meal', 'Recipe card to take home'],
       },
       coffee: {
-        title: 'Coffee Ceremony',
+        title: 'Traditional Coffee Ceremony',
         sub: 'The sacred Ethiopian ritual',
         duration: '1 hour',
         desc: 'Experience the Ethiopian coffee ceremony as it has been performed for generations. Our host will guide you through the roasting, brewing and serving ritual with authentic Wolaita hospitality.',
         includes: ['Three rounds of coffee', 'Traditional snacks', 'Cultural explanation', 'Communal experience'],
       },
       performance: {
-        title: 'Cultural Performance',
-        sub: 'Music, dance and storytelling',
-        duration: '1.5 hours',
-        desc: 'Watch traditional Wolaita musicians and dancers perform ceremonies, songs and dances that have been passed through generations. Hear elders tell oral histories in Wolaytta.',
-        includes: ['Traditional music performance', 'Cultural dance', 'Oral history session', 'Q&A with performers'],
+        title: 'Cultural Music and Dance Performance',
+        sub: 'Wolaita music, song and dance',
+        duration: 'To be announced',
+        desc: 'Traditional Wolaita music, song and ceremonial dance, performed on the grounds. The performances are planned and will be announced here when they begin.',
+        includes: ['Traditional music', 'Cultural dance'],
+      },
+      workshop: {
+        title: 'Cultural Skills Workshop',
+        sub: 'Weaving and other Wolaita skills',
+        duration: 'To be announced',
+        desc: 'Hands-on workshops in weaving and other traditional Wolaita skills are being prepared. They are planned and not open yet.',
+        includes: ['Weaving', 'Other traditional skills'],
       },
       tour: {
         title: 'Heritage Tour',
@@ -588,6 +604,13 @@ export const en = {
         duration: '3–4 hours',
         desc: 'Walk through the entire Bushaashe Garuwa heritage site with an expert guide. Visit cultural houses, ancient trees, the artifact collection, and hear the stories connected to each location.',
         includes: ['Expert heritage guide', 'Cultural houses visit', 'Ancient tree tour', 'Artifact viewing', 'Traditional tea break'],
+      },
+      horse: {
+        title: 'Horseback Riding',
+        sub: 'Ride across the great lawn',
+        duration: 'By arrangement',
+        desc: 'Horses are kept at Bushaashe Garuwa and wait on the great lawn for visitors who would like to ride. Ask when you arrive, or tell us when you book your visit.',
+        includes: ['A horse from the grounds', 'A ride on the great lawn'],
       },
       education: {
         title: 'Educational Visit',
@@ -618,6 +641,16 @@ export const en = {
   },
 
   events: {
+    kinds: {
+      eyebrow: 'What We Hold',
+      title: 'Three Kinds of Events',
+      ask: 'Ask About a Private Event',
+      items: {
+        food: { title: 'Cultural Food Event', when: 'Twice a month', desc: 'An evening of traditional Wolaita food, coffee, music and storytelling in the cultural houses. Reserve your place below.' },
+        gifaataa: { title: 'Gifaataa', when: 'Once a year', desc: 'The Wolaita new year festival, celebrated on the grounds with traditional dress, food, song and dance.' },
+        private: { title: 'Private Events', when: 'When you choose', desc: 'Your own gathering, arranged the way you want it: a family day, an anniversary, a meeting or a celebration with friends.' },
+      },
+    },
     moments: {
       eyebrow: 'Moments',
       title: 'Gatherings at Bushaashe Garuwa',
@@ -695,6 +728,33 @@ export const en = {
         desc: 'Learn about traditional Wolaita instruments and music. A participatory workshop for all ages led by community musicians.',
         avail: 'Open',
       },
+    },
+  },
+
+  meeting: {
+    hero: {
+      eyebrow: 'Meeting Hall',
+      title: 'A Hall for Your Gathering',
+      desc: 'A hall on the heritage grounds for meetings, trainings, weddings and family days, with food and coffee from our kitchen.',
+    },
+    intro: {
+      eyebrow: 'What It Is For',
+      title: 'One Hall, Many Occasions',
+      text: 'The hall is set with rows of chairs dressed in white with bands of Wolaita pattern. Outside are the gardens, the lawns and the cultural houses, so a working day or a celebration can also be a visit.',
+    },
+    uses: {
+      meetings: { title: 'Meetings', desc: 'For organisations, offices and community groups.' },
+      trainings: { title: 'Trainings & Workshops', desc: 'Room to sit, listen and work, with quiet grounds outside.' },
+      education: { title: 'Education', desc: 'Lessons and talks for schools, universities and study groups.' },
+      weddings: { title: 'Weddings', desc: 'A hall for the ceremony or the meal, and the gardens for photographs.' },
+      family: { title: 'Family Gatherings', desc: 'Bring the whole family together for a day.' },
+      anniversaries: { title: 'Anniversaries & Celebrations', desc: 'Birthdays, anniversaries and other days worth marking.' },
+      visitors: { title: 'Visitor Groups', desc: 'A place for groups to gather and eat before or after the heritage walk.' },
+    },
+    photosTitle: 'The Hall and the Grounds',
+    cta: {
+      title: 'Would You Like to Use the Hall?',
+      text: 'Call or write to us with the date and the number of people, and we will arrange it with you.',
     },
   },
 

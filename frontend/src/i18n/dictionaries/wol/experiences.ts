@@ -24,13 +24,17 @@ const page: DeepPartial<Dictionary> = {
     intro: "",
     // EN: Duration
     duration: "",
+    // EN: Coming soon
+    soon: "",
+    // EN: Planned. Not open yet.
+    soonNote: "",
     // EN: What's included
     showIncluded: "",
     // EN: Hide details
     hideDetails: "",
     items: {
       food: {
-        // EN: Food Experience
+        // EN: Cultural Food Experience
         title: "",
         // EN: Taste authentic Wolaita cuisine
         sub: "",
@@ -50,7 +54,7 @@ const page: DeepPartial<Dictionary> = {
         ],
       },
       coffee: {
-        // EN: Coffee Ceremony
+        // EN: Traditional Coffee Ceremony
         title: "",
         // EN: The sacred Ethiopian ritual
         sub: "",
@@ -70,22 +74,34 @@ const page: DeepPartial<Dictionary> = {
         ],
       },
       performance: {
-        // EN: Cultural Performance
+        // EN: Cultural Music and Dance Performance
         title: "",
-        // EN: Music, dance and storytelling
+        // EN: Wolaita music, song and dance
         sub: "",
-        // EN: 1.5 hours
+        // EN: To be announced
         duration: "",
-        // EN: Watch traditional Wolaita musicians and dancers perform ceremonies, songs and dances that have been passed through generations. Hear elders tell oral histories in Wolaytta.
+        // EN: Traditional Wolaita music, song and ceremonial dance, performed on the grounds. The performances are planned and will be announced here when they begin.
         desc: "",
         includes: [
-          // EN: Traditional music performance
+          // EN: Traditional music
           "",
           // EN: Cultural dance
           "",
-          // EN: Oral history session
+        ],
+      },
+      workshop: {
+        // EN: Cultural Skills Workshop
+        title: "",
+        // EN: Weaving and other Wolaita skills
+        sub: "",
+        // EN: To be announced
+        duration: "",
+        // EN: Hands-on workshops in weaving and other traditional Wolaita skills are being prepared. They are planned and not open yet.
+        desc: "",
+        includes: [
+          // EN: Weaving
           "",
-          // EN: Q&A with performers
+          // EN: Other traditional skills
           "",
         ],
       },
@@ -108,6 +124,22 @@ const page: DeepPartial<Dictionary> = {
           // EN: Artifact viewing
           "",
           // EN: Traditional tea break
+          "",
+        ],
+      },
+      horse: {
+        // EN: Horseback Riding
+        title: "",
+        // EN: Ride across the great lawn
+        sub: "",
+        // EN: By arrangement
+        duration: "",
+        // EN: Horses are kept at Bushaashe Garuwa and wait on the great lawn for visitors who would like to ride. Ask when you arrive, or tell us when you book your visit.
+        desc: "",
+        includes: [
+          // EN: A horse from the grounds
+          "",
+          // EN: A ride on the great lawn
           "",
         ],
       },

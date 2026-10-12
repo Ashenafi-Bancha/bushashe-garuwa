@@ -18,6 +18,7 @@ export type HeroSlot =
   | 'events'
   | 'stay'
   | 'vip'
+  | 'meetingHall'
   | 'dine'
   | 'gallery'
   | 'visit'
@@ -48,6 +49,7 @@ export const HERO_SLOTS: Record<HeroSlot, { label: string; path: string; photos:
   events: { label: 'Events', path: '/events', photos: [{ key: 'gifaataa3', pos: 'object-center' }] },
   stay: { label: 'Guest House', path: '/stay', photos: [{ key: 'pavilions', pos: 'object-center' }] },
   vip: { label: 'VIP Service', path: '/vip', photos: [{ key: 'vipDining', pos: 'object-[center_55%]' }] },
+  meetingHall: { label: 'Meeting Hall', path: '/meeting-hall', photos: [{ key: 'meetingHall', pos: 'object-center' }] },
   dine: { label: 'Dine', path: '/dine', photos: [{ key: 'food', pos: 'object-center' }] },
   gallery: { label: 'Gallery', path: '/gallery', photos: [{ key: 'home', pos: 'object-center' }] },
   visit: { label: 'Visit', path: '/visit', photos: [{ key: 'gate', pos: 'object-[center_18%]' }] },

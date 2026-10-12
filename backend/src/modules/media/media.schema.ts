@@ -20,6 +20,7 @@ export const HeroSlot = z.enum([
   'events',
   'stay',
   'vip',
+  'meetingHall',
   'dine',
   'gallery',
   'visit',

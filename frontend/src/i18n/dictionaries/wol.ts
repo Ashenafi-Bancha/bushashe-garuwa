@@ -8,6 +8,7 @@ import heritage from './wol/heritage';
 import experiences from './wol/experiences';
 import events from './wol/events';
 import vip from './wol/vip';
+import meeting from './wol/meeting';
 import stay from './wol/stay';
 import dine from './wol/dine';
 import visit from './wol/visit';
@@ -37,6 +38,7 @@ export const wol: DeepPartial<Dictionary> = {
   ...experiences,
   ...events,
   ...vip,
+  ...meeting,
   ...stay,
   ...dine,
   ...visit,
