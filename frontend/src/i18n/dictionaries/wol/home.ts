@@ -36,7 +36,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Years of heritage
       statYears: "Buqura Layttata",
       // EN: Since the 18th century
-      sinceCentury: "18tto Xeetu Layttatun Doommidi",
+      sinceCentury: "18tto Xeetu Layttaappe Doommidi",
       // EN: WOLAITA · HERITAGE · NATURE · CULTURE · 
       badge: "WOLAYTTA · BUQURAA · MERETAA · WOGAA",
       // EN: Next photograph
@@ -260,7 +260,7 @@ const page: DeepPartial<Dictionary> = {
           // EN: Roots
           label: "Dendduwa",
           // EN: The family's story in the Wolaita highlands begins in the 18th century.
-          desc: "So asaa tarikee Wolaytta xoqqa sohotun, 18tto Xeetu Layttatun doommees.",
+          desc: "So asaa tarikee Wolaytta xoqqa sohotun, 18tto Xeetu Layttaappe doommees.",
         },
         {
           // EN: 1940s
@@ -390,7 +390,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: See all events
       allCta: "Ubba Giigissotakka Be'a.",
       // EN: The next dates will be announced here soon.
-      soon: "Kaalliya gallassata mata erissana.",
+      soon: "Kaalliya gallassata matan erissana.",
     },
     facilities: {
       // EN: On the Grounds

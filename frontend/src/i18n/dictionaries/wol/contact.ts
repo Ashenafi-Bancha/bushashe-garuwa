@@ -16,43 +16,43 @@ const page: DeepPartial<Dictionary> = {
   contact: {
     hero: {
       // EN: Contact
-      eyebrow: "",
+      eyebrow: "Nuna Demmanawu",
       // EN: We'd Love to Hear From You
-      title: "",
+      title: "Intteppe Siyana Doseettees",
     },
     // EN: Whether you're planning a visit, reserving an experience, booking a room, or simply curious about Bushaashe Garuwa, we're here to help.
-    intro: "",
+    intro: "Xomoosuwa keeranawu gididee, Kifiliya oyttanawu woykko cookka Bushaashe Garuwaaba erana xallawu koyidaba gidikkokka, inttena maaddanawu giigi uttida.",
     // EN: Available daily 08:00 – 18:00
-    phoneNote: "",
+    phoneNote: "Ubbatookka 02:00 - 12:00 gakkanawu de'ees.",
     // EN: We respond within 24 hours
-    emailNote: "",
+    emailNote: "24 saatiyaa giddon zaaruwaa immoos.",
     // EN: Damot Sore Woreda, Wolaita Zone
-    locationLine1: "",
+    locationLine1: "Daamoota Soore Allaanaa, Wolaytta Moottaa",
     // EN: Ethiopia
-    locationLine2: "",
+    locationLine2: "Toophphiyaa",
     // EN: Social Media
-    social: "",
+    social: "Coraa Gattiyaa Eqotata",
     form: {
       // EN: Message Sent
-      sentTitle: "",
+      sentTitle: "Kiitay Biis",
       // EN: Thank you for reaching out. We'll be in touch within 24 hours.
-      sentText: "",
+      sentText: "Nunaara gaytto gishshawu keehippe galatoos. 24 saatiya giddon simmi gayttana.",
       // EN: Send a Message
-      title: "",
+      title: "Kiitaa Yeddite",
       // EN: Full Name *
-      name: "",
+      name: "Kumetta Sunttaa",
       // EN: Your full name
-      namePlaceholder: "",
+      namePlaceholder: "Ne Kumetta Sunttaa Hagan Xaafa",
       // EN: Phone
-      phone: "",
+      phone: "Silkke Payduwa",
       // EN: Email *
-      email: "",
+      email: "Iimayliyaa",
       // EN: Message *
-      message: "",
+      message: "Kiitaa",
       // EN: How can we help you?
-      messagePlaceholder: "",
+      messagePlaceholder: "Ay Maddanee?",
       // EN: Send Message
-      submit: "",
+      submit: "Kiitaa Yeddite",
     },
   },
 };
