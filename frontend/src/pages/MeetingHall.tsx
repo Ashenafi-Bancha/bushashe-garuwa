@@ -1,10 +1,19 @@
-import { photos, picture } from '../assets/photos';
+import { photos, picture, type PhotoKey } from '../assets/photos';
+import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import ContactButtons from '../components/ContactButtons';
 
-/* What the hall is used for; the words are in the translations (t.meeting.uses) */
-const USES = ['meetings', 'trainings', 'education', 'weddings', 'family', 'anniversaries', 'visitors'] as const;
+/* What the hall is used for, each with its photograph where there is one; the words are in the translations (t.meeting.uses) */
+const USES: { id: 'meetings' | 'trainings' | 'education' | 'weddings' | 'family' | 'anniversaries' | 'visitors'; photo?: PhotoKey }[] = [
+  { id: 'meetings', photo: 'meetingHall' },
+  { id: 'trainings', photo: 'eventGathering' },
+  { id: 'education' },
+  { id: 'weddings' },
+  { id: 'family', photo: 'eventElders' },
+  { id: 'anniversaries', photo: 'eventCelebration' },
+  { id: 'visitors', photo: 'gifaataa3' },
+];
 
 /**
  * The meeting hall, a service of its own: a hall on the grounds for meetings,
@@ -31,11 +40,16 @@ export default function MeetingHall() {
           </div>
 
           <ul data-wave className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-            {USES.map((id, i) => (
-              <li key={id} data-reveal className="bg-white rounded-[1.5rem] p-6 sm:p-7 elev-1">
-                <span className="block text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] tracking-tight mb-2">{m.uses[id].title}</h3>
-                <p className="text-[#1E3A29]/65 text-sm sm:text-base leading-relaxed">{m.uses[id].desc}</p>
+            {USES.map(({ id, photo }, i) => (
+              <li key={id} data-reveal className="bg-white rounded-[2rem] p-2.5 elev-1">
+                <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
+                  <Photo src={photo && photos[photo]} alt={photo ? t.photos[photo] : m.uses[id].title} label={m.uses[id].title} loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <div className="px-4 py-5 sm:px-5">
+                  <span className="block text-[#C4622D] text-sm font-bold tabular-nums mb-2">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] tracking-tight mb-2">{m.uses[id].title}</h3>
+                  <p className="text-[#1E3A29]/65 text-sm sm:text-base leading-relaxed">{m.uses[id].desc}</p>
+                </div>
               </li>
             ))}
           </ul>

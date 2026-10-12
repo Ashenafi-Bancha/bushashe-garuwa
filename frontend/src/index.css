@@ -291,6 +291,43 @@ html:lang(wal) .nav-cta-wrap { display: none; }
   html:lang(wal) .nav-cta-wrap { display: block; }
 }
 
+/* ── "Explore" on the home page cards: an arrow, and a border of light that keeps turning to invite the tap ── */
+@property --explore-turn { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes exploreTurn { to { --explore-turn: 360deg; } }
+@keyframes exploreNudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+.btn-explore {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 14px 26px;
+  border-radius: 9999px;
+  background: #0E8A50;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  transition: background-color 0.25s ease;
+}
+.btn-explore::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  z-index: -1;
+  border-radius: inherit;
+  padding: 3px;
+  background: conic-gradient(from var(--explore-turn), #0E8A50 0deg, #B9D38A 70deg, #FF9A2E 120deg, #B9D38A 170deg, #0E8A50 240deg, #0E8A50 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: exploreTurn 2.8s linear infinite;
+}
+.btn-explore-arrow { animation: exploreNudge 1.6s ease-in-out infinite; }
+.btn-explore:hover, a:hover .btn-explore { background: #0B7A45; }
+.btn-explore-sm { min-height: 46px; padding: 11px 22px; font-size: 14px; }
+
 /* ── "Back", at the bottom corner of every page but the home page; it stays over the footer too ── */
 .back-button {
   position: fixed;

@@ -3,8 +3,8 @@ import { photos, picture, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 
-/** One thing a visitor finds on a page: its name, the photograph beside it (when there is one yet), and whether it is still to come */
-type Detail = { label: string; photo?: PhotoKey; soon?: boolean };
+/** One thing a visitor finds on a page: its name, and whether it is still to come */
+type Detail = { label: string; soon?: boolean };
 
 /** The parts of the site shown in full: a large photograph, a line about the place, what is found there, and the way in */
 function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; title: string; desc: string; list: Detail[] }[] {
@@ -26,14 +26,14 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       title: t.nav.links.heritage,
       desc: q.heritage,
       list: [
-        { label: heritage.houses.label, photo: 'house' },
-        { label: heritage.trees.label, photo: 'zigba' },
+        { label: heritage.houses.label },
+        { label: heritage.trees.label },
         { label: heritage.spices.label },
-        { label: heritage.animals.label, photo: 'bird' },
+        { label: heritage.animals.label },
         { label: heritage.crocodile.label },
         { label: heritage.artifacts.label },
-        { label: heritage.food.label, photo: 'food' },
-        { label: heritage.clothing.label, photo: 'gifaataa2' },
+        { label: heritage.food.label },
+        { label: heritage.clothing.label },
       ],
     },
     {
@@ -43,12 +43,12 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       title: t.nav.links.experiences,
       desc: q.experiences,
       list: [
-        { label: doing.food.title, photo: 'food' },
+        { label: doing.food.title },
         { label: doing.coffee.title },
         { label: doing.performance.title, soon: true },
         { label: doing.workshop.title, soon: true },
-        { label: doing.tour.title, photo: 'pavilions' },
-        { label: doing.horse.title, photo: 'lawn' },
+        { label: doing.tour.title },
+        { label: doing.horse.title },
       ],
     },
     {
@@ -58,9 +58,9 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       title: t.nav.links.events,
       desc: q.events,
       list: [
-        { label: `${held.food.title} · ${held.food.when}`, photo: 'food' },
-        { label: `${held.gifaataa.title} · ${held.gifaataa.when}`, photo: 'gifaataa3' },
-        { label: held.private.title, photo: 'eventCelebration' },
+        { label: `${held.food.title} · ${held.food.when}` },
+        { label: `${held.gifaataa.title} · ${held.gifaataa.when}` },
+        { label: held.private.title },
       ],
     },
     {
@@ -70,10 +70,10 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       title: t.nav.links.vip,
       desc: t.vip.hero.desc,
       list: [
-        { label: vip.dining.title, photo: 'vipDining' },
-        { label: vip.kitchen.title, photo: 'vipKitchen' },
-        { label: vip.rooms.title, photo: 'vipRoom' },
-        { label: vip.restrooms.title, photo: 'vipShower' },
+        { label: vip.dining.title },
+        { label: vip.kitchen.title },
+        { label: vip.rooms.title },
+        { label: vip.restrooms.title },
       ],
     },
     {
@@ -83,13 +83,13 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       title: t.nav.links.meeting,
       desc: q.meeting,
       list: [
-        { label: hall.meetings.title, photo: 'meetingHall' },
-        { label: hall.trainings.title, photo: 'eventGathering' },
+        { label: hall.meetings.title },
+        { label: hall.trainings.title },
         { label: hall.education.title },
         { label: hall.weddings.title },
-        { label: hall.family.title, photo: 'eventElders' },
-        { label: hall.anniversaries.title, photo: 'eventCelebration' },
-        { label: hall.visitors.title, photo: 'gifaataa3' },
+        { label: hall.family.title },
+        { label: hall.anniversaries.title },
+        { label: hall.visitors.title },
       ],
     },
     {
@@ -99,9 +99,9 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       title: t.nav.links.dine,
       desc: q.dine,
       list: [
-        { label: wolaitaCuisine ?? captions.food.title, photo: 'food' },
-        { label: captions.enset.title, photo: 'enset' },
-        { label: specialEvents ?? captions.eventCelebration.title, photo: 'eventCelebration' },
+        { label: wolaitaCuisine ?? captions.food.title },
+        { label: captions.enset.title },
+        { label: specialEvents ?? captions.eventCelebration.title },
       ],
     },
     {
@@ -111,12 +111,12 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
       title: t.nav.links.visit,
       desc: q.visit,
       list: [
-        { label: t.common.openingHours, photo: 'home' },
-        { label: t.visit.gettingHere.title, photo: 'gate' },
-        { label: visit.heritage.label, photo: 'meeshsho' },
-        { label: visit.group.label, photo: 'gifaataa1' },
+        { label: t.common.openingHours },
+        { label: t.visit.gettingHere.title },
+        { label: visit.heritage.label },
+        { label: visit.group.label },
         { label: visit.education.label },
-        { label: visit.meeting.label, photo: 'meetingHall' },
+        { label: visit.meeting.label },
       ],
     },
   ];
@@ -131,12 +131,27 @@ const MORE: { key: 'stories' | 'gallery' | 'about'; to: string; photo: PhotoKey 
 
 /**
  * The way into every part of the site, in order: the main pages each with a
- * large photograph and a list of what is found there (a small photograph beside
- * every item that has one), then three smaller cards. The Guest House, not open yet, comes
+ * large photograph and a sentence naming what is found there (each of those is
+ * shown in full, with its own photograph, on the page), then three smaller cards.
+ * Every card's Explore button has an arrow and a border that keeps turning. The Guest House, not open yet, comes
  * last on the home page: `GuestHouseSoon` below.
  */
+/** The arrow on the Explore buttons */
+function Arrow() {
+  return (
+    <svg viewBox="0 0 24 24" className="btn-explore-arrow w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M5 12h14" />
+      <path d="m13 6 6 6-6 6" />
+    </svg>
+  );
+}
+
 export default function QuickLinks() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
+  // the names in a list, joined into one sentence in the way of the language
+  const sentence = (list: Detail[]) =>
+    list.map((item) => (item.soon ? `${item.label} (${t.experiences.soon})` : item.label)).join(lang === 'am' ? '፣ ' : ', ') + (lang === 'am' ? '።' : '.');
+
   const q = t.home.quick;
   const rows = details(t);
 
@@ -157,7 +172,7 @@ export default function QuickLinks() {
         <div className="space-y-6 sm:space-y-8">
           {rows.map((row, i) => (
             <article key={row.key} data-reveal className="fade-section grid lg:grid-cols-2 bg-white rounded-[2rem] p-2.5 elev-1">
-              <Link to={row.to} className={`group relative block img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2] lg:aspect-auto lg:min-h-[440px] ${i % 2 ? 'lg:order-2' : ''}`}>
+              <Link to={row.to} className={`group relative block img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2] lg:aspect-auto lg:min-h-[340px] ${i % 2 ? 'lg:order-2' : ''}`}>
                 <img {...picture(photos[row.photo], '(max-width: 1023px) 100vw, 50vw')} alt={t.photos[row.photo]} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
                 <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-xs font-bold text-[#1E3A29] tabular-nums">
                   {String(i + 1).padStart(2, '0')}
@@ -166,41 +181,13 @@ export default function QuickLinks() {
 
               <div className="flex flex-col items-start p-5 sm:p-8 lg:p-10">
                 <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-[1.02] tracking-[-0.03em] mb-3">{row.title}</h3>
-                <p className="text-[#1E3A29]/65 leading-relaxed mb-6">{row.desc}</p>
+                <p className="text-[#1E3A29] text-lg font-semibold leading-snug mb-3">{row.desc}</p>
+                {/* what is found there, as a sentence; each is shown with its photograph on the page itself */}
+                <p className="text-[#1E3A29]/65 leading-relaxed mb-8">{sentence(row.list)}</p>
 
-                {/* what is found there: each item with its own small photograph */}
-                <ul className="w-full grid sm:grid-cols-2 gap-2.5 sm:gap-3 mb-7">
-                  {row.list.map((item) => (
-                    <li key={item.label} className="flex items-center gap-3 rounded-2xl bg-[#F4EFE4] p-2 pr-4">
-                      {item.photo ? (
-                        <img
-                          {...picture(photos[item.photo], '64px')}
-                          alt=""
-                          loading="lazy"
-                          className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-xl object-cover"
-                        />
-                      ) : (
-                        /* no photograph of this yet: a quiet tile holds its place */
-                        <span className="w-14 h-14 sm:w-16 sm:h-16 flex-shrink-0 rounded-xl bg-[#E3EBD8] grid place-items-center text-[#1E3A29]/35" aria-hidden="true">
-                          <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M4 20c0-9 5-15 16-16-1 11-7 16-16 16z" />
-                            <path d="M4 20 13 11" />
-                          </svg>
-                        </span>
-                      )}
-                      <span className="min-w-0 text-sm sm:text-[15px] font-semibold text-[#1E3A29] leading-snug">
-                        <span className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 flex-shrink-0 rounded-full bg-[#0E8A50]" aria-hidden="true" />
-                          {item.label}
-                        </span>
-                        {item.soon && <span className="mt-1 ml-3.5 inline-block rounded-full bg-[#FFF4E6] text-[#C4530F] text-[11px] font-bold px-2 py-0.5">{t.experiences.soon}</span>}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link to={row.to} className="btn-primary mt-auto">
+                <Link to={row.to} className="btn-explore mt-auto">
                   {t.common.explore}
+                  <Arrow />
                 </Link>
               </div>
             </article>
@@ -221,7 +208,10 @@ export default function QuickLinks() {
                 <span className="flex flex-1 flex-col items-start p-4 sm:p-5">
                   <span className="font-display text-2xl font-bold text-[#1E3A29] leading-tight tracking-tight">{t.nav.links[key]}</span>
                   <span className="text-[#1E3A29]/65 text-sm leading-relaxed mt-2 mb-5">{q.items[key]}</span>
-                  <span className="btn-primary btn-sm mt-auto">{t.common.explore}</span>
+                  <span className="btn-explore btn-explore-sm mt-auto">
+                    {t.common.explore}
+                    <Arrow />
+                  </span>
                 </span>
               </Link>
             </li>
