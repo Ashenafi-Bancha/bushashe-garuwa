@@ -16,16 +16,16 @@ const page: DeepPartial<Dictionary> = {
   experiences: {
     hero: {
       // EN: Be Part of the Story
-      eyebrow: "",
+      eyebrow: "Taarikiyawu Issi Bolla Gidite",
       // EN: Experience Wolaita in Bushaashe Garuwa
-      title: "",
+      title: "Wolaytta Bushaashe Garuwan Be'ite",
     },
     // EN: Bushaashe Garuwa is not simply observed; it is experienced. Each of our visitor experiences is designed to create a genuine, respectful and memorable encounter with living Wolaita culture.
     intro: "",
     // EN: Duration
-    duration: "",
+    duration: "Wodiyaa",
     // EN: What's included
-    showIncluded: "",
+    showIncluded: "Aybi Gujettidee",
     // EN: Hide details
     hideDetails: "",
     items: {
@@ -35,7 +35,7 @@ const page: DeepPartial<Dictionary> = {
         // EN: Taste authentic Wolaita cuisine
         sub: "",
         // EN: 2–3 hours
-        duration: "",
+        duration: "2-3 saateta",
         // EN: Gather around the communal table and experience traditional Wolaita cooking. Taste dishes prepared with ancient recipes, learn about the ingredients, and share a meal with our family.
         desc: "",
         includes: [
@@ -55,12 +55,12 @@ const page: DeepPartial<Dictionary> = {
         // EN: The sacred Ethiopian ritual
         sub: "",
         // EN: 1 hour
-        duration: "",
+        duration: "1 saatiyaa",
         // EN: Experience the Ethiopian coffee ceremony as it has been performed for generations. Our host will guide you through the roasting, brewing and serving ritual with authentic Wolaita hospitality.
         desc: "",
         includes: [
           // EN: Three rounds of coffee
-          "",
+          "Tukkiyaa heezza zaaridi",
           // EN: Traditional snacks
           "",
           // EN: Cultural explanation
@@ -75,16 +75,16 @@ const page: DeepPartial<Dictionary> = {
         // EN: Music, dance and storytelling
         sub: "",
         // EN: 1.5 hours
-        duration: "",
+        duration: "1.5 saateta",
         // EN: Watch traditional Wolaita musicians and dancers perform ceremonies, songs and dances that have been passed through generations. Hear elders tell oral histories in Wolaytta.
         desc: "",
         includes: [
           // EN: Traditional music performance
           "",
           // EN: Cultural dance
-          "",
+          "Durssaa",
           // EN: Oral history session
-          "",
+          "Doonaa haydaa wodiyaa",
           // EN: Q&A with performers
           "",
         ],
@@ -95,7 +95,7 @@ const page: DeepPartial<Dictionary> = {
         // EN: A guided walk through history
         sub: "",
         // EN: 3–4 hours
-        duration: "",
+        duration: "3-4 saateta",
         // EN: Walk through the entire Bushaashe Garuwa heritage site with an expert guide. Visit cultural houses, ancient trees, the artifact collection, and hear the stories connected to each location.
         desc: "",
         includes: [
@@ -168,7 +168,7 @@ const page: DeepPartial<Dictionary> = {
           // EN: Nature walk
           "",
           // EN: Storytelling session for children
-          "",
+          "Naatuyyoo haysiyaa odiyoo wodiyaa",
           // EN: Traditional meal
           "",
           // EN: Family portrait
@@ -178,7 +178,7 @@ const page: DeepPartial<Dictionary> = {
     },
     cta: {
       // EN: Not sure where to start?
-      title: "",
+      title: "Awuppe doommanaakko eribookkonii?",
       // EN: Contact us and we'll help you design the Bushaashe Garuwa experience that's right for you.
       desc: "",
     },

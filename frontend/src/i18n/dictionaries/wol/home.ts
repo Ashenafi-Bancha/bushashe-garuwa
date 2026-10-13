@@ -26,7 +26,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: and Passing It On to Future Generations.
       sloganC: "Yeletaappe Yeletawu Aattiyoogaa.",
       // EN: Explore Bushaashe Garuwa
-      explore: "Xeella",
+      explore: "Aaruwaa Be'anawu",
       // EN: Scroll to Explore
       scroll: "Xeellanawu Pude Suga",
       // EN: Slide {n}
