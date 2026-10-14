@@ -26,7 +26,7 @@ const page: DeepPartial<Dictionary> = {
     // EN: Call us
     call: "Silkkiya Shocite",
     // EN: Book Now
-    bookNow: "Sohuwa Oyqqite",
+    bookNow: "Sohuwa Oyttite",
     // EN: Plan Your Visit
     planVisit: "Xomoosanawu Keerite",
     // EN: Contact Us
@@ -40,7 +40,7 @@ const page: DeepPartial<Dictionary> = {
     // EN: Learn More
     learnMore: "Aaruwa Erite",
     // EN: Reserve
-    reserve: "Sohuwa Oyqqite",
+    reserve: "Sohuwa Oyttite",
     // EN: Reserve Your Place
     reserveYourPlace: "Niyo Sohuwa Oyqqa",
     // EN: Get Directions
@@ -122,7 +122,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Visit
       visit: "Xomoosa",
       // EN: Gallery
-      gallery: "Poototu Keettaa",
+      gallery: "Misiliya Keettaa",
       // EN: Services
       services: "Haggaazata",
       // EN: Contact
