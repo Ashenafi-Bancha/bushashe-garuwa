@@ -246,6 +246,7 @@ Decide these once and keep them the same everywhere.
 | Book / reserve                              | Bootaa oytta; oyqqa                                       |
 | Coffee Ceremony                             | Tukkiyaa  Uyiyoo Makkisuwaa; Tukkiyaa shiiqidi uyiyoogaa  |
 | Continue                                    | -                                                 |
+| Crocodile Pond                              | Hawulaashuwaa Maakooriyaa                                 |
 | Cultural                                    | Wogaba                                                    |
 | Cultural food                               | Wogaa qumaa                                               |
 | Century                                     | Kifile Zemeniya                                           |
