@@ -18,9 +18,9 @@ const page: DeepPartial<Dictionary> = {
       // EN: Bushaashe Garuwa
       title: "Bushaashe Garuwa",
       // EN: Stay close to nature.
-      subtitle: "",
+      subtitle: "Meretaa Heeran Takkite",
       // EN: Leave the city behind for fresh air, quiet gardens, and an unhurried stay in the green surroundings of Bushaashe Garuwa.
-      lead: "",
+      lead: "Katamaa guyye yeggidi hagawu yiidi irxxa charkkuwaa, sirphphi giida ataakiltte sohotanne Bushaashe Garuwa heeran eesoy baynna woppu giidi takuwaa takkiiddi woppu giidi ekkite.",
       // EN: Honoring Our Ancestors,
       sloganA: "Nu Mayzza Aawata Bonchchiyoogaa,",
       // EN: Preserving Our Heritage,
