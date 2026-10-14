@@ -122,7 +122,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Visit
       visit: "Xomoosa",
       // EN: Gallery
-      gallery: "Poototu Keettaa",
+      gallery: "Misiliya Keettaa",
       // EN: Services
       services: "Haggaazata",
       // EN: Contact

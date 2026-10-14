@@ -572,7 +572,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Life at Bushaashe Garuwa
       title: "De'uwaa, Bushaashe Garuwan",
       // EN: Full Gallery
-      full: "Mule Misiliya",
+      full: "Ubba Misileta ",
     },
     final: {
       // EN: Ready to Visit?

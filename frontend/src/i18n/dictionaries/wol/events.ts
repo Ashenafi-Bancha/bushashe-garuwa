@@ -16,47 +16,47 @@ const page: DeepPartial<Dictionary> = {
   events: {
     kinds: {
       // EN: What We Hold
-      eyebrow: "",
+      eyebrow: "Nu Giigissiyoogata",
       // EN: Three Kinds of Events
-      title: "",
+      title: "Heezzu Qommo Giigissota",
       // EN: Ask About a Private Event
-      ask: "",
+      ask: "Buzo Giigissuwaabaa Oychchite",
       items: {
         food: {
           // EN: Cultural Food Event
-          title: "",
+          title: "Wogaa Qumaa Makkisuwaa",
           // EN: Twice a month
-          when: "",
+          when: "Aginan naa\"utoo",
           // EN: An evening of traditional Wolaita food, coffee, music and storytelling in the cultural houses. Reserve your place below.
-          desc: "",
+          desc: "Wolaytta wogaa keettatu giddon Wolaytta qumaa, tukkiyaa, yettaanne haysiyaa odiyoo omarssaa. Intte sohuwaa garssaara oyttite.",
         },
         gifaataa: {
           // EN: Gifaataa
-          title: "",
+          title: "Gifaataa",
           // EN: Once a year
-          when: "",
+          when: "Layttan issutoo",
           // EN: The Wolaita new year festival, celebrated on the grounds with traditional dress, food, song and dance.
-          desc: "",
+          desc: "Wolaytta ooratta layttaa baalay woga maayotun, quman, yettaaninee durssan gibbe giddon bochcheettees.",
         },
         private: {
           // EN: Private Events
-          title: "",
+          title: "Buzo Makkisota",
           // EN: When you choose
-          when: "",
+          when: "Intte doorido wodiyan",
           // EN: Your own gathering, arranged the way you want it: a family day, an anniversary, a meeting or a celebration with friends.
-          desc: "",
+          desc: "Intte koyyiyoo ogiyan giigida intte buzo giigissuwaa: so asaa gallassaa, baalaa, shiiquwaa woykko laggetuura oottiyoo baalaa.",
         },
       },
     },
     moments: {
       // EN: Moments
-      eyebrow: "",
+      eyebrow: "Hanidabata",
       // EN: Gatherings at Bushaashe Garuwa
-      title: "",
+      title: "Boshaashe Garuwan polettida shiiqota",
       // EN: Elders, families and friends come here to meet, to celebrate and to play. A few moments from the grounds.
-      desc: "",
+      desc: "Cimati, issi keettaa asatinne laggeti shiiquwawu, ufayssan bonchchanawunne kaa'anawu hagawu yoosona. Gibbiyawu keehippe mata.",
       // EN: See the Gallery
-      cta: "",
+      cta: "Pootuwaa Be'a",
     },
     booking: {
       // EN: Reserve your place
