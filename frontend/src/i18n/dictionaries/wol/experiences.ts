@@ -21,19 +21,19 @@ const page: DeepPartial<Dictionary> = {
       title: "Wolaytta Bushaashe Garuwan Be'ite",
     },
     // EN: Bushaashe Garuwa is not simply observed; it is experienced. Each of our visitor experiences is designed to create a genuine, respectful and memorable encounter with living Wolaita culture.
-    intro: "",
+    intro: "Bushaashe Garoy xeelliyooba xalla gidenna; bochchidi, meezetidi be'iyooba. Issi issi nu imattay meezetiyoobay Wolaytta wogaara tumu, bonchchoy de'iyoonne dogettenna gaytotettay de'ana mala qofettidi giigidaagaa.",
     // EN: Duration
     duration: "Wodiyaa",
     // EN: What's included
-    showIncluded: "Aybi Gujettidee",
+    showIncluded: "A giddon aybi de'ii",
     // EN: Hide details
-    hideDetails: "",
+    hideDetails: "Gentta",
     items: {
       food: {
         // EN: Food Experience
-        title: "",
+        title: "Qumaa Meezetuwaa",
         // EN: Taste authentic Wolaita cuisine
-        sub: "",
+        sub: "Tumu Wolaytta qumaa miidi be'ite",
         // EN: 2–3 hours
         duration: "2-3 saateta",
         // EN: Gather around the communal table and experience traditional Wolaita cooking. Taste dishes prepared with ancient recipes, learn about the ingredients, and share a meal with our family.
