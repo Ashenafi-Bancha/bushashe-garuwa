@@ -16,109 +16,109 @@ const page: DeepPartial<Dictionary> = {
   visit: {
     hero: {
       // EN: Your Visit
-      eyebrow: "",
+      eyebrow: "Intte Xomoosuwaa",
       // EN: Plan Your Visit
-      title: "",
+      title: "Intte Xomoosuwaa Keerite",
     },
     booking: {
       // EN: Book Your Experience
-      eyebrow: "",
+      eyebrow: "Erana Koyiyoobawu Sohuwaa Oyttite",
       // EN: What Would You Like to Experience?
-      title: "",
+      title: "Ay Meezetana Koyidetii?",
       // EN: Select one or more experiences and we'll be in touch to confirm your visit.
-      desc: "",
+      desc: "Issi woykko cora erana koyidobata doorite; xomoosuwaa aguwaa shaakkanawu gayttana.",
     },
     types: {
       heritage: {
         // EN: Heritage Visit
-        label: "",
+        label: "Buquraa Be'anawu",
         // EN: Cultural houses, artifacts, and heritage tour
-        desc: "",
+        desc: "Wogaa keettata, buqura miishshatanne buquraa be'uwaa",
       },
       cultural: {
         // EN: Cultural Tour
-        label: "",
+        label: "Wogaa Be'anawu",
         // EN: Music, dance, food and traditions
-        desc: "",
+        desc: "Yettaa, durssaa, qumaanne wogata",
       },
       food: {
         // EN: Food Event
-        label: "",
+        label: "Qumaa Giigissuwaa",
         // EN: Traditional food experience
-        desc: "",
+        desc: "Wogaa qumaa meeziyaa",
       },
       restaurant: {
         // EN: Restaurant
-        label: "",
+        label: "Katta Keettaa",
         // EN: Lunch or dinner at our restaurant
-        desc: "",
+        desc: "Nu katta keettan laaxaa woykko kahuwaa",
       },
       guesthouse: {
         // EN: Guesthouse
-        label: "",
+        label: "Imatta Keettaa",
         // EN: Overnight stay
-        desc: "",
+        desc: "Issi qammaa aattanawu",
       },
       group: {
         // EN: Group Visit
-        label: "",
+        label: "Citan Xomoosanawu",
         // EN: Groups of 10 or more
-        desc: "",
+        desc: "10nne appe dariya asatu citaa",
       },
       education: {
         // EN: Educational Visit
-        label: "",
+        label: "Luxetta Xomoosuwaa",
         // EN: Schools, universities and researchers
-        desc: "",
+        desc: "Timirtte Keettata, Yunbbersttetanne pilggiyaageeta",
       },
       meeting: {
         // EN: Meeting Hall
-        label: "",
+        label: "Yaa'iyoo Sohuwaa",
         // EN: Meetings, trainings and workshops
-        desc: "",
+        desc: "Yaa'atanne Loohissota",
       },
     },
     gettingHere: {
       // EN: Getting Here
-      title: "",
+      title: "Sohuwaa Waani Gakkanee",
       routes: [
         {
           // EN: Directions
-          from: "",
+          from: "Ginata",
           // EN: Bushaashe Garuwa is near Gununo in Damot Sore Woreda, Wolaita Zone. Use the map below, or search for "XP44+J6 Gununo" on Google Maps. Contact us and we will gladly guide you.
-          dir: "",
+          dir: "Bushaashe Garoy Gununo Ambbaa matan, Daamoota Soore Allaanan, Wolaytta Moottan de'ees. Dugeera de'iyaa karttaa go'etta woykko \"XP44+J6 Gununo\" gaada Googiliyaa Karttaa bollan xaafada koyya. Nuna demmite; gita ufayssan inttena kaalettana.",
         },
       ],
     },
     form: {
       // EN: Thank You!
-      thanksTitle: "",
+      thanksTitle: "Galatoos!",
       // EN: We've received your request and will contact you shortly to confirm your visit to Bushaashe Garuwa.
-      thanksText: "",
+      thanksText: "Intte azazuwaa ekkida; Bushaashe Garuwaa buussaa aguwaa shaakkanawu matan inttena demmana.",
       // EN: Your Details
-      title: "",
+      title: "Intte Marajjaa",
       // EN: Full Name *
-      name: "",
+      name: "Kumetta Sunttaa *",
       // EN: Your full name
-      namePlaceholder: "",
+      namePlaceholder: "Kumetta Suntaa Xaafite",
       // EN: Phone *
-      phone: "",
+      phone: "Silkkiyaa Payduwaa *",
       // EN: Email
-      email: "",
+      email: "Iimayliyaa",
       // EN: Preferred Date *
-      date: "",
+      date: "Koyiyoo Gallassaa *",
       // EN: Number of Visitors
-      visitors: "",
+      visitors: "Xomoosiyaa asaa qoodaa",
       // EN: 1 visitor
-      visitorOne: "",
+      visitorOne: "1 xomoosiyaagaa",
       // EN: {count} visitors
-      visitorMany: "",
+      visitorMany: "{count} xomoosiyaageeta",
       // EN: Message
-      message: "",
+      message: "Kiitaa",
       // EN: Any special requirements or questions...
-      messagePlaceholder: "",
+      messagePlaceholder: "Dumma koshshay woykko oyshay de'ikko...",
       // EN: Continue
-      submit: "",
+      submit: "Qaxxala",
     },
   },
 };

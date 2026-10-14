@@ -244,6 +244,8 @@ Decide these once and keep them the same everywhere.
 | Care, Careful                               | Akeekaa, Loddan, Leelan, Naagettidi                       |
 | Contact                                     | Nuna Demmanawu; Nunaara Gayttanawu                        |
 | Book / reserve                              | Bootaa oytta; oyqqa                                       |
+| Coffee Ceremony                             | Tukkiyaa  Uyiyoo Makkisuwaa; Tukkiyaa shiiqidi uyiyoogaa  |
+| Continue                                    | -                                                 |
 | Cultural                                    | Wogaba                                                    |
 | Cultural food                               | Wogaa qumaa                                               |
 | Century                                     | Kifile Zemeniya                                           |
