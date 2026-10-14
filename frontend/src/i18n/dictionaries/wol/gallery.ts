@@ -16,32 +16,32 @@ const page: DeepPartial<Dictionary> = {
   gallery: {
     hero: {
       // EN: Gallery
-      eyebrow: "",
+      eyebrow: "Poototu Keettaa",
       // EN: Life at Bushaashe Garuwa
-      title: "",
+      title: "De'oy Bushaashe Garuwan",
     },
     // EN: Photographs from the grounds, the gardens and our cultural celebrations. More are added as the seasons and events go by.
-    intro: "",
+    intro: "Gibbiyaa giddon, ataakiltte sohotuppenne wogaa baalatuppe denttido pootota. Wodiyan wodiyan hara hara poototi gujettoosona.",
     filters: {
       // EN: All
-      all: "",
+      all: "Ubbatakka",
       // EN: Grounds & Nature
-      grounds: "",
+      grounds: "Gibbiyaanne Meretaa",
       // EN: Culture & Events
-      culture: "",
+      culture: "Wogaanne Makkisota",
     },
     // EN: {count} photos
-    count: "",
+    count: "{count} pootota",
     // EN: No photos in this category yet.
-    empty: "",
+    empty: "Ha yaran hanno gakkanwukka poototi baawa.",
     // EN: Close
-    close: "",
+    close: "Gordda",
     // EN: Previous photo
-    previous: "",
+    previous: "kase pootuwaa",
     // EN: Next photo
-    next: "",
+    next: "Kaalliyaa pootuwaa",
     // EN: {current} of {total}
-    position: "",
+    position: "{total} ppe {current}",
   },
 };
 

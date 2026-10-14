@@ -60,146 +60,146 @@ const page: DeepPartial<Dictionary> = {
     },
     booking: {
       // EN: Reserve your place
-      title: "",
+      title: "Intte sohuwaa Oyttite",
       // EN: Full Name *
-      name: "",
+      name: "Kumetta Sunttaa",
       // EN: Phone *
-      phone: "",
+      phone: "Silkke Payduwaa",
       // EN: Email
-      email: "",
+      email: "Imayliyaa",
       // EN: How many people? *
-      guests: "",
+      guests: "Aappun asee?",
       // EN: Anything we should know?
-      message: "",
+      message: "Nuna erissanawu koyyiyoobi de'ii?",
       // EN: Dietary needs, a celebration, arrival time…
-      messagePlaceholder: "",
+      messagePlaceholder: "Qumaa Koshshaa (Miyoobatanne meennabata), bonchchiyoobaa woykko oottiyoobaa, gakkiyoo saatiyaa",
       // EN: Reserve my place
-      submit: "",
+      submit: "Ta sohuwaa oyqqa",
       // EN: Sending…
-      sending: "",
+      sending: "Yeddiiddi de'ees",
       // EN: Cancel
-      cancel: "",
+      cancel: "Essa",
       // EN: Close
-      close: "",
+      close: "Gordda",
       // EN: Your place is reserved
-      thanksTitle: "",
+      thanksTitle: "Niyoo bootay oyqettiis",
       // EN: We have received your booking and will call you to confirm the details.
-      thanksText: "",
+      thanksText: "Ne azazuwaa ekkida, aaruwan erananawu silkkiya shocana doos.",
       // EN: Your booking number
-      referenceLabel: "",
+      referenceLabel: "Ne azazuwaa payduwaa",
       // EN: Please keep it. Tell us this number when you call or when you arrive.
-      referenceNote: "",
+      referenceNote: "Ne payduwaa loytta oyqqa. Nuyyoo silkkiyaa shociyoode woykko sohuwaa gakkiyoode, ha payduwaa odite.",
       // EN: Only {count} places left for this evening.
-      placesLeft: "",
+      placesLeft: "Ha omarssawu {count} sohotu xallawu attidosona.",
       // EN: Only one place left for this evening.
-      onePlaceLeft: "",
+      onePlaceLeft: "Ha omarssawu issi soho xallay attiis.",
       // EN: This evening is fully booked.
-      noPlaces: "",
+      noPlaces: "Ha omarssay wuridi oyqettiichchiis, booti baawa.",
     },
     live: {
       // EN: Reserve your place
-      bookCta: "",
+      bookCta: "Intte bootaa oyttite",
       // EN: Together with {partner}
-      partnerWith: "",
+      partnerWith: "Issippe yiyay {partner}",
       // EN: Limited places
-      limited: "",
+      limited: "Amara Sohota",
       // EN: Fully booked
-      full: "",
+      full: "Muleera oyqettiichchiis",
       // EN: Places available
-      open: "",
+      open: "De'iyaa Sohota",
       // EN: Coming up at Bushaashe Garuwa
-      upcomingTitle: "",
+      upcomingTitle: "Bushaashe Garuwan matan yees.",
       // EN: {count} places left
-      placesLeft: "",
+      placesLeft: "{count} sohuti attidosona",
       // EN: One place left
-      onePlaceLeft: "",
+      onePlaceLeft: "Issi sohoy attiis",
     },
     hero: {
       // EN: Cultural Events
-      eyebrow: "",
+      eyebrow: "Wogaa Makkisota",
       // EN: What's Happening
-      titleA: "",
+      titleA: "Bushaashe Garuwan",
       // EN: at Bushaashe Garuwa
-      titleB: "",
+      titleB: "Aybi Haniiddi De'ii?",
     },
     // EN: Featured This Month
-    featured: "",
+    featured: "Ha aginan polettida erettida makkisota",
     // EN: Upcoming Events
-    upcoming: "",
+    upcoming: "Sinttaara Yiiddi De'iya Makkisota",
     categories: {
       // EN: All
-      all: "",
+      all: "Ubbatakka",
       // EN: Food
-      food: "",
+      food: "Qumaa",
       // EN: Culture
-      culture: "",
+      culture: "Wogaa",
       // EN: Education
-      education: "",
+      education: "Timirttiyaa",
       // EN: Music
-      music: "",
+      music: "Yettaa",
       // EN: Community
-      community: "",
+      community: "Heeraa Asaa",
     },
     items: {
       foodOct: {
         // EN: Sunday 5 October 2026
-        dateLabel: "",
+        dateLabel: "Gifaataa 24, 2019",
         // EN: Wolaita Cultural Food Experience
-        name: "",
+        name: "Wolaytta Wogaa Qumaa Meezetiyoogaa",
         // EN: Our flagship monthly gathering: traditional dishes, coffee ceremony, music and oral storytelling around the fire. A complete evening of Wolaita culture.
-        desc: "",
+        desc: "Nu keehippe waanna shiiqoti: woga qumata, shiiqidi tukkiyoo uyiyoogaa, yettaanne tamaa achchan shiiqidi haysiyaa odiyoogaa. Wolaytta wogaa kumetta qammaa.",
         // EN: Limited: 12 places remaining
-        avail: "",
+        avail: "Amara: 12 sohoti attidosona",
       },
       oralHistory: {
         // EN: Sunday 12 October 2026
-        dateLabel: "",
+        dateLabel: "Woggaa 11 Gooluwaa, 2019",
         // EN: Oral History Evening
-        name: "",
+        name: "Doonaa Haydaa Omarssaa",
         // EN: Hear Wolaita elders share stories of family, land, and tradition. Stories told in Wolaytta with interpretation in Amharic and English.
-        desc: "",
+        desc: "Wolaytta bayra asati so asaa, biittaanne wogaa taarikiyaa odiyoode siyiyoogaa. Wolayttattuwan odettiyaa taariketi Amaarattuwawunne Ingiliizattuwawu birshshettoosona.",
         // EN: Open
-        avail: "",
+        avail: "Dooya",
       },
       harvest: {
         // EN: Sunday 19 October 2026
-        dateLabel: "",
+        dateLabel: "Woggaa 08 Gooluwaa, 2019",
         // EN: Harvest Heritage Evening
-        name: "",
+        name: "Kattaa Shiishshiyoo Wodiyaa Omarssaa",
         // EN: Celebrate the harvest season with traditional food, dance and elder storytelling. A community gathering at the heart of Wolaita culture.
-        desc: "",
+        desc: "Kattaa shiishshiyoo wodiyaa woga quman, durssaaninne cimatu haysiyaa oduwan bonchchite. ",
         // EN: Open
-        avail: "",
+        avail: "Dooya",
       },
       schoolDay: {
         // EN: Saturday 25 October 2026
-        dateLabel: "",
+        dateLabel: "Qeeraa 01 Gooluwaa, 2019",
         // EN: School Heritage Visit Day
-        name: "",
+        name: "Timirtte Keettatu Xomooso Gallassaa",
         // EN: A structured educational day for school groups: heritage tour, cultural activities, and traditional lunch.
-        desc: "",
+        desc: "Timirtte keettaappe yiyaa citatussi giigida timirtte gallassa: buqura yuuyyidi be'iyoogaa, wogaa kaassaatanne wogaa laaxaa muussaa.",
         // EN: Group booking
-        avail: "",
+        avail: "Citan Sohuwa Oyttanawu",
       },
       foodNov: {
         // EN: Sunday 2 November 2026
-        dateLabel: "",
+        dateLabel: "Woggaa 22 Gooluwaa, 2019",
         // EN: Wolaita Cultural Food Experience
-        name: "",
+        name: "Wolaytta Wogaa Qumaa Meezetiyoogaa",
         // EN: Our monthly cultural food gathering returns. Traditional Wolaita cuisine, coffee ceremony, music and community.
-        desc: "",
+        desc: "Nu aginaa wogaa qumaa muussaa shiiqoy simmidi yeees. Wolaytta wogaa qumata, tukkiyaa shiiqidi uyyiyoo wodiyaa, yettaanne ",
         // EN: Open
-        avail: "",
+        avail: "Dooya",
       },
       music: {
         // EN: Saturday 8 November 2026
-        dateLabel: "",
+        dateLabel: "Qeeraa 28 Gooluwaa, 2019",
         // EN: Traditional Music Workshop
-        name: "",
+        name: "Wogaa Yettaa Meezetiyoogaa",
         // EN: Learn about traditional Wolaita instruments and music. A participatory workshop for all ages led by community musicians.
-        desc: "",
+        desc: "Wolaytta wogaa yettaa miishshatubaanne yettatubaa tamaariyoogaa. Hegan de'iyaa yettanchchatinne yettaa miishshaa kaa'iyaageeta kaaletttiyoo issippe tamaariyoo wodiyaa.",
         // EN: Open
-        avail: "",
+        avail: "Dooya",
       },
     },
   },

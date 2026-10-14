@@ -28,7 +28,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: and Passing It On to Future Generations.
       sloganC: "Yeletaappe Yeletawu Aattiyoogaa.",
       // EN: Explore Bushaashe Garuwa
-      explore: "Xeella",
+      explore: "Aaruwaa Be'anawu",
       // EN: Scroll to Explore
       scroll: "Xeellanawu Pude Suga",
       // EN: Slide {n}
@@ -76,11 +76,11 @@ const page: DeepPartial<Dictionary> = {
       // EN: Drag the photographs to walk around Bushaashe Garuwa.
       desc: "Bushaashe Garuwa yuushuwaa yuuyyanawu, misileta goochchite.",
       // EN: Turn to the previous photograph
-      previous: "Kasa misiliyawu dooya",
+      previous: "Kase misiliyawu zaara",
       // EN: Turn to the next photograph
-      next: "Kaalliya misiliyawu dooya",
+      next: "Kaalliya misiliyawu zaara",
       // EN: Open the gallery
-      cta: "Misiliya Keettaa Dooya",
+      cta: "Poototu Keettaa Dooya",
       // EN: Drag, swipe, or use the arrows
       hint: "Goochchite, pittite woykko qestte malaataa go'ettite",
     },
@@ -568,7 +568,7 @@ const page: DeepPartial<Dictionary> = {
     },
     gallery: {
       // EN: Gallery
-      eyebrow: "Misiliya",
+      eyebrow: "Misiliya Keettaa",
       // EN: Life at Bushaashe Garuwa
       title: "De'uwaa, Bushaashe Garuwan",
       // EN: Full Gallery

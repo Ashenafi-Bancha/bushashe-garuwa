@@ -34,7 +34,7 @@ const page: DeepPartial<Dictionary> = {
     // EN: Get in Touch
     getInTouch: "Nunaara Gayttite",
     // EN: Explore
-    explore: "Xeella",
+    explore: "Aaruwa Be'ite",
     // EN: Explore All
     exploreAll: "Ubbaakka xeella",
     // EN: Learn More
@@ -110,7 +110,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Heritage
       heritage: "Buquraa",
       // EN: Experiences
-      experiences: "",
+      experiences: "Meezetidobata",
       // EN: Events
       events: "Makkisota",
       // EN: Guest House
@@ -122,7 +122,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Visit
       visit: "Xomoosa",
       // EN: Gallery
-      gallery: "Misiliya",
+      gallery: "Poototu Keettaa",
       // EN: Services
       services: "Haggaazata",
       // EN: Contact

@@ -241,18 +241,20 @@ Decide these once and keep them the same everywhere.
 |---------------------------------------------|-----------------------------------------------------------|
 | About                                       | Nubaa; Nuna Eranawu                                       |
 | Age                                         | Yeleta Layttaa; Bariya; Layttaa                           |
-| Care, Careful                                | Akeekaa, Loddan, Leelan, Naagettidi
+| Care, Careful                               | Akeekaa, Loddan, Leelan, Naagettidi                       |
 | Contact                                     | Nuna Demmanawu; Nunaara Gayttanawu                        |
 | Book / reserve                              | Bootaa oytta; oyqqa                                       |
 | Cultural                                    | Wogaba                                                    |
 | Cultural food                               | Wogaa qumaa                                               |
 | Century                                     | Kifile Zemeniya                                           |
 | Discover                                    | Demma                                                     |
+| District                                    | Allaanaa                                                  |
 | Events                                      | Giigissota                                                |
+| Evidence                                    | Naqaashaa; Markkaa; Macaraa                               |
 | Experiences                                 | Meezeta; Eridobata; Tamaaridobata; Luxidobata; Be'idobaba |
 | Explore                                     | Xeella; Yuuyyi be'uwa; Koyya                              |
 | Family                                      | Keettaa asaa, So asaa                                     |
-| Family Line                                 | So Asaa                                                   |
+| Family Line                                 | So Asaa Zerettaa Yafaraa                                  |
 | Forefather; ancestor                        | mayzzaa, ma"iya                                           |
 | Forefathers                                 | Mayzza aawata                                             |
 | For future                                  | Wodenawu; Sinttanawu                                      |
@@ -264,17 +266,21 @@ Decide these once and keep them the same everywhere.
 | Haydaa, Taarikiya                           | History                                                   |
 | Harvest                                     | Kattaa cahaa; Kattaa shiishuwa; Cahaa                     |
 | Home (menu)                                 | Denddo; Suwa                                              |
-| heritage                                    | buqura                                                    |
+| Heritage                                    | buqura                                                    |
 | Home                                        | Denddo; Suwa                                              | 
 | Learn more                                  | Aaruwa Eranawu                                            |
 | Living                                      | paxa de'iya                                               |
 | Mission                                     | Kiitaa                                                    |
 | Museum                                      | buqura keettaa                                            |
 | Page                                        | Sinttaa                                                   |
+| Province                                    | Awuraajjaa
+| Region                                      | Dalgga Manttiyaa                                          |
 | Restaurant / dine                           | Quma keettaa, Katta Keettaa                               |
 | Search                                      | Koshshaa; Qaagettaa; Qaqqaasetaa; Baadettaa; Tattaafuwa   |
 | Social Media                                | Coraa Gattiyaasaa                                         |
-| Soft                                        | Shugo
+| Society                                     | Deretettaa Asaaa                                          |
+| Soft                                        | Shugo                                                     |
+| Southern Ethiopia                           | Tohossa Toophphiyaa Dalgga Manttiyaa                      |
 | Traditional                                 | -                                                         |
 | Traditional house                           | Beni Keettaa                                              |
 | tradition                                   | -                                                         |
@@ -282,6 +288,7 @@ Decide these once and keep them the same everywhere.
 | Visitor                                     | Xomoosiyaagaa                                             |
 | Where Wolaita Heritage Lives                | Wolaytta Buquray De'iyoosaa.                              |
 | Zannaqa                                     | Tourism                                                   |
+| Zone                                        | Moottaa                                                   |
 
 ## Months in Wolaytta
 The Wolaita year starts around September with Gifaata (New Year). The 12 primary months and the 13th year-end month are:

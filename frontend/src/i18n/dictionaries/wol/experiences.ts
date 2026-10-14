@@ -16,26 +16,26 @@ const page: DeepPartial<Dictionary> = {
   experiences: {
     hero: {
       // EN: Be Part of the Story
-      eyebrow: "",
+      eyebrow: "Taarikiyawu Issi Bolla Gidite",
       // EN: Experience Wolaita in Bushaashe Garuwa
-      title: "",
+      title: "Wolaytta Bushaashe Garuwan Be'ite",
     },
     // EN: Bushaashe Garuwa is not simply observed; it is experienced. Each of our visitor experiences is designed to create a genuine, respectful and memorable encounter with living Wolaita culture.
-    intro: "",
+    intro: "Bushaashe Garoy xeelliyooba xalla gidenna; bochchidi, meezetidi be'iyooba. Issi issi nu imattay meezetiyoobay Wolaytta wogaara tumu, bonchchoy de'iyoonne dogettenna gaytotettay de'ana mala qofettidi giigidaagaa.",
     // EN: Coming soon
     soon: "",
     // EN: Planned. Not open yet.
     soonNote: "",
     // EN: What's included
-    showIncluded: "",
+    showIncluded: "A giddon aybi de'ii",
     // EN: Hide details
-    hideDetails: "",
+    hideDetails: "Gentta",
     items: {
       food: {
         // EN: Cultural Food Experience
-        title: "",
+        title: "Qumaa Meezetuwaa",
         // EN: Taste authentic Wolaita cuisine
-        sub: "",
+        sub: "Tumu Wolaytta qumaa miidi be'ite",
         // EN: Gather around the communal table and experience traditional Wolaita cooking. Taste dishes prepared with ancient recipes, learn about the ingredients, and share a meal with our family.
         desc: "",
         includes: [
@@ -58,7 +58,7 @@ const page: DeepPartial<Dictionary> = {
         desc: "",
         includes: [
           // EN: Three rounds of coffee
-          "",
+          "Tukkiyaa heezza zaaridi",
           // EN: Traditional snacks
           "",
           // EN: Cultural explanation
@@ -78,7 +78,7 @@ const page: DeepPartial<Dictionary> = {
           // EN: Traditional music
           "",
           // EN: Cultural dance
-          "",
+          "Durssaa",
         ],
       },
       workshop: {
@@ -180,7 +180,7 @@ const page: DeepPartial<Dictionary> = {
           // EN: Nature walk
           "",
           // EN: Storytelling session for children
-          "",
+          "Naatuyyoo haysiyaa odiyoo wodiyaa",
           // EN: Traditional meal
           "",
           // EN: Family portrait
@@ -190,7 +190,7 @@ const page: DeepPartial<Dictionary> = {
     },
     cta: {
       // EN: Not sure where to start?
-      title: "",
+      title: "Awuppe doommanaakko eribookkonii?",
       // EN: Contact us and we'll help you design the Bushaashe Garuwa experience that's right for you.
       desc: "",
     },
