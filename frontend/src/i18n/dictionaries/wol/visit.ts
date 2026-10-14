@@ -118,7 +118,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Any special requirements or questions...
       messagePlaceholder: "Dumma koshshay woykko oyshay de'ikko...",
       // EN: Continue
-      submit: "Qaxxala",
+      submit: "Yedda",
     },
   },
 };
