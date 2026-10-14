@@ -81,7 +81,7 @@ export default function Heritage() {
                 </div>
                 <div className="p-5 sm:p-7">
                   <div className="flex items-center gap-3 mb-2">
-                    <span className="text-[#0B6E40] text-sm font-bold tabular-nums">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="text-[#346A1A] text-sm font-bold tabular-nums">{String(i + 1).padStart(2, '0')}</span>
                     <span className="text-[#1E3A29]/65 text-sm font-semibold">{hg.houses.label}</span>
                   </div>
                   <h3 lang="wal" className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] tracking-[-0.03em]">{house.name}</h3>
@@ -112,7 +112,7 @@ export default function Heritage() {
             </div>
             <div className="rounded-[1.75rem] bg-white border border-[#1E3A29]/12 p-6 sm:p-7 text-[#13261A]">
               <div className="flex items-baseline justify-between gap-4 mb-1">
-                <div className="font-display text-3xl font-extrabold text-[#0B6E40] tracking-tight">{ZIGBA.wolaytta}</div>
+                <div className="font-display text-3xl font-extrabold text-[#346A1A] tracking-tight">{ZIGBA.wolaytta}</div>
                 <div className="text-[#1E3A29]/70 text-xs italic">{ZIGBA.scientific}</div>
               </div>
               <div className="text-[#1E3A29]/80 text-sm font-semibold mb-4">{hg.trees.items.zigba.name}</div>

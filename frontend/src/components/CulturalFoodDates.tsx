@@ -47,7 +47,7 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-[0.98] mb-5">{c.title}</h2>
             <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">{c.desc}</p>
 
-            <div className="text-sm font-bold text-[#0B6E40] mb-4">{c.nextTitle}</div>
+            <div className="text-sm font-bold text-[#346A1A] mb-4">{c.nextTitle}</div>
             {dates.length === 0 ? (
               <p className="rounded-2xl bg-white border border-[#1E3A29]/12 p-5 text-[#1E3A29]/80 text-sm leading-relaxed mb-8">{c.soon}</p>
             ) : (

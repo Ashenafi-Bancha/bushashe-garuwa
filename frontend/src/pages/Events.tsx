@@ -179,7 +179,7 @@ export default function Events() {
       {featured.length > 0 && (
         <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-            <div className="text-[#0B6E40] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-10">{e.featured}</div>
+            <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-10">{e.featured}</div>
             <div className="grid md:grid-cols-2 gap-6">
               {featured.map((event) => (
                 <div key={event.key} className="group relative overflow-hidden flex flex-col rounded-3xl bg-white border border-[#1E3A29]/12 hover:border-[#C4622D]/30 transition-all duration-300">
@@ -189,13 +189,13 @@ export default function Events() {
                   <div className="p-5 sm:p-7 flex-1 flex flex-col">
                     <div className="flex items-center justify-between gap-3 mb-4 flex-wrap">
                       <div>
-                        <span className="text-[#0B6E40] text-xs font-sans tracking-wider">{event.dateLabel}</span>
+                        <span className="text-[#346A1A] text-xs font-sans tracking-wider">{event.dateLabel}</span>
                         {event.time && <span className="text-[#1E3A29]/70 text-xs font-sans ml-3">· {event.time}</span>}
                       </div>
                       <span className={`text-xs font-sans rounded-full px-3 py-1 flex-shrink-0 ${availStyle(event.availKind, false)}`}>{event.avail}</span>
                     </div>
                     <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#13261A] mb-3">{event.name}</h2>
-                    {event.partner && <p className="text-[#0B6E40] text-sm mb-3">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
+                    {event.partner && <p className="text-[#346A1A] text-sm mb-3">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
                     <p className="text-[#1E3A29]/80 font-sans text-sm leading-relaxed mb-5 flex-1">{event.desc}</p>
                     <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#1E3A29]/12">{bookButton(event)}</div>
                   </div>
@@ -218,7 +218,7 @@ export default function Events() {
                   onClick={() => setActiveCat(cat)}
                   className={`text-xs font-sans font-semibold rounded-full px-4 py-2 transition-colors border ${
                     activeCat === cat
-                      ? 'bg-[#0E8A50] text-white border-[#0E8A50]'
+                      ? 'bg-[#3F7D20] text-white border-[#3F7D20]'
                       : 'border-[#1E3A29]/20 text-[#1E3A29]/60 hover:border-[#1E3A29]/50 hover:text-[#1E3A29]'
                   }`}
                 >

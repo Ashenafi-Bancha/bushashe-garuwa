@@ -47,7 +47,7 @@ export default function SignIn() {
     }
   };
 
-  const border = error ? 'border-[#C4622D]' : 'border-[#1E3A29]/15 focus:border-[#0E8A50]';
+  const border = error ? 'border-[#C4622D]' : 'border-[#1E3A29]/15 focus:border-[#3F7D20]';
 
   return (
     <div className="min-h-[100svh] flex flex-col bg-[#F4EFE4]">
@@ -63,7 +63,7 @@ export default function SignIn() {
             />
             {/* the name in the green it has on the home page (.brand-sign) */}
             <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#15A864] tracking-tight mt-4">Bushaashe Garuwa</div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#E3EBD8] text-[#0B6E40] text-[11px] font-bold tracking-[0.18em] uppercase px-3.5 py-1.5 mt-3">
+            <div className="inline-flex items-center gap-2 rounded-full bg-[#E3EBD8] text-[#346A1A] text-[11px] font-bold tracking-[0.18em] uppercase px-3.5 py-1.5 mt-3">
               <Icon name="lock" className="w-3.5 h-3.5" />
               Staff area
             </div>
@@ -133,7 +133,7 @@ export default function SignIn() {
                     onClick={() => setShow((v) => !v)}
                     aria-label={show ? 'Hide the password' : 'Show the password'}
                     aria-pressed={show}
-                    className="hit-slim absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center w-10 h-10 rounded-xl text-[#1E3A29]/55 hover:text-[#0B6E40] hover:bg-[#1E3A29]/5 transition-colors"
+                    className="hit-slim absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center w-10 h-10 rounded-xl text-[#1E3A29]/55 hover:text-[#346A1A] hover:bg-[#1E3A29]/5 transition-colors"
                   >
                     <Icon name={show ? 'eyeOff' : 'eye'} />
                   </button>
@@ -148,7 +148,7 @@ export default function SignIn() {
               <button
                 type="submit"
                 disabled={busy || !apiEnabled}
-                className="w-full min-h-[52px] bg-[#0E8A50] hover:bg-[#0B7A45] active:scale-[0.99] text-white font-bold rounded-full transition-all disabled:opacity-60 disabled:active:scale-100"
+                className="w-full min-h-[52px] bg-[#3F7D20] hover:bg-[#346A1A] active:scale-[0.99] text-white font-bold rounded-full transition-all disabled:opacity-60 disabled:active:scale-100"
               >
                 {busy ? 'Signing in…' : 'Sign in'}
               </button>

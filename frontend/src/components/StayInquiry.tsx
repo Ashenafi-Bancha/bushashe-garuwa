@@ -71,7 +71,7 @@ export default function StayInquiry({ room, onRoom }: Props) {
           <p className="text-[#1E3A29]/55 text-sm mb-8">{words.note}</p>
           {/* computers: beside the form. Phones: after it, so the form comes first */}
           <div className="hidden lg:block">
-            <div className="text-[#0B6E40] text-xs font-bold tracking-wider uppercase mb-3">{words.or}</div>
+            <div className="text-[#346A1A] text-xs font-bold tracking-wider uppercase mb-3">{words.or}</div>
             <ContactButtons />
           </div>
         </div>
@@ -147,7 +147,7 @@ export default function StayInquiry({ room, onRoom }: Props) {
         </div>
 
         <div className="lg:hidden">
-          <div className="text-[#0B6E40] text-xs font-bold tracking-wider uppercase mb-3">{words.or}</div>
+          <div className="text-[#346A1A] text-xs font-bold tracking-wider uppercase mb-3">{words.or}</div>
           <ContactButtons />
         </div>
       </div>

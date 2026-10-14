@@ -48,7 +48,7 @@ function AppLayout() {
   return (
     <div className="min-h-screen bg-[#F4EFE4]">
       {/* a thin line across the top: how far down the page you are */}
-      <div id="scroll-progress" aria-hidden="true" className="fixed top-0 inset-x-0 z-[60] h-[3px] origin-left scale-x-0 bg-[#0E8A50]" />
+      <div id="scroll-progress" aria-hidden="true" className="fixed top-0 inset-x-0 z-[60] h-[3px] origin-left scale-x-0 bg-[#3F7D20]" />
       <Navbar />
       <BackButton />
       <PageTransition>

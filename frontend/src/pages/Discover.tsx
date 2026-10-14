@@ -40,7 +40,7 @@ export default function Discover() {
 
           {/* Mission & Vision */}
           <div className="grid md:grid-cols-2 gap-8 mb-12 sm:mb-20">
-            <div className="bg-[#0E8A50] rounded-3xl p-6 sm:p-10">
+            <div className="bg-[#3F7D20] rounded-3xl p-6 sm:p-10">
               <div className="text-white/85 text-xs font-sans font-semibold tracking-wider uppercase mb-4">{d.mission.label}</div>
               <h3 className="font-display text-xl sm:text-2xl font-semibold text-white mb-4">{d.mission.title}</h3>
               <p className="text-white/90 font-sans text-sm leading-relaxed">

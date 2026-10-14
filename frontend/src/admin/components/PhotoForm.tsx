@@ -128,7 +128,7 @@ export default function PhotoForm({
                 void choose(e.dataTransfer.files[0]);
               }}
               className={`relative rounded-2xl border-2 border-dashed overflow-hidden transition-colors ${
-                dragging ? 'border-[#0E8A50] bg-[#0E8A50]/8' : 'border-[#1E3A29]/18 bg-[#F4EFE4]/60'
+                dragging ? 'border-[#3F7D20] bg-[#3F7D20]/8' : 'border-[#1E3A29]/18 bg-[#F4EFE4]/60'
               }`}
             >
               {shown ? (
@@ -137,9 +137,9 @@ export default function PhotoForm({
                 <button
                   type="button"
                   onClick={() => input.current?.click()}
-                  className="w-full aspect-[3/2] flex flex-col items-center justify-center gap-3 text-center px-6 text-[#1E3A29]/60 hover:text-[#0E8A50]"
+                  className="w-full aspect-[3/2] flex flex-col items-center justify-center gap-3 text-center px-6 text-[#1E3A29]/60 hover:text-[#3F7D20]"
                 >
-                  <span className="grid place-items-center w-14 h-14 rounded-2xl bg-white text-[#0E8A50] elev-1">
+                  <span className="grid place-items-center w-14 h-14 rounded-2xl bg-white text-[#3F7D20] elev-1">
                     <Icon name="upload" className="w-6 h-6" />
                   </span>
                   <span className="font-semibold text-[#1E3A29]">{preparing ? 'Preparing the photo…' : 'Choose a photo'}</span>
@@ -252,7 +252,7 @@ export default function PhotoForm({
 
             {withVisibility && (
               <label className="flex items-start gap-3 rounded-xl bg-[#F4EFE4]/70 px-4 py-3 cursor-pointer">
-                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 mt-0.5 accent-[#0E8A50]" />
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 mt-0.5 accent-[#3F7D20]" />
                 <span>
                   <span className="block text-sm font-semibold text-[#1E3A29]">Show on the website</span>
                   <span className="block text-xs text-[#1E3A29]/55 mt-0.5">Untick to keep the photo here without showing it to visitors.</span>

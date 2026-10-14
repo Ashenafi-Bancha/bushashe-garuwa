@@ -80,7 +80,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
                 setOpen(false);
               }}
               className={`w-full flex items-center justify-between gap-3 rounded-xl px-3.5 py-2.5 text-left transition-colors duration-200 ${
-                active ? 'bg-[#0E8A50] text-white' : 'text-[#13261A] hover:bg-[#E3EBD8]'
+                active ? 'bg-[#3F7D20] text-white' : 'text-[#13261A] hover:bg-[#E3EBD8]'
               }`}
             >
               <span className="flex items-baseline gap-2.5 min-w-0">
@@ -89,7 +89,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
               </span>
               {soon && (
                 <span className={`text-[10px] font-semibold rounded-full px-2 py-0.5 flex-shrink-0 ${
-                  active ? 'bg-white/20 text-white' : 'bg-[#E3EBD8] text-[#0B6E40]'
+                  active ? 'bg-white/20 text-white' : 'bg-[#E3EBD8] text-[#346A1A]'
                 }`}>
                   {t.nav.wolayttaSoon}
                 </span>

@@ -172,7 +172,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                   type="button"
                   onClick={() => goTo(heroIdx + 1)}
                   aria-label={h.hero.next}
-                  className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-[#0E8A50] hover:text-white hover:border-[#0E8A50] transition-colors"
+                  className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-[#3F7D20] hover:text-white hover:border-[#3F7D20] transition-colors"
                 >
                   →
                 </button>
@@ -211,7 +211,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           <ul data-wave className="max-w-screen-xl mx-auto grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
             {h.facts.items.map((fact) => (
               <li key={fact.label} className="fact-card">
-                <div className="font-display text-[1.6rem] sm:text-4xl xl:text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-[#0B6E40] whitespace-nowrap">
+                <div className="font-display text-[1.6rem] sm:text-4xl xl:text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-[#346A1A] whitespace-nowrap">
                   <CountUp value={fact.value} />
                 </div>
                 <div className="text-[13px] sm:text-sm text-[#1E3A29]/65 mt-2.5 leading-snug">{fact.label}</div>

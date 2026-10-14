@@ -83,7 +83,7 @@ export default function GalleryView() {
 
         {!library.loading && added.length === 0 && !library.error && (
           <div className="rounded-2xl border-2 border-dashed border-[#1E3A29]/15 bg-white/60 px-6 py-12 text-center">
-            <span className="inline-grid place-items-center w-14 h-14 rounded-2xl bg-[#0E8A50]/10 text-[#0E8A50] mb-4">
+            <span className="inline-grid place-items-center w-14 h-14 rounded-2xl bg-[#3F7D20]/10 text-[#3F7D20] mb-4">
               <Icon name="gallery" className="w-6 h-6" />
             </span>
             <h2 className="font-display text-xl text-[#1E3A29]">No photos added yet</h2>

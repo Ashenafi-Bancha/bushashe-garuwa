@@ -101,10 +101,10 @@ export default function HeroView() {
             >
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 pt-4">
                 <h2 className="font-display text-lg text-[#1E3A29] leading-tight">{label}</h2>
-                <span className={`${TAG} ${live.length ? 'bg-[#0E8A50]/12 text-[#0B6E40]' : 'bg-[#1E3A29]/8 text-[#1E3A29]/60'}`}>
+                <span className={`${TAG} ${live.length ? 'bg-[#3F7D20]/12 text-[#346A1A]' : 'bg-[#1E3A29]/8 text-[#1E3A29]/60'}`}>
                   {live.length ? (slides ? `${live.length} of your slides` : 'Your photo') : slides ? `${builtIn.length} built-in slides` : 'Built-in photo'}
                 </span>
-                <a href={path} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-[#1E3A29]/50 hover:text-[#0E8A50]">
+                <a href={path} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-[#1E3A29]/50 hover:text-[#3F7D20]">
                   See the page
                   <Icon name="external" className="w-3.5 h-3.5" />
                 </a>

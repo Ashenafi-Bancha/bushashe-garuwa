@@ -60,23 +60,23 @@ export default function Visit() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
               <div>
-                <div className="text-[#0B6E40] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
-                <a href="#map" className="block text-[#13261A] font-sans text-sm hover:text-[#0B6E40] transition-colors">{t.common.addressLine1}</a>
+                <div className="text-[#346A1A] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
+                <a href="#map" className="block text-[#13261A] font-sans text-sm hover:text-[#346A1A] transition-colors">{t.common.addressLine1}</a>
                 <div className="text-[#1E3A29]/70 font-sans text-xs">{t.common.addressLine2}</div>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <div>
-                <div className="text-[#0B6E40] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
+                <div className="text-[#346A1A] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
                 <div className="text-[#13261A] font-sans text-sm">{t.common.hoursDaily}</div>
                 <div className="text-[#1E3A29]/70 font-sans text-xs">{t.common.eveningEvents}</div>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <div>
-                <div className="text-[#0B6E40] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
-                <a href="tel:+251932196502" className="block text-[#13261A] font-sans text-sm hover:text-[#0B6E40] transition-colors">+251 932 196 502</a>
-                <a href="mailto:bushaashegaruwa@gmail.com" className="block text-[#1E3A29]/80 font-sans text-xs hover:text-[#0B6E40] transition-colors">bushaashegaruwa@gmail.com</a>
+                <div className="text-[#346A1A] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
+                <a href="tel:+251932196502" className="block text-[#13261A] font-sans text-sm hover:text-[#346A1A] transition-colors">+251 932 196 502</a>
+                <a href="mailto:bushaashegaruwa@gmail.com" className="block text-[#1E3A29]/80 font-sans text-xs hover:text-[#346A1A] transition-colors">bushaashegaruwa@gmail.com</a>
               </div>
             </div>
           </div>
@@ -102,7 +102,7 @@ export default function Visit() {
                     onClick={() => toggleExp(exp.id)}
                     className={`p-4 text-left rounded-2xl border transition-all duration-200 ${
                       selectedExp.includes(exp.id)
-                        ? 'border-[#0E8A50] bg-[#0E8A50] text-white'
+                        ? 'border-[#3F7D20] bg-[#3F7D20] text-white'
                         : 'border-[#1E3A29]/20 bg-white hover:border-[#1E3A29]/50 text-[#1E3A29]'
                     }`}
                   >

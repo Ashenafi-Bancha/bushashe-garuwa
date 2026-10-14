@@ -130,7 +130,7 @@ a, button {
   width: 4px;
   height: 8px;
   border-radius: 2px;
-  background: #0E8A50;
+  background: #3F7D20;
   animation: scrollWheel 1.6s ease-in-out infinite;
 }
 .scroll-cue-text {
@@ -268,7 +268,7 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   z-index: 40;
   padding: 12px 20px;
   border-radius: 9999px;
-  background: #0E8A50;
+  background: #3F7D20;
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -278,7 +278,7 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 }
 @media (min-width: 1024px) {
   .sticky-book { right: 28px; bottom: 28px; padding: 15px 26px; font-size: 15px; }
-  .sticky-book:hover { background: #0B7A45; }
+  .sticky-book:hover { background: #346A1A; }
 }
 
 /* ── Wolaytta words are longer: the header's links sit closer, and its button waits for a wider screen ── */
@@ -304,7 +304,7 @@ html:lang(wal) .nav-cta-wrap { display: none; }
   min-height: 52px;
   padding: 14px 26px;
   border-radius: 9999px;
-  background: #0E8A50;
+  background: #3F7D20;
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -318,14 +318,14 @@ html:lang(wal) .nav-cta-wrap { display: none; }
   z-index: -1;
   border-radius: inherit;
   padding: 3px;
-  background: conic-gradient(from var(--explore-turn), #0E8A50 0deg, #B9D38A 70deg, #FF9A2E 120deg, #B9D38A 170deg, #0E8A50 240deg, #0E8A50 360deg);
+  background: conic-gradient(from var(--explore-turn), #3F7D20 0deg, #B9D38A 70deg, #FF9A2E 120deg, #B9D38A 170deg, #3F7D20 240deg, #3F7D20 360deg);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   animation: exploreTurn 2.8s linear infinite;
 }
 .btn-explore-arrow { animation: exploreNudge 1.6s ease-in-out infinite; }
-.btn-explore:hover, a:hover .btn-explore { background: #0B7A45; }
+.btn-explore:hover, a:hover .btn-explore { background: #346A1A; }
 .btn-explore-sm { min-height: 46px; padding: 11px 22px; font-size: 14px; }
 
 /* ── "Back", at the bottom corner of every page but the home page; it stays over the footer too ── */
@@ -348,7 +348,7 @@ html:lang(wal) .nav-cta-wrap { display: none; }
   box-shadow: 0 10px 26px rgba(19, 38, 26, 0.28);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
-.back-button:hover { background: #0E8A50; color: #fff; }
+.back-button:hover { background: #3F7D20; color: #fff; }
 @media (min-width: 1024px) {
   .back-button { left: 28px; bottom: 28px; padding: 14px 22px 14px 18px; font-size: 15px; }
 }
@@ -375,7 +375,7 @@ html:lang(am) .coming-soon-word { letter-spacing: 0; font-size: clamp(2.2rem, 7.
   height: 34px;
   border-radius: 9999px;
   background: rgba(255, 255, 255, 0.92);
-  border: 2px solid #0E8A50;
+  border: 2px solid #3F7D20;
   box-shadow: 0 4px 14px rgba(19, 38, 26, 0.25);
   position: relative;
   cursor: pointer;
@@ -386,14 +386,14 @@ html:lang(am) .coming-soon-word { letter-spacing: 0; font-size: clamp(2.2rem, 7.
   position: absolute;
   inset: 9px;
   border-radius: 9999px;
-  background: #0E8A50;
+  background: #3F7D20;
 }
 @media (pointer: coarse) {
   .hotspot { width: 38px; height: 38px; }
   .hotspot::after { inset: 10px; }
 }
-.hotspot:hover { box-shadow: 0 0 0 6px rgba(14, 138, 80, 0.22), 0 4px 14px rgba(19, 38, 26, 0.25); }
-.hotspot[aria-pressed='true'] { background: #0E8A50; }
+.hotspot:hover { box-shadow: 0 0 0 6px rgba(63, 125, 32, 0.22), 0 4px 14px rgba(19, 38, 26, 0.25); }
+.hotspot[aria-pressed='true'] { background: #3F7D20; }
 .hotspot[aria-pressed='true']::after { background: #fff; }
 /* a numbered pin on the map of the grounds */
 .map-pin {
@@ -404,15 +404,15 @@ html:lang(am) .coming-soon-word { letter-spacing: 0; font-size: clamp(2.2rem, 7.
   border-radius: 9999px;
   background: #fff;
   color: #13261A;
-  border: 2px solid #0E8A50;
+  border: 2px solid #3F7D20;
   box-shadow: 0 4px 12px rgba(19, 38, 26, 0.28);
   font-size: 12px;
   font-weight: 800;
   cursor: pointer;
   transition: background-color 0.2s ease, box-shadow 0.2s ease;
 }
-.map-pin:hover { box-shadow: 0 0 0 5px rgba(14, 138, 80, 0.22), 0 4px 12px rgba(19, 38, 26, 0.28); }
-.map-pin[aria-pressed='true'] { background: #0E8A50; color: #fff; box-shadow: 0 0 0 6px rgba(14, 138, 80, 0.3), 0 4px 12px rgba(19, 38, 26, 0.28); }
+.map-pin:hover { box-shadow: 0 0 0 5px rgba(63, 125, 32, 0.22), 0 4px 12px rgba(19, 38, 26, 0.28); }
+.map-pin[aria-pressed='true'] { background: #3F7D20; color: #fff; box-shadow: 0 0 0 6px rgba(63, 125, 32, 0.3), 0 4px 12px rgba(19, 38, 26, 0.28); }
 /* the name under each stand of the collection */
 .exhibit-label {
   display: flex;
@@ -428,7 +428,7 @@ html:lang(am) .coming-soon-word { letter-spacing: 0; font-size: clamp(2.2rem, 7.
 }
 .exhibit-label button {
   border-radius: 9999px;
-  background: #0E8A50;
+  background: #3F7D20;
   color: #fff;
   font-family: var(--font-sans, inherit);
   font-size: 13px;
@@ -436,7 +436,7 @@ html:lang(am) .coming-soon-word { letter-spacing: 0; font-size: clamp(2.2rem, 7.
   padding: 9px 18px;
   cursor: pointer;
 }
-.exhibit-label button:hover { background: #0B7A45; }
+.exhibit-label button:hover { background: #346A1A; }
 /* the collection is walked past by scrolling: the section is taller than the screen */
 .museum-walk { height: 300svh; }
 
@@ -575,14 +575,14 @@ html:lang(am) .word-strip { letter-spacing: 0; }
 
 .btn-primary {
   color: #FFFFFF;
-  background: #0E8A50;
+  background: #3F7D20;
   border: 0;
-  box-shadow: 0 14px 30px -18px rgba(14, 138, 80, 0.7);
+  box-shadow: 0 14px 30px -18px rgba(63, 125, 32, 0.7);
 }
-.btn-primary:hover { background: #0B7A45; }
+.btn-primary:hover { background: #346A1A; }
 
 /* on a photograph: a white pill with green words */
-.btn-primary.btn-on-dark { background: #FFFFFF; color: #0B6E40; box-shadow: none; }
+.btn-primary.btn-on-dark { background: #FFFFFF; color: #346A1A; box-shadow: none; }
 .btn-primary.btn-on-dark:hover { background: #E3EBD8; }
 
 /* smaller: in the header and inside cards */
@@ -608,7 +608,7 @@ html:lang(am) .word-strip { letter-spacing: 0; }
   color: currentColor;
   border: 1.5px solid rgba(30, 58, 41, 0.25);
 }
-.btn-outline:hover { border-color: #0E8A50; background: rgba(14, 138, 80, 0.08); }
+.btn-outline:hover { border-color: #3F7D20; background: rgba(63, 125, 32, 0.08); }
 
 /* frosted pill for use on photographs */
 .btn-glass {
@@ -624,14 +624,14 @@ html:lang(am) .word-strip { letter-spacing: 0; }
 
 .btn-primary {
   color: #FFFFFF;
-  background: #0E8A50;
+  background: #3F7D20;
   border: 0;
-  box-shadow: 0 14px 30px -18px rgba(14, 138, 80, 0.7);
+  box-shadow: 0 14px 30px -18px rgba(63, 125, 32, 0.7);
 }
-.btn-primary:hover { background: #0B7A45; }
+.btn-primary:hover { background: #346A1A; }
 
 /* on a photograph: a white pill with green words */
-.btn-primary.btn-on-dark { background: #FFFFFF; color: #0B6E40; box-shadow: none; }
+.btn-primary.btn-on-dark { background: #FFFFFF; color: #346A1A; box-shadow: none; }
 .btn-primary.btn-on-dark:hover { background: #E3EBD8; }
 
 /* smaller: in the header and inside cards */
@@ -784,7 +784,7 @@ html.lenis, html.lenis body { height: auto; }
   gap: 8px;
   border-radius: 999px;
   border: 0;
-  background: #0E8A50;
+  background: #3F7D20;
   color: #fff;
   font-family: var(--font-sans);
   font-size: 14px;
@@ -792,7 +792,7 @@ html.lenis, html.lenis body { height: auto; }
   padding: 10px 20px;
   transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
 }
-.admin-btn:hover:not(:disabled) { background: #0B7A45; }
+.admin-btn:hover:not(:disabled) { background: #346A1A; }
 .admin-btn:active:not(:disabled) { transform: scale(0.98); }
 .admin-btn:disabled { opacity: 0.5; }
 /* phones: the main action fills the row, as on the public site */
@@ -813,7 +813,7 @@ html.lenis, html.lenis body { height: auto; }
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .admin-field::placeholder { color: rgba(30, 58, 41, 0.35); }
-.admin-field:focus { border-color: #0E8A50; box-shadow: 0 0 0 3px rgba(14, 138, 80, 0.14); }
+.admin-field:focus { border-color: #3F7D20; box-shadow: 0 0 0 3px rgba(63, 125, 32, 0.14); }
 
 .admin-btn-quiet {
   /* no `display` here: it would beat Tailwind's `hidden` and the button

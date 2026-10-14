@@ -128,7 +128,7 @@ export default function Gallery() {
                 aria-pressed={filter === f}
                 className={`text-sm font-semibold rounded-full px-5 py-2.5 border transition-all duration-300 ${
                   filter === f
-                    ? 'bg-[#0E8A50] text-white border-[#0E8A50]'
+                    ? 'bg-[#3F7D20] text-white border-[#3F7D20]'
                     : 'border-[#1E3A29]/15 text-[#1E3A29]/70 hover:border-[#1E3A29]/50 hover:text-[#1E3A29]'
                 }`}
               >

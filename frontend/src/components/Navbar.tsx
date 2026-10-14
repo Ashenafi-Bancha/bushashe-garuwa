@@ -117,7 +117,7 @@ export default function Navbar() {
   const onPhoto = wide && hasPhotoHero(location.pathname) && !scrolled && !open;
   const linkTone = (active: boolean) =>
     active
-      ? onPhoto ? 'bg-white/20 text-white backdrop-blur-sm' : 'bg-[#0E8A50] text-[#F4EFE4]'
+      ? onPhoto ? 'bg-white/20 text-white backdrop-blur-sm' : 'bg-[#3F7D20] text-[#F4EFE4]'
       : onPhoto ? 'text-white hover:bg-white/15 [text-shadow:0_1px_8px_rgba(0,0,0,0.45)]' : 'text-[#1E3A29]/75 hover:text-[#1E3A29] hover:bg-[#1E3A29]/6';
 
   const barLink = (key: PageKey) => (
@@ -177,7 +177,7 @@ export default function Navbar() {
         to={routes[key]}
         className={`flex items-center gap-4 rounded-2xl px-3 py-3 transition-colors ${isActive(routes[key]) ? 'bg-white shadow-sm' : 'active:bg-white/70'}`}
       >
-        <span className={`grid place-items-center w-11 h-11 rounded-xl flex-shrink-0 ${isActive(routes[key]) ? 'bg-[#0E8A50] text-[#F4EFE4]' : 'bg-[#86A94F]/20 text-[#1E3A29]'}`}>
+        <span className={`grid place-items-center w-11 h-11 rounded-xl flex-shrink-0 ${isActive(routes[key]) ? 'bg-[#3F7D20] text-[#F4EFE4]' : 'bg-[#86A94F]/20 text-[#1E3A29]'}`}>
           <Icon page={key} />
         </span>
         <span className="min-w-0 flex-1">
@@ -284,7 +284,7 @@ export default function Navbar() {
             <div className="mt-5 text-sm text-[#1E3A29]/80 leading-relaxed space-y-1">
               <p>{t.common.locationLine}</p>
               <p><a href="tel:+251932196502" className="text-[#13261A] font-semibold">+251 932 196 502</a></p>
-              <p><a href="mailto:bushaashegaruwa@gmail.com" className="hover:text-[#0B6E40]">bushaashegaruwa@gmail.com</a></p>
+              <p><a href="mailto:bushaashegaruwa@gmail.com" className="hover:text-[#346A1A]">bushaashegaruwa@gmail.com</a></p>
             </div>
             <div className="mt-4"><SocialLinks small /></div>
           </div>

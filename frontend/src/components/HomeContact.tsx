@@ -39,7 +39,7 @@ export default function HomeContact() {
                   <dt className="text-[#C4622D] text-xs font-bold tracking-[0.14em] uppercase mb-1">{fact.label}</dt>
                   <dd className="text-[#1E3A29] text-base sm:text-lg font-semibold break-words">
                     {fact.href ? (
-                      <a href={fact.href} className="hover:text-[#0B6E40] transition-colors">{fact.value}</a>
+                      <a href={fact.href} className="hover:text-[#346A1A] transition-colors">{fact.value}</a>
                     ) : (
                       fact.value
                     )}
@@ -73,7 +73,7 @@ export default function HomeContact() {
               href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute left-4 bottom-4 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-[#1E3A29] shadow-[0_10px_26px_rgba(19,38,26,0.28)] hover:bg-[#0E8A50] hover:text-white transition-colors"
+              className="absolute left-4 bottom-4 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-[#1E3A29] shadow-[0_10px_26px_rgba(19,38,26,0.28)] hover:bg-[#3F7D20] hover:text-white transition-colors"
             >
               {m.open}
             </a>

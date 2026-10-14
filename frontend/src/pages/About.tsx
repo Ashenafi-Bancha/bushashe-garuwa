@@ -72,7 +72,7 @@ export default function About() {
               <div className="img-zoom aspect-[4/5] rounded-[2rem] bg-[#1E3A29]/10">
                 <img {...picture(photos.lawn)} alt={t.photos.lawn} className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -bottom-5 -left-5 bg-[#0E8A50] rounded-2xl shadow-xl p-6 hidden lg:block">
+              <div className="absolute -bottom-5 -left-5 bg-[#3F7D20] rounded-2xl shadow-xl p-6 hidden lg:block">
                 <div className="text-white font-display text-3xl font-semibold">4+</div>
                 <div className="text-white/85 font-sans text-xs tracking-wider uppercase mt-1">{a.who.generations}</div>
               </div>
@@ -96,7 +96,7 @@ export default function About() {
       <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
-            <div className="text-[#0B6E40] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.purpose.eyebrow}</div>
+            <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.purpose.eyebrow}</div>
             <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] leading-tight">{a.purpose.title}</h2>
           </div>
 
@@ -104,7 +104,7 @@ export default function About() {
             {/* Mission */}
             <div className="bg-white rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 border-r border-t border-[#C4622D]/10" />
-              <div className="text-[#0B6E40] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
+              <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
                 <div className="w-6 h-px bg-[#C4622D]" />
                 {a.purpose.missionLabel}
               </div>
@@ -118,7 +118,7 @@ export default function About() {
                 {a.purpose.missionP2}
               </p>
               <div className="mt-8 pt-8 border-t border-[#1E3A29]/12">
-                <p className="text-[#0B6E40] font-display text-lg italic font-semibold">
+                <p className="text-[#346A1A] font-display text-lg italic font-semibold">
                   “{t.common.slogan}”
                 </p>
               </div>
@@ -127,7 +127,7 @@ export default function About() {
             {/* Vision */}
             <div className="bg-white rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
               <div className="absolute bottom-0 left-0 w-32 h-32 border-l border-b border-[#C4622D]/10" />
-              <div className="text-[#0B6E40] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
+              <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
                 <div className="w-6 h-px bg-[#C4622D]" />
                 {a.purpose.visionLabel}
               </div>
@@ -143,7 +143,7 @@ export default function About() {
               <div className="mt-8 pt-8 border-t border-[#1E3A29]/12">
                 <div className="flex flex-wrap gap-3">
                   {a.purpose.tags.map((tag, i) => (
-                    <span key={i} className="border border-[#B9D38A]/30 text-[#0B6E40]/80 text-xs font-sans rounded-full px-3 py-1">{tag}</span>
+                    <span key={i} className="border border-[#B9D38A]/30 text-[#346A1A]/80 text-xs font-sans rounded-full px-3 py-1">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -175,7 +175,7 @@ export default function About() {
       <section id="family" className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-16 sm:py-24 overflow-hidden">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="max-w-3xl mb-12">
-            <span className="eyebrow bg-white text-[#0B6E40] mb-5">{a.lineage.eyebrow}</span>
+            <span className="eyebrow bg-white text-[#346A1A] mb-5">{a.lineage.eyebrow}</span>
             <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-[#13261A] leading-[1.05] mb-5">{a.lineage.title}</h2>
             <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed">{a.lineage.desc}</p>
           </div>
@@ -200,13 +200,13 @@ export default function About() {
                   >
                     <span
                       className={`relative z-10 w-[72px] h-[72px] lg:w-[104px] lg:h-[104px] flex-shrink-0 rounded-full flex items-center justify-center font-display text-3xl lg:text-5xl transition-all duration-500 ${
-                        active ? 'bg-[#0E8A50] text-white shadow-[0_0_0_8px_rgba(14,138,80,0.18)]' : 'bg-white text-[#0B6E40] ring-4 ring-[#E3EBD8]'
+                        active ? 'bg-[#3F7D20] text-white shadow-[0_0_0_8px_rgba(63,125,32,0.18)]' : 'bg-white text-[#346A1A] ring-4 ring-[#E3EBD8]'
                       }`}
                     >
                       {i + 1}
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[#0B6E40] text-[11px] font-semibold tracking-[0.12em] uppercase mb-1.5">{p.generation}</span>
+                      <span className="block text-[#346A1A] text-[11px] font-semibold tracking-[0.12em] uppercase mb-1.5">{p.generation}</span>
                       <span className="block font-display text-2xl lg:text-3xl text-[#13261A]">{p.name}</span>
                       {p.period && <span className="block text-[#1E3A29]/70 text-sm mt-1">{p.period}</span>}
                     </span>
@@ -220,7 +220,7 @@ export default function About() {
           <div key={person} className="mt-10 rounded-3xl bg-white border border-[#1E3A29]/12 p-7 sm:p-10 animate-fade-up">
             <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-5">
               <h3 className="font-display text-3xl sm:text-4xl text-[#13261A]">{selected.name}</h3>
-              <span className="text-[#0B6E40] text-sm">{selected.generation}{selected.period ? ` · ${selected.period}` : ''}</span>
+              <span className="text-[#346A1A] text-sm">{selected.generation}{selected.period ? ` · ${selected.period}` : ''}</span>
             </div>
             {selected.story.trim() ? (
               selected.story.split(/\n\s*\n/).map((para, i) => (
@@ -237,7 +237,7 @@ export default function About() {
       <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
-            <div className="text-[#0B6E40] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.offer.eyebrow}</div>
+            <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.offer.eyebrow}</div>
             <h2 className="font-display text-4xl font-semibold text-[#13261A]">{a.offer.title}</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">

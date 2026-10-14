@@ -33,7 +33,7 @@ export default function Dine() {
                 onClick={() => setActiveMenu(cat)}
                 className={`text-xs font-sans font-semibold rounded-full px-6 py-3 transition-colors border ${
                   activeMenu === cat
-                    ? 'bg-[#0E8A50] text-white border-[#0E8A50]'
+                    ? 'bg-[#3F7D20] text-white border-[#3F7D20]'
                     : 'border-[#1E3A29]/20 text-[#1E3A29]/60 hover:border-[#1E3A29]/50 hover:text-[#1E3A29]'
                 }`}
               >
@@ -75,7 +75,7 @@ export default function Dine() {
             </div>
             {/* opening hours */}
             <div className="bg-white rounded-[1.5rem] p-5 sm:p-6">
-              <div className="flex items-center gap-2 text-[#0B6E40] text-xs font-bold tracking-[0.14em] uppercase mb-4">
+              <div className="flex items-center gap-2 text-[#346A1A] text-xs font-bold tracking-[0.14em] uppercase mb-4">
                 <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="9" />
                   <path d="M12 7v5l3 2" />
@@ -99,7 +99,7 @@ export default function Dine() {
           <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
             {([
               { kind: dn.bar.cultural, accent: 'bg-[#C4622D]', mark: 'text-[#C4622D]' },
-              { kind: dn.bar.modern, accent: 'bg-[#0E8A50]', mark: 'text-[#0E8A50]' },
+              { kind: dn.bar.modern, accent: 'bg-[#3F7D20]', mark: 'text-[#3F7D20]' },
             ] as const).map(({ kind, accent, mark }) => (
               <div key={kind.title} className="bg-white rounded-[1.75rem] overflow-hidden elev-1">
                 <div className={`h-1.5 ${accent}`} />

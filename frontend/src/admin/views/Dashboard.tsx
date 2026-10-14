@@ -231,17 +231,17 @@ export default function Dashboard() {
                       key={part.id}
                       type="button"
                       onClick={() => setSection(part.id)}
-                      className="group text-left rounded-2xl bg-white border border-[#1E3A29]/8 p-5 hover:border-[#0E8A50]/40 hover:-translate-y-0.5"
+                      className="group text-left rounded-2xl bg-white border border-[#1E3A29]/8 p-5 hover:border-[#3F7D20]/40 hover:-translate-y-0.5"
                     >
-                      <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#1E3A29] text-white mb-4 group-hover:bg-[#0E8A50] transition-colors">
+                      <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#1E3A29] text-white mb-4 group-hover:bg-[#3F7D20] transition-colors">
                         <Icon name={part.icon} />
                       </span>
                       <span className="flex items-center gap-1.5 font-display text-lg text-[#1E3A29]">
                         {part.title}
-                        <Icon name="arrowRight" className="w-4 h-4 text-[#0E8A50] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                        <Icon name="arrowRight" className="w-4 h-4 text-[#3F7D20] opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                       </span>
                       <span className="block text-[#1E3A29]/55 text-sm mt-1">{part.text}</span>
-                      <span className="block text-[#0B6E40] text-xs font-bold mt-3 min-h-4">{part.state}</span>
+                      <span className="block text-[#346A1A] text-xs font-bold mt-3 min-h-4">{part.state}</span>
                     </button>
                   ))}
                 </div>

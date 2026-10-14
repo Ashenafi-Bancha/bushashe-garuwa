@@ -53,7 +53,7 @@ export default function Preview({ view }: { view: 'index' | 'heritage' | 'map' }
         <ul className="space-y-3">
           {PAGES.map((page) => (
             <li key={page.to}>
-              <Link to={page.to} className="block rounded-[1.5rem] bg-white border border-[#1E3A29]/10 p-5 sm:p-6 hover:border-[#0E8A50] transition-colors">
+              <Link to={page.to} className="block rounded-[1.5rem] bg-white border border-[#1E3A29]/10 p-5 sm:p-6 hover:border-[#3F7D20] transition-colors">
                 <span className="block font-display text-xl font-bold text-[#1E3A29]">{page.title}</span>
                 <span className="block text-[#1E3A29]/65 text-sm mt-1">{page.note}</span>
               </Link>

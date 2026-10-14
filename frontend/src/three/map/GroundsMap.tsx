@@ -67,10 +67,10 @@ export default function GroundsMap() {
                     onClick={() => setChosen(point.id)}
                     aria-pressed={chosen === point.id}
                     className={`w-full flex items-center gap-3 rounded-full pl-2 pr-4 py-2 text-left text-sm font-bold transition-colors ${
-                      chosen === point.id ? 'bg-[#0E8A50] text-white' : 'text-[#1E3A29] hover:bg-[#1E3A29]/6'
+                      chosen === point.id ? 'bg-[#3F7D20] text-white' : 'text-[#1E3A29] hover:bg-[#1E3A29]/6'
                     }`}
                   >
-                    <span className={`grid place-items-center w-7 h-7 flex-shrink-0 rounded-full text-xs tabular-nums ${chosen === point.id ? 'bg-white text-[#0B6E40]' : 'bg-[#E3EBD8] text-[#1E3A29]'}`}>
+                    <span className={`grid place-items-center w-7 h-7 flex-shrink-0 rounded-full text-xs tabular-nums ${chosen === point.id ? 'bg-white text-[#346A1A]' : 'bg-[#E3EBD8] text-[#1E3A29]'}`}>
                       {i + 1}
                     </span>
                     {names[point.id]}

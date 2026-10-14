@@ -24,12 +24,12 @@ export default function Footer() {
             <div className="flex items-center gap-3 mb-5">
               <img src={logo} alt="Bushaashe Garuwa" className="w-14 h-14 rounded-full object-contain bg-white p-0.5 flex-shrink-0 shadow-sm" />
               <div className="min-w-0">
-                <div className="font-display text-xl font-bold tracking-tight text-[#0B6E40]">Bushaashe Garuwa</div>
+                <div className="font-display text-xl font-bold tracking-tight text-[#346A1A]">Bushaashe Garuwa</div>
                 <div className="text-[#1E3A29] text-xs font-semibold leading-snug mt-1">{t.common.locationLine}</div>
               </div>
             </div>
             <p className="text-[#1E3A29] text-sm leading-relaxed mb-6 max-w-sm">{t.footer.tagline}</p>
-            <div className="text-[#0B6E40] text-xs font-bold mb-3">{t.footer.followUs}</div>
+            <div className="text-[#346A1A] text-xs font-bold mb-3">{t.footer.followUs}</div>
             <SocialLinks small />
           </div>
 
@@ -38,11 +38,11 @@ export default function Footer() {
             const routes: Record<string, string> = footerRoutes[col];
             return (
               <div key={col}>
-                <div className="text-[#0B6E40] text-[15px] font-extrabold mb-5">{column.title}</div>
+                <div className="text-[#346A1A] text-[15px] font-extrabold mb-5">{column.title}</div>
                 <ul className="space-y-3">
                   {Object.entries(column.links).map(([key, label]) => (
                     <li key={key}>
-                      <Link to={routes[key]} className="text-[#13261A] font-medium hover:text-[#0B6E40] hover:underline underline-offset-4 text-sm transition-colors duration-200">
+                      <Link to={routes[key]} className="text-[#13261A] font-medium hover:text-[#346A1A] hover:underline underline-offset-4 text-sm transition-colors duration-200">
                         {label}
                       </Link>
                     </li>
@@ -55,9 +55,9 @@ export default function Footer() {
 
         <div className="border-t border-[#1E3A29]/20 py-7 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium text-[#13261A]">
           <div className="flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-6 text-center sm:text-left">
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#0B6E40] transition-colors">{t.footer.address}</a>
-            <a href="tel:+251932196502" className="hover:text-[#0B6E40] transition-colors">+251 932 196 502</a>
-            <a href="mailto:bushaashegaruwa@gmail.com" className="hover:text-[#0B6E40] transition-colors">bushaashegaruwa@gmail.com</a>
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#346A1A] transition-colors">{t.footer.address}</a>
+            <a href="tel:+251932196502" className="hover:text-[#346A1A] transition-colors">+251 932 196 502</a>
+            <a href="mailto:bushaashegaruwa@gmail.com" className="hover:text-[#346A1A] transition-colors">bushaashegaruwa@gmail.com</a>
           </div>
           <div>© {new Date().getFullYear()} {t.footer.rights}</div>
         </div>

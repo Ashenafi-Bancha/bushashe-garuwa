@@ -22,7 +22,7 @@ export function StatCard({
     <>
       <div className="flex items-start justify-between gap-3 mb-4">
         <span className="text-[#1E3A29]/60 text-[13px] font-semibold leading-snug">{label}</span>
-        <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#0E8A50]/10 text-[#0E8A50] flex-shrink-0">
+        <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#3F7D20]/10 text-[#3F7D20] flex-shrink-0">
           <Icon name={icon} />
         </span>
       </div>
@@ -32,7 +32,7 @@ export function StatCard({
   );
   const card = 'block w-full text-left rounded-2xl bg-white border border-[#1E3A29]/8 p-5';
   return onClick ? (
-    <button type="button" onClick={onClick} className={`${card} hover:border-[#0E8A50]/40 hover:-translate-y-0.5`}>
+    <button type="button" onClick={onClick} className={`${card} hover:border-[#3F7D20]/40 hover:-translate-y-0.5`}>
       {body}
     </button>
   ) : (
@@ -151,7 +151,7 @@ export function Panel({ children }: { children: ReactNode }) {
 
 const NOTICE_STYLES = {
   info: 'bg-white border border-[#1E3A29]/8 text-[#1E3A29]/70',
-  success: 'bg-[#0E8A50]/10 text-[#0B6E40]',
+  success: 'bg-[#3F7D20]/10 text-[#346A1A]',
   error: 'bg-[#C4622D]/12 text-[#8c4227]',
 };
 
@@ -201,7 +201,7 @@ export function SearchBox({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-full border border-[#1E3A29]/12 bg-white pl-11 pr-4 py-3 text-sm text-[#1E3A29] outline-none placeholder:text-[#1E3A29]/35 focus:border-[#0E8A50] transition-colors"
+        className="w-full rounded-full border border-[#1E3A29]/12 bg-white pl-11 pr-4 py-3 text-sm text-[#1E3A29] outline-none placeholder:text-[#1E3A29]/35 focus:border-[#3F7D20] transition-colors"
       />
     </label>
   );

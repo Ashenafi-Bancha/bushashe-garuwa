@@ -68,7 +68,7 @@ export default function HouseExplorer({ onStepInside }: { onStepInside?: () => v
                 onClick={() => setChosen(place.id)}
                 aria-pressed={chosen === place.id}
                 className={`rounded-full px-4 py-2.5 text-sm font-bold transition-colors ${
-                  chosen === place.id ? 'bg-[#0E8A50] text-white' : 'bg-white text-[#1E3A29] border border-[#1E3A29]/15 hover:border-[#0E8A50]'
+                  chosen === place.id ? 'bg-[#3F7D20] text-white' : 'bg-white text-[#1E3A29] border border-[#1E3A29]/15 hover:border-[#3F7D20]'
                 }`}
               >
                 {words.spots[place.id].label}
