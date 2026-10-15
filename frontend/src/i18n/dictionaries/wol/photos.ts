@@ -15,223 +15,223 @@ import type { DeepPartial } from '../../types';
 const page: DeepPartial<Dictionary> = {
   photos: {
     // EN: Meeshsho Keettaa: a traditional Wolaita house with a thatched dome and a carved wooden door, among enset plants
-    meeshsho: "",
+    meeshsho: "Meesho Keettaa: maatan dadettida qum\"oy, sikettida godaanne ciiretti giigida sanqqay de'iyoo uuttatu giddon keexettida keettaa.",
     // EN: Bushaashe Garuwa: the main gate with its carved tree-trunk pillars and the welcome sign
-    gate: "",
+    gate: "Bushaashe Garuwa: naa\"u mittaappe giigida tuussa mittati, hashshu yeeta giyaa mohaa xuufeenne moqottaappe merettida sanqqay de'iyoo giddo geliyoo waanna penggiyaa",
     // EN: Bushaashe Garuwa: traditional thatched house, flags and grounds
-    house: "",
+    house: "Bushaashe Garuwaa: gita gatta keettaa, banddiratanne zaguwaa",
     // EN: Bushaashe Garuwa: thatched pavilions and lush gardens
-    pavilions: "",
+    pavilions: "Bushaashe Garuwaa: maaxxan xammettida adaratanne lo'idi carkkiya ataakilttiya sa'aa",
     // EN: Bushaashe Garuwa: gardens and recreational grounds
-    gardens: "",
+    gardens: "Bushaashe Garuwaa: ataakiltte mittatanne shemppiyo gadiyaa",
     // EN: Bushaashe Garuwa: open lawns, heritage tree and traditional house
-    lawn: "",
+    lawn: "Bushaashe Garuwaa: dooyettida maata sa'aa, laata mittaanne aada keettaa",
     // EN: The meeting hall at Bushaashe Garuwa: rows of chairs in white covers with bands of Wolaita pattern, under wood-panelled walls
-    meetingHall: "",
+    meetingHall: "Bushaashe Garuwaa shiiquwa adaraa: mitta deese garssan, Wolaytta aleeqee de'iya bootta maoy maayida oydhdheta saasata",
     // EN: A VIP room for sleeping: a carved wooden bed with an embroidered white cover, and an armchair
-    vipRoom: "",
+    vipRoom: "Hiixiyo VIP keettaa: oosetti xalettida mitta arsa, sikketida bootta maoy maayidabaanne uffi gidi uttiyo arsa",
     // EN: The VIP sitting and dining room: sofas, a marble-topped table, a kitchen counter and a fireplace
-    vipDining: "",
+    vipDining: "Uttiyoore maana VIP adaraa: soofata, al'o zaaga dembbaa bolla gayida xarapheezaa, kichchiya koyronne tama sa'aa",
     // EN: The VIP kitchen: carved wooden cupboards above a marble counter with a sink, beside a panelled wooden door
-    vipKitchen: "",
+    vipKitchen: "VIP kichchiya: haaxxa meecciyo sa'ara de'iya qaxxarettida mitta saxinetettaa, mitta pangga matan",
     // EN: The VIP cooking corner: a black double sink with running water and a two-ring electric stove on a wooden worktop
-    vipCooking: "",
+    vipCooking: "VIP kattiyo zoozaa: pulttiya haaxxai de'iya karetta laa'u haaxxa meecciyo sa'aanne mitta oosuwa dembbaa bollan de'iya koranti stove",
     // EN: A VIP rest room: a rain shower and a round mirror under three warm lamps, on marble-patterned tiles
-    vipShower: "",
+    vipShower: "VIP meeceetiyo keettaa: ho'o lampatetta garssan de'iya pillaasa maala haaxxa pulttiyaaye, shaaqila janbberiyaanne xalettida xabiyaa bollan de'iya janbberiyaa",
     // EN: A VIP rest room: a white washbasin with a chrome tap against marble-patterned tiles
-    vipBasin: "",
+    vipBasin: "VIP meeceetiyo keettaa: xalettida xabiyaa sinttan de'iya bootta kusha meecciyoobaanne pillaasa boora poppoqqiyagaa",
     // EN: A VIP rest room: a white toilet in a room tiled from floor to ceiling
-    vipToilet: "",
+    vipToilet: "VIP meeceetiyo keettaa: huupheppe gade gakkanaas xabiyaan maayida keettan de'iya geeshsha bootta sheeshsho sa'aa",
     // EN: Elders in traditional Wolaita dress seated under the great tree at Bushaashe Garuwa, in front of a thatched house and a welcome banner
-    eventElders: "",
+    eventElders: "Bushaashe Garuwaan gita mitta garssan, maaxxan xammettida keettaa sinttanne mokki ekkiya saasani sinttan aada Wolaytta maoya maayidi uttida cimata",
     // EN: A gathering at Bushaashe Garuwa: a man speaks into a microphone to guests seated at a long table covered in Wolaita cloth, under a tree
-    eventGathering: "",
+    eventGathering: "Bushaashe Garuwaa shiiquwaa: mitta garssan Wolaytta maoy maayida adhdha xarapheezaa matan uttida imttatassi issi bitanee maayikrofoniyaan haasayee",
     // EN: A celebration at Bushaashe Garuwa: guests in Wolaita-pattern shirts clap around a cake with candles and a large traditional loaf
-    eventCelebration: "",
+    eventCelebration: "Bushaashe Garuwaa bonchchoo: Wolaytta aleeqee de'iya qamisiya maayida imttati tuulxxiya shamaara de'iya keekiyanne gita aada muqqa yuuyidi kushiya baqoosona",
     // EN: Guests in Wolaita-pattern shirts playing with a ball and laughing on the lawn at Bushaashe Garuwa
-    eventGames: "",
+    eventGames: "Wolaytta aleeqee de'iya qamisiya maayida imttati Bushaashe Garuwaa maata sa'an booliya ka'idi miiccidosona",
     // EN: Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens
-    home: "",
+    home: "Bushaashe Garuwaa: ataakiltte giddon de'iya aada maaxxa keettaa, pulttiya haaxxa pillaasaanne banddarata",
     // EN: Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture
-    enset: "",
+    enset: "Bushaashe Garuwaan dicciya uttiya (woykko emmaay), Wolaytta quma aadaa waanna mittaa",
     // EN: Traditional Wolaita dishes served in woven baskets inside a cultural house at Bushaashe Garuwa
-    food: "",
+    food: "Bushaashe Garuwaa aada keettaa giddon shashshamettida le'etan shiiqida aada Wolaytta qumata",
     // EN: The row of zigba trees at Bushaashe Garuwa, planted by the forefathers of the family
-    zigba: "",
+    zigba: "Bushaashe Garuwaan so asaa aawatu tokkida, saasani maala kora geetettida zigbaa mittata",
     // EN: Plants with red and green leaves along a path at Bushaashe Garuwa, beside a thatched house and young trees
-    gardenPlant: "",
+    gardenPlant: "Maaxxa keettaa matan, yaara mittatara ogiya giddon de'iya zo'o qassi caala hayttai de'iya ataakilttiyaa",
     // EN: A pigeon with a white head and a purple sheen on its neck, perched on the edge of a roof at Bushaashe Garuwa
-    bird: "",
+    bird: "Bushaashe Garuwaa keetta huuphe zappiyaan uttida, bootta huupheenne qolla qorxxiya lo'o birssaqai de'iya holla kafiyaa",
     // EN: Gifaataa celebration at Bushaashe Garuwa: guests in traditional Wolaita dress walking through the heritage gate
-    gifaataa1: "",
+    gifaataa1: "Gifaataa bonchchoo Bushaashe Garuwaan: aada Wolaytta maoy maayida imttati laata kera panggara giddoyees",
     // EN: Gifaataa celebration: women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn
-    gifaataa2: "",
+    gifaataa2: "Gifaataa bonchchoo: aada Wolaytta maoy maayida maccaasay Bushaashe Garuwaa maata gadiyan shiiqidosona",
     // EN: Gifaataa celebration: guests in traditional Wolaita attire on the Bushaashe Garuwa grounds
-    gifaataa3: "",
+    gifaataa3: "Gifaataa bonchchoo: aada Wolaytta maoy maayida imttati Bushaashe Garuwaa gadiyan eqqidosona",
   },
 
   photoCaptions: {
     meeshsho: {
       // EN: Meeshsho Keettaa
-      title: "",
+      title: "Meesho Keettaa",
       // EN: A traditional Wolaita house: a thatched dome, woven walls and a carved door, standing among the enset.
-      desc: "",
+      desc: "Uuttatu giddon eqqida Wolaytta Wogaa keettaa: maatan dadettida qum\"uwaa, galabaan oosettida godaanne ciirettida sanqqaa.",
     },
     gate: {
       // EN: The Main Gate
-      title: "",
+      title: "Waanna Kare Panggiyaa",
       // EN: Two carved tree-trunk pillars, the welcome sign and the bamboo doors: the way into Bushaashe Garuwa.
-      desc: "",
+      desc: "Laa'u qaxxarettida gufayti, mokki ekkiya saasani qassi woshsha pangga: Bushaashe Garuwaa geliyo ogiyaa.",
     },
     home: {
       // EN: The Heart of the Grounds
-      title: "",
+      title: "Sa'aa Wozanaa",
       // EN: The great traditional house, the fountain and the flags, set among the gardens.
-      desc: "",
+      desc: "Gita aada keettaa, pulttiya haaxxa pillaasaanne banddarata, ataakiltte giddon giigida.",
     },
     gifaataa1: {
       // EN: Arriving for Gifaataa
-      title: "",
+      title: "Gifaataassi Yiyoogaa",
       // EN: Guests in traditional Wolaita dress walk through the heritage gate for the new year celebration.
-      desc: "",
+      desc: "Aada Wolaytta maoy maayida imttati laytta laammiya bonchchoos laata kera panggara geloosona.",
     },
     house: {
       // EN: The Traditional House
-      title: "",
+      title: "Beni Keettaa",
       // EN: A traditional Wolaita house with its thatched roof, beside the path and the Ge'ez letters of the name.
-      desc: "",
+      desc: "Maaxxan xammettida ba huupheera de'iya aada Wolaytta keettaa, ogiya matan qassi sunttaa abagida pilleera.",
     },
     gifaataa2: {
       // EN: Women of Gifaataa
-      title: "",
+      title: "Gifaataa Maccaasata",
       // EN: Women in white and red traditional Wolaita dress gather on the lawn during Gifaataa.
-      desc: "",
+      desc: "Boottaara zo'ora aada Wolaytta maoy maayida maccaasay Gifaataa wode maata sa'an shiiqidosona.",
     },
     pavilions: {
       // EN: Thatched Pavilions
-      title: "",
+      title: "Maaxxa Adaratata",
       // EN: Shaded pavilions among the trees, where visitors rest and gather.
-      desc: "",
+      desc: "Mitta garssan de'iya kuuyiya adaratata, be'iyasati shemppiyonne shiiqiyo sohuwaa.",
     },
     gifaataa3: {
       // EN: Guests of the Celebration
-      title: "",
+      title: "Bonchcho Imattata",
       // EN: Guests in traditional Wolaita attire stand together on the grounds during Gifaataa.
-      desc: "",
+      desc: "Aada Wolaytta maoy maayida imttati Gifaataa wode sa'iya bollan issippe eqqidosona.",
     },
     gardens: {
       // EN: The Gardens
-      title: "",
+      title: "Ataakiltte Sa'aa",
       // EN: Green lawns, hedges and a play area for children and families.
-      desc: "",
+      desc: "Caala maata sa'aa, dirssanne na'atassinne so asatassi ka'iyo pillaasaa.",
     },
     enset: {
       // EN: Enset, the False Banana
-      title: "",
+      title: "Uttiyaa (Emmaay)",
       // EN: Enset growing on the grounds: the staple plant at the heart of Wolaita food and culture.
-      desc: "",
+      desc: "Sa'an dicciya uttiyaa: Wolaytta qumanne aada wozanappe de'iya waanna mittaa.",
     },
     food: {
       // EN: The Taste of Wolaita
-      title: "",
+      title: "Wolaytta Qumaa Malata",
       // EN: Traditional Wolaita dishes, from enset to beans and greens, served in woven baskets inside a cultural house.
-      desc: "",
+      desc: "Uttiaappe bakelaasi qassi ataakilttiyaassi de'iya aada Wolaytta qumata, aada keettaa giddon shashshamettida le'etan shiiqida.",
     },
     zigba: {
       // EN: The Zigba Trees
-      title: "",
+      title: "Zigbaa Mittata",
       // EN: Zigba trees planted by the forefathers of the family, standing in a row like a peaceful procession.
-      desc: "",
+      desc: "So asaa aawatu tokkida zigbaa mittati, sarotettaa ogi maala kora saasani eqqida.",
     },
     gardenPlant: {
       // EN: Colours of the Garden
-      title: "",
+      title: "Ataakilttiya Boniyaa",
       // EN: Red-leaved plants line the path beside the thatched house, among young trees and green lawns.
-      desc: "",
+      desc: "Zo'o hayttai de'iya ataakilttiyaa maaxxa keettaa matan ogiya bollan kora eqqida, yaara mittatanne caala maata sa'aara.",
     },
     bird: {
       // EN: A Resident of the Grounds
-      title: "",
+      title: "Gadiyaa De'iyaas",
       // EN: A pigeon with a white head and a shining purple neck watches from the edge of a roof.
-      desc: "",
+      desc: "Bootta huupheenne poqqiya birssaqai de'iya holla kafiyaa keettaa huuphe zappiaappe xeelliyoogaa.",
     },
     lawn: {
       // EN: The Great Lawn
-      title: "",
+      title: "Gita Maata Sa'aa",
       // EN: Open lawns and the great tree, with the traditional house in the distance.
-      desc: "",
+      desc: "Dooyettida maata sa'aanne gita mittaa, haakkiyan de'iya aada keettaara.",
     },
     meetingHall: {
       // EN: The Meeting Hall
-      title: "",
+      title: "Shiiquwa Adaraa",
       // EN: Rows of chairs dressed in white with bands of Wolaita pattern, ready for a meeting or a training.
-      desc: "",
+      desc: "Shiiquwawu woykko tamaarisuwawu giigida Wolaytta aleeqee de'iya bootta maoy maayida oydhdheta saasata.",
     },
     vipRoom: {
       // EN: VIP Room for Sleeping
-      title: "",
+      title: "VIP Hiixiyo Keettaa",
       // EN: A carved wooden bed with a hand-embroidered cover.
-      desc: "",
+      desc: "Kushan sikketida maoy maayida qaxxarettida mitta arsaa.",
     },
     vipDining: {
       // EN: VIP Sitting and Dining Room
-      title: "",
+      title: "VIP Uttiyonne Maana Keettaa",
       // EN: Sofas, a marble-topped table, the kitchen counter and the fireplace.
-      desc: "",
+      desc: "Soofata, al'o zaaga dembbaa bolla gayida xarapheezaa, kichchiya koyronne tama sa'aa.",
     },
     vipKitchen: {
       // EN: The VIP Kitchen
-      title: "",
+      title: "VIP Kichchiyaa",
       // EN: Carved wooden cupboards, a marble counter and a sink: a kitchen of your own to cook in.
-      desc: "",
+      desc: "Qaxxarettida mitta saxinetettaa, al'o zaaga dembbaa bollan de'iya koyronne haaxxa meecciyo sa'aa: neesne katana keettaa.",
     },
     vipCooking: {
       // EN: Cook It Yourself
-      title: "",
+      title: "Ne Huuphen Katta",
       // EN: A double sink with running water and an electric stove, ready for the family meal.
-      desc: "",
+      desc: "Pulttiya haaxxai de'iya laa'u haaxxa meecciyo sa'aanne koranti stove, so asa qumawu giigida.",
     },
     vipShower: {
       // EN: Shower Room
-      title: "",
+      title: "Meeceetiyo Keettaa",
       // EN: A rain shower, a round mirror and warm lamps on marble-patterned tiles.
-      desc: "",
+      desc: "Pillaasa maala haaxxa pulttiyaaye, shaaqila janbberiyaanne ho'o lampata xalettida xabiyaa bollan.",
     },
     vipBasin: {
       // EN: Washbasin
-      title: "",
+      title: "Kusha Meecciyoabaa",
       // EN: A white basin and a bright tap, kept spotless for every guest.
-      desc: "",
+      desc: "Bootta kusha meecciyoobaanne pillaasa boora poppoqqiyagaa, imtta ubbawu geeshshan naagettida.",
     },
     vipToilet: {
       // EN: Private Rest Room
-      title: "",
+      title: "Shaafettida Sheeshsho Sa'aa",
       // EN: A clean, modern rest room, tiled from floor to ceiling.
-      desc: "",
+      desc: "Geeshsha, ha'i wodiya sheeshsho sa'aa, huupheppe gade gakkanaas xabiyaan maayida.",
     },
     eventElders: {
       // EN: Elders Under the Great Tree
-      title: "",
+      title: "Cimata Gita Mitta Garssan",
       // EN: Elders in traditional Wolaita dress sit in the shade before the thatched house, welcoming their guests.
-      desc: "",
+      desc: "Aada Wolaytta maoy maayida cimati maaxxa keettaa sinttan kuuyiyaan uttidi imttata mokki ekkoosona.",
     },
     eventGathering: {
       // EN: A Meeting in the Open Air
-      title: "",
+      title: "Shiiquwa Carkkiya Sa'an",
       // EN: A speaker addresses guests at a long table dressed in Wolaita cloth, in the shade of a tree.
-      desc: "",
+      desc: "Haasayiyaayssi mitta kuuyiyaan, Wolaytta maoy maayida adhdha xarapheezaa matan uttida imttatassi haasayees.",
     },
     eventCelebration: {
       // EN: A Day to Celebrate
-      title: "",
+      title: "Galatiyo Gallassa",
       // EN: Friends clap around a cake and a great traditional loaf, with the thatched pavilion behind them.
-      desc: "",
+      desc: "Laggati keekiyaanne gita aada muqqa yuuyidi kushiya baqoosona, guyyeena maaxxa adaraa de'ishshin.",
     },
     eventGames: {
       // EN: Games on the Lawn
-      title: "",
+      title: "Ka'uwaa Maata Sa'an",
       // EN: After the meal, guests play and laugh together on the wide green lawn.
-      desc: "",
+      desc: "Qumaappe guyyetan imttati aahuwaa caala maata sa'an ka'ididinne miiccidi issippe gayttidosona.",
     },
   },
 };

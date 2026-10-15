@@ -16,165 +16,165 @@ const page: DeepPartial<Dictionary> = {
   stay: {
     hero: {
       // EN: Guesthouse
-      eyebrow: "",
+      eyebrow: "Geshsha Keettaa",
       // EN: Stay Within the Story
-      title: "",
+      title: "Taarikkiya Giddon Shemppa",
       // EN: Sleep where history breathes, in rooms that reflect the warmth and authenticity of Wolaita heritage.
-      desc: "",
+      desc: "Taarikkey de'iyo, Wolaytta aadaa aashshonninne tumutettaa bessiya keettatan hiixxa.",
     },
     comingSoon: {
       // EN: Coming soon
-      badge: "",
+      badge: "Matan yees",
       // EN: A guest house inside the heritage site is planned. It is not open yet.
-      lead: "",
+      lead: "Laata sa'aa giddon imtta keettai halchchettiis. Ha'i dooyettibeenna.",
       // EN: The Guest House Is a Coming Service
-      title: "",
+      title: "Imtta Keetti Yiya Oosuwaa",
       // EN: Bushaashe Garuwa is preparing a guest house so that visitors can stay overnight. It is still being finished and does not take guests yet. We will announce it here when it opens.
-      text: "",
+      text: "Be'iyasati qamma aadhdissana mala Bushaashe Garuwaagee imtta keettaa giigissiis. Ha'issa polliishetishshin imttata ekkekko. Dooyettiyo wode hayssan erissana.",
       // EN: Questions in the Meantime?
-      askTitle: "",
+      askTitle: "Heedzan Oychchoy De'ii?",
       // EN: Call or write to us and we will gladly tell you more.
-      askText: "",
+      askText: "Nuussi silkkiya shoccite woykko xaafite, nuni aaruwa eexxaashetan yootana.",
       // EN: Open Now: the VIP Service
-      vipTitle: "",
+      vipTitle: "Ha'i Dooyettida: VIP Oosuwaa",
       // EN: Families can already come to the VIP rooms to cook, eat, celebrate and stay the night.
-      vipText: "",
+      vipText: "So asati ha'issa VIP keettatassi yiidi katana, maana, galatana qassi qamma aadhdissana danddayoosona.",
     },
     // EN: Amenities
-    amenitiesLabel: "",
+    amenitiesLabel: "Koshshiyaabaa",
     // EN: View Details
-    viewDetails: "",
+    viewDetails: "Aaruwa Be'a",
     // EN: Book This Room
-    bookRoom: "",
+    bookRoom: "Ha Keettaa Oyqqa",
     rooms: {
       standard: {
         // EN: Standard Room
-        name: "",
+        name: "Woga Keettaa",
         // EN: A peaceful retreat with cultural touches, comfortable bedding, private bathroom and serene garden views.
-        desc: "",
+        desc: "Aada bessi, lo'o hiixiyobaa, ba haaxxa meecciyo sohuwaara qassi ataakiltte be'uwaara de'iya sarotetta shemppiyo sohuwaa.",
         // EN: 2 guests
-        guests: "",
+        guests: "2 imttatassi",
       },
       family: {
         // EN: Family Room
-        name: "",
+        name: "So Asa Keettaa",
         // EN: Spacious family room with a private outdoor seating area, heritage decor, and comfortable beds for the whole family.
-        desc: "",
+        desc: "Kumetta so asassi keehi lo'o hiixiyo arsaara, laata aleequwaara qassi ba kariya uttiyo pillaasaara de'iya aahuwaa so asa keettaa.",
         // EN: 4 guests
-        guests: "",
+        guests: "4 imttatassi",
       },
       heritage: {
         // EN: Heritage Room
-        name: "",
+        name: "Laata Keettaa",
         // EN: Our signature room: full immersion in Wolaita design, premium comfort, private terrace with heritage landscape views.
-        desc: "",
+        desc: "Nu dumma keettaa: Wolaytta aleequwa giddon kumetta de'uwaa, al'o shemppuwaa, ba terrace-ra qassi laata gadiyaa be'uwaara.",
         // EN: 2 guests
-        guests: "",
+        guests: "2 imttatassi",
       },
     },
     amenities: {
       // EN: Wi-Fi
-      wifi: "",
+      wifi: "Wi-Fi",
       // EN: Private bathroom
-      bathroom: "",
+      bathroom: "Ba meecciyo sohuwaa",
       // EN: Breakfast included
-      breakfast: "",
+      breakfast: "Maallado qumay de'iyoogaa",
       // EN: Garden view
-      garden: "",
+      garden: "Ataakiltte be'uwaa",
       // EN: Cultural access
-      cultural: "",
+      cultural: "Aada be'uwaa",
       // EN: Reading area
-      reading: "",
+      reading: "Nabbabiya pillaasaa",
       // EN: Private outdoor area
-      outdoor: "",
+      outdoor: "Ba kariya pillaasaa",
       // EN: Children's welcome kit
-      kids: "",
+      kids: "Na'atassi mokki ekkiyo miishshata",
       // EN: Private terrace
-      terrace: "",
+      terrace: "Ba terrace-a",
       // EN: Welcome coffee ceremony
-      coffee: "",
+      coffee: "Mokki ekkiyo buna oosuwaa",
       // EN: Heritage guide service
-      guide: "",
+      guide: "Laata ogiya bessiyaas",
       // EN: Full cultural access
-      fullCultural: "",
+      fullCultural: "Kumetta aada be'uwaa",
     },
     why: {
       // EN: Why Stay at Bushaashe Garuwa?
-      title: "",
+      title: "Aayssi Bushaashe Garuwaan Shemppii?",
       // EN: Every night here is more than accommodation; it is an immersion in a living heritage.
-      desc: "",
+      desc: "Hayssan aadhdhiya qamma ubbay shemppiyoogaappe aadhdhiyaabaa; de'iya laataa giddon uttuyoogaa.",
       items: {
         setting: {
           // EN: Authentic Setting
-          title: "",
+          title: "Tumu Sohuwaa",
           // EN: Surrounded by heritage trees, cultural houses and nature.
-          desc: "",
+          desc: "Laata mittatan, aada keettatanne medhetettaan yuuyettida.",
         },
         breakfast: {
           // EN: Traditional Breakfast
-          title: "",
+          title: "Aada Maallado Qumaa",
           // EN: Start each day with a Wolaita breakfast prepared by our kitchen.
-          desc: "",
+          desc: "Gallassa ubbaa nu kichchiyeppe giigida Wolaytta maallado quman dooyite.",
         },
         access: {
           // EN: Full Cultural Access
-          title: "",
+          title: "Kumetta Aada Be'uwaa",
           // EN: Guests enjoy priority access to all heritage experiences.
-          desc: "",
+          desc: "Imttati aada be'uta ubbaa kasetidi be'iyo uyoppaa demmoosona.",
         },
         coffee: {
           // EN: Morning Coffee Ceremony
-          title: "",
+          title: "Maallado Buna Oosuwaa",
           // EN: Begin every morning with the traditional Ethiopian coffee ritual.
-          desc: "",
+          desc: "Maallado ubbaa aada Itoophiyaa buna oosuwa wogaan dooyite.",
         },
       },
     },
     inquiry: {
       // EN: Request Your Stay
-      title: "",
+      title: "Ne Shemppuwaa Oychcha",
       // EN: Tell us when you would like to come. We will call you to confirm the room and the price.
-      desc: "",
+      desc: "Au wode yaanawu koyiyookko nuussi yootite. Keettaane miishshaa wogaa zaaridi erissanawu silkkiya shocana.",
       // EN: This is a request, not yet a confirmed booking.
-      note: "",
+      note: "Hayssi oychcho xalla, ha'i gakkanaas polettida oyqqo gidenna.",
       // EN: Or reach us directly
-      or: "",
+      or: "Woykko nuura pillaasan gayttite",
       // EN: Arrival date *
-      arrival: "",
+      arrival: "Gakkiyo gallassa *",
       // EN: Nights
-      nights: "",
+      nights: "Qammata",
       // EN: 1 night
-      nightOne: "",
+      nightOne: "1 qamma",
       // EN: {count} nights
-      nightMany: "",
+      nightMany: "{count} qammata",
       // EN: Guests
-      guests: "",
+      guests: "Imttata",
       // EN: 1 guest
-      guestOne: "",
+      guestOne: "1 imtta",
       // EN: {count} guests
-      guestMany: "",
+      guestMany: "{count} imttata",
       // EN: Room
-      room: "",
+      room: "Keettaa",
       // EN: Any room
-      anyRoom: "",
+      anyRoom: "Ayyikeene keettaa",
       // EN: Send my request
-      submit: "",
+      submit: "Ta oychchoo yedda",
       // EN: Sending…
-      sending: "",
+      sending: "Yeddidoogaa...",
       // EN: Request received
-      thanksTitle: "",
+      thanksTitle: "Oychchoy ekkettiis",
       // EN: Thank you. We will call you shortly to confirm your stay at Bushaashe Garuwa.
-      thanksText: "",
+      thanksText: "Galatoos. Bushaashe Garuwaan ne shemppuwaa giigissanawu matan silkkiya shocana.",
     },
     cta: {
       // EN: Ready to Book Your Stay?
-      title: "",
+      title: "Ne Shemppuwaa Oyqqanawu Giigidii?",
       // EN: Contact us to check availability and reserve your room at Bushaashe Garuwa.
-      desc: "",
+      desc: "Sohoy de'iyoogaa be'anawunne Bushaashe Garuwaan ne keettaa oyqqanawu nuura gayttite.",
       // EN: Book Your Stay
-      book: "",
+      book: "Ne Sohuwaa Oyqqa",
       // EN: Ask a Question
-      ask: "",
+      ask: "Oychcho Oychcha",
     },
   },
 };

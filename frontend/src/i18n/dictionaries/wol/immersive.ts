@@ -15,115 +15,115 @@ import type { DeepPartial } from '../../types';
 const page: DeepPartial<Dictionary> = {
   immersive: {
     // EN: Preparing the 3D view…
-    loading: "",
+    loading: "3D be'uwaa giigissiyoogaa...",
     // EN: Drag to turn
-    drag: "",
+    drag: "Yuushshanawu goochcha",
     // EN: Drag to look around
-    lookAround: "",
+    lookAround: "Yuuyidi be'anawu goochcha",
     // EN: Close
-    close: "",
+    close: "Guyyissite",
     house: {
       // EN: Explore in 3D
-      eyebrow: "",
+      eyebrow: "3D-n Be'a",
       // EN: Walk Around a Traditional House
-      title: "",
+      title: "Aada Keettaa Yuuya",
       // EN: A simple stand-in model. A scan of the real house will take its place.
-      placeholder: "",
+      placeholder: "Xalala misile de'iyaa. Tumu keettaa misiley matan hayssan kessettana.",
       // EN: Step inside
-      stepInside: "",
+      stepInside: "Giddoyite",
       spots: {
         roof: {
           // EN: Thatched dome
-          label: "",
+          label: "Maaxxa huuphea",
           // EN: [HOTSPOT TEXT NEEDED: the roof]
-          text: "",
+          text: "[KEETTA HUUPHE QAALA KOSHSHIYA]: keettaa huuphea",
         },
         wall: {
           // EN: Woven walls
-          label: "",
+          label: "Xammettida deesea",
           // EN: [HOTSPOT TEXT NEEDED: the walls]
-          text: "",
+          text: "[DEESE QAALA KOSHSHIYA]: deeseata",
         },
         door: {
           // EN: Carved door
-          label: "",
+          label: "Qaxxarettida panggaa",
           // EN: [HOTSPOT TEXT NEEDED: the door]
-          text: "",
+          text: "[PANGGA QAALA KOSHSHIYA]: panggaa",
         },
         inside: {
           // EN: Inside the house
-          label: "",
+          label: "Keettaa giddosuwaa",
         },
       },
     },
     tour: {
       // EN: 360° Tour
-      eyebrow: "",
+      eyebrow: "360° Yuushu be'uwaa",
       // EN: Look Around Bushaashe Garuwa
-      title: "",
+      title: "Bushaashe Garuwaa Yuuyada Be'a",
       // EN: Choose a place, then drag to look in every direction.
-      desc: "",
+      desc: "Sohuwaa doorada, heedzaneyka be'anawu goochcha.",
       // EN: Open the 360° view
-      open: "",
+      open: "360° be'uwaa dooya",
       // EN: [360° PHOTO NEEDED]
-      needed: "",
+      needed: "[360° MISILE KOSHSHIYA]",
       scenes: {
         // EN: The main gate
-        gate: "",
+        gate: "Waanna kera panggaa",
         // EN: Inside Meeshsho Keettaa
-        meeshsho: "",
+        meeshsho: "Meeshsho Keettaa giddosuwaa",
         // EN: Inside Gulanttaa Keettaa
-        gulanttaa: "",
+        gulanttaa: "Gulanttaa Keettaa giddosuwaa",
         // EN: The great lawn
-        lawn: "",
+        lawn: "Gita maata sa'aa",
         // EN: The zigba trees
-        zigba: "",
+        zigba: "Zigbaa mittata",
       },
     },
     museum: {
       // EN: The Collection
-      eyebrow: "",
+      eyebrow: "Shiiquwaa",
       // EN: Objects Kept in the Cultural Houses
-      title: "",
+      title: "Aada Keettan Naagettida Meeshshata",
       // EN: Scroll to walk past them. Choose one to turn it around.
-      desc: "",
+      desc: "Entta xaleetti aadhdhanawu dirichcha. Issuwaa doorada yuushshada be'a.",
       // EN: Look closer
-      closer: "",
+      closer: "Matan xeella",
       // EN: [OBJECT MODEL NEEDED]
-      modelNeeded: "",
+      modelNeeded: "[MEESHSHA MISILE KOSHSHIYA]",
       // EN: [OBJECT STORY NEEDED]
-      storyNeeded: "",
+      storyNeeded: "[MEESHSHA TARIKI KOSHSHIYA]",
       items: {
         // EN: Grinding stone (wotta)
-        wotta: "",
+        wotta: "Wottaa",
         // EN: Tools for spinning and weaving cotton
-        cotton: "",
+        cotton: "Tooniyaanne maoyo oosuwaa miishshata",
         // EN: Household goods
-        household: "",
+        household: "Keetta giddosaa miishshata",
         // EN: Traditional instruments
-        instruments: "",
+        instruments: "Aada yettiya meeshshata",
       },
     },
     map: {
       // EN: Map of the Grounds
-      eyebrow: "",
+      eyebrow: "Gadiyaa Karttaa",
       // EN: Find Your Way Around
-      title: "",
+      title: "Ne Ogiyaa Garssaappe Demma",
       // EN: Choose a point to see what is there.
-      desc: "",
+      desc: "Yan de'iyaagaa be'anawu xiyaa doorada goottexxa.",
       // EN: [MAP LAYOUT NEEDED] The points are not yet in their true places.
-      layoutNeeded: "",
+      layoutNeeded: "[KARTTA GIIGISSO KOSHSHIYA] Xiyayti tumu sohuwan ha'i gakkanaas wodedibeenna.",
       // EN: See more
-      more: "",
+      more: "Aaruwa be'a",
       points: {
         // EN: The main gate
-        gate: "",
+        gate: "Waanna kera panggaa",
         // EN: Meeshsho Keettaa
-        meeshsho: "",
+        meeshsho: "Meeshsho Keettaa",
         // EN: Gulanttaa Keettaa
-        gulanttaa: "",
+        gulanttaa: "Gulanttaa Keettaa",
         // EN: The zigba trees
-        zigba: "",
+        zigba: "Zigbaa mittata",
       },
     },
   },

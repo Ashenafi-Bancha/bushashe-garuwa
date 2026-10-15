@@ -18,7 +18,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Meeting Hall
       eyebrow: "Shiiquwaa Gutaraa",
       // EN: A Hall for Your Gathering
-      title: "Shiiwuwawu Haniyaa Gutaraa",
+      title: "Shiiquwawu Haniyaa Gutaraa",
       // EN: A hall on the heritage grounds for meetings, trainings, weddings and family days, with food and coffee from our kitchen.
       desc: "Shiiquwawu, loohissuwawu, bullachchatuyyoonne so asaa gallassutussi haniyaa aaho sohoy nu kushiinan giigida qumaanne tukkiyaara.",
     },
