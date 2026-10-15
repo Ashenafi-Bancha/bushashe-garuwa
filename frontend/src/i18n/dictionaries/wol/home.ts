@@ -438,9 +438,9 @@ const page: DeepPartial<Dictionary> = {
         },
         crocodile: {
           // EN: Crocodile Pond & Wildlife
-          title: "Aazoy diyoo haattaanne Wora Do'ata",
+          title: "Hawulaashoy diyoo haattaanne Wora Do'ata",
           // EN: A properly fenced crocodile pond and an area where wild animals are cared for.
-          desc: "Loytti direttida aazoy diyoosa, qassikka wora do'ata naagiyoo sohuwa.",
+          desc: "Loytti direttida hawulaashoy diyoosa, qassikka wora do'ata naagiyoo sohuwa.",
         },
         fish: {
           // EN: Fish Pond

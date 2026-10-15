@@ -273,6 +273,7 @@ Decide these once and keep them the same everywhere.
 | Home                                        | Denddo; Suwa                                              | 
 | Learn more                                  | Aaruwa Eranawu                                            |
 | Living                                      | paxa de'iya                                               |
+| Meeting Hall                                | Shiiquwaa Gutaraa; (dubbushaa=public place), zabbaa       |
 | Mission                                     | Kiitaa                                                    |
 | Museum                                      | buqura keettaa                                            |
 | Page                                        | Sinttaa                                                   |

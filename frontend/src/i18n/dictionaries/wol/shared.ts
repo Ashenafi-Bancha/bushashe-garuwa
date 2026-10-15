@@ -46,7 +46,7 @@ const page: DeepPartial<Dictionary> = {
     // EN: Get Directions
     getDirections: "Ginaa Erite",
     // EN: We could not send your message. Please check your connection and try again, or call us.
-    formError: "Ne kiitaa yeddanawu danddayokko.Ane ne Intterneetee oottikko be'ada , zaarettada mala, woykko nuussi silkkiya shoca",
+    formError: "Ne kiitaa yeddanawu danddayibookko. Ane ne Intterneetee oottikko be'ada , zaarettada mala, woykko nuussi silkkiya shoca",
     // EN: Photo coming soon
     photoComingSoon: "Misilee matan Yees",
     // EN: Location
