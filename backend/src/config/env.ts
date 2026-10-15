@@ -45,6 +45,8 @@ const EnvSchema = z.object({
   SMTP_PASS: z.string().default(''),
   /** Who the emails come from */
   MAIL_FROM: z.string().default('Bushaashe Garuwa <info@bushaashegaruwa.com>'),
+  /** Where a guest's reply to one of those emails goes, when it should not be the MAIL_FROM address; empty for MAIL_FROM */
+  MAIL_REPLY_TO: z.string().trim().default(''),
   /** Where new bookings, visit requests and messages are announced to staff; empty to skip */
   STAFF_EMAIL: z.string().default(''),
   /** Folder that keeps a copy of every email while there is no mail server (development) */

@@ -26,7 +26,14 @@ export function smtpMailer(env: Env): Mailer {
   });
   return {
     async send(email) {
-      await transport.sendMail({ from: env.MAIL_FROM, to: email.to, subject: email.subject, html: email.html, text: email.text });
+      await transport.sendMail({
+        from: env.MAIL_FROM,
+        replyTo: env.MAIL_REPLY_TO || undefined,
+        to: email.to,
+        subject: email.subject,
+        html: email.html,
+        text: email.text,
+      });
     },
   };
 }
