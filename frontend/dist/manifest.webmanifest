@@ -1,0 +1,20 @@
+{
+  "name": "Bushaashe Garuwa",
+  "short_name": "Bushaashe Garuwa",
+  "description": "A living Wolaita heritage, culture and nature destination in Damot Sore, Wolaita Zone, Ethiopia.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#F4EFE4",
+  "theme_color": "#3F7D20",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon.png",
+      "type": "image/png"
+    }
+  ]
+}

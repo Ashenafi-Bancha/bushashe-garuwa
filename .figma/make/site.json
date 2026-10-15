@@ -1,14 +1,17 @@
 {
-  "description": "Bushaashe Garuwa is a living Wolaita heritage destination in Damot Sore Woreda, Wolaita Zone, Ethiopia: traditional houses, heritage trees, traditional food, Gifaataa celebrations, a guesthouse and a quiet reading place facing Mount Damota.",
+  "description": "Bushaashe Garuwa is a living Wolaita (Wolayta) heritage and nature destination in Damot Sore, Wolaita Zone, Ethiopia: cultural houses, traditional food, the Gifaataa festival, VIP family rooms and a meeting hall.",
   "robots": {
-    "index": false
+    "index": true
   },
   "accessibility": {
     "addBypassLinks": false,
     "ignoreReducedMotion": false
   },
-  "title": "Bushaashe Garuwa | Where Wolaita Heritage Lives",
+  "title": "Bushaashe Garuwa (ቡሻሼ ጋሯ) | Wolaita Heritage, Culture & Nature",
   "icons": {
     "icon": "/favicon.png"
+  },
+  "openGraph": {
+    "image": "https://bushaashegaruwa.com/og/home.jpg"
   }
 }

@@ -259,3 +259,91 @@ describe('serving the website from the same app', () => {
     assert.equal((await asset.text()).length, 'console.log("Bushaashe Garuwa");\n'.length * 400);
   });
 });
+
+describe('what search engines read about each page', () => {
+  let site = '';
+  let stop: () => Promise<void>;
+
+  before(async () => {
+    const folder = mkdtempSync(join(tmpdir(), 'bushaashe-seo-'));
+    writeFileSync(
+      join(folder, 'index.html'),
+      '<!doctype html><html><head><title>General</title><meta name="description" content="general"><meta name="robots" content="noindex, nofollow"><meta property="og:title" content="General"></head><body><div id="root"></div></body></html>',
+    );
+    writeFileSync(
+      join(folder, 'seo.json'),
+      JSON.stringify({
+        url: 'https://bushaashegaruwa.com',
+        name: 'Bushaashe Garuwa',
+        alternateNames: ['Bushashe Garuwa', 'ቡሻሼ ጋሯ'],
+        description: 'A Wolaita heritage place.',
+        image: '/og/home.jpg',
+        logo: '/apple-touch-icon.png',
+        telephone: '+251932196502',
+        email: 'bushaashegaruwa@gmail.com',
+        address: { streetAddress: 'Damot Sore Woreda', addressLocality: 'Gununo', addressRegion: 'Wolaita Zone', addressCountry: 'ET' },
+        plusCode: 'XP44+J6 Gununo',
+        maps: 'https://maps.example',
+        opens: '08:00',
+        closes: '18:00',
+        sameAs: [],
+        keywords: 'Wolaita',
+        noindex: ['/admin', '/preview'],
+        pages: [
+          { path: '/', title: 'Home title', description: 'Home words' },
+          { path: '/heritage', title: 'Heritage & houses', description: 'Heritage words "quoted" <b>', image: '/og/heritage.jpg', name: 'Heritage' },
+          { path: '/heritage/trees', title: 'Trees title', description: 'Trees words', name: 'Trees', parent: '/heritage' },
+        ],
+        sections: ['/heritage/'],
+      }),
+    );
+    const env = loadEnv({ NODE_ENV: 'test', WEB_DIST: folder });
+    const db = await openTestDatabase();
+    const server = createApp(env, db, { mailer: memoryMailer() }).listen(0);
+    await new Promise((resolve) => server.once('listening', resolve));
+    site = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    stop = async () => {
+      server.close();
+      await db.close();
+      rmSync(folder, { recursive: true, force: true });
+    };
+  });
+  after(() => stop());
+
+  it('gives each page its own title, description, address, preview photo and business details', async () => {
+    const res = await fetch(site + '/heritage/');
+    assert.equal(res.status, 200);
+    const html = await res.text();
+    assert.match(html, /<title>Heritage &amp; houses<\/title>/);
+    assert.match(html, /<meta name="description" content="Heritage words &quot;quoted&quot; &lt;b&gt;">/);
+    assert.match(html, /<link rel="canonical" href="https:\/\/bushaashegaruwa.com\/heritage">/);
+    assert.match(html, /<meta property="og:image" content="https:\/\/bushaashegaruwa.com\/og\/heritage.jpg">/);
+    assert.match(html, /<meta name="robots" content="index, follow/);
+    assert.doesNotMatch(html, /General|noindex/, 'the general lines are replaced, not added to');
+    const data = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)![1]!);
+    const place = data['@graph'].find((item: { '@type': string[] }) => Array.isArray(item['@type']));
+    assert.equal(place.name, 'Bushaashe Garuwa');
+    assert.deepEqual(place.alternateName, ['Bushashe Garuwa', 'ቡሻሼ ጋሯ']);
+    assert.equal(place.address.addressCountry, 'ET');
+  });
+
+  it('shows sub-pages as the page above them, with a breadcrumb trail', async () => {
+    const trees = await (await fetch(site + '/heritage/trees')).text();
+    assert.match(trees, /<title>Trees title<\/title>/);
+    const crumbs = JSON.parse(trees.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)![1]!)['@graph'][2].breadcrumb.itemListElement;
+    assert.deepEqual(crumbs.map((c: { name: string }) => c.name), ['Bushaashe Garuwa', 'Heritage', 'Trees']);
+    const houses = await (await fetch(site + '/heritage/houses')).text();
+    assert.match(houses, /<link rel="canonical" href="https:\/\/bushaashegaruwa.com\/heritage">/);
+  });
+
+  it('keeps the staff area out of search results, and says 404 for an address that is no page', async () => {
+    const admin = await fetch(site + '/admin');
+    assert.equal(admin.status, 200);
+    assert.match(await admin.text(), /noindex/);
+    const missing = await fetch(site + '/no-such-page');
+    assert.equal(missing.status, 404);
+    const body = await missing.text();
+    assert.match(body, /Page not found/);
+    assert.match(body, /<div id="root">/, 'still the website, which then shows its own "page not found"');
+  });
+});

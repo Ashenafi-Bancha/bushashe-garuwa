@@ -3,6 +3,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BackButton from './components/BackButton';
+import SeoHead from './seo/SeoHead';
 import Home from './pages/Home';
 import Discover from './pages/Discover';
 import Heritage from './pages/Heritage';
@@ -49,6 +50,7 @@ function AppLayout() {
     <div className="min-h-screen bg-[#F4EFE4]">
       {/* a thin line across the top: how far down the page you are */}
       <div id="scroll-progress" aria-hidden="true" className="fixed top-0 inset-x-0 z-[60] h-[3px] origin-left scale-x-0 bg-[#3F7D20]" />
+      <SeoHead />
       <Navbar />
       <BackButton />
       <PageTransition>

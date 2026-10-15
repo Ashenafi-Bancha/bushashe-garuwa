@@ -95,9 +95,9 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const t = useMemo(() => applyOverrides(dictionaries[lang], overrides), [lang, overrides]);
 
   useEffect(() => {
+    // the tab title follows the page too, so it is set in seo/SeoHead.tsx
     document.documentElement.lang = HTML_LANG[lang];
-    document.title = t.meta.title;
-  }, [lang, t]);
+  }, [lang]);
 
   const value = useMemo(() => ({ lang, t, setLanguage }), [lang, t, setLanguage]);
 

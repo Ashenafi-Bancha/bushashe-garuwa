@@ -5,6 +5,8 @@ import path from 'node:path'
 
 // Site title, description and icons live with the Figma Make settings at the repository root
 import siteConfiguration from '../.figma/make/site.json'
+// What search engines read about each page: titles, descriptions, sitemap
+import seoSite from './src/seo/site.json'
 
 // Vite config — https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
@@ -24,6 +26,7 @@ export default defineConfig(({ mode }) => {
       react(),
       tailwindcss(),
       figmaSiteConfiguration(siteConfiguration),
+      seoFiles(seoSite),
       figmaErrorOverlayReplay(),
       figmaReactRefreshBoundaryFallback(),
       figmaMakeKitPlugin({ storiesGlob: '/src/**/*.stories.{ts,tsx,js,jsx}' }),
@@ -78,6 +81,50 @@ type FigmaSiteConfiguration = {
   }
   accessibility?: {
     addBypassLinks?: boolean
+  }
+}
+
+type SeoSiteFile = {
+  url: string
+  noindex: string[]
+  pages: { path: string; image?: string; priority?: string }[]
+}
+
+/**
+ * Writes what search engines need beside the built website:
+ * seo.json (read by the API to write each page's <head>), sitemap.xml (every
+ * page, with its photograph) and robots.txt (everything may be read except the
+ * staff area and the pages under review).
+ */
+function seoFiles(site: SeoSiteFile): Plugin {
+  const today = new Date().toISOString().slice(0, 10)
+  const sitemap = [
+    '<?xml version="1.0" encoding="UTF-8"?>',
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">',
+    ...site.pages.map((page) =>
+      [
+        '  <url>',
+        `    <loc>${site.url}${page.path === '/' ? '/' : page.path}</loc>`,
+        `    <lastmod>${today}</lastmod>`,
+        `    <changefreq>${page.path === '/' || page.path === '/events' ? 'weekly' : 'monthly'}</changefreq>`,
+        `    <priority>${page.priority ?? '0.5'}</priority>`,
+        ...(page.image ? ['    <image:image>', `      <image:loc>${site.url}${page.image}</image:loc>`, '    </image:image>'] : []),
+        '  </url>',
+      ].join('\n'),
+    ),
+    '</urlset>',
+    '',
+  ].join('\n')
+  const robots = ['User-agent: *', 'Allow: /', ...site.noindex.map((path) => `Disallow: ${path}`), 'Disallow: /api/', '', `Sitemap: ${site.url}/sitemap.xml`, ''].join('\n')
+
+  return {
+    name: 'bushaashe-seo-files',
+    apply: 'build',
+    generateBundle() {
+      this.emitFile({ type: 'asset', fileName: 'seo.json', source: JSON.stringify(site) })
+      this.emitFile({ type: 'asset', fileName: 'sitemap.xml', source: sitemap })
+      this.emitFile({ type: 'asset', fileName: 'robots.txt', source: robots })
+    },
   }
 }
 
