@@ -180,6 +180,17 @@ export default function About() {
             <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed">{a.lineage.desc}</p>
           </div>
 
+          {/* the family today */}
+          <figure className="bg-white rounded-[2rem] p-2.5 elev-1 mb-12">
+            <div className="rounded-[1.5rem] overflow-hidden aspect-[3/2] sm:aspect-[21/9]">
+              <img {...picture(photos.family)} alt={t.photos.family} loading="lazy" className="w-full h-full object-cover object-[center_30%]" />
+            </div>
+            <figcaption className="px-4 py-4 sm:px-5">
+              <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions.family.title}</span>
+              <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions.family.desc}</span>
+            </figcaption>
+          </figure>
+
           <div className="relative">
             {/* connecting line */}
             <div className="hidden lg:block absolute top-[76px] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-[#C4622D]/80 via-[#C4622D]/40 to-[#C4622D]/80" />

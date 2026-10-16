@@ -61,7 +61,7 @@ export default function MeetingHall() {
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <h2 id="hall-photos" className="font-display text-3xl sm:text-4xl font-extrabold text-[#13261A] leading-tight mb-8 sm:mb-10">{m.photosTitle}</h2>
           <div data-wave className="grid md:grid-cols-3 gap-5 sm:gap-6">
-            {(['meetingHall', 'eventGathering', 'eventCelebration'] as const).map((key) => (
+            {(['meetingHall', 'hallAndBar', 'eventGathering'] as const).map((key) => (
               <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
                 <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
                   <img {...picture(photos[key], '(max-width: 767px) 100vw, 33vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />

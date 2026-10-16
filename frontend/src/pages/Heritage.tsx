@@ -9,8 +9,8 @@ import PageHero from '../components/PageHero';
 const categories: { id: keyof Dictionary['heritage']['categories']; img?: string; to: string }[] = [
   { id: 'houses', img: photos.meeshsho, to: '/heritage/houses' },
   { id: 'trees', img: photos.enset, to: '/heritage/trees' },
-  { id: 'spices', to: '/heritage/spices' },
-  { id: 'animals', img: photos.bird, to: '/heritage/animals' },
+  { id: 'spices', img: photos.herbs, to: '/heritage/spices' },
+  { id: 'animals', img: photos.deer, to: '/heritage/animals' },
   { id: 'crocodile', to: '/heritage/crocodile' },
   { id: 'artifacts', to: '/heritage/artifacts' },
   { id: 'food', img: photos.food, to: '/dine' },
@@ -124,7 +124,7 @@ export default function Heritage() {
         <p className="mt-5 text-center text-[#1E3A29]/55 text-sm px-5">{hg.trees.qr}</p>
       </section>
 
-      {/* Living nature: a bird of the grounds and the plants along the paths */}
+      {/* Living nature: the plants, the farm and the animals of the grounds */}
       <section id="nature" className="pt-12 sm:pt-16 lg:pt-24" aria-labelledby="nature-title">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mb-8 sm:mb-10">
@@ -132,8 +132,8 @@ export default function Heritage() {
             <h2 id="nature-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1E3A29] leading-[1.05] mb-3">{hg.nature.title}</h2>
             <p className="text-[#1E3A29]/70 leading-relaxed">{hg.nature.desc}</p>
           </div>
-          <div data-wave className="grid md:grid-cols-2 gap-5 sm:gap-6">
-            {(['gardenPlant', 'bird'] as const).map((key) => (
+          <div data-wave className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+            {(['herbs', 'banana', 'gardenPlant', 'farm', 'deer', 'bird'] as const).map((key) => (
               <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
                 <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
                   <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />

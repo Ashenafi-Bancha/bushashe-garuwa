@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { photos, picture } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
@@ -94,6 +95,17 @@ export default function Dine() {
               </dl>
             </div>
           </div>
+
+          {/* the bar itself */}
+          <figure className="bg-white rounded-[2rem] p-2.5 elev-1 mb-5 sm:mb-6">
+            <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[4/3] sm:aspect-[21/9]">
+              <img {...picture(photos.bar)} alt={t.photos.bar} loading="lazy" className="w-full h-full object-cover object-[center_55%]" />
+            </div>
+            <figcaption className="px-4 py-4 sm:px-5">
+              <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions.bar.title}</span>
+              <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions.bar.desc}</span>
+            </figcaption>
+          </figure>
 
           {/* the drinks: cultural ones and modern ones, each in its own card */}
           <div className="grid md:grid-cols-2 gap-5 sm:gap-6">

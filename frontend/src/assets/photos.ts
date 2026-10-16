@@ -51,6 +51,15 @@ import vipShowerImg from './photos/vip-rooms/bath-room.webp';
 import vipBasinImg from './photos/vip-rooms/bath1.webp';
 import vipToiletImg from './photos/vip-rooms/toilet-in-rest-room.webp';
 
+// added October 2026: animals, farm, hall and bar, the family, plants
+import deerImg from './photos/animals/deer-at-bushaashe-garuwa.webp';
+import farmImg from './photos/grounds/4-hectar-farm-land.webp';
+import hallAndBarImg from './photos/meeting-hall/bar-and-meeting-hall-area.webp';
+import familyImg from './photos/people/bushaashe-about-us-family.webp';
+import barImg from './photos/restaurant-bar/bar.webp';
+import bananaImg from './photos/trees-plants/banana.webp';
+import herbsImg from './photos/trees-plants/herbs-and-ingredients.webp';
+
 export const photos = {
   /** The main gate: carved tree-trunk pillars, the welcome sign and the bamboo doors (landscape) */
   gate: gateImg,
@@ -106,6 +115,20 @@ export const photos = {
   eventCelebration: eventCelebrationImg,
   /** Guests playing with a ball on the lawn, laughing (landscape) */
   eventGames: eventGamesImg,
+  /** A young deer with large ears in the grass of the lawn (portrait) */
+  deer: deerImg,
+  /** The farm building with its green roof among banana, enset and young trees on the four-hectare farm (landscape) */
+  farm: farmImg,
+  /** The bamboo meeting hall with its green roof beside the round thatched bar, along the stone path (portrait) */
+  hallAndBar: hallAndBarImg,
+  /** Members of the family in traditional dress on the lawn (landscape) */
+  family: familyImg,
+  /** The bar: a round thatched house with glass walls and lanterns, on the lawn (portrait) */
+  bar: barImg,
+  /** Banana plants with a bunch of green fruit in the red earth (portrait) */
+  banana: bananaImg,
+  /** The herb garden: herbs and flowering plants along the stone path (landscape) */
+  herbs: herbsImg,
 } as const;
 
 export type PhotoKey = keyof typeof photos;

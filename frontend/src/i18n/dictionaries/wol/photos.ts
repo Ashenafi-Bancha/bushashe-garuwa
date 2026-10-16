@@ -58,6 +58,20 @@ const page: DeepPartial<Dictionary> = {
     food: "",
     // EN: The row of zigba trees at Bushaashe Garuwa, planted by the forefathers of the family
     zigba: "",
+    // EN: A young deer with large ears standing in the grass on the lawn at Bushaashe Garuwa
+    deer: "",
+    // EN: The farm building with a green roof among banana, enset and young trees on the four-hectare farm of Bushaashe Garuwa
+    farm: "",
+    // EN: The bamboo meeting hall with a green roof beside the round thatched bar, along a stone path through the gardens of Bushaashe Garuwa
+    hallAndBar: "",
+    // EN: Members of the Bushaashe family in traditional dress on the lawn at Bushaashe Garuwa
+    family: "",
+    // EN: The bar at Bushaashe Garuwa: a round house with a thatched roof, glass walls and lanterns, on the lawn among flowers
+    bar: "",
+    // EN: Banana plants with a bunch of green bananas growing in the red earth at Bushaashe Garuwa
+    banana: "",
+    // EN: The herb garden at Bushaashe Garuwa: herbs and flowering plants beside a stone path
+    herbs: "",
     // EN: Plants with red and green leaves along a path at Bushaashe Garuwa, beside a thatched house and young trees
     gardenPlant: "",
     // EN: A pigeon with a white head and a purple sheen on its neck, perched on the edge of a roof at Bushaashe Garuwa
@@ -141,6 +155,48 @@ const page: DeepPartial<Dictionary> = {
       // EN: The Zigba Trees
       title: "",
       // EN: Zigba trees planted by the forefathers of the family, standing in a row like a peaceful procession.
+      desc: "",
+    },
+    deer: {
+      // EN: A Young Deer on the Lawn
+      title: "",
+      // EN: One of the animals of the grounds, ears up, listening in the green grass.
+      desc: "",
+    },
+    farm: {
+      // EN: The Four-Hectare Farm
+      title: "",
+      // EN: Bananas, enset and young trees stretch across four hectares of farmland around the farm building.
+      desc: "",
+    },
+    hallAndBar: {
+      // EN: The Meeting Hall and the Bar
+      title: "",
+      // EN: The bamboo hall and the round, thatched bar stand side by side along the garden path.
+      desc: "",
+    },
+    family: {
+      // EN: The Family
+      title: "",
+      // EN: Members of the family that keeps Bushaashe Garuwa, in traditional dress on the lawn.
+      desc: "",
+    },
+    bar: {
+      // EN: The Bar
+      title: "",
+      // EN: A round, thatched house with glass walls and warm lanterns, looking out over the lawn and the flowers.
+      desc: "",
+    },
+    banana: {
+      // EN: The Banana Grove
+      title: "",
+      // EN: Banana plants heavy with green fruit grow in rows in the red earth.
+      desc: "",
+    },
+    herbs: {
+      // EN: The Herb Garden
+      title: "",
+      // EN: Herbs for the kitchen and bright flowers grow side by side along the stone path.
       desc: "",
     },
     gardenPlant: {
