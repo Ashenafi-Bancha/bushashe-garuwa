@@ -90,7 +90,7 @@ const SOCIAL = [
   },
 ];
 
-export default function SocialLinks({ dark = true, small = false }: { dark?: boolean; small?: boolean }) {
+export default function SocialLinks({ dark = true, small = false, onGreen = false }: { dark?: boolean; small?: boolean; /** on the green footer: each logo on a small white ring, so its colours read */ onGreen?: boolean }) {
   return (
     <div className={`flex flex-wrap items-center ${small ? 'gap-2' : 'gap-3'}`}>
       {SOCIAL.filter((s) => s.href).map((s) => (
@@ -101,7 +101,7 @@ export default function SocialLinks({ dark = true, small = false }: { dark?: boo
           rel="noopener noreferrer"
           aria-label={s.name}
           title={s.name}
-          className={`block ${small ? 'w-9 h-9' : 'w-10 h-10'} rounded-xl transition-all duration-300 hover:-translate-y-1 ${
+          className={`block ${small ? 'w-9 h-9' : 'w-10 h-10'} ${onGreen ? 'bg-white rounded-full p-[3px]' : 'rounded-xl'} transition-all duration-300 hover:-translate-y-1 ${
             dark ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.5)]' : 'shadow-[0_6px_16px_-8px_rgba(15,26,22,0.35)]'
           } hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.45)]`}
         >
