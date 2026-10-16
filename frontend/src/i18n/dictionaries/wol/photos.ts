@@ -56,7 +56,7 @@ const page: DeepPartial<Dictionary> = {
     enset: "",
     // EN: Traditional Wolaita dishes served in woven baskets inside a cultural house at Bushaashe Garuwa
     food: "",
-    // EN: The row of zigba trees at Bushaashe Garuwa, planted by the forefathers of the family
+    // EN: The row of zigba trees at Bushaashe Garuwa, planted by Garedew, son of Alambo
     zigba: "",
     // EN: A young deer with large ears standing in the grass on the lawn at Bushaashe Garuwa
     deer: "",
@@ -154,7 +154,7 @@ const page: DeepPartial<Dictionary> = {
     zigba: {
       // EN: The Zigba Trees
       title: "",
-      // EN: Zigba trees planted by the forefathers of the family, standing in a row like a peaceful procession.
+      // EN: Zigba trees planted by Garedew, standing in a long, even line like a peaceful procession.
       desc: "",
     },
     deer: {

@@ -113,10 +113,10 @@ const page: DeepPartial<Dictionary> = {
         zigba: {
           // EN: Zigba (African Yellowwood)
           name: "Zigaa",
-          // EN: Planted by our forefathers and the current generation
-          age: "Nu mayzza aawatuuninne ha\"i yeletan tokettidaagaa",
-          // EN: The zigba trees stand in a long line across the grounds. Our forefathers planted the first of them, the family has protected them ever since, and the current generation keeps planting new ones beside them.
-          sig: "Zigaa mittati gibbiyaa giddon adussa yafaran eqqidosona. Koyro tokkiday nu mayzza aawata, he wodiyaappe doommidi keettaa asay naagi oyqqiis, ha\"i yeletay qassi ooratta zigata eta miyyiyan tokkiiddi de'ees.",
+          // EN: Planted by Garedew · Cared for by his children today
+          age: "",
+          // EN: The zigba trees stand in a long, even line across the grounds. Garedew planted them by measure and watered them with water brought from the river, so that travellers passing by could rest in their shade. His children care for them today and keep planting new ones beside them.
+          sig: "",
         },
       },
       // EN: Scan QR codes on-site to discover each tree's full story
