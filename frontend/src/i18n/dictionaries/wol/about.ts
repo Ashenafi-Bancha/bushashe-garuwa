@@ -177,7 +177,7 @@ const page: DeepPartial<Dictionary> = {
           generation: "",
           // EN: 
           period: "",
-          // EN: Alambo received the land from his father Bushaashe as an adera, a sacred trust, and he carried that trust through hard times. In the days of Emperor Haile Selassie, Alambo was imprisoned in Addis Ababa, far from his home and far from the grounds he had promised to keep. His son Garedew did not wait for news to reach him. He set out on foot to see his father. The road to Addis Ababa was long: on the way he stopped for the night in Silte, then walked on, and on the second day he reached Addis Ababa. That journey is still told in the family today: a son's devotion to his father, and the same faithfulness that has kept Bushaashe Garuwa from one generation to the next.
+          // EN: Alambo, son of Bushaashe, received from his father both the land and its history, and with them the culture of Wolaita. He was a great father, who gave his life to keeping that inheritance whole and passing it on to the generations after him. His faithfulness was tested. In the days of Emperor Haile Selassie, Alambo was imprisoned in Addis Ababa, and there he remained for six years. After six years he was brought before the Emperor himself to plead his case. He spoke boldly, and it was said that he had defied the King. He was sentenced to six more years, and taken from Addis Ababa to Wollo, to be held at Were Ilu. Twelve years in all, far from Wolaita and from the grounds he had promised to keep. Yet he was never forgotten at home: through all those years his son Garedew walked the long roads to see him. Through it all, the trust Alambo had received from Bushaashe held fast, and it passed on to the next generation.
           story: "",
         },
         garedew: {
@@ -187,7 +187,7 @@ const page: DeepPartial<Dictionary> = {
           generation: "",
           // EN: 
           period: "",
-          // EN: 
+          // EN: Garedew was Alambo's beloved son, and the long years of his father's imprisonment showed what kind of son he was. When Alambo was held in Addis Ababa, no cars ran on the road from Wolaita. Garedew went on foot. He walked for a whole day, stopped for the night in Silte, and reached Addis Ababa on the second day. Again and again he made that journey to visit his father. When Alambo was taken to Were Ilu in Wollo, the road grew longer still. Garedew walked it too, sleeping along the way, and for the journey he made and sewed his own shoes by hand. He never went empty-handed. He carried money north and came home with mules to sell in Wolaita, for the family were mule traders too. His love for his father and his work for his family travelled the same road.
           story: "",
         },
         current: {
