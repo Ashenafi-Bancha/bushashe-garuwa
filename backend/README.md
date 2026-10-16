@@ -123,7 +123,7 @@ falls back to English), plus a notice to the staff inbox:
   being sent, which is handy while developing.
 - `pnpm email:preview` writes every email, filled with sample details, to
   `data/email-previews/` so the designs can be checked in a browser.
-- For `info@bushaashegaruwa.com`, set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER` and `SMTP_PASS`
+- To send as `noreply@bushaashegaruwa.com` (replies go to `MAIL_REPLY_TO`, the Gmail inbox by default), set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER` and `SMTP_PASS`
   to the values from the mail provider (Google Workspace, Zoho, or the hosting company).
 
 ## Protection
