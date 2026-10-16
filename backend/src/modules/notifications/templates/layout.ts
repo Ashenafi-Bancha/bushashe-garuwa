@@ -179,7 +179,7 @@ export function frame(input: FrameInput): string {
     .filter((s) => s.url)
     .map(
       (s) =>
-        `<td style="padding:0 7px;"><a href="${escape(s.url)}" target="_blank" style="text-decoration:none;"><img src="${site}${s.icon}" width="32" height="32" alt="${s.name}" style="display:block;width:32px;height:32px;border:0;outline:none;" /></a></td>`,
+        `<td style="padding:0 6px;"><table role="presentation" cellpadding="0" cellspacing="0"><tr><td style="background:#FFFFFF;border-radius:50%;padding:3px;"><a href="${escape(s.url)}" target="_blank" style="text-decoration:none;"><img src="${site}${s.icon}" width="32" height="32" alt="${s.name}" style="display:block;width:32px;height:32px;border:0;outline:none;" /></a></td></tr></table></td>`,
     )
     .join('');
 
@@ -214,7 +214,6 @@ export function frame(input: FrameInput): string {
       .t-ink { color:#F4EFE4 !important; }
       .t-body { color:#D5DDD1 !important; }
       .t-muted { color:#A9B5A6 !important; }
-      .foot { color:#A9B5A6 !important; }
       .ref { background:#0E1A12 !important; border:1px solid #3F7D20 !important; }
       .bg-soft td, .rule { border-color:#2F4636 !important; }
     }
@@ -242,23 +241,24 @@ export function frame(input: FrameInput): string {
 
           <!-- the card -->
           <tr>
-            <td class="bg-card px" style="background:#FFFFFF;border-radius:0 0 24px 24px;padding:34px 40px 34px;box-shadow:0 18px 40px -28px rgba(19,38,26,0.35);">
+            <td class="bg-card px" style="background:#FFFFFF;padding:34px 40px 34px;">
               ${input.body}
             </td>
           </tr>
 
-          <!-- footer -->
+          <!-- footer: in the green of the website's buttons, the words in white -->
           <tr>
-            <td align="center" style="padding:28px 16px 8px;">
-              ${icons ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 14px;"><tr>${icons}</tr></table>` : ''}
-              <div class="foot" style="font-family:${font};font-size:13px;line-height:1.75;color:${C.muted};">
-                <a href="${site}" target="_blank" style="color:${C.green};font-weight:700;text-decoration:none;">${site.replace(/^https?:\/\//, '')}</a><br />
+            <td align="center" bgcolor="${C.green}" style="background:${C.green};border-radius:0 0 24px 24px;padding:28px 24px 26px;">
+              ${icons ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 16px;"><tr>${icons}</tr></table>` : ''}
+              <div style="font-family:${font};font-size:13px;line-height:1.8;color:#FFFFFF;">
+                <a href="${site}" target="_blank" style="color:#FFFFFF;font-weight:700;text-decoration:underline;">${site.replace(/^https?:\/\//, '')}</a><br />
                 ${BRAND.contact.address[lang]}<br />
                 &copy; ${year} ${BRAND.name}<br />
-                <span style="font-size:12px;color:#9AA597;">${input.note}</span>
+                <span style="font-size:12px;color:#FFFFFF;opacity:0.85;">${input.note}</span>
               </div>
             </td>
           </tr>
+          <tr><td style="height:12px;line-height:12px;font-size:0;">&nbsp;</td></tr>
         </table>
         <!--[if mso]></td></tr></table><![endif]-->
       </td>
