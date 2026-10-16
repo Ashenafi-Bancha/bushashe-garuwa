@@ -34,6 +34,7 @@ export function smtpMailer(env: Env): Mailer {
         html: email.html,
         text: email.text,
       });
+      logger.info('mail: sent', { kind: email.kind, to: email.to });
     },
   };
 }
@@ -66,5 +67,6 @@ export function memoryMailer(): Mailer & { sent: Email[] } {
 }
 
 export function mailerFor(env: Env): Mailer {
+  logger.info(env.SMTP_HOST ? `mail: sending through ${env.SMTP_HOST} as ${env.MAIL_FROM}` : 'mail: no SMTP_HOST, so emails are saved to the outbox');
   return env.SMTP_HOST ? smtpMailer(env) : outboxMailer(env.MAIL_OUTBOX);
 }
