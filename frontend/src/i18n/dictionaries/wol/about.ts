@@ -43,8 +43,8 @@ const page: DeepPartial<Dictionary> = {
       generations: "Yeletata",
       // EN: Years of Heritage
       years: "Buquraa Wodiya",
-      // EN: Since the 18th century
-      since: "18ntto Xeetu Layttaappe doommidi",
+      // EN: Since before the 18th century
+      since: "",
     },
     purpose: {
       // EN: Our Purpose
@@ -129,8 +129,8 @@ const page: DeepPartial<Dictionary> = {
       eyebrow: "So Asaa Yeletaa Yafaraa",
       // EN: From Bushaashe to Today
       title: "Bushaasheppe doommidi Hachchi gakkanawu",
-      // EN: Bushaashe Garuwa bears the name of Bushaashe, the first father of this line. His story continued through Alambo and Garedew, and lives on today in the family that cares for the grounds. Choose a name to read their history.
-      desc: "Bushaashe Garoy ha so asaa yeletaa yafaran koyro aawa gidida Bushaashe sunttan xeesettes. A taarikee Alambbanne Garedewura kanttida, hachchi qassi gibbiyaa kaalli xeelliyaa keettaa asatun de'ees. Etu taarikiyaa nabbabanawu sunttaa doorite.",
+      // EN: Bushaashe Garuwa bears the name of Bushaashe, who kept the land and the ways of the forefathers who came before him. His story continued through Alambo and Garedew, and lives on today in the family that cares for the grounds. Choose a name to read their history.
+      desc: "",
       // EN: The family is writing this history now. It will be published here soon.
       pending: "So asay ha taarikiyaa xuufiyan giigissiiddi de'oosona. Mata wodiya wuriyoode hagan wottana.",
       // EN: The Children of Bushaashe
@@ -163,18 +163,18 @@ const page: DeepPartial<Dictionary> = {
         bushaashe: {
           // EN: Bushaashe
           name: "Bushaasha",
-          // EN: First generation · The founder
-          generation: "Koyro Yeletaa · Baasidaagaa",
-          // EN: 18th century
-          period: "18ntto Xeetu Layttaa",
+          // EN: The place bears his name
+          generation: "",
+          // EN: 
+          period: "",
           // EN: Long before visitors came to walk its paths, there was Bushaashe, and this place still carries his name. From his forefathers he received more than land. He received a way of life: the houses they built, the trees they planted, the words, the songs and the customs of Wolaita. In a time when such things could easily have slipped away, Bushaashe held them close. He was a strong man and a steadfast keeper of culture, and under his hand the grounds we now call Bushaashe Garuwa were tended, protected and kept whole. Yet his greatest work was not only what he kept, but whom he taught. Around him grew a large family, and to each of his children he gave the same lesson: what our fathers left us is not ours to lose. Keep it. Live by it. Carry it forward. When the time came, Bushaashe placed the land in the hands of his son Alambo, not as a gift alone, but as an adera: a sacred trust, to guard the place, to honour the forefathers and to hand it on whole. Every generation since has lived by that trust, and every visitor who walks through the gate today walks into its story.
           story: "",
         },
         alambo: {
           // EN: Alambo
           name: "Alambba",
-          // EN: Second generation
-          generation: "Naa\"antto Yeletaa",
+          // EN: Son of Bushaashe · Received the trust
+          generation: "",
           // EN: 
           period: "",
           // EN: 
@@ -183,8 +183,8 @@ const page: DeepPartial<Dictionary> = {
         garedew: {
           // EN: Garedew
           name: "Garedew",
-          // EN: Third generation
-          generation: "Heezzantto Yeletaa",
+          // EN: The generation after Alambo
+          generation: "",
           // EN: 
           period: "",
           // EN: 

@@ -205,7 +205,7 @@ export const en = {
       slide: 'Slide {n}',
       statGenerations: 'Generations',
       statYears: 'Years of heritage',
-      sinceCentury: 'Since the 18th century',
+      sinceCentury: 'Since before the 18th century',
       badge: 'WOLAITA · HERITAGE · NATURE · CULTURE · ',
       next: 'Next photograph',
       walk: 'Walk the land of our forefathers',
@@ -249,7 +249,7 @@ export const en = {
     marquee: ['Heritage', 'Nature', 'Culture', 'Food', 'Gifaataa', 'Stay'],
     facts: {
       items: [
-        { value: '18th c.', label: 'Where the story begins' },
+        { value: '300+', label: 'Years of family history' },
         { value: '1940s', label: 'First cultural houses built' },
         { value: '4+', label: 'Generations of the family' },
         { value: '2', label: 'Traditional Wolaita houses' },
@@ -289,7 +289,7 @@ export const en = {
       eyebrow: 'Our History',
       title: 'A Journey Through Time',
       items: [
-        { period: 'The 1700s', label: 'Roots', desc: "The family's story in the Wolaita highlands begins in the 18th century." },
+        { period: 'Before 1700', label: 'Roots', desc: "The family's story in the Wolaita highlands begins before the 18th century." },
         { period: '1940s', label: 'First Houses', desc: 'Cultural houses built; heritage trees planted.' },
         { period: '1970s', label: 'Preservation', desc: 'Oral histories and artifacts formally documented.' },
         { period: '1995', label: 'Oral histories', desc: 'Elders recorded, and their stories written down.' },
@@ -423,7 +423,7 @@ export const en = {
       festival: 'Bushaashe Garuwa is also a gathering place for the region: it hosts cultural celebrations, including the eve of Gifaataa, the traditional New Year festival of the Wolaita people.',
       generations: 'Generations',
       years: 'Years of Heritage',
-      since: 'Since the 18th century',
+      since: 'Since before the 18th century',
     },
     purpose: {
       eyebrow: 'Our Purpose',
@@ -453,7 +453,7 @@ export const en = {
     lineage: {
       eyebrow: 'The Family Line',
       title: 'From Bushaashe to Today',
-      desc: 'Bushaashe Garuwa bears the name of Bushaashe, the first father of this line. His story continued through Alambo and Garedew, and lives on today in the family that cares for the grounds. Choose a name to read their history.',
+      desc: 'Bushaashe Garuwa bears the name of Bushaashe, who kept the land and the ways of the forefathers who came before him. His story continued through Alambo and Garedew, and lives on today in the family that cares for the grounds. Choose a name to read their history.',
       pending: 'The family is writing this history now. It will be published here soon.',
       childrenTitle: 'The Children of Bushaashe',
       ancestorsTitle: 'The Generations Before Bushaashe',
@@ -461,9 +461,9 @@ export const en = {
       /** oldest first; shown with arrows leading to Bushaashe */
       ancestors: [] as string[],
       people: {
-        bushaashe: { name: 'Bushaashe', generation: 'First generation · The founder', period: '18th century', story: 'Long before visitors came to walk its paths, there was Bushaashe, and this place still carries his name.\n\nFrom his forefathers he received more than land. He received a way of life: the houses they built, the trees they planted, the words, the songs and the customs of Wolaita. In a time when such things could easily have slipped away, Bushaashe held them close. He was a strong man and a steadfast keeper of culture, and under his hand the grounds we now call Bushaashe Garuwa were tended, protected and kept whole.\n\nYet his greatest work was not only what he kept, but whom he taught. Around him grew a large family, and to each of his children he gave the same lesson: what our fathers left us is not ours to lose. Keep it. Live by it. Carry it forward.\n\nWhen the time came, Bushaashe placed the land in the hands of his son Alambo, not as a gift alone, but as an adera: a sacred trust, to guard the place, to honour the forefathers and to hand it on whole. Every generation since has lived by that trust, and every visitor who walks through the gate today walks into its story.' },
-        alambo: { name: 'Alambo', generation: 'Second generation', period: '', story: '' },
-        garedew: { name: 'Garedew', generation: 'Third generation', period: '', story: '' },
+        bushaashe: { name: 'Bushaashe', generation: 'The place bears his name', period: '', story: 'Long before visitors came to walk its paths, there was Bushaashe, and this place still carries his name.\n\nFrom his forefathers he received more than land. He received a way of life: the houses they built, the trees they planted, the words, the songs and the customs of Wolaita. In a time when such things could easily have slipped away, Bushaashe held them close. He was a strong man and a steadfast keeper of culture, and under his hand the grounds we now call Bushaashe Garuwa were tended, protected and kept whole.\n\nYet his greatest work was not only what he kept, but whom he taught. Around him grew a large family, and to each of his children he gave the same lesson: what our fathers left us is not ours to lose. Keep it. Live by it. Carry it forward.\n\nWhen the time came, Bushaashe placed the land in the hands of his son Alambo, not as a gift alone, but as an adera: a sacred trust, to guard the place, to honour the forefathers and to hand it on whole. Every generation since has lived by that trust, and every visitor who walks through the gate today walks into its story.' },
+        alambo: { name: 'Alambo', generation: 'Son of Bushaashe · Received the trust', period: '', story: '' },
+        garedew: { name: 'Garedew', generation: 'The generation after Alambo', period: '', story: '' },
         current: { name: 'The Current Generation', generation: 'Today · Commissioner Fiseha Garedew and family', period: '', story: '' },
       },
     },

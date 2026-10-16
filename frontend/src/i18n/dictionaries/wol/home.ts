@@ -37,8 +37,8 @@ const page: DeepPartial<Dictionary> = {
       statGenerations: "Yeletata",
       // EN: Years of heritage
       statYears: "Buqura Layttata",
-      // EN: Since the 18th century
-      sinceCentury: "18tto Xeetu Layttaappe Doommidi",
+      // EN: Since before the 18th century
+      sinceCentury: "",
       // EN: WOLAITA · HERITAGE · NATURE · CULTURE · 
       badge: "WOLAYTTA · BUQURAA · MERETAA · WOGAA",
       // EN: Next photograph
@@ -131,9 +131,9 @@ const page: DeepPartial<Dictionary> = {
     facts: {
       items: [
         {
-          // EN: 18th c.
-          value: "18tto XL.",
-          // EN: Where the story begins
+          // EN: 300+
+          value: "",
+          // EN: Years of family history
           label: "Taarikiya dendduwa",
         },
         {
@@ -261,12 +261,12 @@ const page: DeepPartial<Dictionary> = {
       title: "Wodiyan Hemettiyoogaa",
       items: [
         {
-          // EN: The 1700s
-          period: "1700 layttatun",
+          // EN: Before 1700
+          period: "",
           // EN: Roots
           label: "Dendduwa",
-          // EN: The family's story in the Wolaita highlands begins in the 18th century.
-          desc: "So asaa tarikee Wolaytta xoqqa sohotun, 18tto Xeetu Layttaappe doommees.",
+          // EN: The family's story in the Wolaita highlands begins before the 18th century.
+          desc: "",
         },
         {
           // EN: 1940s
