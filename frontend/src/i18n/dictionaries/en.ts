@@ -463,7 +463,7 @@ export const en = {
       people: {
         bushaashe: { name: 'Bushaashe', generation: 'The place bears his name', period: '', story: 'Long before visitors came to walk its paths, there was Bushaashe, and this place still carries his name.\n\nFrom his forefathers he received more than land. He received a way of life: the houses they built, the trees they planted, the words, the songs and the customs of Wolaita. In a time when such things could easily have slipped away, Bushaashe held them close. He was a strong man and a steadfast keeper of culture, and under his hand the grounds we now call Bushaashe Garuwa were tended, protected and kept whole.\n\nYet his greatest work was not only what he kept, but whom he taught. Around him grew a large family, and to each of his children he gave the same lesson: what our fathers left us is not ours to lose. Keep it. Live by it. Carry it forward.\n\nWhen the time came, Bushaashe placed the land in the hands of his son Alambo, not as a gift alone, but as an adera: a sacred trust, to guard the place, to honour the forefathers and to hand it on whole. Every generation since has lived by that trust, and every visitor who walks through the gate today walks into its story.' },
         alambo: { name: 'Alambo', generation: 'Son of Bushaashe · Received the trust', period: '', story: '' },
-        garedew: { name: 'Garedew', generation: 'The generation after Alambo', period: '', story: '' },
+        garedew: { name: 'Garedew', generation: 'Son of Alambo', period: '', story: '' },
         current: { name: 'The Current Generation', generation: 'Today · Commissioner Fiseha Garedew and family', period: '', story: '' },
       },
     },

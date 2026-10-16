@@ -183,7 +183,7 @@ const page: DeepPartial<Dictionary> = {
         garedew: {
           // EN: Garedew
           name: "Garedew",
-          // EN: The generation after Alambo
+          // EN: Son of Alambo
           generation: "",
           // EN: 
           period: "",
