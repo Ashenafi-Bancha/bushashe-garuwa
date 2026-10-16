@@ -224,10 +224,61 @@ export default function About() {
             </div>
             {selected.story.trim() ? (
               selected.story.split(/\n\s*\n/).map((para, i) => (
-                <p key={i} className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-4 max-w-4xl">{para}</p>
+                <p
+                  key={i}
+                  className={`text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-4 max-w-4xl ${
+                    i === 0 ? 'font-display text-xl sm:text-2xl text-[#13261A] leading-snug' : ''
+                  }`}
+                >
+                  {para}
+                </p>
               ))
             ) : (
               <p className="text-[#1E3A29]/70 italic">{a.lineage.pending}</p>
+            )}
+
+            {person === 'bushaashe' && (
+              <>
+                {/* his children, as written on the sign at the gate */}
+                {a.lineage.children.length > 0 && (
+                  <div className="mt-8 pt-7 border-t border-[#1E3A29]/10">
+                    <h4 className="font-display text-xl sm:text-2xl text-[#13261A] mb-4">{a.lineage.childrenTitle}</h4>
+                    <ul className="flex flex-wrap gap-2.5">
+                      {a.lineage.children.map((child) => (
+                        <li key={child} className="rounded-full bg-[#E3EBD8] text-[#1E3A29] text-sm sm:text-base font-semibold px-4 py-2">
+                          {child} <span className="text-[#1E3A29]/55 font-normal">{selected.name}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* the generations before him, oldest first, leading to Bushaashe */}
+                {a.lineage.ancestors.length > 0 && (
+                  <div className="mt-8 pt-7 border-t border-[#1E3A29]/10">
+                    <h4 className="font-display text-xl sm:text-2xl text-[#13261A] mb-4">{a.lineage.ancestorsTitle}</h4>
+                    <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
+                      {[...a.lineage.ancestors, selected.name].map((name, i, all) => (
+                        <li key={`${name}-${i}`} className="flex items-center gap-2">
+                          <span
+                            className={`rounded-full px-4 py-2 text-sm sm:text-base font-semibold ${
+                              i === all.length - 1 ? 'bg-[#3F7D20] text-white' : 'bg-white ring-1 ring-[#1E3A29]/15 text-[#1E3A29]'
+                            }`}
+                          >
+                            {name}
+                          </span>
+                          {i < all.length - 1 && (
+                            <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#C4622D]" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                              <path d="M5 12h14" />
+                              <path d="m13 6 6 6-6 6" />
+                            </svg>
+                          )}
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>

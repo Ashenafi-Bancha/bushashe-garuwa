@@ -455,8 +455,13 @@ export const en = {
       title: 'From Bushaashe to Today',
       desc: 'Bushaashe Garuwa bears the name of Bushaashe, the first father of this line. His story continued through Alambo and Garedew, and lives on today in the family that cares for the grounds. Choose a name to read their history.',
       pending: 'The family is writing this history now. It will be published here soon.',
+      childrenTitle: 'The Children of Bushaashe',
+      ancestorsTitle: 'The Generations Before Bushaashe',
+      children: ['Anano', 'Betalo', 'Ch\'afan', 'Alambo', 'Tero', 'Biramo', 'Mrs. Bote', 'Sundado', 'Embele'],
+      /** oldest first; shown with arrows leading to Bushaashe */
+      ancestors: [] as string[],
       people: {
-        bushaashe: { name: 'Bushaashe', generation: 'First generation · The founder', period: '18th century', story: '' },
+        bushaashe: { name: 'Bushaashe', generation: 'First generation · The founder', period: '18th century', story: 'Long before visitors came to walk its paths, there was Bushaashe, and this place still carries his name.\n\nFrom his forefathers he received more than land. He received a way of life: the houses they built, the trees they planted, the words, the songs and the customs of Wolaita. In a time when such things could easily have slipped away, Bushaashe held them close. He was a strong man and a steadfast keeper of culture, and under his hand the grounds we now call Bushaashe Garuwa were tended, protected and kept whole.\n\nYet his greatest work was not only what he kept, but whom he taught. Around him grew a large family, and to each of his children he gave the same lesson: what our fathers left us is not ours to lose. Keep it. Live by it. Carry it forward.\n\nWhen the time came, Bushaashe placed the land in the hands of his son Alambo, not as a gift alone, but as an adera: a sacred trust, to guard the place, to honour the forefathers and to hand it on whole. Every generation since has lived by that trust, and every visitor who walks through the gate today walks into its story.' },
         alambo: { name: 'Alambo', generation: 'Second generation', period: '', story: '' },
         garedew: { name: 'Garedew', generation: 'Third generation', period: '', story: '' },
         current: { name: 'The Current Generation', generation: 'Today · Commissioner Fiseha Garedew and family', period: '', story: '' },

@@ -133,6 +133,32 @@ const page: DeepPartial<Dictionary> = {
       desc: "Bushaashe Garoy ha so asaa yeletaa yafaran koyro aawa gidida Bushaashe sunttan xeesettes. A taarikee Alambbanne Garedewura kanttida, hachchi qassi gibbiyaa kaalli xeelliyaa keettaa asatun de'ees. Etu taarikiyaa nabbabanawu sunttaa doorite.",
       // EN: The family is writing this history now. It will be published here soon.
       pending: "So asay ha taarikiyaa xuufiyan giigissiiddi de'oosona. Mata wodiya wuriyoode hagan wottana.",
+      // EN: The Children of Bushaashe
+      childrenTitle: "",
+      // EN: The Generations Before Bushaashe
+      ancestorsTitle: "",
+      children: [
+        // EN: Anano
+        "",
+        // EN: Betalo
+        "",
+        // EN: Ch'afan
+        "",
+        // EN: Alambo
+        "",
+        // EN: Tero
+        "",
+        // EN: Biramo
+        "",
+        // EN: Mrs. Bote
+        "",
+        // EN: Sundado
+        "",
+        // EN: Embele
+        "",
+      ],
+      ancestors: [
+      ],
       people: {
         bushaashe: {
           // EN: Bushaashe
@@ -141,7 +167,7 @@ const page: DeepPartial<Dictionary> = {
           generation: "Koyro Yeletaa · Baasidaagaa",
           // EN: 18th century
           period: "18ntto Xeetu Layttaa",
-          // EN: 
+          // EN: Long before visitors came to walk its paths, there was Bushaashe, and this place still carries his name. From his forefathers he received more than land. He received a way of life: the houses they built, the trees they planted, the words, the songs and the customs of Wolaita. In a time when such things could easily have slipped away, Bushaashe held them close. He was a strong man and a steadfast keeper of culture, and under his hand the grounds we now call Bushaashe Garuwa were tended, protected and kept whole. Yet his greatest work was not only what he kept, but whom he taught. Around him grew a large family, and to each of his children he gave the same lesson: what our fathers left us is not ours to lose. Keep it. Live by it. Carry it forward. When the time came, Bushaashe placed the land in the hands of his son Alambo, not as a gift alone, but as an adera: a sacred trust, to guard the place, to honour the forefathers and to hand it on whole. Every generation since has lived by that trust, and every visitor who walks through the gate today walks into its story.
           story: "",
         },
         alambo: {
