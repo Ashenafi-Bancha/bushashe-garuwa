@@ -197,7 +197,7 @@ const page: DeepPartial<Dictionary> = {
           generation: "Hachchi · Komishineeriyaa Fiseha Garedewnne A soo asaa",
           // EN: 
           period: "",
-          // EN: 
+          // EN: The trust has now come to the children of Garedew. They hold in honour what their fathers left them: the adera, the culture of Wolaita, and the knowledge and ways by which the people of Wolaita lived for generations. Their aim is simple and great at once: that all of this should live on in this place, and pass whole to the generations still to come. Their fathers taught them so. Again and again the words were spoken: guard this place. It holds the history, the culture and the civilisation of Wolaita. Keep it with honour, as you received it from us, and hand it on, prepared and whole, from generation to generation. So they build with care. Beside the zigba trees their father planted, they plant more zigba and other trees. Onto the grounds they have brought the traditional houses of Wolaita, its traditional clothing, its spices and the treasures of its culture: the things that tell of Wolaita's knowledge, history and civilisation. What has grown here is not a museum, and the family would never call it one. It is Bushaashe Garuwa: beautiful to look at and good to stay in, a place where visitors come to see, to linger and to take part, and where programmes and gatherings fill the grounds with life. From Bushaashe to Alambo, from Alambo to Garedew, and from Garedew to his children, the same word has passed from hand to hand. Today it is kept with diligence, so that one day it may be handed on again.
           story: "",
         },
       },
