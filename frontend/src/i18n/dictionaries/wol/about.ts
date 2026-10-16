@@ -177,7 +177,7 @@ const page: DeepPartial<Dictionary> = {
           generation: "",
           // EN: 
           period: "",
-          // EN: 
+          // EN: Alambo received the land from his father Bushaashe as an adera, a sacred trust, and he carried that trust through hard times. In the days of Emperor Haile Selassie, Alambo was imprisoned in Addis Ababa, far from his home and far from the grounds he had promised to keep. His son Garedew did not wait for news to reach him. He set out on foot to see his father. The road to Addis Ababa was long: on the way he stopped for the night in Silte, then walked on, and on the second day he reached Addis Ababa. That journey is still told in the family today: a son's devotion to his father, and the same faithfulness that has kept Bushaashe Garuwa from one generation to the next.
           story: "",
         },
         garedew: {
