@@ -1,47 +1,19 @@
+import { BRAND } from './brand.js';
+
 /**
- * The frame every Bushaashe Garuwa email sits in, drawn the way the website is:
- * a white card on deep forest green, the logo and name at the top, a moss label,
- * the message, and the address and contacts at the foot.
+ * The pieces every Bushaashe Garuwa email is built from: the frame (header with
+ * the logo on deep forest green and a thin band in the colours of the Wolaita
+ * cloth, the white card, the footer with the social icons) and the parts that go
+ * inside it (summary card, figures, buttons, note boxes).
  *
- * Built from tables with inline styles on purpose: that is what Gmail, Outlook
- * and phone mail apps render reliably. No external CSS, no scripts.
+ * Written for mail apps, not browsers: tables for layout, every style inline,
+ * images by absolute address with sizes and alt text, buttons that also work in
+ * Outlook. A short <style> block adds what the better apps understand: the
+ * phone layout and dark mode. Without it the email still reads well.
  */
 
-export const BRAND = {
-  ink: '#1E3A29',
-  body: '#4B5C50',
-  muted: '#83907F',
-  green: '#1E3A29',
-  /** the accent: moss green, as on the website */
-  gold: '#86A94F',
-  mossText: '#5E7F35',
-  mossSoft: '#E6EDD8',
-  canvas: '#13261A',
-  line: '#ECE7DA',
-  soft: '#F4EFE4',
-  font: "'Manrope', 'Segoe UI', Helvetica, Arial, sans-serif",
-  display: "'Bricolage Grotesque', 'Manrope', 'Segoe UI', Helvetica, Arial, sans-serif",
-  address: 'Damot Sore Woreda, Wolaita Zone, Ethiopia',
-  phone: '+251 932 196 502',
-  phoneHref: '+251932196502',
-  email: 'bushaashegaruwa@gmail.com',
-  facebook: 'https://www.facebook.com/bushaashe.garuwa',
-  telegram: 'https://t.me/bushaashegaruwafrist',
-  whatsapp: 'https://wa.me/251932196502',
-  youtube: 'https://www.youtube.com/results?search_query=bushaashe+garuwa',
-} as const;
-
 export type Lang = 'en' | 'am';
-
-/** The typeface for each language; Ge'ez letters need an Ethiopic font */
-export function fontFor(lang: Lang = 'en'): string {
-  return lang === 'am' ? "'Noto Sans Ethiopic', Nyala, 'Abyssinica SIL', 'Segoe UI', sans-serif" : BRAND.font;
-}
-
-/** Small spaced capitals for labels; Ge'ez has no capitals and reads badly spaced out */
-export function capsFor(lang: Lang = 'en', tracking = '0.18em'): string {
-  return lang === 'am' ? '' : `letter-spacing:${tracking};text-transform:uppercase;`;
-}
+const C = BRAND.colors;
 
 /** Everything a guest typed goes through this before it reaches the HTML */
 export function escape(value: string | number | null | undefined): string {
@@ -53,146 +25,258 @@ export function escape(value: string | number | null | undefined): string {
     .replace(/'/g, '&#39;');
 }
 
-export function paragraph(text: string, lang: Lang = 'en'): string {
-  return `<p style="margin:0 0 16px;font-family:${fontFor(lang)};font-size:15px;line-height:1.65;color:${BRAND.body};">${text}</p>`;
+/** The text face for each language; Ge'ez letters need an Ethiopic font */
+export const fontFor = (lang: Lang = 'en') => (lang === 'am' ? BRAND.fonts.ethiopic : BRAND.fonts.body);
+const headingFor = (lang: Lang) => (lang === 'am' ? BRAND.fonts.ethiopic : BRAND.fonts.display);
+/** Small spaced capitals for labels; Ge'ez has no capitals and reads badly spaced out */
+export const capsFor = (lang: Lang = 'en', tracking = '0.14em') => (lang === 'am' ? '' : `letter-spacing:${tracking};text-transform:uppercase;`);
+
+/** A paragraph of body text (the text must already be escaped where a guest typed it) */
+export function paragraph(text: string, lang: Lang = 'en', extra = ''): string {
+  return `<p class="t-body" style="margin:0 0 16px;font-family:${fontFor(lang)};font-size:16px;line-height:1.65;color:${C.body};${extra}">${text}</p>`;
 }
 
-/** The label/value list used for booking and visit details */
-export function details(rows: [label: string, value: string][], lang: Lang = 'en'): string {
+/** The large heading of an email */
+export function heading(text: string, lang: Lang = 'en'): string {
+  return `<h1 class="t-ink h1" style="margin:0 0 14px;font-family:${headingFor(lang)};font-size:30px;font-weight:800;${lang === 'am' ? 'line-height:1.35;' : 'line-height:1.15;letter-spacing:-0.02em;'}color:${C.ink};">${text}</h1>`;
+}
+
+/** A small rounded label above a heading */
+export function eyebrow(text: string, lang: Lang = 'en', tone: 'moss' | 'clay' = 'moss'): string {
+  const [bg, fg] = tone === 'clay' ? ['#FBE7DC', '#9A4A20'] : [C.sage, C.ink];
+  return `<div style="margin:0 0 14px;"><span style="display:inline-block;background:${bg};color:${fg};border-radius:999px;padding:6px 14px;font-family:${fontFor(lang)};font-size:12px;font-weight:700;${capsFor(lang, '0.1em')}">${text}</span></div>`;
+}
+
+/** A section title inside the card */
+export function subheading(text: string, lang: Lang = 'en'): string {
+  return `<h2 class="t-ink" style="margin:26px 0 12px;font-family:${headingFor(lang)};font-size:19px;font-weight:800;line-height:1.3;color:${C.ink};">${text}</h2>`;
+}
+
+/**
+ * The summary card: labels on the left, values on the right, thin lines between.
+ * On a phone each row stacks (label above value). Values must already be escaped.
+ */
+export function summaryCard(rows: [label: string, value: string][], lang: Lang = 'en'): string {
   const body = rows
     .filter(([, value]) => value)
     .map(
       ([label, value], i) => `
-      <tr>
-        <td style="padding:12px 0;${i > 0 ? `border-top:1px solid ${BRAND.line};` : ''}font-family:${fontFor(lang)};font-size:${lang === 'am' ? '13px' : '12px'};${capsFor(lang, '0.08em')}color:${BRAND.muted};width:38%;vertical-align:top;">${label}</td>
-        <td style="padding:12px 0;${i > 0 ? `border-top:1px solid ${BRAND.line};` : ''}font-family:${fontFor(lang)};font-size:15px;font-weight:600;color:${BRAND.ink};vertical-align:top;">${value}</td>
-      </tr>`,
+          <tr class="stack">
+            <td class="t-muted" width="40%" style="padding:13px 12px 13px 0;${i > 0 ? `border-top:1px solid ${C.line};` : ''}font-family:${fontFor(lang)};font-size:${lang === 'am' ? '14px' : '12px'};font-weight:600;${capsFor(lang, '0.08em')}color:${C.muted};vertical-align:top;">${label}</td>
+            <td class="t-ink" style="padding:13px 0;${i > 0 ? `border-top:1px solid ${C.line};` : ''}font-family:${fontFor(lang)};font-size:15px;font-weight:600;line-height:1.5;color:${C.ink};vertical-align:top;text-align:right;">${value}</td>
+          </tr>`,
     )
     .join('');
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 24px;border-collapse:collapse;">${body}</table>`;
+  return `
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg-soft" style="margin:8px 0 8px;background:${C.cream};border-radius:18px;">
+    <tr><td style="padding:6px 22px;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">${body}
+      </table>
+    </td></tr>
+  </table>`;
 }
 
 /** The booking number, large, so a guest can read it out on the phone */
 export function referenceBlock(label: string, code: string, note: string, lang: Lang = 'en'): string {
   return `
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 24px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:6px 0 18px;">
     <tr>
-      <td align="center" style="background:${BRAND.soft};border-radius:20px;padding:22px 16px;">
-        <div style="font-family:${fontFor(lang)};font-size:${lang === 'am' ? '13px' : '11px'};${capsFor(lang)}font-weight:700;color:${BRAND.mossText};">${label}</div>
-        <div style="font-family:${BRAND.display};font-size:34px;font-weight:800;letter-spacing:0.04em;color:${BRAND.ink};margin:8px 0 6px;">${escape(code)}</div>
-        <div style="font-family:${fontFor(lang)};font-size:13px;color:${BRAND.muted};">${note}</div>
+      <td align="center" class="ref" style="background:${C.forest};border-radius:18px;padding:20px 16px;">
+        <div style="font-family:${fontFor(lang)};font-size:${lang === 'am' ? '13px' : '11px'};font-weight:700;${capsFor(lang, '0.18em')}color:${C.moss};">${label}</div>
+        <div style="font-family:${BRAND.fonts.display};font-size:34px;font-weight:800;letter-spacing:0.06em;color:#FFFFFF;margin:8px 0 6px;">${escape(code)}</div>
+        <div style="font-family:${fontFor(lang)};font-size:13px;color:#B7C6B5;">${note}</div>
       </td>
     </tr>
   </table>`;
 }
 
-/** The green pill button, as on the website */
-export function button(href: string, label: string, lang: Lang = 'en'): string {
+/** Big figures side by side (dates, guests), to be read at a glance; they stack on a phone */
+export function highlights(items: [label: string, value: string][], lang: Lang = 'en'): string {
+  const shown = items.filter(([, value]) => value);
+  if (!shown.length) return '';
+  const cells = shown
+    .map(
+      ([label, value], i) => `
+        <td class="hl" valign="top" width="${Math.floor(100 / shown.length)}%" style="padding:0 ${i < shown.length - 1 ? '12px' : '0'} 12px 0;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>
+            <td style="background:${C.sage};border-radius:16px;padding:16px 18px;">
+              <div style="font-family:${fontFor(lang)};font-size:11px;font-weight:700;${capsFor(lang, '0.14em')}color:${C.greenDark};">${label}</div>
+              <div style="font-family:${BRAND.fonts.display};font-size:21px;font-weight:800;line-height:1.25;color:${C.ink};margin-top:6px;">${value}</div>
+            </td>
+          </tr></table>
+        </td>`,
+    )
+    .join('');
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:4px 0 8px;"><tr class="stack">${cells}</tr></table>`;
+}
+
+/** A note in a soft box: what happens next, or what the guest wrote */
+export function noteBox(title: string, text: string, lang: Lang = 'en', options: { quote?: boolean } = {}): string {
   return `
-  <table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 8px;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:18px 0 8px;">
     <tr>
-      <td style="border-radius:999px;background:${BRAND.green};">
-        <a href="${escape(href)}" style="display:inline-block;padding:7px 7px 7px 24px;font-family:${fontFor(lang)};font-size:14px;font-weight:700;color:${BRAND.soft};text-decoration:none;border-radius:999px;line-height:34px;">${label}&nbsp;&nbsp;<span style="display:inline-block;width:34px;height:34px;line-height:34px;border-radius:999px;background:${BRAND.gold};color:${BRAND.canvas};text-align:center;font-size:16px;vertical-align:middle;">&rarr;</span></a>
+      <td class="bg-soft" style="background:${C.cream};border-left:4px solid ${options.quote ? C.clay : C.green};border-radius:0 16px 16px 0;padding:16px 20px;">
+        ${title ? `<div class="t-ink" style="font-family:${headingFor(lang)};font-size:15px;font-weight:800;color:${C.ink};margin:0 0 6px;">${title}</div>` : ''}
+        <div class="t-body" style="font-family:${fontFor(lang)};font-size:15px;line-height:1.65;color:${C.body};${options.quote ? 'white-space:pre-line;' : ''}">${text}</div>
       </td>
     </tr>
   </table>`;
 }
 
-export type LayoutInput = {
+/**
+ * A button that works everywhere: a rounded table cell with a link for most
+ * apps, and a VML shape for Outlook on Windows. `tone` picks green or outline.
+ */
+export function button(href: string, label: string, lang: Lang = 'en', tone: 'solid' | 'outline' = 'solid'): string {
+  const solid = tone === 'solid';
+  const width = Math.max(180, Math.round(label.length * (lang === 'am' ? 15 : 9.5)) + 64);
+  const safeHref = escape(href);
+  return `<table role="presentation" cellpadding="0" cellspacing="0" style="display:inline-table;margin:6px 8px 6px 0;"><tr><td>
+<!--[if mso]>
+<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="${safeHref}" style="height:48px;v-text-anchor:middle;width:${width}px;" arcsize="50%" ${solid ? `stroke="f" fillcolor="${C.green}"` : `strokecolor="${C.green}" strokeweight="2px" fillcolor="#FFFFFF"`}>
+<w:anchorlock/><center style="color:${solid ? '#FFFFFF' : C.green};font-family:Arial,sans-serif;font-size:15px;font-weight:bold;">${label}</center>
+</v:roundrect>
+<![endif]-->
+<!--[if !mso]><!-->
+<table role="presentation" cellpadding="0" cellspacing="0"><tr>
+  <td align="center" bgcolor="${solid ? C.green : '#FFFFFF'}" style="border-radius:999px;${solid ? '' : `border:2px solid ${C.green};`}">
+    <a href="${safeHref}" target="_blank" style="display:inline-block;padding:${solid ? '14px 28px' : '12px 26px'};font-family:${fontFor(lang)};font-size:15px;font-weight:700;line-height:20px;color:${solid ? '#FFFFFF' : C.green};text-decoration:none;border-radius:999px;">${label}&nbsp;&nbsp;&rarr;</a>
+  </td>
+</tr></table>
+<!--<![endif]-->
+</td></tr></table>`;
+}
+
+/** A row of buttons */
+export const buttons = (...items: string[]) => `<div style="margin:22px 0 6px;">${items.join('')}</div>`;
+
+export type FrameInput = {
   lang: Lang;
   siteUrl: string;
-  /** the grey line many mail apps show beside the subject */
+  /** the line many mail apps show beside the subject */
   preheader: string;
-  eyebrow: string;
+  /** the <title> of the document */
   title: string;
-  /** already-built HTML: paragraphs, details, reference, button */
+  /** already-built HTML for inside the white card */
   body: string;
-  /** words in the footer, in the email's language */
-  footer: { followUs: string; why: string };
+  /** the small note at the very bottom (why the reader got this email) */
+  note: string;
 };
 
-export function layout(input: LayoutInput): string {
-  const { siteUrl, lang } = input;
+/** The colours of the Wolaita cloth, as a thin band */
+function clothBand(): string {
+  const cells = BRAND.cloth.map((color) => `<td height="6" style="height:6px;line-height:6px;font-size:0;background:${color};">&nbsp;</td>`).join('');
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr>${cells}</tr></table>`;
+}
+
+/** The whole email: header, card, footer */
+export function frame(input: FrameInput): string {
+  const { lang } = input;
+  const site = input.siteUrl.replace(/\/$/, '');
   const font = fontFor(lang);
-  const logo = `${siteUrl}/apple-touch-icon.png`;
+  const year = new Date().getFullYear();
+  const icons = BRAND.social
+    .filter((s) => s.url)
+    .map(
+      (s) =>
+        `<td style="padding:0 7px;"><a href="${escape(s.url)}" target="_blank" style="text-decoration:none;"><img src="${site}${s.icon}" width="32" height="32" alt="${s.name}" style="display:block;width:32px;height:32px;border:0;outline:none;" /></a></td>`,
+    )
+    .join('');
 
   return `<!doctype html>
-<html lang="${input.lang}">
+<html lang="${lang}" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="color-scheme" content="light only" />
+  <meta name="x-apple-disable-message-reformatting" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="supported-color-schemes" content="light dark" />
   <title>${escape(input.title)}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=Manrope:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!--[if mso]><noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript><![endif]-->
+  <link href="${BRAND.fonts.googleUrl}" rel="stylesheet" />
+  <style>
+    body { margin:0; padding:0; -webkit-text-size-adjust:100%; }
+    img { -ms-interpolation-mode:bicubic; }
+    a { color:${C.green}; }
+    @media only screen and (max-width:620px) {
+      .container { width:100% !important; }
+      .px { padding-left:22px !important; padding-right:22px !important; }
+      .h1 { font-size:25px !important; }
+      .stack td { display:block !important; width:100% !important; text-align:left !important; box-sizing:border-box; }
+      .stack td.t-muted { padding-bottom:2px !important; }
+      .stack td + td { border-top:0 !important; padding-top:0 !important; }
+      .hl { padding:0 0 10px 0 !important; }
+    }
+    @media (prefers-color-scheme: dark) {
+      .bg-page { background:#0E1A12 !important; }
+      .bg-card { background:#17251B !important; }
+      .bg-soft { background:#1F3125 !important; }
+      .t-ink { color:#F4EFE4 !important; }
+      .t-body { color:#D5DDD1 !important; }
+      .t-muted { color:#A9B5A6 !important; }
+      .foot { color:#A9B5A6 !important; }
+      .ref { background:#0E1A12 !important; border:1px solid #3F7D20 !important; }
+      .bg-soft td, .rule { border-color:#2F4636 !important; }
+    }
+  </style>
 </head>
-<body style="margin:0;padding:0;background:${BRAND.canvas};">
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">${escape(input.preheader)}</div>
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${BRAND.canvas};">
+<body class="bg-page" style="margin:0;padding:0;background:${C.cream};">
+  <div style="display:none;max-height:0;max-width:0;overflow:hidden;opacity:0;font-size:1px;line-height:1px;mso-hide:all;">${escape(input.preheader)}&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;&#8199;&#65279;&#847;</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="bg-page" style="background:${C.cream};">
     <tr>
-      <td align="center" style="padding:28px 12px;">
-        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;">
+      <td align="center" style="padding:28px 12px 18px;">
+        <!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0"><tr><td><![endif]-->
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" class="container" style="max-width:600px;">
+
+          <!-- header: the logo on deep forest green, the name, the line of the website -->
+          <tr>
+            <td align="center" style="background:${C.forest};border-radius:24px 24px 0 0;padding:30px 24px 24px;">
+              <table role="presentation" cellpadding="0" cellspacing="0"><tr><td align="center" style="background:#FFFFFF;border-radius:50%;padding:4px;">
+                <img src="${site}${BRAND.logo}" width="68" height="68" alt="${BRAND.name}" style="display:block;width:68px;height:68px;border:0;border-radius:50%;" />
+              </td></tr></table>
+              <div style="font-family:${BRAND.fonts.display};font-size:24px;font-weight:800;letter-spacing:-0.01em;color:#FFFFFF;margin-top:14px;">${BRAND.name}</div>
+              <div style="font-family:${font};font-size:13px;font-weight:600;${capsFor(lang, '0.16em')}color:${C.moss};margin-top:6px;">${BRAND.tagline[lang]}</div>
+            </td>
+          </tr>
+          <tr><td style="font-size:0;line-height:0;">${clothBand()}</td></tr>
 
           <!-- the card -->
           <tr>
-            <td style="background:#FFFFFF;border-radius:28px;padding:0;">
-
-              <!-- logo and name -->
-              <table role="presentation" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                  <td style="padding:28px 32px 0;">
-                    <table role="presentation" cellpadding="0" cellspacing="0">
-                      <tr>
-                        <td style="vertical-align:middle;"><img src="${logo}" width="44" height="44" alt="Bushaashe Garuwa" style="display:block;border-radius:50%;border:0;" /></td>
-                        <td style="vertical-align:middle;padding-left:12px;">
-                          <div style="font-family:${BRAND.display};font-size:18px;font-weight:800;color:${BRAND.ink};letter-spacing:-0.02em;">Bushaashe Garuwa</div>
-                          <div style="font-family:${BRAND.font};font-size:12px;color:${BRAND.muted};margin-top:3px;">Damot Sore · Wolaita · Ethiopia</div>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-
-                <!-- the message -->
-                <tr>
-                  <td style="padding:30px 32px 10px;">
-                    <div style="margin:0 0 16px;"><span style="display:inline-block;background:${BRAND.mossSoft};color:${BRAND.ink};border-radius:999px;padding:6px 14px;font-family:${font};font-size:13px;font-weight:700;">${input.eyebrow}</span></div>
-                    <h1 style="margin:0 0 18px;font-family:${lang === 'am' ? font : BRAND.display};font-size:30px;font-weight:800;${lang === 'am' ? 'line-height:1.35;' : 'line-height:1.15;letter-spacing:-0.03em;'}color:${BRAND.ink};">${input.title}</h1>
-                    ${input.body}
-                  </td>
-                </tr>
-
-                <!-- address and contacts -->
-                <tr>
-                  <td style="padding:8px 32px 28px;">
-                    <div style="border-top:1px solid ${BRAND.line};padding-top:20px;font-family:${BRAND.font};font-size:13px;line-height:1.7;color:${BRAND.muted};">
-                      <strong style="color:${BRAND.ink};">Bushaashe Garuwa</strong><br />
-                      ${BRAND.address}<br />
-                      <a href="tel:${BRAND.phoneHref}" style="color:${BRAND.green};text-decoration:none;">${BRAND.phone}</a>
-                      &nbsp;·&nbsp;
-                      <a href="mailto:${BRAND.email}" style="color:${BRAND.green};text-decoration:none;">${BRAND.email}</a>
-                    </div>
-                  </td>
-                </tr>
-              </table>
+            <td class="bg-card px" style="background:#FFFFFF;border-radius:0 0 24px 24px;padding:34px 40px 34px;box-shadow:0 18px 40px -28px rgba(19,38,26,0.35);">
+              ${input.body}
             </td>
           </tr>
 
-          <!-- below the card, on the black -->
+          <!-- footer -->
           <tr>
-            <td align="center" style="padding:22px 16px 6px;font-family:${font};font-size:12px;line-height:1.7;color:#9DB09F;">
-              ${input.footer.followUs}
-              <a href="${BRAND.facebook}" style="color:#FFFFFF;text-decoration:none;">Facebook</a> ·
-              <a href="${BRAND.telegram}" style="color:#FFFFFF;text-decoration:none;">Telegram</a> ·
-              <a href="${BRAND.whatsapp}" style="color:#FFFFFF;text-decoration:none;">WhatsApp</a> ·
-              <a href="${BRAND.youtube}" style="color:#FFFFFF;text-decoration:none;">YouTube</a><br />
-              <a href="${siteUrl}" style="color:#FFFFFF;text-decoration:none;">${siteUrl.replace(/^https?:\/\//, '')}</a><br />
-              <span style="color:#71877A;">${input.footer.why}</span>
+            <td align="center" style="padding:28px 16px 8px;">
+              ${icons ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:0 auto 14px;"><tr>${icons}</tr></table>` : ''}
+              <div class="foot" style="font-family:${font};font-size:13px;line-height:1.75;color:${C.muted};">
+                <a href="${site}" target="_blank" style="color:${C.green};font-weight:700;text-decoration:none;">${site.replace(/^https?:\/\//, '')}</a><br />
+                ${BRAND.contact.address[lang]}<br />
+                &copy; ${year} ${BRAND.name}<br />
+                <span style="font-size:12px;color:#9AA597;">${input.note}</span>
+              </div>
             </td>
           </tr>
         </table>
+        <!--[if mso]></td></tr></table><![endif]-->
       </td>
     </tr>
   </table>
 </body>
 </html>`;
+}
+
+/** A plain-text copy for mail apps that do not show HTML */
+export function plainText(lines: (string | false | null | undefined)[], lang: Lang = 'en'): string {
+  return [
+    ...lines.filter((line): line is string => typeof line === 'string'),
+    '',
+    '—',
+    BRAND.name,
+    BRAND.contact.address[lang],
+    `${BRAND.contact.phone} · ${BRAND.contact.email}`,
+    BRAND.site,
+  ].join('\n');
 }
