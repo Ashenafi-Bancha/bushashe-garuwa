@@ -28,8 +28,12 @@ export function notifier(mailer: Mailer, env: Env) {
     });
   }
 
+  // everyone in STAFF_EMAIL (several addresses separated by commas), each sent their own copy
+  const staffAddresses = env.STAFF_EMAIL.split(/[,;]/)
+    .map((address) => address.trim())
+    .filter(Boolean);
   const toStaff = (email: Omit<Email, 'to'>) => {
-    if (env.STAFF_EMAIL) deliver({ ...email, to: env.STAFF_EMAIL });
+    for (const to of staffAddresses) deliver({ ...email, to });
   };
 
   const bookingFacts = (booking: Booking, event: EventRecord): BookingFacts => {
