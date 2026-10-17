@@ -77,11 +77,11 @@ export default function MeetingHall() {
       </section>
 
       {/* Arranging it */}
-      <section className="py-12 sm:py-16 lg:py-20 text-center">
+      <section className="band-green mx-2 sm:mx-3 mb-3 rounded-[2rem] sm:rounded-[3rem] py-14 sm:py-20 text-center">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] mb-3">{m.cta.title}</h2>
-          <p className="text-[#1E3A29]/70 max-w-xl mx-auto mb-7">{m.cta.text}</p>
-          <ContactButtons className="justify-center" />
+          <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white mb-3">{m.cta.title}</h2>
+          <p className="text-white/90 max-w-xl mx-auto mb-7">{m.cta.text}</p>
+          <ContactButtons className="justify-center" onGreen />
         </div>
       </section>
     </main>

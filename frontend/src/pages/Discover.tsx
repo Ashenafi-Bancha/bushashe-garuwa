@@ -74,15 +74,15 @@ export default function Discover() {
       </section>
 
       {/* CTA */}
-      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-20 text-center">
+      <section className="band-green mx-2 sm:mx-3 rounded-[2rem] py-20 text-center">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
-          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-[#13261A] mb-4">{t.common.comeBePart}</h2>
-          <p className="text-[#1E3A29]/80 font-sans text-base max-w-xl mx-auto mb-10">{d.cta.desc}</p>
+          <h2 className="font-display text-3xl sm:text-4xl font-semibold text-white mb-4">{t.common.comeBePart}</h2>
+          <p className="text-white/90 font-sans text-base max-w-xl mx-auto mb-10">{d.cta.desc}</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/visit" className="btn-primary">
+            <Link to="/visit" className="btn-primary btn-on-dark">
               {t.common.planVisit}
             </Link>
-            <Link to="/heritage" className="btn-outline text-[#1E3A29]">
+            <Link to="/heritage" className="btn-outline btn-outline-light">
               {d.cta.explore}
             </Link>
           </div>

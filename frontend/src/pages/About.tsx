@@ -315,19 +315,19 @@ export default function About() {
       {/* CTA */}
       <section className="relative mx-2 sm:mx-3 rounded-[2rem] py-28 overflow-hidden">
         <img {...picture(photos.pavilions)} alt={t.photos.pavilions} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-[#E3EBD8]/92" />
+        <div className="absolute inset-0 bg-[#3F7D20]/90" />
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] mb-4">
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4">
             {t.common.comeBePart}
           </h2>
-          <p className="text-[#1E3A29]/80 font-sans text-base max-w-xl mx-auto mb-10 leading-relaxed">
+          <p className="text-white/90 font-sans text-base max-w-xl mx-auto mb-10 leading-relaxed">
             {a.cta.desc}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link to="/visit" className="btn-primary">
+            <Link to="/visit" className="btn-primary btn-on-dark">
               {t.common.planVisit}
             </Link>
-            <Link to="/contact" className="btn-outline text-[#1E3A29]">
+            <Link to="/contact" className="btn-outline btn-outline-light">
               {t.common.getInTouch}
             </Link>
           </div>
