@@ -140,68 +140,10 @@ const page: DeepPartial<Dictionary> = {
       // EN: Community
       community: "Heeraa Asaa",
     },
-    items: {
-      foodOct: {
-        // EN: Sunday 5 October 2026
-        dateLabel: "Gifaataa 24, 2019",
-        // EN: Wolaita Cultural Food Experience
-        name: "Wolaytta Wogaa Qumaa Meezetiyoogaa",
-        // EN: Our flagship monthly gathering: traditional dishes, coffee ceremony, music and oral storytelling around the fire. A complete evening of Wolaita culture.
-        desc: "Nu keehippe waanna shiiqoti: woga qumata, shiiqidi tukkiyoo uyiyoogaa, yettaanne tamaa achchan shiiqidi haysiyaa odiyoogaa. Wolaytta wogaa kumetta qammaa.",
-        // EN: Limited: 12 places remaining
-        avail: "Amara: 12 sohoti attidosona",
-      },
-      oralHistory: {
-        // EN: Sunday 12 October 2026
-        dateLabel: "Woggaa 11 Gooluwaa, 2019",
-        // EN: Oral History Evening
-        name: "Doonaa Haydaa Omarssaa",
-        // EN: Hear Wolaita elders share stories of family, land, and tradition. Stories told in Wolaytta with interpretation in Amharic and English.
-        desc: "Wolaytta bayra asati so asaa, biittaanne wogaa taarikiyaa odiyoode siyiyoogaa. Wolayttattuwan odettiyaa taariketi Amaarattuwawunne Ingiliizattuwawu birshshettoosona.",
-        // EN: Open
-        avail: "Dooya",
-      },
-      harvest: {
-        // EN: Sunday 19 October 2026
-        dateLabel: "Woggaa 08 Gooluwaa, 2019",
-        // EN: Harvest Heritage Evening
-        name: "Kattaa Shiishshiyoo Wodiyaa Omarssaa",
-        // EN: Celebrate the harvest season with traditional food, dance and elder storytelling. A community gathering at the heart of Wolaita culture.
-        desc: "Kattaa shiishshiyoo wodiyaa woga quman, durssaaninne cimatu haysiyaa oduwan bonchchite. ",
-        // EN: Open
-        avail: "Dooya",
-      },
-      schoolDay: {
-        // EN: Saturday 25 October 2026
-        dateLabel: "Qeeraa 01 Gooluwaa, 2019",
-        // EN: School Heritage Visit Day
-        name: "Timirtte Keettatu Xomooso Gallassaa",
-        // EN: A structured educational day for school groups: heritage tour, cultural activities, and traditional lunch.
-        desc: "Timirtte keettaappe yiyaa citatussi giigida timirtte gallassa: buqura yuuyyidi be'iyoogaa, wogaa kaassaatanne wogaa laaxaa muussaa.",
-        // EN: Group booking
-        avail: "Citan Sohuwa Oyttanawu",
-      },
-      foodNov: {
-        // EN: Sunday 2 November 2026
-        dateLabel: "Woggaa 22 Gooluwaa, 2019",
-        // EN: Wolaita Cultural Food Experience
-        name: "Wolaytta Wogaa Qumaa Meezetiyoogaa",
-        // EN: Our monthly cultural food gathering returns. Traditional Wolaita cuisine, coffee ceremony, music and community.
-        desc: "Nu aginaa wogaa qumaa muussaa shiiqoy simmidi yeees. Wolaytta wogaa qumata, tukkiyaa shiiqidi uyyiyoo wodiyaa, yettaanne ",
-        // EN: Open
-        avail: "Dooya",
-      },
-      music: {
-        // EN: Saturday 8 November 2026
-        dateLabel: "Qeeraa 28 Gooluwaa, 2019",
-        // EN: Traditional Music Workshop
-        name: "Wogaa Yettaa Meezetiyoogaa",
-        // EN: Learn about traditional Wolaita instruments and music. A participatory workshop for all ages led by community musicians.
-        desc: "Wolaytta wogaa yettaa miishshatubaanne yettatubaa tamaariyoogaa. Hegan de'iyaa yettanchchatinne yettaa miishshaa kaa'iyaageeta kaaletttiyoo issippe tamaariyoo wodiyaa.",
-        // EN: Open
-        avail: "Dooya",
-      },
-    },
+    // EN: No dates are announced right now. The cultural food evening is held twice a month: the next dates will appear here as soon as they are set, or call us to hear about them.
+    noneYet: "",
+    // EN: No events of this kind are announced right now.
+    noneInCategory: "",
   },
 };
 

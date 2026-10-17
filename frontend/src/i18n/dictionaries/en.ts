@@ -700,44 +700,8 @@ export const en = {
     featured: 'Featured This Month',
     upcoming: 'Upcoming Events',
     categories: { all: 'All', food: 'Food', culture: 'Culture', education: 'Education', music: 'Music', community: 'Community' },
-    items: {
-      foodOct: {
-        dateLabel: 'Sunday 5 October 2026',
-        name: 'Wolaita Cultural Food Experience',
-        desc: 'Our flagship monthly gathering: traditional dishes, coffee ceremony, music and oral storytelling around the fire. A complete evening of Wolaita culture.',
-        avail: 'Limited: 12 places remaining',
-      },
-      oralHistory: {
-        dateLabel: 'Sunday 12 October 2026',
-        name: 'Oral History Evening',
-        desc: 'Hear Wolaita elders share stories of family, land, and tradition. Stories told in Wolaytta with interpretation in Amharic and English.',
-        avail: 'Open',
-      },
-      harvest: {
-        dateLabel: 'Sunday 19 October 2026',
-        name: 'Harvest Heritage Evening',
-        desc: 'Celebrate the harvest season with traditional food, dance and elder storytelling. A community gathering at the heart of Wolaita culture.',
-        avail: 'Open',
-      },
-      schoolDay: {
-        dateLabel: 'Saturday 25 October 2026',
-        name: 'School Heritage Visit Day',
-        desc: 'A structured educational day for school groups: heritage tour, cultural activities, and traditional lunch.',
-        avail: 'Group booking',
-      },
-      foodNov: {
-        dateLabel: 'Sunday 2 November 2026',
-        name: 'Wolaita Cultural Food Experience',
-        desc: 'Our monthly cultural food gathering returns. Traditional Wolaita cuisine, coffee ceremony, music and community.',
-        avail: 'Open',
-      },
-      music: {
-        dateLabel: 'Saturday 8 November 2026',
-        name: 'Traditional Music Workshop',
-        desc: 'Learn about traditional Wolaita instruments and music. A participatory workshop for all ages led by community musicians.',
-        avail: 'Open',
-      },
-    },
+    noneYet: 'No dates are announced right now. The cultural food evening is held twice a month: the next dates will appear here as soon as they are set, or call us to hear about them.',
+    noneInCategory: 'No events of this kind are announced right now.',
   },
 
   meeting: {

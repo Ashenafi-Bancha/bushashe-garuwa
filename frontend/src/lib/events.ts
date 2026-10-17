@@ -1,7 +1,7 @@
 /**
  * Events staff created in the admin area (the twice-monthly cultural food
- * evening and anything else). When the API is not reachable, the pages fall
- * back to the schedule written in the translations.
+ * evening and anything else). These are the only dates the website shows:
+ * when there are none, the pages say that the next dates will be announced.
  */
 import { useCallback, useEffect, useState } from 'react';
 import type { Lang } from '../i18n/config';
@@ -54,7 +54,7 @@ export async function fetchEvents(fresh = false): Promise<SiteEvent[]> {
   }
 }
 
-/** Upcoming events for the public pages; `events.length === 0` means "show the built-in schedule". */
+/** Upcoming events for the public pages; `events.length === 0` means none is announced yet. */
 export function useSiteEvents() {
   const [events, setEvents] = useState<SiteEvent[]>([]);
   const [loaded, setLoaded] = useState(!apiEnabled);

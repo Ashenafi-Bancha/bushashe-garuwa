@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { photos, picture, type PhotoKey } from '../assets/photos';
 import EventBooking from '../components/EventBooking';
 import PageHero from '../components/PageHero';
+import ContactButtons from '../components/ContactButtons';
 import Photo from '../components/Photo';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
@@ -13,15 +14,6 @@ type AvailKind = 'limited' | 'open' | 'group' | 'full';
 
 const categories: Category[] = ['all', 'food', 'culture', 'education', 'music', 'community'];
 
-/* Shown until staff publish events in the admin area; the words live in the translations (t.events.items) */
-const fallbackEvents: { id: keyof Dictionary['events']['items']; time: string; cat: Exclude<Category, 'all'>; availKind: AvailKind; featured: boolean }[] = [
-  { id: 'foodOct', time: '17:00 – 21:00', cat: 'food', availKind: 'limited', featured: true },
-  { id: 'oralHistory', time: '16:00 – 18:30', cat: 'culture', availKind: 'open', featured: false },
-  { id: 'harvest', time: '17:00 – 20:00', cat: 'community', availKind: 'open', featured: true },
-  { id: 'schoolDay', time: '08:30 – 14:00', cat: 'education', availKind: 'group', featured: false },
-  { id: 'foodNov', time: '17:00 – 21:00', cat: 'food', availKind: 'open', featured: false },
-  { id: 'music', time: '10:00 – 13:00', cat: 'music', availKind: 'open', featured: false },
-];
 
 /** One event as the page shows it, whether it came from the admin area or from the translations */
 type Shown = {
@@ -77,23 +69,10 @@ export default function Events() {
     };
   });
 
-  const fromText: Shown[] = fallbackEvents.map((event) => {
-    const text = e.items[event.id];
-    return {
-      key: event.id,
-      dateLabel: text.dateLabel,
-      time: event.time,
-      cat: event.cat,
-      availKind: event.availKind,
-      avail: text.avail,
-      name: text.name,
-      desc: text.desc,
-      photo: event.cat === 'food' ? 'food' : undefined,
-    };
-  });
 
-  const shown = fromApi.length > 0 ? fromApi : fromText;
-  const featured = fromApi.length > 0 ? fromApi.filter((event) => event.live?.featured) : fromText.filter((_, i) => [0, 2].includes(i));
+  // only the events staff have published in the admin area
+  const shown = fromApi;
+  const featured = fromApi.filter((event) => event.live?.featured);
   const filtered = activeCat === 'all' ? shown : shown.filter((event) => event.cat === activeCat);
 
   const photoOf = (key?: string) => (key && key in photos ? photos[key as PhotoKey] : undefined);
@@ -229,6 +208,16 @@ export default function Events() {
           </div>
 
           <div className="space-y-4">
+            {filtered.length === 0 && (
+              <div className="bg-white heritage-card p-6 sm:p-8 text-center">
+                <p className="text-[#1E3A29]/75 font-sans text-base leading-relaxed max-w-2xl mx-auto">{shown.length === 0 ? e.noneYet : e.noneInCategory}</p>
+                {shown.length === 0 && (
+                  <div className="mt-5 flex flex-wrap justify-center gap-3">
+                    <ContactButtons className="justify-center" />
+                  </div>
+                )}
+              </div>
+            )}
             {filtered.map((event) => (
               <div key={event.key} className="bg-white heritage-card flex flex-col sm:flex-row overflow-hidden">
                 <div className="img-zoom sm:w-48 flex-shrink-0 aspect-video sm:aspect-auto bg-[#1E3A29]/10">
