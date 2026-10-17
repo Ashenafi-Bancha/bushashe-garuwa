@@ -185,7 +185,7 @@ const page: DeepPartial<Dictionary> = {
               "Eta ammanoy paacettiis. Atse Hayle Sillaase wode, Alambboy Addis Ababan usuppun layttaa qashettidosona. Usuppun layttaappe guyyiyan bantta yohuwaa odanawu kawuwaa sintti shiiqidosona. Kawuwaara xalidi yayennan palamettidosona. Hegaa gishshawu «Kawuwaa bollan Xaliis» geetettidi gujo usuppun layttawu Addis Ababappe Wollo efin Were Iillun qashettidosona.\n\n" +
               "Muleera tammanne naa\"u layttaa Wolayttappenne bantta naagana giidi qaalaa gelido sohuwaappekka haakkidi de'idosona. Gidoppe attin, bantta soo asan dogettibookkona; he layttatun etu na'ay Garedewu bantta aawaa be'anawu adussa ogeta tohuwan hemettidosona.\n\n" +
               "Alambboyyoo naa\"u macca naatinne oyddu attuma naati de'oosona; Garedewukka etappe issuwaa. Alambboy qashettido wodetun Garedewu eta zaari zaaridi oychchido gishshawu, Alambboy \"tawu gitabaa oottida ta na'awu\" giidi sohuwaa hadaran immidosona. Taarikiyaa naagana koshshiyoogaadan, Wolaytta wogaa gam\"ettana koshshiyoogaadan, kaalliyaa yeletawu giigidanne Wolaytta wogaa oyqqida laataa aattana koshshiyoogaadan tamaarissidosona.\n\n" +
-              "Hagaadan oottidi Alambboy Bushaasheppe ekkido hadaraa tumatettan Garedewuyoo aattiis.",
+              "Hagaadan oottidi Alambboy Bushaasheppe ekkido hadaraa tumatettan Garedewuyyoo aattiis.",
         },
         garedew: {
           // EN: Garedew
