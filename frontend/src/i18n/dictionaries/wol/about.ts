@@ -187,9 +187,9 @@ const page: DeepPartial<Dictionary> = {
           // EN: Garedew
           name: "Garedew",
           // EN: Son of Alambo
-          generation: "",
+          generation: "Alambbo Na'aa",
           // EN: Passed away in 1997 E.C. (2004/05)
-          period: "",
+          period: "1997 M.L. hayqqidosona",
           // EN: Garedew was Alambo's beloved son, and the long years of his father's imprisonment showed what kind of son he was. When Alambo was held in Addis Ababa, no cars ran on the road from Wolaita. Garedew went on foot. He walked for a whole day, stopped for the night in Silte, and reached Addis Ababa on the second day. Again and again he made that journey to visit his father. When Alambo was taken to Were Ilu in Wollo, the road grew longer still. Garedew walked it too, sleeping along the way, and for the journey he made and sewed his own shoes by hand. He never went empty-handed. He carried money north and came home with mules to sell in Wolaita, for the family were mule traders too. His love for his father and his work for his family travelled the same road. In gratitude, Alambo placed the land in Garedew's hands as an adera, and Garedew made it flourish. It was he who planted the zigba trees that still stand in a long, even line across Bushaashe Garuwa, like a peaceful procession. Each was set in its place by measure, and to help them grow strong he brought water from the river to water them. He did not plant them for his family alone. The open field lay beside the road, and Garedew wanted travellers tired from the way to be able to come in and rest in the zigba's shade. That was the kind of father he was: always thinking beyond himself. Garedew married eight wives. With his eighth wife he had six children, two sons and four daughters. Today it is Garedew's children who care for Bushaashe Garuwa and make it flourish, so that the culture of Wolaita, the trust of the fathers and the work of those who came before may go on. Garedew passed away in 1997 in the Ethiopian calendar (2004/05), leaving the line of zigba trees, and the trust, to his children.
           story: "",
         },
@@ -197,7 +197,7 @@ const page: DeepPartial<Dictionary> = {
           // EN: The Current Generation
           name: "Hachchi Yeletaa",
           // EN: Today · Commissioner Fiseha Garedew and family
-          generation: "Hachchi · Komishineeriyaa Fiseha Garedewnne A soo asaa",
+          generation: "Hachchi · Komishineeriyaa Fiseha Garedewunne A soo asaa",
           // EN: 
           period: "",
           // EN: The trust has now come to the children of Garedew. They hold in honour what their fathers left them: the adera, the culture of Wolaita, and the knowledge and ways by which the people of Wolaita lived for generations. Their aim is simple and great at once: that all of this should live on in this place, and pass whole to the generations still to come. Their fathers taught them so. Again and again the words were spoken: guard this place. It holds the history, the culture and the civilisation of Wolaita. Keep it with honour, as you received it from us, and hand it on, prepared and whole, from generation to generation. So they build with care. Beside the zigba trees their father planted, they plant more zigba and other trees. Onto the grounds they have brought the traditional houses of Wolaita, its traditional clothing, its spices and the treasures of its culture: the things that tell of Wolaita's knowledge, history and civilisation. What has grown here is not a museum, and the family would never call it one. It is Bushaashe Garuwa: beautiful to look at and good to stay in, a place where visitors come to see, to linger and to take part, and where programmes and gatherings fill the grounds with life. From Bushaashe to Alambo, from Alambo to Garedew, and from Garedew to his children, the same word has passed from hand to hand. Today it is kept with diligence, so that one day it may be handed on again.
