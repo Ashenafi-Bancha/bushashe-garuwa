@@ -130,32 +130,32 @@ const page: DeepPartial<Dictionary> = {
       // EN: From Bushaashe to Today
       title: "Bushaasheppe doommidi Hachchi gakkanawu",
       // EN: Bushaashe Garuwa bears the name of Bushaashe, who kept the land and the ways of the forefathers who came before him. His story continued through Alambo and Garedew, and lives on today in the family that cares for the grounds. Choose a name to read their history.
-      desc: "",
+      desc: "Bushaashe Garoy banttappe kase de'ida aawato biittaanne wogaa naagidi takettida Bushaashe sunttan xeesettees. Eta taarikee Alambbooninne Garedewun kaallidi yiidi hachchi gibbiyaa naagiyaa so asan paxa gididi de'ees. Eta taarikiyaa nabbabanawu sunttaa dooridi.",
       // EN: The family is writing this history now. It will be published here soon.
       pending: "So asay ha taarikiyaa xuufiyan giigissiiddi de'oosona. Mata wodiya wuriyoode hagan wottana.",
       // EN: The Children of Bushaashe
-      childrenTitle: "",
+      childrenTitle: "Bushaashe Naata",
       // EN: The Generations Before Bushaashe
-      ancestorsTitle: "",
+      ancestorsTitle: "Bushaasheppe Kase Yeletata",
       children: [
         // EN: Anano
-        "",
+        "Anano",
         // EN: Betalo
-        "",
+        "Beetalo",
         // EN: Ch'afan
-        "",
+        "Cafan",
         // EN: Alambo
-        "",
+        "Alambbo",
         // EN: Tero
-        "",
+        "Teero",
         // EN: Biramo
-        "",
+        "Biramo",
         // EN: Mrs. Bote
-        "",
+        "W/ro Bote",
         // EN: Sundado
-        "",
+        "Sundado",
         // EN: Embele
-        "",
+        "Embele",
       ],
       ancestors: [
       ],
@@ -164,17 +164,20 @@ const page: DeepPartial<Dictionary> = {
           // EN: Bushaashe
           name: "Bushaasha",
           // EN: The place bears his name
-          generation: "",
+          generation: "Sohoy eta sunttan xeesettees",
           // EN: 
           period: "",
           // EN: Long before visitors came to walk its paths, there was Bushaashe, and this place still carries his name. From his forefathers he received more than land. He received a way of life: the houses they built, the trees they planted, the words, the songs and the customs of Wolaita. In a time when such things could easily have slipped away, Bushaashe held them close. He was a strong man and a steadfast keeper of culture, and under his hand the grounds we now call Bushaashe Garuwa were tended, protected and kept whole. Yet his greatest work was not only what he kept, but whom he taught. Around him grew a large family, and to each of his children he gave the same lesson: what our fathers left us is not ours to lose. Keep it. Live by it. Carry it forward. When the time came, Bushaashe placed the land in the hands of his son Alambo, not as a gift alone, but as an adera: a sacred trust, to guard the place, to honour the forefathers and to hand it on whole. Every generation since has lived by that trust, and every visitor who walks through the gate today walks into its story.
-          story: "",
+          story: "Hachchi imattati yiidi ogeta yedhdhanaappe daro layttatuppe kase, Bushaashe de'idosona; ha sohoy hachchi gakkanawu eta sunttaa tookkidi de'ees.\n\n" +
+              "Eti bantta aawatuppe ekkidoy biitta xalla gidenna. De'iyoo ogiyaakka ekkidosona: eti keexxido keettata, eti tokkido mittata, Wolaytta qaalata, yettatanne meezeta ekkidosona. Hagaa malabay eesuwan dogettana danddayiyoo wodiyan, Bushaashe mintti oyqqidosona. Bushaashe minonne wogaa minttidi naagiyaa aawa; hachchi nu Bushaashe Garuwa giyo sohoy eta kushiyan saaphotidi, naagettidinne paccennan de'iis.\n\n" +
+              "Eta gita oosoy eti naagidobaa xalla gidenna; oona tamaarissidaakkonneppe attin. Eta yuushuwan gita keettaa asay dicciis; bantta issi issi naatussi issi mala timirttiya immidosona: nu aawati immobay nu xayssana koshshiyooba gidenna. Naagite; an de'itenne; kaalliyaa yeletawu aattite.\n\n" +
+              "Wodee gakkin he sohuwaa Bushaashe bantta na'awu Alambbossi shedhdhidosona. Immidoykka imotadan xalla gidennan hadaradanppekka attin. Hegeekka sohuwaa naagana mala, aawata bonchchana malanne pacissennan kaalliyaa yeletawu shedhdhiyoogaa. He wodeppe doommidi issi issi yeletay he hadaran de'iis. Hachchi ha penggiyaara geliyaa issi issi imattaykka he taarikiyaakko gelees."
         },
         alambo: {
           // EN: Alambo
           name: "Alambba",
           // EN: Son of Bushaashe · Received the trust
-          generation: "",
+          generation: "Bushaashe na'aa · Hadaraa ekkidaagaa",
           // EN: 
           period: "",
           // EN: Alambo, son of Bushaashe, received from his father both the land and its history, and with them the culture of Wolaita. He was a great father, who gave his life to keeping that inheritance whole and passing it on to the generations after him. His faithfulness was tested. In the days of Emperor Haile Selassie, Alambo was imprisoned in Addis Ababa, and there he remained for six years. After six years he was brought before the Emperor himself to plead his case. He spoke boldly, and it was said that he had defied the King. He was sentenced to six more years, and taken from Addis Ababa to Wollo, to be held at Were Ilu. Twelve years in all, far from Wolaita and from the grounds he had promised to keep. Yet he was never forgotten at home: through all those years his son Garedew walked the long roads to see him. Alambo had six children, two daughters and four sons, and Garedew was one of them. Because Garedew had come to him again and again through his years in prison, Alambo called him “my son who has done me great kindness”, and to him he gave the place in trust. He taught Garedew that the history must be guarded, that the culture of Wolaita must be kept, and that what is handed to the next generation must be whole and true to the ways of Wolaita. So the adera that Alambo had received from Bushaashe passed, faithfully, into Garedew's hands.
