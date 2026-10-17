@@ -29,6 +29,8 @@ export default function Sidebar({
   email,
   open,
   onClose,
+  canInstall = false,
+  onInstall,
 }: {
   groups: SectionGroup[];
   current: SectionId;
@@ -38,6 +40,9 @@ export default function Sidebar({
   email?: string;
   open: boolean;
   onClose: () => void;
+  /** the browser offers to install the staff app */
+  canInstall?: boolean;
+  onInstall?: () => void;
 }) {
   const list = (
     <nav className="flex-1 px-3 py-4 overflow-y-auto" aria-label="Staff sections">
@@ -85,7 +90,7 @@ export default function Sidebar({
       <div className="flex items-center gap-3 px-5 h-[72px] border-b border-[#1E3A29]/8">
         <img src={logo} alt="" className="w-10 h-10 rounded-full object-contain flex-shrink-0" />
         <div className="min-w-0">
-          <div className="font-display text-[#15A864] text-[15px] font-bold leading-none truncate">Bushaashe Garuwa</div>
+          <div className="font-display text-[#346A1A] text-[15px] font-extrabold leading-none truncate">Bushaashe Garuwa</div>
           <div className="text-[#3F7D20] text-[10px] font-bold tracking-[0.18em] uppercase mt-1.5">Staff area</div>
         </div>
         <button
@@ -101,6 +106,12 @@ export default function Sidebar({
       {list}
 
       <div className="px-3 py-4 border-t border-[#1E3A29]/8 space-y-1">
+        {canInstall && onInstall && (
+          <button type="button" onClick={onInstall} className={`${ITEM} text-left text-[#346A1A] bg-[#3F7D20]/10 hover:bg-[#3F7D20]/16`}>
+            <Icon name="download" />
+            Install the staff app
+          </button>
+        )}
         <a href="/" className={`${ITEM} ${QUIET}`}>
           <Icon name="external" />
           View the website

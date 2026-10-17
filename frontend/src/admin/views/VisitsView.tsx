@@ -3,7 +3,7 @@ import { adminApi } from '../api/adminClient';
 import type { VisitRequest } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { useAdminList } from '../components/useAdminList';
-import { EditButtons, EditField, Notice, Pager, Panel, RowActions, SearchBox, StatusSelect, formatDate, formatDateTime, useDebounced } from '../components/ui';
+import { ContactActions, EditButtons, EditField, Notice, Pager, Panel, RowActions, SearchBox, StatusSelect, formatDate, formatDateTime, useDebounced } from '../components/ui';
 
 const GROUP_SIZES = ['1', '2', '3–5', '6–10', '11–20', '21–50', '50+'];
 type Draft = { id: number; name: string; phone: string; email: string; date: string; visitors: string; message: string };
@@ -146,6 +146,8 @@ export default function VisitsView() {
                     <EditButtons busy={busyId === visit.id} onCancel={() => setDraft(null)} />
                   </form>
                 ) : (
+                  <>
+                  <ContactActions name={visit.name} phone={visit.phone} email={visit.email} subject="Your visit to Bushaashe Garuwa" />
                   <RowActions
                     busy={busyId === visit.id}
                     onEdit={() =>
@@ -153,6 +155,7 @@ export default function VisitsView() {
                     }
                     onDelete={() => remove(visit)}
                   />
+                  </>
                 )}
               </li>
             ))}

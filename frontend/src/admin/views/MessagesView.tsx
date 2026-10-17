@@ -3,7 +3,7 @@ import { adminApi } from '../api/adminClient';
 import type { ContactMessage } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { useAdminList } from '../components/useAdminList';
-import { Notice, Pager, Panel, RowActions, SearchBox, StatusSelect, formatDateTime, useDebounced } from '../components/ui';
+import { ContactActions, Notice, Pager, Panel, RowActions, SearchBox, StatusSelect, formatDateTime, useDebounced } from '../components/ui';
 
 /** Messages sent from the Contact page. */
 export default function MessagesView() {
@@ -76,6 +76,7 @@ export default function MessagesView() {
               Written in {message.language}
             </div>
             {/* a visitor's own words are kept as written: a message can be deleted, not rewritten */}
+            <ContactActions name={message.name} phone={message.phone} email={message.email} subject="Re: your message to Bushaashe Garuwa" />
             <RowActions busy={busyId === message.id} onDelete={() => remove(message)} />
           </li>
         ))}

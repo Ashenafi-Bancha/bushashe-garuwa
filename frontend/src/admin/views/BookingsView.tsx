@@ -3,7 +3,7 @@ import { adminApi } from '../api/adminClient';
 import type { Booking } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { useAdminList } from '../components/useAdminList';
-import { BookingStatusSelect, EditButtons, EditField, Notice, Pager, Panel, RowActions, SearchBox, formatDate, formatDateTime, useDebounced } from '../components/ui';
+import { BookingStatusSelect, ContactActions, EditButtons, EditField, Notice, Pager, Panel, RowActions, SearchBox, formatDate, formatDateTime, useDebounced } from '../components/ui';
 
 type Draft = { id: number; name: string; phone: string; email: string; guests: string; message: string };
 
@@ -109,11 +109,14 @@ export default function BookingsView() {
                 <EditButtons busy={busyId === booking.id} onCancel={() => setDraft(null)} />
               </form>
             ) : (
+              <>
+              <ContactActions name={booking.name} phone={booking.phone} email={booking.email} subject={`Your booking at Bushaashe Garuwa (${booking.reference})`} />
               <RowActions
                 busy={busyId === booking.id}
                 onEdit={() => setDraft({ id: booking.id, name: booking.name, phone: booking.phone, email: booking.email ?? '', guests: String(booking.guests), message: booking.message ?? '' })}
                 onDelete={() => remove(booking)}
               />
+              </>
             )}
           </li>
         ))}

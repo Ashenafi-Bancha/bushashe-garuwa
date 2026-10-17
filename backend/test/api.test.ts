@@ -347,3 +347,30 @@ describe('what search engines read about each page', () => {
     assert.match(body, /<div id="root">/, 'still the website, which then shows its own "page not found"');
   });
 });
+
+describe('the staff app', () => {
+  let site = '';
+  let stop: () => Promise<void>;
+  before(async () => {
+    const folder = mkdtempSync(join(tmpdir(), 'bushaashe-staff-'));
+    writeFileSync(join(folder, 'index.html'), '<!doctype html><html><head><title>x</title><link rel="manifest" href="/manifest.webmanifest" /><link rel="apple-touch-icon" href="/apple-touch-icon.png" /></head><body></body></html>');
+    writeFileSync(join(folder, 'seo.json'), JSON.stringify({ url: 'https://bushaashegaruwa.com', name: 'Bushaashe Garuwa', alternateNames: [], description: '', image: '/og/home.jpg', logo: '/x.png', telephone: '', email: '', address: { streetAddress: '', addressLocality: '', addressRegion: '', addressCountry: 'ET' }, plusCode: '', maps: '', opens: '08:00', closes: '18:00', sameAs: [], keywords: '', noindex: ['/admin'], pages: [{ path: '/', title: 'Home', description: 'd' }], sections: [] }));
+    const env = loadEnv({ NODE_ENV: 'test', WEB_DIST: folder });
+    const db = await openTestDatabase();
+    const server = createApp(env, db, { mailer: memoryMailer() }).listen(0);
+    await new Promise((resolve) => server.once('listening', resolve));
+    site = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    stop = async () => { server.close(); await db.close(); rmSync(folder, { recursive: true, force: true }); };
+  });
+  after(() => stop());
+
+  it('gives the staff area its own manifest and icon, and leaves the public site alone', async () => {
+    const admin = await (await fetch(site + '/admin')).text();
+    assert.match(admin, /href="\/admin.webmanifest"/);
+    assert.match(admin, /href="\/staff\/apple-touch-icon.png"/);
+    assert.match(admin, /apple-mobile-web-app-capable/);
+    const home = await (await fetch(site + '/')).text();
+    assert.match(home, /href="\/manifest.webmanifest"/);
+    assert.doesNotMatch(home, /admin.webmanifest/);
+  });
+});

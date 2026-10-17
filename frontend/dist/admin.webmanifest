@@ -1,0 +1,64 @@
+{
+  "id": "/admin",
+  "name": "Bushaashe Garuwa Staff",
+  "short_name": "BG Staff",
+  "description": "Manage the Bushaashe Garuwa website: visit requests, bookings, messages, events, photos and text.",
+  "start_url": "/admin",
+  "scope": "/admin",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#F4EFE4",
+  "theme_color": "#3F7D20",
+  "icons": [
+    {
+      "src": "/staff/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/staff/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/staff/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Visit requests",
+      "url": "/admin#visits",
+      "icons": [
+        {
+          "src": "/staff/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Event bookings",
+      "url": "/admin#bookings",
+      "icons": [
+        {
+          "src": "/staff/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Messages",
+      "url": "/admin#messages",
+      "icons": [
+        {
+          "src": "/staff/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

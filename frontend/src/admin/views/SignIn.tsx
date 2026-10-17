@@ -62,7 +62,7 @@ export default function SignIn() {
               className="w-44 sm:w-60 aspect-[3/2] mx-auto rounded-2xl object-cover border-4 border-white shadow-[0_14px_34px_-14px_rgba(19,38,26,0.5)]"
             />
             {/* the name in the green it has on the home page (.brand-sign) */}
-            <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#15A864] tracking-tight mt-4">Bushaashe Garuwa</div>
+            <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#346A1A] tracking-tight mt-4">Bushaashe Garuwa</div>
             <div className="inline-flex items-center gap-2 rounded-full bg-[#E3EBD8] text-[#346A1A] text-[11px] font-bold tracking-[0.18em] uppercase px-3.5 py-1.5 mt-3">
               <Icon name="lock" className="w-3.5 h-3.5" />
               Staff area
@@ -162,10 +162,10 @@ export default function SignIn() {
       </main>
 
       {/* the foot of the page, in its own colour */}
-      <footer className="bg-[#1E3A29] text-white/70 text-xs sm:text-sm">
+      <footer className="bg-[#3F7D20] text-white/85 text-xs sm:text-sm">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>© {new Date().getFullYear()} Bushaashe Garuwa · Staff area</span>
-          <a href="/" className="font-semibold text-white hover:text-[#B9D38A] transition-colors">
+          <a href="/" className="font-semibold text-white underline-offset-4 hover:underline">
             Back to the website
           </a>
         </div>

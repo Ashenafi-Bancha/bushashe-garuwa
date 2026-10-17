@@ -30,9 +30,9 @@ export function StatCard({
       {hint && <div className="text-[#1E3A29]/45 text-xs mt-2">{hint}</div>}
     </>
   );
-  const card = 'block w-full text-left rounded-2xl bg-white border border-[#1E3A29]/8 p-5';
+  const card = 'block w-full text-left rounded-2xl bg-white border border-[#1E3A29]/8 p-5 shadow-[0_1px_2px_rgba(30,58,41,0.04),0_12px_26px_-22px_rgba(30,58,41,0.35)] transition-all duration-300';
   return onClick ? (
-    <button type="button" onClick={onClick} className={`${card} hover:border-[#3F7D20]/40 hover:-translate-y-0.5`}>
+    <button type="button" onClick={onClick} className={`${card} hover:border-[#3F7D20]/40 hover:-translate-y-0.5 hover:shadow-[0_2px_4px_rgba(30,58,41,0.05),0_20px_34px_-22px_rgba(30,58,41,0.45)]`}>
       {body}
     </button>
   ) : (
@@ -40,10 +40,11 @@ export function StatCard({
   );
 }
 
+/* the brand's own colours: clay for what is waiting, green for what is done */
 const STATUS_STYLES: Record<RequestStatus, string> = {
   new: 'bg-[#C4622D]/12 text-[#9A4A20]',
-  in_progress: 'bg-[#1E3A29]/10 text-[#1E3A29]',
-  done: 'bg-emerald-500/12 text-emerald-700',
+  in_progress: 'bg-[#E8B23A]/20 text-[#7A5A10]',
+  done: 'bg-[#3F7D20]/12 text-[#346A1A]',
   archived: 'bg-[#13261A]/8 text-[#1E3A29]/55',
 };
 
@@ -83,7 +84,7 @@ export function StatusSelect({
 
 const BOOKING_STATUS_STYLES: Record<BookingStatus, string> = {
   pending: 'bg-[#C4622D]/12 text-[#9A4A20]',
-  confirmed: 'bg-emerald-500/12 text-emerald-700',
+  confirmed: 'bg-[#3F7D20]/12 text-[#346A1A]',
   attended: 'bg-[#1E3A29]/10 text-[#1E3A29]',
   cancelled: 'bg-[#13261A]/8 text-[#1E3A29]/50',
 };
@@ -146,7 +147,7 @@ export function Pager({
 }
 
 export function Panel({ children }: { children: ReactNode }) {
-  return <div className="rounded-2xl bg-white border border-[#1E3A29]/8 p-5 sm:p-7">{children}</div>;
+  return <div className="rounded-2xl bg-white border border-[#1E3A29]/8 p-5 sm:p-7 shadow-[0_1px_2px_rgba(30,58,41,0.04),0_14px_30px_-26px_rgba(30,58,41,0.4)]">{children}</div>;
 }
 
 const NOTICE_STYLES = {
@@ -255,6 +256,77 @@ export function EditButtons({ busy, onCancel }: { busy: boolean; onCancel: () =>
       <button type="button" disabled={busy} onClick={onCancel} className="inline-flex admin-btn-quiet">
         Cancel
       </button>
+    </div>
+  );
+}
+
+/** A phone number as WhatsApp wants it: digits only, with Ethiopia's code instead of a leading 0 */
+export function whatsappNumber(phone: string): string {
+  const digits = phone.replace(/\D/g, '');
+  if (digits.startsWith('251')) return digits;
+  if (digits.startsWith('0')) return `251${digits.slice(1)}`;
+  if (digits.length === 9) return `251${digits}`;
+  return digits;
+}
+
+/**
+ * One tap to reach the guest: Call, WhatsApp and Email, each shown only when the
+ * guest gave that contact. The usual way to answer a request.
+ */
+export function ContactActions({ name, phone, email, subject }: { name: string; phone?: string | null; email?: string | null; subject: string }) {
+  if (!phone && !email) return null;
+  const first = name.split(' ')[0] ?? name;
+  const greeting = encodeURIComponent(`Hello ${first}, this is Bushaashe Garuwa. `);
+  const button = 'inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[13px] font-bold transition-all duration-200 hover:-translate-y-0.5';
+  return (
+    <div className="flex flex-wrap gap-2 mt-4">
+      {phone && (
+        <a href={`tel:${phone.replace(/[^\d+]/g, '')}`} className={`${button} bg-[#3F7D20] text-white hover:bg-[#346A1A]`}>
+          <Icon name="phone" className="w-4 h-4" />
+          Call
+        </a>
+      )}
+      {phone && (
+        <a
+          href={`https://wa.me/${whatsappNumber(phone)}?text=${greeting}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${button} bg-[#25D366]/12 text-[#0F7A3A] hover:bg-[#25D366]/20`}
+        >
+          <Icon name="chat" className="w-4 h-4" />
+          WhatsApp
+        </a>
+      )}
+      {email && (
+        <a href={`mailto:${email}?subject=${encodeURIComponent(subject)}`} className={`${button} bg-[#1E3A29]/8 text-[#1E3A29] hover:bg-[#1E3A29]/14`}>
+          <Icon name="mail" className="w-4 h-4" />
+          Email
+        </a>
+      )}
+    </div>
+  );
+}
+
+/** The card that offers to install the staff app (or explains how on an iPhone) */
+export function InstallCard({ canInstall, appleHint, onInstall }: { canInstall: boolean; appleHint: boolean; onInstall: () => void }) {
+  if (!canInstall && !appleHint) return null;
+  return (
+    <div className="rounded-2xl bg-[#3F7D20] text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4 shadow-[0_18px_34px_-24px_rgba(63,125,32,0.9)]">
+      <img src="/staff/icon-192.png" alt="" className="w-14 h-14 rounded-2xl flex-shrink-0" />
+      <div className="flex-1 min-w-0">
+        <div className="font-display text-lg font-extrabold">Install the staff app</div>
+        <p className="text-white/85 text-sm mt-1 leading-relaxed">
+          {canInstall
+            ? 'Open the staff area from your home screen like any app: faster, full screen, one tap away.'
+            : 'On iPhone or iPad: tap the Share button in Safari, then "Add to Home Screen".'}
+        </p>
+      </div>
+      {canInstall && (
+        <button type="button" onClick={onInstall} className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-[#346A1A] font-bold text-sm px-5 py-3 hover:bg-[#E3EBD8] transition-colors flex-shrink-0">
+          <Icon name="download" className="w-4 h-4" />
+          Install
+        </button>
+      )}
     </div>
   );
 }

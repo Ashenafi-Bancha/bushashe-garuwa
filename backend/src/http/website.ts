@@ -53,7 +53,15 @@ export function website(folder: string) {
     res.setHeader('Cache-Control', 'no-cache');
     if (!seo) return void res.sendFile(index);
     const answer = seoFor(seo, req.path);
-    res.status(answer.status).type('html').send(withSeo(shell, answer.head));
+    let html = withSeo(shell, answer.head);
+    // the staff area is an app of its own: its manifest, icon and colour
+    if (req.path === '/admin' || req.path.startsWith('/admin/')) {
+      html = html
+        .replace('href="/manifest.webmanifest"', 'href="/admin.webmanifest"')
+        .replace('href="/apple-touch-icon.png"', 'href="/staff/apple-touch-icon.png"')
+        .replace('</head>', '    <meta name="apple-mobile-web-app-capable" content="yes">\n    <meta name="apple-mobile-web-app-title" content="BG Staff">\n  </head>');
+    }
+    res.status(answer.status).type('html').send(html);
   });
 
   logger.info(`website: serving ${root}`);
