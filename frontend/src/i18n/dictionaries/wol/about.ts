@@ -133,6 +133,12 @@ const page: DeepPartial<Dictionary> = {
       desc: "Bushaashe Garoy banttappe kase de'ida aawato biittaanne wogaa naagidi takettida Bushaashe sunttan xeesettees. Eta taarikee Alambbooninne Garedewun kaallidi yiidi hachchi gibbiyaa naagiyaa so asan paxa gididi de'ees. Eta taarikiyaa nabbabanawu sunttaa dooridi.",
       // EN: The family is writing this history now. It will be published here soon.
       pending: "So asay ha taarikiyaa xuufiyan giigissiiddi de'oosona. Mata wodiya wuriyoode hagan wottana.",
+      // EN: Tap a name to read the story.
+      hint: "",
+      // EN: Read the full story
+      readMore: "",
+      // EN: Show less
+      readLess: "",
       // EN: The Children of Bushaashe
       childrenTitle: "Bushaashe Naata",
       // EN: The Generations Before Bushaashe

@@ -9,6 +9,19 @@ import CardGrid from '../components/CardGrid';
 /* The family line, oldest first — names, labels and histories live in the translations (t.about.lineage) */
 const lineage = ['bushaashe', 'alambo', 'garedew', 'current'] as const;
 
+/* Names of people and places in the family stories, set in bold italic. Each language
+   writes them its own way (Amharic adds letters in front, Wolaytta adds endings), so the
+   name itself is found and marked, wherever it sits in the word. */
+const NAMES: Record<string, RegExp> = {
+  en: /(Bushaashe Garuwa|Bushaashe|Alambo|Garedew|Emperor Haile Selassie|Haile Selassie|Addis Ababa|Wolaita|Silte|Were Ilu|Wollo)/g,
+  am: /(ቡሻሼ ጋሯ|ቡሻሼ|አላምቦ|ጋረደው|አፄ ኃይለ ሥላሴ|ኃይለ ሥላሴ|አዲስ አበባ|ወላይታ|ስልጤ|ወረኢሉ|ወሎ)/g,
+  wol: /(Bushaashe Gar[a-z']*|Bushaashe[a-z']*|Alamb+o[a-z']*|Garedew[a-z']*|Haile Sel+as+ie[a-z']*|Addis Ababa[a-z']*|Wola[iy]t+a[a-z']*|Silte[a-z']*|Were Ilu[a-z']*|Wol+o[a-z']*)/g,
+};
+function withNames(text: string, lang: string) {
+  const pattern = NAMES[lang] ?? NAMES.en!;
+  return text.split(pattern).map((part, i) => (i % 2 === 1 ? <strong key={i} className="font-bold italic text-[#13261A]">{part}</strong> : part));
+}
+
 const values = [
   { id: 'authenticity' },
   { id: 'respect' },
@@ -32,10 +45,10 @@ const offerItems = [
 ] as const;
 
 export default function About() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   const a = t.about;
-  const [person, setPerson] = useState<(typeof lineage)[number]>('bushaashe');
-  const selected = a.lineage.people[person];
+  // the story open under its name; none at first, each shows its opening lines and a Read more
+  const [person, setPerson] = useState<(typeof lineage)[number] | null>(null);
   return (
     <main>
 
@@ -191,107 +204,124 @@ export default function About() {
             </figcaption>
           </figure>
 
-          <div className="relative">
-            {/* connecting line */}
-            <div className="hidden lg:block absolute top-[76px] left-[12.5%] right-[12.5%] h-px bg-gradient-to-r from-[#C4622D]/80 via-[#C4622D]/40 to-[#C4622D]/80" />
-            <div className="lg:hidden absolute left-[52px] top-10 bottom-10 w-px bg-[#C4622D]/40" />
+          <p className="text-[#346A1A] text-sm font-bold mb-5">{a.lineage.hint}</p>
 
-            <div className="grid lg:grid-cols-4 gap-3 lg:gap-6">
-              {lineage.map((id, i) => {
-                const p = a.lineage.people[id];
-                const active = person === id;
-                return (
+          {/* one card per generation, oldest first; its story opens right under its name */}
+          <ol className="relative space-y-4">
+            {/* the line that joins the generations */}
+            <span aria-hidden="true" className="absolute left-[34px] sm:left-[42px] top-10 bottom-10 w-px bg-[#C4622D]/40" />
+            {lineage.map((id, i) => {
+              const p = a.lineage.people[id];
+              const open = person === id;
+              const paragraphs = p.story.trim() ? p.story.split(/\n\s*\n/) : [];
+              const panel = `story-${id}`;
+              return (
+                <li key={id} className={`relative rounded-3xl transition-all duration-500 ${open ? 'bg-white shadow-[0_24px_50px_-34px_rgba(19,38,26,0.55)] ring-1 ring-[#C4622D]/35' : 'bg-white/60 hover:bg-white'}`}>
                   <button
-                    key={id}
-                    onClick={() => setPerson(id)}
-                    aria-pressed={active}
-                    className={`relative flex lg:flex-col items-center lg:text-center gap-5 lg:gap-4 rounded-3xl p-4 lg:p-6 text-left transition-all duration-500 ${
-                      active ? 'bg-white ring-1 ring-[#C4622D]/50' : 'hover:bg-white'
-                    }`}
+                    type="button"
+                    onClick={() => setPerson(open ? null : id)}
+                    aria-expanded={open}
+                    aria-controls={panel}
+                    className="w-full flex items-start gap-4 sm:gap-6 p-4 sm:p-6 text-left"
                   >
                     <span
-                      className={`relative z-10 w-[72px] h-[72px] lg:w-[104px] lg:h-[104px] flex-shrink-0 rounded-full flex items-center justify-center font-display text-3xl lg:text-5xl transition-all duration-500 ${
-                        active ? 'bg-[#3F7D20] text-white shadow-[0_0_0_8px_rgba(63,125,32,0.18)]' : 'bg-white text-[#346A1A] ring-4 ring-[#E3EBD8]'
+                      className={`relative z-10 w-[40px] h-[40px] sm:w-[52px] sm:h-[52px] mt-1 flex-shrink-0 rounded-full grid place-items-center font-display text-lg sm:text-2xl font-extrabold transition-all duration-500 ${
+                        open ? 'bg-[#3F7D20] text-white shadow-[0_0_0_6px_rgba(63,125,32,0.18)]' : 'bg-white text-[#346A1A] ring-4 ring-[#E3EBD8]'
                       }`}
                     >
                       {i + 1}
                     </span>
-                    <span className="min-w-0">
-                      <span className="block text-[#346A1A] text-[11px] font-semibold tracking-[0.12em] uppercase mb-1.5">{p.generation}</span>
-                      <span className="block font-display text-2xl lg:text-3xl text-[#13261A]">{p.name}</span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[#346A1A] text-[11px] font-bold tracking-[0.12em] uppercase mb-1">{p.generation}</span>
+                      <span className="flex items-center justify-between gap-3">
+                        <span className="font-display text-2xl sm:text-3xl font-extrabold text-[#13261A] leading-tight">{p.name}</span>
+                        <span
+                          aria-hidden="true"
+                          className={`grid place-items-center w-9 h-9 flex-shrink-0 rounded-full border border-[#1E3A29]/15 text-[#346A1A] transition-transform duration-500 ${open ? 'rotate-180 bg-[#3F7D20]/10' : ''}`}
+                        >
+                          <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+                        </span>
+                      </span>
                       {p.period && <span className="block text-[#1E3A29]/70 text-sm mt-1">{p.period}</span>}
+                      {/* the opening lines, so the reader knows what the story holds */}
+                      {!open && paragraphs[0] && (
+                        <span className="block text-[#1E3A29]/75 text-[15px] sm:text-base leading-relaxed mt-3 line-clamp-2">{withNames(paragraphs[0], lang)}</span>
+                      )}
+                      {!open && (
+                        <span className="inline-flex items-center gap-1.5 text-[#346A1A] text-sm font-bold mt-3">
+                          {paragraphs.length ? a.lineage.readMore : a.lineage.pending}
+                          {paragraphs.length > 0 && <span aria-hidden="true">&rarr;</span>}
+                        </span>
+                      )}
                     </span>
                   </button>
-                );
-              })}
-            </div>
-          </div>
 
-          {/* history of the selected father */}
-          <div key={person} className="mt-10 rounded-3xl bg-white border border-[#1E3A29]/12 p-7 sm:p-10 animate-fade-up">
-            <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2 mb-5">
-              <h3 className="font-display text-3xl sm:text-4xl text-[#13261A]">{selected.name}</h3>
-              <span className="text-[#346A1A] text-sm">{selected.generation}{selected.period ? ` · ${selected.period}` : ''}</span>
-            </div>
-            {selected.story.trim() ? (
-              selected.story.split(/\n\s*\n/).map((para, i) => (
-                <p
-                  key={i}
-                  className={`text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-4 max-w-4xl ${
-                    i === 0 ? 'font-display text-xl sm:text-2xl text-[#13261A] leading-snug' : ''
-                  }`}
-                >
-                  {para}
-                </p>
-              ))
-            ) : (
-              <p className="text-[#1E3A29]/70 italic">{a.lineage.pending}</p>
-            )}
+                  {/* the whole story, opening smoothly under the name */}
+                  <div id={panel} className={`grid transition-[grid-template-rows] duration-500 ease-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+                    <div className="overflow-hidden">
+                      <div className="px-4 sm:px-6 pb-6 sm:pb-8 sm:pl-[100px]">
+                        {paragraphs.length ? (
+                          paragraphs.map((para, k) => (
+                            <p
+                              key={k}
+                              className={`text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-4 max-w-3xl ${k === 0 ? 'font-display text-xl sm:text-2xl text-[#13261A] leading-snug' : ''}`}
+                            >
+                              {withNames(para, lang)}
+                            </p>
+                          ))
+                        ) : (
+                          <p className="text-[#1E3A29]/70 italic">{a.lineage.pending}</p>
+                        )}
 
-            {person === 'bushaashe' && (
-              <>
-                {/* his children, as written on the sign at the gate */}
-                {a.lineage.children.length > 0 && (
-                  <div className="mt-8 pt-7 border-t border-[#1E3A29]/10">
-                    <h4 className="font-display text-xl sm:text-2xl text-[#13261A] mb-4">{a.lineage.childrenTitle}</h4>
-                    <ul className="flex flex-wrap gap-2.5">
-                      {a.lineage.children.map((child) => (
-                        <li key={child} className="rounded-full bg-[#E3EBD8] text-[#1E3A29] text-sm sm:text-base font-semibold px-4 py-2">
-                          {child} <span className="text-[#1E3A29]/55 font-normal">{selected.name}</span>
-                        </li>
-                      ))}
-                    </ul>
+                        {id === 'bushaashe' && (
+                          <>
+                            {/* his children, as written on the sign at the gate */}
+                            {a.lineage.children.length > 0 && (
+                              <div className="mt-6 pt-6 border-t border-[#1E3A29]/10">
+                                <h4 className="font-display text-xl sm:text-2xl text-[#13261A] mb-4">{a.lineage.childrenTitle}</h4>
+                                <ul className="flex flex-wrap gap-2.5">
+                                  {a.lineage.children.map((child) => (
+                                    <li key={child} className="rounded-full bg-[#E3EBD8] text-[#1E3A29] text-sm sm:text-base px-4 py-2">
+                                      <strong className="italic">{child}</strong> <span className="text-[#1E3A29]/60 italic">{p.name}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            )}
+
+                            {/* the generations before him, oldest first, leading to Bushaashe */}
+                            {a.lineage.ancestors.length > 0 && (
+                              <div className="mt-6 pt-6 border-t border-[#1E3A29]/10">
+                                <h4 className="font-display text-xl sm:text-2xl text-[#13261A] mb-4">{a.lineage.ancestorsTitle}</h4>
+                                <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
+                                  {[...a.lineage.ancestors, p.name].map((name, k, all) => (
+                                    <li key={`${name}-${k}`} className="flex items-center gap-2">
+                                      <span className={`rounded-full px-4 py-2 text-sm sm:text-base font-bold italic ${k === all.length - 1 ? 'bg-[#3F7D20] text-white' : 'bg-white ring-1 ring-[#1E3A29]/15 text-[#1E3A29]'}`}>{name}</span>
+                                      {k < all.length - 1 && (
+                                        <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#C4622D]" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                          <path d="M5 12h14" />
+                                          <path d="m13 6 6 6-6 6" />
+                                        </svg>
+                                      )}
+                                    </li>
+                                  ))}
+                                </ol>
+                              </div>
+                            )}
+                          </>
+                        )}
+
+                        <button type="button" onClick={() => setPerson(null)} className="inline-flex items-center gap-1.5 mt-6 text-[#346A1A] text-sm font-bold hover:underline underline-offset-4">
+                          <span aria-hidden="true">&uarr;</span>
+                          {a.lineage.readLess}
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                )}
-
-                {/* the generations before him, oldest first, leading to Bushaashe */}
-                {a.lineage.ancestors.length > 0 && (
-                  <div className="mt-8 pt-7 border-t border-[#1E3A29]/10">
-                    <h4 className="font-display text-xl sm:text-2xl text-[#13261A] mb-4">{a.lineage.ancestorsTitle}</h4>
-                    <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
-                      {[...a.lineage.ancestors, selected.name].map((name, i, all) => (
-                        <li key={`${name}-${i}`} className="flex items-center gap-2">
-                          <span
-                            className={`rounded-full px-4 py-2 text-sm sm:text-base font-semibold ${
-                              i === all.length - 1 ? 'bg-[#3F7D20] text-white' : 'bg-white ring-1 ring-[#1E3A29]/15 text-[#1E3A29]'
-                            }`}
-                          >
-                            {name}
-                          </span>
-                          {i < all.length - 1 && (
-                            <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#C4622D]" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                              <path d="M5 12h14" />
-                              <path d="m13 6 6 6-6 6" />
-                            </svg>
-                          )}
-                        </li>
-                      ))}
-                    </ol>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
+                </li>
+              );
+            })}
+          </ol>
         </div>
       </section>
 
