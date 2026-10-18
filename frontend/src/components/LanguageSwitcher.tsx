@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { HTML_LANG, LANGUAGES, WOLAYTTA_READY } from '../i18n/config';
 import { useI18n } from '../i18n/I18nProvider';
+import LanguageIcon from './LanguageIcon';
 
 /**
  * Globe menu listing the three languages. English is the default.
@@ -47,12 +48,8 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
             : 'text-sm px-4 py-2.5 text-white/80 bg-white/5 border border-white/10 hover:text-white'
         } ${open ? (onDark ? 'bg-white/15 text-white' : 'bg-[#1E3A29]/10 text-[#1E3A29]') : ''}`}
       >
-        {/* globe */}
-        <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="1.6" viewBox="0 0 24 24" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" />
-          <path d="M3.6 9h16.8M3.6 15h16.8" strokeLinecap="round" />
-          <path d="M12 3a15 15 0 0 1 0 18a15 15 0 0 1 0-18z" />
-        </svg>
+        {/* the chosen language's mark */}
+        <LanguageIcon lang={current.code} className="w-[20px] h-[20px]" />
         <span lang={HTML_LANG[current.code]}>{current.short}</span>
         <svg
           className={`max-[359px]:hidden w-3.5 h-3.5 transition-transform duration-300 ${open ? 'rotate-180' : ''}`}
@@ -66,7 +63,7 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
         role="listbox"
         aria-label={t.nav.language}
         inert={!open}
-        className={`absolute right-0 top-full mt-2.5 w-[13.75rem] sm:w-[16rem] rounded-2xl bg-white border border-[#1E3A29]/10 shadow-[0_18px_40px_-16px_rgba(30,58,41,0.4)] p-1.5 origin-top-right transition-all duration-200 z-50 ${
+        className={`absolute right-0 top-full mt-2.5 w-[15.25rem] sm:w-[16.5rem] rounded-2xl bg-white border border-[#1E3A29]/10 shadow-[0_18px_40px_-16px_rgba(30,58,41,0.4)] p-1.5 origin-top-right transition-all duration-200 z-50 ${
           open ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
         }`}
       >
@@ -89,8 +86,8 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
                 active ? 'bg-[#E3EBD8] text-[#13261A]' : 'text-[#13261A] hover:bg-[#F4EFE4]'
               }`}
             >
-              <span className="flex items-baseline gap-2 min-w-0">
-                <span className={`text-[11px] font-bold w-7 flex-shrink-0 ${active ? 'text-[#346A1A]' : 'text-[#1E3A29]/50'}`}>{l.short}</span>
+              <span className="flex items-center gap-2.5 min-w-0">
+                <LanguageIcon lang={l.code} className="w-[22px] h-[22px]" />
                 <span className={`text-sm truncate ${active ? 'font-bold' : 'font-medium'}`}>{l.name}</span>
               </span>
               {active && (
