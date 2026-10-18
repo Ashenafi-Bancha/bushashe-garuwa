@@ -14,15 +14,19 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
 
   useEffect(() => {
     if (!open) return;
-    const onDown = (e: MouseEvent) => {
+    const onDown = (e: PointerEvent) => {
       if (!ref.current?.contains(e.target as Node)) setOpen(false);
     };
+    // the list closes when the page scrolls, as on other sites
+    const onScroll = () => setOpen(false);
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
-    document.addEventListener('mousedown', onDown);
+    document.addEventListener('pointerdown', onDown);
     window.addEventListener('keydown', onKey);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => {
-      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('pointerdown', onDown);
       window.removeEventListener('keydown', onKey);
+      window.removeEventListener('scroll', onScroll);
     };
   }, [open]);
 
@@ -62,10 +66,12 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
         role="listbox"
         aria-label={t.nav.language}
         inert={!open}
-        className={`absolute right-0 max-[379px]:-right-11 top-full mt-2 w-[21rem] max-w-[calc(100vw-2rem)] rounded-2xl bg-white border border-[#1E3A29]/8 shadow-[0_24px_50px_-20px_rgba(30,58,41,0.35)] p-1.5 origin-top-right transition-all duration-300 z-50 ${
+        className={`absolute right-0 top-full mt-2.5 w-[13.75rem] sm:w-[16rem] rounded-2xl bg-white border border-[#1E3A29]/10 shadow-[0_18px_40px_-16px_rgba(30,58,41,0.4)] p-1.5 origin-top-right transition-all duration-200 z-50 ${
           open ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 -translate-y-1 pointer-events-none'
         }`}
       >
+        {/* a small point toward the button, so the list reads as its own */}
+        <span aria-hidden="true" className="absolute -top-[7px] right-6 w-3.5 h-3.5 rotate-45 bg-white border-l border-t border-[#1E3A29]/10 rounded-tl-[3px]" />
         {LANGUAGES.map((l) => {
           const active = lang === l.code;
           const soon = l.code === 'wol' && !WOLAYTTA_READY;
@@ -79,18 +85,21 @@ export default function LanguageSwitcher({ variant, onDark = true }: { variant: 
                 setLanguage(l.code);
                 setOpen(false);
               }}
-              className={`w-full flex items-center justify-between gap-3 rounded-xl px-3.5 py-2.5 text-left transition-colors duration-200 ${
-                active ? 'bg-[#3F7D20] text-white' : 'text-[#13261A] hover:bg-[#E3EBD8]'
+              className={`relative w-full flex items-center justify-between gap-2 rounded-xl px-3 py-3 sm:py-2.5 text-left transition-colors duration-200 ${
+                active ? 'bg-[#E3EBD8] text-[#13261A]' : 'text-[#13261A] hover:bg-[#F4EFE4]'
               }`}
             >
-              <span className="flex items-baseline gap-2.5 min-w-0">
-                <span className={`text-[11px] font-bold w-8 flex-shrink-0 ${active ? 'text-white/80' : 'text-[#1E3A29]/55'}`}>{l.short}</span>
-                <span className="text-sm font-medium">{l.name}</span>
+              <span className="flex items-baseline gap-2 min-w-0">
+                <span className={`text-[11px] font-bold w-7 flex-shrink-0 ${active ? 'text-[#346A1A]' : 'text-[#1E3A29]/50'}`}>{l.short}</span>
+                <span className={`text-sm truncate ${active ? 'font-bold' : 'font-medium'}`}>{l.name}</span>
               </span>
+              {active && (
+                <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0 text-[#3F7D20]" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="m5 12.5 4.5 4.5L19 7.5" />
+                </svg>
+              )}
               {soon && (
-                <span className={`text-[10px] font-semibold rounded-full px-2 py-0.5 flex-shrink-0 ${
-                  active ? 'bg-white/20 text-white' : 'bg-[#E3EBD8] text-[#346A1A]'
-                }`}>
+                <span className="text-[10px] font-semibold rounded-full px-2 py-0.5 flex-shrink-0 bg-[#E3EBD8] text-[#346A1A]">
                   {t.nav.wolayttaSoon}
                 </span>
               )}
