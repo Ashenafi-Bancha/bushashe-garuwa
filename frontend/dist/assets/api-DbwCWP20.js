@@ -78,7 +78,7 @@ Eta gita oosoy eti naagidobaa xalla gidenna; oona tamaarissidaakkonneppe attin. 
 
 Wodee gakkin he sohuwaa Bushaashe bantta na'awu Alambbossi shedhdhidosona. Immidoykka imotadan xalla gidennan hadaradanppekka attin. Hegeekka sohuwaa naagana mala, aawata bonchchana malanne pacissennan kaalliyaa yeletawu shedhdhiyoogaa. He wodeppe doommidi issi issi yeletay he hadaran de'iis. Hachchi ha penggiyaara geliyaa issi issi imattaykka he taarikiyaakko gelees.`},alambo:{name:`Alambba`,generation:`Bushaashe na'aa · Hadaraa ekkidaagaa`,period:``,story:`Bushaashe na'aa Alambboy, bantta aawaappe biittaa, taarikiyaanne Wolatta wogaa laattidosona. He laataa pacissennan naagidi kaalliyaa yeletawu aattanawu bantta de'uwaa immida gita aawa.
 
-Eta ammanoy paacettiis. Atse Hayle Sillaase wode, Alambboy Addis Ababan usuppun layttaa qashettidosona. Usuppun layttaappe guyyiyan bantta yohuwaa odanawu kawuwaa sintti shiiqidosona. Kawuwaara xalidi yayennan palamettidosona. Hegaa gishshawu «Kawuwaa bollan Xaliis» geetettidi gujo usuppun layttawu Addis Ababappe Wollo efin Were Iillun qashettidosona.
+Eta ammanoy paacettiis. Atse Hayle Sillaase wode, Alambboy Tunggan usuppun layttaa qashettidosona. Usuppun layttaappe guyyiyan bantta yohuwaa odanawu kawuwaa sintti shiiqidosona. Kawuwaara xalidi yayennan palamettidosona. Hegaa gishshawu «Kawuwaa bollan Xaliis» geetettidi gujo usuppun layttawu Tunggappe Wollo efin Were Iillun qashettidosona.
 
 Muleera tammanne naa"u layttaa Wolayttappenne bantta naagana giidi qaalaa gelido sohuwaappekka haakkidi de'idosona. Gidoppe attin, bantta soo asan dogettibookkona; he layttatun etu na'ay Garedewu bantta aawaa be'anawu adussa ogeta tohuwan hemettidosona.
 
@@ -86,7 +86,7 @@ Alambboyyoo naa"u macca naatinne oyddu attuma naati de'oosona; Garedewukka etapp
 
 Hagaadan oottidi Alambboy Bushaasheppe ekkido hadaraa tumatettan Garedewuyyoo aattiis.`},garedew:{name:`Garedew`,generation:`Alambbo Na'aa`,period:`1997 M.L. hayqqidosona`,story:`Garedewu Alambboy keehippe dosiyoo na'a. Eta aawaa qasho keettan aattido layttati eti aymala na'akkonne bessidosona.
 
-Alambboy Addis Ababan qashettido wode Wolayttappe biyaa kaamee deenna. Garedewu gediyan biidosona. Gallassaa muliyaa hemettidi, Silxxen aqidi, naa"antto gallassan Addis Ababa gakkidosona. Bantta aawaa oychchanawu he adussa ogiyaa zaari zaaridi hemettidosona.
+Alambboy Tunggan qashettido wode Wolayttappe biyaa kaamee deenna. Garedewu gediyan biidosona. Gallassaa muliyaa hemettidi, Silxxen aqidi, naa"antto gallassan Tungga gakkidosona. Bantta aawaa oychchanawu he adussa ogiyaa zaari zaaridi hemettidosona.
 
 Alambboy Wollo Were Iillu biiyoorin ogee yaa aduqqiis. Garedewu he ogiyaakka bantta ogiyan hemettidosona; ogiyan aqidosona. Hemetawu haniyaa caammaa bantta kushiyan sikkidi wottoosona.
 

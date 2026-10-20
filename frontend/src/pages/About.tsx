@@ -15,7 +15,7 @@ const lineage = ['bushaashe', 'alambo', 'garedew', 'current'] as const;
 const NAMES: Record<string, RegExp> = {
   en: /(Bushaashe Garuwa|Bushaashe|Alambo|Garedew|Emperor Haile Selassie|Haile Selassie|Addis Ababa|Wolaita|Silte|Were Ilu|Wollo)/g,
   am: /(ቡሻሼ ጋሯ|ቡሻሼ|አላምቦ|ጋረደው|አፄ ኃይለ ሥላሴ|ኃይለ ሥላሴ|አዲስ አበባ|ወላይታ|ስልጤ|ወረኢሉ|ወሎ)/g,
-  wol: /(Bushaashe Gar[a-z']*|Bushaashe[a-z']*|Alamb+o[a-z']*|Garedew[a-z']*|Haile Sel+as+ie[a-z']*|Addis Ababa[a-z']*|Wola[iy]t+a[a-z']*|Silte[a-z']*|Were Ilu[a-z']*|Wol+o[a-z']*)/g,
+  wol: /(Bushaashe Gar[a-z']*|Bushaashe[a-z']*|Alamb+o[a-z']*|Garedew[a-z']*|Atse Hayle Sil+aase[a-z']*|Hayle Sil+aase[a-z']*|Haile Sel+as+ie[a-z']*|Tung+a[a-z']*|Addis Ababa[a-z']*|Wola[iy]t+a[a-z']*|Silx+e[a-z']*|Silte[a-z']*|Were Ii?l+u?[a-z']*|Wol+o[a-z']*)/g,
 };
 function withNames(text: string, lang: string) {
   const pattern = NAMES[lang] ?? NAMES.en!;
