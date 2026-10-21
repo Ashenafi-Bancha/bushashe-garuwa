@@ -58,6 +58,24 @@ const page: DeepPartial<Dictionary> = {
     food: "Bushaashe Garuwaa aada keettaa giddon shashshamettida le'etan shiiqida aada Wolaytta qumata",
     // EN: The row of zigba trees at Bushaashe Garuwa, planted by Garedew, son of Alambo
     zigba: "",
+    // EN: Gulanttaa Keettaa at Bushaashe Garuwa: a round traditional Wolaita house with a thatched dome, dark bands on its woven walls and a wooden door
+    gulanttaa: "",
+    // EN: Inside Gulanttaa Keettaa: a traditional bed of wooden poles covered with a hide, against a wall of bamboo and split wood
+    traditionalBed: "",
+    // EN: Inside Gulanttaa Keettaa: woven baskets, lids and fans in red and green, and rows of clay pots, hung on a woven wall
+    artifactsWall: "",
+    // EN: Inside Gulanttaa Keettaa: a large clay water pot, a colourful lidded basket and bundles wrapped in dried enset leaves
+    artifactsCorner: "",
+    // EN: The memorial of Garedew Alambo at Bushaashe Garuwa: a bronze bust on a black column, beside the thatched house and the enset
+    garedewMemorial: "",
+    // EN: A white pigeon with a feathered crest and grey-brown wings on the red earth at Bushaashe Garuwa
+    whitePigeon: "",
+    // EN: A banana plant at Bushaashe Garuwa with a large bunch of green bananas and its purple flower
+    bananaBunch: "",
+    // EN: A papaya tree at Bushaashe Garuwa, heavy with green fruit and one turning yellow
+    papaya: "",
+    // EN: Young broad-leaved trees growing in rows in the red earth of the Bushaashe Garuwa farm
+    youngTrees: "",
     // EN: A young deer with large ears standing in the grass on the lawn at Bushaashe Garuwa
     deer: "",
     // EN: The farm building with a green roof among banana, enset and young trees on the four-hectare farm of Bushaashe Garuwa
@@ -155,6 +173,60 @@ const page: DeepPartial<Dictionary> = {
       // EN: The Zigba Trees
       title: "Zigbaa Mittata",
       // EN: Zigba trees planted by Garedew, standing in a long, even line like a peaceful procession.
+      desc: "",
+    },
+    gulanttaa: {
+      // EN: Gulanttaa Keettaa
+      title: "",
+      // EN: The second traditional house of the grounds: a thatched dome and woven walls banded in black.
+      desc: "",
+    },
+    traditionalBed: {
+      // EN: The Traditional Bed
+      title: "",
+      // EN: A bed of wooden poles under a hide, as the Wolaita slept in their houses.
+      desc: "",
+    },
+    artifactsWall: {
+      // EN: Baskets and Clay Pots
+      title: "",
+      // EN: Woven baskets, lids and fans, and rows of clay pots: the household of a Wolaita home.
+      desc: "",
+    },
+    artifactsCorner: {
+      // EN: The Water Pot and the Mesob
+      title: "",
+      // EN: A clay water pot, a bright lidded basket and bundles kept in dried enset leaves.
+      desc: "",
+    },
+    garedewMemorial: {
+      // EN: The Memorial of Garedew
+      title: "",
+      // EN: A bronze bust of Garedew Alambo stands on the grounds he made flourish.
+      desc: "",
+    },
+    whitePigeon: {
+      // EN: A Crested Pigeon
+      title: "",
+      // EN: A white pigeon with a crown of feathers, one of the birds kept on the grounds.
+      desc: "",
+    },
+    bananaBunch: {
+      // EN: Bananas Ripening
+      title: "",
+      // EN: A heavy bunch of green bananas and the purple flower beneath it.
+      desc: "",
+    },
+    papaya: {
+      // EN: The Papaya Tree
+      title: "",
+      // EN: Papayas growing in a crown under the leaves, one already turning yellow.
+      desc: "",
+    },
+    youngTrees: {
+      // EN: Young Trees
+      title: "",
+      // EN: New trees planted in rows: the grounds are still growing.
       desc: "",
     },
     deer: {

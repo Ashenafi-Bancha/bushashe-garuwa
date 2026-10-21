@@ -60,6 +60,17 @@ import barImg from './photos/restaurant-bar/bar.webp';
 import bananaImg from './photos/trees-plants/banana.webp';
 import herbsImg from './photos/trees-plants/herbs-and-ingredients.webp';
 
+// added October 2026: Gulanttaa Keettaa and what is inside, Garedew's memorial, plants and a bird
+import gulanttaaImg from './photos/cultural-houses/gulanttaa/gulanttaa-keettaa.webp';
+import traditionalBedImg from './photos/artifacts/traditional-bed.webp';
+import artifactsWallImg from './photos/artifacts/baskets-and-clay-pots.webp';
+import artifactsCornerImg from './photos/artifacts/clay-pot-and-mesob.webp';
+import garedewMemorialImg from './photos/people/garedew-memorial.webp';
+import whitePigeonImg from './photos/animals/white-pigeon.webp';
+import bananaBunchImg from './photos/trees-plants/banana-bunch.webp';
+import papayaImg from './photos/trees-plants/papaya.webp';
+import youngTreesImg from './photos/trees-plants/young-trees.webp';
+
 export const photos = {
   /** The main gate: carved tree-trunk pillars, the welcome sign and the bamboo doors (landscape) */
   gate: gateImg,
@@ -129,6 +140,24 @@ export const photos = {
   banana: bananaImg,
   /** The herb garden: herbs and flowering plants along the stone path (landscape) */
   herbs: herbsImg,
+  /** Gulanttaa Keettaa: the round thatched house with dark bands on its woven walls and a wooden door (landscape) */
+  gulanttaa: gulanttaaImg,
+  /** Inside the house: the traditional bed of wooden poles under a hide, before a wall of bamboo and wood (landscape) */
+  traditionalBed: traditionalBedImg,
+  /** Inside the house: woven baskets and clay pots on a woven wall (landscape) */
+  artifactsWall: artifactsWallImg,
+  /** Inside the house: a clay water pot, a colourful lidded basket and enset-leaf bundles (landscape) */
+  artifactsCorner: artifactsCornerImg,
+  /** The memorial of Garedew Alambo: a bronze bust on a black column beside the thatched house (landscape) */
+  garedewMemorial: garedewMemorialImg,
+  /** A white pigeon with a feathered crest on the red earth (landscape) */
+  whitePigeon: whitePigeonImg,
+  /** A banana plant with its bunch of green fruit and purple flower (landscape) */
+  bananaBunch: bananaBunchImg,
+  /** A papaya tree heavy with green fruit and one ripening (landscape) */
+  papaya: papayaImg,
+  /** Young broad-leaved trees growing in rows in the red earth (landscape) */
+  youngTrees: youngTreesImg,
 } as const;
 
 export type PhotoKey = keyof typeof photos;

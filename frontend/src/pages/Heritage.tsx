@@ -7,12 +7,12 @@ import PageHero from '../components/PageHero';
 
 /* Page structure — the text for each id lives in the translations (t.heritage.*) */
 const categories: { id: keyof Dictionary['heritage']['categories']; img?: string; to: string }[] = [
-  { id: 'houses', img: photos.meeshsho, to: '/heritage/houses' },
+  { id: 'houses', img: photos.meeshsho, to: '/heritage#houses' },
   { id: 'trees', img: photos.enset, to: '/heritage/trees' },
   { id: 'spices', img: photos.herbs, to: '/heritage/spices' },
   { id: 'animals', img: photos.deer, to: '/heritage/animals' },
   { id: 'crocodile', to: '/heritage/crocodile' },
-  { id: 'artifacts', to: '/heritage/artifacts' },
+  { id: 'artifacts', img: photos.artifactsWall, to: '/heritage#artifacts' },
   { id: 'food', img: photos.food, to: '/dine' },
   { id: 'clothing', img: photos.gifaataa2, to: '/heritage/clothing' },
   { id: 'music', to: '/heritage/music' },
@@ -23,7 +23,7 @@ const categories: { id: keyof Dictionary['heritage']['categories']; img?: string
    A house without `img` shows the placeholder until its photograph is added. */
 const houses: { name: string; img?: string }[] = [
   { name: 'Meeshsho Keettaa', img: photos.meeshsho },
-  { name: 'Gulanttaa Keettaa' },
+  { name: 'Gulanttaa Keettaa', img: photos.gulanttaa },
 ];
 
 /* The zigba keeps its Wolaytta and scientific names in every language */
@@ -94,6 +94,30 @@ export default function Heritage() {
         </div>
       </section>
 
+      {/* Inside Gulanttaa Keettaa: the traditional materials, which are also the artifacts of the collection */}
+      <section id="artifacts" className="bg-[#E3EBD8] mx-2 sm:mx-3 mb-12 sm:mb-16 rounded-[2rem] sm:rounded-[3rem] py-12 sm:py-16 lg:py-20" aria-labelledby="interior-title">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
+          <div className="max-w-2xl mb-8 sm:mb-10">
+            <span className="eyebrow !bg-white mb-5">{hg.interior.eyebrow}</span>
+            <h2 id="interior-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#13261A] leading-[1.05] mb-3">{hg.interior.title}</h2>
+            <p className="text-[#1E3A29]/75 leading-relaxed">{hg.interior.desc}</p>
+          </div>
+          <div data-wave className="grid md:grid-cols-3 gap-5 sm:gap-6">
+            {(['artifactsWall', 'traditionalBed', 'artifactsCorner'] as const).map((key) => (
+              <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
+                <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[4/3]">
+                  <img {...picture(photos[key], '(max-width: 767px) 100vw, 33vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
+                </div>
+                <figcaption className="px-4 py-4 sm:px-5">
+                  <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions[key].title}</span>
+                  <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions[key].desc}</span>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Trees: the zigba line, planted by our forefathers and the current generation */}
       <section id="trees" className="mx-2 sm:mx-3">
         <div className="rounded-[2rem] sm:rounded-[3rem] overflow-hidden bg-[#E3EBD8]">
@@ -133,7 +157,7 @@ export default function Heritage() {
             <p className="text-[#1E3A29]/70 leading-relaxed">{hg.nature.desc}</p>
           </div>
           <div data-wave className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {(['herbs', 'banana', 'gardenPlant', 'farm', 'deer', 'bird'] as const).map((key) => (
+            {(['herbs', 'banana', 'papaya', 'gardenPlant', 'youngTrees', 'farm', 'deer', 'bird', 'whitePigeon'] as const).map((key) => (
               <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
                 <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
                   <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />

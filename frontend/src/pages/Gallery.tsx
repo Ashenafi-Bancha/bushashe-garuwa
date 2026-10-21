@@ -43,6 +43,15 @@ const builtIn: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'hallAndBar', cat: 'grounds', span: '' },
   { key: 'banana', cat: 'grounds', span: '' },
   { key: 'herbs', cat: 'grounds', span: 'col-span-2' },
+  { key: 'gulanttaa', cat: 'culture', span: 'col-span-2 sm:row-span-2' },
+  { key: 'artifactsWall', cat: 'culture', span: 'col-span-2' },
+  { key: 'traditionalBed', cat: 'culture', span: '' },
+  { key: 'artifactsCorner', cat: 'culture', span: 'col-span-2' },
+  { key: 'garedewMemorial', cat: 'culture', span: 'col-span-2' },
+  { key: 'papaya', cat: 'grounds', span: '' },
+  { key: 'bananaBunch', cat: 'grounds', span: 'col-span-2' },
+  { key: 'whitePigeon', cat: 'grounds', span: '' },
+  { key: 'youngTrees', cat: 'grounds', span: '' },
 ];
 
 const filters: Filter[] = ['all', 'grounds', 'culture'];

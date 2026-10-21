@@ -104,6 +104,14 @@ const page: DeepPartial<Dictionary> = {
       // EN: Inside: the traditional grinding stone (wotta), tools for spinning and weaving cotton, household goods, and the traditional instruments of the Wolaita people.
       inside: "Etu giddon: gaacciyoo shuchchay (woxaa), daddiyoonne puuttuwaa suqqiyoo miishshati, son go'ettiyoo shaqaxatinne beni Wolaytta asaa miishshati de'oosona.",
     },
+    interior: {
+      // EN: Inside the Cultural House
+      eyebrow: "",
+      // EN: Inside Gulanttaa Keettaa
+      title: "",
+      // EN: Step through the door and Wolaita daily life is still in its place: the bed, the baskets, the clay pots and the tools of the home, the traditional materials the family has kept.
+      desc: "",
+    },
     trees: {
       // EN: Living Memory
       eyebrow: "Xayenna Taarikiyaa",

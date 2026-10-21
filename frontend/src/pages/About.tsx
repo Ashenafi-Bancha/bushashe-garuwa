@@ -273,6 +273,15 @@ export default function About() {
                           <p className="text-[#1E3A29]/70 italic">{a.lineage.pending}</p>
                         )}
 
+                        {id === 'garedew' && (
+                          <figure className="mt-2 mb-6 max-w-3xl bg-[#F4EFE4] rounded-[1.5rem] p-2">
+                            <img {...picture(photos.garedewMemorial, '(max-width: 767px) 100vw, 720px')} alt={t.photos.garedewMemorial} loading="lazy" className="w-full aspect-[3/2] object-cover rounded-[1.25rem]" />
+                            <figcaption className="px-3 py-3 text-sm text-[#1E3A29]/75">
+                              <strong className="text-[#13261A]">{t.photoCaptions.garedewMemorial.title}</strong> · {t.photoCaptions.garedewMemorial.desc}
+                            </figcaption>
+                          </figure>
+                        )}
+
                         {id === 'bushaashe' && (
                           <>
                             {/* his children, as written on the sign at the gate */}
