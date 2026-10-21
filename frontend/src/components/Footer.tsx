@@ -17,8 +17,13 @@ export default function Footer() {
   const { t } = useI18n();
   return (
     // the green of the website's buttons, with the words in white (the emails' footer matches)
-    <footer className="relative bg-[#3F7D20] text-white overflow-hidden rounded-t-[2rem] sm:rounded-t-[3rem] pb-16">
-      <div className="max-w-screen-xl mx-auto px-5 sm:px-8 pt-14 sm:pt-20">
+    <footer className="relative text-white">
+      {/* the top edge, drawn by hand: high at the left corner, wavering across, falling away on the right */}
+      <svg viewBox="0 0 1440 190" preserveAspectRatio="none" aria-hidden="true" className="block w-full h-[56px] sm:h-[90px] lg:h-[120px] -mb-px">
+        <path d="M0 0 C6.3 10.8 22.3 47.5 38 65 C53.7 82.5 78.7 95.7 94 105 C109.3 114.3 114 117.5 130 121 C146 124.5 159.8 125.3 190 126 C220.2 126.7 275.2 126.5 311 125 C346.8 123.5 375.2 116.3 405 117 C434.8 117.7 461.7 127.7 490 129 C518.3 130.3 543.5 128 575 125 C606.5 122 646 114.5 679 111 C712 107.5 740 103.5 773 104 C806 104.5 844 111 877 114 C910 117 944.3 122.7 971 122 C997.7 121.3 1010.2 111.7 1037 110 C1063.8 108.3 1102.2 110 1132 112 C1161.8 114 1189.3 116 1216 122 C1242.7 128 1262 139.7 1292 148 C1322 156.3 1371.3 165 1396 172 C1420.7 179 1432.7 187 1440 190 L1440 192 L0 192 Z" fill="#3F7D20" />
+      </svg>
+      <div className="bg-[#3F7D20] overflow-hidden pb-16">
+      <div className="max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-12 pb-12 sm:pb-16">
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
@@ -62,7 +67,7 @@ export default function Footer() {
           <div>© {new Date().getFullYear()} {t.footer.rights}</div>
         </div>
       </div>
-
+      </div>
     </footer>
   );
 }
