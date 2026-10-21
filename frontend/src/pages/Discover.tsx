@@ -3,6 +3,7 @@ import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import CardGrid from '../components/CardGrid';
+import GreenEdge from '../components/GreenEdge';
 
 const pillars = [
   { id: 'heritage' },
@@ -74,7 +75,10 @@ export default function Discover() {
       </section>
 
       {/* CTA */}
-      <section className="band-green mx-2 sm:mx-3 rounded-[2rem] py-20 text-center">
+      {/* the green runs on into the footer */}
+      <section className="band-end text-center">
+        <GreenEdge />
+        <div className="band-green pt-14 sm:pt-16 pb-14 sm:pb-20">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <h2 className="font-display text-3xl sm:text-4xl font-semibold text-white mb-4">{t.common.comeBePart}</h2>
           <p className="text-white/90 font-sans text-base max-w-xl mx-auto mb-10">{d.cta.desc}</p>
@@ -86,6 +90,7 @@ export default function Discover() {
               {d.cta.explore}
             </Link>
           </div>
+        </div>
         </div>
       </section>
     </main>

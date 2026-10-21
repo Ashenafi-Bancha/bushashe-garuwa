@@ -847,6 +847,8 @@ html.lenis, html.lenis body { height: auto; }
 
 /* green bands (the footer's colour) for the moments that ask something of the visitor */
 .band-green { background: #3F7D20; color: #FFFFFF; }
+/* a green band at the end of a page runs straight into the footer, so the footer drops its own edge */
+body:has(.band-end) .footer-edge { display: none; }
 .eyebrow.eyebrow-light { background: rgba(255, 255, 255, 0.16); color: #FFFFFF; }
 .btn-outline.btn-outline-light { color: #FFFFFF; border-color: rgba(255, 255, 255, 0.55); }
 .btn-outline.btn-outline-light:hover { border-color: #FFFFFF; background: rgba(255, 255, 255, 0.12); }

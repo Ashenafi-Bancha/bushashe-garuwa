@@ -2,6 +2,7 @@ import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import ContactButtons from '../components/ContactButtons';
+import GreenEdge from '../components/GreenEdge';
 
 /* The rooms in photographs: two large ones, then the kitchen, then the rest rooms; `span` is the width on the 6-column grid */
 const ROOMS = [
@@ -77,11 +78,15 @@ export default function Vip() {
       </section>
 
       {/* Arranging it */}
-      <section className="band-green mx-2 sm:mx-3 mb-3 rounded-[2rem] sm:rounded-[3rem] py-14 sm:py-20 text-center">
+      {/* the green runs on into the footer */}
+      <section className="band-end text-center">
+        <GreenEdge />
+        <div className="band-green pt-10 sm:pt-14 pb-14 sm:pb-20">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white mb-3">{v.cta.title}</h2>
           <p className="text-white/90 max-w-xl mx-auto mb-7">{v.cta.text}</p>
           <ContactButtons className="justify-center" onGreen />
+        </div>
         </div>
       </section>
     </main>

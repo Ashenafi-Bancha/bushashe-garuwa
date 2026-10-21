@@ -3,6 +3,7 @@ import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import ContactButtons from '../components/ContactButtons';
+import GreenEdge from '../components/GreenEdge';
 
 /* What the hall is used for, each with its photograph where there is one; the words are in the translations (t.meeting.uses) */
 const USES: { id: 'meetings' | 'trainings' | 'education' | 'weddings' | 'family' | 'anniversaries' | 'visitors'; photo?: PhotoKey }[] = [
@@ -77,11 +78,15 @@ export default function MeetingHall() {
       </section>
 
       {/* Arranging it */}
-      <section className="band-green mx-2 sm:mx-3 mb-3 rounded-[2rem] sm:rounded-[3rem] py-14 sm:py-20 text-center">
+      {/* the green runs on into the footer */}
+      <section className="band-end text-center">
+        <GreenEdge />
+        <div className="band-green pt-10 sm:pt-14 pb-14 sm:pb-20">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <h2 className="font-display text-3xl sm:text-4xl font-extrabold text-white mb-3">{m.cta.title}</h2>
           <p className="text-white/90 max-w-xl mx-auto mb-7">{m.cta.text}</p>
           <ContactButtons className="justify-center" onGreen />
+        </div>
         </div>
       </section>
     </main>
