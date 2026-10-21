@@ -148,6 +148,7 @@ export const en = {
     links: {
       home: 'Home',
       about: 'About',
+      family: 'Family History',
       discover: 'Discover',
       heritage: 'Heritage',
       experiences: 'Experiences',
@@ -163,6 +164,7 @@ export const en = {
       stories: 'Family Stories',
     },
     describe: {
+      family: 'Bushaashe, Alambo, Garedew and the family today.',
       discover: 'Our story, mission and vision.',
       contact: 'Phone, email and a message form.',
       vip: 'Private rooms for a family: cook, eat, celebrate and stay.',
@@ -490,6 +492,7 @@ export const en = {
       hint: 'Tap a name to read the story.',
       readMore: 'Read the full story',
       readLess: 'Show less',
+      open: 'Read the family history',
       childrenTitle: 'The Children of Bushaashe',
       ancestorsTitle: 'The Generations Before Bushaashe',
       children: ['Anano', 'Betalo', 'Ch\'afan', 'Alambo', 'Tero', 'Biramo', 'Mrs. Bote', 'Sundado', 'Embele'],

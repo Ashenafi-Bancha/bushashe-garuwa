@@ -146,6 +146,7 @@ export const am: Dictionary = {
     links: {
       home: 'ዋና ገጽ',
       about: 'ስለ እኛ',
+      family: 'የቤተሰብ ታሪክ',
       discover: 'ይተዋወቁን',
       heritage: 'ቅርስ',
       experiences: 'ተሞክሮዎች',
@@ -161,6 +162,7 @@ export const am: Dictionary = {
       stories: 'የቤተሰብ ታሪኮች',
     },
     describe: {
+      family: 'ቡሻሼ፣ አላምቦ፣ ጋረደው እና የዛሬው ቤተሰብ።',
       discover: 'ታሪካችን፣ ተልዕኳችንና ራዕያችን።',
       contact: 'ስልክ፣ ኢሜይልና የመልዕክት ቅጽ።',
       vip: 'ለቤተሰብ የግል ክፍሎች፦ ያብስሉ፣ ይመገቡ፣ ያክብሩ፣ ይደሩ።',
@@ -488,6 +490,7 @@ export const am: Dictionary = {
       hint: 'ታሪኩን ለማንበብ ስሙን ይንኩ።',
       readMore: 'ሙሉ ታሪኩን ያንብቡ',
       readLess: 'ያሳንሱ',
+      open: 'የቤተሰቡን ታሪክ ያንብቡ',
       childrenTitle: 'የቡሻሼ ልጆች',
       ancestorsTitle: 'ከቡሻሼ በፊት የነበሩ ትውልዶች',
       children: ['አናኖ', 'ቤታሎ', 'ጫፋን', 'አላምቦ', 'ቴሮ', 'ቢራሞ', 'ወ/ሮ ቦቴ', 'ሱንዳዶ', 'ኤምበለ'],

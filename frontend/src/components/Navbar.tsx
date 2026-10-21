@@ -7,7 +7,7 @@ import LanguageSwitcher from './LanguageSwitcher';
 import SocialLinks from './SocialLinks';
 import { lockScroll } from '../lib/motion';
 
-type PageKey = 'home' | 'events' | 'heritage' | 'experiences' | 'vip' | 'meeting' | 'stay' | 'dine' | 'about' | 'discover' | 'gallery' | 'contact' | 'visit';
+type PageKey = 'home' | 'events' | 'heritage' | 'experiences' | 'vip' | 'meeting' | 'stay' | 'dine' | 'about' | 'family' | 'discover' | 'gallery' | 'contact' | 'visit';
 
 const routes: Record<PageKey, string> = {
   home: '/',
@@ -19,6 +19,7 @@ const routes: Record<PageKey, string> = {
   stay: '/stay',
   dine: '/dine',
   about: '/about',
+  family: '/family-history',
   discover: '/discover',
   gallery: '/gallery',
   contact: '/contact',
@@ -50,6 +51,7 @@ const paths: Record<PageKey, ReactNode> = {
   stay: <><path d="M3 19V7M21 19v-5a3 3 0 0 0-3-3h-8v8" /><path d="M3 15h18" /><circle cx="6.5" cy="11" r="1.8" /></>,
   dine: <><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10" /><path d="M16 3c-1.7 1.5-2.5 3.5-2.5 6h3V21" /></>,
   about: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7.5v.5" /></>,
+  family: <><path d="M12 21v-7" /><path d="M12 14c-3.5 0-6-2.4-6-5.5S8.5 3 12 3s6 2.4 6 5.5S15.5 14 12 14z" /><path d="M12 14 8.5 10.5M12 11.5l3-3" /><path d="M8 21h8" /></>,
   discover: <><circle cx="12" cy="12" r="9" /><path d="m15.5 8.5-2 5-5 2 2-5z" /></>,
   gallery: <><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" /><circle cx="9" cy="10" r="1.8" /><path d="m4 18 5-5 4 4 3-3 4 4" /></>,
   contact: <><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1C10.7 20 4 13.3 4 5a1 1 0 0 1 1-1z" /></>,
@@ -83,7 +85,7 @@ export default function Navbar() {
 
   // a line under each page name in the panels and the phone menu
   const describe = (key: PageKey): string | undefined => {
-    if (key === 'discover' || key === 'contact' || key === 'vip' || key === 'meeting') return t.nav.describe[key];
+    if (key === 'discover' || key === 'contact' || key === 'vip' || key === 'meeting' || key === 'family') return t.nav.describe[key];
     if (key === 'home') return undefined;
     return t.home.quick.items[key];
   };
@@ -213,6 +215,7 @@ export default function Navbar() {
             {barLink('heritage')}
             {barGroup('services')}
             {barLink('about')}
+            {barLink('family')}
             {barLink('gallery')}
             {barLink('contact')}
           </nav>
@@ -269,6 +272,7 @@ export default function Navbar() {
 
           <ul className="mt-5 space-y-1">
             {menuRow('about', row++)}
+            {menuRow('family', row++)}
             {menuRow('discover', row++)}
             {menuRow('gallery', row++)}
             {menuRow('contact', row++)}

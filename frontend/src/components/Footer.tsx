@@ -9,7 +9,7 @@ import { MAPS_URL } from '../lib/location';
 const footerRoutes = {
   explore: { heritage: '/heritage', experiences: '/experiences', events: '/events', gallery: '/gallery' },
   stay: { vip: '/vip', guesthouse: '/stay', restaurant: '/dine', bar: '/dine#bar', foodEvents: '/events' },
-  discover: { story: '/discover', family: '/heritage/family', timeline: '/heritage/timeline', stories: '/heritage/stories' },
+  discover: { story: '/discover', family: '/family-history', timeline: '/heritage/timeline', stories: '/heritage/stories' },
   visit: { plan: '/visit', contact: '/contact', education: '/experiences/education', groups: '/experiences', schools: '/experiences/education' },
 };
 

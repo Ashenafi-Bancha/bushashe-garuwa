@@ -16,6 +16,7 @@ import Dine from './pages/Dine';
 import Visit from './pages/Visit';
 import Contact from './pages/Contact';
 import About from './pages/About';
+import FamilyHistory from './pages/FamilyHistory';
 import Gallery from './pages/Gallery';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
 import PageTransition from './components/PageTransition';
@@ -84,6 +85,7 @@ function AppLayout() {
         <Route path="/visit" element={<Visit />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/about" element={<About />} />
+        <Route path="/family-history" element={<FamilyHistory />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
         )}

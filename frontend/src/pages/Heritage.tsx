@@ -182,13 +182,13 @@ export default function Heritage() {
               <p className="text-[#1E3A29]/70 font-sans text-base leading-relaxed mb-8">
                 {hg.family.desc}
               </p>
-              <Link to="/about#family" className="btn-primary">
+              <Link to="/family-history" className="btn-primary">
                 {hg.family.cta}
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {hg.family.generations.map((gen, i) => (
-                <Link key={i} to="/about#family" className="heritage-card bg-white p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 min-w-0">
+                <Link key={i} to="/family-history" className="heritage-card bg-white p-4 sm:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 min-w-0">
                   <span className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-[#86A94F] text-[#13261A] flex items-center justify-center font-display text-lg sm:text-2xl font-extrabold flex-shrink-0">{i + 1}</span>
                   <span className="font-display text-lg sm:text-2xl font-bold text-[#1E3A29] leading-tight">{gen}</span>
                 </Link>

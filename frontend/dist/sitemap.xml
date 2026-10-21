@@ -109,6 +109,15 @@
     </image:image>
   </url>
   <url>
+    <loc>https://bushaashegaruwa.com/family-history</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://bushaashegaruwa.com/og/family.jpg</image:loc>
+    </image:image>
+  </url>
+  <url>
     <loc>https://bushaashegaruwa.com/discover</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>monthly</changefreq>

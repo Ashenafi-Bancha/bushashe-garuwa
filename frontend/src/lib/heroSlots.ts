@@ -23,7 +23,8 @@ export type HeroSlot =
   | 'gallery'
   | 'visit'
   | 'contact'
-  | 'about';
+  | 'about'
+  | 'family';
 
 /** A built-in photo and the part of it to keep in view (an object-position class) */
 export type BuiltInHero = { key: PhotoKey; pos: string };
@@ -55,6 +56,7 @@ export const HERO_SLOTS: Record<HeroSlot, { label: string; path: string; photos:
   visit: { label: 'Visit', path: '/visit', photos: [{ key: 'gate', pos: 'object-[center_18%]' }] },
   contact: { label: 'Contact', path: '/contact', photos: [{ key: 'gardens', pos: 'object-center' }] },
   about: { label: 'About', path: '/about', photos: [{ key: 'family', pos: 'object-[center_30%]' }] },
+  family: { label: 'Family History', path: '/family-history', photos: [{ key: 'garedewMemorial', pos: 'object-[center_8%]' }] },
 };
 
 /** Slots that show every photo, one after another */

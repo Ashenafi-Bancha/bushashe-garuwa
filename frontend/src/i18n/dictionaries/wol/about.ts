@@ -139,6 +139,8 @@ const page: DeepPartial<Dictionary> = {
       readMore: "",
       // EN: Show less
       readLess: "",
+      // EN: Read the family history
+      open: "",
       // EN: The Children of Bushaashe
       childrenTitle: "Bushaashe Naata",
       // EN: The Generations Before Bushaashe

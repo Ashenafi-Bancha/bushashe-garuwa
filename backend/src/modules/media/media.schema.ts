@@ -26,6 +26,7 @@ export const HeroSlot = z.enum([
   'visit',
   'contact',
   'about',
+  'family',
 ]);
 export type HeroSlot = z.infer<typeof HeroSlot>;
 

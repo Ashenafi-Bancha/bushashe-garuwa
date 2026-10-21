@@ -105,6 +105,8 @@ const page: DeepPartial<Dictionary> = {
       home: "Suwa",
       // EN: About
       about: "Nubaa",
+      // EN: Family History
+      family: "",
       // EN: Discover
       discover: "Xeella",
       // EN: Heritage
@@ -133,6 +135,8 @@ const page: DeepPartial<Dictionary> = {
       stories: "",
     },
     describe: {
+      // EN: Bushaashe, Alambo, Garedew and the family today.
+      family: "",
       // EN: Our story, mission and vision.
       discover: "Nu haydaa, kiitaa, wode aymuwaa",
       // EN: Phone, email and a message form.
