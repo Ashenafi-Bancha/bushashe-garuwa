@@ -109,12 +109,10 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
       <main>
 
         {/* ═════════ HERO ═════════
-            The photographs come first, and the name, the line and the buttons are
-            on the first screen with them. Computers: the photograph fills the upper
-            part of the screen from edge to edge and runs up behind the header, so the
-            header lies on the picture and is not a strip of its own; nothing else is
-            laid over it. Phones and tablets: right under the header, whole, at the
-            photograph's own shape.
+            Computers: the name, the line and the buttons on the left; the photographs
+            on the right, running in behind the words and melting into the page.
+            Phones and tablets: the photographs right under the header, whole, at
+            their own shape, with the words below.
             Each new photograph sweeps in from the right like a curtain while it
             settles; the one before drifts away underneath. The name and the words
             follow just below. Swipe on phones. */}
@@ -130,9 +128,9 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             />
           </Suspense>
         ) : (
-        <section className="relative" aria-label={h.hero.title}>
+        <section className="home-hero relative lg:mt-[72px] lg:h-[clamp(520px,calc(100svh-160px),880px)] lg:overflow-hidden" aria-label={h.hero.title}>
           <div
-            className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[70svh] lg:min-h-[400px] overflow-hidden bg-[#E3EBD8]"
+            className="relative mt-16 sm:mt-[72px] aspect-[3/2] overflow-hidden bg-[#E3EBD8] lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[62%] lg:h-full lg:aspect-auto lg:bg-transparent"
             onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
             onTouchEnd={(e) => {
               const start = touchX.current; touchX.current = null;
@@ -155,15 +153,13 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
               />
             </div>
 
-            {/* a faint shade behind the header words at the very top */}
-            <span className="hidden lg:block absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/45 via-black/15 to-transparent z-[3]" />
-
-            {/* only a thin soft edge joins the photograph to the page; nothing lies over it */}
-            <span className="absolute inset-x-0 bottom-0 h-6 lg:h-9 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
+            {/* computers: the photographs melt into the page behind the words, and softly at the foot */}
+            <span className="hidden lg:block absolute inset-0 z-[3] bg-[linear-gradient(90deg,#F4EFE4_0%,rgba(244,239,228,0.88)_16%,rgba(244,239,228,0.45)_36%,rgba(244,239,228,0)_60%)]" />
+            <span className="absolute inset-x-0 bottom-0 h-6 lg:h-24 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
 
 
             {/* the name of the place in the photograph, and the way to the next one */}
-            <div className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:bottom-auto lg:right-8 lg:top-[100px] flex items-center gap-2">
+            <div className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:right-8 lg:bottom-8 flex items-center gap-2">
               <span key={slide.id} className="rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
                 {slide.title}
               </span>
@@ -180,11 +176,12 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             </div>
           </div>
 
-          {/* the words, just below the photograph */}
-          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 lg:pt-3 pb-6">
+          {/* the words: below the photographs on phones, on their left on computers */}
+          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 lg:py-0 lg:h-full lg:flex lg:items-center">
+            <div className="lg:max-w-[min(38rem,46%)]">
             {/* the name in the lettering of the main gate, raised in 3D, sized to the screen */}
-            <HeroName title={h.hero.title} className="mb-6 lg:mb-4" />
-            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 lg:gap-12 animate-fade-up delay-300">
+            <HeroName title={h.hero.title} className="mb-6 lg:mb-7" />
+            <div className="flex flex-col justify-between gap-6 lg:gap-7 animate-fade-up delay-300">
               <div className="max-w-xl">
                 <p className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
                 <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
@@ -193,6 +190,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
                 <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>
               </div>
+            </div>
             </div>
           </div>
         </section>

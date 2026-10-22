@@ -238,6 +238,14 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   .hero-name .line-mask { display: inline-block; }
   html:lang(am) .hero-name { font-size: min(13vw, 7.5rem, 9.5svh); }
 }
+/* the home opening on computers: the name on two lines in the left column, beside the photographs */
+@media (min-width: 1024px) {
+  .home-hero .hero-name { font-size: min(5.4vw, 5.1rem, 11svh); }
+  .home-hero .hero-name > span { display: block; }
+  /* the Amharic name is short: one line */
+  html:lang(am) .home-hero .hero-name { font-size: min(6.2vw, 6.25rem, 12svh); }
+  html:lang(am) .home-hero .hero-name > span { display: inline; }
+}
 /* the name's letters rise one by one (components/HeroName.tsx); until the script takes over, each line rises whole */
 .hero-letter { display: inline-block; will-change: transform; }
 .hero-name.by-letter .line-mask > span { animation: none; }

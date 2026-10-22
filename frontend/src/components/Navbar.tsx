@@ -35,10 +35,10 @@ type GroupKey = keyof typeof groups;
 
 /**
  * The pages that open with a photograph running up behind the header, so the
- * header lies on the picture instead of being a strip of its own. The inner
+ * header lies on the picture instead of being a strip of its own. The other
  * pages open with their words on the left, so they keep the plain header.
  */
-const hasPhotoHero = (path: string) => path === '/preview/hero' || path === '/';
+const hasPhotoHero = (path: string) => path === '/preview/hero';
 
 /* ── Line icons, one per page ── */
 const paths: Record<PageKey, ReactNode> = {
