@@ -216,6 +216,7 @@ export const am: Dictionary = {
     },
     address: 'ቡሻሼ ጋሯ፣ ዳሞት ሶሬ ወረዳ፣ ወላይታ ዞን፣ ኢትዮጵያ',
     rights: 'ቡሻሼ ጋሯ። የወላይታ ቅርስ ሕያው የሆነበት።',
+    developedBy: 'ድረ-ገጹን ያበለጸገው፦',
   },
 
   notFound: {

@@ -218,6 +218,7 @@ export const en = {
     },
     address: 'Bushaashe Garuwa, Damot Sore Woreda, Wolaita Zone, Ethiopia',
     rights: 'Bushaashe Garuwa. Where Wolaita Heritage Lives.',
+    developedBy: 'Developed by',
   },
 
   notFound: {

@@ -65,6 +65,13 @@ export default function Footer() {
           </div>
           <div>© {new Date().getFullYear()} {t.footer.rights}</div>
         </div>
+
+        {/* who built the website, last of all */}
+        <div className="border-t border-white/15 pt-5 text-center text-xs text-white/85">
+          {t.footer.developedBy} <strong className="font-bold text-white">Ashenafi Bancha</strong>
+          <span aria-hidden="true" className="mx-2 text-white/50">·</span>
+          <a href="tel:+251938103340" className="font-semibold text-white hover:underline underline-offset-4">0938103340</a>
+        </div>
       </div>
       </div>
     </footer>
