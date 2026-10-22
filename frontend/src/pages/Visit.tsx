@@ -6,6 +6,7 @@ import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
 import LocationMap from '../components/LocationMap';
 import { sendVisitRequest } from '../lib/api';
+import Band from '../components/Band';
 
 type ExperienceType = keyof Dictionary['visit']['types'];
 
@@ -55,7 +56,7 @@ export default function Visit() {
       <PageHero slot="visit" eyebrow={v.hero.eyebrow} title={v.hero.title} desc={t.common.locationLine} />
 
       {/* Info strip */}
-      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-10">
+      <Band className="py-4">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
@@ -81,7 +82,7 @@ export default function Visit() {
             </div>
           </div>
         </div>
-      </section>
+      </Band>
 
       {/* Booking form */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">

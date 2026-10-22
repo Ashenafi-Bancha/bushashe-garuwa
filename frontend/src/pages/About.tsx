@@ -3,6 +3,7 @@ import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import CardGrid from '../components/CardGrid';
+import Band from '../components/Band';
 
 /* Icons per item — the text lives in the translations (t.about.*) */
 const values = [
@@ -87,7 +88,7 @@ export default function About() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+      <Band className="py-6 sm:py-10 lg:py-14">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
             <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.purpose.eyebrow}</div>
@@ -144,7 +145,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </Band>
 
       {/* Our Values */}
       <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
@@ -166,7 +167,7 @@ export default function About() {
       </section>
 
       {/* The family history has a page of its own */}
-      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-20 overflow-hidden">
+      <Band className="py-6 sm:py-10 lg:py-12 overflow-hidden">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
           <Link to="/family-history" className="group block bg-white rounded-[2rem] p-2.5 elev-1">
             <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
@@ -183,10 +184,10 @@ export default function About() {
             </Link>
           </div>
         </div>
-      </section>
+      </Band>
 
       {/* What we offer summary */}
-      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+      <Band className="py-6 sm:py-10 lg:py-14">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
             <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.offer.eyebrow}</div>
@@ -200,7 +201,7 @@ export default function About() {
             ))}
           </div>
         </div>
-      </section>
+      </Band>
 
       {/* CTA */}
       <section className="relative mx-2 sm:mx-3 rounded-[2rem] py-28 overflow-hidden">

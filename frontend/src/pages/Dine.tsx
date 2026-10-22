@@ -5,6 +5,7 @@ import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
+import Band from '../components/Band';
 
 type MenuCategory = keyof Dictionary['dine']['menu'];
 
@@ -66,7 +67,7 @@ export default function Dine() {
       </section>
 
       {/* Bar: what it is and when it is open, then its drinks in two kinds, cultural and modern */}
-      <section id="bar" className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[3rem] py-14 sm:py-20 lg:py-24 mb-12 sm:mb-16">
+      <Band id="bar" outer="mb-12 sm:mb-16" className="py-8 sm:py-12 lg:py-14">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 lg:items-end mb-10 sm:mb-12">
             <div>
@@ -131,7 +132,7 @@ export default function Dine() {
             ))}
           </div>
         </div>
-      </section>
+      </Band>
     </main>
   );
 }

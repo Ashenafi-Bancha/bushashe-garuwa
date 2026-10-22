@@ -1,5 +1,5 @@
 import { picture } from '../assets/photos';
-import type { ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { useI18n } from '../i18n/I18nProvider';
 import type { HeroSlot } from '../lib/heroSlots';
 import { heroPhotos, useSiteMedia } from '../lib/media';
@@ -7,9 +7,9 @@ import { heroPhotos, useSiteMedia } from '../lib/media';
 /**
  * Opening section of the inner pages, drawn like the home page: the photograph
  * comes first; the label, the title and the description follow just below, on
- * the first screen with it. On computers the photograph fills the upper part of
- * the screen from edge to edge and runs up behind the header; on phones it is
- * shown whole. Any <span> inside the title is picked out in moss green.
+ * the first screen with it. The photograph is shown whole, in its own shape,
+ * from edge to edge (on computers running up behind the header) and never
+ * taller than the screen. Any <span> inside the title is picked out in moss green.
  *
  * The photograph is the page's own (src/lib/heroSlots.ts), or the one staff
  * put in its place from the admin area.
@@ -23,17 +23,35 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
 }) {
   const { t, lang } = useI18n();
   const photo = heroPhotos(slot, useSiteMedia(), t, lang)[0]!;
+  // the photograph's own width to height, read once it has loaded (3:2 until then)
+  const [ratio, setRatio] = useState(1.5);
+  const img = useRef<HTMLImageElement>(null);
+  const measure = useCallback(() => {
+    const el = img.current;
+    if (el?.naturalWidth && el.naturalHeight) setRatio(el.naturalWidth / el.naturalHeight);
+  }, []);
+  useEffect(measure, [measure, photo.src]);
 
   return (
     <section className="relative">
-      <div className="relative mt-16 sm:mt-[72px] aspect-[3/2] lg:mt-0 lg:aspect-auto lg:h-[66svh] lg:min-h-[380px] overflow-hidden bg-[#E3EBD8]">
+      {/* the photograph's own shape, from edge to edge, so all of it shows. Only an upright
+          photograph is held to the screen's height, with a soft blurred copy filling the sides. */}
+      <div
+        className={`relative w-full mt-16 sm:mt-[72px] lg:mt-0 min-h-[220px] overflow-hidden bg-[#E3EBD8] ${ratio < 1.2 ? 'max-h-[78svh] lg:max-h-[100svh]' : ''}`}
+        style={{ aspectRatio: ratio }}
+      >
         <div key={photo.id} className="hero-slide hero-slide-first">
-          <img
-            {...picture(photo.src)}
-            alt={photo.alt}
-            fetchPriority="high"
-            className={`hero-slide-img w-full h-full object-cover ${photo.pos}`}
-          />
+          <div className="absolute inset-0">
+            <img src={photo.src} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-80" />
+            <img
+              ref={img}
+              {...picture(photo.src)}
+              alt={photo.alt}
+              fetchPriority="high"
+              onLoad={measure}
+              className="hero-slide-img relative w-full h-full object-contain"
+            />
+          </div>
         </div>
         {/* a faint shade behind the header words at the very top */}
         <span className="hidden lg:block absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-black/45 via-black/15 to-transparent z-[3]" />

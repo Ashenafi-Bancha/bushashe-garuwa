@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
+import Band from '../components/Band';
 
 /**
  * The family history (/family-history): the generations from Bushaashe to the
@@ -35,7 +36,7 @@ export default function FamilyHistory() {
     <main>
       <PageHero slot="family" eyebrow={a.lineage.eyebrow} title={a.lineage.title} desc={a.lineage.desc} />
 
-      <section id="family" className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-20 overflow-hidden">
+      <Band id="family" className="py-6 sm:py-10 lg:py-12 overflow-hidden">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           {/* the family today */}
           <figure className="bg-white rounded-[2rem] p-2.5 elev-1 mb-12">
@@ -167,7 +168,7 @@ export default function FamilyHistory() {
             })}
           </ol>
         </div>
-      </section>
+      </Band>
 
       {/* on to the rest of the story */}
       <section className="py-14 sm:py-20">

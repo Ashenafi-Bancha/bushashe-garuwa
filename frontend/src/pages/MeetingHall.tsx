@@ -4,6 +4,7 @@ import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import ContactButtons from '../components/ContactButtons';
 import GreenEdge from '../components/GreenEdge';
+import Band from '../components/Band';
 
 /* What the hall is used for, each with its photograph where there is one; the words are in the translations (t.meeting.uses) */
 const USES: { id: 'meetings' | 'trainings' | 'education' | 'weddings' | 'family' | 'anniversaries' | 'visitors'; photo?: PhotoKey }[] = [
@@ -58,7 +59,7 @@ export default function MeetingHall() {
       </section>
 
       {/* The hall and the grounds, in photographs */}
-      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] sm:rounded-[3rem] py-12 sm:py-16 lg:py-20" aria-labelledby="hall-photos">
+      <Band aria-labelledby="hall-photos" className="py-6 sm:py-10 lg:py-12">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <h2 id="hall-photos" className="font-display text-3xl sm:text-4xl font-extrabold text-[#13261A] leading-tight mb-8 sm:mb-10">{m.photosTitle}</h2>
           <div data-wave className="grid md:grid-cols-3 gap-5 sm:gap-6">
@@ -75,7 +76,7 @@ export default function MeetingHall() {
             ))}
           </div>
         </div>
-      </section>
+      </Band>
 
       {/* Arranging it */}
       {/* the green runs on into the footer */}

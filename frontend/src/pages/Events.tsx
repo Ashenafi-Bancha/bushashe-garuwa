@@ -8,6 +8,7 @@ import Photo from '../components/Photo';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import { eventText, useSiteEvents, type SiteEvent } from '../lib/events';
+import Band from '../components/Band';
 
 type Category = 'all' | 'food' | 'culture' | 'education' | 'music' | 'community';
 type AvailKind = 'limited' | 'open' | 'group' | 'full';
@@ -156,7 +157,7 @@ export default function Events() {
 
       {/* Featured events */}
       {featured.length > 0 && (
-        <section className="bg-[#E3EBD8] mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24">
+        <Band className="py-6 sm:py-10 lg:py-14">
           <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
             <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-10">{e.featured}</div>
             <div className="grid md:grid-cols-2 gap-6">
@@ -182,7 +183,7 @@ export default function Events() {
               ))}
             </div>
           </div>
-        </section>
+        </Band>
       )}
 
       {/* All events */}
@@ -246,7 +247,7 @@ export default function Events() {
       </section>
 
       {/* Moments from gatherings held on the grounds */}
-      <section className="bg-[#E3EBD8] mx-2 sm:mx-3 mb-3 rounded-[2rem] sm:rounded-[3rem] py-12 sm:py-16 lg:py-20" aria-labelledby="moments-title">
+      <Band aria-labelledby="moments-title" outer="mb-3" className="py-6 sm:py-10 lg:py-12">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8 sm:mb-10">
             <div className="max-w-2xl">
@@ -270,7 +271,7 @@ export default function Events() {
             ))}
           </div>
         </div>
-      </section>
+      </Band>
     </main>
   );
 }

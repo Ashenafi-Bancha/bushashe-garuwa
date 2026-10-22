@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { photos, picture } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import { eventText, type SiteEvent } from '../lib/events';
+import Band from './Band';
 
 /**
  * The twice-monthly cultural food evening on the home page: a deep forest panel
@@ -28,9 +29,8 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
           : t.events.live.open;
 
   return (
-    <section className="px-2 sm:px-3 py-6">
-      <div className="band-green rounded-[2rem] sm:rounded-[3rem] overflow-hidden">
-        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+    <Band tone="green" outer="py-4" className="overflow-hidden">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-10 sm:py-14 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <div data-reveal className="fade-section relative">
             <div className="img-zoom rounded-[1.75rem] overflow-hidden aspect-[4/3] lg:aspect-[4/5]">
               <img {...picture(photos.food)} alt={t.photos.food} loading="lazy" className="w-full h-full object-cover" />
@@ -84,7 +84,6 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+    </Band>
   );
 }

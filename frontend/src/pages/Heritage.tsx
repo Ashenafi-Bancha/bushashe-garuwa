@@ -4,6 +4,7 @@ import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
+import Band from '../components/Band';
 
 /* Page structure — the text for each id lives in the translations (t.heritage.*) */
 const categories: { id: keyof Dictionary['heritage']['categories']; img?: string; to: string }[] = [
@@ -95,7 +96,7 @@ export default function Heritage() {
       </section>
 
       {/* Inside Gulanttaa Keettaa: the traditional materials, which are also the artifacts of the collection */}
-      <section id="artifacts" className="bg-[#E3EBD8] mx-2 sm:mx-3 mb-12 sm:mb-16 rounded-[2rem] sm:rounded-[3rem] py-12 sm:py-16 lg:py-20" aria-labelledby="interior-title">
+      <Band id="artifacts" aria-labelledby="interior-title" outer="mb-12 sm:mb-16" className="py-6 sm:py-10 lg:py-12">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mb-8 sm:mb-10">
             <span className="eyebrow !bg-white mb-5">{hg.interior.eyebrow}</span>
@@ -116,7 +117,7 @@ export default function Heritage() {
             ))}
           </div>
         </div>
-      </section>
+      </Band>
 
       {/* Trees: the zigba line, planted by our forefathers and the current generation */}
       <section id="trees" className="mx-2 sm:mx-3">

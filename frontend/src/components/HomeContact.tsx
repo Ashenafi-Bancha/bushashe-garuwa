@@ -3,6 +3,7 @@ import { useI18n } from '../i18n/I18nProvider';
 import { DIRECTIONS_URL, MAPS_URL, MAP_EMBED_URL, PLUS_CODE } from '../lib/location';
 import ContactButtons from './ContactButtons';
 import SocialLinks from './SocialLinks';
+import Band from './Band';
 
 /**
  * The foot of the home page: every way to reach Bushaashe Garuwa (phone, email,
@@ -22,7 +23,7 @@ export default function HomeContact() {
   ];
 
   return (
-    <section id="contact" className="bg-[#E3EBD8] mx-2 sm:mx-3 mb-3 rounded-[2rem] sm:rounded-[3rem] py-12 sm:py-16 lg:py-20" aria-labelledby="home-contact-title">
+    <Band id="contact" aria-labelledby="home-contact-title" outer="mb-3" className="py-6 sm:py-10 lg:py-12">
       <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
         <div data-reveal className="fade-section max-w-2xl mb-8 sm:mb-12">
           <span className="eyebrow mb-5">{c.hero.eyebrow}</span>
@@ -80,6 +81,6 @@ export default function HomeContact() {
           </div>
         </div>
       </div>
-    </section>
+    </Band>
   );
 }
