@@ -5,11 +5,13 @@ import { PaginationQuery, SearchQuery } from '../../http/pagination.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
+import { RequestStatus } from '../shared/schemas.js';
 import { CreateVisitRequest, UpdateVisitRequest, UpdateVisitStatus } from './visit.schema.js';
 import type { VisitService } from './visit.service.js';
 
 const ListQuery = PaginationQuery.extend({
   q: SearchQuery,
+  status: RequestStatus.optional(),
   upcoming: z
     .enum(['true', 'false'])
     .optional()
@@ -32,8 +34,8 @@ export function visitRoutes(service: VisitService, guards: Guards) {
   });
 
   router.get('/', ...guards.admin, validateQuery(ListQuery), async (_req, res) => {
-    const { upcoming, q, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
-    sendData(res, await service.list(pagination, { upcoming, search: q }));
+    const { upcoming, q, status, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
+    sendData(res, await service.list(pagination, { upcoming, search: q, status }));
   });
 
   router.patch('/:id/status', ...guards.admin, validateBody(UpdateVisitStatus), async (req, res) => {

@@ -152,4 +152,22 @@ export const migrations: { id: number; name: string; sql: string }[] = [
        WHERE jsonb_exists(translations, 'wal');
     `,
   },
+  {
+    id: 5,
+    name: 'staff accounts get a name, a role, an on/off switch and a first-sign-in password change',
+    sql: `
+      ALTER TABLE staff_users ADD COLUMN name TEXT NOT NULL DEFAULT '';
+      -- owner: may add and manage staff; staff: everything else
+      ALTER TABLE staff_users ADD COLUMN role TEXT NOT NULL DEFAULT 'staff' CHECK (role IN ('owner', 'staff'));
+      -- a switched-off account cannot sign in, but its history stays
+      ALTER TABLE staff_users ADD COLUMN active BOOLEAN NOT NULL DEFAULT true;
+      -- set when an owner gives a temporary password: the person chooses their own at first sign-in
+      ALTER TABLE staff_users ADD COLUMN must_change_password BOOLEAN NOT NULL DEFAULT false;
+      -- a hash of the ADMIN_PASSWORD setting last applied, so a password changed in the staff area
+      -- is kept until the setting itself is changed
+      ALTER TABLE staff_users ADD COLUMN seed_hash TEXT;
+      -- the accounts made so far came from the settings: they are the owners
+      UPDATE staff_users SET role = 'owner';
+    `,
+  },
 ];

@@ -1,9 +1,17 @@
 import { Router } from 'express';
 import type { Guards } from '../../http/guards.js';
-import { bearerToken } from '../../http/require-admin.js';
+import { bearerToken, requireOwner } from '../../http/require-admin.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody } from '../../http/validate.js';
-import { LoginBody } from '../staff/staff.schema.js';
+import { parseId } from '../shared/params.js';
+import {
+  ChangePasswordBody,
+  CreateStaffBody,
+  LoginBody,
+  UpdateProfileBody,
+  UpdateStaffBody,
+  type StaffUser,
+} from '../staff/staff.schema.js';
 import type { StaffService } from '../staff/staff.service.js';
 import type { ContactRepository } from '../contact/contact.repository.js';
 import type { ContentRepository } from '../content/content.repository.js';
@@ -19,6 +27,14 @@ import type { VisitRepository } from '../visits/visit.repository.js';
  * POST /admin/logout    ends the session
  * GET  /admin/session   who is signed in (the staff area checks this when it opens)
  * GET  /admin/summary   the counts shown on the dashboard cards
+ *
+ * PUT  /admin/me                         one's own name
+ * PUT  /admin/me/password                one's own password (signs out the other devices)
+ * GET  /admin/staff                      owners: everyone with an account
+ * POST /admin/staff                      owners: a new account, with a temporary password shown once
+ * PUT  /admin/staff/:id                  owners: name, role, switched on or off
+ * POST /admin/staff/:id/reset-password   owners: a new temporary password
+ * DELETE /admin/staff/:id                owners: remove an account
  */
 export function adminRoutes(
   repositories: {
@@ -62,6 +78,42 @@ export function adminRoutes(
       repositories.content.lastUpdatedAt(),
     ]);
     sendData(res, { contact, visits, events, bookings, media, content: { edited, lastUpdatedAt }, generatedAt: new Date().toISOString() });
+  });
+
+  // ── one's own account ──
+
+  router.put('/me', validateBody(UpdateProfileBody), async (req, res) => {
+    sendData(res, await staff.rename(res.locals.staff as StaffUser, req.body.name));
+  });
+
+  router.put('/me/password', validateBody(ChangePasswordBody), async (req, res) => {
+    const { current, next } = req.body as ChangePasswordBody;
+    sendData(res, await staff.changePassword(res.locals.staff as StaffUser, current, next, bearerToken(req.get('authorization'))));
+  });
+
+  // ── owners: the staff accounts ──
+
+  router.get('/staff', requireOwner, async (_req, res) => {
+    sendData(res, { items: await staff.list() });
+  });
+
+  router.post('/staff', requireOwner, validateBody(CreateStaffBody), async (req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
+    sendData(res, await staff.create(req.body as CreateStaffBody), 201);
+  });
+
+  router.put('/staff/:id', requireOwner, validateBody(UpdateStaffBody), async (req, res) => {
+    sendData(res, await staff.update(res.locals.staff as StaffUser, parseId(req.params.id), req.body as UpdateStaffBody));
+  });
+
+  router.post('/staff/:id/reset-password', requireOwner, async (req, res) => {
+    res.setHeader('Cache-Control', 'no-store');
+    sendData(res, await staff.resetPassword(res.locals.staff as StaffUser, parseId(req.params.id)));
+  });
+
+  router.delete('/staff/:id', requireOwner, async (req, res) => {
+    await staff.remove(res.locals.staff as StaffUser, parseId(req.params.id));
+    sendData(res, { removed: true });
   });
 
   return router;

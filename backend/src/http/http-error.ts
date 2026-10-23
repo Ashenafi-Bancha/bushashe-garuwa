@@ -16,6 +16,12 @@ export class HttpError extends Error {
   static unauthorized(message = 'Sign in to the staff area first') {
     return new HttpError(401, 'unauthorized', message);
   }
+  static forbidden(message = 'Only an owner can do this') {
+    return new HttpError(403, 'forbidden', message);
+  }
+  static conflict(message: string) {
+    return new HttpError(409, 'conflict', message);
+  }
   static notFound(message = 'Not found') {
     return new HttpError(404, 'not_found', message);
   }

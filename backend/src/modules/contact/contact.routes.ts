@@ -5,6 +5,7 @@ import { PaginationQuery, SearchQuery } from '../../http/pagination.js';
 import { sendData } from '../../http/respond.js';
 import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
+import { RequestStatus } from '../shared/schemas.js';
 import { CreateContactMessage, UpdateContactStatus } from './contact.schema.js';
 import type { ContactService } from './contact.service.js';
 
@@ -14,7 +15,7 @@ import type { ContactService } from './contact.service.js';
  * PATCH /contact/:id/status   staff: mark as in_progress / done / archived
  * DELETE /contact/:id         staff: delete the message for good
  */
-const ListQuery = PaginationQuery.extend({ q: SearchQuery });
+const ListQuery = PaginationQuery.extend({ q: SearchQuery, status: RequestStatus.optional() });
 
 export function contactRoutes(service: ContactService, guards: Guards) {
   const router = Router();
@@ -25,8 +26,8 @@ export function contactRoutes(service: ContactService, guards: Guards) {
   });
 
   router.get('/', ...guards.admin, validateQuery(ListQuery), async (_req, res) => {
-    const { q, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
-    sendData(res, await service.list(pagination, { search: q }));
+    const { q, status, ...pagination } = res.locals.query as z.infer<typeof ListQuery>;
+    sendData(res, await service.list(pagination, { search: q, status }));
   });
 
   router.patch('/:id/status', ...guards.admin, validateBody(UpdateContactStatus), async (req, res) => {

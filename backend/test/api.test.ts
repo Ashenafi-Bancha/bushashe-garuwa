@@ -374,3 +374,23 @@ describe('the staff app', () => {
     assert.doesNotMatch(home, /admin.webmanifest/);
   });
 });
+
+describe('narrowing the staff lists by status', () => {
+  it('shows only the visit requests and messages with the status asked for', async () => {
+    const all = await read(await staff('/v1/visits?pageSize=100'));
+    const target = all.data.items[0];
+    assert.ok(target, 'the earlier tests left a visit request to work with');
+    await staff(`/v1/visits/${target.id}/status`, { method: 'PATCH', body: JSON.stringify({ status: 'done' }) });
+
+    const done = await read(await staff('/v1/visits?status=done&pageSize=100'));
+    assert.ok(done.data.items.length >= 1);
+    assert.ok(done.data.items.every((v: { status: string }) => v.status === 'done'));
+    assert.ok(done.data.items.some((v: { id: number }) => v.id === target.id));
+    const fresh = await read(await staff('/v1/visits?status=new&pageSize=100'));
+    assert.ok(fresh.data.items.every((v: { status: string }) => v.status === 'new'));
+    assert.equal((await staff('/v1/visits?status=nonsense')).status, 400);
+
+    const messages = await read(await staff('/v1/contact?status=archived'));
+    assert.ok(messages.data.items.every((m: { status: string }) => m.status === 'archived'));
+  });
+});

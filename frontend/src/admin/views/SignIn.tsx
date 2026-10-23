@@ -1,18 +1,19 @@
 import { useState } from 'react';
+import logo from '../../assets/brand/logo-small.webp';
 import { photos, picture } from '../../assets/photos';
 import { ApiError, apiEnabled } from '../../lib/api';
 import { useAdminSession } from '../auth/AdminSession';
 import { Icon } from '../components/icons';
 
 const FIELD =
-  'w-full rounded-2xl bg-white border px-4 py-4 text-base text-[#1E3A29] placeholder:text-[#1E3A29]/30 outline-none transition-colors';
-const LABEL = 'text-[#1E3A29]/65 text-xs font-bold tracking-[0.14em] uppercase';
+  'w-full rounded-2xl bg-[#F4EFE4]/70 border px-4 py-4 text-base text-[#1E3A29] placeholder:text-[#1E3A29]/30 outline-none transition-all focus:bg-white focus:shadow-[0_0_0_4px_rgba(63,125,32,0.12)]';
+const LABEL = 'text-[#1E3A29]/60 text-[12px] font-bold';
 
 /**
- * Staff sign-in: email and password, checked by the API.
- * One centred card on every screen: the photograph of Meeshsho Keettaa on top,
- * the name in the green of the home page, who the page is for, then the form. A bar across the foot of the page, in its own colour,
- * leads back to the website.
+ * Staff sign-in, drawn like the opening screen of a phone app: the photograph
+ * of Meeshsho Keettaa across the top with the name over it, and the form on a
+ * white sheet rising over the photograph. On a computer the photograph fills
+ * the left half and the form sits on the right.
  */
 export default function SignIn() {
   const { signIn } = useAdminSession();
@@ -47,33 +48,30 @@ export default function SignIn() {
     }
   };
 
-  const border = error ? 'border-[#C4622D]' : 'border-[#1E3A29]/15 focus:border-[#3F7D20]';
+  const border = error ? 'border-[#C4622D]' : 'border-transparent focus:border-[#3F7D20]';
 
   return (
-    <div className="min-h-[100svh] flex flex-col bg-[#F4EFE4]">
-      <main className="flex-1 flex items-center justify-center px-4 sm:px-6 py-10 sm:py-14">
-        <div className="w-full max-w-md">
-          {/* who this is: the photograph, the name, and who the page is for */}
-          <div className="text-center mb-7">
-            {/* the photograph of Meeshsho Keettaa, the traditional house, on phones and computers alike */}
-            <img
-              {...picture(photos.meeshsho, '(min-width: 640px) 240px, 176px')}
-              alt="Meeshsho Keettaa, the traditional Wolaita house at Bushaashe Garuwa"
-              className="w-44 sm:w-60 aspect-[3/2] mx-auto rounded-2xl object-cover border-4 border-white shadow-[0_14px_34px_-14px_rgba(19,38,26,0.5)]"
-            />
-            {/* the name in the green it has on the home page (.brand-sign) */}
-            <div className="font-display text-2xl sm:text-3xl font-extrabold text-[#346A1A] tracking-tight mt-4">Bushaashe Garuwa</div>
-            <div className="inline-flex items-center gap-2 rounded-full bg-[#E3EBD8] text-[#346A1A] text-[11px] font-bold tracking-[0.18em] uppercase px-3.5 py-1.5 mt-3">
-              <Icon name="lock" className="w-3.5 h-3.5" />
-              Staff area
-            </div>
+    <div className="min-h-[100svh] bg-[#F4EFE4] lg:grid lg:grid-cols-[1.1fr_1fr]">
+      {/* the photograph, with the name over it */}
+      <div className="relative h-[40svh] min-h-[260px] lg:h-auto lg:min-h-[100svh] overflow-hidden">
+        <img {...picture(photos.meeshsho, '(min-width: 1024px) 55vw, 100vw')} alt="" className="admin-ken absolute inset-0 w-full h-full object-cover" />
+        <span aria-hidden="true" className="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,38,26,0.25)_0%,rgba(19,38,26,0.15)_40%,rgba(30,70,20,0.85)_100%)]" />
+        <div className="absolute inset-x-0 bottom-10 lg:bottom-14 px-6 lg:px-14 text-white" style={{ paddingTop: 'env(safe-area-inset-top)' }}>
+          <img src={logo} alt="" className="w-14 h-14 lg:w-16 lg:h-16 rounded-full bg-white p-0.5 shadow-lg mb-4 admin-rise" />
+          <div className="font-display text-[2rem] lg:text-5xl font-extrabold tracking-tight leading-none admin-rise [animation-delay:80ms]">Bushaashe Garuwa</div>
+          <div className="inline-flex items-center gap-2 mt-3 rounded-full bg-white/18 backdrop-blur-md px-3.5 py-1.5 text-[11px] font-bold tracking-[0.18em] uppercase admin-rise [animation-delay:160ms]">
+            <Icon name="lock" className="w-3.5 h-3.5" />
+            Staff app
           </div>
+        </div>
+      </div>
 
-          <div className="bg-white rounded-[1.75rem] border border-[#1E3A29]/8 shadow-[0_24px_60px_-30px_rgba(19,38,26,0.35)] px-5 py-7 sm:px-9 sm:py-9">
-            <h1 className="font-display text-3xl font-extrabold text-[#1E3A29] text-center leading-tight">Sign in</h1>
-            <p className="text-[#1E3A29]/60 text-sm leading-relaxed text-center mt-2 mb-7">
-              For staff members of Bushaashe Garuwa only.
-            </p>
+      {/* the form, on a sheet rising over the photograph */}
+      <main className="relative -mt-7 lg:mt-0 rounded-t-[30px] lg:rounded-none bg-white lg:bg-[#F4EFE4] flex flex-col lg:justify-center min-h-[calc(60svh+28px)] lg:min-h-0">
+        <div className="w-full max-w-md mx-auto px-6 pt-8 pb-8 lg:px-10 admin-rise [animation-delay:120ms]">
+          <div className="lg:bg-white lg:rounded-[28px] lg:p-10 lg:shadow-[0_30px_70px_-40px_rgba(19,38,26,0.45)]">
+            <h1 className="font-display text-[1.9rem] font-extrabold text-[#1E3A29] leading-tight tracking-tight">Welcome back</h1>
+            <p className="text-[#1E3A29]/55 text-[15px] leading-relaxed mt-1.5 mb-7">Sign in to look after visits, bookings and the website.</p>
 
             {!apiEnabled && (
               <p role="alert" className="rounded-2xl bg-[#C4622D]/12 text-[#8c4227] text-sm px-4 py-3 mb-5">
@@ -92,7 +90,6 @@ export default function SignIn() {
                   type="email"
                   inputMode="email"
                   required
-                  autoFocus
                   autoComplete="username"
                   autoCapitalize="off"
                   autoCorrect="off"
@@ -148,28 +145,33 @@ export default function SignIn() {
               <button
                 type="submit"
                 disabled={busy || !apiEnabled}
-                className="w-full min-h-[52px] bg-[#3F7D20] hover:bg-[#346A1A] active:scale-[0.99] text-white font-bold rounded-full transition-all disabled:opacity-60 disabled:active:scale-100"
+                className="w-full min-h-[56px] mt-2 inline-flex items-center justify-center gap-2 bg-[#3F7D20] hover:bg-[#346A1A] active:scale-[0.98] text-white text-[16px] font-bold rounded-2xl shadow-[0_16px_30px_-16px_rgba(63,125,32,0.9)] transition-all disabled:opacity-60 disabled:active:scale-100"
               >
-                {busy ? 'Signing in…' : 'Sign in'}
+                {busy ? (
+                  <>
+                    <span className="w-4 h-4 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+                    Signing in…
+                  </>
+                ) : (
+                  <>
+                    Sign in
+                    <Icon name="arrowRight" className="w-4 h-4" />
+                  </>
+                )}
               </button>
             </form>
+
+            <p className="text-[#1E3A29]/45 text-[12px] leading-relaxed mt-6">
+              You stay signed in for up to 12 hours, or until you sign out. No account yet? Ask an owner to add you.
+            </p>
           </div>
 
-          <p className="text-[#1E3A29]/50 text-xs leading-relaxed text-center mt-6 px-4">
-            You stay signed in for up to 12 hours, or until you sign out. If you do not have an account, ask the site owner.
-          </p>
-        </div>
-      </main>
-
-      {/* the foot of the page, in its own colour */}
-      <footer className="bg-[#3F7D20] text-white/85 text-xs sm:text-sm">
-        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
-          <span>© {new Date().getFullYear()} Bushaashe Garuwa · Staff area</span>
-          <a href="/" className="font-semibold text-white underline-offset-4 hover:underline">
+          <a href="/" className="flex items-center justify-center gap-1.5 mt-8 text-[13px] font-semibold text-[#346A1A] hover:underline underline-offset-4">
+            <Icon name="arrowLeft" className="w-3.5 h-3.5" />
             Back to the website
           </a>
         </div>
-      </footer>
+      </main>
     </div>
   );
 }

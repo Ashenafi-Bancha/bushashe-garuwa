@@ -20,17 +20,17 @@ export function StatCard({
 }) {
   const body = (
     <>
-      <div className="flex items-start justify-between gap-3 mb-4">
+      <div className="flex items-start justify-between gap-3 mb-3 sm:mb-4">
         <span className="text-[#1E3A29]/60 text-[13px] font-semibold leading-snug">{label}</span>
-        <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#3F7D20]/10 text-[#3F7D20] flex-shrink-0">
+        <span className="grid place-items-center w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#3F7D20]/10 text-[#3F7D20] flex-shrink-0">
           <Icon name={icon} />
         </span>
       </div>
-      <div className="font-display text-4xl font-extrabold tracking-[-0.04em] text-[#1E3A29] leading-none tabular-nums">{value}</div>
+      <div className="font-display text-[2rem] sm:text-4xl font-extrabold tracking-[-0.04em] text-[#1E3A29] leading-none tabular-nums">{value}</div>
       {hint && <div className="text-[#1E3A29]/45 text-xs mt-2">{hint}</div>}
     </>
   );
-  const card = 'block w-full text-left rounded-2xl bg-white border border-[#1E3A29]/8 p-5 shadow-[0_1px_2px_rgba(30,58,41,0.04),0_12px_26px_-22px_rgba(30,58,41,0.35)] transition-all duration-300';
+  const card = 'block w-full text-left rounded-[22px] bg-white border border-[#1E3A29]/7 p-4 sm:p-5 shadow-[0_1px_2px_rgba(30,58,41,0.04),0_16px_30px_-24px_rgba(30,58,41,0.4)] transition-all duration-300 active:scale-[0.98]';
   return onClick ? (
     <button type="button" onClick={onClick} className={`${card} hover:border-[#3F7D20]/40 hover:-translate-y-0.5 hover:shadow-[0_2px_4px_rgba(30,58,41,0.05),0_20px_34px_-22px_rgba(30,58,41,0.45)]`}>
       {body}
@@ -71,7 +71,7 @@ export function StatusSelect({
       disabled={busy}
       onChange={(e) => onChange(e.target.value as RequestStatus)}
       aria-label="Change status"
-      className="rounded-full border border-[#1E3A29]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[#1E3A29] outline-none focus:border-[#1E3A29] disabled:opacity-50"
+      className={`admin-chip-select ${STATUS_STYLES[status]}`}
     >
       {STATUSES.map((s) => (
         <option key={s} value={s}>
@@ -105,7 +105,7 @@ export function BookingStatusSelect({
       disabled={busy}
       onChange={(e) => onChange(e.target.value as BookingStatus)}
       aria-label="Change booking status"
-      className={`rounded-full border-0 px-3 py-1.5 text-xs font-semibold outline-none focus:ring-2 focus:ring-[#1E3A29]/30 disabled:opacity-50 ${BOOKING_STATUS_STYLES[status]}`}
+      className={`admin-chip-select ${BOOKING_STATUS_STYLES[status]}`}
     >
       {BOOKING_STATUSES.map((s) => (
         <option key={s} value={s}>
@@ -147,7 +147,7 @@ export function Pager({
 }
 
 export function Panel({ children }: { children: ReactNode }) {
-  return <div className="rounded-2xl bg-white border border-[#1E3A29]/8 p-5 sm:p-7 shadow-[0_1px_2px_rgba(30,58,41,0.04),0_14px_30px_-26px_rgba(30,58,41,0.4)]">{children}</div>;
+  return <div className="admin-card">{children}</div>;
 }
 
 const NOTICE_STYLES = {
@@ -273,13 +273,13 @@ export function whatsappNumber(phone: string): string {
  * One tap to reach the guest: Call, WhatsApp and Email, each shown only when the
  * guest gave that contact. The usual way to answer a request.
  */
-export function ContactActions({ name, phone, email, subject }: { name: string; phone?: string | null; email?: string | null; subject: string }) {
-  if (!phone && !email) return null;
+export function ContactActions({ name, phone, email, subject, children }: { name: string; phone?: string | null; email?: string | null; subject: string; children?: ReactNode }) {
+  if (!phone && !email && !children) return null;
   const first = name.split(' ')[0] ?? name;
   const greeting = encodeURIComponent(`Hello ${first}, this is Bushaashe Garuwa. `);
-  const button = 'inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[13px] font-bold transition-all duration-200 hover:-translate-y-0.5';
+  const button = 'inline-flex items-center gap-1.5 rounded-full px-3.5 h-10 text-[13px] font-bold transition-all duration-200 active:scale-95';
   return (
-    <div className="flex flex-wrap gap-2 mt-4">
+    <div className="flex flex-wrap items-center gap-2 mt-4">
       {phone && (
         <a href={`tel:${phone.replace(/[^\d+]/g, '')}`} className={`${button} bg-[#3F7D20] text-white hover:bg-[#346A1A]`}>
           <Icon name="phone" className="w-4 h-4" />
@@ -303,6 +303,7 @@ export function ContactActions({ name, phone, email, subject }: { name: string; 
           Email
         </a>
       )}
+      {children}
     </div>
   );
 }
@@ -311,22 +312,135 @@ export function ContactActions({ name, phone, email, subject }: { name: string; 
 export function InstallCard({ canInstall, appleHint, onInstall }: { canInstall: boolean; appleHint: boolean; onInstall: () => void }) {
   if (!canInstall && !appleHint) return null;
   return (
-    <div className="rounded-2xl bg-[#3F7D20] text-white p-5 sm:p-6 flex flex-col sm:flex-row sm:items-center gap-4 shadow-[0_18px_34px_-24px_rgba(63,125,32,0.9)]">
-      <img src="/staff/icon-192.png" alt="" className="w-14 h-14 rounded-2xl flex-shrink-0" />
+    <div className="admin-card !p-4 sm:!p-5 flex items-center gap-3.5">
+      <img src="/staff/icon-192.png" alt="" className="w-12 h-12 rounded-[14px] flex-shrink-0 shadow-[0_6px_14px_-6px_rgba(19,38,26,0.5)]" />
       <div className="flex-1 min-w-0">
-        <div className="font-display text-lg font-extrabold">Install the staff app</div>
-        <p className="text-white/85 text-sm mt-1 leading-relaxed">
-          {canInstall
-            ? 'Open the staff area from your home screen like any app: faster, full screen, one tap away.'
-            : 'On iPhone or iPad: tap the Share button in Safari, then "Add to Home Screen".'}
+        <div className="font-bold text-[15px] text-[#1E3A29]">Get the staff app</div>
+        <p className="text-[#1E3A29]/55 text-[13px] leading-snug mt-0.5">
+          {canInstall ? 'On your home screen, full screen, one tap away.' : 'In Safari: tap Share, then "Add to Home Screen".'}
         </p>
       </div>
       {canInstall && (
-        <button type="button" onClick={onInstall} className="inline-flex items-center justify-center gap-2 rounded-full bg-white text-[#346A1A] font-bold text-sm px-5 py-3 hover:bg-[#E3EBD8] transition-colors flex-shrink-0">
+        <button type="button" onClick={onInstall} className="inline-flex items-center gap-1.5 rounded-full bg-[#3F7D20] text-white font-bold text-[13px] px-4 py-2.5 hover:bg-[#346A1A] active:scale-95 transition-all flex-shrink-0">
           <Icon name="download" className="w-4 h-4" />
           Install
         </button>
       )}
     </div>
+  );
+}
+
+/** A row of choices to narrow a list: All, New, In progress… with how many each holds when known */
+export function FilterChips<T extends string>({
+  options,
+  value,
+  onChange,
+}: {
+  options: { value: T; label: string; count?: number }[];
+  value: T;
+  onChange: (value: T) => void;
+}) {
+  return (
+    <div className="flex gap-2 overflow-x-auto no-scrollbar -mx-4 px-4 sm:mx-0 sm:px-0 sm:flex-wrap" role="tablist">
+      {options.map((option) => {
+        const active = option.value === value;
+        return (
+          <button
+            key={option.value}
+            type="button"
+            role="tab"
+            aria-selected={active}
+            onClick={() => onChange(option.value)}
+            className={`flex-shrink-0 inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] font-bold transition-all active:scale-95 ${
+              active ? 'bg-[#1E3A29] text-white shadow-[0_8px_16px_-10px_rgba(19,38,26,0.8)]' : 'bg-white text-[#1E3A29]/70 border border-[#1E3A29]/8 hover:text-[#1E3A29]'
+            }`}
+          >
+            {option.label}
+            {option.count !== undefined && option.count > 0 && (
+              <span className={`min-w-5 h-5 rounded-full text-[11px] leading-5 px-1.5 tabular-nums ${active ? 'bg-white/20' : 'bg-[#C4622D] text-white'}`}>{option.count}</span>
+            )}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Two choices side by side, like a phone's segmented control */
+export function Segmented<T extends string>({ options, value, onChange }: { options: { value: T; label: string }[]; value: T; onChange: (value: T) => void }) {
+  return (
+    <div className="inline-grid grid-flow-col auto-cols-fr rounded-full bg-[#1E3A29]/7 p-1">
+      {options.map((option) => (
+        <button
+          key={option.value}
+          type="button"
+          onClick={() => onChange(option.value)}
+          aria-pressed={option.value === value}
+          className={`rounded-full px-4 py-1.5 text-[13px] font-bold transition-all ${option.value === value ? 'bg-white text-[#1E3A29] shadow-[0_2px_8px_-2px_rgba(19,38,26,0.25)]' : 'text-[#1E3A29]/55'}`}
+        >
+          {option.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
+/** A small label with an icon, for the facts of a request (its date, the number of guests…) */
+export function Fact({ icon, children, tone = 'plain' }: { icon: IconName; children: ReactNode; tone?: 'plain' | 'strong' }) {
+  return (
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12px] font-semibold ${tone === 'strong' ? 'bg-[#3F7D20]/10 text-[#2E5E17]' : 'bg-[#1E3A29]/6 text-[#1E3A29]/75'}`}>
+      <Icon name={icon} className="w-3.5 h-3.5" />
+      {children}
+    </span>
+  );
+}
+
+/** Round edit and delete buttons, at the end of a card's row of actions */
+export function IconActions({ onEdit, onDelete, busy = false }: { onEdit?: () => void; onDelete: () => void; busy?: boolean }) {
+  const round = 'grid place-items-center w-10 h-10 rounded-full border transition-all active:scale-90 disabled:opacity-40';
+  return (
+    <span className="flex gap-2 ml-auto">
+      {onEdit && (
+        <button type="button" disabled={busy} onClick={onEdit} aria-label="Edit" title="Edit" className={`${round} border-[#1E3A29]/12 text-[#1E3A29]/70 hover:border-[#1E3A29]/40`}>
+          <Icon name="pencil" className="w-4 h-4" />
+        </button>
+      )}
+      <button type="button" disabled={busy} onClick={onDelete} aria-label="Delete" title="Delete" className={`${round} border-[#C62828]/25 text-[#C62828] hover:bg-[#C62828] hover:text-white`}>
+        <Icon name="trash" className="w-4 h-4" />
+      </button>
+    </span>
+  );
+}
+
+/** "today", "tomorrow", "in 3 days", or the date, for a visit or an event */
+export function whenLabel(date: string): string {
+  const day = new Date(`${date.slice(0, 10)}T00:00:00`);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const days = Math.round((day.getTime() - today.getTime()) / 86400000);
+  const short = day.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short' });
+  if (days === 0) return `Today · ${short}`;
+  if (days === 1) return `Tomorrow · ${short}`;
+  if (days > 1 && days < 7) return `In ${days} days · ${short}`;
+  return day.toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' });
+}
+
+/** Grey cards that shimmer while a list loads, in the shape of the cards to come */
+export function ListSkeleton({ rows = 3 }: { rows?: number }) {
+  return (
+    <ul className="space-y-3" aria-label="Loading">
+      {Array.from({ length: rows }, (_, i) => (
+        <li key={i} className="admin-card !p-4 sm:!p-5">
+          <div className="flex items-center gap-3">
+            <span className="admin-shimmer w-11 h-11 rounded-full" />
+            <span className="flex-1 space-y-2">
+              <span className="admin-shimmer block h-3.5 w-2/5 rounded-full" />
+              <span className="admin-shimmer block h-3 w-3/5 rounded-full" />
+            </span>
+          </div>
+          <span className="admin-shimmer block h-9 w-full rounded-2xl mt-4" />
+        </li>
+      ))}
+    </ul>
   );
 }

@@ -1,7 +1,9 @@
 import logo from '../../assets/brand/logo.png';
+import { ROLE_LABELS, type StaffUser } from '../api/types';
+import Avatar from './Avatar';
 import { Icon, type IconName } from './icons';
 
-export type SectionId = 'overview' | 'visits' | 'bookings' | 'messages' | 'events' | 'gallery' | 'hero' | 'content';
+export type SectionId = 'overview' | 'visits' | 'bookings' | 'messages' | 'events' | 'gallery' | 'hero' | 'content' | 'staff' | 'account';
 
 export type Section = {
   id: SectionId;
@@ -26,7 +28,8 @@ export default function Sidebar({
   current,
   onChoose,
   onSignOut,
-  email,
+  user,
+  onAccount,
   open,
   onClose,
   canInstall = false,
@@ -37,7 +40,9 @@ export default function Sidebar({
   onChoose: (id: SectionId) => void;
   onSignOut: () => void;
   /** who is signed in */
-  email?: string;
+  user: StaffUser | null;
+  /** opens My account */
+  onAccount: () => void;
   open: boolean;
   onClose: () => void;
   /** the browser offers to install the staff app */
@@ -120,16 +125,22 @@ export default function Sidebar({
           <Icon name="signOut" />
           Sign out
         </button>
-        {email && (
-          <div className="flex items-center gap-3 rounded-xl bg-[#F4EFE4] px-3 py-2.5 mt-2">
-            <span className="grid place-items-center w-9 h-9 rounded-full bg-[#1E3A29] text-white text-sm font-bold uppercase flex-shrink-0">
-              {email[0]}
+        {user && (
+          <button
+            type="button"
+            onClick={() => {
+              onAccount();
+              onClose();
+            }}
+            className="w-full flex items-center gap-3 rounded-xl bg-[#F4EFE4] px-3 py-2.5 mt-2 text-left hover:bg-[#EDE6D6] transition-colors"
+          >
+            <Avatar name={user.name} email={user.email} size="sm" />
+            <span className="min-w-0 flex-1">
+              <span className="block text-[#1E3A29] text-[13px] font-bold truncate">{user.name || user.email}</span>
+              <span className="block text-[#1E3A29]/50 text-[11px] font-semibold">{ROLE_LABELS[user.role]} · My account</span>
             </span>
-            <div className="min-w-0">
-              <div className="text-[#1E3A29]/45 text-[10px] font-bold tracking-[0.14em] uppercase">Signed in</div>
-              <div className="text-[#1E3A29] text-[13px] font-semibold truncate" title={email}>{email}</div>
-            </div>
-          </div>
+            <Icon name="chevronRight" className="w-4 h-4 text-[#1E3A29]/35" />
+          </button>
         )}
       </div>
     </div>

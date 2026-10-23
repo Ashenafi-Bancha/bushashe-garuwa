@@ -57,13 +57,20 @@ export function visitRepository(db: Queryable) {
     /** Upcoming visits first when `upcoming` is set, otherwise newest requests first */
     async list(
       { page, pageSize }: Pagination,
-      { upcoming = false, search }: { upcoming?: boolean; search?: string } = {},
+      { upcoming = false, search, status }: { upcoming?: boolean; search?: string; status?: string } = {},
     ): Promise<Page<VisitRequest>> {
       const clauses: string[] = [];
+      const params: unknown[] = [];
       if (upcoming) clauses.push(`visit_date >= ${TODAY} AND status != 'archived'`);
-      if (search) clauses.push('(name ILIKE $1 OR phone ILIKE $1 OR email ILIKE $1 OR message ILIKE $1)');
+      if (search) {
+        params.push(`%${search}%`);
+        clauses.push(`(name ILIKE $${params.length} OR phone ILIKE $${params.length} OR email ILIKE $${params.length} OR message ILIKE $${params.length})`);
+      }
+      if (status) {
+        params.push(status);
+        clauses.push(`status = $${params.length}`);
+      }
       const where = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
-      const params = search ? [`%${search}%`] : [];
       const order = upcoming ? 'visit_date ASC, id ASC' : 'created_at DESC, id DESC';
       const rows = await db.query<Row>(
         `SELECT * FROM visit_requests ${where} ORDER BY ${order} LIMIT $${params.length + 1} OFFSET $${params.length + 2}`,

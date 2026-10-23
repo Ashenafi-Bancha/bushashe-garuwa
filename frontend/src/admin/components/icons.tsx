@@ -2,6 +2,38 @@ import type { ReactNode } from 'react';
 
 /** The staff area's icons: simple line drawings, all on the same 24-unit grid. */
 const PATHS = {
+  user: (
+    <>
+      <circle cx="12" cy="8" r="4" />
+      <path d="M4 21a8 8 0 0 1 16 0" />
+    </>
+  ),
+  team: (
+    <>
+      <circle cx="9" cy="8" r="3.5" />
+      <path d="M2.5 20a6.5 6.5 0 0 1 13 0" />
+      <path d="M16 4.6a3.5 3.5 0 0 1 0 6.8M18 14a6.5 6.5 0 0 1 3.5 6" />
+    </>
+  ),
+  key: (
+    <>
+      <circle cx="8" cy="15" r="4.5" />
+      <path d="m11.2 11.8 8.8-8.8M17 6l2.5 2.5M14.5 8.5 16.5 10.5" />
+    </>
+  ),
+  copy: (
+    <>
+      <rect x="8" y="8" width="13" height="13" rx="2.5" />
+      <path d="M16 8V5.5A2.5 2.5 0 0 0 13.5 3h-8A2.5 2.5 0 0 0 3 5.5v8A2.5 2.5 0 0 0 5.5 16H8" />
+    </>
+  ),
+  chevronRight: <path d="m9 5 7 7-7 7" />,
+  shield: (
+    <>
+      <path d="M12 2.8 4.5 5.6v6.1c0 4.7 3.2 8.2 7.5 9.5 4.3-1.3 7.5-4.8 7.5-9.5V5.6Z" />
+      <path d="m8.8 12 2.2 2.2 4.4-4.4" />
+    </>
+  ),
   overview: (
     <>
       <rect x="3" y="3" width="7" height="9" rx="1.5" />

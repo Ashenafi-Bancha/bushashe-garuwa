@@ -21,7 +21,7 @@ export function visitService(repo: VisitRepository, notify?: Notifier) {
       return visit;
     },
 
-    list: (pagination: Pagination, options?: { upcoming?: boolean; search?: string }) => repo.list(pagination, options),
+    list: (pagination: Pagination, options?: { upcoming?: boolean; search?: string; status?: RequestStatus }) => repo.list(pagination, options),
 
     async setStatus(id: number, status: RequestStatus) {
       const updated = await repo.updateStatus(id, status);

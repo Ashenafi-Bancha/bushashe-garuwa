@@ -850,6 +850,148 @@ html.lenis, html.lenis body { height: auto; }
 }
 .admin-btn-quiet.on-dark:hover:not(:disabled) { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.45); }
 
+/* ── Staff app: the look of a phone app ── */
+/* a card: white, softly rounded, lifted by a faint shadow */
+.admin-card {
+  /* no display here, so the flex and grid classes on a card take effect */
+  border-radius: 24px;
+  background: #fff;
+  border: 1px solid rgba(30, 58, 41, 0.07);
+  padding: 20px;
+  box-shadow: 0 1px 2px rgba(30, 58, 41, 0.04), 0 16px 32px -26px rgba(30, 58, 41, 0.45);
+}
+@media (min-width: 640px) { .admin-card { padding: 26px; } }
+
+/* a square button with an icon over its label, as on a phone's settings screen */
+.admin-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 18px;
+  border: 1px solid rgba(30, 58, 41, 0.08);
+  background: #fff;
+  padding: 14px 12px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1E3A29;
+  text-align: center;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+.admin-tile:hover:not(:disabled) { border-color: rgba(63, 125, 32, 0.35); }
+.admin-tile:active:not(:disabled) { transform: scale(0.96); background: #F7F3EA; }
+.admin-tile:disabled { opacity: 0.45; }
+
+/* an on/off switch drawn from a checkbox */
+.admin-switch {
+  appearance: none;
+  flex-shrink: 0;
+  width: 50px;
+  height: 30px;
+  border-radius: 999px;
+  background: rgba(30, 58, 41, 0.18);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+.admin-switch::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(19, 38, 26, 0.3);
+  transition: transform 0.25s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+}
+.admin-switch:checked { background: #3F7D20; }
+.admin-switch:checked::after { transform: translateX(20px); }
+.admin-switch:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* the phone's top bar: frosted, with a hairline once the page scrolls under it */
+.admin-topbar {
+  background: rgba(244, 239, 228, 0.82);
+  -webkit-backdrop-filter: saturate(1.6) blur(18px);
+  backdrop-filter: saturate(1.6) blur(18px);
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+.admin-topbar.is-scrolled { background: rgba(251, 248, 241, 0.9); box-shadow: 0 1px 0 rgba(30, 58, 41, 0.08), 0 10px 24px -20px rgba(19, 38, 26, 0.4); }
+
+/* the tab bar floating over the foot of the screen */
+.admin-tabbar {
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: saturate(1.8) blur(22px);
+  backdrop-filter: saturate(1.8) blur(22px);
+  border: 1px solid rgba(30, 58, 41, 0.07);
+  box-shadow: 0 18px 40px -18px rgba(19, 38, 26, 0.45), 0 2px 6px rgba(19, 38, 26, 0.06);
+}
+
+/* the green card that opens the day */
+.admin-welcome {
+  background:
+    radial-gradient(120% 140% at 100% 0%, rgba(134, 169, 79, 0.55) 0%, transparent 55%),
+    linear-gradient(140deg, #3F7D20 0%, #2A5A17 60%, #1E4413 100%);
+  box-shadow: 0 26px 50px -28px rgba(46, 94, 23, 0.85);
+}
+
+/* a screen arriving: a short rise and fade, like a phone app moving between screens */
+@keyframes adminEnter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.admin-enter { animation: adminEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes adminRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.admin-rise { animation: adminRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
+/* the sign-in photograph drifts slowly closer */
+@keyframes adminKen { from { transform: scale(1.12); } to { transform: scale(1); } }
+.admin-ken { animation: adminKen 9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+/* sheets slide up on phones and grow in on computers; their backdrop fades in */
+@keyframes adminSheetUp { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes adminSheetIn { from { opacity: 0; transform: translateY(14px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes adminFade { from { opacity: 0; } to { opacity: 1; } }
+.admin-sheet { animation: adminSheetUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@media (min-width: 640px) { .admin-sheet { animation-name: adminSheetIn; animation-duration: 0.3s; } }
+.admin-backdrop { animation: adminFade 0.3s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  .admin-enter, .admin-rise, .admin-ken, .admin-sheet, .admin-backdrop { animation: none; }
+}
+
+/* a status shown as a coloured chip that opens its list of choices */
+.admin-chip-select {
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  padding: 7px 30px 7px 13px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  outline: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E3A29' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 12px;
+  transition: filter 0.2s ease;
+}
+.admin-chip-select:focus-visible { box-shadow: 0 0 0 3px rgba(63, 125, 32, 0.25); }
+.admin-chip-select:disabled { opacity: 0.5; }
+
+/* a request nobody has answered yet: a clay mark down its left side */
+.admin-card-new { box-shadow: inset 4px 0 0 #C4622D, 0 1px 2px rgba(30, 58, 41, 0.04), 0 16px 32px -26px rgba(30, 58, 41, 0.45); }
+
+/* placeholders shimmering while a list loads */
+@keyframes adminShimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+.admin-shimmer {
+  display: block;
+  background: linear-gradient(90deg, rgba(30, 58, 41, 0.06) 25%, rgba(30, 58, 41, 0.12) 50%, rgba(30, 58, 41, 0.06) 75%);
+  background-size: 200% 100%;
+  animation: adminShimmer 1.4s linear infinite;
+}
+
+/* rows that scroll sideways without a visible bar */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
 
 /* ═══════════ Polish: the footer's green where it helps, smooth motion, small touches ═══════════ */
 

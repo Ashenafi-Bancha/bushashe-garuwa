@@ -18,3 +18,9 @@ export function requireAdmin(staff: StaffService): RequestHandler {
     next();
   };
 }
+
+/** Owner-only endpoints (managing staff accounts); runs after requireAdmin */
+export const requireOwner: RequestHandler = (_req, res, next) => {
+  if (res.locals.staff?.role !== 'owner') return next(HttpError.forbidden());
+  next();
+};

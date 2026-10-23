@@ -11,6 +11,9 @@ import type {
   RequestStatus,
   SaveEventInput,
   SaveMediaInput,
+  StaffMember,
+  StaffRole,
+  StaffUser,
   Summary,
   VisitRequest,
 } from './types';
@@ -18,7 +21,7 @@ import type {
 /** Fired when the API answers that the session is no longer valid, so the staff area returns to the sign-in screen */
 export const SESSION_ENDED_EVENT = 'bg-admin-session-ended';
 
-export type SignedIn = { token: string; expiresAt: string; user: { id: number; email: string } };
+export type SignedIn = { token: string; expiresAt: string; user: StaffUser };
 
 /**
  * Calls the staff endpoints of the API. Every call carries the session token
@@ -63,13 +66,37 @@ export const adminApi = {
 
   summary: (token: string) => request<Summary>(token, '/v1/admin/summary'),
 
-  messages: (token: string, page: number, search = '') =>
-    request<Page<ContactMessage>>(token, `/v1/contact${list({ page, pageSize: 20, q: search })}`),
+  /** Who is signed in now (name and role may have changed since sign-in) */
+  session: (token: string) => request<{ signedIn: true; user: StaffUser }>(token, '/v1/admin/session'),
 
-  visits: (token: string, page: number, options: { upcoming?: boolean; pageSize?: number; search?: string } = {}) =>
+  // ── One's own account ──
+  rename: (token: string, name: string) => request<StaffUser>(token, '/v1/admin/me', { method: 'PUT', body: JSON.stringify({ name }) }),
+
+  /** Signs out every other device; this one stays signed in */
+  changePassword: (token: string, current: string, next: string) =>
+    request<StaffUser>(token, '/v1/admin/me/password', { method: 'PUT', body: JSON.stringify({ current, next }) }),
+
+  // ── Staff accounts (owners only) ──
+  staff: (token: string) => request<{ items: StaffMember[] }>(token, '/v1/admin/staff'),
+
+  addStaff: (token: string, input: { email: string; name: string; role: StaffRole }) =>
+    request<{ member: StaffMember; temporaryPassword: string }>(token, '/v1/admin/staff', { method: 'POST', body: JSON.stringify(input) }),
+
+  updateStaff: (token: string, id: number, input: { name: string; role: StaffRole; active: boolean }) =>
+    request<StaffMember>(token, `/v1/admin/staff/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
+
+  resetStaffPassword: (token: string, id: number) =>
+    request<{ temporaryPassword: string }>(token, `/v1/admin/staff/${id}/reset-password`, { method: 'POST' }),
+
+  removeStaff: (token: string, id: number) => request<{ removed: true }>(token, `/v1/admin/staff/${id}`, { method: 'DELETE' }),
+
+  messages: (token: string, page: number, search = '', status?: RequestStatus) =>
+    request<Page<ContactMessage>>(token, `/v1/contact${list({ page, pageSize: 20, q: search, status })}`),
+
+  visits: (token: string, page: number, options: { upcoming?: boolean; pageSize?: number; search?: string; status?: RequestStatus } = {}) =>
     request<Page<VisitRequest>>(
       token,
-      `/v1/visits${list({ page, pageSize: options.pageSize ?? 20, upcoming: options.upcoming || undefined, q: options.search })}`,
+      `/v1/visits${list({ page, pageSize: options.pageSize ?? 20, upcoming: options.upcoming || undefined, q: options.search, status: options.status })}`,
     ),
 
   setMessageStatus: (token: string, id: number, status: RequestStatus) =>
@@ -98,8 +125,8 @@ export const adminApi = {
     request<{ removed: true }>(token, `/v1/events/admin/${id}`, { method: 'DELETE' }),
 
   // ── Bookings ──
-  bookings: (token: string, page: number, search = '', eventId?: number) =>
-    request<Page<Booking>>(token, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId, q: search })}`),
+  bookings: (token: string, page: number, search = '', eventId?: number, status?: BookingStatus) =>
+    request<Page<Booking>>(token, `/v1/events/admin/bookings${list({ page, pageSize: 20, eventId, q: search, status })}`),
 
   updateBooking: (token: string, id: number, input: { name: string; phone: string; email: string; guests: number; message: string }) =>
     request<Booking>(token, `/v1/events/admin/bookings/${id}`, { method: 'PUT', body: JSON.stringify(input) }),

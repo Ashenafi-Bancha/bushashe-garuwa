@@ -21,7 +21,7 @@ export function contactService(repo: ContactRepository, notify?: Notifier) {
       return message;
     },
 
-    list: (pagination: Pagination, filter?: { search?: string }) => repo.list(pagination, filter),
+    list: (pagination: Pagination, filter?: { search?: string; status?: string }) => repo.list(pagination, filter),
 
     async setStatus(id: number, status: RequestStatus) {
       const updated = await repo.updateStatus(id, status);

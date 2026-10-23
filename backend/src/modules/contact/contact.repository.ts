@@ -39,9 +39,18 @@ export function contactRepository(db: Queryable) {
     },
 
     /** `search` looks through the name, the email, the phone and the message itself */
-    async list({ page, pageSize }: Pagination, { search }: { search?: string } = {}): Promise<Page<ContactMessage>> {
-      const where = search ? 'WHERE name ILIKE $1 OR email ILIKE $1 OR phone ILIKE $1 OR message ILIKE $1' : '';
-      const params = search ? [`%${search}%`] : [];
+    async list({ page, pageSize }: Pagination, { search, status }: { search?: string; status?: string } = {}): Promise<Page<ContactMessage>> {
+      const clauses: string[] = [];
+      const params: unknown[] = [];
+      if (search) {
+        params.push(`%${search}%`);
+        clauses.push(`(name ILIKE $${params.length} OR email ILIKE $${params.length} OR phone ILIKE $${params.length} OR message ILIKE $${params.length})`);
+      }
+      if (status) {
+        params.push(status);
+        clauses.push(`status = $${params.length}`);
+      }
+      const where = clauses.length ? `WHERE ${clauses.join(' AND ')}` : '';
       const rows = await db.query<Row>(
         `SELECT * FROM contact_messages ${where}
          ORDER BY created_at DESC, id DESC LIMIT $${params.length + 1} OFFSET $${params.length + 2}`,
