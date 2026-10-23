@@ -158,10 +158,11 @@ export default function Heritage() {
             <p className="text-[#1E3A29]/70 leading-relaxed">{hg.nature.desc}</p>
           </div>
           <div data-wave className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {(['herbs', 'banana', 'papaya', 'gardenPlant', 'youngTrees', 'farm', 'deer', 'bird', 'whitePigeon'] as const).map((key) => (
-              <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
-                <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
-                  <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
+            {(['vegetableGarden', 'herbs', 'banana', 'papaya', 'gardenPlant', 'youngTrees', 'farm', 'fishPond', 'deer', 'bird', 'whitePigeon'] as const).map((key) => (
+              // the vegetable garden is a wide card across two columns
+              <figure key={key} className={`bg-white rounded-[2rem] p-2.5 elev-1 ${key === 'vegetableGarden' ? 'md:col-span-2' : ''}`}>
+                <div className={`img-zoom rounded-[1.5rem] overflow-hidden ${key === 'vegetableGarden' ? 'aspect-[3/2] md:aspect-[3.08/1]' : 'aspect-[3/2]'}`}>
+                  <img {...picture(photos[key], key === 'vegetableGarden' ? '(max-width: 767px) 100vw, 66vw' : '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <figcaption className="px-4 py-4 sm:px-5">
                   <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions[key].title}</span>

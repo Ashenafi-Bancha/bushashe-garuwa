@@ -58,6 +58,10 @@ const page: DeepPartial<Dictionary> = {
     food: "Bushaashe Garuwaa aada keettaa giddon shashshamettida le'etan shiiqida aada Wolaytta qumata",
     // EN: The row of zigba trees at Bushaashe Garuwa, planted by Garedew, son of Alambo
     zigba: "",
+    // EN: The fish pond at Bushaashe Garuwa: a rectangular pond with stone walls and clear water reflecting the trees, set in green grass
+    fishPond: "",
+    // EN: The vegetable garden at Bushaashe Garuwa: neat beds of cabbage, carrots and lettuce, with maize and trees behind
+    vegetableGarden: "",
     // EN: Gulanttaa Keettaa at Bushaashe Garuwa: a round traditional Wolaita house with a thatched dome, dark bands on its woven walls and a wooden door
     gulanttaa: "",
     // EN: Inside Gulanttaa Keettaa: a traditional bed of wooden poles covered with a hide, against a wall of bamboo and split wood
@@ -173,6 +177,18 @@ const page: DeepPartial<Dictionary> = {
       // EN: The Zigba Trees
       title: "Zigbaa Mittata",
       // EN: Zigba trees planted by Garedew, standing in a long, even line like a peaceful procession.
+      desc: "",
+    },
+    fishPond: {
+      // EN: The Fish Pond
+      title: "",
+      // EN: A stone-edged pond of clear water in the grass, where fish are raised.
+      desc: "",
+    },
+    vegetableGarden: {
+      // EN: The Vegetable Garden
+      title: "",
+      // EN: Cabbage, carrots, lettuce and other vegetables grow in neat beds, with maize standing behind them.
       desc: "",
     },
     gulanttaa: {

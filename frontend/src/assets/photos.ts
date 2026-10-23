@@ -71,6 +71,10 @@ import bananaBunchImg from './photos/trees-plants/banana-bunch.webp';
 import papayaImg from './photos/trees-plants/papaya.webp';
 import youngTreesImg from './photos/trees-plants/young-trees.webp';
 
+// added October 2026: the fish pond and the vegetable garden
+import fishPondImg from './photos/grounds/fish-pond.webp';
+import vegetableGardenImg from './photos/trees-plants/vegetable-garden.webp';
+
 export const photos = {
   /** The main gate: carved tree-trunk pillars, the welcome sign and the bamboo doors (landscape) */
   gate: gateImg,
@@ -158,6 +162,10 @@ export const photos = {
   papaya: papayaImg,
   /** Young broad-leaved trees growing in rows in the red earth (landscape) */
   youngTrees: youngTreesImg,
+  /** The fish pond: a stone-edged pond of clear water in the grass (landscape) */
+  fishPond: fishPondImg,
+  /** The vegetable garden: beds of cabbage, carrots and lettuce, maize behind (landscape) */
+  vegetableGarden: vegetableGardenImg,
 } as const;
 
 export type PhotoKey = keyof typeof photos;
