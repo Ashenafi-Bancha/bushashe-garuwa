@@ -12,7 +12,7 @@ const categories: { id: keyof Dictionary['heritage']['categories']; img?: string
   { id: 'trees', img: photos.enset, to: '/heritage/trees' },
   { id: 'spices', img: photos.herbs, to: '/heritage/spices' },
   { id: 'animals', img: photos.deer, to: '/heritage/animals' },
-  { id: 'crocodile', to: '/heritage/crocodile' },
+  { id: 'crocodile', img: photos.crocodilePond, to: '/heritage#nature' },
   { id: 'artifacts', img: photos.artifactsWall, to: '/heritage#artifacts' },
   { id: 'food', img: photos.food, to: '/dine' },
   { id: 'clothing', img: photos.gifaataa2, to: '/heritage/clothing' },
@@ -29,6 +29,9 @@ const houses: { name: string; img?: string }[] = [
 
 /* The zigba keeps its Wolaytta and scientific names in every language */
 const ZIGBA = { wolaytta: 'Zigba', scientific: 'Podocarpus falcatus' };
+
+/** Living Nature: the cards that run across two columns */
+const WIDE = new Set<string>(['vegetableGarden', 'crocodilePond']);
 
 export default function Heritage() {
   const { t } = useI18n();
@@ -158,11 +161,11 @@ export default function Heritage() {
             <p className="text-[#1E3A29]/70 leading-relaxed">{hg.nature.desc}</p>
           </div>
           <div data-wave className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {(['vegetableGarden', 'herbs', 'banana', 'papaya', 'gardenPlant', 'youngTrees', 'farm', 'fishPond', 'deer', 'bird', 'whitePigeon'] as const).map((key) => (
-              // the vegetable garden is a wide card across two columns
-              <figure key={key} className={`bg-white rounded-[2rem] p-2.5 elev-1 ${key === 'vegetableGarden' ? 'md:col-span-2' : ''}`}>
-                <div className={`img-zoom rounded-[1.5rem] overflow-hidden ${key === 'vegetableGarden' ? 'aspect-[3/2] md:aspect-[3.08/1]' : 'aspect-[3/2]'}`}>
-                  <img {...picture(photos[key], key === 'vegetableGarden' ? '(max-width: 767px) 100vw, 66vw' : '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
+            {(['vegetableGarden', 'herbs', 'banana', 'papaya', 'gardenPlant', 'youngTrees', 'farm', 'fishPond', 'crocodilePond', 'zoo', 'deer', 'bird', 'whitePigeon'] as const).map((key) => (
+              // the vegetable garden and the crocodile pond are wide cards across two columns
+              <figure key={key} className={`bg-white rounded-[2rem] p-2.5 elev-1 ${WIDE.has(key) ? 'md:col-span-2' : ''}`}>
+                <div className={`img-zoom rounded-[1.5rem] overflow-hidden ${WIDE.has(key) ? 'aspect-[3/2] md:aspect-[3.08/1]' : 'aspect-[3/2]'}`}>
+                  <img {...picture(photos[key], WIDE.has(key) ? '(max-width: 767px) 100vw, 66vw' : '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <figcaption className="px-4 py-4 sm:px-5">
                   <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions[key].title}</span>

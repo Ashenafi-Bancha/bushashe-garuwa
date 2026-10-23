@@ -58,7 +58,15 @@ const page: DeepPartial<Dictionary> = {
     food: "Bushaashe Garuwaa aada keettaa giddon shashshamettida le'etan shiiqida aada Wolaytta qumata",
     // EN: The row of zigba trees at Bushaashe Garuwa, planted by Garedew, son of Alambo
     zigba: "",
-    // EN: The fish pond at Bushaashe Garuwa: a rectangular pond with stone walls and clear water reflecting the trees, set in green grass
+    // EN: The crocodile pond at Bushaashe Garuwa: three crocodiles in clear green water inside a walled pond with a sandy bank, set in the grass
+    crocodilePond: "",
+    // EN: The reading place at Bushaashe Garuwa: a thatched bamboo platform raised among the trees, reached by a bamboo stair, its posts painted red, black and yellow
+    readingPlace: "",
+    // EN: The rock fountain at Bushaashe Garuwa: water falling in threads over a great dark rock ringed with stones, on the lawn among palms and hedges
+    rockFountain: "",
+    // EN: The small zoo at Bushaashe Garuwa: a young deer standing in the grass behind the wire fence, beside its wooden shelter
+    zoo: "",
+    // EN: The fish pond at Bushaashe Garuwa: fish swimming in clear green water in a stone-edged pond under a shade net, fed by a little waterfall
     fishPond: "",
     // EN: The vegetable garden at Bushaashe Garuwa: neat beds of cabbage, carrots and lettuce, with maize and trees behind
     vegetableGarden: "",
@@ -70,7 +78,7 @@ const page: DeepPartial<Dictionary> = {
     artifactsWall: "",
     // EN: Inside Gulanttaa Keettaa: a large clay water pot, a colourful lidded basket and bundles wrapped in dried enset leaves
     artifactsCorner: "",
-    // EN: The memorial of Garedew Alambo at Bushaashe Garuwa: a bronze bust on a black column, beside the thatched house and the enset
+    // EN: The memorial of Garedew Alambo at Bushaashe Garuwa: a bronze bust on a black column, before banana and enset plants
     garedewMemorial: "",
     // EN: A white pigeon with a feathered crest and grey-brown wings on the red earth at Bushaashe Garuwa
     whitePigeon: "",
@@ -179,10 +187,34 @@ const page: DeepPartial<Dictionary> = {
       // EN: Zigba trees planted by Garedew, standing in a long, even line like a peaceful procession.
       desc: "",
     },
+    crocodilePond: {
+      // EN: The Crocodile Pond
+      title: "",
+      // EN: Crocodiles rest in clear water inside a walled, fenced pond, safe to watch from above.
+      desc: "",
+    },
+    readingPlace: {
+      // EN: The Reading Place
+      title: "",
+      // EN: Up the bamboo stair, under the thatch and among the trees: a quiet place to read.
+      desc: "",
+    },
+    rockFountain: {
+      // EN: The Rock Fountain
+      title: "",
+      // EN: Water falls in silver threads over a great dark rock on the lawn.
+      desc: "",
+    },
+    zoo: {
+      // EN: The Small Zoo
+      title: "",
+      // EN: A young deer by its shelter: the zoo where children meet the animals of the grounds.
+      desc: "",
+    },
     fishPond: {
       // EN: The Fish Pond
       title: "",
-      // EN: A stone-edged pond of clear water in the grass, where fish are raised.
+      // EN: Fish swim in clear green water under a shade net, fed by a little waterfall.
       desc: "",
     },
     vegetableGarden: {

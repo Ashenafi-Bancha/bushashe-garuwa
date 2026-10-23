@@ -5,6 +5,7 @@ import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
+import Band from '../components/Band';
 
 /* Order and photos — the text for each id lives in the translations (t.experiences.items) */
 const experiences: { id: keyof Dictionary['experiences']['items']; img?: string; soon?: boolean }[] = [
@@ -85,6 +86,30 @@ export default function Experiences() {
           </div>
         </div>
       </section>
+
+      {/* The Reading Place: a quiet corner of the grounds */}
+      <Band outer="mb-12 sm:mb-16" className="py-6 sm:py-10 lg:py-12" aria-labelledby="reading-title">
+        <div className="max-w-screen-xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+          <figure data-reveal className="bg-white rounded-[2rem] p-2.5 elev-1">
+            <div className="img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
+              <img {...picture(photos.readingPlace, '(max-width: 1023px) 100vw, 50vw')} alt={t.photos.readingPlace} loading="lazy" className="w-full h-full object-cover" />
+            </div>
+            <figcaption className="px-4 py-3 text-sm text-[#1E3A29]/70">{t.home.reading.caption}</figcaption>
+          </figure>
+          <div data-reveal>
+            <span className="eyebrow !bg-white mb-5">{t.home.reading.eyebrow}</span>
+            <h2 id="reading-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#13261A] leading-[1.05] mb-4">{t.home.reading.title}</h2>
+            <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-3">{t.home.reading.desc}</p>
+            <p className="text-[#1E3A29]/70 italic leading-relaxed mb-6">{t.home.reading.mountain}</p>
+            <ul className="flex flex-wrap gap-2.5 mb-8">
+              {t.home.reading.qualities.map((q) => (
+                <li key={q} className="rounded-full bg-white text-[#1E3A29] text-sm font-semibold px-4 py-2">{q}</li>
+              ))}
+            </ul>
+            <Link to="/visit" className="btn-primary">{t.home.reading.cta}</Link>
+          </div>
+        </div>
+      </Band>
 
       {/* CTA */}
       <section className="relative mx-2 sm:mx-3 rounded-[2rem] py-12 sm:py-16 lg:py-24 overflow-hidden">

@@ -75,6 +75,12 @@ import youngTreesImg from './photos/trees-plants/young-trees.webp';
 import fishPondImg from './photos/grounds/fish-pond.webp';
 import vegetableGardenImg from './photos/trees-plants/vegetable-garden.webp';
 
+// added October 2026: the crocodile pond, the reading place, the rock fountain and the zoo
+import crocodilePondImg from './photos/grounds/crocodile-pond.webp';
+import readingPlaceImg from './photos/grounds/reading-place.webp';
+import rockFountainImg from './photos/grounds/rock-fountain.webp';
+import zooImg from './photos/grounds/zoo.webp';
+
 export const photos = {
   /** The main gate: carved tree-trunk pillars, the welcome sign and the bamboo doors (landscape) */
   gate: gateImg,
@@ -166,6 +172,14 @@ export const photos = {
   fishPond: fishPondImg,
   /** The vegetable garden: beds of cabbage, carrots and lettuce, maize behind (landscape) */
   vegetableGarden: vegetableGardenImg,
+  /** The crocodile pond: three crocodiles in clear water inside a walled pond (landscape) */
+  crocodilePond: crocodilePondImg,
+  /** The reading place: a thatched bamboo platform among the trees, posts in red, black and yellow (landscape) */
+  readingPlace: readingPlaceImg,
+  /** The rock fountain: water falling over a great dark rock on the lawn (landscape) */
+  rockFountain: rockFountainImg,
+  /** The small zoo: a young deer behind the fence by its shelter (landscape) */
+  zoo: zooImg,
 } as const;
 
 export type PhotoKey = keyof typeof photos;
