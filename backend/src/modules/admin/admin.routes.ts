@@ -19,6 +19,18 @@ import type { BookingRepository } from '../events/booking.repository.js';
 import type { EventRepository } from '../events/event.repository.js';
 import type { MediaRepository } from '../media/media.repository.js';
 import type { VisitRepository } from '../visits/visit.repository.js';
+import type { ScheduleRepository } from '../schedule/schedule.repository.js';
+import { todayInEthiopia } from '../../db/sql.js';
+import { validateQuery } from '../../http/validate.js';
+import { z } from 'zod';
+
+const ScheduleQuery = z.object({
+  from: z
+    .string()
+    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Use the format YYYY-MM-DD')
+    .optional(),
+  days: z.coerce.number().int().min(1).max(62).default(14),
+});
 
 /**
  * Endpoints behind the staff admin page.
@@ -27,6 +39,7 @@ import type { VisitRepository } from '../visits/visit.repository.js';
  * POST /admin/logout    ends the session
  * GET  /admin/session   who is signed in (the staff area checks this when it opens)
  * GET  /admin/summary   the counts shown on the dashboard cards
+ * GET  /admin/schedule  who is coming, day by day (visits, and events with their bookings)
  *
  * PUT  /admin/me                         one's own name
  * PUT  /admin/me/password                one's own password (signs out the other devices)
@@ -44,6 +57,7 @@ export function adminRoutes(
     events: EventRepository;
     bookings: BookingRepository;
     media: MediaRepository;
+    schedule: ScheduleRepository;
   },
   staff: StaffService,
   guards: Guards,
@@ -78,6 +92,15 @@ export function adminRoutes(
       repositories.content.lastUpdatedAt(),
     ]);
     sendData(res, { contact, visits, events, bookings, media, content: { edited, lastUpdatedAt }, generatedAt: new Date().toISOString() });
+  });
+
+  /** Who is coming, day by day: ?from=YYYY-MM-DD (today in Ethiopia by default) &days=1…62 */
+  router.get('/schedule', validateQuery(ScheduleQuery), async (_req, res) => {
+    const { from = todayInEthiopia(), days } = res.locals.query as z.infer<typeof ScheduleQuery>;
+    const end = new Date(`${from}T00:00:00Z`);
+    end.setUTCDate(end.getUTCDate() + days - 1);
+    const to = end.toISOString().slice(0, 10);
+    sendData(res, { from, to, days: await repositories.schedule.between(from, to) });
   });
 
   // ── one's own account ──

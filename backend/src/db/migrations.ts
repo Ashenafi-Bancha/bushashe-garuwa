@@ -170,4 +170,23 @@ export const migrations: { id: number; name: string; sql: string }[] = [
       UPDATE staff_users SET role = 'owner';
     `,
   },
+  {
+    id: 6,
+    name: 'guests reviews, added by staff and shown on the website',
+    sql: `
+      CREATE TABLE reviews (
+        id          INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        name        TEXT        NOT NULL,
+        -- where the guest came from: a town, a country, a school
+        origin      TEXT,
+        -- the guest's words per language: { "en": "...", "am": "...", "wol": "..." }
+        words       JSONB       NOT NULL,
+        -- 1 to 5 stars, or none
+        rating      INTEGER     CHECK (rating BETWEEN 1 AND 5),
+        published   BOOLEAN     NOT NULL DEFAULT true,
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+      );
+    `,
+  },
 ];

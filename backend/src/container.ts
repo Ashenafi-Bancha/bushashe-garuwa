@@ -15,6 +15,8 @@ import { mediaRepository } from './modules/media/media.repository.js';
 import { mediaService } from './modules/media/media.service.js';
 import { visitRepository } from './modules/visits/visit.repository.js';
 import { visitService } from './modules/visits/visit.service.js';
+import { reviewRepository } from './modules/reviews/review.repository.js';
+import { scheduleRepository } from './modules/schedule/schedule.repository.js';
 import { staffRepository } from './modules/staff/staff.repository.js';
 import { staffService } from './modules/staff/staff.service.js';
 import { mailerFor, type Mailer } from './modules/notifications/mailer.js';
@@ -38,6 +40,8 @@ export function createContainer(env: Env, db: Database, options: { mailer?: Mail
     bookings: bookingRepository(db),
     media: mediaRepository(db),
     staff: staffRepository(db),
+    reviews: reviewRepository(db),
+    schedule: scheduleRepository(db),
   };
 
   const services = {

@@ -12,6 +12,7 @@ import HeroName from '../components/HeroName';
 import StickyBook from '../components/StickyBook';
 import { useNoIndex } from '../lib/noindex';
 import { deviceTier, forcedTier, rememberSlow } from '../three/device';
+import Testimonials from '../components/Testimonials';
 
 /** The 3D landscape opening, fetched only on the pages that use it */
 const LandscapeHero = lazy(() => import('../three/LandscapeHero'));
@@ -251,6 +252,9 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
 
         {/* ═════════ LAST OF THE PLACES: the Guest House, coming soon ═════════ */}
         <GuestHouseSoon />
+
+        {/* ═════════ WHAT GUESTS SAY: the reviews staff published (hidden until there is one) ═════════ */}
+        <Testimonials />
 
         {/* ═════════ CONTACT: every way to reach us, and the map ═════════ */}
         <HomeContact />

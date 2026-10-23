@@ -2,6 +2,22 @@ import type { ReactNode } from 'react';
 
 /** The staff area's icons: simple line drawings, all on the same 24-unit grid. */
 const PATHS = {
+  schedule: (
+    <>
+      <rect x="3" y="4.5" width="18" height="16.5" rx="2.5" />
+      <path d="M3 9.5h18M8 2.5v4M16 2.5v4" />
+      <path d="m8.5 15 2.3 2.3 4.7-4.6" />
+    </>
+  ),
+  star: <path d="m12 3.2 2.7 5.5 6 .9-4.35 4.25 1.03 6-5.38-2.83-5.38 2.83 1.03-6L3.3 9.6l6-.9Z" />,
+  starFilled: <path d="m12 3.2 2.7 5.5 6 .9-4.35 4.25 1.03 6-5.38-2.83-5.38 2.83 1.03-6L3.3 9.6l6-.9Z" fill="currentColor" />,
+  quote: <path d="M9.5 7C6.5 7.8 4.5 10.3 4.5 13.5V17h5v-5H7.2c.2-1.6 1.2-2.8 2.8-3.4ZM19.5 7c-3 .8-5 3.3-5 6.5V17h5v-5h-2.3c.2-1.6 1.2-2.8 2.8-3.4Z" />,
+  clock: (
+    <>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M12 7v5l3 2" />
+    </>
+  ),
   user: (
     <>
       <circle cx="12" cy="8" r="4" />

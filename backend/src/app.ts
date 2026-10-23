@@ -9,6 +9,7 @@ import type { Database } from './db/database.js';
 import { errorHandler, notFound } from './http/error-handler.js';
 import { website, websiteFolder } from './http/website.js';
 import { adminRoutes } from './modules/admin/admin.routes.js';
+import { reviewRoutes } from './modules/reviews/review.routes.js';
 import { contactRoutes } from './modules/contact/contact.routes.js';
 import { contentRoutes } from './modules/content/content.routes.js';
 import { eventRoutes } from './modules/events/event.routes.js';
@@ -66,6 +67,7 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
   v1.use('/content', contentRoutes(services.content, guards));
   v1.use('/events', eventRoutes(services.events, services.bookings, guards));
   v1.use('/media', mediaRoutes(services.media, guards));
+  v1.use('/reviews', reviewRoutes(repositories.reviews, guards));
   v1.use('/admin', adminRoutes(repositories, services.staff, guards));
 
   app.use('/api/health', healthRoutes(db));

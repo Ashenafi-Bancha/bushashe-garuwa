@@ -17,12 +17,16 @@ import EventsView from './EventsView';
 import GalleryView from './GalleryView';
 import HeroView from './HeroView';
 import MessagesView from './MessagesView';
+import ReviewsView from './ReviewsView';
+import ScheduleView, { TodayAgenda } from './ScheduleView';
 import StaffView from './StaffView';
 import VisitsView from './VisitsView';
 
 /** The words at the top of the work area, so staff always know where they are */
 const HEADINGS: Record<SectionId, { title: string; lead: string }> = {
   overview: { title: 'Overview', lead: 'Everything waiting for you today.' },
+  schedule: { title: 'Schedule', lead: 'Who is coming, day by day: visits, and events with their bookings.' },
+  reviews: { title: 'Guest reviews', lead: 'What guests said, shown on the home page.' },
   visits: { title: 'Visit requests', lead: 'People who asked to come and see Bushaashe Garuwa.' },
   bookings: { title: 'Event bookings', lead: 'Places reserved at the cultural food evenings and other events.' },
   messages: { title: 'Messages', lead: 'Messages sent from the contact page.' },
@@ -122,6 +126,7 @@ export default function Dashboard() {
     {
       title: 'Requests',
       sections: [
+        { id: 'schedule', label: 'Schedule', icon: 'schedule' },
         { id: 'visits', label: 'Visit requests', icon: 'visits', badge: badges.visits },
         { id: 'bookings', label: 'Event bookings', icon: 'bookings', badge: badges.bookings },
         { id: 'messages', label: 'Messages', icon: 'messages', badge: badges.messages },
@@ -134,6 +139,7 @@ export default function Dashboard() {
         { id: 'gallery', label: 'Gallery', icon: 'gallery' },
         { id: 'hero', label: 'Page photos', icon: 'hero' },
         { id: 'content', label: 'Website text', icon: 'text' },
+        { id: 'reviews', label: 'Guest reviews', icon: 'star' },
       ],
     },
     {
@@ -219,10 +225,12 @@ export default function Dashboard() {
 
   /** The tiles of the More sheet on a phone */
   const moreTiles: { id: SectionId; icon: IconName; label: string }[] = [
+    { id: 'schedule', icon: 'schedule', label: 'Schedule' },
     { id: 'events', icon: 'events', label: 'Events' },
     { id: 'gallery', icon: 'gallery', label: 'Gallery' },
     { id: 'hero', icon: 'hero', label: 'Page photos' },
     { id: 'content', icon: 'text', label: 'Website text' },
+    { id: 'reviews', icon: 'star', label: 'Reviews' },
     ...(isOwner ? [{ id: 'staff' as const, icon: 'team' as const, label: 'Staff' }] : []),
     { id: 'account', icon: 'user', label: 'My account' },
   ];
@@ -346,6 +354,7 @@ export default function Dashboard() {
               <div className="space-y-8 sm:space-y-10 pt-2 lg:pt-0">
                 {welcome}
                 <InstallCard canInstall={app.canInstall} appleHint={app.appleHint} onInstall={app.install} />
+                <TodayAgenda onOpen={() => setSection('schedule')} />
                 {figures}
 
                 <section>
@@ -387,6 +396,8 @@ export default function Dashboard() {
             {shown === 'gallery' && <GalleryView />}
             {shown === 'hero' && <HeroView />}
             {shown === 'content' && <ContentView />}
+            {shown === 'schedule' && <ScheduleView />}
+            {shown === 'reviews' && <ReviewsView />}
             {shown === 'staff' && <StaffView />}
             {shown === 'account' && <AccountView app={app} />}
           </div>

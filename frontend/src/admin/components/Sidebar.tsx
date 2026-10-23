@@ -3,7 +3,7 @@ import { ROLE_LABELS, type StaffUser } from '../api/types';
 import Avatar from './Avatar';
 import { Icon, type IconName } from './icons';
 
-export type SectionId = 'overview' | 'visits' | 'bookings' | 'messages' | 'events' | 'gallery' | 'hero' | 'content' | 'staff' | 'account';
+export type SectionId = 'overview' | 'visits' | 'bookings' | 'messages' | 'events' | 'gallery' | 'hero' | 'content' | 'staff' | 'account' | 'schedule' | 'reviews';
 
 export type Section = {
   id: SectionId;

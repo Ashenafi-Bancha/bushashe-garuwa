@@ -144,3 +144,33 @@ export type StaffUser = {
 
 /** A member of staff in the owner's list */
 export type StaffMember = StaffUser & { active: boolean; createdAt: string; lastLoginAt: string | null };
+
+// ── Guests' reviews ──
+export type ReviewWords = { en: string; am?: string; wol?: string };
+export type Review = {
+  id: number;
+  name: string;
+  origin: string | null;
+  words: ReviewWords;
+  rating: number | null;
+  published: boolean;
+  createdAt: string;
+  updatedAt: string;
+};
+export type SaveReviewInput = { name: string; origin: string; words: ReviewWords; rating: number | null; published: boolean };
+
+// ── The schedule: who is coming, day by day ──
+export type ScheduledVisit = {
+  id: number;
+  name: string;
+  phone: string;
+  email: string | null;
+  visitors: string;
+  experiences: string[];
+  message: string | null;
+  status: RequestStatus;
+};
+export type ScheduledBooking = { id: number; reference: string; name: string; phone: string; guests: number; status: BookingStatus };
+export type ScheduledEvent = { id: number; name: string; time: string | null; published: boolean; capacity: number | null; guests: number; bookings: ScheduledBooking[] };
+export type ScheduleDay = { date: string; visits: ScheduledVisit[]; events: ScheduledEvent[] };
+export type Schedule = { from: string; to: string; days: ScheduleDay[] };

@@ -10,7 +10,10 @@ import type {
   Page,
   RequestStatus,
   SaveEventInput,
+  Review,
   SaveMediaInput,
+  SaveReviewInput,
+  Schedule,
   StaffMember,
   StaffRole,
   StaffUser,
@@ -150,6 +153,20 @@ export const adminApi = {
     request<MediaImage>(token, `/v1/media/admin/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
 
   deleteMedia: (token: string, id: number) => request<{ removed: true }>(token, `/v1/media/admin/${id}`, { method: 'DELETE' }),
+
+  // ── Who is coming, day by day ──
+  schedule: (token: string, from?: string, days = 14) => request<Schedule>(token, `/v1/admin/schedule${list({ from, days })}`),
+
+  // ── Guests' reviews ──
+  reviews: (token: string) => request<{ items: Review[] }>(token, '/v1/reviews/admin'),
+
+  addReview: (token: string, input: SaveReviewInput) =>
+    request<Review>(token, '/v1/reviews/admin', { method: 'POST', body: JSON.stringify(input) }),
+
+  updateReview: (token: string, id: number, input: SaveReviewInput) =>
+    request<Review>(token, `/v1/reviews/admin/${id}`, { method: 'PUT', body: JSON.stringify(input) }),
+
+  deleteReview: (token: string, id: number) => request<{ removed: true }>(token, `/v1/reviews/admin/${id}`, { method: 'DELETE' }),
 
   // ── Website text ──
   content: (token: string) => request<{ items: ContentEntry[] }>(token, '/v1/content/admin'),
