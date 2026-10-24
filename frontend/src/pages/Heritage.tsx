@@ -37,7 +37,7 @@ const WIDE = new Set<string>(['vegetableGarden', 'crocodilePond']);
 export default function Heritage() {
   const { t, lang } = useI18n();
   // the houses' Wolaita names: in quotation marks and italic in English and Amharic, plain in Wolaytta
-  const houseName = (name: string) => (lang === 'wol' ? name : `“${name}”`);
+  const houseName = (name: string) => (lang === 'wol' ? name : lang === 'am' ? `«${name}»` : `“${name}”`);
   const hg = t.heritage;
   const { pathname } = useLocation();
 
