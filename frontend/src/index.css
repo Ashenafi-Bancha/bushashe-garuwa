@@ -238,6 +238,12 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   .hero-name .line-mask { display: inline-block; }
   html:lang(am) .hero-name { font-size: min(13vw, 7.5rem, 9.5svh); }
 }
+/* computers: the openings' words sit over the photograph, so their label and quiet button turn light */
+@media (min-width: 1024px) {
+  .hero-on-photo .eyebrow { background: rgba(255, 255, 255, 0.16); color: #fff; backdrop-filter: blur(8px); }
+  .hero-on-photo .btn-outline { color: #fff; border-color: rgba(255, 255, 255, 0.6); }
+  .hero-on-photo .btn-outline:hover { background: rgba(255, 255, 255, 0.12); border-color: #fff; }
+}
 /* the home opening on computers: the name on two lines in the left column, beside the photographs */
 @media (min-width: 1024px) {
   .home-hero .hero-name { font-size: min(5.4vw, 5.1rem, 11svh); }

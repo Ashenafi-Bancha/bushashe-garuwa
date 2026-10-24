@@ -10,9 +10,8 @@ import { heroPhotos, useSiteMedia } from '../lib/media';
  * Phones: the photograph first, whole and in its own shape, from edge to edge;
  * the label, the title and the description below it.
  *
- * Computers: the words on the left and the photograph on the right. The
- * photograph runs in behind the words and melts into the colour of the page,
- * so it reads as the background of the text.
+ * Computers: the photograph is the background of the whole opening, with a
+ * deep green shade from the left; the words sit on the left in white.
  *
  * Any <span> inside the title is picked out in moss green. The photograph is
  * the page's own (src/lib/heroSlots.ts), or the one staff put in its place
@@ -39,12 +38,12 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
 
   return (
     <section
-      className="page-hero relative lg:mt-[72px] lg:h-[clamp(480px,calc(64vw/var(--ratio)),calc(100svh-72px))] lg:overflow-hidden"
+      className="page-hero hero-on-photo relative lg:mt-[72px] lg:h-[clamp(500px,calc(100svh-150px),820px)] lg:overflow-hidden"
       style={{ '--ratio': Math.max(ratio, 1.3) } as CSSProperties}
     >
-      {/* the photograph: whole on phones; on computers the right side, behind the words */}
+      {/* the photograph: whole on phones; on computers the background of the whole opening, behind the words */}
       <div
-        className={`relative w-full mt-16 sm:mt-[72px] min-h-[220px] overflow-hidden bg-[#E3EBD8] ${upright ? 'max-h-[78svh]' : ''} lg:absolute lg:inset-y-0 lg:right-0 lg:mt-0 lg:w-[66%] lg:h-full lg:min-h-0 lg:max-h-none lg:bg-transparent`}
+        className={`relative w-full mt-16 sm:mt-[72px] min-h-[220px] overflow-hidden bg-[#E3EBD8] ${upright ? 'max-h-[78svh]' : ''} lg:absolute lg:inset-0 lg:mt-0 lg:w-full lg:h-full lg:min-h-0 lg:max-h-none lg:bg-[#13261A]`}
         style={{ aspectRatio: ratio }}
       >
         <div key={photo.id} className="hero-slide hero-slide-first">
@@ -53,7 +52,7 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
             <img src={photo.src} alt="" aria-hidden="true" className="lg:hidden absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-80" />
             <img
               ref={img}
-              {...picture(photo.src, '(min-width: 1024px) 66vw, 100vw')}
+              {...picture(photo.src)}
               alt={photo.alt}
               fetchPriority="high"
               onLoad={measure}
@@ -61,23 +60,24 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
             />
           </div>
         </div>
-        {/* computers: the photograph melts into the page behind the words, and softly at the foot */}
-        <span className="hidden lg:block absolute inset-0 z-[3] bg-[linear-gradient(90deg,#F4EFE4_0%,rgba(244,239,228,0.88)_18%,rgba(244,239,228,0.45)_38%,rgba(244,239,228,0)_62%)]" />
-        <span className="absolute inset-x-0 bottom-0 h-6 lg:h-24 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
+        {/* computers: a deep green shade from the left, so the white words read over the photograph */}
+        <span className="hidden lg:block absolute inset-0 z-[3] bg-[linear-gradient(90deg,rgba(14,32,19,0.9)_0%,rgba(14,32,19,0.78)_28%,rgba(14,32,19,0.38)_55%,rgba(14,32,19,0.08)_78%,rgba(14,32,19,0)_100%)]" />
+        <span className="hidden lg:block absolute inset-x-0 top-0 h-24 z-[3] bg-gradient-to-b from-[rgba(14,32,19,0.35)] to-transparent" />
+        <span className="absolute inset-x-0 bottom-0 h-6 lg:h-16 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
         <span className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:right-8 lg:bottom-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
           {photo.title}
         </span>
       </div>
 
-      {/* the words: below the photograph on phones, on its left on computers */}
+      {/* the words: below the photograph on phones; over its left side, in white, on computers */}
       <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 sm:pb-10 lg:py-0 lg:h-full lg:flex lg:items-center">
         <div className="lg:max-w-[min(36rem,44%)]">
           <span className="eyebrow mb-5 animate-fade-up">{eyebrow}</span>
-          <h1 className="font-display text-[2.6rem] sm:text-6xl lg:text-[min(4rem,9svh)] font-extrabold text-[#1E3A29] leading-[0.98] [&>span>span_span]:text-[#6F9443]">
+          <h1 className="font-display text-[2.6rem] sm:text-6xl lg:text-[min(4.25rem,9.5svh)] font-extrabold text-[#1E3A29] lg:text-white leading-[0.98] [&>span>span_span]:text-[#6F9443] lg:[&>span>span_span]:text-[#BFDC93] lg:[text-shadow:0_2px_24px_rgba(0,0,0,0.25)]">
             <span className="line-mask"><span>{title}</span></span>
           </h1>
           {desc && (
-            <p className="mt-5 lg:mt-7 text-base sm:text-lg text-[#1E3A29]/75 leading-relaxed max-w-md animate-fade-up delay-200">{desc}</p>
+            <p className="mt-5 lg:mt-7 text-base sm:text-lg text-[#1E3A29]/75 lg:text-white/88 leading-relaxed max-w-md animate-fade-up delay-200">{desc}</p>
           )}
         </div>
       </div>
