@@ -56,8 +56,9 @@ const SOCIAL = [
     href: 'https://www.youtube.com/results?search_query=bushaashe+garuwa',
     icon: (
       <svg viewBox="0 0 24 24" className="w-full h-full" aria-hidden="true">
-        <rect width="24" height="24" rx="6" fill="#FF0000" />
-        <path fill="#fff" d="M10 8.4v7.2l6-3.6-6-3.6Z" />
+        {/* YouTube's own mark: the red rounded rectangle with the white play button */}
+        <rect y="4.6" width="24" height="14.8" rx="4.2" fill="#FF0000" />
+        <path fill="#fff" d="M9.7 8.6v6.8l5.9-3.4-5.9-3.4Z" />
       </svg>
     ),
   },
@@ -90,9 +91,14 @@ const SOCIAL = [
   },
 ];
 
-export default function SocialLinks({ dark = true, small = false, onGreen = false }: { dark?: boolean; small?: boolean; /** on the green footer: each logo on a small white ring, so its colours read */ onGreen?: boolean }) {
+/**
+ * Each network's logo exactly as its own branding draws it, with nothing around
+ * it. The soft shadow follows the logo's own shape (a circle, YouTube's
+ * rectangle), not a square box.
+ */
+export default function SocialLinks({ dark = true, small = false }: { dark?: boolean; small?: boolean; /** kept for the footer's call; the logos look the same everywhere */ onGreen?: boolean }) {
   return (
-    <div className={`flex flex-wrap items-center ${small ? 'gap-2' : 'gap-3'}`}>
+    <div className={`flex flex-wrap items-center ${small ? 'gap-2.5' : 'gap-3'}`}>
       {SOCIAL.filter((s) => s.href).map((s) => (
         <a
           key={s.name}
@@ -101,9 +107,9 @@ export default function SocialLinks({ dark = true, small = false, onGreen = fals
           rel="noopener noreferrer"
           aria-label={s.name}
           title={s.name}
-          className={`block ${small ? 'w-9 h-9' : 'w-10 h-10'} ${onGreen ? 'bg-white rounded-full p-[3px]' : 'rounded-xl'} transition-all duration-300 hover:-translate-y-1 ${
-            dark ? 'shadow-[0_6px_16px_-6px_rgba(0,0,0,0.5)]' : 'shadow-[0_6px_16px_-8px_rgba(15,26,22,0.35)]'
-          } hover:shadow-[0_12px_24px_-8px_rgba(0,0,0,0.45)]`}
+          className={`block ${small ? 'w-9 h-9' : 'w-10 h-10'} transition-all duration-300 hover:-translate-y-1 ${
+            dark ? 'drop-shadow-[0_4px_8px_rgba(0,0,0,0.35)]' : 'drop-shadow-[0_4px_8px_rgba(15,26,22,0.22)]'
+          } hover:drop-shadow-[0_8px_14px_rgba(0,0,0,0.35)]`}
         >
           {s.icon}
         </a>
