@@ -52,7 +52,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Moments
       eyebrow: "Hanidabata",
       // EN: Gatherings at Bushaashe Garuwa
-      title: "Boshaashe Garuwan polettida shiiqota",
+      title: "Bushaashe Garuwan polettida shiiqota",
       // EN: Elders, families and friends come here to meet, to celebrate and to play. A few moments from the grounds.
       desc: "Cimati, issi keettaa asatinne laggeti shiiquwawu, ufayssan bonchchanawunne kaa'anawu hagawu yoosona. Gibbiyawu keehippe mata.",
       // EN: See the Gallery

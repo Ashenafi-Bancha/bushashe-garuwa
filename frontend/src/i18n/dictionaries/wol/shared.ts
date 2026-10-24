@@ -275,7 +275,7 @@ const page: DeepPartial<Dictionary> = {
       },
     },
     // EN: Bushaashe Garuwa, Damot Sore Woreda, Wolaita Zone, Ethiopia
-    address: "Bushaasha Garuwa, Daamoota Soore Allaana, Wolaytta Moottaa, Toophphiya",
+    address: "Bushaashe Garuwa, Daamoota Soore Allaana, Wolaytta Moottaa, Toophphiya",
     // EN: Bushaashe Garuwa. Where Wolaita Heritage Lives.
     rights: "Bushaashe Baruwaa. Wolaytta Buquray De'iyoosaa.",
     // EN: Developed by

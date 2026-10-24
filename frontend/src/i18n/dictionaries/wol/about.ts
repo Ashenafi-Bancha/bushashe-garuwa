@@ -170,7 +170,7 @@ const page: DeepPartial<Dictionary> = {
       people: {
         bushaashe: {
           // EN: Bushaashe
-          name: "Bushaasha",
+          name: "Bushaashe",
           // EN: The place bears his name
           generation: "Sohoy eta sunttan xeesettees",
           // EN: 

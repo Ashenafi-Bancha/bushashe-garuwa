@@ -88,7 +88,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Find your way
       eyebrow: "Intte ogiya demmite",
       // EN: Everything at Bushaashe Garuwa
-      title: "Beshaashe Garuwan de'iyaa ubbabaa",
+      title: "Bushaashe Garuwan de'iyaa ubbabaa",
       // EN: Every part of Bushaashe Garuwa, one step away.
       desc: "Bushaashe Garuwan diyaa ubbabaa, issi tangguwan.",
       items: {

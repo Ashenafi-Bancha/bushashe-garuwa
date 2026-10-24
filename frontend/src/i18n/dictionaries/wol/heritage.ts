@@ -141,7 +141,7 @@ const page: DeepPartial<Dictionary> = {
       cta: "So Taarikiyaa Nabbabite",
       generations: [
         // EN: Bushaashe
-        "Bushaasha",
+        "Bushaashe",
         // EN: Alambo
         "Alambba",
         // EN: Garedew
