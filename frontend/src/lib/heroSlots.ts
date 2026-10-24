@@ -36,9 +36,13 @@ export const HERO_SLOTS: Record<HeroSlot, { label: string; path: string; photos:
     photos: [
       { key: 'gate', pos: 'object-[center_18%]' },
       { key: 'meeshsho', pos: 'object-[center_22%]' },
+      { key: 'garedewMemorial', pos: 'object-[center_25%]' },
       { key: 'home', pos: 'object-center' },
+      { key: 'rockFountain', pos: 'object-[center_45%]' },
       { key: 'gifaataa1', pos: 'object-[center_40%]' },
+      { key: 'fishPond', pos: 'object-[center_55%]' },
       { key: 'house', pos: 'object-center' },
+      { key: 'crocodilePond', pos: 'object-[center_55%]' },
       { key: 'zigba', pos: 'object-[center_40%]' },
       { key: 'gifaataa2', pos: 'object-[center_45%]' },
     ],
