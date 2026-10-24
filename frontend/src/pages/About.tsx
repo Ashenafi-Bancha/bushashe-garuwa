@@ -4,6 +4,7 @@ import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import CardGrid from '../components/CardGrid';
 import Band from '../components/Band';
+import { wol } from '../lib/wolaitaWords';
 
 /* Icons per item — the text lives in the translations (t.about.*) */
 const values = [
@@ -45,13 +46,13 @@ export default function About() {
             <div>
               <span className="eyebrow mb-5">{a.who.eyebrow}</span>
               <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight mb-6 gold-underline">
-                {a.who.title}
+                {wol(a.who.title)}
               </h2>
               <p className="text-[#1E3A29]/70 font-sans text-base leading-relaxed mb-5">
                 {a.who.p1}
               </p>
               <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed mb-5">
-                {a.who.name}
+                {wol(a.who.name)}
               </p>
               <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed mb-5">
                 {a.who.p2}
@@ -60,7 +61,7 @@ export default function About() {
                 {a.who.p3}
               </p>
               <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed">
-                {a.who.festival}
+                {wol(a.who.festival)}
               </p>
             </div>
             <div className="relative">
@@ -92,7 +93,7 @@ export default function About() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
             <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.purpose.eyebrow}</div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] leading-tight">{a.purpose.title}</h2>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] leading-tight">{wol(a.purpose.title)}</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
@@ -152,7 +153,7 @@ export default function About() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
             <span className="eyebrow mb-5">{a.values.eyebrow}</span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{a.values.title}</h2>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{wol(a.values.title)}</h2>
           </div>
           <CardGrid grid="md:grid-cols-2 lg:grid-cols-3">
             {values.map((val, i) => (
@@ -176,8 +177,8 @@ export default function About() {
           </Link>
           <div>
             <span className="eyebrow bg-white text-[#346A1A] mb-5">{a.lineage.eyebrow}</span>
-            <h2 className="font-display text-4xl sm:text-5xl text-[#13261A] leading-[1.05] mb-5">{a.lineage.title}</h2>
-            <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-8">{a.lineage.desc}</p>
+            <h2 className="font-display text-4xl sm:text-5xl text-[#13261A] leading-[1.05] mb-5">{wol(a.lineage.title)}</h2>
+            <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-8">{wol(a.lineage.desc)}</p>
             <Link to="/family-history" className="btn-primary">
               {a.lineage.open}
               <span aria-hidden="true">&rarr;</span>
@@ -191,7 +192,7 @@ export default function About() {
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
             <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.offer.eyebrow}</div>
-            <h2 className="font-display text-4xl font-semibold text-[#13261A]">{a.offer.title}</h2>
+            <h2 className="font-display text-4xl font-semibold text-[#13261A]">{wol(a.offer.title)}</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {offerItems.map((item) => (
@@ -212,7 +213,7 @@ export default function About() {
             {t.common.comeBePart}
           </h2>
           <p className="text-white/90 font-sans text-base max-w-xl mx-auto mb-10 leading-relaxed">
-            {a.cta.desc}
+            {wol(a.cta.desc)}
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/visit" className="btn-primary btn-on-dark">

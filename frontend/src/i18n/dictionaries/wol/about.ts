@@ -37,7 +37,7 @@ const page: DeepPartial<Dictionary> = {
       p2: "Issi wode mittatuura, keettatuura, mehetuuranne wogatuura issi keettaa asay de'iyoosa gididaagee, hachchi alamee mulee yiidi Wolaytta wogaa loyttidi, puulaaninne eran meezetiyoo soho gidiis.",
       // EN: From our cultural houses and ancient trees, to the reading place, oral histories, traditional food, and guesthouse: every element of Bushaashe Garuwa exists to honor the past, celebrate the present, and protect the future of Wolaita heritage.
       p3: "Nu wogaa keettatuppenne mayzza wode mittatuppe doommidi nabbabiyo sohuwa, doonaa haydaa, wogaa qumaanne imattay aqiyoo keettaa gakkanawu: issi issi Bushaashe Garuwan de'iyaabay nu aadhdhida taarikiya bonchchanawu ha\"i nu gakkosan galatanawunne Wolaytta sinttanaa buquraa naaganaassa.",
-      // EN: Bushaashe Garuwa is also a gathering place for the region: it hosts cultural celebrations, including the eve of Gifaataa, the traditional New Year festival of the Wolaita people.
+      // EN: Bushaashe Garuwa is also a gathering place for the region: it hosts cultural celebrations, including the eve of “Gifaataa”, the traditional New Year festival of the Wolaita people.
       festival: "Qassikka, Bushaashe Garoy shiiqo sohuwa: Wolaytta asaa ooratta layttaa baalaa gidida, Gifaataa, malatiyaanne hara cora ufayssa baalata bonchchiyoosa gidiis.",
       // EN: Generations
       generations: "Yeletata",

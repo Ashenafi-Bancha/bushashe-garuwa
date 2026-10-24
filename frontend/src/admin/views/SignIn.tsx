@@ -11,7 +11,7 @@ const LABEL = 'text-[#1E3A29]/60 text-[12px] font-bold';
 
 /**
  * Staff sign-in, drawn like the opening screen of a phone app: the photograph
- * of Meeshsho Keettaa across the top with the name over it, and the form on a
+ * of Meesho Keettaa across the top with the name over it, and the form on a
  * white sheet rising over the photograph. On a computer the photograph fills
  * the left half and the form sits on the right.
  */

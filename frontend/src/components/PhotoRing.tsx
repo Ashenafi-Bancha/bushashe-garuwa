@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { photos, picture, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
+import { wol } from '../lib/wolaitaWords';
 
 const RING: PhotoKey[] = ['gate', 'meeshsho', 'home', 'house', 'gifaataa1', 'food', 'pavilions', 'gifaataa2', 'gardens', 'zigba', 'lawn', 'enset'];
 
@@ -112,15 +113,15 @@ export default function PhotoRing() {
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="text-center mb-10 sm:mb-14">
             <span className="eyebrow mb-5">{ring.eyebrow}</span>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98]">{ring.title}</h2>
-            <p className="text-[#1E3A29]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{ring.desc}</p>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98]">{wol(ring.title)}</h2>
+            <p className="text-[#1E3A29]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{wol(ring.desc)}</p>
           </div>
           <div data-wave className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {RING.map((key) => (
               <figure key={key} className="relative rounded-2xl overflow-hidden bg-[#13261A]">
                 <img {...picture(photos[key], '(min-width: 640px) 33vw, 100vw')} alt={t.photos[key]} loading="lazy" className="w-full aspect-[3/2] sm:aspect-[4/3] object-cover" />
                 <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
-                <figcaption className="absolute left-4 right-4 bottom-3.5 sm:left-3 sm:right-3 sm:bottom-2.5 text-white font-display text-lg sm:text-sm leading-tight">{t.photoCaptions[key].title}</figcaption>
+                <figcaption className="absolute left-4 right-4 bottom-3.5 sm:left-3 sm:right-3 sm:bottom-2.5 text-white font-display text-lg sm:text-sm leading-tight">{wol(t.photoCaptions[key].title)}</figcaption>
               </figure>
             ))}
           </div>
@@ -139,8 +140,8 @@ export default function PhotoRing() {
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 text-center mb-10 sm:mb-14">
         <span className="eyebrow mb-5">{ring.eyebrow}</span>
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98]">{ring.title}</h2>
-        <p className="text-[#1E3A29]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{ring.desc}</p>
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98]">{wol(ring.title)}</h2>
+        <p className="text-[#1E3A29]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{wol(ring.desc)}</p>
       </div>
 
       <div
@@ -177,7 +178,7 @@ export default function PhotoRing() {
               />
               <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
               <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">
-                {t.photoCaptions[key].title}
+                {wol(t.photoCaptions[key].title)}
               </figcaption>
             </figure>
           ))}
@@ -189,7 +190,7 @@ export default function PhotoRing() {
           <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#3F7D20] hover:text-white transition-colors">
             ‹
           </button>
-          <span className="text-[#1E3A29]/60 text-sm min-w-[12rem] text-center">{t.photoCaptions[facing].title}</span>
+          <span className="text-[#1E3A29]/60 text-sm min-w-[12rem] text-center">{wol(t.photoCaptions[facing].title)}</span>
           <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#3F7D20] hover:text-white transition-colors">
             ›
           </button>

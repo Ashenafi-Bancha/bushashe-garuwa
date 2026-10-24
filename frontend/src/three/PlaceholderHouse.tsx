@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 /**
  * PLACEHOLDER MODEL. A simple stand-in for a traditional thatched house, shaped
- * after the photograph of Meeshsho Keettaa: a round wall and a tall domed thatch
+ * after the photograph of Meesho Keettaa: a round wall and a tall domed thatch
  * roof. It carries no cultural detail of its own and is to be replaced by a
  * scanned model of the real house (.glb) when one is ready.
  */

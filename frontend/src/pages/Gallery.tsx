@@ -5,6 +5,7 @@ import { captionFor, mediaUrl, useSiteMedia } from '../lib/media';
 import { lockScroll, Tilt } from '../lib/motion';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
+import { wol } from '../lib/wolaitaWords';
 
 type Category = Exclude<keyof Dictionary['gallery']['filters'], 'all'>;
 type Filter = Category | 'all';
@@ -173,8 +174,8 @@ export default function Gallery() {
                     <img {...picture(item.src)} alt={item.alt} loading="lazy" className="w-full h-full object-cover" />
                     <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5 text-left">
-                      <span className="block font-display text-base sm:text-xl text-white leading-tight">{item.title}</span>
-                      <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{item.desc}</span>
+                      <span className="block font-display text-base sm:text-xl text-white leading-tight">{wol(item.title)}</span>
+                      <span className="hidden sm:block text-white/75 text-xs sm:text-sm leading-snug mt-1 line-clamp-2">{wol(item.desc)}</span>
                     </span>
                   </button>
                 </Tilt>
@@ -225,8 +226,8 @@ export default function Gallery() {
                   className="max-h-[75vh] max-w-full object-contain rounded-2xl shadow-2xl animate-scale-in"
                 />
                 <figcaption className="text-center max-w-2xl">
-                  <span className="block font-display text-2xl sm:text-3xl text-white">{current.title}</span>
-                  <span className="block text-white/65 text-sm sm:text-base mt-2 leading-relaxed">{current.desc}</span>
+                  <span className="block font-display text-2xl sm:text-3xl text-white">{wol(current.title)}</span>
+                  <span className="block text-white/65 text-sm sm:text-base mt-2 leading-relaxed">{wol(current.desc)}</span>
                 </figcaption>
               </>
             )}

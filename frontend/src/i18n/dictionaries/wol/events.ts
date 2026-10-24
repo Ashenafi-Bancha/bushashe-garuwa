@@ -31,7 +31,7 @@ const page: DeepPartial<Dictionary> = {
           desc: "Wolaytta wogaa keettatu giddon Wolaytta qumaa, tukkiyaa, yettaanne haysiyaa odiyoo omarssaa. Intte sohuwaa garssaara oyttite.",
         },
         gifaataa: {
-          // EN: Gifaataa
+          // EN: “Gifaataa”
           title: "Gifaataa",
           // EN: Once a year
           when: "Layttan issutoo",

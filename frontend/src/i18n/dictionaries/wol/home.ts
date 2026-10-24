@@ -63,7 +63,7 @@ const page: DeepPartial<Dictionary> = {
       eyebrow: "Be'a",
       // EN: A Film of Bushaashe Garuwa
       title: "Bushaashe Garuwa Pilmiya",
-      // EN: A short walk through the grounds, the cultural houses and a Gifaataa celebration.
+      // EN: A short walk through the grounds, the cultural houses and a “Gifaataa” celebration.
       desc: "Gade giddon, meesho keettatanne Gifaataa bonchcho sohuwan qantta hemetaa.",
       // EN: Play the film
       play: "Pilmiya Dooya",
@@ -96,7 +96,7 @@ const page: DeepPartial<Dictionary> = {
         heritage: "Mesho keettata, beni mittatanne so asaa taarikiya.",
         // EN: Food, coffee, music, dance and guided tours.
         experiences: "Qumaa, tukkiya, yettaa, durssaanne kaaleta hemeta.",
-        // EN: Cultural food evenings twice a month, and Gifaataa.
+        // EN: Cultural food evenings twice a month, and “Gifaataa”.
         events: "Aginan naa\"utoo qumaa omarssata; Qasskikka Gifaataa bonchchuwaa.",
         // EN: A guest house among the gardens. Coming soon.
         stay: "Ataakiltte sohotun imatta kifiliya. Mata wodiyan...",
@@ -123,7 +123,7 @@ const page: DeepPartial<Dictionary> = {
       "Wogaa",
       // EN: Food
       "Qumaa",
-      // EN: Gifaataa
+      // EN: “Gifaataa”
       "Gifaataa",
       // EN: Stay
       "Takettaa",
@@ -231,7 +231,7 @@ const page: DeepPartial<Dictionary> = {
         houses: {
           // EN: Cultural Houses
           title: "Meesho Keettata",
-          // EN: Gulanttaa Keettaa and Meeshsho Keettaa: two traditional Wolaita houses holding the tools of Wolaita life.
+          // EN: “Gulanttaa Keettaa” and “Meesho Keettaa”: two traditional Wolaita houses holding the tools of Wolaita life.
           desc: "Gulanttaa Keettaane Meesho Keettaa: Wolaytta de'uwaa miishshata oyqqida naa'u beni Wolaytta keettata.",
         },
         trees: {

@@ -70,9 +70,9 @@ const page: DeepPartial<Dictionary> = {
       scenes: {
         // EN: The main gate
         gate: "Waanna kera panggaa",
-        // EN: Inside Meeshsho Keettaa
-        meeshsho: "Meeshsho Keettaa giddosuwaa",
-        // EN: Inside Gulanttaa Keettaa
+        // EN: Inside “Meesho Keettaa”
+        meeshsho: "Meesho Keettaa giddosuwaa",
+        // EN: Inside “Gulanttaa Keettaa”
         gulanttaa: "Gulanttaa Keettaa giddosuwaa",
         // EN: The great lawn
         lawn: "Gita maata sa'aa",
@@ -94,7 +94,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: [OBJECT STORY NEEDED]
       storyNeeded: "[MEESHSHA TARIKI KOSHSHIYA]",
       items: {
-        // EN: Grinding stone (wotta)
+        // EN: Grinding stone (“wotta”)
         wotta: "Wottaa",
         // EN: Tools for spinning and weaving cotton
         cotton: "Tooniyaanne maoyo oosuwaa miishshata",
@@ -118,9 +118,9 @@ const page: DeepPartial<Dictionary> = {
       points: {
         // EN: The main gate
         gate: "Waanna kera panggaa",
-        // EN: Meeshsho Keettaa
-        meeshsho: "Meeshsho Keettaa",
-        // EN: Gulanttaa Keettaa
+        // EN: “Meesho Keettaa”
+        meeshsho: "Meesho Keettaa",
+        // EN: “Gulanttaa Keettaa”
         gulanttaa: "Gulanttaa Keettaa",
         // EN: The zigba trees
         zigba: "Zigbaa mittata",

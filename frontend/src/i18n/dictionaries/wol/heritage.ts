@@ -34,7 +34,7 @@ const page: DeepPartial<Dictionary> = {
       houses: {
         // EN: Cultural Houses
         label: "Wogaa Keettata",
-        // EN: Two traditional Wolaita houses, Gulanttaa Keettaa and Meeshsho Keettaa, full of the traditional tools and instruments of the Wolaita people.
+        // EN: Two traditional Wolaita houses, “Gulanttaa Keettaa” and “Meesho Keettaa”, full of the traditional tools and instruments of the Wolaita people.
         desc: "Naa\"u Wolaytta keettata: Gulantta Keettaanne Meesho Keettaa, Wolaytta woga miishshatun kumidaageeta.",
       },
       trees: {
@@ -101,13 +101,13 @@ const page: DeepPartial<Dictionary> = {
       desc: "Bushaashe Garuwan naa\"u Wolaytta wogaa keettati de'oosona. Etu giddon, Wolaytta asay bantta galla galla de'uwawu, oosuwawunne baalatussi go'ettido miishshati de'oosona.",
       // EN: Traditional Wolaita house
       label: "Beni Wolaytta Keettaa",
-      // EN: Inside: the traditional grinding stone (wotta), tools for spinning and weaving cotton, household goods, and the traditional instruments of the Wolaita people.
+      // EN: Inside: the traditional grinding stone (“wotta”), tools for spinning and weaving cotton, household goods, and the traditional instruments of the Wolaita people.
       inside: "Etu giddon: gaacciyoo shuchchay (woxaa), daddiyoonne puuttuwaa suqqiyoo miishshati, son go'ettiyoo shaqaxatinne beni Wolaytta asaa miishshati de'oosona.",
     },
     interior: {
       // EN: Inside the Cultural House
       eyebrow: "",
-      // EN: Inside Gulanttaa Keettaa
+      // EN: Inside “Gulanttaa Keettaa”
       title: "",
       // EN: Step through the door and Wolaita daily life is still in its place: the bed, the baskets, the clay pots and the tools of the home, the traditional materials the family has kept.
       desc: "",

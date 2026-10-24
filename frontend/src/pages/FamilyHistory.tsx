@@ -4,6 +4,7 @@ import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import Band from '../components/Band';
+import { wol } from '../lib/wolaitaWords';
 
 /**
  * The family history (/family-history): the generations from Bushaashe to the
@@ -44,8 +45,8 @@ export default function FamilyHistory() {
               <img {...picture(photos.family)} alt={t.photos.family} loading="lazy" className="w-full h-full object-cover object-[center_30%]" />
             </div>
             <figcaption className="px-4 py-4 sm:px-5">
-              <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions.family.title}</span>
-              <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions.family.desc}</span>
+              <span className="block font-display text-xl font-bold text-[#1E3A29]">{wol(t.photoCaptions.family.title)}</span>
+              <span className="block text-[#1E3A29]/65 text-sm mt-1">{wol(t.photoCaptions.family.desc)}</span>
             </figcaption>
           </figure>
 
@@ -79,7 +80,7 @@ export default function FamilyHistory() {
                     <span className="min-w-0 flex-1">
                       <span className="block text-[#346A1A] text-[11px] font-bold tracking-[0.12em] uppercase mb-1">{p.generation}</span>
                       <span className="flex items-center justify-between gap-3">
-                        <span className="font-display text-2xl sm:text-3xl font-extrabold text-[#13261A] leading-tight">{p.name}</span>
+                        <span className="font-display text-2xl sm:text-3xl font-extrabold text-[#13261A] leading-tight">{wol(p.name)}</span>
                         <span
                           aria-hidden="true"
                           className={`grid place-items-center w-9 h-9 flex-shrink-0 rounded-full border border-[#1E3A29]/15 text-[#346A1A] transition-transform duration-500 ${open ? 'rotate-180 bg-[#3F7D20]/10' : ''}`}
@@ -127,7 +128,7 @@ export default function FamilyHistory() {
                                 <ul className="flex flex-wrap gap-2.5">
                                   {a.lineage.children.map((child) => (
                                     <li key={child} className="rounded-full bg-[#E3EBD8] text-[#1E3A29] text-sm sm:text-base px-4 py-2">
-                                      <strong className="italic">{child}</strong> <span className="text-[#1E3A29]/60 italic">{p.name}</span>
+                                      <strong className="italic">{child}</strong> <span className="text-[#1E3A29]/60 italic">{wol(p.name)}</span>
                                     </li>
                                   ))}
                                 </ul>

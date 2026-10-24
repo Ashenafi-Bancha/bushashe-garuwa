@@ -14,7 +14,7 @@ import type { DeepPartial } from '../../types';
  */
 const page: DeepPartial<Dictionary> = {
   photos: {
-    // EN: Meeshsho Keettaa: a traditional Wolaita house with a thatched dome and a carved wooden door, among enset plants
+    // EN: “Meesho Keettaa”: a traditional Wolaita house with a thatched dome and a carved wooden door, among enset plants
     meeshsho: "Meesho Keettaa: maatan dadettida qum\"oy, sikettida godaanne ciiretti giigida sanqqay de'iyoo uuttatu giddon keexettida keettaa.",
     // EN: Bushaashe Garuwa: the main gate with its carved tree-trunk pillars and the welcome sign
     gate: "Bushaashe Garuwa: naa\"u mittaappe giigida tuussa mittati, hashshu yeeta giyaa mohaa xuufeenne moqottaappe merettida sanqqay de'iyoo giddo geliyoo waanna penggiyaa",
@@ -70,13 +70,13 @@ const page: DeepPartial<Dictionary> = {
     fishPond: "",
     // EN: The vegetable garden at Bushaashe Garuwa: neat beds of cabbage, carrots and lettuce, with maize and trees behind
     vegetableGarden: "",
-    // EN: Gulanttaa Keettaa at Bushaashe Garuwa: a round traditional Wolaita house with a thatched dome, dark bands on its woven walls and a wooden door
+    // EN: “Gulanttaa Keettaa” at Bushaashe Garuwa: a round traditional Wolaita house with a thatched dome, dark bands on its woven walls and a wooden door
     gulanttaa: "",
-    // EN: Inside Gulanttaa Keettaa: a traditional bed of wooden poles covered with a hide, against a wall of bamboo and split wood
+    // EN: Inside “Gulanttaa Keettaa”: a traditional bed of wooden poles covered with a hide, against a wall of bamboo and split wood
     traditionalBed: "",
-    // EN: Inside Gulanttaa Keettaa: woven baskets, lids and fans in red and green, and rows of clay pots, hung on a woven wall
+    // EN: Inside “Gulanttaa Keettaa”: woven baskets, lids and fans in red and green, and rows of clay pots, hung on a woven wall
     artifactsWall: "",
-    // EN: Inside Gulanttaa Keettaa: a large clay water pot, a colourful lidded basket and bundles wrapped in dried enset leaves
+    // EN: Inside “Gulanttaa Keettaa”: a large clay water pot, a colourful lidded basket and bundles wrapped in dried enset leaves
     artifactsCorner: "",
     // EN: The memorial of Garedew Alambo at Bushaashe Garuwa: a bronze bust on a black column, before banana and enset plants
     garedewMemorial: "",
@@ -106,17 +106,17 @@ const page: DeepPartial<Dictionary> = {
     gardenPlant: "Maaxxa keettaa matan, yaara mittatara ogiya giddon de'iya zo'o qassi caala hayttai de'iya ataakilttiyaa",
     // EN: A pigeon with a white head and a purple sheen on its neck, perched on the edge of a roof at Bushaashe Garuwa
     bird: "Bushaashe Garuwaa keetta huuphe zappiyaan uttida, bootta huupheenne qolla qorxxiya lo'o birssaqai de'iya holla kafiyaa",
-    // EN: Gifaataa celebration at Bushaashe Garuwa: guests in traditional Wolaita dress walking through the heritage gate
+    // EN: “Gifaataa” celebration at Bushaashe Garuwa: guests in traditional Wolaita dress walking through the heritage gate
     gifaataa1: "Gifaataa bonchchoo Bushaashe Garuwaan: aada Wolaytta maoy maayida imttati laata kera panggara giddoyees",
-    // EN: Gifaataa celebration: women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn
+    // EN: “Gifaataa” celebration: women in traditional Wolaita dress gathered on the Bushaashe Garuwa lawn
     gifaataa2: "Gifaataa bonchchoo: aada Wolaytta maoy maayida maccaasay Bushaashe Garuwaa maata gadiyan shiiqidosona",
-    // EN: Gifaataa celebration: guests in traditional Wolaita attire on the Bushaashe Garuwa grounds
+    // EN: “Gifaataa” celebration: guests in traditional Wolaita attire on the Bushaashe Garuwa grounds
     gifaataa3: "Gifaataa bonchchoo: aada Wolaytta maoy maayida imttati Bushaashe Garuwaa gadiyan eqqidosona",
   },
 
   photoCaptions: {
     meeshsho: {
-      // EN: Meeshsho Keettaa
+      // EN: “Meesho Keettaa”
       title: "Meesho Keettaa",
       // EN: A traditional Wolaita house: a thatched dome, woven walls and a carved door, standing among the enset.
       desc: "Uuttatu giddon eqqida Wolaytta Wogaa keettaa: maatan dadettida qum\"uwaa, galabaan oosettida godaanne ciirettida sanqqaa.",
@@ -134,7 +134,7 @@ const page: DeepPartial<Dictionary> = {
       desc: "Gita aada keettaa, pulttiya haaxxa pillaasaanne banddarata, ataakiltte giddon giigida.",
     },
     gifaataa1: {
-      // EN: Arriving for Gifaataa
+      // EN: Arriving for “Gifaataa”
       title: "Gifaataassi Yiyoogaa",
       // EN: Guests in traditional Wolaita dress walk through the heritage gate for the new year celebration.
       desc: "Aada Wolaytta maoy maayida imttati laytta laammiya bonchchoos laata kera panggara geloosona.",
@@ -146,9 +146,9 @@ const page: DeepPartial<Dictionary> = {
       desc: "Maaxxan xammettida ba huupheera de'iya aada Wolaytta keettaa, ogiya matan qassi sunttaa abagida pilleera.",
     },
     gifaataa2: {
-      // EN: Women of Gifaataa
+      // EN: Women of “Gifaataa”
       title: "Gifaataa Maccaasata",
-      // EN: Women in white and red traditional Wolaita dress gather on the lawn during Gifaataa.
+      // EN: Women in white and red traditional Wolaita dress gather on the lawn during “Gifaataa”.
       desc: "Boottaara zo'ora aada Wolaytta maoy maayida maccaasay Gifaataa wode maata sa'an shiiqidosona.",
     },
     pavilions: {
@@ -160,7 +160,7 @@ const page: DeepPartial<Dictionary> = {
     gifaataa3: {
       // EN: Guests of the Celebration
       title: "Bonchcho Imattata",
-      // EN: Guests in traditional Wolaita attire stand together on the grounds during Gifaataa.
+      // EN: Guests in traditional Wolaita attire stand together on the grounds during “Gifaataa”.
       desc: "Aada Wolaytta maoy maayida imttati Gifaataa wode sa'iya bollan issippe eqqidosona.",
     },
     gardens: {
@@ -224,7 +224,7 @@ const page: DeepPartial<Dictionary> = {
       desc: "",
     },
     gulanttaa: {
-      // EN: Gulanttaa Keettaa
+      // EN: “Gulanttaa Keettaa”
       title: "",
       // EN: The second traditional house of the grounds: a thatched dome and woven walls banded in black.
       desc: "",

@@ -84,7 +84,7 @@ import zooImg from './photos/grounds/zoo.webp';
 export const photos = {
   /** The main gate: carved tree-trunk pillars, the welcome sign and the bamboo doors (landscape) */
   gate: gateImg,
-  /** Meeshsho Keettaa: the thatched cultural house with its carved door, among the enset (landscape) */
+  /** Meesho Keettaa: the thatched cultural house with its carved door, among the enset (landscape) */
   meeshsho: meeshshoImg,
   /** Wide view: thatched house, fountain, flags and gardens (landscape) */
   home: overviewImg,

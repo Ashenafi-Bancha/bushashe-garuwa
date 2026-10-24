@@ -13,6 +13,7 @@ import StickyBook from '../components/StickyBook';
 import { useNoIndex } from '../lib/noindex';
 import { deviceTier, forcedTier, rememberSlow } from '../three/device';
 import Testimonials from '../components/Testimonials';
+import { wol } from '../lib/wolaitaWords';
 
 /** The 3D landscape opening, fetched only on the pages that use it */
 const LandscapeHero = lazy(() => import('../three/LandscapeHero'));
@@ -163,7 +164,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             {/* the name of the place in the photograph, and the way to the next one */}
             <div className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:right-8 lg:bottom-8 flex items-center gap-2">
               <span key={slide.id} className="rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
-                {slide.title}
+                {wol(slide.title)}
               </span>
               {heroSlides.length > 1 && (
                 <button
@@ -214,7 +215,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                 <div className="font-display text-[1.6rem] sm:text-4xl xl:text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-[#346A1A] whitespace-nowrap">
                   <CountUp value={fact.value} />
                 </div>
-                <div className="text-[13px] sm:text-sm text-[#1E3A29]/65 mt-2.5 leading-snug">{fact.label}</div>
+                <div className="text-[13px] sm:text-sm text-[#1E3A29]/65 mt-2.5 leading-snug">{wol(fact.label)}</div>
               </li>
             ))}
           </ul>
@@ -228,8 +229,8 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <div data-reveal className="fade-section max-w-2xl mb-8 sm:mb-12">
               <span className="eyebrow mb-5">{h.facilities.eyebrow}</span>
-              <h2 id="facilities-title" className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] leading-[1] mb-4">{h.facilities.title}</h2>
-              <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{h.facilities.desc}</p>
+              <h2 id="facilities-title" className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] leading-[1] mb-4">{wol(h.facilities.title)}</h2>
+              <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{wol(h.facilities.desc)}</p>
             </div>
             <CardGrid grid="md:grid-cols-2 lg:grid-cols-3">
               {facilities.map((id, i) => {
@@ -238,8 +239,8 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                   <div key={id} className="h-full flex gap-4 rounded-[1.5rem] bg-white p-5 sm:p-6 elev-1">
                     <span className="text-[#C4622D] text-sm font-bold tabular-nums pt-1">{String(i + 1).padStart(2, '0')}</span>
                     <div>
-                      <h3 className="font-display text-xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{item.title}</h3>
-                      <p className="text-[#1E3A29]/60 text-sm leading-relaxed">{item.desc}</p>
+                      <h3 className="font-display text-xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{wol(item.title)}</h3>
+                      <p className="text-[#1E3A29]/60 text-sm leading-relaxed">{wol(item.desc)}</p>
                     </div>
                   </div>
                 );

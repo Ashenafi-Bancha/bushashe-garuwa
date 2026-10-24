@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { photos, picture, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
+import { wol } from '../lib/wolaitaWords';
 
 /** One thing a visitor finds on a page: its name, and whether it is still to come */
 type Detail = { label: string; soon?: boolean };
@@ -162,10 +163,10 @@ export default function QuickLinks() {
           <div>
             <span className="eyebrow mb-5">{q.eyebrow}</span>
             <h2 id="quick-title" className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98] max-w-2xl">
-              {q.title}
+              {wol(q.title)}
             </h2>
           </div>
-          <p className="text-[#1E3A29]/60 text-base sm:text-lg max-w-sm">{q.desc}</p>
+          <p className="text-[#1E3A29]/60 text-base sm:text-lg max-w-sm">{wol(q.desc)}</p>
         </div>
 
         {/* the main pages, one below the other; the photograph changes side from row to row on computers */}
@@ -180,8 +181,8 @@ export default function QuickLinks() {
               </Link>
 
               <div className="flex flex-col items-start p-5 sm:p-8 lg:p-10">
-                <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-[1.02] tracking-[-0.03em] mb-3">{row.title}</h3>
-                <p className="text-[#1E3A29] text-lg font-semibold leading-snug mb-3">{row.desc}</p>
+                <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-[1.02] tracking-[-0.03em] mb-3">{wol(row.title)}</h3>
+                <p className="text-[#1E3A29] text-lg font-semibold leading-snug mb-3">{wol(row.desc)}</p>
                 {/* what is found there, as a sentence; each is shown with its photograph on the page itself */}
                 <p className="text-[#1E3A29]/65 leading-relaxed mb-8">{sentence(row.list)}</p>
 

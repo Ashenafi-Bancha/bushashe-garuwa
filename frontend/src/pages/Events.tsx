@@ -9,6 +9,7 @@ import { fmt, useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import { eventText, useSiteEvents, type SiteEvent } from '../lib/events';
 import Band from '../components/Band';
+import { wol } from '../lib/wolaitaWords';
 
 type Category = 'all' | 'food' | 'culture' | 'education' | 'music' | 'community';
 type AvailKind = 'limited' | 'open' | 'group' | 'full';
@@ -131,7 +132,7 @@ export default function Events() {
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mb-8 sm:mb-10">
             <span className="eyebrow mb-5">{e.kinds.eyebrow}</span>
-            <h2 id="kinds-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1E3A29] leading-[1.05]">{e.kinds.title}</h2>
+            <h2 id="kinds-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1E3A29] leading-[1.05]">{wol(e.kinds.title)}</h2>
           </div>
           <ul data-wave className="grid md:grid-cols-3 gap-5 sm:gap-6">
             {([
@@ -142,11 +143,11 @@ export default function Events() {
               <li key={id} className="flex flex-col bg-white rounded-[2rem] p-2.5 elev-1">
                 <div className="relative img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
                   <img {...picture(photos[photo], '(max-width: 767px) 100vw, 33vw')} alt={t.photos[photo]} loading="lazy" className="w-full h-full object-cover" />
-                  <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-xs font-bold text-[#1E3A29]">{e.kinds.items[id].when}</span>
+                  <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-xs font-bold text-[#1E3A29]">{wol(e.kinds.items[id].when)}</span>
                 </div>
                 <div className="flex flex-1 flex-col items-start px-4 py-5 sm:px-5">
-                  <h3 className="font-display text-2xl font-bold text-[#1E3A29] tracking-tight mb-2">{e.kinds.items[id].title}</h3>
-                  <p className="text-[#1E3A29]/65 text-sm sm:text-base leading-relaxed">{e.kinds.items[id].desc}</p>
+                  <h3 className="font-display text-2xl font-bold text-[#1E3A29] tracking-tight mb-2">{wol(e.kinds.items[id].title)}</h3>
+                  <p className="text-[#1E3A29]/65 text-sm sm:text-base leading-relaxed">{wol(e.kinds.items[id].desc)}</p>
                   {id === 'private' && <Link to="/contact" className="btn-primary btn-sm mt-5">{e.kinds.ask}</Link>}
                 </div>
               </li>
@@ -174,9 +175,9 @@ export default function Events() {
                       </div>
                       <span className={`text-xs font-sans rounded-full px-3 py-1 flex-shrink-0 ${availStyle(event.availKind, false)}`}>{event.avail}</span>
                     </div>
-                    <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#13261A] mb-3">{event.name}</h2>
+                    <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#13261A] mb-3">{wol(event.name)}</h2>
                     {event.partner && <p className="text-[#346A1A] text-sm mb-3">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
-                    <p className="text-[#1E3A29]/80 font-sans text-sm leading-relaxed mb-5 flex-1">{event.desc}</p>
+                    <p className="text-[#1E3A29]/80 font-sans text-sm leading-relaxed mb-5 flex-1">{wol(event.desc)}</p>
                     <div className="flex items-center justify-end gap-4 pt-4 border-t border-[#1E3A29]/12">{bookButton(event)}</div>
                   </div>
                 </div>
@@ -231,9 +232,9 @@ export default function Events() {
                       {event.time && <span className="text-[#1E3A29]/65 text-xs font-sans">{event.time}</span>}
                       <span className="bg-[#F4EFE4] text-[#1E3A29] text-[10px] font-sans font-semibold uppercase tracking-wider rounded-full px-2.5 py-0.5">{e.categories[event.cat]}</span>
                     </div>
-                    <h3 className="font-display text-xl font-semibold text-[#1E3A29] mb-2">{event.name}</h3>
+                    <h3 className="font-display text-xl font-semibold text-[#1E3A29] mb-2">{wol(event.name)}</h3>
                     {event.partner && <p className="text-[#1E3A29] text-sm mb-2">{fmt(e.live.partnerWith, { partner: event.partner })}</p>}
-                    <p className="text-[#1E3A29]/55 text-sm font-sans leading-relaxed">{event.desc}</p>
+                    <p className="text-[#1E3A29]/55 text-sm font-sans leading-relaxed">{wol(event.desc)}</p>
                   </div>
                   <div className="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-3 flex-shrink-0">
                     <span className={`text-xs font-sans rounded-full px-3 py-1 ${availStyle(event.availKind, false)}`}>{event.avail}</span>
@@ -252,8 +253,8 @@ export default function Events() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8 sm:mb-10">
             <div className="max-w-2xl">
               <span className="eyebrow mb-5">{e.moments.eyebrow}</span>
-              <h2 id="moments-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#13261A] leading-[1.05] mb-3">{e.moments.title}</h2>
-              <p className="text-[#1E3A29]/70 leading-relaxed">{e.moments.desc}</p>
+              <h2 id="moments-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#13261A] leading-[1.05] mb-3">{wol(e.moments.title)}</h2>
+              <p className="text-[#1E3A29]/70 leading-relaxed">{wol(e.moments.desc)}</p>
             </div>
             <Link to="/gallery" className="btn-outline text-[#1E3A29] self-start md:self-auto flex-shrink-0">{e.moments.cta}</Link>
           </div>
@@ -264,8 +265,8 @@ export default function Events() {
                   <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <figcaption className="px-4 py-4 sm:px-5">
-                  <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions[key].title}</span>
-                  <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions[key].desc}</span>
+                  <span className="block font-display text-xl font-bold text-[#1E3A29]">{wol(t.photoCaptions[key].title)}</span>
+                  <span className="block text-[#1E3A29]/65 text-sm mt-1">{wol(t.photoCaptions[key].desc)}</span>
                 </figcaption>
               </figure>
             ))}

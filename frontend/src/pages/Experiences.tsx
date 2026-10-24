@@ -6,6 +6,7 @@ import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import PageHero from '../components/PageHero';
 import Band from '../components/Band';
+import { wol } from '../lib/wolaitaWords';
 
 /* Order and photos — the text for each id lives in the translations (t.experiences.items) */
 const experiences: { id: keyof Dictionary['experiences']['items']; img?: string; soon?: boolean }[] = [
@@ -46,11 +47,11 @@ export default function Experiences() {
                 <div className="p-5 sm:p-7">
                   <div className="mb-4">
                     <div>
-                      <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#1E3A29] mb-1">{exp.title}</h2>
+                      <h2 className="font-display text-xl sm:text-2xl font-semibold text-[#1E3A29] mb-1">{wol(exp.title)}</h2>
                       <p className="text-[#1E3A29] text-sm font-sans">{exp.sub}</p>
                     </div>
                   </div>
-                  <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed mb-4">{exp.desc}</p>
+                  <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed mb-4">{wol(exp.desc)}</p>
 
                   <button
                     onClick={() => setSelected(selected === i ? null : i)}
@@ -98,8 +99,8 @@ export default function Experiences() {
           </figure>
           <div data-reveal>
             <span className="eyebrow !bg-white mb-5">{t.home.reading.eyebrow}</span>
-            <h2 id="reading-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#13261A] leading-[1.05] mb-4">{t.home.reading.title}</h2>
-            <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-3">{t.home.reading.desc}</p>
+            <h2 id="reading-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#13261A] leading-[1.05] mb-4">{wol(t.home.reading.title)}</h2>
+            <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-3">{wol(t.home.reading.desc)}</p>
             <p className="text-[#1E3A29]/70 italic leading-relaxed mb-6">{t.home.reading.mountain}</p>
             <ul className="flex flex-wrap gap-2.5 mb-8">
               {t.home.reading.qualities.map((q) => (
@@ -116,8 +117,8 @@ export default function Experiences() {
         <img {...picture(photos.gardens)} alt={t.photos.gardens} className="absolute inset-0 w-full h-full object-cover"/>
         <div className="absolute inset-0 bg-[#3F7D20]/90"/>
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-6">{x.cta.title}</h2>
-          <p className="text-white/90 font-sans text-base max-w-xl mx-auto mb-10">{x.cta.desc}</p>
+          <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-6">{wol(x.cta.title)}</h2>
+          <p className="text-white/90 font-sans text-base max-w-xl mx-auto mb-10">{wol(x.cta.desc)}</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link to="/contact" className="btn-primary btn-on-dark">
               {t.common.contactUs}
