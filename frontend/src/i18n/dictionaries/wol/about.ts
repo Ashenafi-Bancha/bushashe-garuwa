@@ -134,13 +134,13 @@ const page: DeepPartial<Dictionary> = {
       // EN: The family is writing this history now. It will be published here soon.
       pending: "So asay ha taarikiyaa xuufiyan giigissiiddi de'oosona. Mata wodiya wuriyoode hagan wottana.",
       // EN: Tap a name to read the story.
-      hint: "",
+      hint: "Taarikiya nabbabanawu sunttaa bochcha.",
       // EN: Read the full story
-      readMore: "",
+      readMore: "Kumetta taarikiyaa nabbabba",
       // EN: Show less
-      readLess: "",
+      readLess: "Xuntta",
       // EN: Read the family history
-      open: "",
+      open: "So asaa taarikiyaa nabbabba",
       // EN: The Children of Bushaashe
       childrenTitle: "Bushaashe Naata",
       // EN: The Generations Before Bushaashe
