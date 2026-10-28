@@ -789,113 +789,188 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
 .lenis.lenis-stopped { overflow: hidden; }
 
-/* ── Staff area (/admin) ── */
-/* the main action on a screen: the same emerald pill as the public site */
+/* ── Staff area (/admin): one calm look for every screen ──
+   Colours are named once here and used as var(--a-…) in the staff screens. */
+.admin-root, .admin-signin {
+  --a-bg: #F6F5F1;
+  --a-surface: #FFFFFF;
+  --a-border: #E6E3DA;
+  --a-hover: #F4F2EC;
+  --a-ink: #18291E;
+  --a-muted: #66706A;
+  --a-faint: #9BA39D;
+  --a-brand: #3F7D20;
+  --a-brand-dark: #33691A;
+  --a-brand-soft: #EEF4E7;
+  --a-danger: #C62828;
+  background: var(--a-bg);
+  color: var(--a-ink);
+  font-feature-settings: 'cv11', 'ss01';
+}
+
+/* headings: plain and steady, not the website's display face */
+.admin-h1 { font-family: var(--font-sans); font-size: 26px; line-height: 1.15; font-weight: 750; letter-spacing: -0.02em; color: var(--a-ink); }
+@media (min-width: 640px) { .admin-h1 { font-size: 30px; } }
+.admin-h3 { font-family: var(--font-sans); font-size: 15px; font-weight: 700; color: var(--a-ink); }
+/* the display face the old screens use for small headings reads better as the plain one here */
+.admin-root .font-display { font-family: var(--font-sans); letter-spacing: -0.015em; }
+
+/* the main action on a screen */
 .admin-btn {
   /* no `display` here (see .admin-btn-quiet) */
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 999px;
+  min-height: 40px;
+  border-radius: 10px;
   border: 0;
-  background: #3F7D20;
+  background: var(--a-brand, #3F7D20);
   color: #fff;
   font-family: var(--font-sans);
   font-size: 14px;
-  font-weight: 700;
-  padding: 10px 20px;
-  transition: background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  font-weight: 650;
+  padding: 9px 16px;
+  box-shadow: 0 1px 2px rgba(19, 38, 26, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: background 0.2s ease, opacity 0.2s ease, transform 0.15s ease;
 }
-.admin-btn:hover:not(:disabled) { background: #346A1A; }
+.admin-btn:hover:not(:disabled) { background: var(--a-brand-dark, #33691A); }
 .admin-btn:active:not(:disabled) { transform: scale(0.98); }
-.admin-btn:disabled { opacity: 0.5; }
-/* phones: the main action fills the row, as on the public site */
+.admin-btn:disabled { opacity: 0.45; }
 @media (max-width: 639px) {
-  .admin-btn { width: 100%; min-height: 48px; font-size: 15px; }
+  .admin-btn { min-height: 46px; font-size: 15px; }
 }
 
-/* text boxes in the staff forms */
+/* a second, quieter action */
+.admin-btn-quiet {
+  /* no `display` here: it would beat Tailwind's `hidden`. Markup sets the display. */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 38px;
+  border-radius: 10px;
+  border: 1px solid var(--a-border, #E6E3DA);
+  background: #fff;
+  color: var(--a-ink, #18291E);
+  font-family: var(--font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  padding: 7px 13px;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+.admin-btn-quiet:hover:not(:disabled) { background: var(--a-hover, #F4F2EC); border-color: #D6D2C6; }
+.admin-btn-quiet.danger { color: var(--a-danger, #C62828); }
+.admin-btn-quiet.danger:hover:not(:disabled) { background: #FCEDEC; border-color: #F1C4C1; }
+.admin-btn-quiet:disabled { opacity: 0.4; }
+.admin-btn-quiet.on-dark { background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.25); color: #fff; }
+
+/* a round-cornered square button with only an icon */
+.admin-icon-btn {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: var(--a-muted, #66706A);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+.admin-icon-btn:hover:not(:disabled) { background: var(--a-hover, #F4F2EC); color: var(--a-ink, #18291E); }
+.admin-icon-btn:active:not(:disabled) { transform: scale(0.94); }
+.admin-icon-btn.bordered { border: 1px solid var(--a-border, #E6E3DA); background: #fff; }
+.admin-icon-btn.danger:hover:not(:disabled) { background: #FCEDEC; color: var(--a-danger, #C62828); }
+.admin-icon-btn:disabled { opacity: 0.4; }
+
+/* text boxes */
 .admin-field {
   width: 100%;
-  border-radius: 12px;
-  border: 1px solid rgba(30, 58, 41, 0.18);
+  min-height: 42px;
+  border-radius: 10px;
+  border: 1px solid var(--a-border, #E6E3DA);
   background: #fff;
-  color: #1E3A29;
+  color: var(--a-ink, #18291E);
   font-size: 14px;
-  padding: 11px 14px;
+  padding: 10px 12px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-.admin-field::placeholder { color: rgba(30, 58, 41, 0.35); }
-.admin-field:focus { border-color: #3F7D20; box-shadow: 0 0 0 3px rgba(63, 125, 32, 0.14); }
+.admin-field::placeholder { color: var(--a-faint, #9BA39D); }
+.admin-field:hover { border-color: #D6D2C6; }
+.admin-field:focus { border-color: var(--a-brand, #3F7D20); box-shadow: 0 0 0 3px rgba(63, 125, 32, 0.14); }
+@media (max-width: 639px) { .admin-field { font-size: 16px; min-height: 46px; } }
 
-.admin-btn-quiet {
-  /* no `display` here: it would beat Tailwind's `hidden` and the button
-     would stay on screen where we meant to hide it. Markup sets the display. */
-  align-items: center;
-  gap: 6px;
-  border-radius: 999px;
-  border: 1px solid rgba(30, 58, 41, 0.2);
-  background: #fff;
-  color: #1E3A29;
-  font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 600;
-  padding: 8px 16px;
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, opacity 0.2s ease;
-}
-.admin-btn-quiet:hover:not(:disabled) { border-color: rgba(30, 58, 41, 0.5); }
-/* deleting is red, so it is never mistaken for an ordinary button */
-.admin-btn-quiet.danger { color: #C62828; border-color: rgba(198, 40, 40, 0.4); }
-.admin-btn-quiet.danger:hover:not(:disabled) { background: #C62828; border-color: #C62828; color: #fff; }
-.admin-btn-quiet:disabled { opacity: 0.4; }
-.admin-btn-quiet.on-dark {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  color: #fff;
-}
-.admin-btn-quiet.on-dark:hover:not(:disabled) { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.45); }
-
-/* ── Staff app: the look of a phone app ── */
-/* a card: white, softly rounded, lifted by a faint shadow */
+/* a card: white, thin border, the softest shadow */
 .admin-card {
   /* no display here, so the flex and grid classes on a card take effect */
-  border-radius: 24px;
+  border-radius: 14px;
   background: #fff;
-  border: 1px solid rgba(30, 58, 41, 0.07);
-  padding: 20px;
-  box-shadow: 0 1px 2px rgba(30, 58, 41, 0.04), 0 16px 32px -26px rgba(30, 58, 41, 0.45);
+  border: 1px solid var(--a-border, #E6E3DA);
+  padding: 18px;
+  box-shadow: 0 1px 2px rgba(19, 38, 26, 0.04);
 }
-@media (min-width: 640px) { .admin-card { padding: 26px; } }
+@media (min-width: 640px) { .admin-card { padding: 22px; } }
 
-/* a square button with an icon over its label, as on a phone's settings screen */
+/* a small round count beside a menu item */
+.admin-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #C4622D;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* the computer menu's items */
+.admin-nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 9px;
+  font-size: 14px;
+  font-weight: 550;
+  color: #48524B;
+  text-align: left;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.admin-nav-item:hover { background: var(--a-hover, #F4F2EC); color: var(--a-ink, #18291E); }
+.admin-nav-item.is-active { background: var(--a-brand-soft, #EEF4E7); color: var(--a-brand-dark, #33691A); font-weight: 650; }
+.admin-nav-item.is-active svg { color: var(--a-brand, #3F7D20); }
+
+/* a square button with an icon over its label */
 .admin-tile {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  border-radius: 18px;
-  border: 1px solid rgba(30, 58, 41, 0.08);
+  border-radius: 14px;
+  border: 1px solid var(--a-border, #E6E3DA);
   background: #fff;
-  padding: 14px 12px;
+  padding: 12px;
   font-size: 13px;
-  font-weight: 700;
-  color: #1E3A29;
+  font-weight: 650;
+  color: var(--a-ink, #18291E);
   text-align: center;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.15s ease, background 0.2s ease, border-color 0.2s ease;
 }
-.admin-tile:hover:not(:disabled) { border-color: rgba(63, 125, 32, 0.35); }
-.admin-tile:active:not(:disabled) { transform: scale(0.96); background: #F7F3EA; }
+.admin-tile:hover:not(:disabled) { border-color: #D6D2C6; background: var(--a-hover, #F4F2EC); }
+.admin-tile:active:not(:disabled) { transform: scale(0.97); }
 .admin-tile:disabled { opacity: 0.45; }
 
 /* an on/off switch drawn from a checkbox */
 .admin-switch {
   appearance: none;
   flex-shrink: 0;
-  width: 50px;
-  height: 30px;
+  width: 44px;
+  height: 26px;
   border-radius: 999px;
-  background: rgba(30, 58, 41, 0.18);
+  background: #D9D6CC;
   position: relative;
   cursor: pointer;
   transition: background 0.25s ease;
@@ -905,93 +980,89 @@ html.lenis, html.lenis body { height: auto; }
   position: absolute;
   top: 3px;
   left: 3px;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border-radius: 999px;
   background: #fff;
-  box-shadow: 0 2px 6px rgba(19, 38, 26, 0.3);
-  transition: transform 0.25s var(--ease-out-expo, cubic-bezier(0.16, 1, 0.3, 1));
+  box-shadow: 0 1px 3px rgba(19, 38, 26, 0.3);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.admin-switch:checked { background: #3F7D20; }
-.admin-switch:checked::after { transform: translateX(20px); }
+.admin-switch:checked { background: var(--a-brand, #3F7D20); }
+.admin-switch:checked::after { transform: translateX(18px); }
 .admin-switch:disabled { opacity: 0.5; cursor: not-allowed; }
 
-/* the phone's top bar: frosted, with a hairline once the page scrolls under it */
+/* the phone's top bar and tab bar: white, frosted, with hairlines */
 .admin-topbar {
-  background: rgba(244, 239, 228, 0.82);
-  -webkit-backdrop-filter: saturate(1.6) blur(18px);
-  backdrop-filter: saturate(1.6) blur(18px);
-  transition: box-shadow 0.3s ease, background 0.3s ease;
+  background: rgba(246, 245, 241, 0.85);
+  -webkit-backdrop-filter: saturate(1.6) blur(16px);
+  backdrop-filter: saturate(1.6) blur(16px);
+  transition: box-shadow 0.25s ease;
 }
-.admin-topbar.is-scrolled { background: rgba(251, 248, 241, 0.9); box-shadow: 0 1px 0 rgba(30, 58, 41, 0.08), 0 10px 24px -20px rgba(19, 38, 26, 0.4); }
-
-/* the tab bar floating over the foot of the screen */
+.admin-topbar.is-scrolled { box-shadow: 0 1px 0 var(--a-border, #E6E3DA); }
 .admin-tabbar {
-  border-radius: 26px;
-  background: rgba(255, 255, 255, 0.9);
-  -webkit-backdrop-filter: saturate(1.8) blur(22px);
-  backdrop-filter: saturate(1.8) blur(22px);
-  border: 1px solid rgba(30, 58, 41, 0.07);
-  box-shadow: 0 18px 40px -18px rgba(19, 38, 26, 0.45), 0 2px 6px rgba(19, 38, 26, 0.06);
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: saturate(1.6) blur(16px);
+  backdrop-filter: saturate(1.6) blur(16px);
+  border-top: 1px solid var(--a-border, #E6E3DA);
 }
 
-/* the green card that opens the day */
-.admin-welcome {
-  background:
-    radial-gradient(120% 140% at 100% 0%, rgba(134, 169, 79, 0.55) 0%, transparent 55%),
-    linear-gradient(140deg, #3F7D20 0%, #2A5A17 60%, #1E4413 100%);
-  box-shadow: 0 26px 50px -28px rgba(46, 94, 23, 0.85);
-}
-
-/* a screen arriving: a short rise and fade, like a phone app moving between screens */
-@keyframes adminEnter { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
-.admin-enter { animation: adminEnter 0.38s cubic-bezier(0.16, 1, 0.3, 1) both; }
-@keyframes adminRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
-.admin-rise { animation: adminRise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both; }
-/* the sign-in photograph drifts slowly closer */
-@keyframes adminKen { from { transform: scale(1.12); } to { transform: scale(1); } }
-.admin-ken { animation: adminKen 9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
-
-/* sheets slide up on phones and grow in on computers; their backdrop fades in */
-@keyframes adminSheetUp { from { transform: translateY(100%); } to { transform: none; } }
-@keyframes adminSheetIn { from { opacity: 0; transform: translateY(14px) scale(0.98); } to { opacity: 1; transform: none; } }
-@keyframes adminFade { from { opacity: 0; } to { opacity: 1; } }
-.admin-sheet { animation: adminSheetUp 0.42s cubic-bezier(0.16, 1, 0.3, 1) both; }
-@media (min-width: 640px) { .admin-sheet { animation-name: adminSheetIn; animation-duration: 0.3s; } }
-.admin-backdrop { animation: adminFade 0.3s ease both; }
-@media (prefers-reduced-motion: reduce) {
-  .admin-enter, .admin-rise, .admin-ken, .admin-sheet, .admin-backdrop { animation: none; }
-}
-
-/* a status shown as a coloured chip that opens its list of choices */
+/* a status shown as a small coloured chip that opens its list of choices */
 .admin-chip-select {
   appearance: none;
   border: 0;
   border-radius: 999px;
-  padding: 7px 30px 7px 13px;
+  padding: 5px 26px 5px 11px;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 650;
   cursor: pointer;
   outline: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231E3A29' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2318291E' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px;
-  transition: filter 0.2s ease;
+  background-position: right 9px center;
+  background-size: 11px;
 }
 .admin-chip-select:focus-visible { box-shadow: 0 0 0 3px rgba(63, 125, 32, 0.25); }
 .admin-chip-select:disabled { opacity: 0.5; }
 
-/* a request nobody has answered yet: a clay mark down its left side */
-.admin-card-new { box-shadow: inset 4px 0 0 #C4622D, 0 1px 2px rgba(30, 58, 41, 0.04), 0 16px 32px -26px rgba(30, 58, 41, 0.45); }
+/* a request nobody has answered yet: a small clay dot before its name */
+.admin-card-new { position: relative; }
+.admin-card-new::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 16px;
+  bottom: 16px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: #C4622D;
+}
 
 /* placeholders shimmering while a list loads */
 @keyframes adminShimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 .admin-shimmer {
   display: block;
-  background: linear-gradient(90deg, rgba(30, 58, 41, 0.06) 25%, rgba(30, 58, 41, 0.12) 50%, rgba(30, 58, 41, 0.06) 75%);
+  background: linear-gradient(90deg, #EFEDE6 25%, #E6E3DA 50%, #EFEDE6 75%);
   background-size: 200% 100%;
   animation: adminShimmer 1.4s linear infinite;
+}
+
+/* a screen arriving: a short rise and fade */
+@keyframes adminEnter { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.admin-enter { animation: adminEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes adminRise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.admin-rise { animation: adminRise 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes adminKen { from { transform: scale(1.08); } to { transform: scale(1); } }
+.admin-ken { animation: adminKen 9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+
+/* sheets slide up on phones and grow in on computers; their backdrop fades in */
+@keyframes adminSheetUp { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes adminSheetIn { from { opacity: 0; transform: translateY(10px) scale(0.98); } to { opacity: 1; transform: none; } }
+@keyframes adminFade { from { opacity: 0; } to { opacity: 1; } }
+.admin-sheet { animation: adminSheetUp 0.38s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@media (min-width: 640px) { .admin-sheet { animation-name: adminSheetIn; animation-duration: 0.25s; } }
+.admin-backdrop { animation: adminFade 0.25s ease both; }
+@media (prefers-reduced-motion: reduce) {
+  .admin-enter, .admin-rise, .admin-ken, .admin-sheet, .admin-backdrop { animation: none; }
 }
 
 /* rows that scroll sideways without a visible bar */

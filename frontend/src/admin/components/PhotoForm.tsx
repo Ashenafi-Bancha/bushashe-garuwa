@@ -11,7 +11,7 @@ const LANGS: { code: MediaLang; name: string; note?: string }[] = [
   { code: 'wol', name: 'Wolayttatto doonaa', note: 'Left empty, visitors reading Wolaytta see the English words.' },
 ];
 
-const LABEL = 'block text-xs font-bold text-[#1E3A29]/65 tracking-wider uppercase mb-2';
+const LABEL = 'block text-xs font-bold text-[var(--a-muted)] tracking-wider uppercase mb-2';
 
 export type PhotoFormValues = {
   /** the new photograph; left out when only the words of an existing photo change */
@@ -108,8 +108,8 @@ export default function PhotoForm({
 
       <Panel>
         <div className="mb-6">
-          <h2 className="font-display text-2xl text-[#1E3A29]">{heading}</h2>
-          {lead && <p className="text-[#1E3A29]/55 text-sm mt-1">{lead}</p>}
+          <h2 className="font-display text-2xl text-[var(--a-ink)]">{heading}</h2>
+          {lead && <p className="text-[var(--a-muted)] text-sm mt-1">{lead}</p>}
         </div>
 
         <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] gap-6 lg:gap-8">
@@ -128,7 +128,7 @@ export default function PhotoForm({
                 void choose(e.dataTransfer.files[0]);
               }}
               className={`relative rounded-2xl border-2 border-dashed overflow-hidden transition-colors ${
-                dragging ? 'border-[#3F7D20] bg-[#3F7D20]/8' : 'border-[#1E3A29]/18 bg-[#F4EFE4]/60'
+                dragging ? 'border-[#3F7D20] bg-[#3F7D20]/8' : 'border-[#1E3A29]/18 bg-[var(--a-bg)]/60'
               }`}
             >
               {shown ? (
@@ -137,12 +137,12 @@ export default function PhotoForm({
                 <button
                   type="button"
                   onClick={() => input.current?.click()}
-                  className="w-full aspect-[3/2] flex flex-col items-center justify-center gap-3 text-center px-6 text-[#1E3A29]/60 hover:text-[#3F7D20]"
+                  className="w-full aspect-[3/2] flex flex-col items-center justify-center gap-3 text-center px-6 text-[var(--a-muted)] hover:text-[var(--a-brand)]"
                 >
-                  <span className="grid place-items-center w-14 h-14 rounded-2xl bg-white text-[#3F7D20] elev-1">
+                  <span className="grid place-items-center w-14 h-14 rounded-2xl bg-white text-[var(--a-brand)] elev-1">
                     <Icon name="upload" className="w-6 h-6" />
                   </span>
-                  <span className="font-semibold text-[#1E3A29]">{preparing ? 'Preparing the photo…' : 'Choose a photo'}</span>
+                  <span className="font-semibold text-[var(--a-ink)]">{preparing ? 'Preparing the photo…' : 'Choose a photo'}</span>
                   <span className="text-xs">or drop it here. JPEG, PNG or WebP.</span>
                 </button>
               )}
@@ -167,13 +167,13 @@ export default function PhotoForm({
                 </button>
               )}
               {image && (
-                <span className="text-[#1E3A29]/50 text-xs">
+                <span className="text-[var(--a-faint)] text-xs">
                   {image.width} × {image.height} pixels, {formatSize(image.blob.size)}
                 </span>
               )}
             </div>
             {!currentSrc && (
-              <p className="text-[#1E3A29]/45 text-xs mt-3 leading-relaxed">
+              <p className="text-[var(--a-faint)] text-xs mt-3 leading-relaxed">
                 Wide photos work best. Large photos are made smaller before they are sent, so any size from a phone or a camera is fine.
               </p>
             )}
@@ -193,7 +193,7 @@ export default function PhotoForm({
                       onClick={() => setLang(l.code)}
                       aria-pressed={lang === l.code}
                       className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold border transition-colors ${
-                        lang === l.code ? 'bg-[#1E3A29] text-white border-[#1E3A29]' : 'border-[#1E3A29]/15 text-[#1E3A29]/70 hover:border-[#1E3A29]/50'
+                        lang === l.code ? 'bg-[#1E3A29] text-white border-[#1E3A29]' : 'border-[var(--a-border)] text-[var(--a-muted)] hover:border-[#1E3A29]/50'
                       }`}
                     >
                       {l.name}
@@ -202,7 +202,7 @@ export default function PhotoForm({
                   );
                 })}
               </div>
-              {note && <p className="text-[#1E3A29]/45 text-xs mt-2">{note}</p>}
+              {note && <p className="text-[var(--a-faint)] text-xs mt-2">{note}</p>}
             </div>
 
             <div>
@@ -251,11 +251,11 @@ export default function PhotoForm({
             )}
 
             {withVisibility && (
-              <label className="flex items-start gap-3 rounded-xl bg-[#F4EFE4]/70 px-4 py-3 cursor-pointer">
+              <label className="flex items-start gap-3 rounded-xl bg-[var(--a-bg)] px-4 py-3 cursor-pointer">
                 <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 mt-0.5 accent-[#3F7D20]" />
                 <span>
-                  <span className="block text-sm font-semibold text-[#1E3A29]">Show on the website</span>
-                  <span className="block text-xs text-[#1E3A29]/55 mt-0.5">Untick to keep the photo here without showing it to visitors.</span>
+                  <span className="block text-sm font-semibold text-[var(--a-ink)]">Show on the website</span>
+                  <span className="block text-xs text-[var(--a-muted)] mt-0.5">Untick to keep the photo here without showing it to visitors.</span>
                 </span>
               </label>
             )}
@@ -268,7 +268,7 @@ export default function PhotoForm({
           </div>
         )}
 
-        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[#1E3A29]/10">
+        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[var(--a-border)]">
           <button type="submit" disabled={saving || preparing} className="inline-flex admin-btn">
             <Icon name="check" className="w-4 h-4" />
             {saving ? 'Saving…' : 'Save photo'}

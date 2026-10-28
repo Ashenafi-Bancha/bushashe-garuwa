@@ -18,7 +18,7 @@ const toneFor = (seed: string) => {
 
 /** The round picture of a person: their initials on a colour of their own */
 export default function Avatar({ name, email = '', size = 'md', light = false }: { name: string; email?: string; size?: 'sm' | 'md' | 'lg' | 'xl'; /** white, for a green background */ light?: boolean }) {
-  const sizes = { sm: 'w-8 h-8 text-[11px]', md: 'w-11 h-11 text-sm', lg: 'w-14 h-14 text-lg', xl: 'w-20 h-20 text-2xl' };
+  const sizes = { sm: 'w-8 h-8 text-[11px]', md: 'w-10 h-10 text-[13px]', lg: 'w-14 h-14 text-lg', xl: 'w-20 h-20 text-2xl' };
   return (
     <span aria-hidden="true" className={`grid place-items-center rounded-full font-bold tracking-wide flex-shrink-0 ${sizes[size]} ${light ? 'bg-white text-[#2E5E17]' : toneFor(name || email)}`}>
       {initials(name, email)}

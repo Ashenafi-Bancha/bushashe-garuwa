@@ -35,16 +35,15 @@ export default function AccountView({ app }: { app: StaffApp }) {
     <div className="max-w-2xl space-y-5">
       {/* who you are */}
       <section className="admin-card overflow-hidden !p-0">
-        <div className="relative px-5 sm:px-7 pt-7 pb-6 bg-[linear-gradient(135deg,#3F7D20_0%,#2E5E17_100%)] text-white">
-          <span aria-hidden="true" className="absolute inset-0 opacity-[0.12] bg-[repeating-linear-gradient(135deg,#fff_0_2px,transparent_2px_14px)]" />
+        <div className="relative px-5 sm:px-6 pt-6 pb-5 border-b border-[var(--a-border)]">
           <div className="relative flex items-center gap-4">
-            <span className="rounded-full ring-4 ring-white/25">
-              <Avatar name={user.name} email={user.email} size="xl" light />
+            <span className="rounded-full">
+              <Avatar name={user.name} email={user.email} size="lg" />
             </span>
             <div className="min-w-0">
-              <div className="font-display text-2xl font-extrabold leading-tight truncate">{user.name || 'Add your name'}</div>
-              <div className="text-white/80 text-sm truncate">{user.email}</div>
-              <span className="inline-flex items-center gap-1.5 mt-2 rounded-full bg-white/18 px-2.5 py-1 text-[11px] font-bold tracking-wide uppercase">
+              <div className="text-[18px] font-bold text-[var(--a-ink)] leading-tight truncate">{user.name || 'Add your name'}</div>
+              <div className="text-[var(--a-muted)] text-[13px] truncate">{user.email}</div>
+              <span className="inline-flex items-center gap-1 mt-1.5 rounded-md bg-[var(--a-brand-soft)] text-[var(--a-brand-dark)] px-2 py-0.5 text-[11.5px] font-semibold">
                 <Icon name={user.role === 'owner' ? 'shield' : 'user'} className="w-3.5 h-3.5" />
                 {ROLE_LABELS[user.role]}
               </span>
@@ -53,7 +52,7 @@ export default function AccountView({ app }: { app: StaffApp }) {
         </div>
         <form onSubmit={saveName} className="px-5 sm:px-7 py-5 space-y-3">
           <label className="block">
-            <span className="block text-[#1E3A29]/60 text-[12px] font-bold mb-1.5">Your name, as your colleagues see it</span>
+            <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Your name, as your colleagues see it</span>
             <input value={name} onChange={(e) => setName(e.target.value)} required maxLength={80} placeholder="e.g. Almaz Tesfaye" className="admin-field" />
           </label>
           {message && <Notice kind={message.kind}>{message.text}</Notice>}
@@ -66,12 +65,12 @@ export default function AccountView({ app }: { app: StaffApp }) {
       {/* the password */}
       <section className="admin-card">
         <div className="flex items-center gap-3 mb-4">
-          <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#3F7D20]/10 text-[#3F7D20]">
+          <span className="grid place-items-center w-10 h-10 rounded-xl bg-[var(--a-brand-soft)] text-[var(--a-brand)]">
             <Icon name="key" />
           </span>
           <div>
-            <h3 className="font-display text-lg font-bold text-[#1E3A29]">Password</h3>
-            <p className="text-[#1E3A29]/55 text-sm">Changing it signs you out on your other phones and computers.</p>
+            <h3 className="font-display text-lg font-bold text-[var(--a-ink)]">Password</h3>
+            <p className="text-[var(--a-muted)] text-sm">Changing it signs you out on your other phones and computers.</p>
           </div>
         </div>
         <PasswordForm />

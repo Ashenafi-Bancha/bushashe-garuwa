@@ -115,14 +115,14 @@ export default function VisitsView({ newCount }: { newCount?: number }) {
 
       {data && data.total > 0 && (
         <>
-          <ul className="space-y-3">
+          <ul className="grid grid-cols-1 xl:grid-cols-2 gap-3 items-start">
             {data.items.map((visit) => (
               <li key={visit.id} className={`admin-card !p-4 sm:!p-5 ${visit.status === 'new' ? 'admin-card-new' : ''}`}>
                 <div className="flex items-start gap-3">
                   <Avatar name={visit.name} />
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-bold text-[16px] text-[#1E3A29] leading-tight truncate">{visit.name}</h3>
-                    <div className="text-[13px] text-[#1E3A29]/55 truncate mt-0.5">
+                    <h3 className="font-semibold text-[15px] text-[var(--a-ink)] leading-tight truncate">{visit.name}</h3>
+                    <div className="text-[13px] text-[var(--a-muted)] truncate mt-0.5">
                       {visit.phone}
                       {visit.email ? ` · ${visit.email}` : ''}
                     </div>
@@ -130,7 +130,7 @@ export default function VisitsView({ newCount }: { newCount?: number }) {
                   <StatusSelect status={visit.status} busy={busyId === visit.id} onChange={(next) => changeStatus(visit.id, next)} />
                 </div>
 
-                <div className="flex flex-wrap gap-2 mt-3.5">
+                <div className="flex flex-wrap gap-1.5 mt-3">
                   <Fact icon="events" tone="strong">{whenLabel(visit.date)}</Fact>
                   <Fact icon="guests">
                     {visit.visitors} {visit.visitors === '1' ? 'guest' : 'guests'}
@@ -140,11 +140,11 @@ export default function VisitsView({ newCount }: { newCount?: number }) {
                   ))}
                 </div>
 
-                {visit.message && <p className="mt-3 rounded-2xl rounded-tl-md bg-[#F4EFE4] px-4 py-3 text-[14px] text-[#1E3A29]/80 leading-relaxed whitespace-pre-line">{visit.message}</p>}
-                <div className="text-[11px] text-[#1E3A29]/40 mt-2.5">Asked {timeAgo(visit.createdAt)}</div>
+                {visit.message && <p className="mt-3 border-l-2 border-[var(--a-border)] pl-3 text-[14px] text-[#3C4740] leading-relaxed whitespace-pre-line">{visit.message}</p>}
+                <div className="text-[12px] text-[var(--a-faint)] mt-2.5">Asked {timeAgo(visit.createdAt)}</div>
 
                 {draft?.id === visit.id ? (
-                  <form onSubmit={save} className="mt-4 rounded-2xl bg-[#F4EFE4] p-4 sm:p-5 space-y-3">
+                  <form onSubmit={save} className="mt-4 rounded-2xl bg-[var(--a-bg)] p-4 sm:p-5 space-y-3">
                     <div className="grid sm:grid-cols-2 gap-3">
                       <EditField label="Name">
                         <input required value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} className="admin-field" />

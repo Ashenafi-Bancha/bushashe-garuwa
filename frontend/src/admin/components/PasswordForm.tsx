@@ -21,7 +21,7 @@ function PasswordField({ label, value, onChange, autoComplete }: { label: string
   const [shown, setShown] = useState(false);
   return (
     <label className="block">
-      <span className="block text-[#1E3A29]/60 text-[12px] font-bold mb-1.5">{label}</span>
+      <span className="block text-[13px] font-semibold text-[var(--a-ink)] mb-1.5">{label}</span>
       <span className="relative block">
         <input
           type={shown ? 'text' : 'password'}
@@ -29,13 +29,13 @@ function PasswordField({ label, value, onChange, autoComplete }: { label: string
           value={value}
           onChange={(e) => onChange(e.target.value)}
           autoComplete={autoComplete}
-          className="admin-field pr-12"
+          className="admin-field !pr-12"
         />
         <button
           type="button"
           onClick={() => setShown(!shown)}
           aria-label={shown ? 'Hide the password' : 'Show the password'}
-          className="absolute right-2 top-1/2 -translate-y-1/2 grid place-items-center w-9 h-9 rounded-full text-[#1E3A29]/50 hover:bg-[#1E3A29]/6"
+          className="absolute right-1.5 top-1/2 -translate-y-1/2 admin-icon-btn"
         >
           <Icon name={shown ? 'eyeOff' : 'eye'} className="w-4 h-4" />
         </button>
@@ -88,12 +88,12 @@ export default function PasswordForm({ currentLabel = 'Current password', onDone
             <span key={n} className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${next && rating.score >= n ? BAR[rating.score] : 'bg-[#1E3A29]/10'}`} />
           ))}
         </div>
-        <p className="text-[12px] text-[#1E3A29]/55 mt-1.5">{rating.label}</p>
+        <p className="text-[12px] text-[var(--a-muted)] mt-1.5">{rating.label}</p>
       </div>
       <PasswordField label="New password again" value={again} onChange={setAgain} autoComplete="new-password" />
       {error && <Notice kind="error">{error}</Notice>}
       {done && !error && <Notice kind="success">Your password is changed. Any other phone or computer signed in with your account has been signed out.</Notice>}
-      <button type="submit" disabled={busy} className="admin-btn w-full">
+      <button type="submit" disabled={busy} className="admin-btn flex w-full">
         {busy ? 'Saving…' : 'Save the new password'}
       </button>
     </form>

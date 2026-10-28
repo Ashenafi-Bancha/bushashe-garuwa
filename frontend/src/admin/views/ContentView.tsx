@@ -7,13 +7,13 @@ import { adminApi } from '../api/adminClient';
 import type { ContentEntry } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import { EDITABLE_GROUPS, valueAtPath, type EditableField } from '../content/editableFields';
-import { Notice, Panel } from '../components/ui';
+import { Notice, Panel, Segmented } from '../components/ui';
 
 type Lang = 'en' | 'am' | 'wol';
 const LANGS: { code: Lang; name: string }[] = [
   { code: 'en', name: 'English' },
   { code: 'am', name: 'አማርኛ' },
-  { code: 'wol', name: 'Wolayttatto doonaa' },
+  { code: 'wol', name: 'Wolaytta' },
 ];
 const builtIn: Record<Lang, unknown> = { en, am, wol };
 
@@ -84,37 +84,15 @@ export default function ContentView() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-2">
-        {LANGS.map((l) => (
-          <button
-            key={l.code}
-            type="button"
-            onClick={() => setLang(l.code)}
-            aria-pressed={lang === l.code}
-            className={`rounded-full px-4 py-2 text-sm font-semibold border transition-colors ${
-              lang === l.code ? 'bg-[#1E3A29] text-white border-[#1E3A29]' : 'border-[#1E3A29]/15 text-[#1E3A29]/70 hover:border-[#1E3A29]/50'
-            }`}
-          >
-            {l.name}
-          </button>
-        ))}
-        <button type="button" onClick={refresh} className="inline-flex admin-btn-quiet ml-auto">Refresh</button>
-      </div>
-
-      <div className="flex flex-wrap gap-2">
-        {EDITABLE_GROUPS.map((g) => (
-          <button
-            key={g.id}
-            type="button"
-            onClick={() => setGroupId(g.id)}
-            aria-pressed={g.id === groupId}
-            className={`rounded-full px-4 py-2 text-xs font-semibold border transition-colors ${
-              g.id === groupId ? 'bg-[#1E3A29] text-[#F4EFE4] border-[#1E3A29]' : 'border-[#1E3A29]/15 text-[#1E3A29]/60 hover:border-[#1E3A29]/40'
-            }`}
-          >
-            {g.title}
-          </button>
-        ))}
+      <div className="flex flex-col sm:flex-row sm:items-center gap-2.5">
+        <Segmented options={LANGS.map((l) => ({ value: l.code, label: l.name }))} value={lang} onChange={setLang} />
+        <select value={groupId} onChange={(e) => setGroupId(e.target.value)} aria-label="Which part of the website" className="admin-field sm:!w-auto sm:min-w-[240px]">
+          {EDITABLE_GROUPS.map((g) => (
+            <option key={g.id} value={g.id}>
+              {g.title}
+            </option>
+          ))}
+        </select>
       </div>
 
       {error && <Notice kind="error">{error}</Notice>}
@@ -123,13 +101,13 @@ export default function ContentView() {
 
       <Panel>
         <div className="mb-5">
-          <h2 className="font-display text-2xl text-[#1E3A29]">{group.title}</h2>
-          <p className="text-[#1E3A29]/50 text-sm mt-1">
+          <h2 className="text-[17px] font-bold text-[var(--a-ink)]">{group.title}</h2>
+          <p className="text-[var(--a-muted)] text-[13px] mt-0.5">
             {group.note ?? 'Leave a box empty to go back to the words built into the website.'}
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           {group.fields.map((f) => {
             const builtInText = original(f);
             const value = current(f);
@@ -137,11 +115,11 @@ export default function ContentView() {
             return (
               <div key={f.path}>
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
-                  <label htmlFor={`f-${f.path}`} className="text-xs font-semibold text-[#1E3A29]/70 tracking-wider uppercase">
+                  <label htmlFor={`f-${f.path}`} className="text-[13px] font-semibold text-[var(--a-ink)]">
                     {f.label}
                     {f.shared && <span className="text-[#1E3A29]/35 normal-case tracking-normal"> · all languages</span>}
                   </label>
-                  {isEdited && <span className="text-[#C4622D] text-[11px] font-semibold uppercase tracking-wider">Edited</span>}
+                  {isEdited && <span className="rounded-md bg-[#FBEAE0] text-[#9A4A20] text-[11px] font-semibold px-1.5 py-0.5">Edited</span>}
                 </div>
                 {f.multiline ? (
                   <textarea
@@ -162,13 +140,13 @@ export default function ContentView() {
                     className={field}
                   />
                 )}
-                {builtInText && <p className="text-[#1E3A29]/40 text-xs mt-1.5">Built in: {builtInText}</p>}
+                {builtInText && <p className="text-[var(--a-faint)] text-[12px] mt-1.5 line-clamp-2">Built in: {builtInText}</p>}
               </div>
             );
           })}
         </div>
 
-        <div className="flex flex-wrap items-center gap-3 mt-7 pt-5 border-t border-[#1E3A29]/10">
+        <div className="sticky bottom-[calc(60px+env(safe-area-inset-bottom))] lg:bottom-4 z-10 flex flex-wrap items-center gap-3 mt-6 -mx-[18px] sm:-mx-[22px] -mb-[18px] sm:-mb-[22px] px-[18px] sm:px-[22px] py-3.5 border-t border-[var(--a-border)] bg-white/95 backdrop-blur rounded-b-[14px]">
           <button
             type="button"
             onClick={save}

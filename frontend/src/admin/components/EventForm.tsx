@@ -22,7 +22,7 @@ export const emptyEvent = (): SaveEventInput => ({
 });
 
 const field = 'admin-field';
-const label = 'block text-xs font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2';
+const label = 'block text-xs font-semibold text-[var(--a-muted)] tracking-wider uppercase mb-2';
 
 /** Add or change one event, with its words in each language. */
 export default function EventForm({
@@ -62,7 +62,7 @@ export default function EventForm({
   return (
     <Panel>
       <form onSubmit={submit} className="space-y-6">
-        <h2 className="font-display text-2xl text-[#1E3A29]">{heading}</h2>
+        <h2 className="font-display text-2xl text-[var(--a-ink)]">{heading}</h2>
         {error && <Notice kind="error">{error}</Notice>}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -109,7 +109,7 @@ export default function EventForm({
               className={field}
               placeholder="Leave empty for no limit"
             />
-            <p className="text-[#1E3A29]/45 text-xs mt-1.5">
+            <p className="text-[var(--a-faint)] text-xs mt-1.5">
               The website counts the places left and stops taking bookings when the event is full.
             </p>
           </div>
@@ -130,7 +130,7 @@ export default function EventForm({
             ['featured', 'Show on the home page'],
             ['bookable', 'People can reserve a place'],
           ] as const).map(([name, text]) => (
-            <label key={name} className="inline-flex items-center gap-2 text-sm text-[#1E3A29] cursor-pointer">
+            <label key={name} className="inline-flex items-center gap-2 text-sm text-[var(--a-ink)] cursor-pointer">
               <input type="checkbox" checked={values[name]} onChange={(e) => set({ [name]: e.target.checked })} className="w-4 h-4 accent-[#1E3A29]" />
               {text}
             </label>
@@ -139,7 +139,7 @@ export default function EventForm({
 
         <div className="space-y-5">
           {(['en', 'am', 'wol'] as const).map((lang) => (
-            <div key={lang} className="rounded-2xl border border-[#1E3A29]/10 p-4">
+            <div key={lang} className="rounded-2xl border border-[var(--a-border)] p-4">
               <div className="text-[#C4622D] text-[11px] font-semibold tracking-[0.16em] uppercase mb-3">
                 {lang === 'en' ? 'English (required)' : lang === 'am' ? 'Amharic' : 'Wolayttatto doonaa'}
               </div>
@@ -162,7 +162,7 @@ export default function EventForm({
               </div>
             </div>
           ))}
-          <p className="text-[#1E3A29]/45 text-xs">Left empty, Amharic and Wolaytta show the English words.</p>
+          <p className="text-[var(--a-faint)] text-xs">Left empty, Amharic and Wolaytta show the English words.</p>
         </div>
 
         <div className="flex flex-wrap gap-3">

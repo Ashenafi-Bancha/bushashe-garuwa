@@ -45,17 +45,17 @@ export default function Sheet({
       <div
         ref={panel}
         tabIndex={-1}
-        className={`admin-sheet relative w-full ${wide ? 'sm:max-w-2xl' : 'sm:max-w-md'} max-h-[92svh] overflow-y-auto overscroll-contain bg-[#FBF8F1] rounded-t-[28px] sm:rounded-[28px] shadow-[0_-20px_60px_-20px_rgba(19,38,26,0.45)] outline-none`}
+        className={`admin-sheet relative w-full ${wide ? 'sm:max-w-2xl' : 'sm:max-w-md'} max-h-[92svh] overflow-y-auto overscroll-contain bg-[var(--a-bg)] rounded-t-[22px] sm:rounded-2xl shadow-[0_-20px_60px_-20px_rgba(19,38,26,0.45)] outline-none`}
         style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 16px)' }}
       >
         {/* the grip a phone sheet is pulled by */}
-        <div className="sm:hidden sticky top-0 z-10 flex justify-center pt-2.5 pb-1 bg-[#FBF8F1]">
+        <div className="sm:hidden sticky top-0 z-10 flex justify-center pt-2.5 pb-1 bg-[var(--a-bg)]">
           <span className="w-10 h-1.5 rounded-full bg-[#1E3A29]/15" />
         </div>
         {title && (
-          <div className="sticky top-0 sm:top-0 z-10 flex items-center justify-between gap-3 px-5 sm:px-6 pt-2 sm:pt-5 pb-3 bg-[#FBF8F1]">
-            <h2 className="font-display text-xl font-extrabold text-[#1E3A29] tracking-tight">{title}</h2>
-            <button type="button" onClick={() => closeRef.current()} aria-label="Close" className="grid place-items-center w-9 h-9 rounded-full bg-[#1E3A29]/6 text-[#1E3A29]/70 hover:bg-[#1E3A29]/12">
+          <div className="sticky top-0 sm:top-0 z-10 flex items-center justify-between gap-3 px-5 sm:px-6 pt-2 sm:pt-5 pb-3 bg-[var(--a-bg)]">
+            <h2 className="text-[18px] font-bold text-[var(--a-ink)] tracking-[-0.01em]">{title}</h2>
+            <button type="button" onClick={() => closeRef.current()} aria-label="Close" className="admin-icon-btn bordered">
               <Icon name="close" className="w-4 h-4" />
             </button>
           </div>

@@ -119,8 +119,8 @@ export default function ReviewsView() {
         <span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#E8A21A]/15 text-[#B07A0E] flex-shrink-0">
           <Icon name="quote" />
         </span>
-        <p className="flex-1 text-sm text-[#1E3A29]/70 leading-relaxed">
-          Add what guests said, with their permission. Shown reviews appear in <strong className="text-[#1E3A29]">What Our Guests Say</strong> on the home page{reviews ? ` (${shown} shown now)` : ''}.
+        <p className="flex-1 text-sm text-[var(--a-muted)] leading-relaxed">
+          Add what guests said, with their permission. Shown reviews appear in <strong className="text-[var(--a-ink)]">What Our Guests Say</strong> on the home page{reviews ? ` (${shown} shown now)` : ''}.
         </p>
         <button type="button" onClick={() => open()} className="admin-btn inline-flex items-center justify-center gap-2 flex-shrink-0">
           <Icon name="plus" className="w-4 h-4" />
@@ -139,21 +139,21 @@ export default function ReviewsView() {
               <div className="flex items-start gap-3">
                 <Avatar name={review.name} />
                 <div className="min-w-0 flex-1">
-                  <h3 className="font-bold text-[16px] text-[#1E3A29] leading-tight truncate">{review.name}</h3>
-                  <div className="text-[13px] text-[#1E3A29]/55 truncate mt-0.5">{[review.origin, timeAgo(review.createdAt)].filter(Boolean).join(' · ')}</div>
+                  <h3 className="font-bold text-[16px] text-[var(--a-ink)] leading-tight truncate">{review.name}</h3>
+                  <div className="text-[13px] text-[var(--a-muted)] truncate mt-0.5">{[review.origin, timeAgo(review.createdAt)].filter(Boolean).join(' · ')}</div>
                 </div>
                 <Stars value={review.rating} />
               </div>
-              <blockquote className="mt-3.5 font-display text-[17px] leading-snug text-[#1E3A29]">“{review.words.en}”</blockquote>
+              <blockquote className="mt-3.5 font-display text-[17px] leading-snug text-[var(--a-ink)]">“{review.words.en}”</blockquote>
               <div className="flex flex-wrap gap-1.5 mt-2.5">
                 {LANGS.filter((l) => review.words[l.value]).map((l) => (
-                  <span key={l.value} className="rounded-full bg-[#1E3A29]/6 px-2.5 py-1 text-[11px] font-bold text-[#1E3A29]/60">{l.label}</span>
+                  <span key={l.value} className="rounded-full bg-[#1E3A29]/6 px-2.5 py-1 text-[11px] font-bold text-[var(--a-muted)]">{l.label}</span>
                 ))}
               </div>
               <div className="flex items-center gap-3 mt-4">
                 <label className="flex items-center gap-2.5 cursor-pointer">
                   <input type="checkbox" role="switch" checked={review.published} onChange={() => toggle(review)} className="admin-switch" />
-                  <span className="text-[13px] font-bold text-[#1E3A29]">{review.published ? 'Shown on the website' : 'Hidden'}</span>
+                  <span className="text-[13px] font-bold text-[var(--a-ink)]">{review.published ? 'Shown on the website' : 'Hidden'}</span>
                 </label>
                 <IconActions onEdit={() => open(review)} onDelete={() => remove(review)} />
               </div>
@@ -167,18 +167,18 @@ export default function ReviewsView() {
           <form onSubmit={save} className="space-y-4 pb-2">
             <div className="grid grid-cols-2 gap-3">
               <label className="block">
-                <span className="block text-[#1E3A29]/60 text-[12px] font-bold mb-1.5">Guest's name</span>
+                <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Guest's name</span>
                 <input required maxLength={80} value={draft.name} onChange={(e) => setDraft({ name: e.target.value })} placeholder="e.g. Selam B." className="admin-field" />
               </label>
               <label className="block">
-                <span className="block text-[#1E3A29]/60 text-[12px] font-bold mb-1.5">From (optional)</span>
+                <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">From (optional)</span>
                 <input maxLength={80} value={draft.origin} onChange={(e) => setDraft({ origin: e.target.value })} placeholder="e.g. Addis Ababa" className="admin-field" />
               </label>
             </div>
 
             <div>
               <div className="flex items-center justify-between gap-3 mb-2">
-                <span className="text-[#1E3A29]/60 text-[12px] font-bold">Their words</span>
+                <span className="text-[var(--a-muted)] text-[12px] font-bold">Their words</span>
                 <Segmented options={LANGS} value={lang} onChange={setLang} />
               </div>
               <textarea
@@ -191,15 +191,15 @@ export default function ReviewsView() {
               />
             </div>
 
-            <div className="flex items-center justify-between gap-3 rounded-2xl bg-white border border-[#1E3A29]/8 px-4 py-3">
-              <span className="text-[13px] font-bold text-[#1E3A29]">Stars</span>
+            <div className="flex items-center justify-between gap-3 rounded-2xl bg-white border border-[var(--a-border)] px-4 py-3">
+              <span className="text-[13px] font-bold text-[var(--a-ink)]">Stars</span>
               <Stars value={draft.rating} onChange={(rating) => setDraft({ rating })} size="w-6 h-6" />
             </div>
 
-            <label className="flex items-center justify-between gap-4 rounded-2xl bg-white border border-[#1E3A29]/8 p-4 cursor-pointer">
+            <label className="flex items-center justify-between gap-4 rounded-2xl bg-white border border-[var(--a-border)] p-4 cursor-pointer">
               <span>
-                <span className="block font-bold text-sm text-[#1E3A29]">Show on the website</span>
-                <span className="block text-[12px] text-[#1E3A29]/55">Only with the guest's permission.</span>
+                <span className="block font-bold text-sm text-[var(--a-ink)]">Show on the website</span>
+                <span className="block text-[12px] text-[var(--a-muted)]">Only with the guest's permission.</span>
               </span>
               <input type="checkbox" role="switch" checked={draft.published} onChange={(e) => setDraft({ published: e.target.checked })} className="admin-switch" />
             </label>

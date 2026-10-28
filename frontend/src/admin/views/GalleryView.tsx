@@ -56,7 +56,7 @@ export default function GalleryView() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => {
@@ -68,11 +68,10 @@ export default function GalleryView() {
             <Icon name="plus" className="w-4 h-4" />
             Add a photo
           </button>
-          <button type="button" onClick={library.refresh} className="inline-flex admin-btn-quiet">
+          <button type="button" onClick={library.refresh} aria-label="Refresh" title="Refresh" className="admin-icon-btn bordered !w-10 !h-10">
             <Icon name="refresh" className="w-4 h-4" />
-            Refresh
           </button>
-          <span className="ml-auto text-[#1E3A29]/45 text-sm">
+          <span className="ml-auto text-[var(--a-muted)] text-[13px]">
             {added.length} added, {builtIn.length} built in
           </span>
         </div>
@@ -82,12 +81,12 @@ export default function GalleryView() {
         {library.loading && added.length === 0 && <Notice>Loading the photos…</Notice>}
 
         {!library.loading && added.length === 0 && !library.error && (
-          <div className="rounded-2xl border-2 border-dashed border-[#1E3A29]/15 bg-white/60 px-6 py-12 text-center">
-            <span className="inline-grid place-items-center w-14 h-14 rounded-2xl bg-[#3F7D20]/10 text-[#3F7D20] mb-4">
+          <div className="rounded-2xl border border-dashed border-[#D6D2C6] bg-white px-6 py-10 text-center">
+            <span className="inline-grid place-items-center w-14 h-14 rounded-2xl bg-[var(--a-brand-soft)] text-[var(--a-brand)] mb-4">
               <Icon name="gallery" className="w-6 h-6" />
             </span>
-            <h2 className="font-display text-xl text-[#1E3A29]">No photos added yet</h2>
-            <p className="text-[#1E3A29]/55 text-sm mt-1 max-w-sm mx-auto">
+            <h2 className="font-display text-xl text-[var(--a-ink)]">No photos added yet</h2>
+            <p className="text-[var(--a-muted)] text-sm mt-1 max-w-sm mx-auto">
               Add a photo with a heading and a description, and it joins the Gallery page after the built-in photos.
             </p>
           </div>
@@ -96,11 +95,11 @@ export default function GalleryView() {
         {added.length > 0 && (
           <ul className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {added.map((photo) => (
-              <li key={photo.id} className="rounded-2xl bg-white border border-[#1E3A29]/8 overflow-hidden flex flex-col">
+              <li key={photo.id} className="admin-card !p-0 overflow-hidden flex flex-col">
                 <div className="relative aspect-[3/2] bg-[#1E3A29]/8">
                   <img src={mediaUrl(photo.id)} alt="" loading="lazy" className={`w-full h-full object-cover ${photo.published ? '' : 'opacity-50'}`} />
                   <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-                    <span className={`${TAG} bg-white/90 text-[#1E3A29]`}>{GALLERY_CATEGORY_LABELS[photo.category ?? 'grounds']}</span>
+                    <span className={`${TAG} bg-white/90 text-[var(--a-ink)]`}>{GALLERY_CATEGORY_LABELS[photo.category ?? 'grounds']}</span>
                     {!photo.published && (
                       <span className={`${TAG} bg-[#C4622D] text-white`}>
                         <Icon name="eyeOff" className="w-3 h-3" />
@@ -110,16 +109,16 @@ export default function GalleryView() {
                   </div>
                 </div>
                 <div className="p-4 flex-1 flex flex-col">
-                  <h3 className="font-display text-lg text-[#1E3A29] leading-tight">
+                  <h3 className="font-display text-lg text-[var(--a-ink)] leading-tight">
                     {photo.translations.en.title || <span className="text-[#C4622D]">No heading yet</span>}
                   </h3>
-                  {photo.translations.en.desc && <p className="text-[#1E3A29]/60 text-sm mt-1 line-clamp-2">{photo.translations.en.desc}</p>}
-                  <p className="text-[#1E3A29]/40 text-xs mt-2">
+                  {photo.translations.en.desc && <p className="text-[var(--a-muted)] text-sm mt-1 line-clamp-2">{photo.translations.en.desc}</p>}
+                  <p className="text-[var(--a-faint)] text-xs mt-2">
                     {photo.width && photo.height ? `${photo.width} × ${photo.height}, ` : ''}
                     {formatSize(photo.size)}
                     {photo.translations.am?.title ? ', አማርኛ' : ''}
                   </p>
-                  <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-[#1E3A29]/8">
+                  <div className="flex flex-wrap gap-2 mt-4 pt-4 border-t border-[var(--a-border)]">
                     <button type="button" onClick={() => setEditing(photo)} className="inline-flex admin-btn-quiet">
                       <Icon name="pencil" className="w-3.5 h-3.5" />
                       Edit
@@ -146,8 +145,8 @@ export default function GalleryView() {
       </div>
 
       <section>
-        <h2 className="font-display text-lg font-bold text-[#1E3A29]">Built into the website</h2>
-        <p className="text-[#1E3A29]/55 text-sm mt-1 mb-4">
+        <h2 className="admin-h3">Built into the website</h2>
+        <p className="text-[var(--a-muted)] text-sm mt-1 mb-4">
           These photos are part of the website itself and always open the gallery. Your photos follow them.
         </p>
         <ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">

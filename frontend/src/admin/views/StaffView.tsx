@@ -14,7 +14,7 @@ type Open = { kind: 'add' } | { kind: 'member'; member: StaffMember } | { kind: 
 
 /** The state of an account, in a word */
 function stateOf(member: StaffMember): { label: string; style: string } {
-  if (!member.active) return { label: 'Switched off', style: 'bg-[#13261A]/8 text-[#1E3A29]/55' };
+  if (!member.active) return { label: 'Switched off', style: 'bg-[#13261A]/8 text-[var(--a-muted)]' };
   if (member.mustChangePassword) return { label: 'Not signed in yet', style: 'bg-[#E8B23A]/20 text-[#7A5A10]' };
   return { label: 'Active', style: 'bg-[#3F7D20]/12 text-[#346A1A]' };
 }
@@ -72,11 +72,11 @@ export default function StaffView() {
   return (
     <div className="space-y-5 max-w-3xl">
       <div className="admin-card flex flex-col sm:flex-row sm:items-center gap-4">
-        <span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#3F7D20]/10 text-[#3F7D20] flex-shrink-0">
+        <span className="grid place-items-center w-12 h-12 rounded-2xl bg-[var(--a-brand-soft)] text-[var(--a-brand)] flex-shrink-0">
           <Icon name="team" />
         </span>
-        <p className="flex-1 text-sm text-[#1E3A29]/70 leading-relaxed">
-          Each person signs in with their own email and password. <strong className="text-[#1E3A29]">Owners</strong> can also add and change accounts here; <strong className="text-[#1E3A29]">staff</strong> can do everything else.
+        <p className="flex-1 text-sm text-[var(--a-muted)] leading-relaxed">
+          Each person signs in with their own email and password. <strong className="text-[var(--a-ink)]">Owners</strong> can also add and change accounts here; <strong className="text-[var(--a-ink)]">staff</strong> can do everything else.
         </p>
         <button type="button" onClick={() => setOpen({ kind: 'add' })} className="admin-btn inline-flex items-center justify-center gap-2 flex-shrink-0">
           <Icon name="plus" className="w-4 h-4" />
@@ -88,7 +88,7 @@ export default function StaffView() {
       {!members && !error && <Notice>Loading the staff accounts…</Notice>}
 
       {members && (
-        <ul className="admin-card !p-0 divide-y divide-[#1E3A29]/8 overflow-hidden">
+        <ul className="admin-card !p-0 divide-y divide-[var(--a-border)] overflow-hidden">
           {members.map((member) => {
             const state = stateOf(member);
             const me = member.id === user?.id;
@@ -98,15 +98,15 @@ export default function StaffView() {
                   type="button"
                   onClick={() => (me ? undefined : setOpen({ kind: 'member', member }))}
                   disabled={me}
-                  className="w-full flex items-center gap-3.5 px-4 sm:px-5 py-4 text-left transition-colors enabled:hover:bg-[#F4EFE4]/70 enabled:active:bg-[#F4EFE4]"
+                  className="w-full flex items-center gap-3.5 px-4 sm:px-5 py-4 text-left transition-colors enabled:hover:bg-[var(--a-bg)] enabled:active:bg-[var(--a-bg)]"
                 >
                   <span className={member.active ? '' : 'opacity-45'}>
                     <Avatar name={member.name} email={member.email} />
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="flex items-center gap-2 flex-wrap">
-                      <span className="font-bold text-[#1E3A29] truncate">{member.name || member.email.split('@')[0]}</span>
-                      {me && <span className="text-[11px] font-bold text-[#1E3A29]/45">(you)</span>}
+                      <span className="font-bold text-[var(--a-ink)] truncate">{member.name || member.email.split('@')[0]}</span>
+                      {me && <span className="text-[11px] font-bold text-[var(--a-faint)]">(you)</span>}
                       {member.role === 'owner' && (
                         <span className="inline-flex items-center gap-1 rounded-full bg-[#1E3A29] text-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide">
                           <Icon name="shield" className="w-3 h-3" />
@@ -114,10 +114,10 @@ export default function StaffView() {
                         </span>
                       )}
                     </span>
-                    <span className="block text-[13px] text-[#1E3A29]/55 truncate">{member.email}</span>
+                    <span className="block text-[13px] text-[var(--a-muted)] truncate">{member.email}</span>
                     <span className="flex items-center gap-2 mt-1.5 flex-wrap">
                       <span className={`rounded-full px-2.5 py-0.5 text-[11px] font-bold ${state.style}`}>{state.label}</span>
-                      <span className="text-[11px] text-[#1E3A29]/45">Last signed in {timeAgo(member.lastLoginAt)}</span>
+                      <span className="text-[11px] text-[var(--a-faint)]">Last signed in {timeAgo(member.lastLoginAt)}</span>
                     </span>
                   </span>
                   {!me && <Icon name="chevronRight" className="w-5 h-5 text-[#1E3A29]/30 flex-shrink-0" />}
@@ -127,17 +127,17 @@ export default function StaffView() {
           })}
         </ul>
       )}
-      <p className="text-[12px] text-[#1E3A29]/50 px-1">To change your own name or password, open My account.</p>
+      <p className="text-[12px] text-[var(--a-faint)] px-1">To change your own name or password, open My account.</p>
 
       {/* a new account */}
       <Sheet open={open?.kind === 'add'} onClose={close} title="Add a member of staff">
         <form onSubmit={add} className="space-y-4 pb-2">
           <label className="block">
-            <span className="block text-[#1E3A29]/60 text-[12px] font-bold mb-1.5">Name</span>
+            <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Name</span>
             <input required maxLength={80} value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} placeholder="e.g. Almaz Tesfaye" className="admin-field" />
           </label>
           <label className="block">
-            <span className="block text-[#1E3A29]/60 text-[12px] font-bold mb-1.5">Email (they sign in with it)</span>
+            <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Email (they sign in with it)</span>
             <input required type="email" value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} placeholder="name@example.com" className="admin-field" />
           </label>
           <RolePicker value={draft.role} onChange={(role) => setDraft({ ...draft, role })} />
@@ -186,19 +186,19 @@ function RolePicker({ value, onChange, disabled = false }: { value: StaffRole; o
   ];
   return (
     <fieldset disabled={disabled}>
-      <legend className="block text-[#1E3A29]/60 text-[12px] font-bold mb-1.5">Role</legend>
+      <legend className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Role</legend>
       <div className="grid grid-cols-2 gap-2.5">
         {choices.map(({ role, text }) => (
           <label
             key={role}
-            className={`cursor-pointer rounded-2xl border-2 p-3.5 transition-colors ${value === role ? 'border-[#3F7D20] bg-[#3F7D20]/6' : 'border-[#1E3A29]/10 bg-white'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`cursor-pointer rounded-2xl border-2 p-3.5 transition-colors ${value === role ? 'border-[#3F7D20] bg-[#3F7D20]/6' : 'border-[var(--a-border)] bg-white'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <input type="radio" name="role" className="sr-only" checked={value === role} onChange={() => onChange(role)} />
-            <span className="flex items-center gap-1.5 font-bold text-[#1E3A29] text-sm">
-              <Icon name={role === 'owner' ? 'shield' : 'user'} className="w-4 h-4 text-[#3F7D20]" />
+            <span className="flex items-center gap-1.5 font-bold text-[var(--a-ink)] text-sm">
+              <Icon name={role === 'owner' ? 'shield' : 'user'} className="w-4 h-4 text-[var(--a-brand)]" />
               {ROLE_LABELS[role]}
             </span>
-            <span className="block text-[12px] text-[#1E3A29]/55 mt-1 leading-snug">{text}</span>
+            <span className="block text-[12px] text-[var(--a-muted)] mt-1 leading-snug">{text}</span>
           </label>
         ))}
       </div>
@@ -233,11 +233,11 @@ function MemberSheet({
   return (
     <Sheet open onClose={onClose} title={member.name || member.email}>
       <div className="space-y-5 pb-2">
-        <div className="flex items-center gap-3 rounded-2xl bg-white p-3.5 border border-[#1E3A29]/8">
+        <div className="flex items-center gap-3 rounded-2xl bg-white p-3.5 border border-[var(--a-border)]">
           <Avatar name={member.name} email={member.email} />
           <div className="min-w-0">
-            <div className="text-sm text-[#1E3A29] truncate">{member.email}</div>
-            <div className="text-[12px] text-[#1E3A29]/50">Added {timeAgo(member.createdAt)} · last signed in {timeAgo(member.lastLoginAt)}</div>
+            <div className="text-sm text-[var(--a-ink)] truncate">{member.email}</div>
+            <div className="text-[12px] text-[var(--a-faint)]">Added {timeAgo(member.createdAt)} · last signed in {timeAgo(member.lastLoginAt)}</div>
           </div>
         </div>
 
@@ -249,17 +249,17 @@ function MemberSheet({
           className="space-y-4"
         >
           <label className="block">
-            <span className="block text-[#1E3A29]/60 text-[12px] font-bold mb-1.5">Name</span>
+            <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Name</span>
             <input required maxLength={80} value={name} onChange={(e) => setName(e.target.value)} className="admin-field" />
           </label>
           <RolePicker value={role} onChange={setRole} disabled={lastOwner} />
-          {lastOwner && <p className="text-[12px] text-[#1E3A29]/55 -mt-2">The only owner stays an owner, so someone can always manage the accounts.</p>}
+          {lastOwner && <p className="text-[12px] text-[var(--a-muted)] -mt-2">The only owner stays an owner, so someone can always manage the accounts.</p>}
 
           {/* on or off */}
-          <label className={`flex items-center justify-between gap-4 rounded-2xl bg-white border border-[#1E3A29]/8 p-4 ${lastOwner ? 'opacity-50' : 'cursor-pointer'}`}>
+          <label className={`flex items-center justify-between gap-4 rounded-2xl bg-white border border-[var(--a-border)] p-4 ${lastOwner ? 'opacity-50' : 'cursor-pointer'}`}>
             <span>
-              <span className="block font-bold text-sm text-[#1E3A29]">Can sign in</span>
-              <span className="block text-[12px] text-[#1E3A29]/55">Switch off when someone leaves; their account is kept.</span>
+              <span className="block font-bold text-sm text-[var(--a-ink)]">Can sign in</span>
+              <span className="block text-[12px] text-[var(--a-muted)]">Switch off when someone leaves; their account is kept.</span>
             </span>
             <input type="checkbox" role="switch" checked={active} disabled={lastOwner} onChange={(e) => setActive(e.target.checked)} className="admin-switch" />
           </label>
@@ -272,7 +272,7 @@ function MemberSheet({
 
         <div className="grid grid-cols-2 gap-2.5 pt-1">
           <button type="button" disabled={busy} onClick={onReset} className="admin-tile">
-            <Icon name="key" className="w-5 h-5 text-[#3F7D20]" />
+            <Icon name="key" className="w-5 h-5 text-[var(--a-brand)]" />
             New password
           </button>
           <button type="button" disabled={busy || lastOwner} onClick={onRemove} className="admin-tile text-[#C62828]">
@@ -317,8 +317,8 @@ function TemporaryPassword({ name, email, password, onDone }: { name: string; em
 
   return (
     <div className="space-y-4 pb-2">
-      <p className="text-sm text-[#1E3A29]/70 leading-relaxed">
-        Give this password to <strong className="text-[#1E3A29]">{name || email}</strong>. It is shown only now. They will choose their own password the first time they sign in.
+      <p className="text-sm text-[var(--a-muted)] leading-relaxed">
+        Give this password to <strong className="text-[var(--a-ink)]">{name || email}</strong>. It is shown only now. They will choose their own password the first time they sign in.
       </p>
       <button type="button" onClick={() => copy('password')} className="w-full rounded-2xl bg-[#13261A] text-white px-5 py-5 text-center group">
         <span className="block font-mono text-2xl sm:text-[28px] font-bold tracking-[0.08em] select-all">{password}</span>
@@ -329,11 +329,11 @@ function TemporaryPassword({ name, email, password, onDone }: { name: string; em
       </button>
       <div className="grid grid-cols-2 gap-2.5">
         <button type="button" onClick={share} className="admin-tile">
-          <Icon name="chat" className="w-5 h-5 text-[#3F7D20]" />
+          <Icon name="chat" className="w-5 h-5 text-[var(--a-brand)]" />
           Send to them
         </button>
         <button type="button" onClick={() => copy('message')} className="admin-tile">
-          <Icon name={copied === 'message' ? 'check' : 'copy'} className="w-5 h-5 text-[#3F7D20]" />
+          <Icon name={copied === 'message' ? 'check' : 'copy'} className="w-5 h-5 text-[var(--a-brand)]" />
           {copied === 'message' ? 'Copied' : 'Copy message'}
         </button>
       </div>

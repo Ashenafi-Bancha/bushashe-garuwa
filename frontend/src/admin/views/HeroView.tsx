@@ -73,12 +73,11 @@ export default function HeroView() {
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center gap-3">
-        <p className="text-[#1E3A29]/60 text-sm max-w-2xl">
+        <p className="text-[var(--a-muted)] text-sm max-w-2xl">
           Each page opens with one large photograph. Put your own in its place, with a heading, or go back to the built-in one at any time.
         </p>
-        <button type="button" onClick={library.refresh} className="inline-flex admin-btn-quiet ml-auto">
+        <button type="button" onClick={library.refresh} aria-label="Refresh" title="Refresh" className="admin-icon-btn bordered !w-10 !h-10 ml-auto">
           <Icon name="refresh" className="w-4 h-4" />
-          Refresh
         </button>
       </div>
 
@@ -97,14 +96,14 @@ export default function HeroView() {
           return (
             <li
               key={slot}
-              className={`rounded-2xl bg-white border border-[#1E3A29]/8 overflow-hidden flex flex-col ${slides ? 'sm:col-span-2 xl:col-span-3' : ''}`}
+              className={`admin-card !p-0 overflow-hidden flex flex-col ${slides ? 'sm:col-span-2 xl:col-span-3' : ''}`}
             >
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 pt-4">
-                <h2 className="font-display text-lg text-[#1E3A29] leading-tight">{label}</h2>
-                <span className={`${TAG} ${live.length ? 'bg-[#3F7D20]/12 text-[#346A1A]' : 'bg-[#1E3A29]/8 text-[#1E3A29]/60'}`}>
+                <h2 className="text-[15px] font-semibold text-[var(--a-ink)] leading-tight">{label}</h2>
+                <span className={`${TAG} ${live.length ? 'bg-[#3F7D20]/12 text-[#346A1A]' : 'bg-[#1E3A29]/8 text-[var(--a-muted)]'}`}>
                   {live.length ? (slides ? `${live.length} of your slides` : 'Your photo') : slides ? `${builtIn.length} built-in slides` : 'Built-in photo'}
                 </span>
-                <a href={path} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-[#1E3A29]/50 hover:text-[#3F7D20]">
+                <a href={path} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-[var(--a-faint)] hover:text-[var(--a-brand)]">
                   See the page
                   <Icon name="external" className="w-3.5 h-3.5" />
                 </a>
@@ -116,10 +115,10 @@ export default function HeroView() {
                   <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3">
                     {live.length > 0
                       ? live.map((photo) => (
-                          <li key={photo.id} className="rounded-xl overflow-hidden border border-[#1E3A29]/8">
+                          <li key={photo.id} className="rounded-xl overflow-hidden border border-[var(--a-border)]">
                             <img src={mediaUrl(photo.id)} alt="" loading="lazy" className="w-full aspect-[3/2] object-cover" />
                             <div className="p-2.5">
-                              <div className="text-[13px] font-semibold text-[#1E3A29] leading-tight line-clamp-2">{photo.translations.en.title}</div>
+                              <div className="text-[13px] font-semibold text-[var(--a-ink)] leading-tight line-clamp-2">{photo.translations.en.title}</div>
                               <div className="flex gap-1.5 mt-2">
                                 <button type="button" onClick={() => start(slot, photo)} className="inline-flex admin-btn-quiet !px-2.5 !py-1.5" aria-label="Edit the slide">
                                   <Icon name="pencil" className="w-3.5 h-3.5" />
@@ -138,9 +137,9 @@ export default function HeroView() {
                           </li>
                         ))
                       : builtIn.map(({ key }) => (
-                          <li key={key} className="rounded-xl overflow-hidden border border-[#1E3A29]/8">
+                          <li key={key} className="rounded-xl overflow-hidden border border-[var(--a-border)]">
                             <img src={photos[key]} alt="" loading="lazy" className="w-full aspect-[3/2] object-cover" />
-                            <div className="p-2.5 text-[13px] font-semibold text-[#1E3A29]/70 leading-tight line-clamp-2">{en.photoCaptions[key].title}</div>
+                            <div className="p-2.5 text-[13px] font-semibold text-[var(--a-muted)] leading-tight line-clamp-2">{en.photoCaptions[key].title}</div>
                           </li>
                         ))}
                   </ul>
@@ -149,7 +148,7 @@ export default function HeroView() {
                       <Icon name="plus" className="w-4 h-4" />
                       Add a slide
                     </button>
-                    <span className="text-[#1E3A29]/50 text-xs">
+                    <span className="text-[var(--a-faint)] text-xs">
                       {live.length ? 'Remove all of your slides to go back to the built-in ones.' : 'Your first slide takes the place of the built-in ones.'}
                     </span>
                   </div>
@@ -163,7 +162,7 @@ export default function HeroView() {
                       loading="lazy"
                       className={`w-full aspect-[3/2] object-cover ${live[0] ? 'object-center' : builtIn[0]!.pos}`}
                     />
-                    <span className="absolute right-2.5 bottom-2.5 max-w-[80%] truncate rounded-full bg-white/90 px-3 py-1.5 text-[#1E3A29] text-xs font-semibold">
+                    <span className="absolute right-2.5 bottom-2.5 max-w-[80%] truncate rounded-full bg-white/90 px-3 py-1.5 text-[var(--a-ink)] text-xs font-semibold">
                       {live[0] ? live[0].translations.en.title : en.photoCaptions[builtIn[0]!.key].title}
                     </span>
                   </div>
@@ -194,7 +193,7 @@ export default function HeroView() {
 
               {/* a photo that was sent but never given its heading */}
               {unfinished.map((photo) => (
-                <div key={photo.id} className="flex flex-wrap items-center gap-2 border-t border-[#1E3A29]/8 bg-[#C4622D]/6 px-4 py-3">
+                <div key={photo.id} className="flex flex-wrap items-center gap-2 border-t border-[var(--a-border)] bg-[#C4622D]/6 px-4 py-3">
                   <img src={mediaUrl(photo.id)} alt="" loading="lazy" className="w-12 h-9 rounded-md object-cover" />
                   <span className="text-xs text-[#8c4227] font-semibold flex-1 min-w-[8rem]">Not on the website yet: it needs a heading.</span>
                   <button type="button" onClick={() => start(slot, photo)} className="inline-flex admin-btn-quiet !py-1.5">

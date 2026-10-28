@@ -37,7 +37,7 @@ function EventCard({ event }: { event: ScheduledEvent }) {
           <Icon name="events" />
         </span>
         <div className="min-w-0 flex-1">
-          <h4 className="font-bold text-[16px] text-[#1E3A29] leading-tight">{event.name || 'Event'}</h4>
+          <h4 className="font-bold text-[16px] text-[var(--a-ink)] leading-tight">{event.name || 'Event'}</h4>
           <div className="flex flex-wrap gap-2 mt-2">
             {event.time && <Fact icon="clock">{event.time}</Fact>}
             <Fact icon="guests" tone="strong">
@@ -54,13 +54,13 @@ function EventCard({ event }: { event: ScheduledEvent }) {
         </div>
       )}
       {event.bookings.length > 0 ? (
-        <ul className="mt-3.5 divide-y divide-[#1E3A29]/8 rounded-2xl bg-[#F4EFE4]/70 overflow-hidden">
+        <ul className="mt-3.5 divide-y divide-[var(--a-border)] rounded-2xl bg-[var(--a-bg)] overflow-hidden">
           {event.bookings.map((booking) => (
             <li key={booking.id} className="flex items-center gap-3 px-3.5 py-2.5">
               <Avatar name={booking.name} size="sm" />
               <span className="min-w-0 flex-1">
-                <span className="block text-[14px] font-semibold text-[#1E3A29] truncate">{booking.name}</span>
-                <span className="block text-[12px] text-[#1E3A29]/55">
+                <span className="block text-[14px] font-semibold text-[var(--a-ink)] truncate">{booking.name}</span>
+                <span className="block text-[12px] text-[var(--a-muted)]">
                   {booking.guests} {booking.guests === 1 ? 'guest' : 'guests'} · {BOOKING_STATUS_LABELS[booking.status]} · <span className="font-mono">{booking.reference}</span>
                 </span>
               </span>
@@ -74,7 +74,7 @@ function EventCard({ event }: { event: ScheduledEvent }) {
           ))}
         </ul>
       ) : (
-        <p className="mt-3 text-[13px] text-[#1E3A29]/50">No bookings yet.</p>
+        <p className="mt-3 text-[13px] text-[var(--a-faint)]">No bookings yet.</p>
       )}
     </div>
   );
@@ -87,8 +87,8 @@ function VisitCard({ visit, busy, onStatus }: { visit: ScheduledVisit; busy: boo
       <div className="flex items-start gap-3">
         <Avatar name={visit.name} />
         <div className="min-w-0 flex-1">
-          <h4 className="font-bold text-[16px] text-[#1E3A29] leading-tight truncate">{visit.name}</h4>
-          <div className="text-[13px] text-[#1E3A29]/55 truncate mt-0.5">{visit.phone}</div>
+          <h4 className="font-bold text-[16px] text-[var(--a-ink)] leading-tight truncate">{visit.name}</h4>
+          <div className="text-[13px] text-[var(--a-muted)] truncate mt-0.5">{visit.phone}</div>
         </div>
         <StatusSelect status={visit.status} busy={busy} onChange={onStatus} />
       </div>
@@ -98,7 +98,7 @@ function VisitCard({ visit, busy, onStatus }: { visit: ScheduledVisit; busy: boo
         </Fact>
         {visit.experiences.length > 0 && <Fact icon="sparkle">{visit.experiences.length} {visit.experiences.length === 1 ? 'wish' : 'wishes'}</Fact>}
       </div>
-      {visit.message && <p className="mt-3 rounded-2xl rounded-tl-md bg-[#F4EFE4] px-4 py-2.5 text-[13.5px] text-[#1E3A29]/80 leading-relaxed line-clamp-3">{visit.message}</p>}
+      {visit.message && <p className="mt-3 border-l-2 border-[var(--a-border)] pl-3 text-[13.5px] text-[#3C4740] leading-relaxed line-clamp-3">{visit.message}</p>}
       <ContactActions name={visit.name} phone={visit.phone} email={visit.email} subject="Your visit to Bushaashe Garuwa" />
     </div>
   );
@@ -158,11 +158,11 @@ export default function ScheduleView() {
       {/* the days, to swipe through */}
       <div className="admin-card !p-3 sm:!p-4">
         <div className="flex items-center justify-between gap-2 px-1 mb-2.5">
-          <button type="button" onClick={() => move(-DAYS)} aria-label="Two weeks earlier" className="grid place-items-center w-9 h-9 rounded-full hover:bg-[#1E3A29]/6 active:scale-90 text-[#1E3A29]/70">
+          <button type="button" onClick={() => move(-DAYS)} aria-label="Two weeks earlier" className="grid place-items-center w-9 h-9 rounded-full hover:bg-[#1E3A29]/6 active:scale-90 text-[var(--a-muted)]">
             <Icon name="arrowLeft" className="w-4 h-4" />
           </button>
           <div className="text-center">
-            <div className="font-display font-bold text-[15px] text-[#1E3A29]">
+            <div className="font-display font-bold text-[15px] text-[var(--a-ink)]">
               {asDate(from).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })} – {asDate(addDays(from, DAYS - 1)).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
             </div>
             {from !== today() && (
@@ -171,7 +171,7 @@ export default function ScheduleView() {
               </button>
             )}
           </div>
-          <button type="button" onClick={() => move(DAYS)} aria-label="Two weeks later" className="grid place-items-center w-9 h-9 rounded-full hover:bg-[#1E3A29]/6 active:scale-90 text-[#1E3A29]/70">
+          <button type="button" onClick={() => move(DAYS)} aria-label="Two weeks later" className="grid place-items-center w-9 h-9 rounded-full hover:bg-[#1E3A29]/6 active:scale-90 text-[var(--a-muted)]">
             <Icon name="arrowRight" className="w-4 h-4" />
           </button>
         </div>
@@ -189,10 +189,10 @@ export default function ScheduleView() {
                 aria-pressed={active}
                 aria-label={`${dayTitle(date)}: ${s.visits} visits, ${s.events} events`}
                 className={`snap-start flex-shrink-0 w-[52px] rounded-2xl py-2.5 flex flex-col items-center gap-0.5 transition-all active:scale-95 ${
-                  active ? 'bg-[#3F7D20] text-white shadow-[0_10px_20px_-10px_rgba(63,125,32,0.9)]' : isToday ? 'bg-[#3F7D20]/10 text-[#1E3A29]' : 'text-[#1E3A29]/75 hover:bg-[#1E3A29]/5'
+                  active ? 'bg-[#3F7D20] text-white shadow-[0_10px_20px_-10px_rgba(63,125,32,0.9)]' : isToday ? 'bg-[var(--a-brand-soft)] text-[var(--a-ink)]' : 'text-[#3C4740] hover:bg-[#1E3A29]/5'
                 }`}
               >
-                <span className={`text-[11px] font-bold uppercase ${active ? 'text-white/80' : 'text-[#1E3A29]/45'}`}>{d.toLocaleDateString('en-GB', { weekday: 'short' })}</span>
+                <span className={`text-[11px] font-bold uppercase ${active ? 'text-white/80' : 'text-[var(--a-faint)]'}`}>{d.toLocaleDateString('en-GB', { weekday: 'short' })}</span>
                 <span className="font-display text-[19px] font-extrabold leading-none tabular-nums">{d.getDate()}</span>
                 <span className="flex gap-1 h-1.5 mt-1">
                   {s.visits > 0 && <span className={`w-1.5 h-1.5 rounded-full ${active ? 'bg-white' : 'bg-[#3F7D20]'}`} />}
@@ -211,14 +211,14 @@ export default function ScheduleView() {
         <div key={chosen} className="admin-enter space-y-5">
           <div className="flex items-end justify-between gap-3 px-1">
             <div>
-              <h3 className="font-display text-2xl font-extrabold text-[#1E3A29] tracking-tight">{dayTitle(chosen)}</h3>
-              <p className="text-[13px] text-[#1E3A29]/55 mt-0.5">
+              <h3 className="text-[20px] font-bold text-[var(--a-ink)] tracking-[-0.01em]">{dayTitle(chosen)}</h3>
+              <p className="text-[13px] text-[var(--a-muted)] mt-0.5">
                 {size.visits || size.events
                   ? [size.visits && `${size.visits} ${size.visits === 1 ? 'visit' : 'visits'}`, size.events && `${size.events} ${size.events === 1 ? 'event' : 'events'}`, size.guests && `${size.guests} booked guests`].filter(Boolean).join(' · ')
                   : 'Nothing planned yet'}
               </p>
             </div>
-            <span className="flex items-center gap-3 text-[11px] font-semibold text-[#1E3A29]/50">
+            <span className="flex items-center gap-3 text-[11px] font-semibold text-[var(--a-faint)]">
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#3F7D20]" />Visits</span>
               <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#C4622D]" />Events</span>
             </span>
@@ -226,11 +226,11 @@ export default function ScheduleView() {
 
           {size.visits === 0 && size.events === 0 && (
             <div className="admin-card text-center !py-10">
-              <span className="inline-grid place-items-center w-14 h-14 rounded-2xl bg-[#3F7D20]/10 text-[#3F7D20] mb-3">
+              <span className="inline-grid place-items-center w-14 h-14 rounded-2xl bg-[var(--a-brand-soft)] text-[var(--a-brand)] mb-3">
                 <Icon name="schedule" className="w-7 h-7" />
               </span>
-              <p className="font-bold text-[#1E3A29]">A quiet day</p>
-              <p className="text-[13px] text-[#1E3A29]/55 mt-1">No visits or events on this day yet.</p>
+              <p className="font-bold text-[var(--a-ink)]">A quiet day</p>
+              <p className="text-[13px] text-[var(--a-muted)] mt-1">No visits or events on this day yet.</p>
             </div>
           )}
 
@@ -268,27 +268,27 @@ export function TodayAgenda({ onOpen }: { onOpen: () => void }) {
   const days = [today(), addDays(today(), 1)].map((date) => ({ date, day: schedule?.days.find((d) => d.date === date) }));
   return (
     <section className="admin-card !p-0 overflow-hidden">
-      <div className="flex items-center justify-between gap-3 px-5 pt-5 pb-3">
-        <h2 className="font-display text-lg font-bold text-[#1E3A29]">Today & tomorrow</h2>
-        <button type="button" onClick={onOpen} className="inline-flex items-center gap-1 text-[13px] font-bold text-[#346A1A]">
+      <div className="flex items-center justify-between gap-3 px-5 pt-4 pb-3">
+        <h2 className="admin-h3">Today & tomorrow</h2>
+        <button type="button" onClick={onOpen} className="inline-flex items-center gap-1 text-[13px] font-semibold text-[var(--a-brand)]">
           Schedule
           <Icon name="chevronRight" className="w-4 h-4" />
         </button>
       </div>
-      <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[#1E3A29]/8 border-t border-[#1E3A29]/8">
+      <div className="grid sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-[var(--a-border)] border-t border-[var(--a-border)]">
         {days.map(({ date, day }) => {
           const people = [...(day?.events.map((e) => ({ key: `e${e.id}`, label: `${e.name} · ${e.guests} guests`, event: true })) ?? []), ...(day?.visits.map((v) => ({ key: `v${v.id}`, label: `${v.name} · ${v.visitors}`, event: false })) ?? [])];
           return (
-            <button key={date} type="button" onClick={onOpen} className="text-left px-5 py-4 hover:bg-[#F4EFE4]/60 active:bg-[#F4EFE4] transition-colors">
-              <div className="text-[12px] font-bold uppercase tracking-wider text-[#1E3A29]/45">{dayTitle(date)}</div>
+            <button key={date} type="button" onClick={onOpen} className="text-left px-5 py-4 hover:bg-[var(--a-bg)]/60 active:bg-[var(--a-bg)] transition-colors">
+              <div className="text-[12px] font-bold uppercase tracking-wider text-[var(--a-faint)]">{dayTitle(date)}</div>
               {!schedule ? (
                 <span className="admin-shimmer block h-3.5 w-2/3 rounded-full mt-2.5" />
               ) : people.length === 0 ? (
-                <div className="text-[14px] text-[#1E3A29]/55 mt-1.5">Nothing planned</div>
+                <div className="text-[14px] text-[var(--a-muted)] mt-1.5">Nothing planned</div>
               ) : (
                 <ul className="mt-2 space-y-1.5">
                   {people.slice(0, 3).map((p) => (
-                    <li key={p.key} className="flex items-center gap-2 text-[14px] text-[#1E3A29] truncate">
+                    <li key={p.key} className="flex items-center gap-2 text-[14px] text-[var(--a-ink)] truncate">
                       <span className={`w-2 h-2 rounded-full flex-shrink-0 ${p.event ? 'bg-[#C4622D]' : 'bg-[#3F7D20]'}`} />
                       <span className="truncate">{p.label}</span>
                     </li>

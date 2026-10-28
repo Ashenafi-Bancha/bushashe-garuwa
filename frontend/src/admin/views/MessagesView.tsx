@@ -59,19 +59,19 @@ export default function MessagesView({ newCount }: { newCount?: number }) {
 
       {data && data.total > 0 && (
         <>
-          <ul className="space-y-3">
+          <ul className="grid grid-cols-1 xl:grid-cols-2 gap-3 items-start">
             {data.items.map((message) => (
               <li key={message.id} className={`admin-card !p-4 sm:!p-5 ${message.status === 'new' ? 'admin-card-new' : ''}`}>
                 <div className="flex items-start gap-3">
                   <Avatar name={message.name} email={message.email} />
                   <div className="min-w-0 flex-1">
-                    <h3 className="font-bold text-[16px] text-[#1E3A29] leading-tight truncate">{message.name}</h3>
-                    <div className="text-[13px] text-[#1E3A29]/55 truncate mt-0.5">{timeAgo(message.createdAt)}</div>
+                    <h3 className="font-semibold text-[15px] text-[var(--a-ink)] leading-tight truncate">{message.name}</h3>
+                    <div className="text-[13px] text-[var(--a-muted)] truncate mt-0.5">{timeAgo(message.createdAt)}</div>
                   </div>
                   <StatusSelect status={message.status} busy={busyId === message.id} onChange={(next) => changeStatus(message.id, next)} />
                 </div>
 
-                <p className="mt-3.5 rounded-2xl rounded-tl-md bg-[#F4EFE4] px-4 py-3 text-[14.5px] text-[#1E3A29]/85 leading-relaxed whitespace-pre-line">{message.message}</p>
+                <p className="mt-3 text-[14.5px] text-[var(--a-ink)] leading-relaxed whitespace-pre-line">{message.message}</p>
 
                 <div className="flex flex-wrap gap-2 mt-3">
                   <Fact icon="mail">{message.email}</Fact>

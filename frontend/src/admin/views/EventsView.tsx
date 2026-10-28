@@ -5,7 +5,7 @@ import type { AdminEvent, SaveEventInput } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
 import EventForm, { emptyEvent } from '../components/EventForm';
 import { Icon } from '../components/icons';
-import { Notice, Panel, formatDate } from '../components/ui';
+import { Notice, formatDate } from '../components/ui';
 
 /** Events staff manage: the cultural food evenings and everything else. */
 export default function EventsView() {
@@ -79,101 +79,92 @@ export default function EventsView() {
     );
   }
 
+  const tag = 'rounded-md px-2 py-0.5 text-[11.5px] font-semibold';
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-3">
-        <button
-          type="button"
-          onClick={() => setEditing({ id: null, values: emptyEvent() })}
-          className="inline-flex admin-btn"
-        >
+      <div className="flex items-center gap-2">
+        <button type="button" onClick={() => setEditing({ id: null, values: emptyEvent() })} className="inline-flex admin-btn">
           <Icon name="plus" className="w-4 h-4" />
           Add an event
         </button>
-        <button type="button" onClick={refresh} className="inline-flex admin-btn-quiet">
+        <button type="button" onClick={refresh} aria-label="Refresh" title="Refresh" className="admin-icon-btn bordered !w-10 !h-10">
           <Icon name="refresh" className="w-4 h-4" />
-          Refresh
         </button>
       </div>
 
       {error && <Notice kind="error">{error}</Notice>}
       {loading && events.length === 0 && <Notice>Loading events…</Notice>}
-      {!loading && events.length === 0 && !error && (
-        <Notice>No events yet. Add the next cultural food evening so it shows on the website.</Notice>
-      )}
+      {!loading && events.length === 0 && !error && <Notice>No events yet. Add the next cultural food evening so it shows on the website.</Notice>}
 
       {events.length > 0 && (
-        <Panel>
-          <ul className="divide-y divide-[#1E3A29]/10">
-            {events.map((event) => (
-              <li key={event.id} className="py-5 first:pt-0 last:pb-0">
-                <div className="flex flex-wrap items-start justify-between gap-3">
+        <ul className="admin-card !p-0 divide-y divide-[var(--a-border)] overflow-hidden">
+          {events.map((event) => {
+            const day = new Date(`${event.date}T00:00:00`);
+            const past = event.date < today;
+            const booked = event.capacity === null ? null : event.capacity - (event.placesLeft ?? 0);
+            return (
+              <li key={event.id} className={`flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-4 sm:px-5 ${past ? 'opacity-60' : ''}`}>
+                <div className="flex items-start gap-3.5 min-w-0 flex-1">
+                  {/* the date, like a page of a calendar */}
+                  <span className="flex-shrink-0 w-12 text-center rounded-xl border border-[var(--a-border)] overflow-hidden">
+                    <span className="block bg-[var(--a-brand)] text-white text-[10.5px] font-bold uppercase py-0.5">{day.toLocaleDateString('en-GB', { month: 'short' })}</span>
+                    <span className="block text-[18px] font-bold text-[var(--a-ink)] leading-tight py-1 tabular-nums">{day.getDate()}</span>
+                  </span>
                   <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-2 mb-1">
-                      <h3 className="font-display text-xl text-[#1E3A29]">{event.translations.en.name}</h3>
-                      {!event.published && <span className="rounded-full bg-[#13261A]/8 text-[#1E3A29]/55 text-xs font-semibold px-2.5 py-0.5">Draft</span>}
-                      {event.featured && <span className="rounded-full bg-[#C4622D]/12 text-[#9A4A20] text-xs font-semibold px-2.5 py-0.5">On the home page</span>}
-                      {event.date < today && <span className="rounded-full bg-[#13261A]/8 text-[#1E3A29]/55 text-xs font-semibold px-2.5 py-0.5">Past</span>}
+                    <div className="flex flex-wrap items-center gap-1.5">
+                      <h3 className="text-[15px] font-semibold text-[var(--a-ink)] mr-1">{event.translations.en.name}</h3>
+                      {!event.published && <span className={`${tag} bg-[#EFEDE6] text-[var(--a-muted)]`}>Draft</span>}
+                      {event.featured && <span className={`${tag} bg-[#FBEAE0] text-[#9A4A20]`}>On the home page</span>}
+                      {past && <span className={`${tag} bg-[#EFEDE6] text-[var(--a-muted)]`}>Past</span>}
                     </div>
-                    <div className="text-sm text-[#1E3A29]/60">
+                    <div className="text-[13px] text-[var(--a-muted)] mt-0.5">
                       {formatDate(event.date)}
-                      {event.time ? ` · ${event.time}` : ''} · {event.category}
+                      {event.time ? ` · ${event.time}` : ''}
                       {event.partner ? ` · with ${event.partner}` : ''}
                     </div>
                     {event.bookable && (
-                      <div className="text-sm mt-1">
-                        {event.capacity === null ? (
-                          <span className="text-[#1E3A29]/50">Open bookings, no limit</span>
-                        ) : (
-                          <span className={event.placesLeft === 0 ? 'text-[#1E3A29] font-semibold' : 'text-[#1E3A29]'}>
-                            {event.capacity - (event.placesLeft ?? 0)} of {event.capacity} places booked
-                            {event.placesLeft === 0 ? ' · full' : ` · ${event.placesLeft} left`}
-                          </span>
-                        )}
+                      <div className="text-[13px] text-[var(--a-ink)] mt-1">
+                        {booked === null ? 'Bookings open, no limit' : `${booked} of ${event.capacity} places booked${event.placesLeft === 0 ? ' · full' : ` · ${event.placesLeft} left`}`}
                       </div>
                     )}
-                    {event.translations.en.desc && (
-                      <p className="text-[#1E3A29]/70 text-sm mt-2 max-w-2xl">{event.translations.en.desc}</p>
-                    )}
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    <button
-                      type="button"
-                      disabled={busyId === event.id}
-                      onClick={() => toggle(event, { published: !event.published })}
-                      className="inline-flex admin-btn-quiet"
-                    >
-                      {event.published ? 'Unpublish' : 'Publish'}
-                    </button>
-                    <button
-                      type="button"
-                      disabled={busyId === event.id}
-                      onClick={() => toggle(event, { featured: !event.featured })}
-                      className="inline-flex admin-btn-quiet"
-                    >
-                      {event.featured ? 'Remove from home' : 'Show on home'}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        const { id: _id, createdAt: _c, updatedAt: _u, placesLeft: _p, ...values } = event;
-                        setEditing({ id: event.id, values });
-                      }}
-                      className="inline-flex admin-btn-quiet"
-                    >
-                      Edit
-                    </button>
-                    <button type="button" disabled={busyId === event.id} onClick={() => remove(event)} className="inline-flex admin-btn-quiet danger">
-                      <Icon name="trash" className="w-3.5 h-3.5" />
-                      Delete
-                    </button>
                   </div>
                 </div>
+
+                <div className="flex items-center gap-1 sm:flex-shrink-0 pl-[62px] sm:pl-0">
+                  <button type="button" disabled={busyId === event.id} onClick={() => toggle(event, { published: !event.published })} className="inline-flex admin-btn-quiet !min-h-9">
+                    <Icon name={event.published ? 'eyeOff' : 'eye'} className="w-4 h-4" />
+                    {event.published ? 'Hide' : 'Publish'}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={busyId === event.id}
+                    onClick={() => toggle(event, { featured: !event.featured })}
+                    aria-label={event.featured ? 'Take off the home page' : 'Show on the home page'}
+                    title={event.featured ? 'Take off the home page' : 'Show on the home page'}
+                    className={`admin-icon-btn ${event.featured ? '!text-[#C4622D]' : ''}`}
+                  >
+                    <Icon name={event.featured ? 'starFilled' : 'star'} className="w-[18px] h-[18px]" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const { id: _id, createdAt: _c, updatedAt: _u, placesLeft: _p, ...values } = event;
+                      setEditing({ id: event.id, values });
+                    }}
+                    aria-label="Edit"
+                    title="Edit"
+                    className="admin-icon-btn"
+                  >
+                    <Icon name="pencil" className="w-[18px] h-[18px]" />
+                  </button>
+                  <button type="button" disabled={busyId === event.id} onClick={() => remove(event)} aria-label="Delete" title="Delete" className="admin-icon-btn danger">
+                    <Icon name="trash" className="w-[18px] h-[18px]" />
+                  </button>
+                </div>
               </li>
-            ))}
-          </ul>
-        </Panel>
+            );
+          })}
+        </ul>
       )}
     </div>
   );

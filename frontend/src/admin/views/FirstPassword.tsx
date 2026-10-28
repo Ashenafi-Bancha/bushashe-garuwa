@@ -1,6 +1,7 @@
 import { firstName, useAdminSession } from '../auth/AdminSession';
 import { Icon } from '../components/icons';
 import PasswordForm from '../components/PasswordForm';
+import { SignInFrame } from './SignIn';
 
 /**
  * The first sign-in with a temporary password from an owner: the person
@@ -8,31 +9,20 @@ import PasswordForm from '../components/PasswordForm';
  */
 export default function FirstPassword() {
   const { user, signOut } = useAdminSession();
+  const name = firstName(user);
   return (
-    <div className="min-h-[100svh] bg-[#F4EFE4] flex flex-col">
-      <div
-        className="relative bg-[linear-gradient(140deg,#3F7D20_0%,#24501A_100%)] text-white px-6 pb-14 pt-12 overflow-hidden"
-        style={{ paddingTop: 'max(env(safe-area-inset-top), 48px)' }}
-      >
-        <span aria-hidden="true" className="absolute inset-0 opacity-[0.1] bg-[repeating-linear-gradient(135deg,#fff_0_2px,transparent_2px_14px)]" />
-        <div className="relative max-w-md mx-auto admin-rise">
-          <span className="grid place-items-center w-14 h-14 rounded-2xl bg-white/15 mb-5">
-            <Icon name="key" className="w-7 h-7" />
-          </span>
-          <h1 className="font-display text-3xl font-extrabold leading-tight tracking-tight">
-            Welcome{firstName(user) ? `, ${firstName(user)}` : ''}!
-          </h1>
-          <p className="text-white/80 mt-2 leading-relaxed">You signed in with a temporary password. Choose your own now: only you will know it.</p>
-        </div>
+    <SignInFrame>
+      <div className="admin-card !p-6 sm:!p-8 shadow-[0_1px_2px_rgba(19,38,26,0.04),0_20px_40px_-30px_rgba(19,38,26,0.35)]">
+        <span className="grid place-items-center w-11 h-11 rounded-xl bg-[var(--a-brand-soft)] text-[var(--a-brand)] mb-4">
+          <Icon name="key" className="w-5 h-5" />
+        </span>
+        <h1 className="text-[24px] font-bold tracking-[-0.02em] text-[var(--a-ink)]">Welcome{name ? `, ${name}` : ''}</h1>
+        <p className="text-[14px] text-[var(--a-muted)] mt-1 mb-6">You signed in with a temporary password. Choose your own now: only you will know it.</p>
+        <PasswordForm currentLabel="Temporary password" />
       </div>
-      <main className="relative -mt-7 flex-1 rounded-t-[30px] bg-white">
-        <div className="max-w-md mx-auto px-6 pt-8 pb-10 admin-rise [animation-delay:100ms]">
-          <PasswordForm currentLabel="Temporary password (from your email or message)" />
-          <button type="button" onClick={signOut} className="w-full mt-4 py-3 text-[13px] font-semibold text-[#1E3A29]/55 hover:text-[#1E3A29]">
-            Sign out
-          </button>
-        </div>
-      </main>
-    </div>
+      <button type="button" onClick={signOut} className="w-full mt-4 py-2 text-[13px] font-semibold text-[var(--a-muted)] hover:text-[var(--a-ink)]">
+        Sign out
+      </button>
+    </SignInFrame>
   );
 }

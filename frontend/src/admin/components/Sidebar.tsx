@@ -1,9 +1,21 @@
-import logo from '../../assets/brand/logo.png';
+import logo from '../../assets/brand/logo-small.webp';
 import { ROLE_LABELS, type StaffUser } from '../api/types';
 import Avatar from './Avatar';
 import { Icon, type IconName } from './icons';
 
-export type SectionId = 'overview' | 'visits' | 'bookings' | 'messages' | 'events' | 'gallery' | 'hero' | 'content' | 'staff' | 'account' | 'schedule' | 'reviews';
+export type SectionId =
+  | 'overview'
+  | 'visits'
+  | 'bookings'
+  | 'messages'
+  | 'events'
+  | 'gallery'
+  | 'hero'
+  | 'content'
+  | 'staff'
+  | 'account'
+  | 'schedule'
+  | 'reviews';
 
 export type Section = {
   id: SectionId;
@@ -16,12 +28,10 @@ export type Section = {
 /** The menu in parts: the day's work first, then what is shown on the website */
 export type SectionGroup = { title?: string; sections: Section[] };
 
-const ITEM = 'w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold transition-colors';
-const QUIET = 'text-[#1E3A29]/65 hover:bg-[#1E3A29]/5 hover:text-[#1E3A29]';
-
 /**
- * The staff menu: the same list on every screen, as a column beside the work on
- * wide screens and as a drawer behind the menu button on narrow ones.
+ * The staff menu on computers: a quiet white column beside the work. The
+ * sections scroll on their own; the person signed in stays at the foot.
+ * Phones use the tab bar and the More sheet instead (see Dashboard).
  */
 export default function Sidebar({
   groups,
@@ -30,8 +40,6 @@ export default function Sidebar({
   onSignOut,
   user,
   onAccount,
-  open,
-  onClose,
   canInstall = false,
   onInstall,
 }: {
@@ -43,128 +51,75 @@ export default function Sidebar({
   user: StaffUser | null;
   /** opens My account */
   onAccount: () => void;
-  open: boolean;
-  onClose: () => void;
   /** the browser offers to install the staff app */
   canInstall?: boolean;
   onInstall?: () => void;
 }) {
-  const list = (
-    <nav className="flex-1 px-3 py-4 overflow-y-auto" aria-label="Staff sections">
-      {groups.map((group, i) => (
-        <div key={group.title ?? i} className={i > 0 ? 'mt-6' : ''}>
-          {group.title && (
-            <div className="px-3 mb-2 text-[11px] font-bold tracking-[0.14em] uppercase text-[#1E3A29]/40">{group.title}</div>
-          )}
-          <div className="space-y-1">
-            {group.sections.map((section) => {
-              const active = section.id === current;
-              return (
-                <button
-                  key={section.id}
-                  type="button"
-                  onClick={() => {
-                    onChoose(section.id);
-                    onClose();
-                  }}
-                  aria-current={active ? 'page' : undefined}
-                  className={`${ITEM} text-left ${active ? 'bg-[#3F7D20] text-white shadow-[0_10px_22px_-14px_rgba(63,125,32,0.9)]' : QUIET}`}
-                >
-                  <Icon name={section.icon} />
-                  <span className="flex-1 truncate">{section.label}</span>
-                  {section.badge !== undefined && section.badge > 0 && (
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-[11px] font-bold tabular-nums ${
-                        active ? 'bg-white text-[#346A1A]' : 'bg-[#C4622D] text-white'
-                      }`}
-                    >
-                      {section.badge}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+  return (
+    <aside className="hidden lg:flex fixed inset-y-0 left-0 z-40 w-[248px] flex-col bg-white border-r border-[var(--a-border)]">
+      {/* who this is */}
+      <div className="flex items-center gap-3 px-5 h-16 flex-shrink-0">
+        <img src={logo} alt="" className="w-9 h-9 rounded-full object-contain bg-white ring-1 ring-[var(--a-border)]" />
+        <div className="min-w-0 leading-tight">
+          <div className="text-[14px] font-bold text-[var(--a-ink)] truncate">Bushaashe Garuwa</div>
+          <div className="text-[12px] text-[var(--a-muted)]">Staff area</div>
         </div>
-      ))}
-    </nav>
-  );
-
-  const panel = (
-    <div className="flex h-full flex-col bg-white border-r border-[#1E3A29]/10">
-      <div className="flex items-center gap-3 px-5 h-[72px] border-b border-[#1E3A29]/8">
-        <img src={logo} alt="" className="w-10 h-10 rounded-full object-contain flex-shrink-0" />
-        <div className="min-w-0">
-          <div className="font-display text-[#346A1A] text-[15px] font-extrabold leading-none truncate">Bushaashe Garuwa</div>
-          <div className="text-[#3F7D20] text-[10px] font-bold tracking-[0.18em] uppercase mt-1.5">Staff area</div>
-        </div>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="Close the menu"
-          className="lg:hidden ml-auto grid place-items-center w-10 h-10 rounded-xl text-[#1E3A29]/60 hover:bg-[#1E3A29]/5"
-        >
-          <Icon name="close" />
-        </button>
       </div>
 
-      {list}
+      {/* the sections */}
+      <nav className="flex-1 min-h-0 overflow-y-auto px-3 pb-4" aria-label="Staff sections">
+        {groups.map((group, i) => (
+          <div key={group.title ?? i} className={i > 0 ? 'mt-5' : 'mt-2'}>
+            {group.title && <div className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--a-faint)]">{group.title}</div>}
+            <div className="space-y-0.5">
+              {group.sections.map((section) => {
+                const active = section.id === current;
+                return (
+                  <button
+                    key={section.id}
+                    type="button"
+                    onClick={() => onChoose(section.id)}
+                    aria-current={active ? 'page' : undefined}
+                    className={`admin-nav-item ${active ? 'is-active' : ''}`}
+                  >
+                    <Icon name={section.icon} className="w-[18px] h-[18px]" />
+                    <span className="flex-1 truncate">{section.label}</span>
+                    {section.badge !== undefined && section.badge > 0 && <span className="admin-count">{section.badge}</span>}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        ))}
+      </nav>
 
-      <div className="px-3 py-4 border-t border-[#1E3A29]/8 space-y-1">
+      {/* the app, the website, and you */}
+      <div className="flex-shrink-0 border-t border-[var(--a-border)] p-3 space-y-0.5">
         {canInstall && onInstall && (
-          <button type="button" onClick={onInstall} className={`${ITEM} text-left text-[#346A1A] bg-[#3F7D20]/10 hover:bg-[#3F7D20]/16`}>
-            <Icon name="download" />
+          <button type="button" onClick={onInstall} className="admin-nav-item text-[var(--a-brand)]">
+            <Icon name="download" className="w-[18px] h-[18px]" />
             Install the staff app
           </button>
         )}
-        <a href="/" className={`${ITEM} ${QUIET}`}>
-          <Icon name="external" />
+        <a href="/" target="_blank" rel="noreferrer" className="admin-nav-item">
+          <Icon name="external" className="w-[18px] h-[18px]" />
           View the website
         </a>
-        <button type="button" onClick={onSignOut} className={`${ITEM} text-left text-[#C62828] hover:bg-[#C62828]/8 hover:text-[#A31F1F]`}>
-          <Icon name="signOut" />
-          Sign out
-        </button>
         {user && (
-          <button
-            type="button"
-            onClick={() => {
-              onAccount();
-              onClose();
-            }}
-            className="w-full flex items-center gap-3 rounded-xl bg-[#F4EFE4] px-3 py-2.5 mt-2 text-left hover:bg-[#EDE6D6] transition-colors"
-          >
-            <Avatar name={user.name} email={user.email} size="sm" />
-            <span className="min-w-0 flex-1">
-              <span className="block text-[#1E3A29] text-[13px] font-bold truncate">{user.name || user.email}</span>
-              <span className="block text-[#1E3A29]/50 text-[11px] font-semibold">{ROLE_LABELS[user.role]} · My account</span>
-            </span>
-            <Icon name="chevronRight" className="w-4 h-4 text-[#1E3A29]/35" />
-          </button>
+          <div className={`flex items-center gap-2 rounded-xl p-1.5 mt-2 ${current === 'account' ? 'bg-[var(--a-brand-soft)]' : ''}`}>
+            <button type="button" onClick={onAccount} className="flex-1 min-w-0 flex items-center gap-2.5 rounded-lg p-1 text-left hover:bg-[var(--a-hover)]">
+              <Avatar name={user.name} email={user.email} size="sm" />
+              <span className="min-w-0">
+                <span className="block text-[13px] font-semibold text-[var(--a-ink)] truncate">{user.name || user.email}</span>
+                <span className="block text-[11px] text-[var(--a-muted)]">{ROLE_LABELS[user.role]}</span>
+              </span>
+            </button>
+            <button type="button" onClick={onSignOut} aria-label="Sign out" title="Sign out" className="admin-icon-btn">
+              <Icon name="signOut" className="w-[18px] h-[18px]" />
+            </button>
+          </div>
         )}
       </div>
-    </div>
-  );
-
-  return (
-    <>
-      {/* wide screens: the column is always there */}
-      <aside className="hidden lg:block fixed inset-y-0 left-0 w-[264px] z-40">{panel}</aside>
-
-      {/* narrow screens: a drawer */}
-      <div
-        className={`lg:hidden fixed inset-0 z-50 transition-opacity duration-300 ${open ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-        aria-hidden={!open}
-      >
-        <button type="button" aria-label="Close the menu" onClick={onClose} className="absolute inset-0 bg-[#13261A]/50 backdrop-blur-sm" />
-        <div
-          className={`absolute inset-y-0 left-0 w-[86%] max-w-[300px] shadow-2xl transition-transform duration-300 ${
-            open ? 'translate-x-0' : '-translate-x-full'
-          }`}
-        >
-          {panel}
-        </div>
-      </div>
-    </>
+    </aside>
   );
 }
