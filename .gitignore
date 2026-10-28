@@ -25,3 +25,6 @@ logs/
 # beside it.
 /.plugins/
 /.opencode-skills/
+
+# email previews written by a local test run (MAIL_OUTBOX=1)
+backend/1/
