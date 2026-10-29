@@ -70,7 +70,11 @@ export default function Footer() {
         <div className="border-t border-white/15 pt-5 text-center text-xs text-white/85">
           {t.footer.developedBy}{' '}
           <strong className="font-bold text-white">
-            Ashenafi Bancha(<a href="tel:+251938103340" className="hover:underline underline-offset-4">0938103340</a>)
+            {/* the name leads to the developer's portfolio */}
+            <a href="https://ashenafi.dev" target="_blank" rel="noopener" className="underline decoration-white/40 underline-offset-4 hover:decoration-white">
+              Ashenafi Bancha
+            </a>
+            (<a href="tel:+251938103340" className="hover:underline underline-offset-4">0938103340</a>)
           </strong>
         </div>
       </div>
