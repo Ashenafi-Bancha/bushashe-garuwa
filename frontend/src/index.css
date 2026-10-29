@@ -238,6 +238,20 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   .hero-name .line-mask { display: inline-block; }
   html:lang(am) .hero-name { font-size: min(13vw, 7.5rem, 9.5svh); }
 }
+/* computers: the home page name sits over the photographs in white, still raised */
+@media (min-width: 1024px) {
+  .home-hero .hero-name {
+    color: #FFFFFF;
+    text-shadow:
+      0 0.012em 0 #E9EEE6,
+      0 0.024em 0 #D7DFD3,
+      0 0.036em 0 #C3CEBE,
+      0 0.048em 0 #AEBBA8,
+      0 0.06em 0 #97A691,
+      0 0.072em 0 #7F8F79,
+      0 0.12em 0.35em rgba(0, 0, 0, 0.45);
+  }
+}
 /* computers: the openings' words sit over the photograph, so their label and quiet button turn light */
 @media (min-width: 1024px) {
   .hero-on-photo .eyebrow { background: rgba(255, 255, 255, 0.16); color: #fff; backdrop-filter: blur(8px); }

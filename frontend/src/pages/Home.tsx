@@ -130,7 +130,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             />
           </Suspense>
         ) : (
-        <section className="home-hero hero-on-photo relative lg:mt-[72px] lg:h-[clamp(520px,calc(100svh-160px),880px)] lg:overflow-hidden" aria-label={h.hero.title}>
+        <section className="home-hero hero-on-photo relative lg:mt-[72px] lg:h-[min(66.667vw,calc(100svh-72px))] lg:min-h-[480px] lg:overflow-hidden" aria-label={h.hero.title}>
           <div
             className="relative mt-16 sm:mt-[72px] aspect-[3/2] overflow-hidden bg-[#E3EBD8] lg:absolute lg:inset-0 lg:mt-0 lg:w-full lg:h-full lg:aspect-auto lg:bg-[#13261A]"
             onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
@@ -143,22 +143,24 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           >
             {lastSlide && (
               <div key={`out-${lastSlide.id}-${slide.id}`} className="hero-slide hero-slide-out">
-                <img {...picture(lastSlide.src)} alt="" className={`w-full h-full object-cover ${lastSlide.pos}`} />
+                <img src={lastSlide.src} alt="" aria-hidden="true" className="hidden lg:block absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-80" />
+                <img {...picture(lastSlide.src)} alt="" className={`relative w-full h-full object-cover lg:object-contain ${lastSlide.pos}`} />
               </div>
             )}
             <div key={`in-${slide.id}`} className={`hero-slide ${lastSlide ? 'hero-slide-in' : 'hero-slide-first'}`}>
+              {/* computers: the whole photograph, with a soft blurred copy filling the space beside it */}
+              <img src={slide.src} alt="" aria-hidden="true" className="hidden lg:block absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-80" />
               <img
                 {...picture(slide.src)}
                 alt={slide.alt}
                 fetchPriority="high"
-                className={`hero-slide-img w-full h-full object-cover ${slide.pos}`}
+                className={`hero-slide-img relative w-full h-full object-cover lg:object-contain ${slide.pos}`}
               />
             </div>
 
             {/* computers: the photographs melt into the page behind the words, and softly at the foot */}
-            <span className="hidden lg:block absolute inset-0 z-[3] bg-[linear-gradient(90deg,rgba(14,32,19,0.96)_0%,rgba(14,32,19,0.92)_40%,rgba(14,32,19,0.5)_58%,rgba(14,32,19,0.1)_76%,rgba(14,32,19,0)_92%)]" />
-            <span className="hidden lg:block absolute inset-x-0 top-0 h-24 z-[3] bg-gradient-to-b from-[rgba(14,32,19,0.35)] to-transparent" />
-            <span className="absolute inset-x-0 bottom-0 h-6 lg:h-16 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
+            <span className="hidden lg:block absolute inset-0 z-[3] bg-[linear-gradient(90deg,rgba(10,24,14,0.62)_0%,rgba(10,24,14,0.46)_30%,rgba(10,24,14,0.16)_54%,rgba(10,24,14,0)_70%)]" />
+            <span className="absolute inset-x-0 bottom-0 h-6 lg:h-10 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
 
 
             {/* the name of the place in the photograph, and the way to the next one */}
@@ -186,8 +188,8 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             <HeroName title={h.hero.title} className="mb-6 lg:mb-7" />
             <div className="flex flex-col justify-between gap-6 lg:gap-7 animate-fade-up delay-300">
               <div className="max-w-xl">
-                <p className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] lg:text-white leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
-                <p className="text-[#1E3A29]/70 lg:text-white/85 text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
+                <p className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] lg:text-white lg:[text-shadow:0_2px_14px_rgba(0,0,0,0.45)] leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
+                <p className="text-[#1E3A29]/70 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
               </div>
               <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
