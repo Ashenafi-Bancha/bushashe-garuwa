@@ -91,6 +91,8 @@ const page: DeepPartial<Dictionary> = {
       title: "Bushaashe Garuwan de'iyaa ubbabaa",
       // EN: Every part of Bushaashe Garuwa, one step away.
       desc: "Bushaashe Garuwan diyaa ubbabaa, issi tangguwan.",
+      // EN: Click the button below to see more about {name}.
+      more: "",
       items: {
         // EN: Cultural houses, ancient trees and the family story.
         heritage: "Mesho keettata, beni mittatanne so asaa taarikiya.",

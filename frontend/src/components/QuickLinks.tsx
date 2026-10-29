@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { photos, picture, type PhotoKey } from '../assets/photos';
-import { useI18n } from '../i18n/I18nProvider';
+import { fmt, useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
 import { wol } from '../lib/wolaitaWords';
 
@@ -184,9 +184,14 @@ export default function QuickLinks() {
                 <h3 className="font-display text-3xl sm:text-4xl font-extrabold text-[#1E3A29] leading-[1.02] tracking-[-0.03em] mb-3">{wol(row.title)}</h3>
                 <p className="text-[#1E3A29] text-lg font-semibold leading-snug mb-3">{wol(row.desc)}</p>
                 {/* what is found there, as a sentence; each is shown with its photograph on the page itself */}
-                <p className="text-[#1E3A29]/65 leading-relaxed mb-8">{sentence(row.list)}</p>
+                <p className="text-[#1E3A29]/65 leading-relaxed mb-6">{sentence(row.list)}</p>
 
-                <Link to={row.to} className="btn-explore mt-auto">
+                {/* a short pointer to the button */}
+                <p className="quick-more mt-auto mb-3">
+                  <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 5v14" /><path d="m6 13 6 6 6-6" /></svg>
+                  {fmt(q.more, { name: t.nav.links[row.key as keyof typeof t.nav.links] ?? row.title })}
+                </p>
+                <Link to={row.to} className="btn-explore">
                   {t.common.explore}
                   <Arrow />
                 </Link>
@@ -208,8 +213,12 @@ export default function QuickLinks() {
                 </span>
                 <span className="flex flex-1 flex-col items-start p-4 sm:p-5">
                   <span className="font-display text-2xl font-bold text-[#1E3A29] leading-tight tracking-tight">{t.nav.links[key]}</span>
-                  <span className="text-[#1E3A29]/65 text-sm leading-relaxed mt-2 mb-5">{q.items[key]}</span>
-                  <span className="btn-explore btn-explore-sm mt-auto">
+                  <span className="text-[#1E3A29]/65 text-sm leading-relaxed mt-2 mb-4">{q.items[key]}</span>
+                  <span className="quick-more mt-auto mb-3">
+                    <svg viewBox="0 0 24 24" className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 5v14" /><path d="m6 13 6 6 6-6" /></svg>
+                    {fmt(q.more, { name: t.nav.links[key] })}
+                  </span>
+                  <span className="btn-explore btn-explore-sm">
                     {t.common.explore}
                     <Arrow />
                   </span>
