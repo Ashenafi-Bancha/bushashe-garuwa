@@ -280,7 +280,6 @@ export const en = {
       eyebrow: 'Find your way',
       title: 'Everything at Bushaashe Garuwa',
       desc: 'Every part of Bushaashe Garuwa, one step away.',
-      more: 'Click the button below to see more about {name}.',
       items: {
         heritage: 'Cultural houses, ancient trees and the family story.',
         experiences: 'Food, coffee, music, dance and guided tours.',

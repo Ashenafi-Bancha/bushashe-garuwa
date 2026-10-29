@@ -1137,16 +1137,3 @@ footer ul a:hover { background-size: 100% 1.5px; }
   box-shadow: 0 14px 30px -18px rgba(63, 125, 32, 0.7);
 }
 .btn-explore::before { display: none; }
-/* the short line above it, pointing to it */
-.quick-more {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border-radius: 9999px;
-  background: #E3EBD8;
-  color: #2E5E17;
-  padding: 6px 12px;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.3;
-}
