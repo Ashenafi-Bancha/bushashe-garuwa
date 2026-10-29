@@ -130,7 +130,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             />
           </Suspense>
         ) : (
-        <section className="home-hero hero-on-photo relative lg:mt-[72px] lg:h-[min(66.667vw,calc(100svh-72px))] lg:min-h-[480px] lg:overflow-hidden" aria-label={h.hero.title}>
+        <section className="home-hero hero-on-photo relative lg:mt-[72px] lg:h-[66.667vw] lg:overflow-hidden" aria-label={h.hero.title}>
           <div
             className="relative mt-16 sm:mt-[72px] aspect-[3/2] overflow-hidden bg-[#E3EBD8] lg:absolute lg:inset-0 lg:mt-0 lg:w-full lg:h-full lg:aspect-auto lg:bg-[#13261A]"
             onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
@@ -143,18 +143,16 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           >
             {lastSlide && (
               <div key={`out-${lastSlide.id}-${slide.id}`} className="hero-slide hero-slide-out">
-                <img src={lastSlide.src} alt="" aria-hidden="true" className="hidden lg:block absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-80" />
-                <img {...picture(lastSlide.src)} alt="" className={`relative w-full h-full object-cover lg:object-contain ${lastSlide.pos}`} />
+                <img {...picture(lastSlide.src)} alt="" className={`relative w-full h-full object-cover ${lastSlide.pos}`} />
               </div>
             )}
             <div key={`in-${slide.id}`} className={`hero-slide ${lastSlide ? 'hero-slide-in' : 'hero-slide-first'}`}>
-              {/* computers: the whole photograph, with a soft blurred copy filling the space beside it */}
-              <img src={slide.src} alt="" aria-hidden="true" className="hidden lg:block absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-80" />
+              {/* computers: the opening has the photographs' own shape (3:2) across the whole width, so each fills it entirely */}
               <img
                 {...picture(slide.src)}
                 alt={slide.alt}
                 fetchPriority="high"
-                className={`hero-slide-img relative w-full h-full object-cover lg:object-contain ${slide.pos}`}
+                className={`hero-slide-img relative w-full h-full object-cover ${slide.pos}`}
               />
             </div>
 
