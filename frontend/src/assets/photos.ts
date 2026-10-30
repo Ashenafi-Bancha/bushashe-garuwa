@@ -73,6 +73,10 @@ import youngTreesImg from './photos/trees-plants/young-trees.webp';
 
 // added October 2026: the fish pond and the vegetable garden
 import fishPondImg from './photos/grounds/fish-pond.webp';
+
+// added October 2026: the horses
+import horseRidingImg from './photos/animals/horse-riding.webp';
+import horsesImg from './photos/animals/horses.webp';
 import vegetableGardenImg from './photos/trees-plants/vegetable-garden.webp';
 
 // added October 2026: the crocodile pond, the reading place, the rock fountain and the zoo
@@ -180,9 +184,19 @@ export const photos = {
   rockFountain: rockFountainImg,
   /** The small zoo: a young deer behind the fence by its shelter (landscape) */
   zoo: zooImg,
+  /** A rider in a light suit and a woven scarf on a grey horse in traditional red-tasselled harness, crossing the lawn (landscape) */
+  horseRiding: horseRidingImg,
+  /** Two horses in traditional harness, brass bridles, red and yellow tassels and an embroidered saddle cloth, on the lawn (landscape) */
+  horses: horsesImg,
 } as const;
 
 export type PhotoKey = keyof typeof photos;
+
+/** Photos whose subject sits high in the frame: when a wide tile crops them, keep the top (heads and ears) */
+export const photoFocus: Partial<Record<PhotoKey, string>> = {
+  horseRiding: 'object-[center_12%]',
+  horses: 'object-[center_8%]',
+};
 
 /* The lighter copies of each photograph (name-small.webp, name-phone.webp), found by its address */
 const files = import.meta.glob<string>('./photos/**/*.webp', { eager: true, import: 'default' });

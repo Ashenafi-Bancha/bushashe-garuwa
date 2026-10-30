@@ -66,6 +66,10 @@ const page: DeepPartial<Dictionary> = {
     rockFountain: "",
     // EN: The small zoo at Bushaashe Garuwa: a young deer standing in the grass behind the wire fence, beside its wooden shelter
     zoo: "",
+    // EN: A rider in a light suit and a woven scarf on a grey horse dressed in traditional red-tasselled harness, crossing the lawn at Bushaashe Garuwa
+    horseRiding: "",
+    // EN: Two horses in traditional harness at Bushaashe Garuwa, with brass bridles, red and yellow tassels and an embroidered saddle cloth, standing on the lawn
+    horses: "",
     // EN: The fish pond at Bushaashe Garuwa: fish swimming in clear green water in a stone-edged pond under a shade net, fed by a little waterfall
     fishPond: "",
     // EN: The vegetable garden at Bushaashe Garuwa: neat beds of cabbage, carrots and lettuce, with maize and trees behind
@@ -209,6 +213,18 @@ const page: DeepPartial<Dictionary> = {
       // EN: The Small Zoo
       title: "",
       // EN: A young deer by its shelter: the zoo where children meet the animals of the grounds.
+      desc: "",
+    },
+    horseRiding: {
+      // EN: A Ride Across the Lawn
+      title: "",
+      // EN: A grey horse in its festive harness carries a rider past the thatched houses.
+      desc: "",
+    },
+    horses: {
+      // EN: The Horses of the Grounds
+      title: "",
+      // EN: Dressed in brass and red tassels, the way horses are adorned in Wolaita.
       desc: "",
     },
     fishPond: {

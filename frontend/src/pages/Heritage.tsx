@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
-import { photos, picture } from '../assets/photos';
+import { photoFocus, photos, picture } from '../assets/photos';
 import Photo from '../components/Photo';
 import { useI18n } from '../i18n/I18nProvider';
 import type { Dictionary } from '../i18n/dictionaries/en';
@@ -32,7 +32,7 @@ const houses: { name: string; img?: string }[] = [
 const ZIGBA = { wolaytta: 'Zigba', scientific: 'Podocarpus falcatus' };
 
 /** Living Nature: the cards that run across two columns */
-const WIDE = new Set<string>(['vegetableGarden', 'crocodilePond']);
+const WIDE = new Set<string>(['vegetableGarden', 'crocodilePond', 'horses']);
 
 export default function Heritage() {
   const { t, lang } = useI18n();
@@ -164,11 +164,11 @@ export default function Heritage() {
             <p className="text-[#1E3A29]/70 leading-relaxed">{wol(hg.nature.desc)}</p>
           </div>
           <div data-wave className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {(['vegetableGarden', 'herbs', 'banana', 'papaya', 'gardenPlant', 'youngTrees', 'farm', 'fishPond', 'crocodilePond', 'zoo', 'deer', 'bird', 'whitePigeon'] as const).map((key) => (
+            {(['vegetableGarden', 'herbs', 'banana', 'papaya', 'gardenPlant', 'youngTrees', 'farm', 'fishPond', 'crocodilePond', 'zoo', 'deer', 'bird', 'whitePigeon', 'horses', 'horseRiding'] as const).map((key) => (
               // the vegetable garden and the crocodile pond are wide cards across two columns
               <figure key={key} className={`bg-white rounded-[2rem] p-2.5 elev-1 ${WIDE.has(key) ? 'md:col-span-2' : ''}`}>
                 <div className={`img-zoom rounded-[1.5rem] overflow-hidden ${WIDE.has(key) ? 'aspect-[3/2] md:aspect-[3.08/1]' : 'aspect-[3/2]'}`}>
-                  <img {...picture(photos[key], WIDE.has(key) ? '(max-width: 767px) 100vw, 66vw' : '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
+                  <img {...picture(photos[key], WIDE.has(key) ? '(max-width: 767px) 100vw, 66vw' : '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className={`w-full h-full object-cover ${photoFocus[key] ?? ''}`} />
                 </div>
                 <figcaption className="px-4 py-4 sm:px-5">
                   <span className="block font-display text-xl font-bold text-[#1E3A29]">{wol(t.photoCaptions[key].title)}</span>

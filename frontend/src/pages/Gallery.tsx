@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { photos, picture, type PhotoKey } from '../assets/photos';
+import { photoFocus, photos, picture, type PhotoKey } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
 import { captionFor, mediaUrl, useSiteMedia } from '../lib/media';
 import { lockScroll, Tilt } from '../lib/motion';
@@ -59,6 +59,8 @@ const builtIn: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'readingPlace', cat: 'grounds', span: 'col-span-2' },
   { key: 'rockFountain', cat: 'grounds', span: 'col-span-2' },
   { key: 'zoo', cat: 'grounds', span: 'col-span-2' },
+  { key: 'horseRiding', cat: 'culture', span: 'col-span-2' },
+  { key: 'horses', cat: 'culture', span: 'col-span-2' },
 ];
 
 const filters: Filter[] = ['all', 'grounds', 'culture'];
@@ -76,7 +78,7 @@ const spans = [
 ];
 
 /** A photo ready to draw, whether built in or added by staff */
-type Item = { id: string; cat: Category; span: string; src: string; alt: string; title: string; desc: string };
+type Item = { id: string; cat: Category; span: string; src: string; focus?: string; alt: string; title: string; desc: string };
 
 export default function Gallery() {
   const { t, lang } = useI18n();
@@ -91,6 +93,7 @@ export default function Gallery() {
       cat,
       span,
       src: photos[key],
+      focus: photoFocus[key],
       alt: t.photos[key],
       title: t.photoCaptions[key].title,
       desc: t.photoCaptions[key].desc,
@@ -171,7 +174,7 @@ export default function Gallery() {
                     onClick={() => setOpenIdx(i)}
                     className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#1E3A29]/8"
                   >
-                    <img {...picture(item.src)} alt={item.alt} loading="lazy" className="w-full h-full object-cover" />
+                    <img {...picture(item.src)} alt={item.alt} loading="lazy" className={`w-full h-full object-cover ${item.focus ?? ''}`} />
                     <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />
                     <span className="absolute inset-x-0 bottom-0 p-3 sm:p-5 text-left">
                       <span className="block font-display text-base sm:text-xl text-white leading-tight">{wol(item.title)}</span>

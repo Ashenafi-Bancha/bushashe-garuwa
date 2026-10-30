@@ -15,7 +15,7 @@ const experiences: { id: keyof Dictionary['experiences']['items']; img?: string;
   { id: 'performance', soon: true },
   { id: 'workshop', soon: true },
   { id: 'tour', img: photos.house },
-  { id: 'horse', img: photos.lawn },
+  { id: 'horse', img: photos.horseRiding },
   { id: 'education', img: photos.eventGathering },
   { id: 'photography', img: photos.gardens },
   { id: 'family', img: photos.eventElders },
