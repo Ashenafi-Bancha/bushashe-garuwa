@@ -46,6 +46,7 @@ Start with task-relevant files below. Only follow imports or inspect other files
 - `vercel.json` - Builds and deploys the website from `frontend/`
 - One app for both, without Docker: the host (AletCloud) runs `pnpm build` then `pnpm start`; the API serves the website built beside it (`backend/src/http/website.ts`). Do not add a `Dockerfile`
 - **The built website (`frontend/dist`) is committed.** Building it needs over 500 MB of memory, more than the host's builder has, so host builds were failing. After ANY change under `frontend/` (or to `pnpm-lock.yaml` / `.figma/make/site.json`), run `pnpm web:prebuild` and commit `frontend/dist` with the change; `pnpm web:check` says whether it is up to date. On the host, `pnpm build` (`scripts/build.mjs`) uses the committed copy when its stamp matches the source and only builds the small API
+- `docs/CLOUDFLARE.md` - Putting Cloudflare in front of the site (DNS records, settings, going back); behind it the API counts visitors by `CF-Connecting-IP` (`visitorAddress` in `backend/src/http/rate-limit.ts`)
 - `.mise.toml` - Toolchain versions for Node.js and pnpm
 
 ## Dependencies

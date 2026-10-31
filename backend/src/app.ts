@@ -37,7 +37,7 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
   const prepare = () => services.staff.ensureAccount(env);
 
   app.disable('x-powered-by');
-  app.set('trust proxy', 1); // real visitor address behind the hosting proxy (used by the rate limit)
+  app.set('trust proxy', 1); // real visitor address behind the hosting proxy; behind Cloudflare see visitorAddress (http/rate-limit.ts)
   app.use(
     helmet({
       // the website loads its fonts from Google and embeds the Google map and the YouTube film

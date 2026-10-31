@@ -158,6 +158,16 @@ describe('protection', () => {
     assert.deepEqual(statuses, [201, 201, 429, 429]);
   });
 
+  it('counts each visitor on their own behind Cloudflare', async () => {
+    // the address above is used up; a visitor Cloudflare names is someone else
+    const res = await fetch(base + '/v1/contact', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'cf-connecting-ip': '203.0.113.7' },
+      body: JSON.stringify({ name: 'x', email: 'x@y.com', message: 'm' }),
+    });
+    assert.equal(res.status, 201);
+  });
+
   it('answers unknown endpoints with JSON 404', async () => {
     const res = await fetch(base + '/v1/nothing');
     assert.equal(res.status, 404);
