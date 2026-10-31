@@ -387,7 +387,6 @@ export const en = {
       items: {
         meetingHall: { title: 'Meeting Hall', desc: 'A hall for meetings, trainings, workshops and community gatherings, with food and coffee served from our kitchen.' },
         zoo: { title: 'Zoo & Animals', desc: 'A small zoo where visitors (especially children and school groups) meet the animals kept on the grounds.' },
-        pool: { title: 'Swimming Pool', desc: 'A swimming pool set among the gardens, for guests of the guesthouse and for day visitors.' },
         orchard: { title: 'Plants & Fruit Trees', desc: 'Mango, apple, papaya and banana trees, more than 1,800 coffee trees, enset, and traditional garden plants with wonderful scents.' },
         horses: { title: 'Horse Riding', desc: 'Horses wait on the great lawn for visitors who would like to ride.' },
         crocodile: { title: 'Crocodile Pond & Wildlife', desc: 'A properly fenced crocodile pond and an area where wild animals are cared for.' },

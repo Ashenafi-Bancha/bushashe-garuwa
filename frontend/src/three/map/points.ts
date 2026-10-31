@@ -15,7 +15,6 @@ export type MapPointId =
   | 'zigba'
   | 'meetingHall'
   | 'zoo'
-  | 'pool'
   | 'orchard'
   | 'horses'
   | 'crocodile'
@@ -38,7 +37,6 @@ export const MAP_POINTS: MapPoint[] = [
   { id: 'meetingHall', at: [5.6, 3.4], to: '/experiences' },
   { id: 'restaurant', at: [8.8, -0.6], to: '/dine' },
   { id: 'guesthouse', at: [5.2, -3.6], to: '/stay' },
-  { id: 'pool', at: [9.6, -5], to: '/stay' },
   { id: 'horses', at: [-5.6, 4.6], to: '/experiences' },
   { id: 'zoo', at: [-9.8, 2], to: '/heritage/animals' },
   { id: 'crocodile', at: [-10, -4.6], to: '/heritage/animals' },

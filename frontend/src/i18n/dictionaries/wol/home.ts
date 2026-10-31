@@ -418,12 +418,6 @@ const page: DeepPartial<Dictionary> = {
           // EN: A small zoo where visitors (especially children and school groups) meet the animals kept on the grounds.
           desc: "Xomoosiyaageeti (ubba qeeri naatinne lixetta keetta citati) do'ata be'iyoo xoyta do'ata naagiyoo sohuwa.",
         },
-        pool: {
-          // EN: Swimming Pool
-          title: "Haattaa Wadhdhiyoo Maaqooriyaa",
-          // EN: A swimming pool set among the gardens, for guests of the guesthouse and for day visitors.
-          desc: "Imatta keettan de'iyaa imattatuyyoonne gallassa xomoosiyaageetuyyoo giigida haattaa wadhdhiyoo eellida haattaa sohuwa.",
-        },
         orchard: {
           // EN: Plants & Fruit Trees
           title: "Dozata & Ayfiya Mittata",

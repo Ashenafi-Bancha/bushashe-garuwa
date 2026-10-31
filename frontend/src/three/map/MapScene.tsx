@@ -143,7 +143,6 @@ export default function MapScene({ tier, active, names, chosen, onChoose }: Prop
         <Building x={at('meetingHall')[0]} z={at('meetingHall')[1]} wide={3} deep={2} />
         <Building x={at('restaurant')[0]} z={at('restaurant')[1]} />
         <Building x={at('guesthouse')[0]} z={at('guesthouse')[1]} wide={3.2} deep={1.5} />
-        <Water x={at('pool')[0]} z={at('pool')[1]} wide={2.6} deep={1.5} />
         <Water x={at('crocodile')[0]} z={at('crocodile')[1]} wide={2.6} deep={2} round />
         <Water x={at('fish')[0]} z={at('fish')[1]} wide={2} deep={1.6} round />
         {/* the zigba trees stand in a line */}
