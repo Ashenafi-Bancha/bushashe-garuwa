@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { photos, picture } from '../assets/photos';
+import { photoFocus, photos, picture, type PhotoKey } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import { heroPhotos, useSiteMedia } from '../lib/media';
 import QuickLinks, { GuestHouseSoon } from '../components/QuickLinks';
@@ -22,6 +22,18 @@ const SLIDE_MS = 6000;
 
 /* What else is on the grounds; the words are in the translations (t.home.facilities.items) */
 const facilities = ['meetingHall', 'vip', 'zoo', 'pool', 'orchard', 'horses', 'crocodile', 'fish', 'restaurant'] as const;
+/* the photograph of each; the swimming pool has none yet, so it shows a water-coloured tile until one is added */
+const facilityPhotos: Record<(typeof facilities)[number], PhotoKey | null> = {
+  meetingHall: 'meetingHall',
+  vip: 'vipDining',
+  zoo: 'zoo',
+  pool: null,
+  orchard: 'papaya',
+  horses: 'horses',
+  crocodile: 'crocodilePond',
+  fish: 'fishPond',
+  restaurant: 'food',
+};
 
 /* ── A figure that counts up when it comes into view: "1,800+" counts to 1800 ── */
 function CountUp({ value }: { value: string }) {
@@ -235,11 +247,26 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             <CardGrid grid="md:grid-cols-2 lg:grid-cols-3">
               {facilities.map((id, i) => {
                 const item = h.facilities.items[id];
+                const key = facilityPhotos[id];
+                const number = String(i + 1).padStart(2, '0');
                 return (
-                  <div key={id} className="h-full flex gap-4 rounded-[1.5rem] bg-white p-5 sm:p-6 elev-1">
-                    <span className="text-[#C4622D] text-sm font-bold tabular-nums pt-1">{String(i + 1).padStart(2, '0')}</span>
-                    <div>
-                      <h3 className="font-display text-xl font-bold text-[#1E3A29] tracking-tight mb-1.5">{wol(item.title)}</h3>
+                  // phones: a small photograph beside the words; tablets and computers: the photograph above them
+                  <div key={id} className="h-full flex md:flex-col gap-4 md:gap-0 rounded-[1.5rem] bg-white p-2.5 md:p-2.5 elev-1 overflow-hidden">
+                    <div className="img-zoom relative flex-shrink-0 self-center md:self-auto w-32 sm:w-44 md:w-full aspect-[3/2] rounded-[1.1rem] overflow-hidden">
+                      {key ? (
+                        <img {...picture(photos[key], '(max-width: 767px) 180px, (max-width: 1023px) 50vw, 33vw')} alt={t.photos[key]} loading="lazy" className={`w-full h-full object-cover ${photoFocus[key] ?? ''}`} />
+                      ) : (
+                        <span className="grid place-items-center w-full h-full max-sm:h-auto max-sm:aspect-[3/2] bg-[linear-gradient(160deg,#BFE3EA_0%,#6FB7C8_55%,#3D8FA6_100%)]" aria-hidden="true">
+                          <svg viewBox="0 0 48 24" className="w-1/2 text-white/85" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                            <path d="M2 8c4 0 4-4 8-4s4 4 8 4 4-4 8-4 4 4 8 4 4-4 8-4" />
+                            <path d="M2 18c4 0 4-4 8-4s4 4 8 4 4-4 8-4 4 4 8 4 4-4 8-4" />
+                          </svg>
+                        </span>
+                      )}
+                      <span className="absolute left-2 top-2 md:left-3 md:top-3 rounded-full bg-white/90 backdrop-blur-md px-2 py-0.5 md:px-2.5 md:py-1 text-[#C4622D] text-[11px] md:text-xs font-bold tabular-nums">{number}</span>
+                    </div>
+                    <div className="min-w-0 self-center md:self-auto py-1 pr-2 md:px-3.5 md:pt-4 md:pb-3.5">
+                      <h3 className="font-display text-lg md:text-xl font-bold text-[#1E3A29] tracking-tight mb-1 md:mb-1.5">{wol(item.title)}</h3>
                       <p className="text-[#1E3A29]/60 text-sm leading-relaxed">{wol(item.desc)}</p>
                     </div>
                   </div>
