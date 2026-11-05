@@ -311,7 +311,7 @@ export const en = {
     intro: {
       eyebrow: 'Our Purpose',
       title: 'More Than a Destination',
-      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination, where generations of history, culture, and knowledge meet the warmth of genuine hospitality.',
+      p1: 'Bushaashe Garuwa is a living Wolaita heritage destination, where generations of history, culture, and knowledge meet the warmth of genuine hospitality. More than 90% of Bushaashe Garuwa is based on Wolaita culture.',
       p2: 'We are not a museum. We are a living family heritage that welcomes visitors to become part of our ongoing story. From cultural houses to the reading place in the gardens, from traditional food to oral histories, Bushaashe Garuwa is an experience unlike any other in Ethiopia.',
       pillars: ['Heritage', 'Nature', 'Culture', 'Hospitality'],
       generations: 'Generations',
@@ -468,7 +468,7 @@ export const en = {
       title: 'More Than a Place: A Living Story',
       p1: 'Bushaashe Garuwa is a living Wolaita heritage destination in Damot Sore Woreda, Wolaita Zone, Ethiopia: a beautifully developed eco-tourism site, cultivated and cared for by the Bushaashe family. We are more than a museum, a resort, or a tourist attraction; we are a family heritage that has been tended and passed down across four generations.',
       name: 'The name Bushaashe (sometimes written Bushashe) is a family name, and today it is also known across Wolaita as the name of a cultural landmark.',
-      p2: 'What began as a family homestead, with its trees, houses, animals, and traditions, has grown into a place where the whole world can come and experience the depth, beauty, and wisdom of Wolaita culture.',
+      p2: 'What began as a family homestead, with its trees, houses, animals, and traditions, has grown into a place where the whole world can come and experience the depth, beauty, and wisdom of Wolaita culture. More than 90% of Bushaashe Garuwa is based on Wolaita culture.',
       p3: 'From our cultural houses and ancient trees, to the reading place, oral histories, traditional food, and guesthouse: every element of Bushaashe Garuwa exists to honor the past, celebrate the present, and protect the future of Wolaita heritage.',
       festival: 'Bushaashe Garuwa is also a gathering place for the region: it hosts cultural celebrations, including the eve of “Gifaataa”, the traditional New Year festival of the Wolaita people.',
       generations: 'Generations',
@@ -583,7 +583,7 @@ export const en = {
       desc: 'Birds on the roofs and bright plants along the paths: the grounds are alive in every season.',
     },
     hero: { eyebrow: 'Wolaita Heritage', title: 'Explore Wolaita Heritage in Bushaashe Garuwa' },
-    intro: 'Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one.',
+    intro: 'Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one. More than 90% of it is based on Wolaita culture.',
     categories: {
       houses: { label: 'Cultural Houses', desc: 'Two traditional Wolaita houses, “Gulanttaa Keettaa” and “Meesho Keettaa”, full of the traditional tools and instruments of the Wolaita people.' },
       trees: { label: 'Trees & Plants', desc: 'Heritage trees, mango, apple, papaya and banana, more than 1,800 coffee trees, enset and fragrant traditional garden plants.' },

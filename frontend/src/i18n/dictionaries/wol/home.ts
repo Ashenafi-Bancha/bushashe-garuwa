@@ -173,7 +173,7 @@ const page: DeepPartial<Dictionary> = {
       eyebrow: "Nu Halchchoy",
       // EN: More Than a Destination
       title: "Sohoppe Kanttees",
-      // EN: Bushaashe Garuwa is a living Wolaita heritage destination, where generations of history, culture, and knowledge meet the warmth of genuine hospitality.
+      // EN: Bushaashe Garuwa is a living Wolaita heritage destination, where generations of history, culture, and knowledge meet the warmth of genuine hospitality. More than 90% of Bushaashe Garuwa is based on Wolaita culture.
       p1: "Bushaashe Garoy \"paxa de'iyaa\" Wolaytta buqura soho; yeletatu taarikee, wogaynne eray tumu gita ufayssan imattaa mohuwara issippe diyoossaa. ",
       // EN: We are not a museum. We are a living family heritage that welcomes visitors to become part of our ongoing story. From cultural houses to the reading place in the gardens, from traditional food to oral histories, Bushaashe Garuwa is an experience unlike any other in Ethiopia.
       p2: "Nuuni muuzeeme gidokko. Xomoosiyaageeti nu kaalliya taarikiya bolla gidana mala shoobbiya \"paxa de'iyaa\" so asaa buqurappe attin. Meesho keettatuppe biidi nabbabbiyoo sohota gakkanawu, wogaa qumaappe biidi nu doona taarikiyaa gakkanawu, Bushaashe Garoy Toophphiyan de'iya haraatuppe dummatiya soho.",

@@ -28,7 +28,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: Explore Wolaita Heritage in Bushaashe Garuwa
       title: "Wolaytta Bushaashe Garuwan Be'ite",
     },
-    // EN: Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one.
+    // EN: Every element of Bushaashe Garuwa is a living chapter of Wolaita history. Explore our heritage categories and discover the stories within each one. More than 90% of it is based on Wolaita culture.
     intro: "Issi issi Bushaashe Garuwan de'iyaabay paxa de'iyaa Wolaytta haydaa shemppuwaa. Nu buquraa qommota xeelliiddi issuwa issuwa giddon de'iyaa taariketa be'ite.",
     categories: {
       houses: {
