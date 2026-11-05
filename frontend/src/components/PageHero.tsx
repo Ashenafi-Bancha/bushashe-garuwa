@@ -11,9 +11,10 @@ import { wol } from '../lib/wolaitaWords';
  * Phones: the photograph first, whole and in its own shape, from edge to edge;
  * the label, the title and the description below it.
  *
- * Computers: the photograph is the background of the whole opening, shown
- * whole in its own shape, with a light shade from the left; the words sit on
- * the left in white.
+ * Computers: the photograph covers the whole opening from the left edge to the
+ * right, as on the home page: a wide photo is shown whole, a taller one is
+ * trimmed at top and bottom to 3:2 (keeping its focus point). A light shade
+ * from the left; the words sit on the left in white.
  *
  * Any <span> inside the title is picked out in moss green. The photograph is
  * the page's own (src/lib/heroSlots.ts), or the one staff put in its place
@@ -40,7 +41,7 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
 
   return (
     <section
-      className="page-hero hero-on-photo relative lg:mt-[72px] lg:overflow-hidden lg:h-[min(calc(100vw/var(--ratio)),calc(100svh-72px))] lg:min-h-[480px]"
+      className="page-hero hero-on-photo relative lg:mt-[72px] lg:overflow-hidden lg:h-[calc(100vw/max(var(--ratio),1.5))] lg:min-h-[480px]"
       style={{ '--ratio': ratio } as CSSProperties}
     >
       {/* the photograph: whole on phones; on computers the background of the whole opening, behind the words */}
@@ -50,15 +51,15 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
       >
         <div key={photo.id} className="hero-slide hero-slide-first">
           <div className="absolute inset-0">
-            {/* a soft blurred copy fills any space beside the photograph, which itself is always shown whole */}
-            <img src={photo.src} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-80" />
+            {/* phones: a soft blurred copy fills any space beside the photograph, which itself is shown whole */}
+            <img src={photo.src} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover scale-110 blur-2xl opacity-80 lg:hidden" />
             <img
               ref={img}
               {...picture(photo.src)}
               alt={photo.alt}
               fetchPriority="high"
               onLoad={measure}
-              className="hero-slide-img relative w-full h-full object-contain"
+              className={`hero-slide-img relative w-full h-full object-contain lg:object-cover ${photo.pos}`}
             />
           </div>
         </div>
