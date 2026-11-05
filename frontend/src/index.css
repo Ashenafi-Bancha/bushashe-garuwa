@@ -266,6 +266,24 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
   html:lang(am) .home-hero .hero-name { font-size: min(6.2vw, 6.25rem, 12svh); }
   html:lang(am) .home-hero .hero-name > span { display: inline; }
 }
+/* computers: the home name in the same lettering as the other pages' openings
+   (PageHero): the display font, white with a soft shadow, not raised or capitalised */
+@media (min-width: 1024px) {
+  .home-hero .hero-name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-transform: none;
+    font-size: min(4.25rem, 9.5svh);
+    line-height: 0.98;
+    color: #FFFFFF;
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+    filter: none;
+    transform: none;
+  }
+  .home-hero .hero-name.brand-3d .line-mask { padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  html:lang(am) .home-hero .hero-name { font-size: min(4.25rem, 9.5svh); font-weight: 700; letter-spacing: 0; line-height: 1.15; }
+}
 /* the name's letters rise one by one (components/HeroName.tsx); until the script takes over, each line rises whole */
 .hero-letter { display: inline-block; will-change: transform; }
 .hero-name.by-letter .line-mask > span { animation: none; }
