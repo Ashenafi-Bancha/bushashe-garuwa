@@ -21,67 +21,67 @@ const page: DeepPartial<Dictionary> = {
     // EN: Bushaashe Garuwa: traditional thatched house, flags and grounds
     house: "Bushaashe Garuwaa: gita gatta keettaa, banddiratanne zaguwaa",
     // EN: Bushaashe Garuwa: thatched pavilions and lush gardens
-    pavilions: "Bushaashe Garuwaa: maaxxan xammettida adaratanne lo'idi carkkiya ataakilttiya sa'aa",
+    pavilions: "Bushaashe Garuwaa: maatan xammettida qeeri keettatanne lo'idi carkkiya ataakilttiya sohuwaa",
     // EN: Bushaashe Garuwa: gardens and recreational grounds
-    gardens: "Bushaashe Garuwaa: ataakiltte mittatanne shemppiyo gadiyaa",
+    gardens: "Bushaashe Garuwaa: ataakiltte gadetanne kaa'iyoo sohota",
     // EN: Bushaashe Garuwa: open lawns, heritage tree and traditional house
-    lawn: "Bushaashe Garuwaa: dooyettida maata sa'aa, laata mittaanne aada keettaa",
+    lawn: "Bushaashe Garuwaa: aaho qooruwaa, laata mittaanne beni keettaa",
     // EN: The meeting hall at Bushaashe Garuwa: rows of chairs in white covers with bands of Wolaita pattern, under wood-panelled walls
-    meetingHall: "Bushaashe Garuwaa shiiquwa adaraa: mitta deese garssan, Wolaytta aleeqee de'iya bootta maoy maayida oydhdheta saasata",
+    meetingHall: "Bushaashe Garuwan de'iyaa shiiquwa gutaraa: goday mittan alleeqido keettaa giddon de'iya, bootta carqqiyan kamettida oydeti yafaran uttidosaa.",
     // EN: A VIP room for sleeping: a carved wooden bed with an embroidered white cover, and an armchair
-    vipRoom: "Hiixiyo VIP keettaa: oosetti xalettida mitta arsa, sikketida bootta maoy maayidabaanne uffi gidi uttiyo arsa",
+    vipRoom: "Xiskkanawu VIP kifiliyaa: sikettida bootta carqqiyan kamettida mittaappe ciiretti giigida arssaanne zemppuwaara de'iyaa oydiyaa",
     // EN: The VIP sitting and dining room: sofas, a marble-topped table, a kitchen counter and a fireplace
-    vipDining: "Uttiyoore maana VIP adaraa: soofata, al'o zaaga dembbaa bolla gayida xarapheezaa, kichchiya koyronne tama sa'aa",
+    vipDining: "Uttiyoonne qumaa miyoo VIP kifiliyaa: soofata, ibinabaradiyan kamettida xarapheezzaa, eqo kushiinaanne tamaa eettiyoosaa",
     // EN: The VIP kitchen: carved wooden cupboards above a marble counter with a sink, beside a panelled wooden door
-    vipKitchen: "VIP kichchiya: haaxxa meecciyo sa'ara de'iya qaxxarettida mitta saxinetettaa, mitta pangga matan",
+    vipKitchen: "VIP kushiinaa: mitta penggiyaa miyyiyan, ibinabaradiya xarapheezzaappe bolla baggaara de'iyaa mittaappe ciirettidi giigida eqo saaxiniyaa",
     // EN: The VIP cooking corner: a black double sink with running water and a two-ring electric stove on a wooden worktop
-    vipCooking: "VIP kattiyo zoozaa: pulttiya haaxxai de'iya karetta laa'u haaxxa meecciyo sa'aanne mitta oosuwa dembbaa bollan de'iya koranti stove",
+    vipCooking: "VIP kattiyo zoozaa: goggiyaa haattay de'iyoo naa\"u karetta meecciyo ollatinne naa\"u kattiyoosay de'iyoo koorinttiyaa coocee de'iyoo mittaappe giigida eqqidi kattiyoo sohuwaa.",
     // EN: A VIP rest room: a rain shower and a round mirror under three warm lamps, on marble-patterned tiles
-    vipShower: "VIP meeceetiyo keettaa: ho'o lampatetta garssan de'iya pillaasa maala haaxxa pulttiyaaye, shaaqila janbberiyaanne xalettida xabiyaa bollan de'iya janbberiyaa",
+    vipShower: "VIP meecettiyoo kifiliyaa: iraa haattan bollaa meecettiyoosaanne qassikka ibinabaradiyan kamettida xarapheezzaappe bolla baggaara heezzu xomppettuppe garssaara de'iyaa irzziizo-mala heregay de'iyoosaa",
     // EN: A VIP rest room: a white washbasin with a chrome tap against marble-patterned tiles
-    vipBasin: "VIP meeceetiyo keettaa: xalettida xabiyaa sinttan de'iya bootta kusha meecciyoobaanne pillaasa boora poppoqqiyagaa",
+    vipBasin: "VIP meeceetiyo keettaa: ibinabaradiyan kamettida xarapheezzaa bollan de'iyaa haattaa bombbati de'iyoo bootta meecciyoo ollaa.",
     // EN: A VIP rest room: a white toilet in a room tiled from floor to ceiling
-    vipToilet: "VIP meeceetiyo keettaa: huupheppe gade gakkanaas xabiyaan maayida keettan de'iya geeshsha bootta sheeshsho sa'aa",
+    vipToilet: "VIP meeceetiyo keettaa: sa'aappe biidi kaaraa gakkanaassi bootta shuchchan puulattid sheeshsha keettaa",
     // EN: Elders in traditional Wolaita dress seated under the great tree at Bushaashe Garuwa, in front of a thatched house and a welcome banner
-    eventElders: "Bushaashe Garuwaan gita mitta garssan, maaxxan xammettida keettaa sinttanne mokki ekkiya saasani sinttan aada Wolaytta maoya maayidi uttida cimata",
+    eventElders: "Wogaa maayuwaa maayida cimati Bushaashe Garuwaan de'iyaa gita mittaa garssan, 'Hashshu Saro Yeeta' giyaa xuufiyaa oyqqidi maata keettaa sinttan uttidosona",
     // EN: A gathering at Bushaashe Garuwa: a man speaks into a microphone to guests seated at a long table covered in Wolaita cloth, under a tree
-    eventGathering: "Bushaashe Garuwaa shiiquwaa: mitta garssan Wolaytta maoy maayida adhdha xarapheezaa matan uttida imttatassi issi bitanee maayikrofoniyaan haasayee",
+    eventGathering: "Bushaashe Garuwan de'iyaa shiiquwaa: Wolaytta maayuwan kamettida adussa xarapheezzaa sinttan mitta giddon uttida imattatuyyoo bitanee maykiraapooniyan haasayees.",
     // EN: A celebration at Bushaashe Garuwa: guests in Wolaita-pattern shirts clap around a cake with candles and a large traditional loaf
-    eventCelebration: "Bushaashe Garuwaa bonchchoo: Wolaytta aleeqee de'iya qamisiya maayida imttati tuulxxiya shamaara de'iya keekiyanne gita aada muqqa yuuyidi kushiya baqoosona",
+    eventCelebration: "Bushaashe Garuwan de'iyaa bonchchuwaa: Imattati Wolaytta shuraabiyan alleeqidi sanddalliyaa keekkiyaanne gita daabbuwaa yuushuwan kushiyaa baqqiiddi",
     // EN: Guests in Wolaita-pattern shirts playing with a ball and laughing on the lawn at Bushaashe Garuwa
-    eventGames: "Wolaytta aleeqee de'iya qamisiya maayida imttati Bushaashe Garuwaa maata sa'an booliya ka'idi miiccidosona",
+    eventGames: "Imattati Wolaytta shuraabiyan alleeqidi, kuwaasiya kaa'iiddinne Bushaashe Garuwan de'iya gita qooruwan poocammiiddinne miicciiddi",
     // EN: Bushaashe Garuwa: traditional thatched house, fountain and flags among the gardens
-    home: "Bushaashe Garuwaa: ataakiltte giddon de'iya aada maaxxa keettaa, pulttiya haaxxa pillaasaanne banddarata",
+    home: "Bushaashe Garuwaa: ataakiltte sohotu giddon de'iyaa beni gatta keettaa, pulttuwaanne banddiraa",
     // EN: Enset (false banana) growing at Bushaashe Garuwa, the staple plant of Wolaita food culture
-    enset: "Bushaashe Garuwaan dicciya uttiya (woykko emmaay), Wolaytta quma aadaa waanna mittaa",
+    enset: "Wolaytta asaa meeze quma gididanne Bushaashe Garuwaan dicciya uttaa",
     // EN: Traditional Wolaita dishes served in woven baskets inside a cultural house at Bushaashe Garuwa
-    food: "Bushaashe Garuwaa aada keettaa giddon shashshamettida le'etan shiiqida aada Wolaytta qumata",
+    food: "Bushaashe Garuwan Wolaytta beni keettatu giddon sikettida sayniyan shiiqiya Wolaytta qumaa.",
     // EN: The row of zigba trees at Bushaashe Garuwa, planted by Garedew, son of Alambo
-    zigba: "",
+    zigba: "Alambbo na'aa gidida Garedewun tokettida Bushaashe Garuwan de'iyaa zigaa mittatu yafaraa",
     // EN: The crocodile pond at Bushaashe Garuwa: three crocodiles in clear green water inside a walled pond with a sandy bank, set in the grass
-    crocodilePond: "",
+    crocodilePond: "Bushaashe Garuwan giddon hawulaashoy de'iyoo haattaa ollaa: maata giddon de'iyaanne shafetiyaa soho gidida direttida maata malatiya haattaa ollaa giddon heezzu hawulaashoti de'oosona.",
     // EN: The reading place at Bushaashe Garuwa: a thatched bamboo platform raised among the trees, reached by a bamboo stair, its posts painted red, black and yellow
-    readingPlace: "",
+    readingPlace: "Bushaashe Garuwan de'iyaa nabbabbiyoo sohuwaa: woyshan dadetti giigida wuygeenne maatan dadettida kaaray de'iyoo, mittatu giddon xoqqu giidi keexettida, woyshan giigida kiyiyoo xekkaay de'iyoonne, a mintti essida tuussati zo'o, karettanne bica qalamiyan tiyettidi alleeqido sohuwaa",
     // EN: The rock fountain at Bushaashe Garuwa: water falling in threads over a great dark rock ringed with stones, on the lawn among palms and hedges
-    rockFountain: "",
+    rockFountain: "Bushaashe Garuwan de'iyaa shuchchan giigida pulttuwaa: zambbaanne dadettida dirssatu giddon gita qooruwan de'iyaa baasuwan qeeri shuchchatun doodettida woggaa shuchchaa bollaara shaahettidi goggiyaa haattaa.",
     // EN: The small zoo at Bushaashe Garuwa: a young deer standing in the grass behind the wire fence, beside its wooden shelter
-    zoo: "",
+    zoo: "Bushaashe Garuwan de'iyaa wora do'ata naagiyoo guutta sohuwaa: shuban dirssaa guyye baggan ba mitta keettaa matan maata giddon eqqi mara dogiyaa",
     // EN: A rider in a light suit and a woven scarf on a grey horse dressed in traditional red-tasselled harness, crossing the lawn at Bushaashe Garuwa
-    horseRiding: "",
+    horseRiding: "Suufiya maayidi, dadettida sharbbiyaa qooriyan xaaxidi, beni zo'o carqqiyaara koorettida giraaca paraa toggidi Bushashe Garuwan qooruwan yuuyyiyaa paraa laaggiyaagaa",
     // EN: Two horses in traditional harness at Bushaashe Garuwa, with brass bridles, red and yellow tassels and an embroidered saddle cloth, standing on the lawn
-    horses: "",
+    horses: "Bushaashe Garuwaa giddon naasiyaa bixaalan bixaalettidda, zo'o bicanne siketti giigida kooraara de'iyaa qooruwan eqqida naa\"u parata.",
     // EN: The fish pond at Bushaashe Garuwa: fish swimming in clear green water in a stone-edged pond under a shade net, fed by a little waterfall
-    fishPond: "",
+    fishPond: "Bushaashe Garuwan de'iyaa molee de'iyoo haattaa ollaa: goggiyaa haattan kumiyaa, yuushoy shuchchan giigido direttidanne maata malatiyaa geeshsha haattaa giddon wadhdhiyaa moliyaa",
     // EN: The vegetable garden at Bushaashe Garuwa: neat beds of cabbage, carrots and lettuce, with maize and trees behind
-    vegetableGarden: "",
+    vegetableGarden: "Gushaahse Garuwan de'iyaa ataakiltte sohuwaa: Guyyeera badalaynne zaafeti de'iyoo xaatta santtaa, kaarootiyaa salaaxaa gadiyaa.",
     // EN: “Gulanttaa Keettaa” at Bushaashe Garuwa: a round traditional Wolaita house with a thatched dome, dark bands on its woven walls and a wooden door
-    gulanttaa: "",
+    gulanttaa: "Bushaashe Garuwan de'iyaa “Gulantta Keettaa”: maatan dadettida kaaray, sikettida godatu bollan kareta yafaratinne mitta penggee de'iyoo beni irzzo Wolaytta keettaa",
     // EN: Inside “Gulanttaa Keettaa”: a traditional bed of wooden poles covered with a hide, against a wall of bamboo and split wood
-    traditionalBed: "",
+    traditionalBed: "“Gulantta Keettaa” gidduwaa: woyshaappe merettidanne galbbay hiixettido beni arssaa",
     // EN: Inside “Gulanttaa Keettaa”: woven baskets, lids and fans in red and green, and rows of clay pots, hung on a woven wall
-    artifactsWall: "",
+    artifactsWall: "“Gulantta Keettaa” gidduwaa: godan kaqqettida zo'onne maatama datta qarcciitata, eta qum\"utanne, urqqaappe merettida shaateta",
     // EN: Inside “Gulanttaa Keettaa”: a large clay water pot, a colourful lidded basket and bundles wrapped in dried enset leaves
-    artifactsCorner: "",
+    artifactsCorner: "“Gulantta Keettaa” gidduwaa: wogga haattaa otuwaa, dumma dumma mereti de'iyoo qum\"uwaara de'iyaa masoofiyaanne uuttaa gobban giigida shidhdhaa",
     // EN: The memorial of Garedew Alambo at Bushaashe Garuwa: a bronze bust on a black column, before banana and enset plants
     garedewMemorial: "",
     // EN: A white pigeon with a feathered crest and grey-brown wings on the red earth at Bushaashe Garuwa
@@ -131,201 +131,201 @@ const page: DeepPartial<Dictionary> = {
     },
     home: {
       // EN: The Heart of the Grounds
-      title: "Sa'aa Wozanaa",
+      title: "Gibbiyawu Gul\"a Sohuwaa",
       // EN: The great traditional house, the fountain and the flags, set among the gardens.
-      desc: "Gita aada keettaa, pulttiya haaxxa pillaasaanne banddarata, ataakiltte giddon giigida.",
+      desc: "Gita beni keettaa, pulttuwaanne banddirata.",
     },
     gifaataa1: {
       // EN: Arriving for “Gifaataa”
       title: "Gifaataassi Yiyoogaa",
       // EN: Guests in traditional Wolaita dress walk through the heritage gate for the new year celebration.
-      desc: "Aada Wolaytta maoy maayida imttati laytta laammiya bonchchoos laata kera panggara geloosona.",
+      desc: "Wolaytta maayota maayida imattati ooratta layttaa baalaa bonchchiyoogaa penggiyaara gelishin.",
     },
     house: {
       // EN: The Traditional House
       title: "Beni Keettaa",
       // EN: A traditional Wolaita house with its thatched roof, beside the path and the Ge'ez letters of the name.
-      desc: "Maaxxan xammettida ba huupheera de'iya aada Wolaytta keettaa, ogiya matan qassi sunttaa abagida pilleera.",
+      desc: "Ogiyaanne amaaratto pitaletun xaafettida sunttaa matan de'iyaa maatan dadettida kaaray de'iyoo beni Wolaytta keettaa.",
     },
     gifaataa2: {
       // EN: Women of “Gifaataa”
       title: "Gifaataa Maccaasata",
       // EN: Women in white and red traditional Wolaita dress gather on the lawn during “Gifaataa”.
-      desc: "Boottaara zo'ora aada Wolaytta maoy maayida maccaasay Gifaataa wode maata sa'an shiiqidosona.",
+      desc: "Boottaanne zo'o wogaa Wolaytta maayota maayida maccaasati Gifaataa wodiyan yiidi maata sa'an shiiqi uttidogaa",
     },
     pavilions: {
       // EN: Thatched Pavilions
-      title: "Maaxxa Adaratata",
+      title: "Maata Daaseta",
       // EN: Shaded pavilions among the trees, where visitors rest and gather.
-      desc: "Mitta garssan de'iya kuuyiya adaratata, be'iyasati shemppiyonne shiiqiyo sohuwaa.",
+      desc: "Imattati shemppiyoonne shiiquyoo mittatu giddon de'iyaa kuway de'iyoo daaseta.",
     },
     gifaataa3: {
       // EN: Guests of the Celebration
-      title: "Bonchcho Imattata",
+      title: "Baalaa Imattata",
       // EN: Guests in traditional Wolaita attire stand together on the grounds during “Gifaataa”.
-      desc: "Aada Wolaytta maoy maayida imttati Gifaataa wode sa'iya bollan issippe eqqidosona.",
+      desc: "Wolaytta wogaa maayuwaa maayida imatti “Gifaataa” wodiyan gibbe giddon shiiqi eqqidosona",
     },
     gardens: {
       // EN: The Gardens
-      title: "Ataakiltte Sa'aa",
+      title: "Ataakiltte Gadiyaa",
       // EN: Green lawns, hedges and a play area for children and families.
-      desc: "Caala maata sa'aa, dirssanne na'atassinne so asatassi ka'iyo pillaasaa.",
+      desc: "Maata qooruwaa, dadattida dirssatanne naatinne so asay kaa'iyoo sohuwaa.",
     },
     enset: {
       // EN: Enset, the False Banana
-      title: "Uttiyaa (Emmaay)",
+      title: "Uuttaa",
       // EN: Enset growing on the grounds: the staple plant at the heart of Wolaita food and culture.
-      desc: "Sa'an dicciya uttiyaa: Wolaytta qumanne aada wozanappe de'iya waanna mittaa.",
+      desc: "Gibbe gade giddon mokkiyaa uuttaa: Wolaytta qumaanne wogaa waanna gidida meeze mittaa.",
     },
     food: {
       // EN: The Taste of Wolaita
-      title: "Wolaytta Qumaa Malata",
+      title: "Wolaytta Mal\"otettaa",
       // EN: Traditional Wolaita dishes, from enset to beans and greens, served in woven baskets inside a cultural house.
       desc: "Uttiaappe bakelaasi qassi ataakilttiyaassi de'iya aada Wolaytta qumata, aada keettaa giddon shashshamettida le'etan shiiqida.",
     },
     zigba: {
       // EN: The Zigba Trees
-      title: "Zigbaa Mittata",
+      title: "Zigaa Mittata",
       // EN: Zigba trees planted by Garedew, standing in a long, even line like a peaceful procession.
-      desc: "",
+      desc: "Garedewu tokkida zigbaa mittati, sarotettaa ogi maala kora adhdha, laappettida saasani eqqida.",
     },
     crocodilePond: {
       // EN: The Crocodile Pond
-      title: "",
+      title: "Gushire Haaxxa Pillaasaa",
       // EN: Crocodiles rest in clear water inside a walled, fenced pond, safe to watch from above.
-      desc: "",
+      desc: "Dirissida, penggiya de'iya haaxxa pillaasa giddon pooqiya haaxxan gushireti shemppoosona, bollaappe xaafotaara xeellana.",
     },
     readingPlace: {
       // EN: The Reading Place
-      title: "",
+      title: "Nabbabiya Pillaasaa",
       // EN: Up the bamboo stair, under the thatch and among the trees: a quiet place to read.
-      desc: "",
+      desc: "Woshsha goxxara bolla kida, maaxxa garssanne mittatu giddon: nabbabanawu cirim giida sohuwa.",
     },
     rockFountain: {
       // EN: The Rock Fountain
-      title: "",
+      title: "Shhaaha Gadiya Pillaasaa",
       // EN: Water falls in silver threads over a great dark rock on the lawn.
-      desc: "",
+      desc: "Maata sa'an de'iya gita karetta shhaaha bolla haaxxay birssaa qanqqa maala woysees.",
     },
     zoo: {
       // EN: The Small Zoo
-      title: "",
+      title: "Guutta Do'a Sa'aa",
       // EN: A young deer by its shelter: the zoo where children meet the animals of the grounds.
-      desc: "",
+      desc: "Ba shemppiyo sohuwa matan de'iya yaara marata: na'ati gadiya do'ataara gayttiyo do'a sa'aa.",
     },
     horseRiding: {
       // EN: A Ride Across the Lawn
-      title: "",
+      title: "Maata Sa'an Toppiyoogaa",
       // EN: A grey horse in its festive harness carries a rider past the thatched houses.
-      desc: "",
+      desc: "Bonchcho ooso kaydiyara de'iya boora paray maaxxa keettatu sinttan toppiisayssa kissees.",
     },
     horses: {
       // EN: The Horses of the Grounds
-      title: "",
+      title: "Gadiyaa Parata",
       // EN: Dressed in brass and red tassels, the way horses are adorned in Wolaita.
-      desc: "",
+      desc: "Biriisinne zo'o saasaran maayida, Wolaytta wogaan parati maayettiyo ogeena.",
     },
     fishPond: {
       // EN: The Fish Pond
-      title: "",
+      title: "Mole Haaxxa Pillaasaa",
       // EN: Fish swim in clear green water under a shade net, fed by a little waterfall.
-      desc: "",
+      desc: "Kuuyiya neta garssan, guutta shhaahay woytiya pooqiya caala haaxxan moleti yuuyoosona.",
     },
     vegetableGarden: {
       // EN: The Vegetable Garden
-      title: "",
+      title: "Ataakilttiya Sa'aa",
       // EN: Cabbage, carrots, lettuce and other vegetables grow in neat beds, with maize standing behind them.
-      desc: "",
+      desc: "Gulumbe, kaaroota, salaxennee ha'i ataakiltte lo'idi shaarida kelaan diroosona, masilay guyyeena eqqishshin.",
     },
     gulanttaa: {
       // EN: “Gulanttaa Keettaa”
-      title: "",
-      // EN: The second traditional house of the grounds: a thatched dome and woven walls banded in black.
-      desc: "",
+      title: "“Gulanttaa Keettaa”",
+      // EN: The second traditional house of the grounds: a thatched dome and woven walls banded in black.",
+      desc: "Gadiya laa'u aada keettaa: maaxxan xammettida huupheenne karettida aleeqee de'iya xammettida deesea.",
     },
     traditionalBed: {
       // EN: The Traditional Bed
-      title: "",
-      // EN: A bed of wooden poles under a hide, as the Wolaita slept in their houses.
-      desc: "",
+      title: "Aada Arsaa",
+      // EN: A bed of wooden poles under a hide, as the Wolaita slept in their houses.",
+      desc: "Wolayttati ba keettan hiixxiya maata garssan de'iya mitta qaqqa arsaa.",
     },
     artifactsWall: {
       // EN: Baskets and Clay Pots
-      title: "",
-      // EN: Woven baskets, lids and fans, and rows of clay pots: the household of a Wolaita home.
-      desc: "",
+      title: "Le'etanne Shaho Gidota",
+      // EN: Woven baskets, lids and fans, and rows of clay pots: the household of a Wolaita home.",
+      desc: "Shashshamettida le'eta, qofanniyaanne huuphe oggiyaa, qassikka shaho gidota saasani: Wolaytta keettaa miishshata.",
     },
     artifactsCorner: {
       // EN: The Water Pot and the Mesob
-      title: "",
-      // EN: A clay water pot, a bright lidded basket and bundles kept in dried enset leaves.
-      desc: "",
+      title: "Shaho Haaxxa Gidoonne Mesoba",
+      // EN: A clay water pot, a bright lidded basket and bundles kept in dried enset leaves.",
+      desc: "Shaho haaxxa gido, poqqiya qofanni de'iya le'etannee qorxxiya uttiya haayttan naagettida qofata.",
     },
     garedewMemorial: {
       // EN: The Memorial of Garedew
-      title: "",
-      // EN: A bronze bust of Garedew Alambo stands on the grounds he made flourish.
-      desc: "",
+      title: "Garedewu Naagettida Sohuwaa",
+      // EN: A bronze bust of Garedew Alambo stands on the grounds he made flourish.",
+      desc: "Garedewu Alamboba birnze misiley i diccissida gadiya bollan eqqiis.",
     },
     whitePigeon: {
       // EN: A Crested Pigeon
-      title: "",
-      // EN: A white pigeon with a crown of feathers, one of the birds kept on the grounds.
-      desc: "",
+      title: "Huuphe Maaya Holla Kafiyaa",
+      // EN: A white pigeon with a crown of feathers, one of the birds kept on the grounds.",
+      desc: "Guuphe maayiya de'iya bootta holla kafiyaa, gadiyan naagettida kafotatu issippaa.",
     },
     bananaBunch: {
       // EN: Bananas Ripening
-      title: "",
-      // EN: A heavy bunch of green bananas and the purple flower beneath it.
-      desc: "",
+      title: "Muziya Ayfe Maxxiyaogaa",
+      // EN: A heavy bunch of green bananas and the purple flower beneath it.",
+      desc: "Caala muziya masiyya gido garssan de'iya birssaa ayfe guupheelaa.",
     },
     papaya: {
       // EN: The Papaya Tree
-      title: "",
-      // EN: Papayas growing in a crown under the leaves, one already turning yellow.
-      desc: "",
+      title: "Paapaaya Mittaa",
+      // EN: Papayas growing in a crown under the leaves, one already turning yellow.",
+      desc: "Haayttatu garssan huuphe gido diro paapaayata, issi huuphey kase zaggisiis.",
     },
     youngTrees: {
       // EN: Young Trees
-      title: "",
-      // EN: New trees planted in rows: the grounds are still growing.
-      desc: "",
+      title: "Yaara Mittata",
+      // EN: New trees planted in rows: the grounds are still growing.",
+      desc: "Saasani tokkida ha'i yaara mittata: gadiyay ha'issikka dicci de'is.",
     },
     deer: {
       // EN: A Young Deer on the Lawn
-      title: "",
-      // EN: One of the animals of the grounds, ears up, listening in the green grass.
-      desc: "",
+      title: "Maata Sa'an Yaara Marata",
+      // EN: One of the animals of the grounds, ears up, listening in the green grass.",
+      desc: "Gadiya do'atatu issippaa, hayttata bolla kidi, caala maxxan siyi de'iyaayssi.",
     },
     farm: {
       // EN: The Four-Hectare Farm
-      title: "",
-      // EN: Bananas, enset and young trees stretch across four hectares of farmland around the farm building.
-      desc: "",
+      title: "Oyddu Hektaara Gadiyaa",
+      // EN: Bananas, enset and young trees stretch across four hectares of farmland around the farm building.",
+      desc: "Muziya, uttiyaanne yaara mittati gadiya keettaa yuuyidi oyddu hektaara gadiyaa bollan aadhdhiis.",
     },
     hallAndBar: {
       // EN: The Meeting Hall and the Bar
-      title: "",
-      // EN: The bamboo hall and the round, thatched bar stand side by side along the garden path.
-      desc: "",
+      title: "Shiiquwa Adaraanne Shaayee Keettaa",
+      // EN: The bamboo hall and the round, thatched bar stand side by side along the garden path.",
+      desc: "Woshsha adaraanne yuushu maaxxa shaayee keetti ataakiltte ogiya bollan issi baashan eqqidosona.",
     },
     bar: {
       // EN: The Bar
-      title: "",
-      // EN: A round, thatched house with glass walls and warm lanterns, looking out over the lawn and the flowers.
-      desc: "",
+      title: "Shaayee Keettaa",
+      // EN: A round, thatched house with glass walls and warm lanterns, looking out over the lawn and the flowers.",
+      desc: "Gilaasi deeseanne ho'o lampati de'iya, maata sa'anne shaawa xeelliya yuushu maaxxa keettaa.",
     },
     banana: {
       // EN: The Banana Grove
-      title: "",
-      // EN: Banana plants heavy with green fruit grow in rows in the red earth.
-      desc: "",
+      title: "Muziya Gadiiyaa",
+      // EN: Banana plants heavy with green fruit grow in rows in the red earth.",
+      desc: "Zo'o biittan saasani caala ayfen masiya muziya mittati diccoosona.",
     },
     herbs: {
       // EN: The Herb Garden
-      title: "",
-      // EN: Herbs for the kitchen and bright flowers grow side by side along the stone path.
-      desc: "",
+      title: "Sawiya Ataakiltte Sa'aa",
+      // EN: Herbs for the kitchen and bright flowers grow side by side along the stone path.",
+      desc: "Kichchiya woshshaataanne poqqiya shaawati shaaqi ogiya bollan issi baashan diccoosona.",
     },
     gardenPlant: {
       // EN: Colours of the Garden
@@ -360,7 +360,7 @@ const page: DeepPartial<Dictionary> = {
     vipDining: {
       // EN: VIP Sitting and Dining Room
       title: "VIP Uttiyonne Maana Keettaa",
-      // EN: Sofas, a marble-topped table, the kitchen counter and the fireplace.
+      // EN: Sofas, a marble-topped table, the kitchen counter and the fireplace.",
       desc: "Soofata, al'o zaaga dembbaa bolla gayida xarapheezaa, kichchiya koyronne tama sa'aa.",
     },
     vipKitchen: {
@@ -402,19 +402,19 @@ const page: DeepPartial<Dictionary> = {
     eventGathering: {
       // EN: A Meeting in the Open Air
       title: "Shiiquwa Carkkiya Sa'an",
-      // EN: A speaker addresses guests at a long table dressed in Wolaita cloth, in the shade of a tree.
+      // EN: A speaker addresses guests at a long table dressed in Wolaita cloth, in the shade of a tree.",
       desc: "Haasayiyaayssi mitta kuuyiyaan, Wolaytta maoy maayida adhdha xarapheezaa matan uttida imttatassi haasayees.",
     },
     eventCelebration: {
       // EN: A Day to Celebrate
       title: "Galatiyo Gallassa",
-      // EN: Friends clap around a cake and a great traditional loaf, with the thatched pavilion behind them.
+      // EN: Friends clap around a cake and a great traditional loaf, with the thatched pavilion behind them.",
       desc: "Laggati keekiyaanne gita aada muqqa yuuyidi kushiya baqoosona, guyyeena maaxxa adaraa de'ishshin.",
     },
     eventGames: {
       // EN: Games on the Lawn
       title: "Ka'uwaa Maata Sa'an",
-      // EN: After the meal, guests play and laugh together on the wide green lawn.
+      // EN: After the meal, guests play and laugh together on the wide green lawn.",
       desc: "Qumaappe guyyetan imttati aahuwaa caala maata sa'an ka'ididinne miiccidi issippe gayttidosona.",
     },
   },

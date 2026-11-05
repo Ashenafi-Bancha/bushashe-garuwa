@@ -112,7 +112,7 @@ const page: DeepPartial<Dictionary> = {
         },
         breakfast: {
           // EN: Traditional Breakfast
-          title: "Meeze Maallado Qan\"iyaa",
+          title: "Maallado Qan\"iyaa",
           // EN: Start each day with a Wolaita breakfast prepared by our kitchen.
           desc: "Issi issi gallassaa nu kushiinan giigida Wolaytta qan'iyaa miidi doommite.",
         },
