@@ -52,7 +52,8 @@ export const firstName = (user: StaffUser | null) => (user?.name.trim().split(/\
 
 /** One or two letters for the round picture of a person */
 export const initials = (name: string, email = '') => {
-  const words = name.trim().split(/\s+/).filter(Boolean);
+  // letters only (any script, Ge'ez too): "Almaz (owner)" gives AO, not A(
+  const words = name.trim().split(/\s+/).map((word) => word.replace(/[^\p{L}\p{N}]/gu, '')).filter(Boolean);
   const letters = words.length > 1 ? words[0]![0]! + words[words.length - 1]![0]! : (words[0] ?? email).slice(0, 2);
   return letters.toUpperCase();
 };
