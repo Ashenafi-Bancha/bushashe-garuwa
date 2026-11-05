@@ -36,7 +36,7 @@ const page: DeepPartial<Dictionary> = {
         title: "Qumaa Meezetuwaa",
         // EN: Taste authentic Wolaita cuisine
         sub: "Tumu Wolaytta qumaa miidi be'ite",
-        // EN: Gather around the communal table and experience traditional Wolaita cooking. Taste dishes prepared with ancient recipes, learn about the ingredients, and share a meal with our family.
+        // EN: Pick fresh food from the garden, cook it, and eat it together here on the grounds, as if you were at home. Gather around the communal table, taste dishes prepared with ancient recipes, learn about the ingredients and share a meal with our family: a day of the traditional, cultural life of Bushaashe Garuwa.
         desc: "Issipe shiiqidi Wolaytta wogaa qumaa katuwaa be'ite. Mayzza katuwaa ogiyan ka'ida quma mi be'ite, qimametubaa tamaarite, qassikka nu so asaara shiiqidi qumaa miite.",
         includes: [
           // EN: Welcome coffee ceremony

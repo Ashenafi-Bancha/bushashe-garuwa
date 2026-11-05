@@ -352,7 +352,7 @@ export const en = {
       eyebrow: 'Be Part of the Story',
       title: 'Experience Wolaita in Bushaashe Garuwa',
       items: {
-        food: { title: 'Traditional Food', desc: 'Taste authentic Wolaita dishes prepared with generational recipes.' },
+        food: { title: 'Traditional Food', desc: 'Taste authentic Wolaita dishes prepared with generational recipes. Visitors can pick food from the garden, cook it and eat it here, as at home.' },
         coffee: { title: 'Coffee Ceremony', desc: 'Experience the sacred Ethiopian coffee ritual in its cultural setting.' },
         performance: { title: 'Cultural Performance', desc: 'Watch traditional Wolaita music, song and ceremonial dance.' },
         tour: { title: 'Heritage Tour', desc: 'Walk through generations of history with an expert guide.' },
@@ -636,7 +636,7 @@ export const en = {
       food: {
         title: 'Cultural Food Experience',
         sub: 'Taste authentic Wolaita cuisine',
-        desc: 'Gather around the communal table and experience traditional Wolaita cooking. Taste dishes prepared with ancient recipes, learn about the ingredients, and share a meal with our family.',
+        desc: 'Pick fresh food from the garden, cook it, and eat it together here on the grounds, as if you were at home. Gather around the communal table, taste dishes prepared with ancient recipes, learn about the ingredients and share a meal with our family: a day of the traditional, cultural life of Bushaashe Garuwa.',
         includes: ['Welcome coffee ceremony', 'Guided cooking demonstration', 'Full traditional meal', 'Recipe card to take home'],
       },
       coffee: {
@@ -894,7 +894,7 @@ export const en = {
     hero: {
       eyebrow: 'Restaurant & Bar',
       title: 'Taste the Culture in Bushaashe Garuwa',
-      desc: 'Every dish is rooted in tradition, prepared with care, and served with Wolaita warmth.',
+      desc: 'Every dish is rooted in tradition, prepared with care, and served with Wolaita warmth. Pick food from the garden, cook it and eat it here, and feel at home in the traditional life of Bushaashe Garuwa.',
     },
     categories: { wolaita: 'Wolaita Cuisine', ethiopian: 'Ethiopian Cuisine', drinks: 'Drinks', special: 'Special Events' },
     menu: {

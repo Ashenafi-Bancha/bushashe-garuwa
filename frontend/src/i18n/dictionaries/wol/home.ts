@@ -313,7 +313,7 @@ const page: DeepPartial<Dictionary> = {
         food: {
           // EN: Traditional Food
           title: "Woga Qumaa",
-          // EN: Taste authentic Wolaita dishes prepared with generational recipes.
+          // EN: Taste authentic Wolaita dishes prepared with generational recipes. Visitors can pick food from the garden, cook it and eat it here, as at home.
           desc: "Beni katettan ka'ida Wolaytta tumu wogaa qumata ma be'a.",
         },
         coffee: {

@@ -19,7 +19,7 @@ const page: DeepPartial<Dictionary> = {
       eyebrow: "Katta Keettaanne Ushsha Keettaa",
       // EN: Taste the Culture in Bushaashe Garuwa
       title: "Wolaytta Bushaashe Garuwan Be'ite",
-      // EN: Every dish is rooted in tradition, prepared with care, and served with Wolaita warmth.
+      // EN: Every dish is rooted in tradition, prepared with care, and served with Wolaita warmth. Pick food from the garden, cook it and eat it here, and feel at home in the traditional life of Bushaashe Garuwa.
       desc: "Issi issi qumay wogan keten\"ida, akeekan giigidanne Wolaytta ufayssa mohuwaara shiiqiyaagaa.",
     },
     categories: {
