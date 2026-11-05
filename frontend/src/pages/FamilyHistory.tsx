@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { photos, picture } from '../assets/photos';
 import { useI18n } from '../i18n/I18nProvider';
 import PageHero from '../components/PageHero';
 import Band from '../components/Band';
@@ -39,17 +38,6 @@ export default function FamilyHistory() {
 
       <Band id="family" className="py-6 sm:py-10 lg:py-12 overflow-hidden">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-          {/* the family today */}
-          <figure className="bg-white rounded-[2rem] p-2.5 elev-1 mb-12">
-            <div className="rounded-[1.5rem] overflow-hidden aspect-[3/2] sm:aspect-[21/9]">
-              <img {...picture(photos.family)} alt={t.photos.family} loading="lazy" className="w-full h-full object-cover object-[center_30%]" />
-            </div>
-            <figcaption className="px-4 py-4 sm:px-5">
-              <span className="block font-display text-xl font-bold text-[#1E3A29]">{wol(t.photoCaptions.family.title)}</span>
-              <span className="block text-[#1E3A29]/65 text-sm mt-1">{wol(t.photoCaptions.family.desc)}</span>
-            </figcaption>
-          </figure>
-
           <p className="text-[#346A1A] text-sm font-bold mb-5">{a.lineage.hint}</p>
 
           {/* one card per generation, oldest first; its story opens right under its name */}

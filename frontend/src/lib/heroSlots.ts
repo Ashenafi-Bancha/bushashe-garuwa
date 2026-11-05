@@ -61,7 +61,7 @@ export const HERO_SLOTS: Record<HeroSlot, { label: string; path: string; photos:
   gallery: { label: 'Gallery', path: '/gallery', photos: [{ key: 'home', pos: 'object-center' }] },
   visit: { label: 'Visit', path: '/visit', photos: [{ key: 'gate', pos: 'object-[center_18%]' }] },
   contact: { label: 'Contact', path: '/contact', photos: [{ key: 'gardens', pos: 'object-center' }] },
-  about: { label: 'About', path: '/about', photos: [{ key: 'family', pos: 'object-[center_30%]' }] },
+  about: { label: 'About', path: '/about', photos: [{ key: 'house', pos: 'object-center' }] },
   family: { label: 'Family History', path: '/family-history', photos: [{ key: 'garedewMemorial', pos: 'object-[center_8%]' }] },
 };
 

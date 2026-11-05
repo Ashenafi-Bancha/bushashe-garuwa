@@ -127,7 +127,7 @@ function details(t: Dictionary): { key: string; to: string; photo: PhotoKey; tit
 const MORE: { key: 'stories' | 'gallery' | 'about'; to: string; photo: PhotoKey }[] = [
   { key: 'stories', to: '/heritage/stories', photo: 'eventElders' },
   { key: 'gallery', to: '/gallery', photo: 'zigba' },
-  { key: 'about', to: '/about', photo: 'family' },
+  { key: 'about', to: '/about', photo: 'house' },
 ];
 
 /**

@@ -37,7 +37,6 @@ const builtIn: { key: PhotoKey; cat: Category; span: string }[] = [
   { key: 'vipShower', cat: 'grounds', span: '' },
   { key: 'gardenPlant', cat: 'grounds', span: 'col-span-2' },
   { key: 'bird', cat: 'grounds', span: 'col-span-2' },
-  { key: 'family', cat: 'culture', span: 'col-span-2' },
   { key: 'deer', cat: 'grounds', span: 'sm:row-span-2' },
   { key: 'bar', cat: 'grounds', span: 'sm:row-span-2' },
   { key: 'farm', cat: 'grounds', span: 'col-span-2' },

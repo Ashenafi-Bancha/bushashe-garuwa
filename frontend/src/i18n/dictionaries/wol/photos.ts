@@ -98,8 +98,6 @@ const page: DeepPartial<Dictionary> = {
     farm: "",
     // EN: The bamboo meeting hall with a green roof beside the round thatched bar, along a stone path through the gardens of Bushaashe Garuwa
     hallAndBar: "",
-    // EN: Members of the Bushaashe family in traditional dress on the lawn at Bushaashe Garuwa
-    family: "",
     // EN: The bar at Bushaashe Garuwa: a round house with a thatched roof, glass walls and lanterns, on the lawn among flowers
     bar: "",
     // EN: Banana plants with a bunch of green bananas growing in the red earth at Bushaashe Garuwa
@@ -309,12 +307,6 @@ const page: DeepPartial<Dictionary> = {
       // EN: The Meeting Hall and the Bar
       title: "",
       // EN: The bamboo hall and the round, thatched bar stand side by side along the garden path.
-      desc: "",
-    },
-    family: {
-      // EN: The Family
-      title: "",
-      // EN: Members of the family that keeps Bushaashe Garuwa, in traditional dress on the lawn.
       desc: "",
     },
     bar: {
