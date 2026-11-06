@@ -211,7 +211,7 @@ const page: DeepPartial<Dictionary> = {
       // EN: The Small Zoo
       title: "Do'ata Naagiyoo Guutta Sohuwaa",
       // EN: A young deer by its shelter: the zoo where children meet the animals of the grounds.
-      desc: "Ba keettaa matan eqqida mara dogiyaa: naati gibbiyan de'iyaa do'ata be'iyoo 'do\'ata naagiyoo sohuwaa'.",
+      desc: "Ba keettaa matan eqqida mara dogiyaa: naati gibbiyan de'iyaa do'ata be'iyoo 'do'ata naagiyoo sohuwaa'.",
     },
     horseRiding: {
       // EN: A Ride Across the Lawn
@@ -240,91 +240,91 @@ const page: DeepPartial<Dictionary> = {
     gulanttaa: {
       // EN: “Gulanttaa Keettaa”
       title: "“Gulantta Keettaa”",
-      // EN: The second traditional house of the grounds: a thatched dome and woven walls banded in black.",
+      // EN: The second traditional house of the grounds: a thatched dome and woven walls banded in black.
       desc: "Gibbe giddon naa\"antto beni keettaa: maata qum\"oynne karetta yafaratun alleeqida dadettida godaa.",
     },
     traditionalBed: {
       // EN: The Traditional Bed
       title: "Wogaa Arssaa",
-      // EN: A bed of wooden poles under a hide, as the Wolaita slept in their houses.",
+      // EN: A bed of wooden poles under a hide, as the Wolaita slept in their houses.
       desc: "Wolaytta asay beni xiskkiyoo, galbban kamettida mittaa arssaa.",
     },
     artifactsWall: {
       // EN: Baskets and Clay Pots
       title: "Samppatanne Urqqa Miishshata",
-      // EN: Woven baskets, lids and fans, and rows of clay pots: the household of a Wolaita home.",
+      // EN: Woven baskets, lids and fans, and rows of clay pots: the household of a Wolaita home.
       desc: "Wolaytta so giddo miishshata: masoofeta, samppata, shaateta, goseta, buleta, zazzareta, pittiyoobatanne hara hara cora miishshata.",
     },
     artifactsCorner: {
       // EN: The Water Pot and the Mesob
       title: "Haattaa Otuwaanne Masoofiyaa",
-      // EN: A clay water pot, a bright lidded basket and bundles kept in dried enset leaves.",
+      // EN: A clay water pot, a bright lidded basket and bundles kept in dried enset leaves.
       desc: "Haattaa otuwaa, alleeqida masoofiyaanne uuttaa gobbaappe merettida uttiyoo shidhdhaa.",
     },
     garedewMemorial: {
       // EN: The Memorial of Garedew
       title: "Garedewu Hassayayiyoogaa",
-      // EN: A bronze bust of Garedew Alambo stands on the grounds he made flourish.",
+      // EN: A bronze bust of Garedew Alambo stands on the grounds he made flourish.
       desc: "Garedewu Alambbossi naasiyan giigida hawulttee eti puulayido gibbe giddon eqqiis.",
     },
     whitePigeon: {
       // EN: A Crested Pigeon
       title: "Zawudee De'iyoo Haraphphiyoo",
-      // EN: A white pigeon with a crown of feathers, one of the birds kept on the grounds.",
+      // EN: A white pigeon with a crown of feathers, one of the birds kept on the grounds.
       desc: "Gibbe giddon naagettiyaa kafotuppe issuwaa gidida, qefiyaa zawudee de'iyoo bootta haraphphiyoo.",
     },
     bananaBunch: {
       // EN: Bananas Ripening
       title: "Ka'iyaa Muuzziyaa",
-      // EN: A heavy bunch of green bananas and the purple flower beneath it.",
+      // EN: A heavy bunch of green bananas and the purple flower beneath it.
       desc: "Maata malatiyaa muuziyan deexettidanne garssaara ochcha teeraa milatiyaa ciishshay de'iyoo muuziyaa mittaa.",
     },
     papaya: {
       // EN: The Papaya Tree
       title: "Paapaayiyaa Mittaa",
-      // EN: Papayas growing in a crown under the leaves, one already turning yellow.",
+      // EN: Papayas growing in a crown under the leaves, one already turning yellow.
       desc: "Zawudiyaadan bonccuwaappe garssaara diccida paapaayiyaa; issi ayfee koyrottidi ka'iiddi de'ees.",
     },
     youngTrees: {
       // EN: Young Trees
       title: "Yelaga Mittata",
-      // EN: New trees planted in rows: the grounds are still growing.",
+      // EN: New trees planted in rows: the grounds are still growing.
       desc: "Yafaran tokettida ooratta mittata: gibbee hanno gakkanawu haa haa puulattiiddi de'ees.",
     },
     deer: {
       // EN: A Young Deer on the Lawn
       title: "Maatan Eqqida Mara Dogiyoo",
-      // EN: One of the animals of the grounds, ears up, listening in the green grass.",
+      // EN: One of the animals of the grounds, ears up, listening in the green grass.
       desc: "Gibbe giddon de'iyaa do'atuppe issuwaa gidida dogiyaa, hayttaa essada ezggaydda de'awusu.",
     },
     farm: {
       // EN: The Four-Hectare Farm
       title: "Oyddu Hektaare Gadiyaa",
-      // EN: Bananas, enset and young trees stretch across four hectares of farmland around the farm building.",
+      // EN: Bananas, enset and young trees stretch across four hectares of farmland around the farm building.
       desc: "Muezee, uttaynne yelaga mittati oyddu hektaare gidiya gadiyan keettaa yuuyyidi muleera micetti uttidosona.",
     },
     hallAndBar: {
       // EN: The Meeting Hall and the Bar
       title: "Shiiquwa Gutaraanne Shaye Keettaa",
-      // EN: The bamboo hall and the round, thatched bar stand side by side along the garden path.",
+      // EN: The bamboo hall and the round, thatched bar stand side by side along the garden path.
       desc: "Ataakiltte sohuwaa efiyaa ogiyaa matan eqqida woyshan keexettida gutaraanne maatan dadettida kaaray de'iyoo irzzo shaye keettaa.",
     },
     bar: {
       // EN: The Bar
       title: "Shaye Keettaa",
-      // EN: A round, thatched house with glass walls and warm lanterns, looking out over the lawn and the flowers.",
+      // EN: A round, thatched house with glass walls and warm lanterns, looking out over the lawn and the flowers.
       desc: "Herega godaynne pholqqattiyaa xomppeti de'iyoo irzzotida maata kaaray de'iyoo keettaa. Dembbaakkonne ciishshatukko simmidi eqqiis.",
     },
     banana: {
       // EN: The Banana Grove
       title: "Muuziya Goshshaa",
-      // EN: Banana plants heavy with green fruit grow in rows in the red earth.",
+      // EN: Banana plants heavy with green fruit grow in rows in the red earth.
       desc: "Maatama ayfiyaa tookkida muuziyaa mittati zo'o biittaa bollan, yafaran mokkidosona.",
     },
     herbs: {
       // EN: The Herb Garden
       title: "Sawiya Mittatu Sohuwaa",
-      // EN: Herbs for the kitchen and bright flowers grow side by side along the stone path.",
+      // EN: Herbs for the kitchen and bright flowers grow side by side along the stone path.
       desc: "Kichchiya woshshaataanne poqqiya shaawati shaaqi ogiya bollan issi baashan diccoosona.",
     },
     gardenPlant: {
@@ -360,7 +360,7 @@ const page: DeepPartial<Dictionary> = {
     vipDining: {
       // EN: VIP Sitting and Dining Room
       title: "VIP Uttiyonne Miyoo Kifiliyaa",
-      // EN: Sofas, a marble-topped table, the kitchen counter and the fireplace.",
+      // EN: Sofas, a marble-topped table, the kitchen counter and the fireplace.
       desc: "Soofata, ibinabaradiyan kamettida xarapheezzaa, kushiinan de'iyaa miishshata dooriyo sohuwaanne tama eettiyoo sohuwaa.",
     },
     vipKitchen: {
@@ -402,19 +402,19 @@ const page: DeepPartial<Dictionary> = {
     eventGathering: {
       // EN: A Meeting in the Open Air
       title: "Kareera Carkkiyaasan Yaa'iyoogaa",
-      // EN: A speaker addresses guests at a long table dressed in Wolaita cloth, in the shade of a tree.",
+      // EN: A speaker addresses guests at a long table dressed in Wolaita cloth, in the shade of a tree.
       desc: "Mittaa kuwaa giddon Wolaytta carqqiyan kamettida adussa xarapheezzaa yuushuwan uttida imattatussi haasayiiddi de'ees.",
     },
     eventCelebration: {
       // EN: A Day to Celebrate
       title: "Galatiyo Gallassaa",
-      // EN: Friends clap around a cake and a great traditional loaf, with the thatched pavilion behind them.",
+      // EN: Friends clap around a cake and a great traditional loaf, with the thatched pavilion behind them.
       desc: "Laggeti keekkiyaanne wogga daabbuwaa yuushuwan kushiyaa baqqiiddi; guyye baggaara maata keettay de'ees.",
     },
     eventGames: {
       // EN: Games on the Lawn
       title: "Qooruwan Kaassaa",
-      // EN: After the meal, guests play and laugh together on the wide green lawn.",
+      // EN: After the meal, guests play and laugh together on the wide green lawn.
       desc: "Qumaappe guyyiyan, imattati aaho qooruwan issippe kaa'oosonanne miiccoosona.",
     },
   },
