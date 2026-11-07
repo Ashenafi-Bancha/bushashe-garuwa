@@ -163,6 +163,13 @@ describe('the forms, on the API', () => {
     assert.deepEqual(await fieldsOf(res), ['name', 'phone']);
   });
 
+  it('says what is wrong with an optional field, not just "Invalid input"', async () => {
+    const res = await send('/v1/contact', { name: 'Abebe Kebede', email: 'abebe@example.com', phone: '-------', message: 'Hello' });
+    const details = ((await res.json()) as any).error.details;
+    assert.equal(details[0].field, 'phone');
+    assert.match(details[0].message, /phone number/);
+  });
+
   it('keeps phone numbers in one form', async () => {
     const res = await send('/v1/visits', { name: 'Abebe Kebede', phone: '0912 345 678', date: inTwoWeeks, visitors: '2' });
     assert.equal(res.status, 201);

@@ -35,11 +35,17 @@ function ruled(check: (value: string) => Problem | null, limits: { max?: number;
 /** Optional: missing, null or empty (after cleaning) becomes undefined */
 function optional<T extends z.ZodType<string, string>>(schema: T) {
   return z
-    .union([z.null(), z.string()])
+    .union([z.null(), z.string()], { error: 'Please write text here' })
     .optional()
-    .transform((value) => (value == null ? '' : clean(value)))
-    .pipe(z.union([z.literal(''), schema]))
-    .transform((value) => (value === '' ? undefined : value));
+    .transform((value, ctx): z.output<T> | undefined => {
+      const text = value == null ? '' : clean(value);
+      if (text === '') return undefined;
+      // when it is written, the field's own rule applies, with its own message (not a vague "Invalid input")
+      const checked = schema.safeParse(text);
+      if (checked.success) return checked.data;
+      for (const issue of checked.error.issues) ctx.addIssue({ code: 'custom', message: issue.message });
+      return z.NEVER;
+    });
 }
 
 /** Required text with a length limit */
