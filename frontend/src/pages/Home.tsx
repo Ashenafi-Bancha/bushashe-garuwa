@@ -1,10 +1,13 @@
 import { lazy, Suspense, useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { photoFocus, photos, picture, type PhotoKey } from '../assets/photos';
-import { useI18n } from '../i18n/I18nProvider';
+import { fmt, useI18n } from '../i18n/I18nProvider';
 import { heroPhotos, useSiteMedia } from '../lib/media';
 import QuickLinks, { GuestHouseSoon } from '../components/QuickLinks';
 import CulturalFoodDates from '../components/CulturalFoodDates';
+import UpcomingEvents from '../components/UpcomingEvents';
+import { eventStart } from '../lib/eventTime';
+import { scrollToHash } from '../lib/motion';
 import CardGrid from '../components/CardGrid';
 import { useSiteEvents } from '../lib/events';
 import HomeContact from '../components/HomeContact';
@@ -200,6 +203,8 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                 <p className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] lg:text-white lg:[text-shadow:0_2px_14px_rgba(0,0,0,0.45)] leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
                 <p className="text-[#1E3A29]/70 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
               </div>
+              {/* the call to the next events: warm orange, a live dot and the next date; it leads to the events below */}
+              <HeroEventsButton events={siteEvents} />
               <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
                 <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>
@@ -231,6 +236,9 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             ))}
           </ul>
         </section>
+
+        {/* ═════════ UPCOMING EVENTS: the heading types itself; each event an advertisement with a countdown ═════════ */}
+        <UpcomingEvents events={siteEvents} />
 
         {/* ═════════ EVERY PART OF THE SITE, in order, the Guest House (coming soon) last ═════════ */}
         <QuickLinks />
@@ -280,5 +288,41 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
         <StickyBook />
       </main>
     </>
+  );
+}
+
+/** "See the upcoming events" in the opening: scrolls to the events below, or opens the Events page when none is announced */
+function HeroEventsButton({ events }: { events: ReturnType<typeof useSiteEvents>['events'] }) {
+  const { t, lang } = useI18n();
+  const ad = t.events.ad;
+  const next = events[0];
+  const inner = (
+    <>
+      <span className="event-live-dot" aria-hidden="true" />
+      <span className="flex-1">{ad.heroCta}</span>
+      {next && (
+        <span className="btn-hero-event-date">
+          {fmt(ad.heroNext, {
+            date: eventStart(next).toLocaleDateString(lang === 'am' ? 'am-ET' : 'en-GB', { timeZone: 'Africa/Addis_Ababa', day: 'numeric', month: 'short' }),
+          })}
+          <span aria-hidden="true" className="btn-explore-arrow">→</span>
+        </span>
+      )}
+      {!next && <span aria-hidden="true" className="btn-explore-arrow pr-2">→</span>}
+    </>
+  );
+  return next ? (
+    <a
+      href="#upcoming"
+      onClick={(event) => {
+        event.preventDefault();
+        scrollToHash('#upcoming');
+      }}
+      className="btn-hero-event self-start"
+    >
+      {inner}
+    </a>
+  ) : (
+    <Link to="/events" className="btn-hero-event self-start">{inner}</Link>
   );
 }

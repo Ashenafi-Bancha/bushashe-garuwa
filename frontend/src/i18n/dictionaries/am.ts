@@ -743,6 +743,23 @@ export const am: Dictionary = {
     categories: { all: 'ሁሉም', food: 'ምግብ', culture: 'ባህል', education: 'ትምህርት', music: 'ሙዚቃ', community: 'ማኅበረሰብ' },
     noneYet: 'በአሁኑ ጊዜ የተገለጸ ቀን የለም። የባህላዊ ምግብ ዝግጅቱ በወር ሁለት ጊዜ ይካሄዳል፤ ቀጣዮቹ ቀናት እንደተወሰኑ እዚህ ይታያሉ፣ ወይም ደውለው ይጠይቁን።',
     noneInCategory: 'በአሁኑ ጊዜ የዚህ ዓይነት ዝግጅት አልተገለጸም።',
+    /** an event drawn as an advertisement, with a countdown (components/EventAd.tsx), and the home page's events button */
+    ad: {
+      eyebrow: 'በቅርቡ',
+      startsIn: 'ለመጀመር የቀረው',
+      days: 'ቀናት',
+      hours: 'ሰዓታት',
+      minutes: 'ደቂቃዎች',
+      seconds: 'ሰከንዶች',
+      live: 'አሁን እየተካሄደ ነው',
+      dontMiss: 'እንዳያመልጥዎ',
+      featured: 'ተለይቶ የቀረበ',
+      where: 'ቡሻሼ ጋሯ፣ ዳሞት ሶሬ',
+      placesOf: 'ከ{total} ቦታዎች {left} ቀርተዋል',
+      seeAll: 'ሁሉንም ዝግጅቶች ይመልከቱ',
+      heroCta: 'መጪ ዝግጅቶችን ይመልከቱ',
+      heroNext: 'ቀጣዩ፦ {date}',
+    },
   },
 
   meeting: {

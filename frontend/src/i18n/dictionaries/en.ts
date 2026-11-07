@@ -745,6 +745,23 @@ export const en = {
     categories: { all: 'All', food: 'Food', culture: 'Culture', education: 'Education', music: 'Music', community: 'Community' },
     noneYet: 'No dates are announced right now. The cultural food evening is held twice a month: the next dates will appear here as soon as they are set, or call us to hear about them.',
     noneInCategory: 'No events of this kind are announced right now.',
+    /** an event drawn as an advertisement, with a countdown (components/EventAd.tsx), and the home page's events button */
+    ad: {
+      eyebrow: 'Coming Up',
+      startsIn: 'Starts in',
+      days: 'Days',
+      hours: 'Hours',
+      minutes: 'Minutes',
+      seconds: 'Seconds',
+      live: 'Happening now',
+      dontMiss: "Don't miss it",
+      featured: 'Featured',
+      where: 'Bushaashe Garuwa, Damot Sore',
+      placesOf: '{left} of {total} places left',
+      seeAll: 'See all events',
+      heroCta: 'See the upcoming events',
+      heroNext: 'Next: {date}',
+    },
   },
 
   meeting: {

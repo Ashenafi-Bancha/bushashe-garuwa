@@ -144,6 +144,36 @@ const page: DeepPartial<Dictionary> = {
     noneYet: "",
     // EN: No events of this kind are announced right now.
     noneInCategory: "",
+    ad: {
+      // EN: Coming Up
+      eyebrow: "",
+      // EN: Starts in
+      startsIn: "",
+      // EN: Days
+      days: "",
+      // EN: Hours
+      hours: "",
+      // EN: Minutes
+      minutes: "",
+      // EN: Seconds
+      seconds: "",
+      // EN: Happening now
+      live: "",
+      // EN: Don't miss it
+      dontMiss: "",
+      // EN: Featured
+      featured: "",
+      // EN: Bushaashe Garuwa, Damot Sore
+      where: "",
+      // EN: {left} of {total} places left
+      placesOf: "",
+      // EN: See all events
+      seeAll: "",
+      // EN: See the upcoming events
+      heroCta: "",
+      // EN: Next: {date}
+      heroNext: "",
+    },
   },
 };
 
