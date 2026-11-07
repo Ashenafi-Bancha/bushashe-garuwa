@@ -18,14 +18,59 @@ export const API_BASE = (import.meta.env.VITE_API_URL as string | undefined)?.re
 export const apiEnabled = API_BASE !== '';
 
 export class ApiError extends Error {
+  /** the fields the API refused, when it names them */
+  readonly fields: { field: string; message: string }[];
+  /** anything else the API added, for example { placesLeft: 3 } */
+  readonly details: Record<string, unknown>;
+
   constructor(
     readonly status: number,
     readonly code: string,
     message: string,
-    readonly fields: { field: string; message: string }[] = [],
+    details: unknown = [],
   ) {
     super(message);
+    this.fields = Array.isArray(details)
+      ? details.filter((d): d is { field: string; message: string } => typeof d?.field === 'string' && typeof d?.message === 'string')
+      : [];
+    this.details = details && typeof details === 'object' && !Array.isArray(details) ? (details as Record<string, unknown>) : {};
+    // "Some fields need attention" says too little: name each field and what is wrong with it
+    if (this.fields.length > 0) this.message = this.fields.map((f) => `${fieldLabel(f.field)}: ${f.message}`).join(' · ');
   }
+}
+
+const FIELD_WORDS: Record<string, string> = {
+  name: 'Name',
+  email: 'Email',
+  phone: 'Phone',
+  message: 'Message',
+  date: 'Date',
+  time: 'Time',
+  guests: 'Guests',
+  visitors: 'Visitors',
+  capacity: 'How many guests fit',
+  partner: 'Partner',
+  photo: 'Photo',
+  desc: 'Description',
+  title: 'Heading',
+  origin: 'Where they are from',
+  words: 'Their words',
+  rating: 'Stars',
+  value: 'Text',
+  current: 'Current password',
+  next: 'New password',
+  password: 'Password',
+  role: 'Role',
+};
+const LANGUAGES: Record<string, string> = { en: 'English', am: 'Amharic', wol: 'Wolaytta' };
+
+/** "translations.am.name" → "Name (Amharic)" */
+function fieldLabel(path: string): string {
+  const parts = path.split('.').filter((part) => part !== 'translations' && !/^\d+$/.test(part));
+  const language = parts.find((part) => part in LANGUAGES);
+  const word = [...parts].reverse().find((part) => !(part in LANGUAGES)) ?? language ?? path;
+  const label = FIELD_WORDS[word] ?? word.charAt(0).toUpperCase() + word.slice(1);
+  return language && word !== language ? `${label} (${LANGUAGES[language]})` : language ? `${FIELD_WORDS.words} (${LANGUAGES[language]})` : label;
 }
 
 async function post<T>(path: string, body: unknown): Promise<T | null> {

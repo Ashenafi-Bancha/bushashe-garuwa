@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ApiError } from '../../lib/api';
+import { LIMITS, checkNewPassword, englishProblem } from '../../lib/rules';
 import { adminApi } from '../api/adminClient';
 import { useAdminSession } from '../auth/AdminSession';
 import { Icon } from './icons';
@@ -7,7 +8,7 @@ import { Notice } from './ui';
 
 /** How safe a new password looks, from its length and the kinds of characters in it */
 function strength(password: string): { score: 0 | 1 | 2 | 3; label: string } {
-  if (password.length < 10) return { score: 0, label: password ? 'Too short: at least 10 characters' : 'At least 10 characters' };
+  if (password.length < LIMITS.passwordMin) return { score: 0, label: password ? `Too short: at least ${LIMITS.passwordMin} characters` : `At least ${LIMITS.passwordMin} characters` };
   const kinds = [/[a-z]/, /[A-Z]/, /\d/, /[^a-zA-Z\d]/].filter((r) => r.test(password)).length;
   if (password.length >= 14 && kinds >= 3) return { score: 3, label: 'Strong' };
   if (password.length >= 12 || kinds >= 3) return { score: 2, label: 'Good' };
@@ -49,7 +50,7 @@ function PasswordField({ label, value, onChange, autoComplete }: { label: string
  * other device is signed out; this one stays signed in.
  */
 export default function PasswordForm({ currentLabel = 'Current password', onDone }: { currentLabel?: string; onDone?: () => void }) {
-  const { token, setUser } = useAdminSession();
+  const { token, setUser, email } = useAdminSession();
   const [current, setCurrent] = useState('');
   const [next, setNext] = useState('');
   const [again, setAgain] = useState('');
@@ -61,8 +62,11 @@ export default function PasswordForm({ currentLabel = 'Current password', onDone
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    if (next !== again) return setError('The two new passwords are not the same');
-    if (next.length < 10) return setError('Choose a password of at least 10 characters');
+    // the same rules as the API (src/lib/rules.ts)
+    if (current === '') return setError(`Please write your ${currentLabel.toLowerCase()}.`);
+    const problem = checkNewPassword(next, current, email);
+    if (problem) return setError(`${englishProblem(problem, { max: LIMITS.passwordMax })}.`);
+    if (next !== again) return setError(`${englishProblem('passwordsDiffer')}.`);
     setBusy(true);
     try {
       setUser(await adminApi.changePassword(token, current, next));

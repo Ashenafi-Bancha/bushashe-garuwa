@@ -1,5 +1,22 @@
 import { z } from 'zod';
-import { optionalText, text } from '../shared/schemas.js';
+import { CAPACITY_MAX, LIMITS, checkEventDate, checkEventTime, checkLine, clean, englishProblem } from '../shared/rules.js';
+import { optionalLine, optionalText } from '../shared/schemas.js';
+
+/** The event's name: one line */
+const EventName = z
+  .string({ error: 'Please fill this in' })
+  .transform(clean)
+  .superRefine((value, ctx) => {
+    const problem = checkLine(value, LIMITS.eventName);
+    if (problem) ctx.addIssue({ code: 'custom', message: englishProblem(problem, { max: LIMITS.eventName }) });
+  });
+
+/** YYYY-MM-DD; a new event may not be in the past (in Ethiopia) */
+const EventDate = (isNew: boolean) =>
+  z.string().superRefine((value, ctx) => {
+    const problem = checkEventDate(value, isNew);
+    if (problem) ctx.addIssue({ code: 'custom', message: englishProblem(problem) });
+  });
 
 /** Matches the filters on the Events page */
 export const EventCategory = z.enum(['food', 'culture', 'education', 'music', 'community']);
@@ -9,14 +26,14 @@ export const EventAvailability = z.enum(['open', 'limited', 'full']);
 
 /** The words for one language. English is required; the others may be left empty and fall back to it. */
 const Translation = z.object({
-  name: text(160),
-  desc: optionalText(2000),
+  name: EventName,
+  desc: optionalText(LIMITS.eventDesc),
 });
 
 const OptionalTranslation = z
   .object({
-    name: optionalText(160),
-    desc: optionalText(2000),
+    name: optionalLine(LIMITS.eventName),
+    desc: optionalText(LIMITS.eventDesc),
   })
   .optional()
   // an entry with nothing in it is the same as no entry at all
@@ -28,33 +45,43 @@ export const EventTranslations = z.object({
   wol: OptionalTranslation,
 });
 
+/** Changing an event: any real day, so an old event can still be put right */
 export const SaveEvent = z.object({
-  date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'Use the format YYYY-MM-DD'),
+  date: EventDate(false),
+  /** "17:00", "17:00 – 21:00", "8:00 AM - 2:00 PM": the countdown on the website starts from it */
   time: z
-    .string()
-    .trim()
-    .max(40)
+    .union([z.null(), z.string()])
     .optional()
+    .transform((value) => clean(value ?? ''))
+    .superRefine((value, ctx) => {
+      const problem = checkEventTime(value);
+      if (problem) ctx.addIssue({ code: 'custom', message: englishProblem(problem, { max: LIMITS.eventTime }) });
+    })
     .transform((value) => (value ? value : undefined)),
   category: EventCategory,
   availability: EventAvailability.default('open'),
   featured: z.boolean().default(false),
   published: z.boolean().default(true),
+  /** key of a photo in the website's photo registry, for example "food" */
   photo: z
-    .string()
-    .trim()
-    .max(40)
+    .union([z.null(), z.string().trim().max(40).regex(/^[A-Za-z0-9]*$/, 'Choose a photo from the list')])
     .optional()
     .transform((value) => (value ? value : undefined)),
   /** Partner hosting the event with us, for example "Lidya Cultural Food" */
-  partner: optionalText(120),
+  partner: optionalLine(LIMITS.partner),
   /** People may reserve a place for this event */
   bookable: z.boolean().default(false),
   /** How many guests fit; leave empty for no limit */
-  capacity: z.coerce.number().int().min(1).max(5000).nullish().transform((value) => value ?? null),
+  capacity: z
+    .union([z.null(), z.literal(''), z.coerce.number({ error: 'Please write a whole number' }).int('Please write a whole number').min(1, 'Please write at least 1').max(CAPACITY_MAX, `Please write ${CAPACITY_MAX} or fewer`)])
+    .optional()
+    .transform((value) => (typeof value === 'number' ? value : null)),
   translations: EventTranslations,
 });
 export type SaveEvent = z.infer<typeof SaveEvent>;
+
+/** Adding an event: its day must not have passed */
+export const CreateEvent = SaveEvent.extend({ date: EventDate(true) });
 
 export const EventQuery = z.object({
   /** staff only: also show events that are not published, and past ones */

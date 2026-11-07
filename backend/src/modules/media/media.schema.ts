@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { LIMITS, checkLine, clean } from '../shared/rules.js';
 
 /**
  * A media image is a photograph staff added from the admin area.
@@ -38,8 +39,12 @@ export const GalleryCategory = z.enum(['grounds', 'culture']);
 export type GalleryCategory = z.infer<typeof GalleryCategory>;
 
 const Caption = z.object({
-  title: z.string().trim().max(120).default(''),
-  desc: z.string().trim().max(600).default(''),
+  title: z
+    .string()
+    .transform(clean)
+    .pipe(z.string().max(LIMITS.photoTitle, `Please keep it to ${LIMITS.photoTitle} characters or fewer`).refine((value) => checkLine(value, LIMITS.photoTitle, false) !== 'oneLine', 'Please keep this on one line'))
+    .default(''),
+  desc: z.string().transform(clean).pipe(z.string().max(LIMITS.photoDesc, `Please keep it to ${LIMITS.photoDesc} characters or fewer`)).default(''),
 });
 
 /** The heading and description shown with the photo, in each language; English is the fallback */

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { GUESTS_MAX, LIMITS, checkEmail, checkName, checkPhone, checkText, checkWholeNumber, isRealDate } from '../../lib/rules';
 import { adminApi } from '../api/adminClient';
 import { BOOKING_STATUS_LABELS, type Booking, type BookingStatus } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
@@ -14,6 +15,7 @@ import {
   IconActions,
   ListSkeleton,
   Notice,
+  firstProblem,
   Pager,
   SearchBox,
   useDebounced,
@@ -36,9 +38,21 @@ export default function BookingsView({ pendingCount }: { pendingCount?: number }
     [query, status],
   );
 
+  const [formError, setFormError] = useState('');
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!draft) return;
+    // the same rules as the API (src/lib/rules.ts); the API also checks the event has room
+    const guestsProblem = checkWholeNumber(draft.guests, 1, GUESTS_MAX);
+    const problem = firstProblem([
+      ['Name', checkName(draft.name)],
+      ['Phone', checkPhone(draft.phone)],
+      ['Email', checkEmail(draft.email, false)],
+      ['Guests', guestsProblem && { problem: guestsProblem, min: 1, max: GUESTS_MAX }],
+      ['Note', checkText(draft.message, LIMITS.bookingMessage, false) && { problem: 'tooLong', max: LIMITS.bookingMessage }],
+    ]);
+    setFormError(problem);
+    if (problem) return;
     const { id, guests, ...values } = draft;
     if (await act(id, () => adminApi.updateBooking(token, id, { ...values, guests: Number(guests) }), 'Could not save the changes')) setDraft(null);
   };
@@ -112,25 +126,26 @@ export default function BookingsView({ pendingCount }: { pendingCount?: number }
                 <div className="text-[11px] text-[var(--a-faint)] mt-2.5">Booked {timeAgo(booking.createdAt)}</div>
 
                 {draft?.id === booking.id ? (
-                  <form onSubmit={save} className="mt-4 rounded-2xl bg-[var(--a-bg)] p-4 sm:p-5 space-y-3">
+                  <form onSubmit={save} noValidate className="mt-4 rounded-2xl bg-[var(--a-bg)] p-4 sm:p-5 space-y-3">
                     <div className="grid sm:grid-cols-2 gap-3">
                       <EditField label="Name">
-                        <input required value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} className="admin-field" />
+                        <input required maxLength={LIMITS.name} autoComplete="off" value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} className="admin-field" />
                       </EditField>
                       <EditField label="Phone">
-                        <input required type="tel" value={draft.phone} onChange={(e) => setDraft({ ...draft, phone: e.target.value })} className="admin-field" />
+                        <input required type="tel" inputMode="tel" maxLength={LIMITS.phone} value={draft.phone} onChange={(e) => setDraft({ ...draft, phone: e.target.value })} className="admin-field" />
                       </EditField>
                       <EditField label="Email">
-                        <input type="email" value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} className="admin-field" />
+                        <input type="email" inputMode="email" maxLength={LIMITS.email} value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} className="admin-field" />
                       </EditField>
                       <EditField label="Guests">
-                        <input required type="number" min={1} max={200} value={draft.guests} onChange={(e) => setDraft({ ...draft, guests: e.target.value })} className="admin-field" />
+                        <input required type="number" inputMode="numeric" min={1} max={GUESTS_MAX} step={1} value={draft.guests} onChange={(e) => setDraft({ ...draft, guests: e.target.value })} className="admin-field" />
                       </EditField>
                     </div>
                     <EditField label="Note">
-                      <textarea rows={3} value={draft.message} onChange={(e) => setDraft({ ...draft, message: e.target.value })} className="admin-field resize-y" />
+                      <textarea rows={3} maxLength={LIMITS.bookingMessage} value={draft.message} onChange={(e) => setDraft({ ...draft, message: e.target.value })} className="admin-field resize-y" />
                     </EditField>
-                    <EditButtons busy={busyId === booking.id} onCancel={() => setDraft(null)} />
+                    {formError && <Notice kind="error">{formError}</Notice>}
+                    <EditButtons busy={busyId === booking.id} onCancel={() => { setDraft(null); setFormError(''); }} />
                   </form>
                 ) : (
                   <ContactActions name={booking.name} phone={booking.phone} email={booking.email} subject={`Your booking at Bushaashe Garuwa (${booking.reference})`}>

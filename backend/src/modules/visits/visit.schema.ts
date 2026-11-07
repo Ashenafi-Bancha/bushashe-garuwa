@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { Email, Honeypot, Language, Phone, RequestStatus, optionalText, text } from '../shared/schemas.js';
+import { LIMITS, checkVisitDate, englishProblem, isRealDate } from '../shared/rules.js';
+import { Honeypot, Language, OptionalEmail, Phone, PersonName, RequestStatus, optionalText } from '../shared/schemas.js';
 
 /** The options on the Plan Your Visit page (frontend t.visit.types) */
 export const ExperienceType = z.enum([
@@ -16,25 +17,24 @@ export const ExperienceType = z.enum([
 /** The group sizes offered in the form's select */
 export const GroupSize = z.enum(['1', '2', '3–5', '6–10', '11–20', '21–50', '50+']);
 
-/** YYYY-MM-DD, today or later (one day of slack for time zones) */
-const VisitDate = z
-  .string()
-  .regex(/^\d{4}-\d{2}-\d{2}$/, 'Use the format YYYY-MM-DD')
-  .refine((value) => !Number.isNaN(Date.parse(value)), 'Enter a real date')
-  .refine((value) => {
-    const yesterday = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString().slice(0, 10);
-    return value >= yesterday;
-  }, 'The visit date cannot be in the past');
+/** YYYY-MM-DD: a real day, from today (in Ethiopia, one day of grace) to two years ahead */
+const VisitDate = z.string().superRefine((value, ctx) => {
+  const problem = checkVisitDate(value);
+  if (problem) ctx.addIssue({ code: 'custom', message: englishProblem(problem) });
+});
+
+/** YYYY-MM-DD: any real day (staff may correct an old request) */
+const AnyDate = z.string().refine(isRealDate, englishProblem('date'));
 
 /** Body of POST /api/v1/visits (the form on the Plan Your Visit page) */
 export const CreateVisitRequest = z.object({
-  name: text(120),
+  name: PersonName(LIMITS.name),
   phone: Phone,
-  email: z.union([Email, z.literal('')]).optional().transform((value) => value || undefined),
+  email: OptionalEmail,
   date: VisitDate,
   visitors: GroupSize,
   experiences: z.array(ExperienceType).max(8).default([]).transform((list) => [...new Set(list)]),
-  message: optionalText(3000),
+  message: optionalText(LIMITS.visitMessage),
   language: Language,
   website: Honeypot,
 });
@@ -48,15 +48,12 @@ export const UpdateVisitStatus = z.object({ status: RequestStatus });
  * past, so an old request can still be put right.
  */
 export const UpdateVisitRequest = z.object({
-  name: text(120),
+  name: PersonName(LIMITS.name),
   phone: Phone,
-  email: z.union([Email, z.literal('')]).optional().transform((value) => value || undefined),
-  date: z
-    .string()
-    .regex(/^\d{4}-\d{2}-\d{2}$/, 'Use the format YYYY-MM-DD')
-    .refine((value) => !Number.isNaN(Date.parse(value)), 'Enter a real date'),
+  email: OptionalEmail,
+  date: AnyDate,
   visitors: GroupSize,
-  message: optionalText(3000),
+  message: optionalText(LIMITS.visitMessage),
 });
 export type UpdateVisitRequest = z.infer<typeof UpdateVisitRequest>;
 

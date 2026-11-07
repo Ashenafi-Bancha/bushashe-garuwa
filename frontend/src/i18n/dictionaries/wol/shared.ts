@@ -47,6 +47,44 @@ const page: DeepPartial<Dictionary> = {
     getDirections: "Ginaa Erite",
     // EN: We could not send your message. Please check your connection and try again, or call us.
     formError: "Ne kiitaa yeddanawu danddayibookko. Ane ne Intterneetee oottikko be'ada , zaarettada mala, woykko nuussi silkkiya shoca",
+    problems: {
+      // EN: Please fill this in.
+      required: "",
+      // EN: Please keep it to {max} characters or fewer.
+      tooLong: "",
+      // EN: Please write your name with letters (no links or signs like @ or #).
+      name: "",
+      // EN: Please write a full email address, like name@example.com.
+      email: "",
+      // EN: Please write a phone number, like 0912 345 678 or +251 912 345 678. From outside Ethiopia, start with + and the country code.
+      phone: "",
+      // EN: Please choose a real date.
+      date: "",
+      // EN: This date has already passed. Please choose today or a later day.
+      pastDate: "",
+      // EN: Please choose a date within the next two years.
+      farDate: "",
+      // EN: Please write the time like 17:00 or 17:00 – 21:00.
+      time: "",
+      // EN: Please write a whole number.
+      wholeNumber: "",
+      // EN: Please write at least {min}.
+      tooFew: "",
+      // EN: Please write {max} or fewer.
+      tooMany: "",
+      // EN: Please choose a password of at least 10 characters.
+      passwordShort: "",
+      // EN: Please choose a password different from the one you have now.
+      passwordSame: "",
+      // EN: Your password cannot be your email address.
+      passwordEmail: "",
+      // EN: The two passwords are not the same.
+      passwordsDiffer: "",
+      // EN: Please keep this on one line.
+      oneLine: "",
+      // EN: Please check the fields marked in red.
+      fixFields: "",
+    },
     // EN: Photo coming soon
     photoComingSoon: "Misilee matan Yees",
     // EN: Location

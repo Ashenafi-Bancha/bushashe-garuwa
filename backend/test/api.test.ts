@@ -154,7 +154,7 @@ describe('protection', () => {
   it('limits form submissions per visitor', async () => {
     // 7 form posts allowed per window in this test (shared by both forms); the tests above used 5
     const statuses: number[] = [];
-    for (let i = 0; i < 4; i++) statuses.push((await post('/v1/contact', { name: 'x', email: 'x@y.com', message: 'm' })).status);
+    for (let i = 0; i < 4; i++) statuses.push((await post('/v1/contact', { name: 'Xy', email: 'x@y.com', message: 'm' })).status);
     assert.deepEqual(statuses, [201, 201, 429, 429]);
   });
 
@@ -163,7 +163,7 @@ describe('protection', () => {
     const res = await fetch(base + '/v1/contact', {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'cf-connecting-ip': '203.0.113.7' },
-      body: JSON.stringify({ name: 'x', email: 'x@y.com', message: 'm' }),
+      body: JSON.stringify({ name: 'Xy', email: 'x@y.com', message: 'm' }),
     });
     assert.equal(res.status, 201);
   });

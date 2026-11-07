@@ -1,4 +1,5 @@
 import { useState, type ReactNode } from 'react';
+import { checkEmail, englishProblem } from '../../lib/rules';
 import logo from '../../assets/brand/logo-small.webp';
 import { photos, picture } from '../../assets/photos';
 import { ApiError, apiEnabled } from '../../lib/api';
@@ -61,6 +62,10 @@ export default function SignIn() {
     if (busy) return;
     if (!email.trim() || !password) {
       setError('Enter your email and your password.');
+      return;
+    }
+    if (checkEmail(email)) {
+      setError(`${englishProblem('email')}.`);
       return;
     }
     setBusy(true);

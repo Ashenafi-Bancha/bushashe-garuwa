@@ -4,6 +4,8 @@ import SocialLinks from '../components/SocialLinks';
 import PageHero from '../components/PageHero';
 import LocationMap from '../components/LocationMap';
 import { sendContactMessage } from '../lib/api';
+import { FieldError, useFormCheck } from '../lib/formCheck';
+import { LIMITS, checkEmail, checkName, checkPhone, checkText } from '../lib/rules';
 
 export default function Contact() {
   const { t, lang } = useI18n();
@@ -14,19 +16,38 @@ export default function Contact() {
   const [failed, setFailed] = useState(false);
   const honeypot = useRef<HTMLInputElement>(null);
 
+  // the same rules as the API (src/lib/rules.ts)
+  const check = useFormCheck('contact', {
+    name: () => checkName(form.name),
+    phone: () => checkPhone(form.phone, false),
+    email: () => checkEmail(form.email),
+    message: () => {
+      const problem = checkText(form.message, LIMITS.contactMessage);
+      return problem && { problem, max: LIMITS.contactMessage };
+    },
+  });
+  const change = (name: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((current) => ({ ...current, [name]: e.target.value }));
+    check.changed(name);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSending(true);
     setFailed(false);
+    if (!check.all()) return;
+    setSending(true);
     try {
       await sendContactMessage({ ...form, language: lang, website: honeypot.current?.value });
       setSubmitted(true);
-    } catch {
-      setFailed(true);
+    } catch (err) {
+      if (!check.fromServer(err)) setFailed(true);
     } finally {
       setSending(false);
     }
   };
+  const input = (name: string) =>
+    `w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4] ${name === 'message' ? 'resize-none' : ''}`;
+  const label = 'block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2';
 
   return (
     <main>
@@ -91,52 +112,30 @@ export default function Contact() {
               ) : (
                 <>
                   <h2 className="font-display text-2xl font-semibold text-[#1E3A29] mb-7">{c.form.title}</h2>
-                  <form onSubmit={handleSubmit} className="space-y-5">
+                  <form onSubmit={handleSubmit} noValidate className="space-y-5">
                     {/* hidden from people; spam bots fill it in */}
                     <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                     <div>
-                      <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{c.form.name}</label>
-                      <input
-                        required
-                        type="text"
-                        value={form.name}
-                        onChange={(e) => setForm({ ...form, name: e.target.value })}
-                        className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]"
-                        placeholder={c.form.namePlaceholder}
-                      />
+                      <label className={label} htmlFor="contact-name">{c.form.name}</label>
+                      <input {...check.field('name')} required type="text" autoComplete="name" maxLength={LIMITS.name} value={form.name} onChange={change('name')} className={input('name')} placeholder={c.form.namePlaceholder} />
+                      <FieldError check={check} name="name" />
                     </div>
                     <div>
-                      <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{c.form.phone}</label>
-                      <input
-                        type="tel"
-                        value={form.phone}
-                        onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                        className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]"
-                        placeholder="+251..."
-                      />
+                      <label className={label} htmlFor="contact-phone">{c.form.phone}</label>
+                      <input {...check.field('phone')} type="tel" inputMode="tel" autoComplete="tel" maxLength={LIMITS.phone} value={form.phone} onChange={change('phone')} className={input('phone')} placeholder="0912 345 678" />
+                      <FieldError check={check} name="phone" />
                     </div>
                     <div>
-                      <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{c.form.email}</label>
-                      <input
-                        required
-                        type="email"
-                        value={form.email}
-                        onChange={(e) => setForm({ ...form, email: e.target.value })}
-                        className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]"
-                        placeholder="your@email.com"
-                      />
+                      <label className={label} htmlFor="contact-email">{c.form.email}</label>
+                      <input {...check.field('email')} required type="email" inputMode="email" autoComplete="email" maxLength={LIMITS.email} value={form.email} onChange={change('email')} className={input('email')} placeholder="your@email.com" />
+                      <FieldError check={check} name="email" />
                     </div>
                     <div>
-                      <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{c.form.message}</label>
-                      <textarea
-                        required
-                        rows={5}
-                        value={form.message}
-                        onChange={(e) => setForm({ ...form, message: e.target.value })}
-                        className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4] resize-none"
-                        placeholder={c.form.messagePlaceholder}
-                      />
+                      <label className={label} htmlFor="contact-message">{c.form.message}</label>
+                      <textarea {...check.field('message')} required rows={5} maxLength={LIMITS.contactMessage} value={form.message} onChange={change('message')} className={input('message')} placeholder={c.form.messagePlaceholder} />
+                      <FieldError check={check} name="message" />
                     </div>
+                    {check.hasErrors && <p className="text-sm font-sans font-semibold text-[#B42318]">{t.common.problems.fixFields}</p>}
                     {failed && <p role="alert" className="text-sm font-sans text-[#1E3A29]">{t.common.formError}</p>}
                     <button
                       type="submit"

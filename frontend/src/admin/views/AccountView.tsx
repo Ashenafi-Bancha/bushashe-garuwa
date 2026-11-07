@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { LIMITS, checkName } from '../../lib/rules';
 import { ApiError } from '../../lib/api';
 import { adminApi } from '../api/adminClient';
 import { ROLE_LABELS } from '../api/types';
@@ -6,7 +7,7 @@ import { useAdminSession } from '../auth/AdminSession';
 import Avatar from '../components/Avatar';
 import { Icon } from '../components/icons';
 import PasswordForm from '../components/PasswordForm';
-import { InstallCard, Notice } from '../components/ui';
+import { InstallCard, Notice, firstProblem } from '../components/ui';
 import type { StaffApp } from '../pwa';
 
 /** My account: one's own name and password, the app, and signing out. */
@@ -19,6 +20,8 @@ export default function AccountView({ app }: { app: StaffApp }) {
 
   const saveName = async (e: React.FormEvent) => {
     e.preventDefault();
+    const problem = firstProblem([['Name', checkName(name, LIMITS.staffName)]]);
+    if (problem) return setMessage({ kind: 'error', text: problem });
     setBusy(true);
     setMessage(null);
     try {
@@ -50,7 +53,7 @@ export default function AccountView({ app }: { app: StaffApp }) {
             </div>
           </div>
         </div>
-        <form onSubmit={saveName} className="px-5 sm:px-7 py-5 space-y-3">
+        <form onSubmit={saveName} noValidate className="px-5 sm:px-7 py-5 space-y-3">
           <label className="block">
             <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Your name, as your colleagues see it</span>
             <input value={name} onChange={(e) => setName(e.target.value)} required maxLength={80} placeholder="e.g. Almaz Tesfaye" className="admin-field" />

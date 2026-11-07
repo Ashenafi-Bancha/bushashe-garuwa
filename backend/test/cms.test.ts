@@ -125,10 +125,22 @@ describe('events', () => {
       method: 'POST',
       body: JSON.stringify({ ...culturalFood, published: false, translations: { en: { name: 'Draft evening' } } }),
     });
-    await staff('/v1/events/admin', {
+    const refused = await staff('/v1/events/admin', {
       method: 'POST',
       body: JSON.stringify({ ...culturalFood, date: lastYear, translations: { en: { name: 'Past evening' } } }),
     });
+    assert.equal(refused.status, 400, 'a new event cannot be in the past');
+    const added = await read(
+      await staff('/v1/events/admin', {
+        method: 'POST',
+        body: JSON.stringify({ ...culturalFood, translations: { en: { name: 'Past evening' } } }),
+      }),
+    );
+    const moved = await staff(`/v1/events/admin/${added.data.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ ...culturalFood, date: lastYear, translations: { en: { name: 'Past evening' } } }),
+    });
+    assert.equal(moved.status, 200, 'an existing event can still be put right, even in the past');
 
     const publicList = await read(await fetch(base + '/v1/events'));
     assert.equal(publicList.data.items.length, 1);
@@ -192,8 +204,8 @@ describe('booking a place at an event', () => {
   it('refuses bookings for past events and unknown events', async () => {
     const list = await read(await staff('/v1/events/admin'));
     const past = list.data.items.find((e: any) => e.translations.en.name === 'Past evening');
-    assert.equal((await post(`/v1/events/${past.id}/bookings`, { name: 'A', phone: '0911000000', guests: 1 })).status, 400);
-    assert.equal((await post('/v1/events/9999/bookings', { name: 'A', phone: '0911000000', guests: 1 })).status, 404);
+    assert.equal((await post(`/v1/events/${past.id}/bookings`, { name: 'Abebe', phone: '0911000000', guests: 1 })).status, 400);
+    assert.equal((await post('/v1/events/9999/bookings', { name: 'Abebe', phone: '0911000000', guests: 1 })).status, 404);
   });
 
   it('checks the guest details', async () => {
@@ -356,7 +368,7 @@ describe('emails', () => {
       body: JSON.stringify({ ...culturalFood, capacity: 200, translations: event.translations }),
     });
     const res = await post(`/v1/events/${event.id}/bookings`, {
-      name: 'Mekdes <b>Haile</b>',
+      name: 'Mekdes & Haile',
       phone: '0988 77 66 55',
       email: 'mekdes@example.com',
       guests: 2,
@@ -370,8 +382,7 @@ describe('emails', () => {
     assert.equal(guest.to, 'mekdes@example.com');
     assert.ok(guest.subject.includes(reference), 'the subject carries the booking number');
     assert.ok(guest.subject.startsWith('ቦታዎ ተይዟል'), 'written in the language the guest used');
-    assert.ok(guest.html.includes('Mekdes &lt;b&gt;Haile&lt;/b&gt;'), 'what a guest types is escaped');
-    assert.ok(!guest.html.includes('<b>Haile</b>'));
+    assert.ok(guest.html.includes('Mekdes &amp; Haile'), 'what a guest types is escaped');
     assert.ok(guest.text.includes(reference), 'a plain-text copy is included');
 
     const staffNotice = outbox.sent.find((m) => m.kind === 'staff-new-booking');

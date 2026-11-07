@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { LIMITS, checkEmail, checkName } from '../../lib/rules';
 import { ApiError } from '../../lib/api';
 import { adminApi } from '../api/adminClient';
 import { ROLE_LABELS, type StaffMember, type StaffRole } from '../api/types';
@@ -6,7 +7,7 @@ import { useAdminSession } from '../auth/AdminSession';
 import Avatar, { timeAgo } from '../components/Avatar';
 import { Icon } from '../components/icons';
 import Sheet from '../components/Sheet';
-import { Notice } from '../components/ui';
+import { Notice, firstProblem } from '../components/ui';
 
 type Draft = { name: string; email: string; role: StaffRole };
 /** What the sheet shows: a new account, one person's settings, or a temporary password to pass on */
@@ -60,6 +61,11 @@ export default function StaffView() {
 
   const add = (e: React.FormEvent) => {
     e.preventDefault();
+    const problem = firstProblem([
+      ['Name', checkName(draft.name, LIMITS.staffName)],
+      ['Email', checkEmail(draft.email)],
+    ]);
+    if (problem) return setSheetError(problem);
     void run(async () => {
       const result = await adminApi.addStaff(token, draft);
       setOpen({ kind: 'password', member: result.member, password: result.temporaryPassword });
@@ -131,14 +137,14 @@ export default function StaffView() {
 
       {/* a new account */}
       <Sheet open={open?.kind === 'add'} onClose={close} title="Add a member of staff">
-        <form onSubmit={add} className="space-y-4 pb-2">
+        <form onSubmit={add} noValidate className="space-y-4 pb-2">
           <label className="block">
             <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Name</span>
             <input required maxLength={80} value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} placeholder="e.g. Almaz Tesfaye" className="admin-field" />
           </label>
           <label className="block">
             <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Email (they sign in with it)</span>
-            <input required type="email" value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} placeholder="name@example.com" className="admin-field" />
+            <input required type="email" inputMode="email" autoComplete="off" maxLength={LIMITS.email} value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} placeholder="name@example.com" className="admin-field" />
           </label>
           <RolePicker value={draft.role} onChange={(role) => setDraft({ ...draft, role })} />
           {sheetError && <Notice kind="error">{sheetError}</Notice>}
@@ -156,7 +162,11 @@ export default function StaffView() {
           error={sheetError}
           lastOwner={open.member.role === 'owner' && open.member.active && owners <= 1}
           onClose={close}
-          onSave={(values) => run(async () => { await adminApi.updateStaff(token, open.member.id, values); close(); })}
+          onSave={(values) => {
+            const problem = firstProblem([['Name', checkName(values.name, LIMITS.staffName)]]);
+            if (problem) return setSheetError(problem);
+            void run(async () => { await adminApi.updateStaff(token, open.member.id, values); close(); });
+          }}
           onReset={() =>
             run(async () => {
               const { temporaryPassword } = await adminApi.resetStaffPassword(token, open.member.id);
@@ -242,6 +252,7 @@ function MemberSheet({
         </div>
 
         <form
+          noValidate
           onSubmit={(e) => {
             e.preventDefault();
             onSave({ name, role, active });

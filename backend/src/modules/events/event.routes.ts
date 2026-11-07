@@ -7,7 +7,7 @@ import { validateBody, validateQuery } from '../../http/validate.js';
 import { parseId } from '../shared/params.js';
 import { BookingStatus, CreateBooking, UpdateBooking, UpdateBookingStatus } from './booking.schema.js';
 import type { BookingService } from './booking.service.js';
-import { SaveEvent } from './event.schema.js';
+import { CreateEvent, SaveEvent } from './event.schema.js';
 import type { EventService } from './event.service.js';
 
 /**
@@ -70,7 +70,7 @@ export function eventRoutes(service: EventService, bookings: BookingService, gua
     sendData(res, { items: await service.all() });
   });
 
-  router.post('/admin', ...guards.admin, validateBody(SaveEvent), async (req, res) => {
+  router.post('/admin', ...guards.admin, validateBody(CreateEvent), async (req, res) => {
     sendData(res, await service.create(req.body), 201);
   });
 

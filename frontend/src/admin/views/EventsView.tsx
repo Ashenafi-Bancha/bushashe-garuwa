@@ -73,6 +73,7 @@ export default function EventsView() {
       <EventForm
         initial={editing.values}
         heading={editing.id === null ? 'New event' : 'Edit event'}
+        isNew={editing.id === null}
         onCancel={() => setEditing(null)}
         onSave={save}
       />

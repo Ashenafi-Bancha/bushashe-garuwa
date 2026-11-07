@@ -1,5 +1,13 @@
 import { z } from 'zod';
-import { Email, Honeypot, Language, Phone, optionalText, text } from '../shared/schemas.js';
+import { GUESTS_MAX, LIMITS } from '../shared/rules.js';
+import { Honeypot, Language, OptionalEmail, Phone, PersonName, optionalText } from '../shared/schemas.js';
+
+/** How many guests one booking is for */
+const Guests = z.coerce
+  .number({ error: 'Please write a whole number' })
+  .int('Please write a whole number')
+  .min(1, 'Please write at least 1')
+  .max(GUESTS_MAX, `For more than ${GUESTS_MAX} guests, please call us`);
 
 /**
  * A booking's life:
@@ -18,14 +26,11 @@ export const HOLDS_PLACES: BookingStatus[] = ['pending', 'confirmed', 'attended'
 
 /** Body of POST /api/v1/events/:id/bookings: reserving places at an event */
 export const CreateBooking = z.object({
-  name: text(120),
+  name: PersonName(LIMITS.name),
   phone: Phone,
-  email: z
-    .union([Email, z.literal('')])
-    .optional()
-    .transform((value) => value || undefined),
-  guests: z.coerce.number().int().min(1, 'At least one guest').max(200, 'For very large groups, please call us'),
-  message: optionalText(2000),
+  email: OptionalEmail,
+  guests: Guests,
+  message: optionalText(LIMITS.bookingMessage),
   language: Language,
   website: Honeypot,
 });
@@ -35,14 +40,11 @@ export const UpdateBookingStatus = z.object({ status: BookingStatus });
 
 /** Body of PUT /api/v1/events/admin/bookings/:id: staff correcting a booking after a phone call */
 export const UpdateBooking = z.object({
-  name: text(120),
+  name: PersonName(LIMITS.name),
   phone: Phone,
-  email: z
-    .union([Email, z.literal('')])
-    .optional()
-    .transform((value) => value || undefined),
-  guests: z.coerce.number().int().min(1, 'At least one guest').max(200, 'At most 200 guests'),
-  message: optionalText(2000),
+  email: OptionalEmail,
+  guests: Guests,
+  message: optionalText(LIMITS.bookingMessage),
 });
 export type UpdateBooking = z.infer<typeof UpdateBooking>;
 

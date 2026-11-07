@@ -48,7 +48,7 @@ export function createContainer(env: Env, db: Database, options: { mailer?: Mail
     contact: contactService(repositories.contact, notify),
     visits: visitService(repositories.visits, notify),
     content: contentService(repositories.content),
-    events: eventService(repositories.events),
+    events: eventService(repositories.events, repositories.bookings),
     bookings: bookingService(repositories.bookings, repositories.events, notify),
     media: mediaService(repositories.media),
     staff: staffService(repositories.staff),

@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { LIMITS, clean } from '../shared/rules.js';
 
 /**
  * A content entry is one edited piece of the website: a heading, a paragraph,
@@ -21,7 +22,8 @@ export const ContentKey = z
 export const SaveContentEntry = z.object({
   key: ContentKey,
   lang: ContentLang,
-  value: z.string().max(8000),
+  /** empty puts the original words back */
+  value: z.string().transform(clean).pipe(z.string().max(LIMITS.contentText, `Please keep it to ${LIMITS.contentText} characters or fewer`)),
 });
 export type SaveContentEntry = z.infer<typeof SaveContentEntry>;
 

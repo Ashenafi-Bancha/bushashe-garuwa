@@ -1,4 +1,6 @@
 import { useEffect, useState, type ReactNode } from 'react';
+import type { Found } from '../../lib/formCheck';
+import { englishProblem } from '../../lib/rules';
 import { BOOKING_STATUSES, BOOKING_STATUS_LABELS, STATUSES, STATUS_LABELS, type BookingStatus, type RequestStatus } from '../api/types';
 import { Icon, type IconName } from './icons';
 
@@ -442,4 +444,18 @@ export function ListSkeleton({ rows = 3 }: { rows?: number }) {
       ))}
     </ul>
   );
+}
+
+/**
+ * Checks a staff form before it is sent, with the same rules as the API
+ * (src/lib/rules.ts): the first field that needs fixing, as "Phone: Please
+ * write a phone number…", or '' when everything is fine.
+ */
+export function firstProblem(fields: [label: string, found: Found][]): string {
+  for (const [label, found] of fields) {
+    if (!found) continue;
+    const { problem, ...limits } = typeof found === 'string' ? { problem: found } : found;
+    return `${label}: ${englishProblem(problem, limits)}.`;
+  }
+  return '';
 }

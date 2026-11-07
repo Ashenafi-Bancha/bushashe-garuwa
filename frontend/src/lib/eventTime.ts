@@ -1,27 +1,19 @@
 /**
  * When an event begins, and how long until then.
  *
- * Staff write the time freely in the admin area ("8:00 AM - 2:00 AM", "18:30",
- * "2 PM"); the first time in it is the start. The grounds are in Ethiopia, so
+ * Staff write the time in the admin area ("8:00 AM - 2:00 AM", "18:30",
+ * "17:00 – 21:00"; both sides check it can be read); the first time is the start. The grounds are in Ethiopia, so
  * the date and time are read in East Africa Time (UTC+3, no summer time).
  */
 import { useEffect, useState } from 'react';
 import type { SiteEvent } from './events';
+import { eventTimes } from './rules';
 
 export function eventStart(event: Pick<SiteEvent, 'date' | 'time'>): Date {
-  let hours = 0;
-  let minutes = 0;
-  const found = event.time?.match(/(\d{1,2})(?:[:.](\d{2}))?\s*([AaPp])?\.?\s*[Mm]?/);
-  if (found) {
-    hours = Number(found[1]);
-    minutes = Number(found[2] ?? 0);
-    const half = found[3]?.toLowerCase();
-    if (half === 'p' && hours < 12) hours += 12;
-    if (half === 'a' && hours === 12) hours = 0;
-    if (hours > 23 || minutes > 59) hours = minutes = 0;
-  }
+  // the same reading as the forms (src/lib/rules.ts): the first time written; midnight when there is none
+  const start = eventTimes(event.time ?? '')?.start ?? { hours: 0, minutes: 0 };
   const pad = (n: number) => String(n).padStart(2, '0');
-  return new Date(`${event.date.slice(0, 10)}T${pad(hours)}:${pad(minutes)}:00+03:00`);
+  return new Date(`${event.date.slice(0, 10)}T${pad(start.hours)}:${pad(start.minutes)}:00+03:00`);
 }
 
 export type TimeLeft = { days: number; hours: number; minutes: number; seconds: number; started: boolean };

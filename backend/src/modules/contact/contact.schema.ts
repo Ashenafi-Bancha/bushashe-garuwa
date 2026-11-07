@@ -1,12 +1,13 @@
 import { z } from 'zod';
-import { Email, Honeypot, Language, Phone, RequestStatus, text } from '../shared/schemas.js';
+import { LIMITS } from '../shared/rules.js';
+import { Email, Honeypot, Language, OptionalPhone, PersonName, RequestStatus, text } from '../shared/schemas.js';
 
 /** Body of POST /api/v1/contact (the form on the Contact page) */
 export const CreateContactMessage = z.object({
-  name: text(120),
+  name: PersonName(LIMITS.name),
   email: Email,
-  phone: z.union([Phone, z.literal('')]).optional().transform((value) => value || undefined),
-  message: text(5000),
+  phone: OptionalPhone,
+  message: text(LIMITS.contactMessage),
   language: Language,
   website: Honeypot,
 });

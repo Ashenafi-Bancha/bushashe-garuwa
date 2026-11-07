@@ -1267,3 +1267,9 @@ footer ul a:hover { background-size: 100% 1.5px; }
   box-shadow: 0 14px 30px -18px rgba(63, 125, 32, 0.7);
 }
 .btn-explore::before { display: none; }
+
+/* ── A form field that needs fixing (src/lib/formCheck.tsx) ── */
+.field-error { margin-top: 6px; font-size: 13px; line-height: 1.4; font-weight: 600; color: #B42318; }
+input[aria-invalid='true'],
+textarea[aria-invalid='true'],
+select[aria-invalid='true'] { border-color: #B42318 !important; box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12); }

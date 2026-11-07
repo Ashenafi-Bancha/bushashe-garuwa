@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
+import { LIMITS, checkLine, checkName, checkText } from '../../lib/rules';
 import { ApiError } from '../../lib/api';
 import { adminApi } from '../api/adminClient';
 import type { Review, SaveReviewInput } from '../api/types';
@@ -6,7 +7,7 @@ import { useAdminSession } from '../auth/AdminSession';
 import Avatar, { timeAgo } from '../components/Avatar';
 import { Icon } from '../components/icons';
 import Sheet from '../components/Sheet';
-import { IconActions, ListSkeleton, Notice, Segmented } from '../components/ui';
+import { IconActions, ListSkeleton, Notice, Segmented, firstProblem } from '../components/ui';
 
 type Lang = 'en' | 'am' | 'wol';
 const LANGS: { value: Lang; label: string }[] = [
@@ -70,6 +71,17 @@ export default function ReviewsView() {
       setLang('en');
       return setSheetError('Write the guest\'s words in English (the other languages are optional).');
     }
+    // the same rules as the API (src/lib/rules.ts)
+    const { draft } = editing;
+    const long = (value: string, max: number) => checkText(value, max, false) && { problem: 'tooLong' as const, max };
+    const problem = firstProblem([
+      ['Name', checkName(draft.name, LIMITS.reviewName)],
+      ['Where they are from', checkLine(draft.origin, LIMITS.origin, false) && { problem: checkLine(draft.origin, LIMITS.origin, false)!, max: LIMITS.origin }],
+      ['Their words (English)', long(draft.words.en, LIMITS.reviewWords)],
+      ['Their words (Amharic)', long(draft.words.am ?? '', LIMITS.reviewWords)],
+      ['Their words (Wolaytta)', long(draft.words.wol ?? '', LIMITS.reviewWords)],
+    ]);
+    if (problem) return setSheetError(problem);
     setBusy(true);
     setSheetError('');
     try {
@@ -164,7 +176,7 @@ export default function ReviewsView() {
 
       <Sheet open={editing !== null} onClose={() => setEditing(null)} title={editing?.id === null ? 'Add a review' : 'Change the review'}>
         {draft && (
-          <form onSubmit={save} className="space-y-4 pb-2">
+          <form onSubmit={save} noValidate className="space-y-4 pb-2">
             <div className="grid grid-cols-2 gap-3">
               <label className="block">
                 <span className="block text-[var(--a-muted)] text-[12px] font-bold mb-1.5">Guest's name</span>

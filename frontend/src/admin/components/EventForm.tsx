@@ -1,7 +1,8 @@
 import { useState } from 'react';
+import { CAPACITY_MAX, LIMITS, checkEventDate, checkEventTime, checkLine, checkText, checkWholeNumber, todayInEthiopia } from '../../lib/rules';
 import { ApiError } from '../../lib/api';
 import type { SaveEventInput } from '../api/types';
-import { Notice, Panel } from './ui';
+import { Notice, Panel, firstProblem } from './ui';
 
 const CATEGORIES: SaveEventInput['category'][] = ['food', 'culture', 'education', 'music', 'community'];
 const AVAILABILITY: SaveEventInput['availability'][] = ['open', 'limited', 'full'];
@@ -28,11 +29,14 @@ const label = 'block text-xs font-semibold text-[var(--a-muted)] tracking-wider 
 export default function EventForm({
   initial,
   heading,
+  isNew = false,
   onSave,
   onCancel,
 }: {
   initial: SaveEventInput;
   heading: string;
+  /** a new event may not be in the past; an existing one can still be put right */
+  isNew?: boolean;
   onSave: (values: SaveEventInput) => Promise<void>;
   onCancel: () => void;
 }) {
@@ -49,6 +53,26 @@ export default function EventForm({
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // the same rules as the API (src/lib/rules.ts)
+    const words = values.translations;
+    const line = (value: string | undefined, max: number, required: boolean) => {
+      const problem = checkLine(value ?? '', max, required);
+      return problem && { problem, max };
+    };
+    const capacity = values.capacity === null ? null : checkWholeNumber(String(values.capacity), 1, CAPACITY_MAX);
+    const problem = firstProblem([
+      ['Date', checkEventDate(values.date, isNew)],
+      ['Time', checkEventTime(values.time ?? '') && { problem: checkEventTime(values.time ?? '')!, max: LIMITS.eventTime }],
+      ['Partner', line(values.partner ?? '', LIMITS.partner, false)],
+      ['How many guests fit', capacity && { problem: capacity, min: 1, max: CAPACITY_MAX }],
+      ['Name (English)', line(words.en.name, LIMITS.eventName, true)],
+      ['Description (English)', checkText(words.en.desc ?? '', LIMITS.eventDesc, false) && { problem: 'tooLong', max: LIMITS.eventDesc }],
+      ['Name (Amharic)', line(words.am?.name, LIMITS.eventName, false)],
+      ['Description (Amharic)', checkText(words.am?.desc ?? '', LIMITS.eventDesc, false) && { problem: 'tooLong', max: LIMITS.eventDesc }],
+      ['Name (Wolaytta)', line(words.wol?.name, LIMITS.eventName, false)],
+      ['Description (Wolaytta)', checkText(words.wol?.desc ?? '', LIMITS.eventDesc, false) && { problem: 'tooLong', max: LIMITS.eventDesc }],
+    ]);
+    if (problem) return setError(problem);
     setSaving(true);
     setError('');
     try {
@@ -61,18 +85,19 @@ export default function EventForm({
 
   return (
     <Panel>
-      <form onSubmit={submit} className="space-y-6">
+      <form onSubmit={submit} noValidate className="space-y-6">
         <h2 className="font-display text-2xl text-[var(--a-ink)]">{heading}</h2>
         {error && <Notice kind="error">{error}</Notice>}
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <div>
             <label className={label} htmlFor="event-date">Date</label>
-            <input id="event-date" type="date" required value={values.date} onChange={(e) => set({ date: e.target.value })} className={field} />
+            <input id="event-date" type="date" required min={isNew ? todayInEthiopia() : undefined} value={values.date} onChange={(e) => set({ date: e.target.value })} className={field} />
           </div>
           <div>
             <label className={label} htmlFor="event-time">Time</label>
-            <input id="event-time" type="text" value={values.time ?? ''} onChange={(e) => set({ time: e.target.value })} className={field} placeholder="17:00 – 21:00" />
+            <input id="event-time" type="text" maxLength={LIMITS.eventTime} value={values.time ?? ''} onChange={(e) => set({ time: e.target.value })} className={field} placeholder="17:00 – 21:00" aria-describedby="event-time-hint" />
+            <p id="event-time-hint" className="text-[var(--a-faint)] text-xs mt-1.5">Like 17:00 – 21:00 or 8:00 AM - 2:00 PM. The website's countdown starts from the first time.</p>
           </div>
           <div>
             <label className={label} htmlFor="event-category">Kind of event</label>
@@ -95,7 +120,7 @@ export default function EventForm({
         <div className="grid sm:grid-cols-3 gap-4">
           <div>
             <label className={label} htmlFor="event-partner">Partner (optional)</label>
-            <input id="event-partner" type="text" value={values.partner ?? ''} onChange={(e) => set({ partner: e.target.value })} className={field} placeholder="Lidya Cultural Food" />
+            <input id="event-partner" type="text" maxLength={LIMITS.partner} value={values.partner ?? ''} onChange={(e) => set({ partner: e.target.value })} className={field} placeholder="Lidya Cultural Food" />
           </div>
           <div>
             <label className={label} htmlFor="event-capacity">How many guests fit</label>
@@ -103,7 +128,8 @@ export default function EventForm({
               id="event-capacity"
               type="number"
               min={1}
-              max={5000}
+              max={CAPACITY_MAX}
+              step={1}
               value={values.capacity ?? ''}
               onChange={(e) => set({ capacity: e.target.value === '' ? null : Number(e.target.value) })}
               className={field}
@@ -147,6 +173,7 @@ export default function EventForm({
                 <input
                   type="text"
                   required={lang === 'en'}
+                  maxLength={LIMITS.eventName}
                   value={values.translations[lang]?.name ?? ''}
                   onChange={(e) => setText(lang, 'name', e.target.value)}
                   className={field}
@@ -154,6 +181,7 @@ export default function EventForm({
                 />
                 <textarea
                   rows={2}
+                  maxLength={LIMITS.eventDesc}
                   value={values.translations[lang]?.desc ?? ''}
                   onChange={(e) => setText(lang, 'desc', e.target.value)}
                   className={`${field} resize-none`}

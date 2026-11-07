@@ -1,6 +1,9 @@
 import { useRef, useState } from 'react';
 import { fmt, useI18n } from '../i18n/I18nProvider';
+import { ApiError } from '../lib/api';
 import { bookEvent, eventText, type SiteEvent } from '../lib/events';
+import { FieldError, useFormCheck } from '../lib/formCheck';
+import { GUESTS_MAX, LIMITS, checkEmail, checkName, checkPhone, checkText, checkWholeNumber } from '../lib/rules';
 
 /** Reserve places at an event, for example the cultural food evening. */
 export default function EventBooking({
@@ -21,10 +24,32 @@ export default function EventBooking({
   const [failed, setFailed] = useState('');
   const honeypot = useRef<HTMLInputElement>(null);
 
+  // at most the places left (and never more than one booking may hold)
+  const most = Math.min(GUESTS_MAX, event.placesLeft ?? GUESTS_MAX);
+  // the same rules as the API (src/lib/rules.ts)
+  const check = useFormCheck('booking', {
+    name: () => checkName(form.name),
+    phone: () => checkPhone(form.phone),
+    email: () => checkEmail(form.email, false),
+    guests: () => {
+      const problem = checkWholeNumber(form.guests, 1, most);
+      return problem && { problem, min: 1, max: most };
+    },
+    message: () => {
+      const problem = checkText(form.message, LIMITS.bookingMessage, false);
+      return problem && { problem, max: LIMITS.bookingMessage };
+    },
+  });
+  const change = (name: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((current) => ({ ...current, [name]: e.target.value }));
+    check.changed(name);
+  };
+
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSending(true);
     setFailed('');
+    if (!check.all()) return;
+    setSending(true);
     try {
       const result = await bookEvent(event.id, {
         name: form.name,
@@ -38,7 +63,13 @@ export default function EventBooking({
       setDone({ reference: result?.reference ?? null });
       onBooked?.();
     } catch (err) {
-      setFailed((err as Error).message || t.common.formError);
+      if (check.fromServer(err)) return;
+      // the API's answers, in the visitor's language
+      const left = err instanceof ApiError ? Number(err.details.placesLeft) : NaN;
+      if (err instanceof ApiError && err.code === 'event_full') setFailed(b.noPlaces);
+      else if (err instanceof ApiError && err.code === 'not_enough_places' && left > 0) setFailed(left === 1 ? b.onePlaceLeft : fmt(b.placesLeft, { count: left }));
+      else setFailed(t.common.formError);
+      onBooked?.(); // the places left have changed: show the new number
     } finally {
       setSending(false);
     }
@@ -70,7 +101,7 @@ export default function EventBooking({
   }
 
   return (
-    <form onSubmit={submit} className="bg-white rounded-3xl p-6 sm:p-8 space-y-4">
+    <form onSubmit={submit} noValidate className="bg-white rounded-3xl p-6 sm:p-8 space-y-4">
       <div>
         <h3 className="font-display text-2xl text-[#1E3A29]">{b.title}</h3>
         <p className="text-[#1E3A29]/55 font-sans text-sm mt-1">{eventText(event, lang).name}</p>
@@ -90,36 +121,33 @@ export default function EventBooking({
       <div className="grid sm:grid-cols-2 gap-4">
         <div>
           <label className={label} htmlFor="booking-name">{b.name}</label>
-          <input id="booking-name" required type="text" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={field} />
+          <input {...check.field('name')} required type="text" autoComplete="name" maxLength={LIMITS.name} value={form.name} onChange={change('name')} className={field} />
+          <FieldError check={check} name="name" />
         </div>
         <div>
           <label className={label} htmlFor="booking-phone">{b.phone}</label>
-          <input id="booking-phone" required type="tel" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className={field} placeholder="+251..." />
+          <input {...check.field('phone')} required type="tel" inputMode="tel" autoComplete="tel" maxLength={LIMITS.phone} value={form.phone} onChange={change('phone')} className={field} placeholder="0912 345 678" />
+          <FieldError check={check} name="phone" />
         </div>
         <div>
           <label className={label} htmlFor="booking-email">{b.email}</label>
-          <input id="booking-email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} className={field} />
+          <input {...check.field('email')} type="email" inputMode="email" autoComplete="email" maxLength={LIMITS.email} value={form.email} onChange={change('email')} className={field} />
+          <FieldError check={check} name="email" />
         </div>
         <div>
           <label className={label} htmlFor="booking-guests">{b.guests}</label>
-          <input
-            id="booking-guests"
-            required
-            type="number"
-            min={1}
-            max={event.placesLeft ?? 200}
-            value={form.guests}
-            onChange={(e) => setForm({ ...form, guests: e.target.value })}
-            className={field}
-          />
+          <input {...check.field('guests')} required type="number" inputMode="numeric" min={1} max={most} step={1} value={form.guests} onChange={change('guests')} className={field} />
+          <FieldError check={check} name="guests" />
         </div>
       </div>
 
       <div>
         <label className={label} htmlFor="booking-message">{b.message}</label>
-        <textarea id="booking-message" rows={3} value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} className={`${field} resize-none`} placeholder={b.messagePlaceholder} />
+        <textarea {...check.field('message')} rows={3} maxLength={LIMITS.bookingMessage} value={form.message} onChange={change('message')} className={`${field} resize-none`} placeholder={b.messagePlaceholder} />
+        <FieldError check={check} name="message" />
       </div>
 
+      {check.hasErrors && <p className="text-sm font-sans font-semibold text-[#B42318]">{t.common.problems.fixFields}</p>}
       {failed && <p role="alert" className="text-sm font-sans text-[#1E3A29]">{failed}</p>}
 
       <div className="flex flex-wrap gap-3">

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { GUESTS_MAX, LIMITS, checkEmail, checkName, checkPhone, checkText, checkWholeNumber, isRealDate } from '../../lib/rules';
 import { adminApi } from '../api/adminClient';
 import { STATUS_LABELS, type RequestStatus, type VisitRequest } from '../api/types';
 import { useAdminSession } from '../auth/AdminSession';
@@ -13,6 +14,7 @@ import {
   IconActions,
   ListSkeleton,
   Notice,
+  firstProblem,
   Pager,
   SearchBox,
   Segmented,
@@ -51,9 +53,20 @@ export default function VisitsView({ newCount }: { newCount?: number }) {
     [when, status, query],
   );
 
+  const [formError, setFormError] = useState('');
   const save = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!draft) return;
+    // the same rules as the API (src/lib/rules.ts)
+    const problem = firstProblem([
+      ['Name', checkName(draft.name)],
+      ['Phone', checkPhone(draft.phone)],
+      ['Email', checkEmail(draft.email, false)],
+      ['Visit date', draft.date === '' ? 'required' : isRealDate(draft.date) ? null : 'date'],
+      ['Note', checkText(draft.message, LIMITS.visitMessage, false) && { problem: 'tooLong', max: LIMITS.visitMessage }],
+    ]);
+    setFormError(problem);
+    if (problem) return;
     const { id, ...values } = draft;
     if (await act(id, () => adminApi.updateVisit(token, id, values), 'Could not save the changes')) setDraft(null);
   };
@@ -144,16 +157,16 @@ export default function VisitsView({ newCount }: { newCount?: number }) {
                 <div className="text-[12px] text-[var(--a-faint)] mt-2.5">Asked {timeAgo(visit.createdAt)}</div>
 
                 {draft?.id === visit.id ? (
-                  <form onSubmit={save} className="mt-4 rounded-2xl bg-[var(--a-bg)] p-4 sm:p-5 space-y-3">
+                  <form onSubmit={save} noValidate className="mt-4 rounded-2xl bg-[var(--a-bg)] p-4 sm:p-5 space-y-3">
                     <div className="grid sm:grid-cols-2 gap-3">
                       <EditField label="Name">
-                        <input required value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} className="admin-field" />
+                        <input required maxLength={LIMITS.name} autoComplete="off" value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} className="admin-field" />
                       </EditField>
                       <EditField label="Phone">
-                        <input required type="tel" value={draft.phone} onChange={(e) => setDraft({ ...draft, phone: e.target.value })} className="admin-field" />
+                        <input required type="tel" inputMode="tel" maxLength={LIMITS.phone} value={draft.phone} onChange={(e) => setDraft({ ...draft, phone: e.target.value })} className="admin-field" />
                       </EditField>
                       <EditField label="Email">
-                        <input type="email" value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} className="admin-field" />
+                        <input type="email" inputMode="email" maxLength={LIMITS.email} value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} className="admin-field" />
                       </EditField>
                       <EditField label="Visit date">
                         <input required type="date" value={draft.date} onChange={(e) => setDraft({ ...draft, date: e.target.value })} className="admin-field" />
@@ -167,9 +180,10 @@ export default function VisitsView({ newCount }: { newCount?: number }) {
                       </EditField>
                     </div>
                     <EditField label="Note">
-                      <textarea rows={3} value={draft.message} onChange={(e) => setDraft({ ...draft, message: e.target.value })} className="admin-field resize-y" />
+                      <textarea rows={3} maxLength={LIMITS.visitMessage} value={draft.message} onChange={(e) => setDraft({ ...draft, message: e.target.value })} className="admin-field resize-y" />
                     </EditField>
-                    <EditButtons busy={busyId === visit.id} onCancel={() => setDraft(null)} />
+                    {formError && <Notice kind="error">{formError}</Notice>}
+                    <EditButtons busy={busyId === visit.id} onCancel={() => { setDraft(null); setFormError(''); }} />
                   </form>
                 ) : (
                   <ContactActions name={visit.name} phone={visit.phone} email={visit.email} subject="Your visit to Bushaashe Garuwa">

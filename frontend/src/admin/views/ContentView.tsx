@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { LIMITS } from '../../lib/rules';
 import { am } from '../../i18n/dictionaries/am';
 import { en } from '../../i18n/dictionaries/en';
 import { wol } from '../../i18n/dictionaries/wol';
@@ -125,6 +126,7 @@ export default function ContentView() {
                   <textarea
                     id={`f-${f.path}`}
                     rows={3}
+                    maxLength={LIMITS.contentText}
                     value={value}
                     placeholder={builtInText}
                     onChange={(e) => setDrafts({ ...drafts, [draftKey(f)]: e.target.value })}
@@ -134,6 +136,7 @@ export default function ContentView() {
                   <input
                     id={`f-${f.path}`}
                     type="text"
+                    maxLength={LIMITS.contentLine}
                     value={value}
                     placeholder={builtInText}
                     onChange={(e) => setDrafts({ ...drafts, [draftKey(f)]: e.target.value })}

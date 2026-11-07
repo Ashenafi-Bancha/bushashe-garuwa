@@ -1,4 +1,6 @@
 import { useRef, useState } from 'react';
+import { FieldError, useFormCheck } from '../lib/formCheck';
+import { LIMITS, VISIT_DAYS_AHEAD, addDays, checkEmail, checkName, checkPhone, checkText, checkVisitDate, todayInEthiopia } from '../lib/rules';
 import { Link } from 'react-router-dom';
 import { photos } from '../assets/photos';
 import { fmt, useI18n } from '../i18n/I18nProvider';
@@ -36,19 +38,40 @@ export default function Visit() {
   const [failed, setFailed] = useState(false);
   const honeypot = useRef<HTMLInputElement>(null);
 
+  // the same rules as the API (src/lib/rules.ts)
+  const check = useFormCheck('visit', {
+    name: () => checkName(form.name),
+    phone: () => checkPhone(form.phone),
+    email: () => checkEmail(form.email, false),
+    date: () => checkVisitDate(form.date),
+    message: () => {
+      const problem = checkText(form.message, LIMITS.visitMessage, false);
+      return problem && { problem, max: LIMITS.visitMessage };
+    },
+  });
+  const change = (name: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setForm((current) => ({ ...current, [name]: e.target.value }));
+    if (name !== 'visitors') check.changed(name);
+  };
+  // the calendar offers today (in Ethiopia) up to two years ahead
+  const today = todayInEthiopia();
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSending(true);
     setFailed(false);
+    if (!check.all()) return;
+    setSending(true);
     try {
       await sendVisitRequest({ ...form, experiences: selectedExp, language: lang, website: honeypot.current?.value });
       setSubmitted(true);
-    } catch {
-      setFailed(true);
+    } catch (err) {
+      if (!check.fromServer(err)) setFailed(true);
     } finally {
       setSending(false);
     }
   };
+  const input = 'w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]';
+  const label = 'block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2';
 
   return (
     <main>
@@ -142,74 +165,43 @@ export default function Visit() {
                 ) : (
                   <>
                     <h3 className="font-display text-2xl font-semibold text-[#1E3A29] mb-6">{v.form.title}</h3>
-                    <form onSubmit={handleSubmit} className="space-y-4">
+                    <form onSubmit={handleSubmit} noValidate className="space-y-4">
                       {/* hidden from people; spam bots fill it in */}
                       <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{v.form.name}</label>
-                          <input
-                            required
-                            type="text"
-                            value={form.name}
-                            onChange={(e) => setForm({ ...form, name: e.target.value })}
-                            className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]"
-                            placeholder={v.form.namePlaceholder}
-                          />
+                          <label className={label} htmlFor="visit-name">{v.form.name}</label>
+                          <input {...check.field('name')} required type="text" autoComplete="name" maxLength={LIMITS.name} value={form.name} onChange={change('name')} className={input} placeholder={v.form.namePlaceholder} />
+                          <FieldError check={check} name="name" />
                         </div>
                         <div>
-                          <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{v.form.phone}</label>
-                          <input
-                            required
-                            type="tel"
-                            value={form.phone}
-                            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                            className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]"
-                            placeholder="+251..."
-                          />
+                          <label className={label} htmlFor="visit-phone">{v.form.phone}</label>
+                          <input {...check.field('phone')} required type="tel" inputMode="tel" autoComplete="tel" maxLength={LIMITS.phone} value={form.phone} onChange={change('phone')} className={input} placeholder="0912 345 678" />
+                          <FieldError check={check} name="phone" />
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{v.form.email}</label>
-                        <input
-                          type="email"
-                          value={form.email}
-                          onChange={(e) => setForm({ ...form, email: e.target.value })}
-                          className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]"
-                          placeholder="your@email.com"
-                        />
+                        <label className={label} htmlFor="visit-email">{v.form.email}</label>
+                        <input {...check.field('email')} type="email" inputMode="email" autoComplete="email" maxLength={LIMITS.email} value={form.email} onChange={change('email')} className={input} placeholder="your@email.com" />
+                        <FieldError check={check} name="email" />
                       </div>
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div>
-                          <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{v.form.date}</label>
-                          <input
-                            required
-                            type="date"
-                            value={form.date}
-                            onChange={(e) => setForm({ ...form, date: e.target.value })}
-                            className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]"
-                          />
+                          <label className={label} htmlFor="visit-date">{v.form.date}</label>
+                          <input {...check.field('date')} required type="date" min={today} max={addDays(today, VISIT_DAYS_AHEAD)} value={form.date} onChange={change('date')} className={input} />
+                          <FieldError check={check} name="date" />
                         </div>
                         <div>
-                          <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{v.form.visitors}</label>
-                          <select
-                            value={form.visitors}
-                            onChange={(e) => setForm({ ...form, visitors: e.target.value })}
-                            className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4] appearance-none"
-                          >
+                          <label className={label} htmlFor="visit-visitors">{v.form.visitors}</label>
+                          <select id="visit-visitors" value={form.visitors} onChange={change('visitors')} className={`${input} appearance-none`}>
                             {['1', '2', '3–5', '6–10', '11–20', '21–50', '50+'].map((n) => <option key={n} value={n}>{n === '1' ? v.form.visitorOne : fmt(v.form.visitorMany, { count: n })}</option>)}
                           </select>
                         </div>
                       </div>
                       <div>
-                        <label className="block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2">{v.form.message}</label>
-                        <textarea
-                          rows={3}
-                          value={form.message}
-                          onChange={(e) => setForm({ ...form, message: e.target.value })}
-                          className="w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4] resize-none"
-                          placeholder={v.form.messagePlaceholder}
-                        />
+                        <label className={label} htmlFor="visit-message">{v.form.message}</label>
+                        <textarea {...check.field('message')} rows={3} maxLength={LIMITS.visitMessage} value={form.message} onChange={change('message')} className={`${input} resize-none`} placeholder={v.form.messagePlaceholder} />
+                        <FieldError check={check} name="message" />
                       </div>
                       {selectedExp.length > 0 && (
                         <div className="flex flex-wrap gap-2 pt-2">
@@ -218,6 +210,7 @@ export default function Visit() {
                           ))}
                         </div>
                       )}
+                      {check.hasErrors && <p className="text-sm font-sans font-semibold text-[#B42318]">{t.common.problems.fixFields}</p>}
                       {failed && <p role="alert" className="text-sm font-sans text-[#1E3A29]">{t.common.formError}</p>}
                       <button
                         type="submit"
