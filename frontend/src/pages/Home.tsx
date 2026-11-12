@@ -171,7 +171,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             </div>
 
             {/* computers: the photographs melt into the page behind the words, and softly at the foot */}
-            <span className="hidden lg:block absolute inset-0 z-[3] bg-[linear-gradient(90deg,rgba(10,24,14,0.62)_0%,rgba(10,24,14,0.46)_30%,rgba(10,24,14,0.16)_54%,rgba(10,24,14,0)_70%)]" />
+            <span className="hero-shade hidden lg:block absolute inset-0 z-[3]" />
             <span className="absolute inset-x-0 bottom-0 h-6 lg:h-10 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
 
 

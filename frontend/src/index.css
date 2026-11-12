@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@800;900&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+Ethiopic:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@800;900&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,600&family=Noto+Serif+Ethiopic:wght@500;600;700&display=swap');
 @import 'tailwindcss';
 
 /* Living Earth: warm paper, deep forest, fresh moss, a touch of clay. */
@@ -273,20 +273,20 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
 @media (min-width: 1024px) {
   .home-hero .hero-name {
     font-family: var(--font-hero);
-    font-weight: 500;
-    letter-spacing: 0;
+    font-weight: 700;
+    letter-spacing: -0.01em;
     text-transform: none;
-    font-size: min(5.25rem, 11svh);
+    font-size: min(5.75rem, 12svh);
     line-height: 1.02;
     color: #FFFFFF;
-    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 32px rgba(0, 0, 0, 0.5);
     filter: none;
     transform: none;
   }
   .home-hero .hero-name.brand-3d .line-mask { padding-bottom: 0.08em; margin-bottom: -0.08em; }
   /* one line, like the name in the reference */
   .home-hero .hero-name > span { display: inline; }
-  html:lang(am) .home-hero .hero-name { font-size: min(4.5rem, 10svh); font-weight: 500; letter-spacing: 0; line-height: 1.2; }
+  html:lang(am) .home-hero .hero-name { font-size: min(4.75rem, 10.5svh); font-weight: 700; letter-spacing: 0; line-height: 1.2; }
 }
 /* the name's letters rise one by one (components/HeroName.tsx); until the script takes over, each line rises whole */
 .hero-letter { display: inline-block; will-change: transform; }
@@ -1278,28 +1278,43 @@ input[aria-invalid='true'],
 textarea[aria-invalid='true'],
 select[aria-invalid='true'] { border-color: #B42318 !important; box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12); }
 
-/* ── Computers: the words of every opening (the home page and PageHero) in an elegant serif, white ── */
+/* ── Computers: the words of every opening (the home page and PageHero): a bold serif title, a clean sans text, white and easy to read ── */
 @media (min-width: 1024px) {
   .hero-on-photo h1.font-display,
   html:lang(am) .hero-on-photo h1.font-display {
     font-family: var(--font-hero);
-    font-weight: 500;
-    letter-spacing: 0;
-    line-height: 1.04;
-    font-size: min(5rem, 10.5svh);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    font-size: min(5.25rem, 10.5svh);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 8px 32px rgba(0, 0, 0, 0.5);
   }
   html:lang(am) .hero-on-photo h1.font-display { font-size: min(4.25rem, 9.5svh); line-height: 1.2; }
+  /* the line under the home name: bold italic, a touch of fresh green */
   .hero-on-photo .hero-sub {
     font-family: var(--font-hero);
-    font-weight: 500;
+    font-style: italic;
+    font-weight: 600;
     letter-spacing: 0;
-    font-size: min(2.25rem, 5svh);
-    line-height: 1.15;
+    font-size: min(2.5rem, 5.5svh);
+    line-height: 1.1;
+    color: #E4F1C9;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35), 0 6px 24px rgba(0, 0, 0, 0.5);
   }
+  html:lang(am) .hero-on-photo .hero-sub { font-style: normal; }
+  /* the description: the clean sans of the site, larger and firmer than before */
   .hero-on-photo .hero-desc {
-    font-family: var(--font-hero);
-    font-weight: 500;
-    font-size: min(1.6rem, 3.6svh);
-    line-height: 1.35;
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: min(1.25rem, 2.9svh);
+    line-height: 1.6;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45), 0 4px 18px rgba(0, 0, 0, 0.45);
+  }
+  /* the shade behind the words: deeper from the left and from the top, where the words now sit */
+  .hero-shade {
+    background:
+      linear-gradient(180deg, rgba(10, 24, 14, 0.38) 0%, rgba(10, 24, 14, 0) 55%),
+      linear-gradient(90deg, rgba(10, 24, 14, 0.78) 0%, rgba(10, 24, 14, 0.6) 30%, rgba(10, 24, 14, 0.22) 56%, rgba(10, 24, 14, 0) 74%);
   }
 }

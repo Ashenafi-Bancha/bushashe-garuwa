@@ -64,7 +64,7 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
           </div>
         </div>
         {/* computers: a light shade from the left, just enough for the white words to read */}
-        <span className="hidden lg:block absolute inset-0 z-[3] bg-[linear-gradient(90deg,rgba(10,24,14,0.62)_0%,rgba(10,24,14,0.46)_30%,rgba(10,24,14,0.16)_54%,rgba(10,24,14,0)_70%)]" />
+        <span className="hero-shade hidden lg:block absolute inset-0 z-[3]" />
                 <span className="absolute inset-x-0 bottom-0 h-6 lg:h-10 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
         <span className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:right-8 lg:bottom-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
           {wol(photo.title)}
@@ -73,13 +73,13 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
 
       {/* the words: below the photograph on phones; over its upper left, in white, on computers */}
       <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 sm:pb-10 lg:pb-0 lg:pt-[clamp(3.5rem,12vh,8rem)] lg:h-full lg:flex lg:items-start">
-        <div className="lg:max-w-[min(36rem,44%)]">
+        <div className="lg:max-w-[min(48rem,58%)]">
           <span className="eyebrow mb-5 animate-fade-up">{eyebrow}</span>
           <h1 className="font-display text-[2.6rem] sm:text-6xl lg:text-[min(4.25rem,9.5svh)] font-extrabold text-[#1E3A29] lg:text-white leading-[0.98] [&>span>span_span]:text-[#6F9443] lg:[&>span>span_span]:text-[#BFDC93] lg:[text-shadow:0_2px_18px_rgba(0,0,0,0.45)]">
             <span className="line-mask"><span>{wol(title)}</span></span>
           </h1>
           {desc && (
-            <p className="hero-desc mt-5 lg:mt-7 text-base sm:text-lg text-[#1E3A29]/75 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] leading-relaxed max-w-md lg:max-w-none animate-fade-up delay-200">{wol(desc)}</p>
+            <p className="hero-desc mt-5 lg:mt-7 text-base sm:text-lg text-[#1E3A29]/75 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] leading-relaxed max-w-md lg:max-w-[38rem] animate-fade-up delay-200">{wol(desc)}</p>
           )}
         </div>
       </div>
