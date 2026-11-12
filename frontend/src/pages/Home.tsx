@@ -193,18 +193,24 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             </div>
           </div>
 
-          {/* the words: below the photographs on phones, on their left on computers */}
-          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 lg:py-0 lg:h-full lg:flex lg:items-center">
+          {/* the words: below the photographs on phones, on their upper left on computers */}
+          <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 lg:pb-0 lg:pt-[clamp(3.5rem,12vh,8rem)] lg:h-full lg:flex lg:items-start">
+            {/* computers: the call to the next events at the top right of the opening */}
+            <div className="hidden lg:block absolute top-8 right-8 z-[6] animate-fade-up delay-300">
+              <HeroEventsButton events={siteEvents} />
+            </div>
             <div className="lg:max-w-[min(38rem,46%)]">
             {/* the name in the lettering of the main gate, raised in 3D, sized to the screen */}
             <HeroName title={h.hero.title} className="mb-6 lg:mb-7" />
             <div className="flex flex-col justify-between gap-6 lg:gap-7 animate-fade-up delay-300">
               <div className="max-w-xl">
-                <p className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] lg:text-white lg:[text-shadow:0_2px_14px_rgba(0,0,0,0.45)] leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
-                <p className="text-[#1E3A29]/70 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
+                <p className="hero-sub font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] lg:text-white lg:[text-shadow:0_2px_14px_rgba(0,0,0,0.45)] leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
+                <p className="hero-desc text-[#1E3A29]/70 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
               </div>
               {/* the call to the next events: warm orange, a live dot and the next date; it leads to the events below */}
-              <HeroEventsButton events={siteEvents} />
+              <div className="lg:hidden">
+                <HeroEventsButton events={siteEvents} />
+              </div>
               <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
                 <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>

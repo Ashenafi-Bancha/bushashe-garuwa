@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@800;900&family=Noto+Sans+Ethiopic:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@800;900&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500;600&family=Noto+Serif+Ethiopic:wght@400;500&display=swap');
 @import 'tailwindcss';
 
 /* Living Earth: warm paper, deep forest, fresh moss, a touch of clay. */
@@ -14,6 +14,8 @@
   /* Display = headings (bold grotesque), sans = body. Noto Sans Ethiopic renders Amharic (Ge'ez). */
   --font-display: 'Bricolage Grotesque', 'Noto Sans Ethiopic', system-ui, sans-serif;
   --font-sans: 'Manrope', 'Noto Sans Ethiopic', system-ui, sans-serif;
+  /* the openings' words on computers: an elegant serif; Noto Serif Ethiopic for Amharic */
+  --font-hero: 'Cormorant Garamond', 'Noto Serif Ethiopic', Georgia, serif;
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
@@ -270,19 +272,21 @@ html:lang(am) .hero-name { font-size: min(15vw, 7rem); line-height: 1.25; }
    (PageHero): the display font, white with a soft shadow, not raised or capitalised */
 @media (min-width: 1024px) {
   .home-hero .hero-name {
-    font-family: var(--font-display);
-    font-weight: 800;
-    letter-spacing: -0.04em;
+    font-family: var(--font-hero);
+    font-weight: 500;
+    letter-spacing: 0;
     text-transform: none;
-    font-size: min(4.25rem, 9.5svh);
-    line-height: 0.98;
+    font-size: min(5.25rem, 11svh);
+    line-height: 1.02;
     color: #FFFFFF;
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
     filter: none;
     transform: none;
   }
   .home-hero .hero-name.brand-3d .line-mask { padding-bottom: 0.08em; margin-bottom: -0.08em; }
-  html:lang(am) .home-hero .hero-name { font-size: min(4.25rem, 9.5svh); font-weight: 700; letter-spacing: 0; line-height: 1.15; }
+  /* one line, like the name in the reference */
+  .home-hero .hero-name > span { display: inline; }
+  html:lang(am) .home-hero .hero-name { font-size: min(4.5rem, 10svh); font-weight: 500; letter-spacing: 0; line-height: 1.2; }
 }
 /* the name's letters rise one by one (components/HeroName.tsx); until the script takes over, each line rises whole */
 .hero-letter { display: inline-block; will-change: transform; }
@@ -1273,3 +1277,29 @@ footer ul a:hover { background-size: 100% 1.5px; }
 input[aria-invalid='true'],
 textarea[aria-invalid='true'],
 select[aria-invalid='true'] { border-color: #B42318 !important; box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.12); }
+
+/* ── Computers: the words of every opening (the home page and PageHero) in an elegant serif, white ── */
+@media (min-width: 1024px) {
+  .hero-on-photo h1.font-display,
+  html:lang(am) .hero-on-photo h1.font-display {
+    font-family: var(--font-hero);
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: 1.04;
+    font-size: min(5rem, 10.5svh);
+  }
+  html:lang(am) .hero-on-photo h1.font-display { font-size: min(4.25rem, 9.5svh); line-height: 1.2; }
+  .hero-on-photo .hero-sub {
+    font-family: var(--font-hero);
+    font-weight: 500;
+    letter-spacing: 0;
+    font-size: min(2.25rem, 5svh);
+    line-height: 1.15;
+  }
+  .hero-on-photo .hero-desc {
+    font-family: var(--font-hero);
+    font-weight: 500;
+    font-size: min(1.6rem, 3.6svh);
+    line-height: 1.35;
+  }
+}
