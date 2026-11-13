@@ -18,9 +18,12 @@ export function SignInFrame({ children }: { children: ReactNode }) {
       <div className="hidden lg:block p-4 pr-0">
         <div className="relative h-full min-h-[560px] rounded-[22px] overflow-hidden bg-[#DCE4D2]">
           <img {...picture(photos.meeshsho, '50vw')} alt="Meesho Keettaa at Bushaashe Garuwa" className="admin-ken absolute inset-0 w-full h-full object-cover" />
-          <span className="absolute left-5 bottom-5 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-[12.5px] font-semibold text-[var(--a-ink)]">
-            Meesho Keettaa · Bushaashe Garuwa
-          </span>
+          {/* the brand over the photograph: the deep forest rising from the foot, the name in the openings' serif */}
+          <span className="absolute inset-0 bg-[linear-gradient(0deg,rgba(13,28,18,0.92)_0%,rgba(19,38,26,0.55)_38%,rgba(19,38,26,0)_65%)]" />
+          <div className="absolute left-8 right-8 bottom-8 text-white">
+            <div className="brand-serif text-[44px] xl:text-[52px] leading-none">Bushaashe Garuwa</div>
+            <div className="mt-3 text-[15px] font-semibold text-white/80">Staff area · Meesho Keettaa</div>
+          </div>
         </div>
       </div>
 
@@ -29,7 +32,7 @@ export function SignInFrame({ children }: { children: ReactNode }) {
           {/* who this is */}
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left mb-8 admin-rise">
             <img src={logo} alt="" className="w-16 h-16 rounded-full bg-white object-contain p-0.5 ring-1 ring-[var(--a-border)] shadow-[0_6px_18px_-10px_rgba(19,38,26,0.35)]" />
-            <div className="mt-4 text-[17px] font-bold text-[var(--a-ink)]">Bushaashe Garuwa</div>
+            <div className="mt-4 brand-serif text-[26px] leading-none text-[var(--a-ink)]">Bushaashe Garuwa</div>
             <div className="mt-1 inline-flex items-center gap-1.5 text-[13px] text-[var(--a-muted)]">
               <Icon name="lock" className="w-3.5 h-3.5" />
               Staff area

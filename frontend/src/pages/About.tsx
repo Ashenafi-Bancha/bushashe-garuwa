@@ -68,7 +68,7 @@ export default function About() {
               <div className="img-zoom aspect-[4/5] rounded-[2rem] bg-[#1E3A29]/10">
                 <img {...picture(photos.lawn)} alt={t.photos.lawn} className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -bottom-5 -left-5 bg-[#3F7D20] rounded-2xl shadow-xl p-6 hidden lg:block">
+              <div className="brand-deep absolute -bottom-5 -left-5 rounded-2xl shadow-xl p-6 hidden lg:block">
                 <div className="text-white font-display text-3xl font-semibold">4+</div>
                 <div className="text-white/85 font-sans text-xs tracking-wider uppercase mt-1">{a.who.generations}</div>
               </div>

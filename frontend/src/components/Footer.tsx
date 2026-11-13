@@ -17,18 +17,18 @@ const footerRoutes = {
 export default function Footer() {
   const { t } = useI18n();
   return (
-    // the green of the website's buttons, with the words in white (the emails' footer matches)
+    // the deep forest of the brand, with the words in white and the name in the openings' serif
     <footer className="relative text-white">
       {/* the top edge; hidden when a green band above already leads into the footer */}
       <GreenEdge className="footer-edge" />
-      <div className="bg-[#3F7D20] overflow-hidden pb-16">
+      <div className="brand-deep overflow-hidden pb-16">
       <div className="max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-12 pb-12 sm:pb-16">
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <img src={logo} alt="Bushaashe Garuwa" className="w-14 h-14 rounded-full object-contain bg-white p-0.5 flex-shrink-0 shadow-sm" />
               <div className="min-w-0">
-                <div className="font-display text-xl font-bold tracking-tight text-white">Bushaashe Garuwa</div>
+                <div className="brand-serif text-[1.65rem] leading-none text-white">Bushaashe Garuwa</div>
                 <div className="text-white/85 text-xs font-semibold leading-snug mt-1">{t.common.locationLine}</div>
               </div>
             </div>

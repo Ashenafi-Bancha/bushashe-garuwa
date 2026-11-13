@@ -56,13 +56,13 @@ export default function Sidebar({
   onInstall?: () => void;
 }) {
   return (
-    <aside className="hidden lg:flex fixed inset-y-0 left-0 z-40 w-[248px] flex-col bg-white border-r border-[var(--a-border)]">
+    <aside className="admin-deep hidden lg:flex fixed inset-y-0 left-0 z-40 w-[248px] flex-col">
       {/* who this is */}
       <div className="flex items-center gap-3 px-5 h-16 flex-shrink-0">
-        <img src={logo} alt="" className="w-9 h-9 rounded-full object-contain bg-white ring-1 ring-[var(--a-border)]" />
+        <img src={logo} alt="" className="w-9 h-9 rounded-full object-contain bg-white ring-2 ring-white/20" />
         <div className="min-w-0 leading-tight">
-          <div className="text-[14px] font-bold text-[var(--a-ink)] truncate">Bushaashe Garuwa</div>
-          <div className="text-[12px] text-[var(--a-muted)]">Staff area</div>
+          <div className="brand-serif text-[19px] leading-none text-white truncate">Bushaashe Garuwa</div>
+          <div className="text-[12px] text-white/60 mt-1">Staff area</div>
         </div>
       </div>
 
@@ -70,7 +70,7 @@ export default function Sidebar({
       <nav className="flex-1 min-h-0 overflow-y-auto px-3 pb-4" aria-label="Staff sections">
         {groups.map((group, i) => (
           <div key={group.title ?? i} className={i > 0 ? 'mt-5' : 'mt-2'}>
-            {group.title && <div className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--a-faint)]">{group.title}</div>}
+            {group.title && <div className="px-3 mb-1.5 text-[11px] font-semibold uppercase tracking-[0.08em] text-white/45">{group.title}</div>}
             <div className="space-y-0.5">
               {group.sections.map((section) => {
                 const active = section.id === current;
@@ -94,9 +94,9 @@ export default function Sidebar({
       </nav>
 
       {/* the app, the website, and you */}
-      <div className="flex-shrink-0 border-t border-[var(--a-border)] p-3 space-y-0.5">
+      <div className="flex-shrink-0 border-t border-white/10 p-3 space-y-0.5">
         {canInstall && onInstall && (
-          <button type="button" onClick={onInstall} className="admin-nav-item text-[var(--a-brand)]">
+          <button type="button" onClick={onInstall} className="admin-nav-item !text-[#B9D38A]">
             <Icon name="download" className="w-[18px] h-[18px]" />
             Install the staff app
           </button>
@@ -106,12 +106,12 @@ export default function Sidebar({
           View the website
         </a>
         {user && (
-          <div className={`flex items-center gap-2 rounded-xl p-1.5 mt-2 ${current === 'account' ? 'bg-[var(--a-brand-soft)]' : ''}`}>
-            <button type="button" onClick={onAccount} className="flex-1 min-w-0 flex items-center gap-2.5 rounded-lg p-1 text-left hover:bg-[var(--a-hover)]">
+          <div className={`flex items-center gap-2 rounded-xl p-1.5 mt-2 ${current === 'account' ? 'bg-white/12' : ''}`}>
+            <button type="button" onClick={onAccount} className="flex-1 min-w-0 flex items-center gap-2.5 rounded-lg p-1 text-left hover:bg-white/10">
               <Avatar name={user.name} email={user.email} size="sm" />
               <span className="min-w-0">
-                <span className="block text-[13px] font-semibold text-[var(--a-ink)] truncate">{user.name || user.email}</span>
-                <span className="block text-[11px] text-[var(--a-muted)]">{ROLE_LABELS[user.role]}</span>
+                <span className="block text-[13px] font-semibold text-white truncate">{user.name || user.email}</span>
+                <span className="block text-[11px] text-white/55">{ROLE_LABELS[user.role]}</span>
               </span>
             </button>
             <button type="button" onClick={onSignOut} aria-label="Sign out" title="Sign out" className="admin-icon-btn">
