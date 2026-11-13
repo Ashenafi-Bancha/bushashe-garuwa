@@ -120,18 +120,7 @@ function NeedsAttention({ onOpen, refreshKey }: { onOpen: (section: SectionId) =
 }
 
 /** The title of a section, what it is for, and its main buttons on the right */
-function PageHeader({ title, lead, actions, brand = false }: { title: ReactNode; lead?: ReactNode; actions?: ReactNode; brand?: boolean }) {
-  // the overview's greeting: a deep forest panel with the name in the openings' serif
-  if (brand)
-    return (
-      <div className="brand-deep admin-greeting rounded-[22px] px-5 py-6 sm:px-8 sm:py-8 mb-5 sm:mb-7 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-        <div className="min-w-0">
-          <h1 className="brand-serif text-[30px] sm:text-[40px] leading-[1.05] text-white">{title}</h1>
-          {lead && <p className="text-[14px] sm:text-[15px] text-white/75 mt-2">{lead}</p>}
-        </div>
-        {actions && <div className="flex items-center gap-2 flex-shrink-0">{actions}</div>}
-      </div>
-    );
+function PageHeader({ title, lead, actions }: { title: ReactNode; lead?: ReactNode; actions?: ReactNode }) {
   return (
     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-3 sm:gap-6 mb-5 sm:mb-7">
       <div className="min-w-0">
@@ -275,12 +264,11 @@ export default function Dashboard() {
   const overview = (
     <div className="space-y-5 sm:space-y-6">
       <PageHeader
-        brand
         title={`${greeting}${name ? `, ${name}` : ''}`}
         lead={
           <>
             {today} ·{' '}
-            {waiting === undefined ? 'checking what is waiting…' : waiting === 0 ? 'nothing is waiting for you.' : <strong className="font-semibold text-white">{plural(waiting, 'thing is', 'things are')} waiting for you.</strong>}
+            {waiting === undefined ? 'checking what is waiting…' : waiting === 0 ? 'nothing is waiting for you.' : <strong className="font-semibold text-[var(--a-ink)]">{plural(waiting, 'thing is', 'things are')} waiting for you.</strong>}
           </>
         }
         actions={

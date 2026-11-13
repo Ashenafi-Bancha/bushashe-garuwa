@@ -54,11 +54,11 @@ export default function EventAd({ event, onBook }: { event: SiteEvent; onBook?: 
   ];
 
   return (
-    <article className="event-ad group relative grid lg:grid-cols-[minmax(0,44%)_1fr] overflow-hidden rounded-[2rem] bg-[#13261A] text-white shadow-[0_30px_60px_-30px_rgba(19,38,26,0.65)]">
+    <article className="event-ad group relative grid lg:grid-cols-[minmax(0,44%)_1fr] overflow-hidden rounded-[2rem] bg-[#3F7D20] text-white shadow-[0_30px_60px_-30px_rgba(63,125,32,0.7)]">
       {/* the photograph, with the date like a ticket stub */}
       <div className="relative img-zoom aspect-[16/10] lg:aspect-auto lg:min-h-full">
         <Photo src={photo} alt={text.name} label={text.name} className="absolute inset-0 w-full h-full object-cover" />
-        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(19,38,26,0)_45%,rgba(19,38,26,0.75)_100%)] lg:bg-[linear-gradient(90deg,rgba(19,38,26,0)_60%,rgba(19,38,26,0.9)_100%)]" />
+        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(63,125,32,0)_55%,rgba(63,125,32,0.85)_100%)] lg:bg-[linear-gradient(90deg,rgba(63,125,32,0)_70%,rgba(63,125,32,0.95)_100%)]" />
         <div className="absolute top-4 left-4 sm:top-5 sm:left-5 w-[84px] rounded-2xl bg-white text-[#13261A] text-center overflow-hidden shadow-xl">
           <div className="bg-[#E2571C] text-white text-[11px] font-extrabold uppercase tracking-[0.14em] py-1.5">{date({ month: 'short' })}</div>
           <div className="font-display text-4xl font-extrabold leading-none pt-2">{date({ day: 'numeric' })}</div>
@@ -70,7 +70,7 @@ export default function EventAd({ event, onBook }: { event: SiteEvent; onBook?: 
       {/* the words, the countdown and the button */}
       <div className="relative p-6 sm:p-8 lg:p-10 flex flex-col gap-5">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="rounded-full bg-white/12 border border-white/20 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-[#B9D38A]">{e.categories[event.category]}</span>
+          <span className="rounded-full bg-white/12 border border-white/20 px-3 py-1 text-[11px] font-extrabold uppercase tracking-[0.14em] text-white">{e.categories[event.category]}</span>
           {event.partner && <span className="text-sm text-white/75">{fmt(e.live.partnerWith, { partner: event.partner })}</span>}
         </div>
 
@@ -81,17 +81,17 @@ export default function EventAd({ event, onBook }: { event: SiteEvent; onBook?: 
 
         <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm font-semibold text-white/90">
           <li className="flex items-center gap-2">
-            <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#FF9A2E]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="3" /><path d="M3 9.5h18M8 2.5v4M16 2.5v4" /></svg>
+            <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="3" /><path d="M3 9.5h18M8 2.5v4M16 2.5v4" /></svg>
             {date({ weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
           </li>
           {event.time && (
             <li className="flex items-center gap-2">
-              <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#FF9A2E]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
+              <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></svg>
               {event.time}
             </li>
           )}
           <li className="flex items-center gap-2">
-            <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#FF9A2E]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
+            <svg viewBox="0 0 24 24" className="w-4 h-4 text-white" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z" /><circle cx="12" cy="9" r="2.5" /></svg>
             {wol(ad.where)}
           </li>
         </ul>
@@ -104,10 +104,10 @@ export default function EventAd({ event, onBook }: { event: SiteEvent; onBook?: 
           </div>
         ) : (
           <div>
-            <div className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#FF9A2E] mb-2">{ad.startsIn}</div>
+            <div className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-white/85 mb-2">{ad.startsIn}</div>
             <div className="grid grid-cols-4 gap-2 sm:gap-3 max-w-md" role="timer" aria-label={`${ad.startsIn} ${left.days} ${ad.days}, ${left.hours} ${ad.hours}, ${left.minutes} ${ad.minutes}`}>
               {units.map((unit) => (
-                <div key={unit.label} className="rounded-2xl bg-white/[0.08] border border-white/15 py-3 text-center" aria-hidden="true">
+                <div key={unit.label} className="rounded-2xl bg-white/[0.14] border border-white/25 py-3 text-center" aria-hidden="true">
                   <div className="font-display text-3xl sm:text-4xl font-extrabold tabular-nums leading-none">{pad(unit.value)}</div>
                   <div className="mt-1.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.12em] text-white/60">{unit.label}</div>
                 </div>

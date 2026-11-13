@@ -331,7 +331,7 @@ function TemporaryPassword({ name, email, password, onDone }: { name: string; em
       <p className="text-sm text-[var(--a-muted)] leading-relaxed">
         Give this password to <strong className="text-[var(--a-ink)]">{name || email}</strong>. It is shown only now. They will choose their own password the first time they sign in.
       </p>
-      <button type="button" onClick={() => copy('password')} className="w-full rounded-2xl bg-[#13261A] text-white px-5 py-5 text-center group">
+      <button type="button" onClick={() => copy('password')} className="w-full rounded-2xl bg-[#3F7D20] text-white px-5 py-5 text-center group">
         <span className="block font-mono text-2xl sm:text-[28px] font-bold tracking-[0.08em] select-all">{password}</span>
         <span className="flex items-center justify-center gap-1.5 text-[12px] text-white/60 mt-2 group-hover:text-white/90">
           <Icon name={copied === 'password' ? 'check' : 'copy'} className="w-3.5 h-3.5" />

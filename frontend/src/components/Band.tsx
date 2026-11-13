@@ -1,8 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import GreenEdge from './GreenEdge';
 
-/** green: the deep forest of the brand (the footer, the openings' shade) */
-const TONES = { sage: '#E3EBD8', green: '#13261A' } as const;
+const TONES = { sage: '#E3EBD8', green: '#3F7D20' } as const;
 
 /**
  * A coloured band across the page, shaped like the footer: the top-left corner
@@ -14,7 +13,7 @@ export default function Band({ tone = 'sage', className = '', outer = '', childr
   return (
     <section {...rest} className={`relative ${outer}`}>
       <GreenEdge color={color} />
-      <div className={`${tone === 'green' ? 'band-green' : ''} ${className}`} style={{ backgroundColor: color }}>
+      <div className={`${tone === 'green' ? 'band-green' : ''} ${className}`} style={{ background: color }}>
         {children}
       </div>
       <GreenEdge color={color} flip />

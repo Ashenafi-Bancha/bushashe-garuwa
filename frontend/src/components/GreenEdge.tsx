@@ -5,7 +5,7 @@
  * corner hanging down. The corners keep their shape at every width; only the
  * straight middle stretches.
  */
-export default function GreenEdge({ color = '#13261A', flip = false, className = '' }: { color?: string; flip?: boolean; className?: string }) {
+export default function GreenEdge({ color = '#3F7D20', flip = false, className = '' }: { color?: string; flip?: boolean; className?: string }) {
   return (
     <div
       aria-hidden="true"
