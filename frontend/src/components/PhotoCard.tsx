@@ -32,16 +32,16 @@ export default function PhotoCard({
   return (
     <Link
       to={to}
-      className="group flex h-full flex-col rounded-[1.75rem] bg-white p-2.5 elev-1 transition-[transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(30,58,41,0.45)]"
+      className="group flex h-full flex-col rounded-[1.75rem] bg-white p-2.5 elev-1 transition-[transform,box-shadow] duration-500 hover:-translate-y-1.5 hover:shadow-[0_30px_60px_-30px_rgba(24,32,27,0.45)]"
     >
       <div className={`img-zoom rounded-[1.35rem] overflow-hidden ${ratio}`}>
         <Photo src={photo} alt={title} label={title} className="w-full h-full object-cover" />
       </div>
 
       <div className="flex flex-1 flex-col px-3 pt-5 pb-3">
-        <h3 className="font-display text-xl font-bold text-[#1E3A29] leading-tight mb-2">{title}</h3>
-        {desc && <p className="text-[#1E3A29]/60 text-sm leading-relaxed mb-5">{desc}</p>}
-        {meta && <span className="text-[#C4622D] text-xs font-semibold mb-5">{meta}</span>}
+        <h3 className="font-display text-xl font-bold text-[#18201B] leading-tight mb-2">{title}</h3>
+        {desc && <p className="text-[#18201B]/60 text-sm leading-relaxed mb-5">{desc}</p>}
+        {meta && <span className="text-[#9C6B17] text-xs font-semibold mb-5">{meta}</span>}
 
         <span className="mt-auto btn-primary btn-sm">{action ?? t.common.explore}</span>
       </div>

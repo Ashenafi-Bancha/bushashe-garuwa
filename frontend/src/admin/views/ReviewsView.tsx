@@ -24,10 +24,10 @@ function Stars({ value, onChange, size = 'w-4 h-4' }: { value: number | null; on
       {[1, 2, 3, 4, 5].map((n) =>
         onChange ? (
           <button key={n} type="button" onClick={() => onChange(value === n ? null : n)} aria-label={`${n} stars`} className="p-1 -m-0.5 active:scale-90 transition-transform">
-            <Icon name={value !== null && n <= value ? 'starFilled' : 'star'} className={`${size} ${value !== null && n <= value ? 'text-[#E8A21A]' : 'text-[#1E3A29]/25'}`} />
+            <Icon name={value !== null && n <= value ? 'starFilled' : 'star'} className={`${size} ${value !== null && n <= value ? 'text-[#C9973A]' : 'text-[#18201B]/25'}`} />
           </button>
         ) : (
-          <Icon key={n} name={value !== null && n <= value ? 'starFilled' : 'star'} className={`${size} ${value !== null && n <= value ? 'text-[#E8A21A]' : 'text-[#1E3A29]/20'}`} />
+          <Icon key={n} name={value !== null && n <= value ? 'starFilled' : 'star'} className={`${size} ${value !== null && n <= value ? 'text-[#C9973A]' : 'text-[#18201B]/20'}`} />
         ),
       )}
     </span>
@@ -128,7 +128,7 @@ export default function ReviewsView() {
   return (
     <div className="space-y-5 max-w-3xl">
       <div className="admin-card flex flex-col sm:flex-row sm:items-center gap-4">
-        <span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#E8A21A]/15 text-[#B07A0E] flex-shrink-0">
+        <span className="grid place-items-center w-12 h-12 rounded-2xl bg-[#C9973A]/15 text-[#B07A0E] flex-shrink-0">
           <Icon name="quote" />
         </span>
         <p className="flex-1 text-sm text-[var(--a-muted)] leading-relaxed">
@@ -159,7 +159,7 @@ export default function ReviewsView() {
               <blockquote className="mt-3.5 font-display text-[17px] leading-snug text-[var(--a-ink)]">“{review.words.en}”</blockquote>
               <div className="flex flex-wrap gap-1.5 mt-2.5">
                 {LANGS.filter((l) => review.words[l.value]).map((l) => (
-                  <span key={l.value} className="rounded-full bg-[#1E3A29]/6 px-2.5 py-1 text-[11px] font-bold text-[var(--a-muted)]">{l.label}</span>
+                  <span key={l.value} className="rounded-full bg-[#18201B]/6 px-2.5 py-1 text-[11px] font-bold text-[var(--a-muted)]">{l.label}</span>
                 ))}
               </div>
               <div className="flex items-center gap-3 mt-4">

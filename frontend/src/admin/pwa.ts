@@ -36,7 +36,7 @@ export function useStaffApp() {
   useEffect(() => {
     // the staff app's own identity, in place of the public website's
     setHead('link[rel="manifest"]', link('manifest'), 'href', '/admin.webmanifest');
-    setHead('meta[name="theme-color"]', meta('theme-color'), 'content', '#3F7D20');
+    setHead('meta[name="theme-color"]', meta('theme-color'), 'content', '#24603B');
     setHead('link[rel="apple-touch-icon"]', link('apple-touch-icon'), 'href', '/staff/apple-touch-icon.png');
     setHead('meta[name="apple-mobile-web-app-capable"]', meta('apple-mobile-web-app-capable'), 'content', 'yes');
     setHead('meta[name="mobile-web-app-capable"]', meta('mobile-web-app-capable'), 'content', 'yes');

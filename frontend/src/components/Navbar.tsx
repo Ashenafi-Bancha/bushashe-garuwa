@@ -119,8 +119,8 @@ export default function Navbar() {
   const onPhoto = wide && hasPhotoHero(location.pathname) && !scrolled && !open;
   const linkTone = (active: boolean) =>
     active
-      ? onPhoto ? 'bg-white/20 text-white backdrop-blur-sm' : 'bg-[#3F7D20] text-[#F4EFE4]'
-      : onPhoto ? 'text-white hover:bg-white/15 [text-shadow:0_1px_8px_rgba(0,0,0,0.45)]' : 'text-[#1E3A29]/75 hover:text-[#1E3A29] hover:bg-[#1E3A29]/6';
+      ? onPhoto ? 'bg-white/20 text-white backdrop-blur-sm' : 'bg-[#24603B] text-[#FAF7F0]'
+      : onPhoto ? 'text-white hover:bg-white/15 [text-shadow:0_1px_8px_rgba(0,0,0,0.45)]' : 'text-[#18201B]/75 hover:text-[#18201B] hover:bg-[#18201B]/6';
 
   const barLink = (key: PageKey) => (
     <Link
@@ -146,16 +146,16 @@ export default function Navbar() {
       </button>
       {/* the panel hangs from the button; the invisible top padding keeps the hover alive on the way down */}
       <div className={`absolute left-1/2 -translate-x-1/2 top-full pt-3 transition-all duration-300 ${panel === g ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-1 pointer-events-none'}`} inert={panel !== g}>
-        <ul className="w-[22rem] rounded-[1.5rem] bg-white p-2 shadow-[0_24px_60px_-24px_rgba(30,58,41,0.45)] border border-[#1E3A29]/6">
+        <ul className="w-[22rem] rounded-[1.5rem] bg-white p-2 shadow-[0_24px_60px_-24px_rgba(24,32,27,0.45)] border border-[#18201B]/6">
           {groups[g].map((key) => (
             <li key={key}>
-              <Link to={routes[key]} className={`group flex items-start gap-3.5 rounded-2xl p-3 transition-colors ${isActive(routes[key]) ? 'bg-[#E9EEDD]' : 'hover:bg-[#F4EFE4]'}`}>
-                <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#86A94F]/20 text-[#1E3A29] flex-shrink-0 transition-colors group-hover:bg-[#86A94F] group-hover:text-[#13261A]">
+              <Link to={routes[key]} className={`group flex items-start gap-3.5 rounded-2xl p-3 transition-colors ${isActive(routes[key]) ? 'bg-[#F2EADA]' : 'hover:bg-[#FAF7F0]'}`}>
+                <span className="grid place-items-center w-10 h-10 rounded-xl bg-[#C9973A]/20 text-[#18201B] flex-shrink-0 transition-colors group-hover:bg-[#C9973A] group-hover:text-[#121915]">
                   <Icon page={key} />
                 </span>
                 <span className="min-w-0">
-                  <span className="block font-bold text-[#1E3A29] text-sm">{t.nav.links[key]}</span>
-                  {describe(key) && <span className="block text-[#1E3A29]/55 text-xs leading-snug mt-0.5">{describe(key)}</span>}
+                  <span className="block font-bold text-[#18201B] text-sm">{t.nav.links[key]}</span>
+                  {describe(key) && <span className="block text-[#18201B]/55 text-xs leading-snug mt-0.5">{describe(key)}</span>}
                 </span>
               </Link>
             </li>
@@ -179,14 +179,14 @@ export default function Navbar() {
         to={routes[key]}
         className={`flex items-center gap-4 rounded-2xl px-3 py-3 transition-colors ${isActive(routes[key]) ? 'bg-white shadow-sm' : 'active:bg-white/70'}`}
       >
-        <span className={`grid place-items-center w-11 h-11 rounded-xl flex-shrink-0 ${isActive(routes[key]) ? 'bg-[#3F7D20] text-[#F4EFE4]' : 'bg-[#86A94F]/20 text-[#1E3A29]'}`}>
+        <span className={`grid place-items-center w-11 h-11 rounded-xl flex-shrink-0 ${isActive(routes[key]) ? 'bg-[#24603B] text-[#FAF7F0]' : 'bg-[#C9973A]/20 text-[#18201B]'}`}>
           <Icon page={key} />
         </span>
         <span className="min-w-0 flex-1">
-          <span className="block font-display text-lg font-bold text-[#1E3A29] leading-tight tracking-tight">{t.nav.links[key]}</span>
-          {describe(key) && <span className="block text-[#1E3A29]/55 text-xs leading-snug mt-0.5 truncate">{describe(key)}</span>}
+          <span className="block font-display text-lg font-bold text-[#18201B] leading-tight tracking-tight">{t.nav.links[key]}</span>
+          {describe(key) && <span className="block text-[#18201B]/55 text-xs leading-snug mt-0.5 truncate">{describe(key)}</span>}
         </span>
-        <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#1E3A29]/35 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+        <svg viewBox="0 0 24 24" className="w-4 h-4 text-[#18201B]/35 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true"><path d="m9 6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
       </Link>
     </li>
   );
@@ -197,7 +197,7 @@ export default function Navbar() {
     <>
       {/* part of the page, not a separate bar: on a photograph just the words;
           otherwise the page's own paper colour, edge to edge, no border or shadow */}
-      <header className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${onPhoto ? 'bg-transparent' : 'bg-[#F4EFE4]'}`}>
+      <header className={`fixed top-0 inset-x-0 z-50 transition-colors duration-500 ${onPhoto ? 'bg-transparent' : 'bg-[#FAF7F0]'}`}>
         <div className="mx-auto max-w-screen-xl h-16 sm:h-[72px] px-4 sm:px-8 flex items-center justify-between gap-3">
           <Link to="/" className="flex items-center gap-2.5 flex-shrink-0 group" aria-label={t.nav.homeAria}>
             <img
@@ -205,7 +205,7 @@ export default function Navbar() {
               alt="Bushaashe Garuwa"
               className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-contain bg-white p-0.5 transition-transform duration-500 group-hover:scale-105"
             />
-            <span className="font-display text-[16px] max-[379px]:text-[14px] sm:text-[18px] font-bold tracking-tight whitespace-nowrap text-[#15A864]">Bushaashe Garuwa</span>
+            <span className="brand-wordmark text-[19px] max-[379px]:text-[17px] sm:text-[21px] leading-none whitespace-nowrap text-[#24603B]">Bushaashe Garuwa</span>
           </Link>
 
           {/* computers: every way in, right in the bar */}
@@ -233,7 +233,7 @@ export default function Navbar() {
               aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
               aria-expanded={open}
               aria-controls="site-menu"
-              className="lg:hidden grid place-items-center w-11 h-11 -mr-2 text-[#1E3A29]"
+              className="lg:hidden grid place-items-center w-11 h-11 -mr-2 text-[#18201B]"
             >
               {/* a plain three-line icon that turns into a cross */}
               <span className="relative block w-6 h-[18px]">
@@ -254,7 +254,7 @@ export default function Navbar() {
         aria-label={t.nav.menuLabel}
         inert={!open}
         data-lenis-prevent
-        className={`site-menu lg:hidden fixed inset-0 z-[45] bg-[#F4EFE4] overflow-y-auto ${open ? 'is-open' : 'pointer-events-none'}`}
+        className={`site-menu lg:hidden fixed inset-0 z-[45] bg-[#FAF7F0] overflow-y-auto ${open ? 'is-open' : 'pointer-events-none'}`}
       >
         <nav className="max-w-lg mx-auto px-4 pt-24 sm:pt-28 pb-10" aria-label={t.nav.mobileNav}>
           <ul className="space-y-1">
@@ -265,7 +265,7 @@ export default function Navbar() {
 
           {(Object.keys(groups) as GroupKey[]).map((g) => (
             <div key={g} className="mt-5">
-              <div className="px-3 mb-1.5 text-xs font-bold text-[#C4622D]">{t.nav.links[g]}</div>
+              <div className="px-3 mb-1.5 text-xs font-bold text-[#9C6B17]">{t.nav.links[g]}</div>
               <ul className="space-y-1">{groups[g].map((key) => menuRow(key, row++))}</ul>
             </div>
           ))}
@@ -279,16 +279,16 @@ export default function Navbar() {
           </ul>
 
           <div
-            className="mt-7 rounded-[1.75rem] bg-[#E3EBD8] text-[#13261A] p-5"
+            className="mt-7 rounded-[1.75rem] bg-[#F2EADA] text-[#121915] p-5"
             style={{ opacity: open ? 1 : 0, transform: open ? 'none' : 'translateY(14px)', transition: 'opacity .5s ease .45s, transform .7s var(--ease-out-expo) .45s' }}
           >
             <Link to="/visit" className="btn-primary w-full">
               {t.common.planVisit}
             </Link>
-            <div className="mt-5 text-sm text-[#1E3A29]/80 leading-relaxed space-y-1">
+            <div className="mt-5 text-sm text-[#18201B]/80 leading-relaxed space-y-1">
               <p>{t.common.locationLine}</p>
-              <p><a href="tel:+251932196502" className="text-[#13261A] font-semibold">+251 932 196 502</a></p>
-              <p><a href="mailto:bushaashegaruwa@gmail.com" className="hover:text-[#346A1A]">bushaashegaruwa@gmail.com</a></p>
+              <p><a href="tel:+251932196502" className="text-[#121915] font-semibold">+251 932 196 502</a></p>
+              <p><a href="mailto:bushaashegaruwa@gmail.com" className="hover:text-[#1B4A2D]">bushaashegaruwa@gmail.com</a></p>
             </div>
             <div className="mt-4"><SocialLinks small /></div>
           </div>

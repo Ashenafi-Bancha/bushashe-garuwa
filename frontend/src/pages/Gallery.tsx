@@ -153,25 +153,25 @@ export default function Gallery() {
                 aria-pressed={filter === f}
                 className={`text-sm font-semibold rounded-full px-5 py-2.5 border transition-all duration-300 ${
                   filter === f
-                    ? 'bg-[#3F7D20] text-white border-[#3F7D20]'
-                    : 'border-[#1E3A29]/15 text-[#1E3A29]/70 hover:border-[#1E3A29]/50 hover:text-[#1E3A29]'
+                    ? 'bg-[#24603B] text-white border-[#24603B]'
+                    : 'border-[#18201B]/15 text-[#18201B]/70 hover:border-[#18201B]/50 hover:text-[#18201B]'
                 }`}
               >
                 {g.filters[f]}
               </button>
             ))}
-            <span className="ml-auto text-[#1E3A29]/40 text-sm whitespace-nowrap">{fmt(g.count, { count: shown.length })}</span>
+            <span className="ml-auto text-[#18201B]/40 text-sm whitespace-nowrap">{fmt(g.count, { count: shown.length })}</span>
           </div>
 
           {shown.length === 0 ? (
-            <p className="py-20 text-center text-[#1E3A29]/40">{g.empty}</p>
+            <p className="py-20 text-center text-[#18201B]/40">{g.empty}</p>
           ) : (
             <div data-wave className="grid grid-flow-row-dense grid-cols-2 sm:grid-cols-4 auto-rows-[150px] sm:auto-rows-[210px] lg:auto-rows-[240px] gap-3 sm:gap-4">
               {shown.map((item, i) => (
                 <Tilt key={item.id} className={`rounded-2xl sm:rounded-3xl ${filter === 'all' ? item.span : spans[i % spans.length]}`} max={5}>
                   <button
                     onClick={() => setOpenIdx(i)}
-                    className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#1E3A29]/8"
+                    className="img-zoom group relative block w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#18201B]/8"
                   >
                     <img {...picture(item.src)} alt={item.alt} loading="lazy" className={`w-full h-full object-cover ${item.focus ?? ''}`} />
                     <span className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-500" />

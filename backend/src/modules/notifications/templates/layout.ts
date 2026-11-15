@@ -43,7 +43,7 @@ export function heading(text: string, lang: Lang = 'en'): string {
 
 /** A small rounded label above a heading */
 export function eyebrow(text: string, lang: Lang = 'en', tone: 'moss' | 'clay' = 'moss'): string {
-  const [bg, fg] = tone === 'clay' ? ['#FBE7DC', '#9A4A20'] : [C.sage, C.ink];
+  const [bg, fg] = tone === 'clay' ? ['#FBE7DC', '#7A5210'] : [C.sage, C.ink];
   return `<div style="margin:0 0 14px;"><span style="display:inline-block;background:${bg};color:${fg};border-radius:999px;padding:6px 14px;font-family:${fontFor(lang)};font-size:12px;font-weight:700;${capsFor(lang, '0.1em')}">${text}</span></div>`;
 }
 
@@ -211,10 +211,10 @@ export function frame(input: FrameInput): string {
       .bg-page { background:#0E1A12 !important; }
       .bg-card { background:#17251B !important; }
       .bg-soft { background:#1F3125 !important; }
-      .t-ink { color:#F4EFE4 !important; }
+      .t-ink { color:#FAF7F0 !important; }
       .t-body { color:#D5DDD1 !important; }
       .t-muted { color:#A9B5A6 !important; }
-      .ref { background:#0E1A12 !important; border:1px solid #3F7D20 !important; }
+      .ref { background:#0E1A12 !important; border:1px solid #24603B !important; }
       .bg-soft td, .rule { border-color:#2F4636 !important; }
     }
   </style>

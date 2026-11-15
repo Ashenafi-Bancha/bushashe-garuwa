@@ -2,11 +2,11 @@ import { initials } from '../auth/AdminSession';
 
 /* warm colours from the site's palette, one picked per name so a person always has the same */
 const TONES = [
-  'bg-[#3F7D20] text-white',
-  'bg-[#C4622D] text-white',
-  'bg-[#1E3A29] text-white',
-  'bg-[#E8B23A] text-[#3A2A05]',
-  'bg-[#6F9443] text-white',
+  'bg-[#24603B] text-white',
+  'bg-[#9C6B17] text-white',
+  'bg-[#18201B] text-white',
+  'bg-[#C9973A] text-[#3A2A05]',
+  'bg-[#7A5210] text-white',
   'bg-[#8C4A2F] text-white',
 ];
 
@@ -20,7 +20,7 @@ const toneFor = (seed: string) => {
 export default function Avatar({ name, email = '', size = 'md', light = false }: { name: string; email?: string; size?: 'sm' | 'md' | 'lg' | 'xl'; /** white, for a green background */ light?: boolean }) {
   const sizes = { sm: 'w-8 h-8 text-[11px]', md: 'w-10 h-10 text-[13px]', lg: 'w-14 h-14 text-lg', xl: 'w-20 h-20 text-2xl' };
   return (
-    <span aria-hidden="true" className={`grid place-items-center rounded-full font-bold tracking-wide flex-shrink-0 ${sizes[size]} ${light ? 'bg-white text-[#2E5E17]' : toneFor(name || email)}`}>
+    <span aria-hidden="true" className={`grid place-items-center rounded-full font-bold tracking-wide flex-shrink-0 ${sizes[size]} ${light ? 'bg-white text-[#1B4A2D]' : toneFor(name || email)}`}>
       {initials(name, email)}
     </span>
   );

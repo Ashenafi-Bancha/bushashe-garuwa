@@ -103,14 +103,14 @@ export default function BookingsView({ pendingCount }: { pendingCount?: number }
                   <div className="min-w-0 flex-1">
                     <h3 className="font-semibold text-[15px] text-[var(--a-ink)] leading-tight truncate">{booking.name}</h3>
                     <div className="text-[13px] text-[var(--a-muted)] truncate mt-0.5">
-                      <span className="font-mono font-semibold text-[#9A4A20]">{booking.reference}</span> · {booking.phone}
+                      <span className="font-mono font-semibold text-[#7A5210]">{booking.reference}</span> · {booking.phone}
                     </div>
                   </div>
                   <BookingStatusSelect status={booking.status} busy={busyId === booking.id} onChange={(next) => changeStatus(booking.id, next)} />
                 </div>
 
                 <div className="mt-3 rounded-xl bg-[var(--a-bg)] px-3.5 py-2.5">
-                  <div className="text-[11px] font-bold text-[#346A1A] uppercase tracking-wider">Event</div>
+                  <div className="text-[11px] font-bold text-[#1B4A2D] uppercase tracking-wider">Event</div>
                   <div className="font-bold text-[14px] text-[var(--a-ink)] mt-0.5">{booking.eventName}</div>
                   {booking.eventDate && <div className="text-[13px] text-[var(--a-muted)]">{whenLabel(booking.eventDate)}</div>}
                 </div>

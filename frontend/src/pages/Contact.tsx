@@ -46,8 +46,8 @@ export default function Contact() {
     }
   };
   const input = (name: string) =>
-    `w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4] ${name === 'message' ? 'resize-none' : ''}`;
-  const label = 'block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2';
+    `w-full rounded-xl border border-[#18201B]/20 focus:border-[#18201B] px-4 py-3 font-sans text-sm text-[#18201B] outline-none transition-colors bg-[#FAF7F0] ${name === 'message' ? 'resize-none' : ''}`;
+  const label = 'block text-xs font-sans font-semibold text-[#18201B]/70 tracking-wider uppercase mb-2';
 
   return (
     <main>
@@ -55,7 +55,7 @@ export default function Contact() {
       <PageHero slot="contact" eyebrow={c.hero.eyebrow} title={c.hero.title} desc={c.intro} />
 
       {/* Contact content */}
-      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#FAF7F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-16">
             {/* Left: info */}
@@ -64,39 +64,39 @@ export default function Contact() {
               <div className="space-y-8">
                 <div className="flex items-start gap-5">
                   <div>
-                    <div className="text-[#C4622D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.phone}</div>
-                    <a href="tel:+251932196502" className="block text-[#1E3A29] font-sans text-base font-medium hover:text-[#C4622D] transition-colors">+251 932 196 502</a>
-                    <div className="text-[#1E3A29]/45 font-sans text-sm mt-0.5">{c.phoneNote}</div>
+                    <div className="text-[#9C6B17] text-xs font-sans tracking-wider uppercase mb-1">{t.common.phone}</div>
+                    <a href="tel:+251932196502" className="block text-[#18201B] font-sans text-base font-medium hover:text-[#9C6B17] transition-colors">+251 932 196 502</a>
+                    <div className="text-[#18201B]/45 font-sans text-sm mt-0.5">{c.phoneNote}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-5">
                   <div>
-                    <div className="text-[#C4622D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.email}</div>
-                    <a href="mailto:bushaashegaruwa@gmail.com" className="block text-[#1E3A29] font-sans text-base font-medium hover:text-[#C4622D] transition-colors">bushaashegaruwa@gmail.com</a>
-                    <div className="text-[#1E3A29]/45 font-sans text-sm mt-0.5">{c.emailNote}</div>
+                    <div className="text-[#9C6B17] text-xs font-sans tracking-wider uppercase mb-1">{t.common.email}</div>
+                    <a href="mailto:bushaashegaruwa@gmail.com" className="block text-[#18201B] font-sans text-base font-medium hover:text-[#9C6B17] transition-colors">bushaashegaruwa@gmail.com</a>
+                    <div className="text-[#18201B]/45 font-sans text-sm mt-0.5">{c.emailNote}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-5">
                   <div>
-                    <div className="text-[#C4622D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
-                    <a href="#map" className="block text-[#1E3A29] font-sans text-base font-medium hover:text-[#C4622D] transition-colors">{t.common.brand}</a>
-                    <div className="text-[#1E3A29]/45 font-sans text-sm mt-0.5">{c.locationLine1}<br/>{c.locationLine2}</div>
+                    <div className="text-[#9C6B17] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
+                    <a href="#map" className="block text-[#18201B] font-sans text-base font-medium hover:text-[#9C6B17] transition-colors">{t.common.brand}</a>
+                    <div className="text-[#18201B]/45 font-sans text-sm mt-0.5">{c.locationLine1}<br/>{c.locationLine2}</div>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-5">
                   <div>
-                    <div className="text-[#C4622D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
-                    <div className="text-[#1E3A29] font-sans text-base font-medium">{t.common.hoursDaily}</div>
-                    <div className="text-[#1E3A29]/45 font-sans text-sm mt-0.5">{t.common.eveningEvents}</div>
+                    <div className="text-[#9C6B17] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
+                    <div className="text-[#18201B] font-sans text-base font-medium">{t.common.hoursDaily}</div>
+                    <div className="text-[#18201B]/45 font-sans text-sm mt-0.5">{t.common.eveningEvents}</div>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-10 pt-10 border-t border-[#1E3A29]/10">
-                <div className="text-[#1E3A29]/40 text-xs font-sans tracking-wider uppercase mb-4">{c.social}</div>
+              <div className="mt-10 pt-10 border-t border-[#18201B]/10">
+                <div className="text-[#18201B]/40 text-xs font-sans tracking-wider uppercase mb-4">{c.social}</div>
                 <SocialLinks dark={false} />
               </div>
             </div>
@@ -105,13 +105,13 @@ export default function Contact() {
             <div className="bg-white p-8 rounded-3xl shadow-sm">
               {submitted ? (
                 <div className="text-center py-16">
-                  <div className="w-12 h-1 rounded-full bg-[#C4622D] mx-auto mb-8" />
-                  <h3 className="font-display text-2xl font-semibold text-[#1E3A29] mb-3">{c.form.sentTitle}</h3>
-                  <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{c.form.sentText}</p>
+                  <div className="w-12 h-1 rounded-full bg-[#9C6B17] mx-auto mb-8" />
+                  <h3 className="font-display text-2xl font-semibold text-[#18201B] mb-3">{c.form.sentTitle}</h3>
+                  <p className="text-[#18201B]/60 font-sans text-sm leading-relaxed">{c.form.sentText}</p>
                 </div>
               ) : (
                 <>
-                  <h2 className="font-display text-2xl font-semibold text-[#1E3A29] mb-7">{c.form.title}</h2>
+                  <h2 className="font-display text-2xl font-semibold text-[#18201B] mb-7">{c.form.title}</h2>
                   <form onSubmit={handleSubmit} noValidate className="space-y-5">
                     {/* hidden from people; spam bots fill it in */}
                     <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
@@ -136,7 +136,7 @@ export default function Contact() {
                       <FieldError check={check} name="message" />
                     </div>
                     {check.hasErrors && <p className="text-sm font-sans font-semibold text-[#B42318]">{t.common.problems.fixFields}</p>}
-                    {failed && <p role="alert" className="text-sm font-sans text-[#1E3A29]">{t.common.formError}</p>}
+                    {failed && <p role="alert" className="text-sm font-sans text-[#18201B]">{t.common.formError}</p>}
                     <button
                       type="submit"
                       disabled={sending}

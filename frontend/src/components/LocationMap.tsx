@@ -7,35 +7,35 @@ export default function LocationMap({ id = 'map' }: { id?: string }) {
   const m = t.common.map;
 
   return (
-    <section id={id} className="py-16 sm:py-24 bg-[#F4EFE4]">
+    <section id={id} className="py-16 sm:py-24 bg-[#FAF7F0]">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 grid lg:grid-cols-[1fr_1.6fr] gap-10 lg:gap-14 items-center">
         <div>
-          <span className="eyebrow bg-[#1E3A29]/10 text-[#1E3A29] mb-5">{m.eyebrow}</span>
-          <h2 className="font-display text-4xl sm:text-5xl text-[#1E3A29] leading-[1.05] mb-5">{m.title}</h2>
-          <p className="text-[#1E3A29]/65 text-base leading-relaxed mb-6">{m.desc}</p>
+          <span className="eyebrow bg-[#18201B]/10 text-[#18201B] mb-5">{m.eyebrow}</span>
+          <h2 className="font-display text-4xl sm:text-5xl text-[#18201B] leading-[1.05] mb-5">{m.title}</h2>
+          <p className="text-[#18201B]/65 text-base leading-relaxed mb-6">{m.desc}</p>
 
           <dl className="space-y-4 mb-8">
             <div>
-              <dt className="text-[#C4622D] text-xs font-semibold tracking-[0.16em] uppercase mb-1">{m.listedAs}</dt>
-              <dd className="text-[#1E3A29] font-medium">{MAPS_LISTING_NAME}</dd>
+              <dt className="text-[#9C6B17] text-xs font-semibold tracking-[0.16em] uppercase mb-1">{m.listedAs}</dt>
+              <dd className="text-[#18201B] font-medium">{MAPS_LISTING_NAME}</dd>
             </div>
             <div>
-              <dt className="text-[#C4622D] text-xs font-semibold tracking-[0.16em] uppercase mb-1">{m.plusCode}</dt>
-              <dd className="text-[#1E3A29] font-medium tracking-wide">{PLUS_CODE}</dd>
+              <dt className="text-[#9C6B17] text-xs font-semibold tracking-[0.16em] uppercase mb-1">{m.plusCode}</dt>
+              <dd className="text-[#18201B] font-medium tracking-wide">{PLUS_CODE}</dd>
             </div>
             <div>
-              <dt className="text-[#C4622D] text-xs font-semibold tracking-[0.16em] uppercase mb-1">{t.common.location}</dt>
-              <dd className="text-[#1E3A29] font-medium">{t.common.locationLine}</dd>
+              <dt className="text-[#9C6B17] text-xs font-semibold tracking-[0.16em] uppercase mb-1">{t.common.location}</dt>
+              <dd className="text-[#18201B] font-medium">{t.common.locationLine}</dd>
             </div>
           </dl>
 
           <div className="flex flex-wrap gap-3">
             <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="btn-primary">{m.directions}</a>
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="btn-outline text-[#1E3A29] border-[#1E3A29]/25">{m.open}</a>
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="btn-outline text-[#18201B] border-[#18201B]/25">{m.open}</a>
           </div>
         </div>
 
-        <div className="relative rounded-[2rem] overflow-hidden bg-[#1E3A29]/10 elev-3 h-[340px] sm:h-[440px] lg:h-[520px]">
+        <div className="relative rounded-[2rem] overflow-hidden bg-[#18201B]/10 elev-3 h-[340px] sm:h-[440px] lg:h-[520px]">
           <iframe
             src={MAP_EMBED_URL}
             title={m.frameTitle}

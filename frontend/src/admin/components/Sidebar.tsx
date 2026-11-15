@@ -61,7 +61,7 @@ export default function Sidebar({
       <div className="flex items-center gap-3 px-5 h-16 flex-shrink-0">
         <img src={logo} alt="" className="w-9 h-9 rounded-full object-contain bg-white ring-1 ring-[var(--a-border)]" />
         <div className="min-w-0 leading-tight">
-          <div className="text-[14px] font-bold text-[var(--a-ink)] truncate">Bushaashe Garuwa</div>
+          <div className="brand-wordmark text-[16.5px] leading-none whitespace-nowrap text-[#24603B]">Bushaashe Garuwa</div>
           <div className="text-[12px] text-[var(--a-muted)]">Staff area</div>
         </div>
       </div>

@@ -45,17 +45,17 @@ export default function Preview({ view }: { view: 'index' | 'heritage' | 'map' }
     <main className="pt-16 sm:pt-[72px] min-h-[80svh]">
       <section className="max-w-3xl mx-auto px-5 sm:px-8 py-12 sm:py-20">
         <span className="eyebrow mb-5">Not public</span>
-        <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] leading-[1] mb-4">Pages under review</h1>
-        <p className="text-[#1E3A29]/70 leading-relaxed mb-8">
+        <h1 className="font-display text-4xl sm:text-5xl font-extrabold text-[#18201B] leading-[1] mb-4">Pages under review</h1>
+        <p className="text-[#18201B]/70 leading-relaxed mb-8">
           New parts of the site, shown here before they replace anything visitors see. Add <code>?3d=none</code> to an address to see what a phone that cannot
           draw 3D is shown instead.
         </p>
         <ul className="space-y-3">
           {PAGES.map((page) => (
             <li key={page.to}>
-              <Link to={page.to} className="block rounded-[1.5rem] bg-white border border-[#1E3A29]/10 p-5 sm:p-6 hover:border-[#3F7D20] transition-colors">
-                <span className="block font-display text-xl font-bold text-[#1E3A29]">{page.title}</span>
-                <span className="block text-[#1E3A29]/65 text-sm mt-1">{page.note}</span>
+              <Link to={page.to} className="block rounded-[1.5rem] bg-white border border-[#18201B]/10 p-5 sm:p-6 hover:border-[#24603B] transition-colors">
+                <span className="block font-display text-xl font-bold text-[#18201B]">{page.title}</span>
+                <span className="block text-[#18201B]/65 text-sm mt-1">{page.note}</span>
               </Link>
             </li>
           ))}

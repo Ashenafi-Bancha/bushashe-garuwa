@@ -15,9 +15,9 @@ type Open = { kind: 'add' } | { kind: 'member'; member: StaffMember } | { kind: 
 
 /** The state of an account, in a word */
 function stateOf(member: StaffMember): { label: string; style: string } {
-  if (!member.active) return { label: 'Switched off', style: 'bg-[#13261A]/8 text-[var(--a-muted)]' };
-  if (member.mustChangePassword) return { label: 'Not signed in yet', style: 'bg-[#E8B23A]/20 text-[#7A5A10]' };
-  return { label: 'Active', style: 'bg-[#3F7D20]/12 text-[#346A1A]' };
+  if (!member.active) return { label: 'Switched off', style: 'bg-[#121915]/8 text-[var(--a-muted)]' };
+  if (member.mustChangePassword) return { label: 'Not signed in yet', style: 'bg-[#C9973A]/20 text-[#7A5A10]' };
+  return { label: 'Active', style: 'bg-[#24603B]/12 text-[#1B4A2D]' };
 }
 
 /** Owners: everyone who can sign in to the staff area, and adding or changing accounts. */
@@ -114,7 +114,7 @@ export default function StaffView() {
                       <span className="font-bold text-[var(--a-ink)] truncate">{member.name || member.email.split('@')[0]}</span>
                       {me && <span className="text-[11px] font-bold text-[var(--a-faint)]">(you)</span>}
                       {member.role === 'owner' && (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-[#1E3A29] text-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-[#18201B] text-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide">
                           <Icon name="shield" className="w-3 h-3" />
                           Owner
                         </span>
@@ -126,7 +126,7 @@ export default function StaffView() {
                       <span className="text-[11px] text-[var(--a-faint)]">Last signed in {timeAgo(member.lastLoginAt)}</span>
                     </span>
                   </span>
-                  {!me && <Icon name="chevronRight" className="w-5 h-5 text-[#1E3A29]/30 flex-shrink-0" />}
+                  {!me && <Icon name="chevronRight" className="w-5 h-5 text-[#18201B]/30 flex-shrink-0" />}
                 </button>
               </li>
             );
@@ -201,7 +201,7 @@ function RolePicker({ value, onChange, disabled = false }: { value: StaffRole; o
         {choices.map(({ role, text }) => (
           <label
             key={role}
-            className={`cursor-pointer rounded-2xl border-2 p-3.5 transition-colors ${value === role ? 'border-[#3F7D20] bg-[#3F7D20]/6' : 'border-[var(--a-border)] bg-white'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`cursor-pointer rounded-2xl border-2 p-3.5 transition-colors ${value === role ? 'border-[#24603B] bg-[#24603B]/6' : 'border-[var(--a-border)] bg-white'} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <input type="radio" name="role" className="sr-only" checked={value === role} onChange={() => onChange(role)} />
             <span className="flex items-center gap-1.5 font-bold text-[var(--a-ink)] text-sm">
@@ -331,7 +331,7 @@ function TemporaryPassword({ name, email, password, onDone }: { name: string; em
       <p className="text-sm text-[var(--a-muted)] leading-relaxed">
         Give this password to <strong className="text-[var(--a-ink)]">{name || email}</strong>. It is shown only now. They will choose their own password the first time they sign in.
       </p>
-      <button type="button" onClick={() => copy('password')} className="w-full rounded-2xl bg-[#3F7D20] text-white px-5 py-5 text-center group">
+      <button type="button" onClick={() => copy('password')} className="w-full rounded-2xl bg-[#24603B] text-white px-5 py-5 text-center group">
         <span className="block font-mono text-2xl sm:text-[28px] font-bold tracking-[0.08em] select-all">{password}</span>
         <span className="flex items-center justify-center gap-1.5 text-[12px] text-white/60 mt-2 group-hover:text-white/90">
           <Icon name={copied === 'password' ? 'check' : 'copy'} className="w-3.5 h-3.5" />

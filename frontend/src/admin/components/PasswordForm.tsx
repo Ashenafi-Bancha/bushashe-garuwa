@@ -15,7 +15,7 @@ function strength(password: string): { score: 0 | 1 | 2 | 3; label: string } {
   return { score: 1, label: 'Fair: a longer password is safer' };
 }
 
-const BAR = ['bg-[#C62828]', 'bg-[#E8B23A]', 'bg-[#7FA548]', 'bg-[#3F7D20]'];
+const BAR = ['bg-[#C62828]', 'bg-[#C9973A]', 'bg-[#7FA548]', 'bg-[#24603B]'];
 
 /** A password box with a show/hide eye */
 function PasswordField({ label, value, onChange, autoComplete }: { label: string; value: string; onChange: (v: string) => void; autoComplete: string }) {
@@ -89,7 +89,7 @@ export default function PasswordForm({ currentLabel = 'Current password', onDone
         <PasswordField label="New password" value={next} onChange={setNext} autoComplete="new-password" />
         <div className="flex gap-1.5 mt-2.5" aria-hidden="true">
           {[1, 2, 3].map((n) => (
-            <span key={n} className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${next && rating.score >= n ? BAR[rating.score] : 'bg-[#1E3A29]/10'}`} />
+            <span key={n} className={`h-1.5 flex-1 rounded-full transition-colors duration-300 ${next && rating.score >= n ? BAR[rating.score] : 'bg-[#18201B]/10'}`} />
           ))}
         </div>
         <p className="text-[12px] text-[var(--a-muted)] mt-1.5">{rating.label}</p>

@@ -46,7 +46,7 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
     >
       {/* the photograph: whole on phones; on computers the background of the whole opening, behind the words */}
       <div
-        className={`relative w-full mt-16 sm:mt-[72px] min-h-[220px] overflow-hidden bg-[#E3EBD8] ${upright ? 'max-h-[78svh]' : ''} lg:absolute lg:inset-0 lg:mt-0 lg:w-full lg:h-full lg:min-h-0 lg:max-h-none lg:bg-[#13261A]`}
+        className={`relative w-full mt-16 sm:mt-[72px] min-h-[220px] overflow-hidden bg-[#F2EADA] ${upright ? 'max-h-[78svh]' : ''} lg:absolute lg:inset-0 lg:mt-0 lg:w-full lg:h-full lg:min-h-0 lg:max-h-none lg:bg-[#121915]`}
         style={{ aspectRatio: ratio }}
       >
         <div key={photo.id} className="hero-slide hero-slide-first">
@@ -65,8 +65,8 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
         </div>
         {/* computers: a light shade from the left, just enough for the white words to read */}
         <span className="hero-shade hidden lg:block absolute inset-0 z-[3]" />
-                <span className="absolute inset-x-0 bottom-0 h-6 lg:h-10 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
-        <span className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:right-8 lg:bottom-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
+                <span className="absolute inset-x-0 bottom-0 h-6 lg:h-10 bg-gradient-to-t from-[#FAF7F0] to-transparent z-[3]" />
+        <span className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:right-8 lg:bottom-8 rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#18201B] text-xs sm:text-sm font-semibold animate-fade-in">
           {wol(photo.title)}
         </span>
       </div>
@@ -75,11 +75,11 @@ export default function PageHero({ eyebrow, title, desc, slot }: {
       <div className="relative z-[5] max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-10 pb-6 sm:pb-10 lg:pb-0 lg:pt-[clamp(3.5rem,12vh,8rem)] lg:h-full lg:flex lg:items-start">
         <div className="lg:max-w-[min(48rem,58%)]">
           <span className="eyebrow mb-5 animate-fade-up">{eyebrow}</span>
-          <h1 className="font-display text-[2.6rem] sm:text-6xl lg:text-[min(4.25rem,9.5svh)] font-extrabold text-[#1E3A29] lg:text-white leading-[0.98] [&>span>span_span]:text-[#6F9443] lg:[&>span>span_span]:text-[#BFDC93] lg:[text-shadow:0_2px_18px_rgba(0,0,0,0.45)]">
+          <h1 className="font-display text-[2.6rem] sm:text-6xl lg:text-[min(4.25rem,9.5svh)] font-extrabold text-[#18201B] lg:text-white leading-[0.98] [&>span>span_span]:text-[#9C6B17] lg:[&>span>span_span]:text-[#F0CC7A] lg:[text-shadow:0_2px_18px_rgba(0,0,0,0.45)]">
             <span className="line-mask"><span>{wol(title)}</span></span>
           </h1>
           {desc && (
-            <p className="hero-desc mt-5 lg:mt-7 text-base sm:text-lg text-[#1E3A29]/75 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] leading-relaxed max-w-md lg:max-w-[38rem] animate-fade-up delay-200">{wol(desc)}</p>
+            <p className="hero-desc mt-5 lg:mt-7 text-base sm:text-lg text-[#18201B]/75 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] leading-relaxed max-w-md lg:max-w-[38rem] animate-fade-up delay-200">{wol(desc)}</p>
           )}
         </div>
       </div>

@@ -41,16 +41,16 @@ export default function Sheet({
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-[60] flex items-end sm:items-center justify-center sm:p-6" role="dialog" aria-modal="true" aria-label={title}>
-      <button type="button" aria-label="Close" onClick={() => closeRef.current()} className="admin-backdrop absolute inset-0 bg-[#13261A]/45 backdrop-blur-[3px]" />
+      <button type="button" aria-label="Close" onClick={() => closeRef.current()} className="admin-backdrop absolute inset-0 bg-[#121915]/45 backdrop-blur-[3px]" />
       <div
         ref={panel}
         tabIndex={-1}
-        className={`admin-sheet relative w-full ${wide ? 'sm:max-w-2xl' : 'sm:max-w-md'} max-h-[92svh] overflow-y-auto overscroll-contain bg-[var(--a-bg)] rounded-t-[22px] sm:rounded-2xl shadow-[0_-20px_60px_-20px_rgba(19,38,26,0.45)] outline-none`}
+        className={`admin-sheet relative w-full ${wide ? 'sm:max-w-2xl' : 'sm:max-w-md'} max-h-[92svh] overflow-y-auto overscroll-contain bg-[var(--a-bg)] rounded-t-[22px] sm:rounded-2xl shadow-[0_-20px_60px_-20px_rgba(18,25,21,0.45)] outline-none`}
         style={{ paddingBottom: 'max(env(safe-area-inset-bottom), 16px)' }}
       >
         {/* the grip a phone sheet is pulled by */}
         <div className="sm:hidden sticky top-0 z-10 flex justify-center pt-2.5 pb-1 bg-[var(--a-bg)]">
-          <span className="w-10 h-1.5 rounded-full bg-[#1E3A29]/15" />
+          <span className="w-10 h-1.5 rounded-full bg-[#18201B]/15" />
         </div>
         {title && (
           <div className="sticky top-0 sm:top-0 z-10 flex items-center justify-between gap-3 px-5 sm:px-6 pt-2 sm:pt-5 pb-3 bg-[var(--a-bg)]">

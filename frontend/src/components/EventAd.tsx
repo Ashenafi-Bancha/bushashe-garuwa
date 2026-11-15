@@ -54,15 +54,15 @@ export default function EventAd({ event, onBook }: { event: SiteEvent; onBook?: 
   ];
 
   return (
-    <article className="event-ad group relative grid lg:grid-cols-[minmax(0,44%)_1fr] overflow-hidden rounded-[2rem] bg-[#3F7D20] text-white shadow-[0_30px_60px_-30px_rgba(63,125,32,0.7)]">
+    <article className="event-ad group relative grid lg:grid-cols-[minmax(0,44%)_1fr] overflow-hidden rounded-[2rem] bg-[#24603B] text-white shadow-[0_30px_60px_-30px_rgba(36,96,59,0.7)]">
       {/* the photograph, with the date like a ticket stub */}
       <div className="relative img-zoom aspect-[16/10] lg:aspect-auto lg:min-h-full">
         <Photo src={photo} alt={text.name} label={text.name} className="absolute inset-0 w-full h-full object-cover" />
-        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(63,125,32,0)_55%,rgba(63,125,32,0.85)_100%)] lg:bg-[linear-gradient(90deg,rgba(63,125,32,0)_70%,rgba(63,125,32,0.95)_100%)]" />
-        <div className="absolute top-4 left-4 sm:top-5 sm:left-5 w-[84px] rounded-2xl bg-white text-[#13261A] text-center overflow-hidden shadow-xl">
-          <div className="bg-[#E2571C] text-white text-[11px] font-extrabold uppercase tracking-[0.14em] py-1.5">{date({ month: 'short' })}</div>
+        <span className="absolute inset-0 bg-[linear-gradient(180deg,rgba(36,96,59,0)_55%,rgba(36,96,59,0.85)_100%)] lg:bg-[linear-gradient(90deg,rgba(36,96,59,0)_70%,rgba(36,96,59,0.95)_100%)]" />
+        <div className="absolute top-4 left-4 sm:top-5 sm:left-5 w-[84px] rounded-2xl bg-white text-[#121915] text-center overflow-hidden shadow-xl">
+          <div className="bg-[#B98328] text-white text-[11px] font-extrabold uppercase tracking-[0.14em] py-1.5">{date({ month: 'short' })}</div>
           <div className="font-display text-4xl font-extrabold leading-none pt-2">{date({ day: 'numeric' })}</div>
-          <div className="text-[11px] font-bold text-[#13261A]/60 pb-2 pt-1">{date({ weekday: 'short' })}</div>
+          <div className="text-[11px] font-bold text-[#121915]/60 pb-2 pt-1">{date({ weekday: 'short' })}</div>
         </div>
         <span className="event-ad-ribbon absolute top-4 right-4 sm:top-5 sm:right-5">{event.featured ? ad.featured : ad.dontMiss}</span>
       </div>
@@ -98,7 +98,7 @@ export default function EventAd({ event, onBook }: { event: SiteEvent; onBook?: 
 
         {/* the countdown to the start */}
         {left.started ? (
-          <div className="inline-flex items-center gap-3 self-start rounded-full bg-[#E2571C] px-5 py-2.5 font-extrabold">
+          <div className="inline-flex items-center gap-3 self-start rounded-full bg-[#B98328] px-5 py-2.5 font-extrabold">
             <span className="event-live-dot" aria-hidden="true" />
             {ad.live}
           </div>
@@ -128,7 +128,7 @@ export default function EventAd({ event, onBook }: { event: SiteEvent; onBook?: 
             {/* how full it is, once someone has booked */}
             {taken !== null && taken > 0 && !full && (
               <div className="mt-2 h-2 rounded-full bg-white/15 overflow-hidden" aria-hidden="true">
-                <div className="h-full rounded-full bg-gradient-to-r from-[#FF9A2E] to-[#E2571C]" style={{ width: `${Math.max(6, taken * 100)}%` }} />
+                <div className="h-full rounded-full bg-gradient-to-r from-[#E0B252] to-[#B98328]" style={{ width: `${Math.max(6, taken * 100)}%` }} />
               </div>
             )}
           </div>

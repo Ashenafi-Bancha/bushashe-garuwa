@@ -75,24 +75,24 @@ export default function EventBooking({
     }
   };
 
-  const field = 'w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-sm text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]';
-  const label = 'block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2';
+  const field = 'w-full rounded-xl border border-[#18201B]/20 focus:border-[#18201B] px-4 py-3 font-sans text-sm text-[#18201B] outline-none transition-colors bg-[#FAF7F0]';
+  const label = 'block text-xs font-sans font-semibold text-[#18201B]/70 tracking-wider uppercase mb-2';
 
   if (done) {
     return (
       <div className="bg-white rounded-3xl p-8 text-center">
-        <div className="w-12 h-1 rounded-full bg-[#C4622D] mx-auto mb-6" />
-        <h3 className="font-display text-2xl text-[#1E3A29] mb-3">{b.thanksTitle}</h3>
-        <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{b.thanksText}</p>
+        <div className="w-12 h-1 rounded-full bg-[#9C6B17] mx-auto mb-6" />
+        <h3 className="font-display text-2xl text-[#18201B] mb-3">{b.thanksTitle}</h3>
+        <p className="text-[#18201B]/60 font-sans text-sm leading-relaxed">{b.thanksText}</p>
         {done.reference && (
-          <div className="mt-6 inline-block rounded-2xl bg-[#F4EFE4] px-6 py-4">
-            <div className="text-[#C4622D] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1">{b.referenceLabel}</div>
-            <div className="font-display text-2xl text-[#1E3A29] tracking-wide">{done.reference}</div>
-            <p className="text-[#1E3A29]/50 text-xs mt-2 max-w-xs">{b.referenceNote}</p>
+          <div className="mt-6 inline-block rounded-2xl bg-[#FAF7F0] px-6 py-4">
+            <div className="text-[#9C6B17] text-[11px] font-semibold tracking-[0.16em] uppercase mb-1">{b.referenceLabel}</div>
+            <div className="font-display text-2xl text-[#18201B] tracking-wide">{done.reference}</div>
+            <p className="text-[#18201B]/50 text-xs mt-2 max-w-xs">{b.referenceNote}</p>
           </div>
         )}
         {onClose && (
-          <button type="button" onClick={onClose} className="mt-6 text-[#1E3A29] font-sans text-sm font-semibold underline">
+          <button type="button" onClick={onClose} className="mt-6 text-[#18201B] font-sans text-sm font-semibold underline">
             {b.close}
           </button>
         )}
@@ -103,10 +103,10 @@ export default function EventBooking({
   return (
     <form onSubmit={submit} noValidate className="bg-white rounded-3xl p-6 sm:p-8 space-y-4">
       <div>
-        <h3 className="font-display text-2xl text-[#1E3A29]">{b.title}</h3>
-        <p className="text-[#1E3A29]/55 font-sans text-sm mt-1">{eventText(event, lang).name}</p>
+        <h3 className="font-display text-2xl text-[#18201B]">{b.title}</h3>
+        <p className="text-[#18201B]/55 font-sans text-sm mt-1">{eventText(event, lang).name}</p>
         {event.placesLeft !== null && (
-          <p className="text-[#1E3A29] font-sans text-sm mt-2">
+          <p className="text-[#18201B] font-sans text-sm mt-2">
             {event.placesLeft === 0
               ? b.noPlaces
               : event.placesLeft === 1
@@ -148,7 +148,7 @@ export default function EventBooking({
       </div>
 
       {check.hasErrors && <p className="text-sm font-sans font-semibold text-[#B42318]">{t.common.problems.fixFields}</p>}
-      {failed && <p role="alert" className="text-sm font-sans text-[#1E3A29]">{failed}</p>}
+      {failed && <p role="alert" className="text-sm font-sans text-[#18201B]">{failed}</p>}
 
       <div className="flex flex-wrap gap-3">
         <button
@@ -159,7 +159,7 @@ export default function EventBooking({
           {sending ? b.sending : b.submit}
         </button>
         {onClose && (
-          <button type="button" onClick={onClose} className="btn-outline text-[#1E3A29]">
+          <button type="button" onClick={onClose} className="btn-outline text-[#18201B]">
             {b.cancel}
           </button>
         )}

@@ -18,8 +18,8 @@ export default function LanguageIcon({ lang, className = 'w-5 h-5' }: { lang: La
       <g clipPath={`url(#${clip})`}>
         {lang === 'en' && (
           <>
-            <rect width="24" height="24" fill="#E3EBD8" />
-            <g fill="none" stroke="#3F7D20" strokeWidth="1.5">
+            <rect width="24" height="24" fill="#F2EADA" />
+            <g fill="none" stroke="#24603B" strokeWidth="1.5">
               <circle cx="12" cy="12" r="7.5" />
               <path d="M4.5 12h15M12 4.5c2.4 2.2 3.4 4.7 3.4 7.5s-1 5.3-3.4 7.5c-2.4-2.2-3.4-4.7-3.4-7.5s1-5.3 3.4-7.5z" />
             </g>
@@ -50,7 +50,7 @@ export default function LanguageIcon({ lang, className = 'w-5 h-5' }: { lang: La
           </>
         )}
       </g>
-      <circle cx="12" cy="12" r="11.5" fill="none" stroke="rgba(19,38,26,0.15)" />
+      <circle cx="12" cy="12" r="11.5" fill="none" stroke="rgba(18,25,21,0.15)" />
     </svg>
   );
 }

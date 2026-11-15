@@ -157,7 +157,7 @@ export default function EventForm({
             ['bookable', 'People can reserve a place'],
           ] as const).map(([name, text]) => (
             <label key={name} className="inline-flex items-center gap-2 text-sm text-[var(--a-ink)] cursor-pointer">
-              <input type="checkbox" checked={values[name]} onChange={(e) => set({ [name]: e.target.checked })} className="w-4 h-4 accent-[#1E3A29]" />
+              <input type="checkbox" checked={values[name]} onChange={(e) => set({ [name]: e.target.checked })} className="w-4 h-4 accent-[#18201B]" />
               {text}
             </label>
           ))}
@@ -166,7 +166,7 @@ export default function EventForm({
         <div className="space-y-5">
           {(['en', 'am', 'wol'] as const).map((lang) => (
             <div key={lang} className="rounded-2xl border border-[var(--a-border)] p-4">
-              <div className="text-[#C4622D] text-[11px] font-semibold tracking-[0.16em] uppercase mb-3">
+              <div className="text-[#9C6B17] text-[11px] font-semibold tracking-[0.16em] uppercase mb-3">
                 {lang === 'en' ? 'English (required)' : lang === 'am' ? 'Amharic' : 'Wolayttatto doonaa'}
               </div>
               <div className="space-y-3">

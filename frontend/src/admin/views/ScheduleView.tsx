@@ -33,7 +33,7 @@ function EventCard({ event }: { event: ScheduledEvent }) {
   return (
     <div className="admin-card !p-4 sm:!p-5">
       <div className="flex items-start gap-3">
-        <span className="grid place-items-center w-11 h-11 rounded-2xl bg-[#C4622D]/12 text-[#9A4A20] flex-shrink-0">
+        <span className="grid place-items-center w-11 h-11 rounded-2xl bg-[#9C6B17]/12 text-[#7A5210] flex-shrink-0">
           <Icon name="events" />
         </span>
         <div className="min-w-0 flex-1">
@@ -49,8 +49,8 @@ function EventCard({ event }: { event: ScheduledEvent }) {
         </div>
       </div>
       {share !== null && (
-        <div className="mt-3.5 h-2 rounded-full bg-[#1E3A29]/8 overflow-hidden" aria-hidden="true">
-          <div className={`h-full rounded-full ${share >= 90 ? 'bg-[#C4622D]' : 'bg-[#3F7D20]'}`} style={{ width: `${share}%` }} />
+        <div className="mt-3.5 h-2 rounded-full bg-[#18201B]/8 overflow-hidden" aria-hidden="true">
+          <div className={`h-full rounded-full ${share >= 90 ? 'bg-[#9C6B17]' : 'bg-[#24603B]'}`} style={{ width: `${share}%` }} />
         </div>
       )}
       {event.bookings.length > 0 ? (
@@ -64,7 +64,7 @@ function EventCard({ event }: { event: ScheduledEvent }) {
                   {booking.guests} {booking.guests === 1 ? 'guest' : 'guests'} · {BOOKING_STATUS_LABELS[booking.status]} · <span className="font-mono">{booking.reference}</span>
                 </span>
               </span>
-              <a href={`tel:${booking.phone.replace(/[^\d+]/g, '')}`} aria-label={`Call ${booking.name}`} className="grid place-items-center w-9 h-9 rounded-full bg-[#3F7D20] text-white active:scale-90 transition-transform">
+              <a href={`tel:${booking.phone.replace(/[^\d+]/g, '')}`} aria-label={`Call ${booking.name}`} className="grid place-items-center w-9 h-9 rounded-full bg-[#24603B] text-white active:scale-90 transition-transform">
                 <Icon name="phone" className="w-4 h-4" />
               </a>
               <a href={`https://wa.me/${whatsappNumber(booking.phone)}`} target="_blank" rel="noopener noreferrer" aria-label={`WhatsApp ${booking.name}`} className="grid place-items-center w-9 h-9 rounded-full bg-[#25D366]/15 text-[#0F7A3A] active:scale-90 transition-transform">
@@ -158,7 +158,7 @@ export default function ScheduleView() {
       {/* the days, to swipe through */}
       <div className="admin-card !p-3 sm:!p-4">
         <div className="flex items-center justify-between gap-2 px-1 mb-2.5">
-          <button type="button" onClick={() => move(-DAYS)} aria-label="Two weeks earlier" className="grid place-items-center w-9 h-9 rounded-full hover:bg-[#1E3A29]/6 active:scale-90 text-[var(--a-muted)]">
+          <button type="button" onClick={() => move(-DAYS)} aria-label="Two weeks earlier" className="grid place-items-center w-9 h-9 rounded-full hover:bg-[#18201B]/6 active:scale-90 text-[var(--a-muted)]">
             <Icon name="arrowLeft" className="w-4 h-4" />
           </button>
           <div className="text-center">
@@ -166,12 +166,12 @@ export default function ScheduleView() {
               {asDate(from).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })} – {asDate(addDays(from, DAYS - 1)).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}
             </div>
             {from !== today() && (
-              <button type="button" onClick={() => { setFrom(today()); setChosen(today()); }} className="text-[12px] font-bold text-[#346A1A]">
+              <button type="button" onClick={() => { setFrom(today()); setChosen(today()); }} className="text-[12px] font-bold text-[#1B4A2D]">
                 Back to today
               </button>
             )}
           </div>
-          <button type="button" onClick={() => move(DAYS)} aria-label="Two weeks later" className="grid place-items-center w-9 h-9 rounded-full hover:bg-[#1E3A29]/6 active:scale-90 text-[var(--a-muted)]">
+          <button type="button" onClick={() => move(DAYS)} aria-label="Two weeks later" className="grid place-items-center w-9 h-9 rounded-full hover:bg-[#18201B]/6 active:scale-90 text-[var(--a-muted)]">
             <Icon name="arrowRight" className="w-4 h-4" />
           </button>
         </div>
@@ -189,14 +189,14 @@ export default function ScheduleView() {
                 aria-pressed={active}
                 aria-label={`${dayTitle(date)}: ${s.visits} visits, ${s.events} events`}
                 className={`snap-start flex-shrink-0 w-[52px] rounded-2xl py-2.5 flex flex-col items-center gap-0.5 transition-all active:scale-95 ${
-                  active ? 'bg-[#3F7D20] text-white shadow-[0_10px_20px_-10px_rgba(63,125,32,0.9)]' : isToday ? 'bg-[var(--a-brand-soft)] text-[var(--a-ink)]' : 'text-[#3C4740] hover:bg-[#1E3A29]/5'
+                  active ? 'bg-[#24603B] text-white shadow-[0_10px_20px_-10px_rgba(36,96,59,0.9)]' : isToday ? 'bg-[var(--a-brand-soft)] text-[var(--a-ink)]' : 'text-[#3C4740] hover:bg-[#18201B]/5'
                 }`}
               >
                 <span className={`text-[11px] font-bold uppercase ${active ? 'text-white/80' : 'text-[var(--a-faint)]'}`}>{d.toLocaleDateString('en-GB', { weekday: 'short' })}</span>
                 <span className="font-display text-[19px] font-extrabold leading-none tabular-nums">{d.getDate()}</span>
                 <span className="flex gap-1 h-1.5 mt-1">
-                  {s.visits > 0 && <span className={`w-1.5 h-1.5 rounded-full ${active ? 'bg-white' : 'bg-[#3F7D20]'}`} />}
-                  {s.events > 0 && <span className={`w-1.5 h-1.5 rounded-full ${active ? 'bg-[#F5C59F]' : 'bg-[#C4622D]'}`} />}
+                  {s.visits > 0 && <span className={`w-1.5 h-1.5 rounded-full ${active ? 'bg-white' : 'bg-[#24603B]'}`} />}
+                  {s.events > 0 && <span className={`w-1.5 h-1.5 rounded-full ${active ? 'bg-[#F5C59F]' : 'bg-[#9C6B17]'}`} />}
                 </span>
               </button>
             );
@@ -219,8 +219,8 @@ export default function ScheduleView() {
               </p>
             </div>
             <span className="flex items-center gap-3 text-[11px] font-semibold text-[var(--a-faint)]">
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#3F7D20]" />Visits</span>
-              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#C4622D]" />Events</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#24603B]" />Visits</span>
+              <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-[#9C6B17]" />Events</span>
             </span>
           </div>
 
@@ -236,7 +236,7 @@ export default function ScheduleView() {
 
           {day && day.events.length > 0 && (
             <section className="space-y-3">
-              <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#9A4A20] px-1">Events</h4>
+              <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#7A5210] px-1">Events</h4>
               {day.events.map((event) => (
                 <EventCard key={event.id} event={event} />
               ))}
@@ -245,7 +245,7 @@ export default function ScheduleView() {
 
           {day && day.visits.length > 0 && (
             <section className="space-y-3">
-              <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#346A1A] px-1">Visits</h4>
+              <h4 className="text-[12px] font-bold uppercase tracking-wider text-[#1B4A2D] px-1">Visits</h4>
               {day.visits.map((visit) => (
                 <VisitCard key={visit.id} visit={visit} busy={busyId === visit.id} onStatus={(status) => setVisitStatus(visit, status)} />
               ))}
@@ -289,11 +289,11 @@ export function TodayAgenda({ onOpen }: { onOpen: () => void }) {
                 <ul className="mt-2 space-y-1.5">
                   {people.slice(0, 3).map((p) => (
                     <li key={p.key} className="flex items-center gap-2 text-[14px] text-[var(--a-ink)] truncate">
-                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${p.event ? 'bg-[#C4622D]' : 'bg-[#3F7D20]'}`} />
+                      <span className={`w-2 h-2 rounded-full flex-shrink-0 ${p.event ? 'bg-[#9C6B17]' : 'bg-[#24603B]'}`} />
                       <span className="truncate">{p.label}</span>
                     </li>
                   ))}
-                  {people.length > 3 && <li className="text-[12px] font-bold text-[#346A1A]">+{people.length - 3} more</li>}
+                  {people.length > 3 && <li className="text-[12px] font-bold text-[#1B4A2D]">+{people.length - 3} more</li>}
                 </ul>
               )}
             </button>

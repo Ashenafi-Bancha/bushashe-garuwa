@@ -96,12 +96,12 @@ export default function GalleryView() {
           <ul className="grid sm:grid-cols-2 xl:grid-cols-3 gap-4">
             {added.map((photo) => (
               <li key={photo.id} className="admin-card !p-0 overflow-hidden flex flex-col">
-                <div className="relative aspect-[3/2] bg-[#1E3A29]/8">
+                <div className="relative aspect-[3/2] bg-[#18201B]/8">
                   <img src={mediaUrl(photo.id)} alt="" loading="lazy" className={`w-full h-full object-cover ${photo.published ? '' : 'opacity-50'}`} />
                   <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
                     <span className={`${TAG} bg-white/90 text-[var(--a-ink)]`}>{GALLERY_CATEGORY_LABELS[photo.category ?? 'grounds']}</span>
                     {!photo.published && (
-                      <span className={`${TAG} bg-[#C4622D] text-white`}>
+                      <span className={`${TAG} bg-[#9C6B17] text-white`}>
                         <Icon name="eyeOff" className="w-3 h-3" />
                         Hidden
                       </span>
@@ -110,7 +110,7 @@ export default function GalleryView() {
                 </div>
                 <div className="p-4 flex-1 flex flex-col">
                   <h3 className="font-display text-lg text-[var(--a-ink)] leading-tight">
-                    {photo.translations.en.title || <span className="text-[#C4622D]">No heading yet</span>}
+                    {photo.translations.en.title || <span className="text-[#9C6B17]">No heading yet</span>}
                   </h3>
                   {photo.translations.en.desc && <p className="text-[var(--a-muted)] text-sm mt-1 line-clamp-2">{photo.translations.en.desc}</p>}
                   <p className="text-[var(--a-faint)] text-xs mt-2">
@@ -151,7 +151,7 @@ export default function GalleryView() {
         </p>
         <ul className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-3">
           {builtIn.map((key) => (
-            <li key={key} className="relative aspect-square rounded-xl overflow-hidden bg-[#1E3A29]/8" title={en.photoCaptions[key].title}>
+            <li key={key} className="relative aspect-square rounded-xl overflow-hidden bg-[#18201B]/8" title={en.photoCaptions[key].title}>
               <img src={photos[key]} alt={en.photoCaptions[key].title} loading="lazy" className="w-full h-full object-cover" />
               <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-2 pt-6 pb-1.5 text-white text-[11px] font-semibold leading-tight line-clamp-2">
                 {en.photoCaptions[key].title}

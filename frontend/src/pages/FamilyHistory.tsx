@@ -24,7 +24,7 @@ const NAMES: Record<string, RegExp> = {
 };
 function withNames(text: string, lang: string) {
   const pattern = NAMES[lang] ?? NAMES.en!;
-  return text.split(pattern).map((part, i) => (i % 2 === 1 ? <strong key={i} className="font-bold italic text-[#13261A]">{part}</strong> : part));
+  return text.split(pattern).map((part, i) => (i % 2 === 1 ? <strong key={i} className="font-bold italic text-[#121915]">{part}</strong> : part));
 }
 
 export default function FamilyHistory() {
@@ -38,19 +38,19 @@ export default function FamilyHistory() {
 
       <Band id="family" className="py-6 sm:py-10 lg:py-12 overflow-hidden">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-          <p className="text-[#346A1A] text-sm font-bold mb-5">{a.lineage.hint}</p>
+          <p className="text-[#1B4A2D] text-sm font-bold mb-5">{a.lineage.hint}</p>
 
           {/* one card per generation, oldest first; its story opens right under its name */}
           <ol className="relative space-y-4">
             {/* the line that joins the generations */}
-            <span aria-hidden="true" className="absolute left-[34px] sm:left-[42px] top-10 bottom-10 w-px bg-[#C4622D]/40" />
+            <span aria-hidden="true" className="absolute left-[34px] sm:left-[42px] top-10 bottom-10 w-px bg-[#9C6B17]/40" />
             {lineage.map((id, i) => {
               const p = a.lineage.people[id];
               const open = person === id;
               const paragraphs = p.story.trim() ? p.story.split(/\n\s*\n/) : [];
               const panel = `story-${id}`;
               return (
-                <li key={id} className={`relative rounded-3xl transition-all duration-500 ${open ? 'bg-white shadow-[0_24px_50px_-34px_rgba(19,38,26,0.55)] ring-1 ring-[#C4622D]/35' : 'bg-white/60 hover:bg-white'}`}>
+                <li key={id} className={`relative rounded-3xl transition-all duration-500 ${open ? 'bg-white shadow-[0_24px_50px_-34px_rgba(18,25,21,0.55)] ring-1 ring-[#9C6B17]/35' : 'bg-white/60 hover:bg-white'}`}>
                   <button
                     type="button"
                     onClick={() => setPerson(open ? null : id)}
@@ -60,29 +60,29 @@ export default function FamilyHistory() {
                   >
                     <span
                       className={`relative z-10 w-[40px] h-[40px] sm:w-[52px] sm:h-[52px] mt-1 flex-shrink-0 rounded-full grid place-items-center font-display text-lg sm:text-2xl font-extrabold transition-all duration-500 ${
-                        open ? 'bg-[#3F7D20] text-white shadow-[0_0_0_6px_rgba(63,125,32,0.18)]' : 'bg-white text-[#346A1A] ring-4 ring-[#E3EBD8]'
+                        open ? 'bg-[#24603B] text-white shadow-[0_0_0_6px_rgba(36,96,59,0.18)]' : 'bg-white text-[#1B4A2D] ring-4 ring-[#F2EADA]'
                       }`}
                     >
                       {i + 1}
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[#346A1A] text-[11px] font-bold tracking-[0.12em] uppercase mb-1">{p.generation}</span>
+                      <span className="block text-[#1B4A2D] text-[11px] font-bold tracking-[0.12em] uppercase mb-1">{p.generation}</span>
                       <span className="flex items-center justify-between gap-3">
-                        <span className="font-display text-2xl sm:text-3xl font-extrabold text-[#13261A] leading-tight">{wol(p.name)}</span>
+                        <span className="font-display text-2xl sm:text-3xl font-extrabold text-[#121915] leading-tight">{wol(p.name)}</span>
                         <span
                           aria-hidden="true"
-                          className={`grid place-items-center w-9 h-9 flex-shrink-0 rounded-full border border-[#1E3A29]/15 text-[#346A1A] transition-transform duration-500 ${open ? 'rotate-180 bg-[#3F7D20]/10' : ''}`}
+                          className={`grid place-items-center w-9 h-9 flex-shrink-0 rounded-full border border-[#18201B]/15 text-[#1B4A2D] transition-transform duration-500 ${open ? 'rotate-180 bg-[#24603B]/10' : ''}`}
                         >
                           <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
                         </span>
                       </span>
-                      {p.period && <span className="block text-[#1E3A29]/70 text-sm mt-1">{p.period}</span>}
+                      {p.period && <span className="block text-[#18201B]/70 text-sm mt-1">{p.period}</span>}
                       {/* the opening lines, so the reader knows what the story holds */}
                       {!open && paragraphs[0] && (
-                        <span className="block text-[#1E3A29]/75 text-[15px] sm:text-base leading-relaxed mt-3 line-clamp-2">{withNames(paragraphs[0], lang)}</span>
+                        <span className="block text-[#18201B]/75 text-[15px] sm:text-base leading-relaxed mt-3 line-clamp-2">{withNames(paragraphs[0], lang)}</span>
                       )}
                       {!open && (
-                        <span className="inline-flex items-center gap-1.5 text-[#346A1A] text-sm font-bold mt-3">
+                        <span className="inline-flex items-center gap-1.5 text-[#1B4A2D] text-sm font-bold mt-3">
                           {paragraphs.length ? a.lineage.readMore : a.lineage.pending}
                           {paragraphs.length > 0 && <span aria-hidden="true">&rarr;</span>}
                         </span>
@@ -98,25 +98,25 @@ export default function FamilyHistory() {
                           paragraphs.map((para, k) => (
                             <p
                               key={k}
-                              className={`text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-4 max-w-3xl ${k === 0 ? 'font-display text-xl sm:text-2xl text-[#13261A] leading-snug' : ''}`}
+                              className={`text-[#18201B]/80 text-base sm:text-lg leading-relaxed mb-4 max-w-3xl ${k === 0 ? 'font-display text-xl sm:text-2xl text-[#121915] leading-snug' : ''}`}
                             >
                               {withNames(para, lang)}
                             </p>
                           ))
                         ) : (
-                          <p className="text-[#1E3A29]/70 italic">{a.lineage.pending}</p>
+                          <p className="text-[#18201B]/70 italic">{a.lineage.pending}</p>
                         )}
 
                         {id === 'bushaashe' && (
                           <>
                             {/* his children, as written on the sign at the gate */}
                             {a.lineage.children.length > 0 && (
-                              <div className="mt-6 pt-6 border-t border-[#1E3A29]/10">
-                                <h4 className="font-display text-xl sm:text-2xl text-[#13261A] mb-4">{a.lineage.childrenTitle}</h4>
+                              <div className="mt-6 pt-6 border-t border-[#18201B]/10">
+                                <h4 className="font-display text-xl sm:text-2xl text-[#121915] mb-4">{a.lineage.childrenTitle}</h4>
                                 <ul className="flex flex-wrap gap-2.5">
                                   {a.lineage.children.map((child) => (
-                                    <li key={child} className="rounded-full bg-[#E3EBD8] text-[#1E3A29] text-sm sm:text-base px-4 py-2">
-                                      <strong className="italic">{child}</strong> <span className="text-[#1E3A29]/60 italic">{wol(p.name)}</span>
+                                    <li key={child} className="rounded-full bg-[#F2EADA] text-[#18201B] text-sm sm:text-base px-4 py-2">
+                                      <strong className="italic">{child}</strong> <span className="text-[#18201B]/60 italic">{wol(p.name)}</span>
                                     </li>
                                   ))}
                                 </ul>
@@ -125,14 +125,14 @@ export default function FamilyHistory() {
 
                             {/* the generations before him, oldest first, leading to Bushaashe */}
                             {a.lineage.ancestors.length > 0 && (
-                              <div className="mt-6 pt-6 border-t border-[#1E3A29]/10">
-                                <h4 className="font-display text-xl sm:text-2xl text-[#13261A] mb-4">{a.lineage.ancestorsTitle}</h4>
+                              <div className="mt-6 pt-6 border-t border-[#18201B]/10">
+                                <h4 className="font-display text-xl sm:text-2xl text-[#121915] mb-4">{a.lineage.ancestorsTitle}</h4>
                                 <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
                                   {[...a.lineage.ancestors, p.name].map((name, k, all) => (
                                     <li key={`${name}-${k}`} className="flex items-center gap-2">
-                                      <span className={`rounded-full px-4 py-2 text-sm sm:text-base font-bold italic ${k === all.length - 1 ? 'bg-[#3F7D20] text-white' : 'bg-white ring-1 ring-[#1E3A29]/15 text-[#1E3A29]'}`}>{name}</span>
+                                      <span className={`rounded-full px-4 py-2 text-sm sm:text-base font-bold italic ${k === all.length - 1 ? 'bg-[#24603B] text-white' : 'bg-white ring-1 ring-[#18201B]/15 text-[#18201B]'}`}>{name}</span>
                                       {k < all.length - 1 && (
-                                        <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#C4622D]" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                        <svg viewBox="0 0 24 24" className="w-5 h-5 text-[#9C6B17]" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                                           <path d="M5 12h14" />
                                           <path d="m13 6 6 6-6 6" />
                                         </svg>
@@ -145,7 +145,7 @@ export default function FamilyHistory() {
                           </>
                         )}
 
-                        <button type="button" onClick={() => setPerson(null)} className="inline-flex items-center gap-1.5 mt-6 text-[#346A1A] text-sm font-bold hover:underline underline-offset-4">
+                        <button type="button" onClick={() => setPerson(null)} className="inline-flex items-center gap-1.5 mt-6 text-[#1B4A2D] text-sm font-bold hover:underline underline-offset-4">
                           <span aria-hidden="true">&uarr;</span>
                           {a.lineage.readLess}
                         </button>

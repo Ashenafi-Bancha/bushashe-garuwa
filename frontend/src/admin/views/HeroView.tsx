@@ -100,7 +100,7 @@ export default function HeroView() {
             >
               <div className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 pt-4">
                 <h2 className="text-[15px] font-semibold text-[var(--a-ink)] leading-tight">{label}</h2>
-                <span className={`${TAG} ${live.length ? 'bg-[#3F7D20]/12 text-[#346A1A]' : 'bg-[#1E3A29]/8 text-[var(--a-muted)]'}`}>
+                <span className={`${TAG} ${live.length ? 'bg-[#24603B]/12 text-[#1B4A2D]' : 'bg-[#18201B]/8 text-[var(--a-muted)]'}`}>
                   {live.length ? (slides ? `${live.length} of your slides` : 'Your photo') : slides ? `${builtIn.length} built-in slides` : 'Built-in photo'}
                 </span>
                 <a href={path} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-1 text-xs font-semibold text-[var(--a-faint)] hover:text-[var(--a-brand)]">
@@ -155,7 +155,7 @@ export default function HeroView() {
                 </div>
               ) : (
                 <>
-                  <div className="relative m-4 mb-0 rounded-xl overflow-hidden bg-[#1E3A29]/8">
+                  <div className="relative m-4 mb-0 rounded-xl overflow-hidden bg-[#18201B]/8">
                     <img
                       src={live[0] ? mediaUrl(live[0].id) : photos[builtIn[0]!.key]}
                       alt=""
@@ -193,7 +193,7 @@ export default function HeroView() {
 
               {/* a photo that was sent but never given its heading */}
               {unfinished.map((photo) => (
-                <div key={photo.id} className="flex flex-wrap items-center gap-2 border-t border-[var(--a-border)] bg-[#C4622D]/6 px-4 py-3">
+                <div key={photo.id} className="flex flex-wrap items-center gap-2 border-t border-[var(--a-border)] bg-[#9C6B17]/6 px-4 py-3">
                   <img src={mediaUrl(photo.id)} alt="" loading="lazy" className="w-12 h-9 rounded-md object-cover" />
                   <span className="text-xs text-[#8c4227] font-semibold flex-1 min-w-[8rem]">Not on the website yet: it needs a heading.</span>
                   <button type="button" onClick={() => start(slot, photo)} className="inline-flex admin-btn-quiet !py-1.5">

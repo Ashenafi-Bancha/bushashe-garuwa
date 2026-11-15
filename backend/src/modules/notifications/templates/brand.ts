@@ -17,26 +17,26 @@ export const BRAND = {
 
   colors: {
     /** deep forest: the header band */
-    forest: '#13261A',
+    forest: '#121915',
     /** the dark green of headings and text */
-    ink: '#1E3A29',
+    ink: '#18201B',
     body: '#4B5C50',
     muted: '#7D8A7A',
     /** the green of the website's buttons */
-    green: '#3F7D20',
-    greenDark: '#346A1A',
-    moss: '#B9D38A',
+    green: '#24603B',
+    greenDark: '#1B4A2D',
+    moss: '#F0CC7A',
     /** paper cream and sage, the website's two backgrounds */
-    cream: '#F4EFE4',
-    sage: '#E3EBD8',
+    cream: '#FAF7F0',
+    sage: '#F2EADA',
     line: '#E6DECD',
     /** terracotta, the website's warm accent */
-    clay: '#C4622D',
+    clay: '#9C6B17',
     white: '#FFFFFF',
   },
 
   /** the colours of the traditional Wolaita cloth, for the thin band under the header */
-  cloth: ['#B5321E', '#E8B23A', '#1B1B1B', '#3F7D20', '#E8B23A', '#B5321E', '#1B1B1B', '#3F7D20'],
+  cloth: ['#B5321E', '#C9973A', '#1B1B1B', '#24603B', '#C9973A', '#B5321E', '#1B1B1B', '#24603B'],
 
   fonts: {
     /** headings: the website's display face, then safe fallbacks */

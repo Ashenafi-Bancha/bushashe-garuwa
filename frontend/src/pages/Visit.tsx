@@ -70,8 +70,8 @@ export default function Visit() {
       setSending(false);
     }
   };
-  const input = 'w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]';
-  const label = 'block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2';
+  const input = 'w-full rounded-xl border border-[#18201B]/20 focus:border-[#18201B] px-4 py-3 font-sans text-base text-[#18201B] outline-none transition-colors bg-[#FAF7F0]';
+  const label = 'block text-xs font-sans font-semibold text-[#18201B]/70 tracking-wider uppercase mb-2';
 
   return (
     <main>
@@ -84,23 +84,23 @@ export default function Visit() {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div className="flex items-start gap-4">
               <div>
-                <div className="text-[#346A1A] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
-                <a href="#map" className="block text-[#13261A] font-sans text-sm hover:text-[#346A1A] transition-colors">{t.common.addressLine1}</a>
-                <div className="text-[#1E3A29]/70 font-sans text-xs">{t.common.addressLine2}</div>
+                <div className="text-[#1B4A2D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.location}</div>
+                <a href="#map" className="block text-[#121915] font-sans text-sm hover:text-[#1B4A2D] transition-colors">{t.common.addressLine1}</a>
+                <div className="text-[#18201B]/70 font-sans text-xs">{t.common.addressLine2}</div>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <div>
-                <div className="text-[#346A1A] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
-                <div className="text-[#13261A] font-sans text-sm">{t.common.hoursDaily}</div>
-                <div className="text-[#1E3A29]/70 font-sans text-xs">{t.common.eveningEvents}</div>
+                <div className="text-[#1B4A2D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.openingHours}</div>
+                <div className="text-[#121915] font-sans text-sm">{t.common.hoursDaily}</div>
+                <div className="text-[#18201B]/70 font-sans text-xs">{t.common.eveningEvents}</div>
               </div>
             </div>
             <div className="flex items-start gap-4">
               <div>
-                <div className="text-[#346A1A] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
-                <a href="tel:+251932196502" className="block text-[#13261A] font-sans text-sm hover:text-[#346A1A] transition-colors">+251 932 196 502</a>
-                <a href="mailto:bushaashegaruwa@gmail.com" className="block text-[#1E3A29]/80 font-sans text-xs hover:text-[#346A1A] transition-colors">bushaashegaruwa@gmail.com</a>
+                <div className="text-[#1B4A2D] text-xs font-sans tracking-wider uppercase mb-1">{t.common.contact}</div>
+                <a href="tel:+251932196502" className="block text-[#121915] font-sans text-sm hover:text-[#1B4A2D] transition-colors">+251 932 196 502</a>
+                <a href="mailto:bushaashegaruwa@gmail.com" className="block text-[#18201B]/80 font-sans text-xs hover:text-[#1B4A2D] transition-colors">bushaashegaruwa@gmail.com</a>
               </div>
             </div>
           </div>
@@ -108,13 +108,13 @@ export default function Visit() {
       </Band>
 
       {/* Booking form */}
-      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#FAF7F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
             <div>
               <span className="eyebrow mb-5">{v.booking.eyebrow}</span>
-              <h2 className="font-display text-4xl font-semibold text-[#1E3A29] leading-tight mb-6">{v.booking.title}</h2>
-              <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed mb-8">{v.booking.desc}</p>
+              <h2 className="font-display text-4xl font-semibold text-[#18201B] leading-tight mb-6">{v.booking.title}</h2>
+              <p className="text-[#18201B]/60 font-sans text-sm leading-relaxed mb-8">{v.booking.desc}</p>
 
               {/* Experience selector */}
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-10">
@@ -126,26 +126,26 @@ export default function Visit() {
                     onClick={() => toggleExp(exp.id)}
                     className={`p-4 text-left rounded-2xl border transition-all duration-200 ${
                       selectedExp.includes(exp.id)
-                        ? 'border-[#3F7D20] bg-[#3F7D20] text-white'
-                        : 'border-[#1E3A29]/20 bg-white hover:border-[#1E3A29]/50 text-[#1E3A29]'
+                        ? 'border-[#24603B] bg-[#24603B] text-white'
+                        : 'border-[#18201B]/20 bg-white hover:border-[#18201B]/50 text-[#18201B]'
                     }`}
                   >
                     <div className="font-sans font-semibold text-xs mb-1">{v.types[exp.id].label}</div>
-                    <div className={`font-sans text-[10px] ${selectedExp.includes(exp.id) ? 'text-white/60' : 'text-[#1E3A29]/45'}`}>{v.types[exp.id].desc}</div>
+                    <div className={`font-sans text-[10px] ${selectedExp.includes(exp.id) ? 'text-white/60' : 'text-[#18201B]/45'}`}>{v.types[exp.id].desc}</div>
                   </button>
                 ))}
               </div>
 
               {/* Getting here */}
               <div>
-                <h3 className="font-display text-2xl font-semibold text-[#1E3A29] mb-5">{v.gettingHere.title}</h3>
+                <h3 className="font-display text-2xl font-semibold text-[#18201B] mb-5">{v.gettingHere.title}</h3>
                 <div className="space-y-4">
                   {v.gettingHere.routes.map((route, i) => (
                     <div key={i} className="flex gap-4">
-                      <div className="w-2 h-2 bg-[#C4622D] mt-2 flex-shrink-0"/>
+                      <div className="w-2 h-2 bg-[#9C6B17] mt-2 flex-shrink-0"/>
                       <div>
-                        <div className="font-sans font-semibold text-sm text-[#1E3A29] mb-1">{route.from}</div>
-                        <div className="font-sans text-xs text-[#1E3A29]/60 leading-relaxed">{route.dir}</div>
+                        <div className="font-sans font-semibold text-sm text-[#18201B] mb-1">{route.from}</div>
+                        <div className="font-sans text-xs text-[#18201B]/60 leading-relaxed">{route.dir}</div>
                       </div>
                     </div>
                   ))}
@@ -158,13 +158,13 @@ export default function Visit() {
               <div className="bg-white p-8 rounded-3xl shadow-sm">
                 {submitted ? (
                   <div className="text-center py-12">
-                    <div className="w-12 h-1 rounded-full bg-[#C4622D] mx-auto mb-8" />
-                    <h3 className="font-display text-2xl font-semibold text-[#1E3A29] mb-3">{v.form.thanksTitle}</h3>
-                    <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{v.form.thanksText}</p>
+                    <div className="w-12 h-1 rounded-full bg-[#9C6B17] mx-auto mb-8" />
+                    <h3 className="font-display text-2xl font-semibold text-[#18201B] mb-3">{v.form.thanksTitle}</h3>
+                    <p className="text-[#18201B]/60 font-sans text-sm leading-relaxed">{v.form.thanksText}</p>
                   </div>
                 ) : (
                   <>
-                    <h3 className="font-display text-2xl font-semibold text-[#1E3A29] mb-6">{v.form.title}</h3>
+                    <h3 className="font-display text-2xl font-semibold text-[#18201B] mb-6">{v.form.title}</h3>
                     <form onSubmit={handleSubmit} noValidate className="space-y-4">
                       {/* hidden from people; spam bots fill it in */}
                       <input type="text" name="website" ref={honeypot} tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
@@ -206,12 +206,12 @@ export default function Visit() {
                       {selectedExp.length > 0 && (
                         <div className="flex flex-wrap gap-2 pt-2">
                           {selectedExp.map((id) => (
-                            <span key={id} className="bg-[#1E3A29]/10 text-[#1E3A29] text-xs font-sans rounded-full px-3 py-1">{v.types[id].label}</span>
+                            <span key={id} className="bg-[#18201B]/10 text-[#18201B] text-xs font-sans rounded-full px-3 py-1">{v.types[id].label}</span>
                           ))}
                         </div>
                       )}
                       {check.hasErrors && <p className="text-sm font-sans font-semibold text-[#B42318]">{t.common.problems.fixFields}</p>}
-                      {failed && <p role="alert" className="text-sm font-sans text-[#1E3A29]">{t.common.formError}</p>}
+                      {failed && <p role="alert" className="text-sm font-sans text-[#18201B]">{t.common.formError}</p>}
                       <button
                         type="submit"
                         disabled={sending}

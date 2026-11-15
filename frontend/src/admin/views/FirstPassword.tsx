@@ -12,7 +12,7 @@ export default function FirstPassword() {
   const name = firstName(user);
   return (
     <SignInFrame>
-      <div className="admin-card !p-6 sm:!p-8 shadow-[0_1px_2px_rgba(19,38,26,0.04),0_20px_40px_-30px_rgba(19,38,26,0.35)]">
+      <div className="admin-card !p-6 sm:!p-8 shadow-[0_1px_2px_rgba(18,25,21,0.04),0_20px_40px_-30px_rgba(18,25,21,0.35)]">
         <span className="grid place-items-center w-11 h-11 rounded-xl bg-[var(--a-brand-soft)] text-[var(--a-brand)] mb-4">
           <Icon name="key" className="w-5 h-5" />
         </span>

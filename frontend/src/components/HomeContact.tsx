@@ -27,25 +27,25 @@ export default function HomeContact() {
       <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
         <div data-reveal className="fade-section max-w-2xl mb-8 sm:mb-12">
           <span className="eyebrow mb-5">{c.hero.eyebrow}</span>
-          <h2 id="home-contact-title" className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#13261A] leading-[0.98] mb-4">{c.hero.title}</h2>
-          <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{c.intro}</p>
+          <h2 id="home-contact-title" className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#121915] leading-[0.98] mb-4">{c.hero.title}</h2>
+          <p className="text-[#18201B]/70 text-base sm:text-lg leading-relaxed">{c.intro}</p>
         </div>
 
         <div className="grid lg:grid-cols-[1fr_1.35fr] gap-5 sm:gap-6">
           {/* the address and the ways to reach us */}
           <div data-reveal className="fade-section bg-white rounded-[2rem] p-6 sm:p-8 elev-1 flex flex-col">
-            <dl className="divide-y divide-[#1E3A29]/10">
+            <dl className="divide-y divide-[#18201B]/10">
               {facts.map((fact) => (
                 <div key={fact.label} className="py-4 first:pt-0">
-                  <dt className="text-[#C4622D] text-xs font-bold tracking-[0.14em] uppercase mb-1">{fact.label}</dt>
-                  <dd className="text-[#1E3A29] text-base sm:text-lg font-semibold break-words">
+                  <dt className="text-[#9C6B17] text-xs font-bold tracking-[0.14em] uppercase mb-1">{fact.label}</dt>
+                  <dd className="text-[#18201B] text-base sm:text-lg font-semibold break-words">
                     {fact.href ? (
-                      <a href={fact.href} className="hover:text-[#346A1A] transition-colors">{fact.value}</a>
+                      <a href={fact.href} className="hover:text-[#1B4A2D] transition-colors">{fact.value}</a>
                     ) : (
                       fact.value
                     )}
                   </dd>
-                  {fact.note && <dd className="text-[#1E3A29]/55 text-sm mt-0.5">{fact.note}</dd>}
+                  {fact.note && <dd className="text-[#18201B]/55 text-sm mt-0.5">{fact.note}</dd>}
                 </div>
               ))}
             </dl>
@@ -56,12 +56,12 @@ export default function HomeContact() {
             </div>
             <div className="mt-auto pt-7 flex flex-wrap gap-3">
               <Link to="/contact" className="btn-primary">{c.form.title}</Link>
-              <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="btn-outline text-[#1E3A29]">{m.directions}</a>
+              <a href={DIRECTIONS_URL} target="_blank" rel="noopener noreferrer" className="btn-outline text-[#18201B]">{m.directions}</a>
             </div>
           </div>
 
           {/* the map itself */}
-          <div data-reveal className="fade-section relative rounded-[2rem] overflow-hidden bg-[#1E3A29]/10 elev-1 min-h-[360px] sm:min-h-[460px]">
+          <div data-reveal className="fade-section relative rounded-[2rem] overflow-hidden bg-[#18201B]/10 elev-1 min-h-[360px] sm:min-h-[460px]">
             <iframe
               src={MAP_EMBED_URL}
               title={m.frameTitle}
@@ -74,7 +74,7 @@ export default function HomeContact() {
               href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute left-4 bottom-4 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-[#1E3A29] shadow-[0_10px_26px_rgba(19,38,26,0.28)] hover:bg-[#3F7D20] hover:text-white transition-colors"
+              className="absolute left-4 bottom-4 rounded-full bg-white px-4 py-2.5 text-sm font-bold text-[#18201B] shadow-[0_10px_26px_rgba(18,25,21,0.28)] hover:bg-[#24603B] hover:text-white transition-colors"
             >
               {m.open}
             </a>

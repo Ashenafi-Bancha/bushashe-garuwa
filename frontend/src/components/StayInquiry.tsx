@@ -9,8 +9,8 @@ const ROOMS: RoomId[] = ['standard', 'family', 'heritage'];
 const GUESTS = ['1', '2', '3–5', '6–10'];
 const NIGHTS = [1, 2, 3, 4, 5, 6, 7, 10, 14];
 
-const FIELD = 'w-full rounded-xl border border-[#1E3A29]/20 focus:border-[#1E3A29] px-4 py-3 font-sans text-base text-[#1E3A29] outline-none transition-colors bg-[#F4EFE4]';
-const LABEL = 'block text-xs font-sans font-semibold text-[#1E3A29]/70 tracking-wider uppercase mb-2';
+const FIELD = 'w-full rounded-xl border border-[#18201B]/20 focus:border-[#18201B] px-4 py-3 font-sans text-base text-[#18201B] outline-none transition-colors bg-[#FAF7F0]';
+const LABEL = 'block text-xs font-sans font-semibold text-[#18201B]/70 tracking-wider uppercase mb-2';
 
 type Props = {
   /** The room chosen on the page, if any */
@@ -63,15 +63,15 @@ export default function StayInquiry({ room, onRoom }: Props) {
   };
 
   return (
-    <section id="book" className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24 scroll-mt-24">
+    <section id="book" className="bg-[#FAF7F0] py-12 sm:py-16 lg:py-24 scroll-mt-24">
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 lg:items-start">
         <div>
-          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] leading-[1] mb-5">{words.title}</h2>
-          <p className="text-[#1E3A29]/70 leading-relaxed mb-3">{words.desc}</p>
-          <p className="text-[#1E3A29]/55 text-sm mb-8">{words.note}</p>
+          <h2 className="font-display text-4xl sm:text-5xl font-extrabold text-[#18201B] leading-[1] mb-5">{words.title}</h2>
+          <p className="text-[#18201B]/70 leading-relaxed mb-3">{words.desc}</p>
+          <p className="text-[#18201B]/55 text-sm mb-8">{words.note}</p>
           {/* computers: beside the form. Phones: after it, so the form comes first */}
           <div className="hidden lg:block">
-            <div className="text-[#346A1A] text-xs font-bold tracking-wider uppercase mb-3">{words.or}</div>
+            <div className="text-[#1B4A2D] text-xs font-bold tracking-wider uppercase mb-3">{words.or}</div>
             <ContactButtons />
           </div>
         </div>
@@ -79,9 +79,9 @@ export default function StayInquiry({ room, onRoom }: Props) {
         <div className="bg-white p-6 sm:p-8 rounded-3xl shadow-sm">
           {sent ? (
             <div className="text-center py-12" role="status">
-              <div className="w-12 h-1 rounded-full bg-[#C4622D] mx-auto mb-8" />
-              <h3 className="font-display text-2xl font-semibold text-[#1E3A29] mb-3">{words.thanksTitle}</h3>
-              <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{words.thanksText}</p>
+              <div className="w-12 h-1 rounded-full bg-[#9C6B17] mx-auto mb-8" />
+              <h3 className="font-display text-2xl font-semibold text-[#18201B] mb-3">{words.thanksTitle}</h3>
+              <p className="text-[#18201B]/60 font-sans text-sm leading-relaxed">{words.thanksText}</p>
             </div>
           ) : (
             <form onSubmit={submit} className="space-y-4">
@@ -138,7 +138,7 @@ export default function StayInquiry({ room, onRoom }: Props) {
                 <label htmlFor="stay-message" className={LABEL}>{form.message}</label>
                 <textarea id="stay-message" rows={3} value={fields.message} onChange={set('message')} className={`${FIELD} resize-none`} placeholder={form.messagePlaceholder} />
               </div>
-              {failed && <p role="alert" className="text-[#9A4A20] text-sm font-semibold">{t.common.formError}</p>}
+              {failed && <p role="alert" className="text-[#7A5210] text-sm font-semibold">{t.common.formError}</p>}
               <button type="submit" disabled={sending} className="btn-primary w-full disabled:opacity-60">
                 {sending ? words.sending : words.submit}
               </button>
@@ -147,7 +147,7 @@ export default function StayInquiry({ room, onRoom }: Props) {
         </div>
 
         <div className="lg:hidden">
-          <div className="text-[#346A1A] text-xs font-bold tracking-wider uppercase mb-3">{words.or}</div>
+          <div className="text-[#1B4A2D] text-xs font-bold tracking-wider uppercase mb-3">{words.or}</div>
           <ContactButtons />
         </div>
       </div>

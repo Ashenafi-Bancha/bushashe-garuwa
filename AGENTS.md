@@ -57,6 +57,8 @@ Start with task-relevant files below. Only follow imports or inspect other files
 
 ## Styling
 
+**The Garuwa palette** (from the logo; keep to it): one green, Garuwa Green `#24603B` (pressed `#1B4A2D`, soft tint `#E9F0EA`) for buttons, the footer, green bands and staff highlights; one accent, Thatch Gold `#C9973A` (text on light `#9C6B17`/`#7A5210`, on green or photos `#F0CC7A`, wash `#F6EBD3`) for labels and the events buttons (gold with ink words); Ivory `#FAF7F0` page, Sand `#F2EADA` bands, Ink `#18201B` text. No other greens or oranges. Headings (`h1`-`h3.font-display`), the wordmark (`.brand-wordmark`) and the staff headings use the serif `--font-hero`; body text and buttons stay in Manrope. The labels above headings (`.eyebrow`) are small gold capitals.
+
 The website uses **Tailwind CSS v4** through the `@tailwindcss/vite` plugin configured in `frontend/vite.config.ts`. `frontend/src/index.css` imports Tailwind with `@import 'tailwindcss';`. Use Tailwind utility classes directly in JSX and put global CSS or Tailwind v4 theme customization in `frontend/src/index.css`. No Tailwind config file or PostCSS config is needed.
 
 `src/main.tsx` imports `src/index.css`, so global font wiring belongs in `src/index.css`. Keep CSS `@import` statements first, then add any `@font-face` rules and font-family defaults there.

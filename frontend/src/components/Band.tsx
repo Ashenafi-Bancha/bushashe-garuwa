@@ -1,7 +1,7 @@
 import type { HTMLAttributes } from 'react';
 import GreenEdge from './GreenEdge';
 
-const TONES = { sage: '#E3EBD8', green: '#3F7D20' } as const;
+const TONES = { sage: '#F2EADA', green: '#24603B' } as const;
 
 /**
  * A coloured band across the page, shaped like the footer: the top-left corner

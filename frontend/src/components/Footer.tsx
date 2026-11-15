@@ -21,14 +21,14 @@ export default function Footer() {
     <footer className="relative text-white">
       {/* the top edge; hidden when a green band above already leads into the footer */}
       <GreenEdge className="footer-edge" />
-      <div className="bg-[#3F7D20] overflow-hidden pb-16">
+      <div className="bg-[#24603B] overflow-hidden pb-16">
       <div className="max-w-screen-xl mx-auto px-5 sm:px-8 pt-6 sm:pt-8">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-10 lg:gap-12 pb-12 sm:pb-16">
           <div className="col-span-2 md:col-span-3 lg:col-span-1">
             <div className="flex items-center gap-3 mb-5">
               <img src={logo} alt="Bushaashe Garuwa" className="w-14 h-14 rounded-full object-contain bg-white p-0.5 flex-shrink-0 shadow-sm" />
               <div className="min-w-0">
-                <div className="font-display text-xl font-bold tracking-tight text-white">Bushaashe Garuwa</div>
+                <div className="brand-wordmark text-[1.4rem] leading-none whitespace-nowrap text-white">Bushaashe Garuwa</div>
                 <div className="text-white/85 text-xs font-semibold leading-snug mt-1">{t.common.locationLine}</div>
               </div>
             </div>
@@ -42,7 +42,7 @@ export default function Footer() {
             const routes: Record<string, string> = footerRoutes[col];
             return (
               <div key={col}>
-                <div className="text-white text-[15px] font-extrabold mb-5">{column.title}</div>
+                <div className="footer-col-title mb-5">{column.title}</div>
                 <ul className="space-y-3">
                   {Object.entries(column.links).map(([key, label]) => (
                     <li key={key}>
@@ -57,7 +57,7 @@ export default function Footer() {
           })}
         </div>
 
-        <div className="border-t border-white/25 py-7 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium text-white/90">
+        <div className="footer-rule border-t py-7 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-medium text-white/90">
           <div className="flex flex-col sm:flex-row flex-wrap items-center gap-2 sm:gap-6 text-center sm:text-left">
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className="hover:text-white hover:underline underline-offset-4 transition-colors">{t.footer.address}</a>
             <a href="tel:+251932196502" className="hover:text-white hover:underline underline-offset-4 transition-colors">+251 932 196 502</a>

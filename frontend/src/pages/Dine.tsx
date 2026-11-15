@@ -25,7 +25,7 @@ export default function Dine() {
       <PageHero slot="dine" eyebrow={dn.hero.eyebrow} title={dn.hero.title} desc={dn.hero.desc} />
 
       {/* Menu */}
-      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#FAF7F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           {/* Category tabs */}
           <div className="flex flex-wrap gap-2 mb-8 sm:mb-14">
@@ -35,8 +35,8 @@ export default function Dine() {
                 onClick={() => setActiveMenu(cat)}
                 className={`text-xs font-sans font-semibold rounded-full px-6 py-3 transition-colors border ${
                   activeMenu === cat
-                    ? 'bg-[#3F7D20] text-white border-[#3F7D20]'
-                    : 'border-[#1E3A29]/20 text-[#1E3A29]/60 hover:border-[#1E3A29]/50 hover:text-[#1E3A29]'
+                    ? 'bg-[#24603B] text-white border-[#24603B]'
+                    : 'border-[#18201B]/20 text-[#18201B]/60 hover:border-[#18201B]/50 hover:text-[#18201B]'
                 }`}
               >
                 {dn.categories[cat]}
@@ -47,12 +47,12 @@ export default function Dine() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {Object.entries(dn.menu[activeMenu]).map(([id, item]) => (
               <div key={id} className="bg-white heritage-card overflow-hidden">
-                <div className="img-zoom aspect-square sm:aspect-video bg-[#1E3A29]/10">
+                <div className="img-zoom aspect-square sm:aspect-video bg-[#18201B]/10">
                   <Photo src={dishPhotos[id]} alt={item.name} label={item.name} className="w-full h-full object-cover"/>
                 </div>
                 <div className="p-4 sm:p-5">
-                  <h3 className="font-display text-base sm:text-lg font-bold text-[#1E3A29] mb-1.5 sm:mb-2 leading-tight">{item.name}</h3>
-                  <p className="text-[#1E3A29]/55 text-xs font-sans leading-relaxed">{item.desc}</p>
+                  <h3 className="font-display text-base sm:text-lg font-bold text-[#18201B] mb-1.5 sm:mb-2 leading-tight">{item.name}</h3>
+                  <p className="text-[#18201B]/55 text-xs font-sans leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -72,12 +72,12 @@ export default function Dine() {
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-16 lg:items-end mb-10 sm:mb-12">
             <div>
               <span className="eyebrow mb-5 !bg-white">{dn.bar.eyebrow}</span>
-              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#13261A] leading-[1] mb-5">{dn.bar.title}</h2>
-              <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed max-w-xl">{dn.bar.desc}</p>
+              <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#121915] leading-[1] mb-5">{dn.bar.title}</h2>
+              <p className="text-[#18201B]/80 text-base sm:text-lg leading-relaxed max-w-xl">{dn.bar.desc}</p>
             </div>
             {/* opening hours */}
             <div className="bg-white rounded-[1.5rem] p-5 sm:p-6">
-              <div className="flex items-center gap-2 text-[#346A1A] text-xs font-bold tracking-[0.14em] uppercase mb-4">
+              <div className="flex items-center gap-2 text-[#1B4A2D] text-xs font-bold tracking-[0.14em] uppercase mb-4">
                 <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="9" />
                   <path d="M12 7v5l3 2" />
@@ -86,12 +86,12 @@ export default function Dine() {
               </div>
               <dl className="grid grid-cols-2 gap-4">
                 <div>
-                  <dt className="text-[#1E3A29]/60 text-sm">{dn.bar.weekdays}</dt>
-                  <dd className="font-display text-xl sm:text-3xl font-extrabold text-[#1E3A29] tabular-nums whitespace-nowrap mt-1">14:00 – 22:00</dd>
+                  <dt className="text-[#18201B]/60 text-sm">{dn.bar.weekdays}</dt>
+                  <dd className="font-display text-xl sm:text-3xl font-extrabold text-[#18201B] tabular-nums whitespace-nowrap mt-1">14:00 – 22:00</dd>
                 </div>
                 <div>
-                  <dt className="text-[#1E3A29]/60 text-sm">{dn.bar.weekends}</dt>
-                  <dd className="font-display text-xl sm:text-3xl font-extrabold text-[#1E3A29] tabular-nums whitespace-nowrap mt-1">12:00 – 23:00</dd>
+                  <dt className="text-[#18201B]/60 text-sm">{dn.bar.weekends}</dt>
+                  <dd className="font-display text-xl sm:text-3xl font-extrabold text-[#18201B] tabular-nums whitespace-nowrap mt-1">12:00 – 23:00</dd>
                 </div>
               </dl>
             </div>
@@ -103,25 +103,25 @@ export default function Dine() {
               <img {...picture(photos.bar)} alt={t.photos.bar} loading="lazy" className="w-full h-full object-cover object-[center_55%]" />
             </div>
             <figcaption className="px-4 py-4 sm:px-5">
-              <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions.bar.title}</span>
-              <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions.bar.desc}</span>
+              <span className="block font-display text-xl font-bold text-[#18201B]">{t.photoCaptions.bar.title}</span>
+              <span className="block text-[#18201B]/65 text-sm mt-1">{t.photoCaptions.bar.desc}</span>
             </figcaption>
           </figure>
 
           {/* the drinks: cultural ones and modern ones, each in its own card */}
           <div className="grid md:grid-cols-2 gap-5 sm:gap-6">
             {([
-              { kind: dn.bar.cultural, accent: 'bg-[#C4622D]', mark: 'text-[#C4622D]' },
-              { kind: dn.bar.modern, accent: 'bg-[#3F7D20]', mark: 'text-[#3F7D20]' },
+              { kind: dn.bar.cultural, accent: 'bg-[#9C6B17]', mark: 'text-[#9C6B17]' },
+              { kind: dn.bar.modern, accent: 'bg-[#24603B]', mark: 'text-[#24603B]' },
             ] as const).map(({ kind, accent, mark }) => (
               <div key={kind.title} className="bg-white rounded-[1.75rem] overflow-hidden elev-1">
                 <div className={`h-1.5 ${accent}`} />
                 <div className="p-6 sm:p-8">
-                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] tracking-tight">{kind.title}</h3>
-                  <p className="text-[#1E3A29]/65 text-sm sm:text-base mt-1.5 mb-5">{kind.desc}</p>
-                  <ul className="divide-y divide-[#1E3A29]/10">
+                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-[#18201B] tracking-tight">{kind.title}</h3>
+                  <p className="text-[#18201B]/65 text-sm sm:text-base mt-1.5 mb-5">{kind.desc}</p>
+                  <ul className="divide-y divide-[#18201B]/10">
                     {kind.items.map((drink) => (
-                      <li key={drink} className="flex items-center gap-3 py-3.5 text-[#1E3A29] text-base sm:text-lg font-semibold">
+                      <li key={drink} className="flex items-center gap-3 py-3.5 text-[#18201B] text-base sm:text-lg font-semibold">
                         <span className={`text-xl leading-none ${mark}`} aria-hidden="true">•</span>
                         {drink}
                       </li>

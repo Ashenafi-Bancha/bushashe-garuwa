@@ -51,7 +51,7 @@ export default function Events() {
 
       {/* Booking form, opened from any bookable event */}
       {booking && (
-        <section id="book" className="bg-[#F4EFE4] pt-12 sm:pt-16">
+        <section id="book" className="bg-[#FAF7F0] pt-12 sm:pt-16">
           <div className="max-w-screen-md mx-auto px-4 sm:px-6">
             <EventBooking
               event={booking}
@@ -71,7 +71,7 @@ export default function Events() {
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="max-w-2xl mb-8 sm:mb-10">
             <span className="eyebrow mb-5">{e.kinds.eyebrow}</span>
-            <h2 id="kinds-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1E3A29] leading-[1.05]">{wol(e.kinds.title)}</h2>
+            <h2 id="kinds-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#18201B] leading-[1.05]">{wol(e.kinds.title)}</h2>
           </div>
           <ul data-wave className="grid md:grid-cols-3 gap-5 sm:gap-6">
             {([
@@ -82,11 +82,11 @@ export default function Events() {
               <li key={id} className="flex flex-col bg-white rounded-[2rem] p-2.5 elev-1">
                 <div className="relative img-zoom rounded-[1.5rem] overflow-hidden aspect-[3/2]">
                   <img {...picture(photos[photo], '(max-width: 767px) 100vw, 33vw')} alt={t.photos[photo]} loading="lazy" className="w-full h-full object-cover" />
-                  <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-xs font-bold text-[#1E3A29]">{wol(e.kinds.items[id].when)}</span>
+                  <span className="absolute top-4 left-4 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-xs font-bold text-[#18201B]">{wol(e.kinds.items[id].when)}</span>
                 </div>
                 <div className="flex flex-1 flex-col items-start px-4 py-5 sm:px-5">
-                  <h3 className="font-display text-2xl font-bold text-[#1E3A29] tracking-tight mb-2">{wol(e.kinds.items[id].title)}</h3>
-                  <p className="text-[#1E3A29]/65 text-sm sm:text-base leading-relaxed">{wol(e.kinds.items[id].desc)}</p>
+                  <h3 className="font-display text-2xl font-bold text-[#18201B] tracking-tight mb-2">{wol(e.kinds.items[id].title)}</h3>
+                  <p className="text-[#18201B]/65 text-sm sm:text-base leading-relaxed">{wol(e.kinds.items[id].desc)}</p>
                   {id === 'private' && <Link to="/contact" className="btn-primary btn-sm mt-5">{e.kinds.ask}</Link>}
                 </div>
               </li>
@@ -96,10 +96,10 @@ export default function Events() {
       </section>
 
       {/* All events: the heading types itself, each event an advertisement with a countdown */}
-      <section id="upcoming" className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
+      <section id="upcoming" className="bg-[#FAF7F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between gap-6 mb-10 flex-wrap">
-            <TypeHeading text={e.upcoming} className="font-display text-4xl sm:text-5xl font-extrabold text-[#13261A]" />
+            <TypeHeading text={e.upcoming} className="font-display text-4xl sm:text-5xl font-extrabold text-[#121915]" />
             <div className="flex flex-wrap gap-2">
               {categories.map((cat) => (
                 <button
@@ -107,8 +107,8 @@ export default function Events() {
                   onClick={() => setActiveCat(cat)}
                   className={`text-xs font-sans font-semibold rounded-full px-4 py-2 transition-colors border ${
                     activeCat === cat
-                      ? 'bg-[#3F7D20] text-white border-[#3F7D20]'
-                      : 'border-[#1E3A29]/20 text-[#1E3A29]/60 hover:border-[#1E3A29]/50 hover:text-[#1E3A29]'
+                      ? 'bg-[#24603B] text-white border-[#24603B]'
+                      : 'border-[#18201B]/20 text-[#18201B]/60 hover:border-[#18201B]/50 hover:text-[#18201B]'
                   }`}
                 >
                   {e.categories[cat]}
@@ -120,7 +120,7 @@ export default function Events() {
           <div className="space-y-6">
             {filtered.length === 0 && (
               <div className="bg-white heritage-card p-6 sm:p-8 text-center">
-                <p className="text-[#1E3A29]/75 font-sans text-base leading-relaxed max-w-2xl mx-auto">{events.length === 0 ? e.noneYet : e.noneInCategory}</p>
+                <p className="text-[#18201B]/75 font-sans text-base leading-relaxed max-w-2xl mx-auto">{events.length === 0 ? e.noneYet : e.noneInCategory}</p>
                 {events.length === 0 && (
                   <div className="mt-5 flex flex-wrap justify-center gap-3">
                     <ContactButtons className="justify-center" />
@@ -141,10 +141,10 @@ export default function Events() {
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 mb-8 sm:mb-10">
             <div className="max-w-2xl">
               <span className="eyebrow mb-5">{e.moments.eyebrow}</span>
-              <h2 id="moments-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#13261A] leading-[1.05] mb-3">{wol(e.moments.title)}</h2>
-              <p className="text-[#1E3A29]/70 leading-relaxed">{wol(e.moments.desc)}</p>
+              <h2 id="moments-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121915] leading-[1.05] mb-3">{wol(e.moments.title)}</h2>
+              <p className="text-[#18201B]/70 leading-relaxed">{wol(e.moments.desc)}</p>
             </div>
-            <Link to="/gallery" className="btn-outline text-[#1E3A29] self-start md:self-auto flex-shrink-0">{e.moments.cta}</Link>
+            <Link to="/gallery" className="btn-outline text-[#18201B] self-start md:self-auto flex-shrink-0">{e.moments.cta}</Link>
           </div>
           <div data-wave className="grid md:grid-cols-2 gap-5 sm:gap-6">
             {(['eventElders', 'eventGathering', 'eventCelebration', 'eventGames'] as const).map((key) => (
@@ -153,8 +153,8 @@ export default function Events() {
                   <img {...picture(photos[key], '(max-width: 767px) 100vw, 50vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <figcaption className="px-4 py-4 sm:px-5">
-                  <span className="block font-display text-xl font-bold text-[#1E3A29]">{wol(t.photoCaptions[key].title)}</span>
-                  <span className="block text-[#1E3A29]/65 text-sm mt-1">{wol(t.photoCaptions[key].desc)}</span>
+                  <span className="block font-display text-xl font-bold text-[#18201B]">{wol(t.photoCaptions[key].title)}</span>
+                  <span className="block text-[#18201B]/65 text-sm mt-1">{wol(t.photoCaptions[key].desc)}</span>
                 </figcaption>
               </figure>
             ))}

@@ -128,7 +128,7 @@ export default function PhotoForm({
                 void choose(e.dataTransfer.files[0]);
               }}
               className={`relative rounded-2xl border-2 border-dashed overflow-hidden transition-colors ${
-                dragging ? 'border-[#3F7D20] bg-[#3F7D20]/8' : 'border-[#1E3A29]/18 bg-[var(--a-bg)]/60'
+                dragging ? 'border-[#24603B] bg-[#24603B]/8' : 'border-[#18201B]/18 bg-[var(--a-bg)]/60'
               }`}
             >
               {shown ? (
@@ -193,7 +193,7 @@ export default function PhotoForm({
                       onClick={() => setLang(l.code)}
                       aria-pressed={lang === l.code}
                       className={`inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold border transition-colors ${
-                        lang === l.code ? 'bg-[#1E3A29] text-white border-[#1E3A29]' : 'border-[var(--a-border)] text-[var(--a-muted)] hover:border-[#1E3A29]/50'
+                        lang === l.code ? 'bg-[#18201B] text-white border-[#18201B]' : 'border-[var(--a-border)] text-[var(--a-muted)] hover:border-[#18201B]/50'
                       }`}
                     >
                       {l.name}
@@ -252,7 +252,7 @@ export default function PhotoForm({
 
             {withVisibility && (
               <label className="flex items-start gap-3 rounded-xl bg-[var(--a-bg)] px-4 py-3 cursor-pointer">
-                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 mt-0.5 accent-[#3F7D20]" />
+                <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} className="w-4 h-4 mt-0.5 accent-[#24603B]" />
                 <span>
                   <span className="block text-sm font-semibold text-[var(--a-ink)]">Show on the website</span>
                   <span className="block text-xs text-[var(--a-muted)] mt-0.5">Untick to keep the photo here without showing it to visitors.</span>

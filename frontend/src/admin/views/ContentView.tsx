@@ -118,9 +118,9 @@ export default function ContentView() {
                 <div className="flex flex-wrap items-baseline justify-between gap-2 mb-2">
                   <label htmlFor={`f-${f.path}`} className="text-[13px] font-semibold text-[var(--a-ink)]">
                     {f.label}
-                    {f.shared && <span className="text-[#1E3A29]/35 normal-case tracking-normal"> · all languages</span>}
+                    {f.shared && <span className="text-[#18201B]/35 normal-case tracking-normal"> · all languages</span>}
                   </label>
-                  {isEdited && <span className="rounded-md bg-[#FBEAE0] text-[#9A4A20] text-[11px] font-semibold px-1.5 py-0.5">Edited</span>}
+                  {isEdited && <span className="rounded-md bg-[#F6EBD3] text-[#7A5210] text-[11px] font-semibold px-1.5 py-0.5">Edited</span>}
                 </div>
                 {f.multiline ? (
                   <textarea

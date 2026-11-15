@@ -31,11 +31,11 @@ const Preview = lazy(() => import('./pages/Preview'));
 function NotFound() {
   const { t } = useI18n();
   return (
-    <main className="pt-20 min-h-screen bg-[#F4EFE4] flex items-center justify-center">
+    <main className="pt-20 min-h-screen bg-[#FAF7F0] flex items-center justify-center">
       <div className="text-center px-6">
-        <div className="font-display text-8xl text-[#1E3A29]/20 mb-6">404</div>
-        <h1 className="font-display text-3xl font-semibold text-[#1E3A29] mb-4">{t.notFound.title}</h1>
-        <p className="text-[#1E3A29]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
+        <div className="font-display text-8xl text-[#18201B]/20 mb-6">404</div>
+        <h1 className="font-display text-3xl font-semibold text-[#18201B] mb-4">{t.notFound.title}</h1>
+        <p className="text-[#18201B]/55 font-sans text-sm mb-8">{t.notFound.text}</p>
         <a href="/" className="btn-primary">
           {t.notFound.button}
         </a>
@@ -48,9 +48,9 @@ function AppLayout() {
   useEffect(() => startSmoothScroll(), []);
 
   return (
-    <div className="min-h-screen bg-[#F4EFE4]">
+    <div className="min-h-screen bg-[#FAF7F0]">
       {/* a thin line across the top: how far down the page you are */}
-      <div id="scroll-progress" aria-hidden="true" className="fixed top-0 inset-x-0 z-[60] h-[3px] origin-left scale-x-0 bg-[#3F7D20]" />
+      <div id="scroll-progress" aria-hidden="true" className="fixed top-0 inset-x-0 z-[60] h-[3px] origin-left scale-x-0 bg-[#24603B]" />
       <SeoHead />
       <Navbar />
       <BackButton />
@@ -103,7 +103,7 @@ export default function App() {
           <Route
             path="/admin/*"
             element={
-              <Suspense fallback={<div className="min-h-screen bg-[#F4EFE4]" />}>
+              <Suspense fallback={<div className="min-h-screen bg-[#FAF7F0]" />}>
                 <AdminApp />
               </Suspense>
             }

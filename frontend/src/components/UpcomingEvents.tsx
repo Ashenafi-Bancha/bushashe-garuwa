@@ -21,9 +21,9 @@ export default function UpcomingEvents({ events }: { events: SiteEvent[] }) {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
           <div>
             <span className="eyebrow mb-4">{wol(t.events.ad.eyebrow)}</span>
-            <TypeHeading id="upcoming-title" text={t.events.upcoming} className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#13261A] leading-[1.02]" />
+            <TypeHeading id="upcoming-title" text={t.events.upcoming} className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#121915] leading-[1.02]" />
           </div>
-          <Link to="/events" className="btn-outline text-[#1E3A29] self-start sm:self-auto flex-shrink-0">{t.events.ad.seeAll}</Link>
+          <Link to="/events" className="btn-outline text-[#18201B] self-start sm:self-auto flex-shrink-0">{t.events.ad.seeAll}</Link>
         </div>
         <div className="space-y-6">
           {next.map((event) => (

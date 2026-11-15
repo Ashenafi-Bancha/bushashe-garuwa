@@ -113,12 +113,12 @@ export default function PhotoRing() {
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
           <div className="text-center mb-10 sm:mb-14">
             <span className="eyebrow mb-5">{ring.eyebrow}</span>
-            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98]">{wol(ring.title)}</h2>
-            <p className="text-[#1E3A29]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{wol(ring.desc)}</p>
+            <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#18201B] leading-[0.98]">{wol(ring.title)}</h2>
+            <p className="text-[#18201B]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{wol(ring.desc)}</p>
           </div>
           <div data-wave className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {RING.map((key) => (
-              <figure key={key} className="relative rounded-2xl overflow-hidden bg-[#13261A]">
+              <figure key={key} className="relative rounded-2xl overflow-hidden bg-[#121915]">
                 <img {...picture(photos[key], '(min-width: 640px) 33vw, 100vw')} alt={t.photos[key]} loading="lazy" className="w-full aspect-[3/2] sm:aspect-[4/3] object-cover" />
                 <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
                 <figcaption className="absolute left-4 right-4 bottom-3.5 sm:left-3 sm:right-3 sm:bottom-2.5 text-white font-display text-lg sm:text-sm leading-tight">{wol(t.photoCaptions[key].title)}</figcaption>
@@ -140,8 +140,8 @@ export default function PhotoRing() {
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 text-center mb-10 sm:mb-14">
         <span className="eyebrow mb-5">{ring.eyebrow}</span>
-        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E3A29] leading-[0.98]">{wol(ring.title)}</h2>
-        <p className="text-[#1E3A29]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{wol(ring.desc)}</p>
+        <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#18201B] leading-[0.98]">{wol(ring.title)}</h2>
+        <p className="text-[#18201B]/60 mt-5 max-w-xl mx-auto text-base sm:text-lg">{wol(ring.desc)}</p>
       </div>
 
       <div
@@ -166,7 +166,7 @@ export default function PhotoRing() {
           {RING.map((key, i) => (
             <figure
               key={key}
-              className="absolute inset-0 rounded-[1.75rem] overflow-hidden shadow-[0_40px_80px_-34px_rgba(19,38,26,0.7)]"
+              className="absolute inset-0 rounded-[1.75rem] overflow-hidden shadow-[0_40px_80px_-34px_rgba(18,25,21,0.7)]"
               style={{ transform: `rotateY(${i * step}deg) translateZ(${radius}px)` }}
             >
               <img
@@ -174,7 +174,7 @@ export default function PhotoRing() {
                 alt={t.photos[key]}
                 loading="lazy"
                 draggable={false}
-                className="w-full h-full object-contain sm:object-cover bg-[#13261A] pointer-events-none"
+                className="w-full h-full object-contain sm:object-cover bg-[#121915] pointer-events-none"
               />
               <span className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent" />
               <figcaption className="absolute left-4 right-4 bottom-4 text-left text-white font-display text-lg leading-tight">
@@ -187,17 +187,17 @@ export default function PhotoRing() {
 
       <div className="relative max-w-screen-xl mx-auto px-5 sm:px-8 mt-10 flex flex-col sm:flex-row items-center justify-center gap-5">
         <div className="flex items-center gap-3">
-          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#3F7D20] hover:text-white transition-colors">
+          <button type="button" onClick={() => turn(1)} aria-label={ring.previous} className="w-12 h-12 rounded-full bg-white text-[#18201B] text-xl elev-1 hover:bg-[#24603B] hover:text-white transition-colors">
             ‹
           </button>
-          <span className="text-[#1E3A29]/60 text-sm min-w-[12rem] text-center">{wol(t.photoCaptions[facing].title)}</span>
-          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-12 h-12 rounded-full bg-white text-[#1E3A29] text-xl elev-1 hover:bg-[#3F7D20] hover:text-white transition-colors">
+          <span className="text-[#18201B]/60 text-sm min-w-[12rem] text-center">{wol(t.photoCaptions[facing].title)}</span>
+          <button type="button" onClick={() => turn(-1)} aria-label={ring.next} className="w-12 h-12 rounded-full bg-white text-[#18201B] text-xl elev-1 hover:bg-[#24603B] hover:text-white transition-colors">
             ›
           </button>
         </div>
         <Link to="/gallery" className="btn-primary">{ring.cta}</Link>
       </div>
-      <p className="relative text-center text-[#1E3A29]/40 text-xs mt-5">{ring.hint}</p>
+      <p className="relative text-center text-[#18201B]/40 text-xs mt-5">{ring.hint}</p>
     </section>
   );
 }

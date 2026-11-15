@@ -36,7 +36,7 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
               <img {...picture(photos.food)} alt={t.photos.food} loading="lazy" className="w-full h-full object-cover" />
             </div>
             {partner && (
-              <div className="absolute -bottom-5 left-5 right-5 sm:left-auto sm:right-6 sm:max-w-xs rounded-2xl bg-[#F4EFE4] text-[#1E3A29] px-5 py-4 font-bold text-sm shadow-xl">
+              <div className="absolute -bottom-5 left-5 right-5 sm:left-auto sm:right-6 sm:max-w-xs rounded-2xl bg-[#FAF7F0] text-[#18201B] px-5 py-4 font-bold text-sm shadow-xl">
                 {fmt(c.partner, { partner })}
               </div>
             )}
@@ -56,8 +56,8 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
                   const full = event.placesLeft === 0 || event.availability === 'full';
                   const few = event.availability === 'limited' || (event.placesLeft !== null && event.placesLeft <= 5);
                   return (
-                    <li key={event.id} className="flex items-center gap-4 rounded-2xl bg-white text-[#13261A] p-3 pr-4">
-                      <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[#F4EFE4] text-[#1E3A29] grid place-items-center text-center leading-none">
+                    <li key={event.id} className="flex items-center gap-4 rounded-2xl bg-white text-[#121915] p-3 pr-4">
+                      <div className="flex-shrink-0 w-16 h-16 rounded-xl bg-[#FAF7F0] text-[#18201B] grid place-items-center text-center leading-none">
                         <div>
                           <div className="font-display text-2xl font-extrabold">{day(event.date)}</div>
                           <div className="text-[10px] font-bold mt-1 opacity-70">{month(event.date)}</div>
@@ -65,10 +65,10 @@ export default function CulturalFoodDates({ events }: { events: SiteEvent[] }) {
                       </div>
                       <div className="min-w-0 flex-1">
                         <div className="font-bold leading-tight truncate">{eventText(event, lang).name}</div>
-                        {event.time && <div className="text-[#1E3A29]/80 text-sm mt-1">{event.time}</div>}
+                        {event.time && <div className="text-[#18201B]/80 text-sm mt-1">{event.time}</div>}
                       </div>
                       <span className={`flex-shrink-0 rounded-full px-3 py-1 text-[11px] font-bold ${
-                        full ? 'bg-white text-[#1E3A29]/70' : few ? 'bg-[#C4622D] text-[#13261A]' : 'bg-[#86A94F] text-[#13261A]'
+                        full ? 'bg-white text-[#18201B]/70' : few ? 'bg-[#9C6B17] text-[#121915]' : 'bg-[#C9973A] text-[#121915]'
                       }`}>
                         {placeLabel(event)}
                       </span>

@@ -133,7 +133,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             settles; the one before drifts away underneath. The name and the words
             follow just below. Swipe on phones. */}
         {tier !== 'none' ? (
-          <Suspense fallback={<div className="h-[100svh] bg-[#E3EBD8]" />}>
+          <Suspense fallback={<div className="h-[100svh] bg-[#F2EADA]" />}>
             <LandscapeHero
               tier={tier}
               watchSpeed={forcedTier() === null}
@@ -146,7 +146,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
         ) : (
         <section className="home-hero hero-on-photo relative lg:mt-[72px] lg:h-[66.667vw] lg:overflow-hidden" aria-label={h.hero.title}>
           <div
-            className="relative mt-16 sm:mt-[72px] aspect-[3/2] overflow-hidden bg-[#E3EBD8] lg:absolute lg:inset-0 lg:mt-0 lg:w-full lg:h-full lg:aspect-auto lg:bg-[#13261A]"
+            className="relative mt-16 sm:mt-[72px] aspect-[3/2] overflow-hidden bg-[#F2EADA] lg:absolute lg:inset-0 lg:mt-0 lg:w-full lg:h-full lg:aspect-auto lg:bg-[#121915]"
             onTouchStart={(e) => { touchX.current = e.touches[0]?.clientX ?? null; }}
             onTouchEnd={(e) => {
               const start = touchX.current; touchX.current = null;
@@ -172,12 +172,12 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
 
             {/* computers: the photographs melt into the page behind the words, and softly at the foot */}
             <span className="hero-shade hidden lg:block absolute inset-0 z-[3]" />
-            <span className="absolute inset-x-0 bottom-0 h-6 lg:h-10 bg-gradient-to-t from-[#F4EFE4] to-transparent z-[3]" />
+            <span className="absolute inset-x-0 bottom-0 h-6 lg:h-10 bg-gradient-to-t from-[#FAF7F0] to-transparent z-[3]" />
 
 
             {/* the name of the place in the photograph, and the way to the next one */}
             <div className="absolute z-[4] right-3 bottom-3 sm:right-5 sm:bottom-5 lg:right-8 lg:bottom-8 flex items-center gap-2">
-              <span key={slide.id} className="rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#1E3A29] text-xs sm:text-sm font-semibold animate-fade-in">
+              <span key={slide.id} className="rounded-full bg-white/85 backdrop-blur-md px-4 py-2 text-[#18201B] text-xs sm:text-sm font-semibold animate-fade-in">
                 {wol(slide.title)}
               </span>
               {heroSlides.length > 1 && (
@@ -185,7 +185,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                   type="button"
                   onClick={() => goTo(heroIdx + 1)}
                   aria-label={h.hero.next}
-                  className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#1E3A29] hover:bg-[#3F7D20] hover:text-white hover:border-[#3F7D20] transition-colors"
+                  className="hit-slim grid place-items-center w-9 h-9 rounded-full bg-white/85 backdrop-blur-md text-[#18201B] hover:bg-[#24603B] hover:text-white hover:border-[#24603B] transition-colors"
                 >
                   →
                 </button>
@@ -204,8 +204,8 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
             <HeroName title={h.hero.title} className="mb-6 lg:mb-7" />
             <div className="flex flex-col justify-between gap-6 lg:gap-7 animate-fade-up delay-300">
               <div className="max-w-xl">
-                <p className="hero-sub font-display text-2xl sm:text-3xl font-extrabold text-[#1E3A29] lg:text-white lg:[text-shadow:0_2px_14px_rgba(0,0,0,0.45)] leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
-                <p className="hero-desc text-[#1E3A29]/70 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
+                <p className="hero-sub font-display text-2xl sm:text-3xl font-extrabold text-[#18201B] lg:text-white lg:[text-shadow:0_2px_14px_rgba(0,0,0,0.45)] leading-tight tracking-tight mb-2">{h.hero.subtitle}</p>
+                <p className="hero-desc text-[#18201B]/70 lg:text-white lg:[text-shadow:0_1px_12px_rgba(0,0,0,0.5)] text-base sm:text-lg leading-relaxed">{h.hero.lead}</p>
               </div>
               {/* the call to the next events: warm orange, a live dot and the next date; it leads to the events below */}
               <div className="lg:hidden">
@@ -213,7 +213,7 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
               </div>
               <div className="flex flex-wrap items-center gap-3 flex-shrink-0">
                 <Link to="/discover" className="btn-primary">{h.hero.explore}</Link>
-                <Link to="/visit" className="btn-outline text-[#1E3A29]">{t.common.planVisit}</Link>
+                <Link to="/visit" className="btn-outline text-[#18201B]">{t.common.planVisit}</Link>
               </div>
             </div>
             </div>
@@ -234,10 +234,10 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           <ul data-wave className="max-w-screen-xl mx-auto grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
             {h.facts.items.map((fact) => (
               <li key={fact.label} className="fact-card">
-                <div className="font-display text-[1.6rem] sm:text-4xl xl:text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-[#346A1A] whitespace-nowrap">
+                <div className="font-display text-[1.6rem] sm:text-4xl xl:text-[2rem] font-extrabold leading-none tracking-[-0.03em] text-[#1B4A2D] whitespace-nowrap">
                   <CountUp value={fact.value} />
                 </div>
-                <div className="text-[13px] sm:text-sm text-[#1E3A29]/65 mt-2.5 leading-snug">{wol(fact.label)}</div>
+                <div className="text-[13px] sm:text-sm text-[#18201B]/65 mt-2.5 leading-snug">{wol(fact.label)}</div>
               </li>
             ))}
           </ul>
@@ -254,8 +254,8 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
           <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
             <div data-reveal className="fade-section max-w-2xl mb-8 sm:mb-12">
               <span className="eyebrow mb-5">{h.facilities.eyebrow}</span>
-              <h2 id="facilities-title" className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] leading-[1] mb-4">{wol(h.facilities.title)}</h2>
-              <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{wol(h.facilities.desc)}</p>
+              <h2 id="facilities-title" className="font-display text-4xl sm:text-5xl font-extrabold text-[#18201B] leading-[1] mb-4">{wol(h.facilities.title)}</h2>
+              <p className="text-[#18201B]/70 text-base sm:text-lg leading-relaxed">{wol(h.facilities.desc)}</p>
             </div>
             <CardGrid grid="md:grid-cols-2 lg:grid-cols-4">
               {facilities.map((id, i) => {
@@ -267,11 +267,11 @@ export default function Home({ landscape = false }: { /** Open with the 3D lands
                   <div key={id} className="h-full flex md:flex-col gap-4 md:gap-0 rounded-[1.5rem] bg-white p-2.5 md:p-2.5 elev-1 overflow-hidden">
                     <div className="img-zoom relative flex-shrink-0 self-center md:self-auto w-32 sm:w-44 md:w-full aspect-[3/2] rounded-[1.1rem] overflow-hidden">
                       <img {...picture(photos[key], '(max-width: 767px) 180px, (max-width: 1023px) 50vw, 25vw')} alt={t.photos[key]} loading="lazy" className={`w-full h-full object-cover ${photoFocus[key] ?? ''}`} />
-                      <span className="absolute left-2 top-2 md:left-3 md:top-3 rounded-full bg-white/90 backdrop-blur-md px-2 py-0.5 md:px-2.5 md:py-1 text-[#C4622D] text-[11px] md:text-xs font-bold tabular-nums">{number}</span>
+                      <span className="absolute left-2 top-2 md:left-3 md:top-3 rounded-full bg-white/90 backdrop-blur-md px-2 py-0.5 md:px-2.5 md:py-1 text-[#9C6B17] text-[11px] md:text-xs font-bold tabular-nums">{number}</span>
                     </div>
                     <div className="min-w-0 self-center md:self-auto py-1 pr-2 md:px-3.5 md:pt-4 md:pb-3.5">
-                      <h3 className="font-display text-lg md:text-xl font-bold text-[#1E3A29] tracking-tight mb-1 md:mb-1.5">{wol(item.title)}</h3>
-                      <p className="text-[#1E3A29]/60 text-sm leading-relaxed">{wol(item.desc)}</p>
+                      <h3 className="font-display text-lg md:text-xl font-bold text-[#18201B] tracking-tight mb-1 md:mb-1.5">{wol(item.title)}</h3>
+                      <p className="text-[#18201B]/60 text-sm leading-relaxed">{wol(item.desc)}</p>
                     </div>
                   </div>
                 );

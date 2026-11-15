@@ -16,7 +16,7 @@ export function SignInFrame({ children }: { children: ReactNode }) {
     <div className="admin-signin min-h-[100svh] lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:grid-cols-[1.15fr_1fr]">
       {/* computers: the photograph, alone, in a rounded frame */}
       <div className="hidden lg:block p-4 pr-0">
-        <div className="relative h-full min-h-[560px] rounded-[22px] overflow-hidden bg-[#DCE4D2]">
+        <div className="relative h-full min-h-[560px] rounded-[22px] overflow-hidden bg-[#F2EADA]">
           <img {...picture(photos.meeshsho, '50vw')} alt="Meesho Keettaa at Bushaashe Garuwa" className="admin-ken absolute inset-0 w-full h-full object-cover" />
           <span className="absolute left-5 bottom-5 rounded-full bg-white/90 backdrop-blur px-3.5 py-1.5 text-[12.5px] font-semibold text-[var(--a-ink)]">
             Meesho Keettaa · Bushaashe Garuwa
@@ -28,8 +28,8 @@ export function SignInFrame({ children }: { children: ReactNode }) {
         <div className="w-full max-w-[400px] mx-auto">
           {/* who this is */}
           <div className="flex flex-col items-center text-center lg:items-start lg:text-left mb-8 admin-rise">
-            <img src={logo} alt="" className="w-16 h-16 rounded-full bg-white object-contain p-0.5 ring-1 ring-[var(--a-border)] shadow-[0_6px_18px_-10px_rgba(19,38,26,0.35)]" />
-            <div className="mt-4 text-[17px] font-bold text-[var(--a-ink)]">Bushaashe Garuwa</div>
+            <img src={logo} alt="" className="w-16 h-16 rounded-full bg-white object-contain p-0.5 ring-1 ring-[var(--a-border)] shadow-[0_6px_18px_-10px_rgba(18,25,21,0.35)]" />
+            <div className="mt-4 brand-wordmark text-[24px] leading-none text-[#24603B]">Bushaashe Garuwa</div>
             <div className="mt-1 inline-flex items-center gap-1.5 text-[13px] text-[var(--a-muted)]">
               <Icon name="lock" className="w-3.5 h-3.5" />
               Staff area
@@ -88,7 +88,7 @@ export default function SignIn() {
 
   return (
     <SignInFrame>
-      <div className="admin-card !p-6 sm:!p-8 shadow-[0_1px_2px_rgba(19,38,26,0.04),0_20px_40px_-30px_rgba(19,38,26,0.35)]">
+      <div className="admin-card !p-6 sm:!p-8 shadow-[0_1px_2px_rgba(18,25,21,0.04),0_20px_40px_-30px_rgba(18,25,21,0.35)]">
         <h1 className="text-[24px] font-bold tracking-[-0.02em] text-[var(--a-ink)]">Sign in</h1>
         <p className="text-[14px] text-[var(--a-muted)] mt-1 mb-6">Look after visits, bookings and the website.</p>
 

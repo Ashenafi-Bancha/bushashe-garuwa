@@ -37,42 +37,42 @@ export default function About() {
 
       {/* Hero */}
       <PageHero slot="about" eyebrow={a.hero.eyebrow} desc={t.common.slogan}
-        title={<>{a.hero.titleA}<br /><span className="text-[#1E3A29]">{a.hero.titleB}</span></>} />
+        title={<>{a.hero.titleA}<br /><span className="text-[#18201B]">{a.hero.titleB}</span></>} />
 
       {/* Who we are */}
-      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#FAF7F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             <div>
               <span className="eyebrow mb-5">{a.who.eyebrow}</span>
-              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight mb-6 gold-underline">
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#18201B] leading-tight mb-6 gold-underline">
                 {wol(a.who.title)}
               </h2>
-              <p className="text-[#1E3A29]/70 font-sans text-base leading-relaxed mb-5">
+              <p className="text-[#18201B]/70 font-sans text-base leading-relaxed mb-5">
                 {a.who.p1}
               </p>
-              <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed mb-5">
+              <p className="text-[#18201B]/60 font-sans text-base leading-relaxed mb-5">
                 {wol(a.who.name)}
               </p>
-              <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed mb-5">
+              <p className="text-[#18201B]/60 font-sans text-base leading-relaxed mb-5">
                 {a.who.p2}
               </p>
-              <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed mb-5">
+              <p className="text-[#18201B]/60 font-sans text-base leading-relaxed mb-5">
                 {a.who.p3}
               </p>
-              <p className="text-[#1E3A29]/60 font-sans text-base leading-relaxed">
+              <p className="text-[#18201B]/60 font-sans text-base leading-relaxed">
                 {wol(a.who.festival)}
               </p>
             </div>
             <div className="relative">
-              <div className="img-zoom aspect-[4/5] rounded-[2rem] bg-[#1E3A29]/10">
+              <div className="img-zoom aspect-[4/5] rounded-[2rem] bg-[#18201B]/10">
                 <img {...picture(photos.lawn)} alt={t.photos.lawn} className="w-full h-full object-cover" />
               </div>
-              <div className="absolute -bottom-5 -left-5 bg-[#3F7D20] rounded-2xl shadow-xl p-6 hidden lg:block">
+              <div className="absolute -bottom-5 -left-5 bg-[#24603B] rounded-2xl shadow-xl p-6 hidden lg:block">
                 <div className="text-white font-display text-3xl font-semibold">4+</div>
                 <div className="text-white/85 font-sans text-xs tracking-wider uppercase mt-1">{a.who.generations}</div>
               </div>
-              <div className="absolute -top-5 -right-5 bg-[#C4622D] rounded-2xl shadow-xl px-6 py-5 hidden lg:block max-w-[12rem]">
+              <div className="absolute -top-5 -right-5 bg-[#9C6B17] rounded-2xl shadow-xl px-6 py-5 hidden lg:block max-w-[12rem]">
                 <div className="text-white font-display text-2xl font-semibold leading-tight">{a.who.since}</div>
               </div>
             </div>
@@ -83,8 +83,8 @@ export default function About() {
       {/* Ultimate goal */}
       <section className="py-16 sm:py-24">
         <div className="max-w-4xl mx-auto px-5 sm:px-8 text-center">
-          <span className="eyebrow bg-[#1E3A29]/10 text-[#1E3A29] mb-7">{t.common.goal.eyebrow}</span>
-          <p className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#1E3A29] leading-[1.2]">{t.common.goal.text}</p>
+          <span className="eyebrow bg-[#18201B]/10 text-[#18201B] mb-7">{t.common.goal.eyebrow}</span>
+          <p className="font-display text-3xl sm:text-4xl lg:text-5xl text-[#18201B] leading-[1.2]">{t.common.goal.text}</p>
         </div>
       </section>
 
@@ -92,29 +92,29 @@ export default function About() {
       <Band className="py-6 sm:py-10 lg:py-14">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
-            <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.purpose.eyebrow}</div>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#13261A] leading-tight">{wol(a.purpose.title)}</h2>
+            <div className="text-[#1B4A2D] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.purpose.eyebrow}</div>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#121915] leading-tight">{wol(a.purpose.title)}</h2>
           </div>
 
           <div className="grid md:grid-cols-2 gap-4">
             {/* Mission */}
             <div className="bg-white rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 border-r border-t border-[#C4622D]/10" />
-              <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
-                <div className="w-6 h-px bg-[#C4622D]" />
+              <div className="absolute top-0 right-0 w-32 h-32 border-r border-t border-[#9C6B17]/10" />
+              <div className="text-[#1B4A2D] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
+                <div className="w-6 h-px bg-[#9C6B17]" />
                 {a.purpose.missionLabel}
               </div>
-              <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#13261A] leading-snug mb-6">
+              <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#121915] leading-snug mb-6">
                 {a.purpose.missionTitle}
               </h3>
-              <p className="text-[#1E3A29]/80 font-sans text-sm leading-relaxed mb-6">
+              <p className="text-[#18201B]/80 font-sans text-sm leading-relaxed mb-6">
                 {a.purpose.missionP1}
               </p>
-              <p className="text-[#1E3A29]/70 font-sans text-sm leading-relaxed">
+              <p className="text-[#18201B]/70 font-sans text-sm leading-relaxed">
                 {a.purpose.missionP2}
               </p>
-              <div className="mt-8 pt-8 border-t border-[#1E3A29]/12">
-                <p className="text-[#346A1A] font-display text-lg italic font-semibold">
+              <div className="mt-8 pt-8 border-t border-[#18201B]/12">
+                <p className="text-[#1B4A2D] font-display text-lg italic font-semibold">
                   “{t.common.slogan}”
                 </p>
               </div>
@@ -122,24 +122,24 @@ export default function About() {
 
             {/* Vision */}
             <div className="bg-white rounded-3xl p-6 sm:p-10 lg:p-14 relative overflow-hidden">
-              <div className="absolute bottom-0 left-0 w-32 h-32 border-l border-b border-[#C4622D]/10" />
-              <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
-                <div className="w-6 h-px bg-[#C4622D]" />
+              <div className="absolute bottom-0 left-0 w-32 h-32 border-l border-b border-[#9C6B17]/10" />
+              <div className="text-[#1B4A2D] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-6 flex items-center gap-3">
+                <div className="w-6 h-px bg-[#9C6B17]" />
                 {a.purpose.visionLabel}
               </div>
-              <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#13261A] leading-snug mb-6">
+              <h3 className="font-display text-2xl sm:text-3xl font-semibold text-[#121915] leading-snug mb-6">
                 {a.purpose.visionTitle}
               </h3>
-              <p className="text-[#1E3A29]/80 font-sans text-sm leading-relaxed mb-6">
+              <p className="text-[#18201B]/80 font-sans text-sm leading-relaxed mb-6">
                 {a.purpose.visionP1}
               </p>
-              <p className="text-[#1E3A29]/70 font-sans text-sm leading-relaxed">
+              <p className="text-[#18201B]/70 font-sans text-sm leading-relaxed">
                 {a.purpose.visionP2}
               </p>
-              <div className="mt-8 pt-8 border-t border-[#1E3A29]/12">
+              <div className="mt-8 pt-8 border-t border-[#18201B]/12">
                 <div className="flex flex-wrap gap-3">
                   {a.purpose.tags.map((tag, i) => (
-                    <span key={i} className="border border-[#B9D38A]/30 text-[#346A1A]/80 text-xs font-sans rounded-full px-3 py-1">{tag}</span>
+                    <span key={i} className="border border-[#F0CC7A]/30 text-[#1B4A2D]/80 text-xs font-sans rounded-full px-3 py-1">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -149,18 +149,18 @@ export default function About() {
       </Band>
 
       {/* Our Values */}
-      <section className="bg-[#F4EFE4] py-12 sm:py-16 lg:py-24">
+      <section className="bg-[#FAF7F0] py-12 sm:py-16 lg:py-24">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="mb-8 sm:mb-12">
             <span className="eyebrow mb-5">{a.values.eyebrow}</span>
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#1E3A29] leading-tight">{wol(a.values.title)}</h2>
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-[#18201B] leading-tight">{wol(a.values.title)}</h2>
           </div>
           <CardGrid grid="md:grid-cols-2 lg:grid-cols-3">
             {values.map((val, i) => (
               <div key={val.id} className="h-full bg-white heritage-card p-7">
-                <span className="block text-[#C4622D] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="font-display text-2xl font-bold text-[#1E3A29] mb-3">{a.values.items[val.id].title}</h3>
-                <p className="text-[#1E3A29]/60 font-sans text-sm leading-relaxed">{a.values.items[val.id].desc}</p>
+                <span className="block text-[#9C6B17] text-sm font-bold tabular-nums mb-4">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="font-display text-2xl font-bold text-[#18201B] mb-3">{a.values.items[val.id].title}</h3>
+                <p className="text-[#18201B]/60 font-sans text-sm leading-relaxed">{a.values.items[val.id].desc}</p>
               </div>
             ))}
           </CardGrid>
@@ -176,9 +176,9 @@ export default function About() {
             </div>
           </Link>
           <div>
-            <span className="eyebrow bg-white text-[#346A1A] mb-5">{a.lineage.eyebrow}</span>
-            <h2 className="font-display text-4xl sm:text-5xl text-[#13261A] leading-[1.05] mb-5">{wol(a.lineage.title)}</h2>
-            <p className="text-[#1E3A29]/80 text-base sm:text-lg leading-relaxed mb-8">{wol(a.lineage.desc)}</p>
+            <span className="eyebrow bg-white text-[#1B4A2D] mb-5">{a.lineage.eyebrow}</span>
+            <h2 className="font-display text-4xl sm:text-5xl text-[#121915] leading-[1.05] mb-5">{wol(a.lineage.title)}</h2>
+            <p className="text-[#18201B]/80 text-base sm:text-lg leading-relaxed mb-8">{wol(a.lineage.desc)}</p>
             <Link to="/family-history" className="btn-primary">
               {a.lineage.open}
               <span aria-hidden="true">&rarr;</span>
@@ -191,13 +191,13 @@ export default function About() {
       <Band className="py-6 sm:py-10 lg:py-14">
         <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-12">
-            <div className="text-[#346A1A] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.offer.eyebrow}</div>
-            <h2 className="font-display text-4xl font-semibold text-[#13261A]">{wol(a.offer.title)}</h2>
+            <div className="text-[#1B4A2D] text-xs font-sans font-semibold tracking-[0.16em] uppercase mb-4">{a.offer.eyebrow}</div>
+            <h2 className="font-display text-4xl font-semibold text-[#121915]">{wol(a.offer.title)}</h2>
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {offerItems.map((item) => (
-              <div key={item.id} className="rounded-2xl border border-[#1E3A29]/12 hover:border-[#C4622D]/40 p-5 text-center transition-colors duration-200">
-                <div className="text-[#1E3A29]/80 font-sans text-xs leading-snug">{a.offer.items[item.id]}</div>
+              <div key={item.id} className="rounded-2xl border border-[#18201B]/12 hover:border-[#9C6B17]/40 p-5 text-center transition-colors duration-200">
+                <div className="text-[#18201B]/80 font-sans text-xs leading-snug">{a.offer.items[item.id]}</div>
               </div>
             ))}
           </div>
@@ -207,7 +207,7 @@ export default function About() {
       {/* CTA */}
       <section className="relative mx-2 sm:mx-3 rounded-[2rem] py-28 overflow-hidden">
         <img {...picture(photos.pavilions)} alt={t.photos.pavilions} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-[#3F7D20]/90" />
+        <div className="absolute inset-0 bg-[#24603B]/90" />
         <div className="relative z-10 max-w-screen-xl mx-auto px-4 sm:px-6 text-center">
           <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl font-semibold text-white mb-4">
             {t.common.comeBePart}

@@ -115,7 +115,7 @@ export default function EventsView() {
                     <div className="flex flex-wrap items-center gap-1.5">
                       <h3 className="text-[15px] font-semibold text-[var(--a-ink)] mr-1">{event.translations.en.name}</h3>
                       {!event.published && <span className={`${tag} bg-[#EFEDE6] text-[var(--a-muted)]`}>Draft</span>}
-                      {event.featured && <span className={`${tag} bg-[#FBEAE0] text-[#9A4A20]`}>On the home page</span>}
+                      {event.featured && <span className={`${tag} bg-[#F6EBD3] text-[#7A5210]`}>On the home page</span>}
                       {past && <span className={`${tag} bg-[#EFEDE6] text-[var(--a-muted)]`}>Past</span>}
                     </div>
                     <div className="text-[13px] text-[var(--a-muted)] mt-0.5">
@@ -142,7 +142,7 @@ export default function EventsView() {
                     onClick={() => toggle(event, { featured: !event.featured })}
                     aria-label={event.featured ? 'Take off the home page' : 'Show on the home page'}
                     title={event.featured ? 'Take off the home page' : 'Show on the home page'}
-                    className={`admin-icon-btn ${event.featured ? '!text-[#C4622D]' : ''}`}
+                    className={`admin-icon-btn ${event.featured ? '!text-[#9C6B17]' : ''}`}
                   >
                     <Icon name={event.featured ? 'starFilled' : 'star'} className="w-[18px] h-[18px]" />
                   </button>

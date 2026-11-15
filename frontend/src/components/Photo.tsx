@@ -26,7 +26,7 @@ export default function Photo({ src, alt, label, className = '', ...rest }: Phot
       aria-label={`${alt} (${t.common.photoComingSoon})`}
       className={`${className} photo-placeholder relative overflow-hidden flex flex-col items-center justify-center text-center p-5`}
     >
-      <svg viewBox="0 0 96 64" className="relative w-20 sm:w-24 h-auto text-[#1E3A29]/35 mb-3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg viewBox="0 0 96 64" className="relative w-20 sm:w-24 h-auto text-[#18201B]/35 mb-3" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <circle cx="74" cy="15" r="6" />
         <path d="M2 54c14-10 26-14 40-10s26 4 52-8" />
         <path d="M2 62c20-8 40-10 60-6s22 2 32-2" opacity=".6" />
@@ -35,8 +35,8 @@ export default function Photo({ src, alt, label, className = '', ...rest }: Phot
         <path d="M34 13v-5" />
         <path d="M31 48v-7h6v7" />
       </svg>
-      {label && <span className="relative font-display text-base sm:text-lg font-bold text-[#1E3A29]/80 leading-tight max-w-[16rem]">{label}</span>}
-      <span className="relative mt-2 inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold text-[#1E3A29]/60">
+      {label && <span className="relative font-display text-base sm:text-lg font-bold text-[#18201B]/80 leading-tight max-w-[16rem]">{label}</span>}
+      <span className="relative mt-2 inline-flex items-center gap-1.5 rounded-full bg-white/70 px-3 py-1 text-[11px] font-semibold text-[#18201B]/60">
         <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
           <path d="M4 8h3l2-3h6l2 3h3v11H4z" /><circle cx="12" cy="13" r="3.5" />
         </svg>

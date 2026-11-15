@@ -36,9 +36,9 @@ export default function MeetingHall() {
           <div className="grid lg:grid-cols-[1.2fr_1fr] gap-5 lg:gap-16 lg:items-end mb-10 sm:mb-12">
             <div>
               <span className="eyebrow mb-5">{m.intro.eyebrow}</span>
-              <h2 id="hall-what" className="font-display text-4xl sm:text-5xl font-extrabold text-[#1E3A29] leading-[1]">{m.intro.title}</h2>
+              <h2 id="hall-what" className="font-display text-4xl sm:text-5xl font-extrabold text-[#18201B] leading-[1]">{m.intro.title}</h2>
             </div>
-            <p className="text-[#1E3A29]/70 text-base sm:text-lg leading-relaxed">{m.intro.text}</p>
+            <p className="text-[#18201B]/70 text-base sm:text-lg leading-relaxed">{m.intro.text}</p>
           </div>
 
           <ul data-wave className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -48,9 +48,9 @@ export default function MeetingHall() {
                   <Photo src={photo && photos[photo]} alt={photo ? t.photos[photo] : m.uses[id].title} label={m.uses[id].title} loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <div className="px-4 py-5 sm:px-5">
-                  <span className="block text-[#C4622D] text-sm font-bold tabular-nums mb-2">{String(i + 1).padStart(2, '0')}</span>
-                  <h3 className="font-display text-xl sm:text-2xl font-bold text-[#1E3A29] tracking-tight mb-2">{m.uses[id].title}</h3>
-                  <p className="text-[#1E3A29]/65 text-sm sm:text-base leading-relaxed">{m.uses[id].desc}</p>
+                  <span className="block text-[#9C6B17] text-sm font-bold tabular-nums mb-2">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className="font-display text-xl sm:text-2xl font-bold text-[#18201B] tracking-tight mb-2">{m.uses[id].title}</h3>
+                  <p className="text-[#18201B]/65 text-sm sm:text-base leading-relaxed">{m.uses[id].desc}</p>
                 </div>
               </li>
             ))}
@@ -61,7 +61,7 @@ export default function MeetingHall() {
       {/* The hall and the grounds, in photographs */}
       <Band aria-labelledby="hall-photos" className="py-6 sm:py-10 lg:py-12">
         <div className="max-w-screen-xl mx-auto px-5 sm:px-8">
-          <h2 id="hall-photos" className="font-display text-3xl sm:text-4xl font-extrabold text-[#13261A] leading-tight mb-8 sm:mb-10">{m.photosTitle}</h2>
+          <h2 id="hall-photos" className="font-display text-3xl sm:text-4xl font-extrabold text-[#121915] leading-tight mb-8 sm:mb-10">{m.photosTitle}</h2>
           <div data-wave className="grid md:grid-cols-3 gap-5 sm:gap-6">
             {(['meetingHall', 'hallAndBar', 'eventGathering'] as const).map((key) => (
               <figure key={key} className="bg-white rounded-[2rem] p-2.5 elev-1">
@@ -69,8 +69,8 @@ export default function MeetingHall() {
                   <img {...picture(photos[key], '(max-width: 767px) 100vw, 33vw')} alt={t.photos[key]} loading="lazy" className="w-full h-full object-cover" />
                 </div>
                 <figcaption className="px-4 py-4 sm:px-5">
-                  <span className="block font-display text-xl font-bold text-[#1E3A29]">{t.photoCaptions[key].title}</span>
-                  <span className="block text-[#1E3A29]/65 text-sm mt-1">{t.photoCaptions[key].desc}</span>
+                  <span className="block font-display text-xl font-bold text-[#18201B]">{t.photoCaptions[key].title}</span>
+                  <span className="block text-[#18201B]/65 text-sm mt-1">{t.photoCaptions[key].desc}</span>
                 </figcaption>
               </figure>
             ))}

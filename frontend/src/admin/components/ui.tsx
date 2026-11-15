@@ -44,9 +44,9 @@ export function StatCard({
 
 /* the brand's own colours: clay for what is waiting, green for what is done */
 const STATUS_STYLES: Record<RequestStatus, string> = {
-  new: 'bg-[#FBEAE0] text-[#9A4A20]',
+  new: 'bg-[#F6EBD3] text-[#7A5210]',
   in_progress: 'bg-[#FBF1D6] text-[#7A5A10]',
-  done: 'bg-[#E8F2DF] text-[#2E5E17]',
+  done: 'bg-[#E9F0EA] text-[#1B4A2D]',
   archived: 'bg-[#EFEDE6] text-[#66706A]',
 };
 
@@ -85,8 +85,8 @@ export function StatusSelect({
 }
 
 const BOOKING_STATUS_STYLES: Record<BookingStatus, string> = {
-  pending: 'bg-[#FBEAE0] text-[#9A4A20]',
-  confirmed: 'bg-[#E8F2DF] text-[#2E5E17]',
+  pending: 'bg-[#F6EBD3] text-[#7A5210]',
+  confirmed: 'bg-[#E9F0EA] text-[#1B4A2D]',
   attended: 'bg-[#E4ECF4] text-[#2B4A66]',
   cancelled: 'bg-[#EFEDE6] text-[#66706A]',
 };
@@ -154,7 +154,7 @@ export function Panel({ children }: { children: ReactNode }) {
 
 const NOTICE_STYLES = {
   info: 'bg-white border border-[var(--a-border)] text-[var(--a-muted)]',
-  success: 'bg-[#E8F2DF] border border-[#CFE3BE] text-[#2E5E17]',
+  success: 'bg-[#E9F0EA] border border-[#CFE0D3] text-[#1B4A2D]',
   error: 'bg-[#FCEDEC] border border-[#F1C4C1] text-[#9B2C25]',
 };
 
@@ -359,7 +359,7 @@ export function FilterChips<T extends string>({
           >
             {option.label}
             {option.count !== undefined && option.count > 0 && (
-              <span className={`min-w-[18px] h-[18px] rounded-full text-[10.5px] leading-[18px] px-1.5 text-center tabular-nums ${active ? 'bg-white/20' : 'bg-[#C4622D] text-white'}`}>{option.count}</span>
+              <span className={`min-w-[18px] h-[18px] rounded-full text-[10.5px] leading-[18px] px-1.5 text-center tabular-nums ${active ? 'bg-white/20' : 'bg-[#9C6B17] text-white'}`}>{option.count}</span>
             )}
           </button>
         );
@@ -378,7 +378,7 @@ export function Segmented<T extends string>({ options, value, onChange }: { opti
           type="button"
           onClick={() => onChange(option.value)}
           aria-pressed={option.value === value}
-          className={`rounded-[8px] h-[30px] px-3.5 text-[13px] font-semibold transition-all ${option.value === value ? 'bg-white text-[var(--a-ink)] shadow-[0_1px_3px_rgba(19,38,26,0.15)]' : 'text-[var(--a-muted)] hover:text-[var(--a-ink)]'}`}
+          className={`rounded-[8px] h-[30px] px-3.5 text-[13px] font-semibold transition-all ${option.value === value ? 'bg-white text-[var(--a-ink)] shadow-[0_1px_3px_rgba(18,25,21,0.15)]' : 'text-[var(--a-muted)] hover:text-[var(--a-ink)]'}`}
         >
           {option.label}
         </button>
@@ -390,7 +390,7 @@ export function Segmented<T extends string>({ options, value, onChange }: { opti
 /** A small label with an icon, for the facts of a request (its date, the number of guests…) */
 export function Fact({ icon, children, tone = 'plain' }: { icon: IconName; children: ReactNode; tone?: 'plain' | 'strong' }) {
   return (
-    <span className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-[12.5px] font-medium ${tone === 'strong' ? 'bg-[var(--a-brand-soft)] text-[#2E5E17]' : 'bg-[#F1EFE9] text-[#4D574F]'}`}>
+    <span className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-[12.5px] font-medium ${tone === 'strong' ? 'bg-[var(--a-brand-soft)] text-[#1B4A2D]' : 'bg-[#F1EFE9] text-[#4D574F]'}`}>
       <Icon name={icon} className="w-3.5 h-3.5" />
       {children}
     </span>
