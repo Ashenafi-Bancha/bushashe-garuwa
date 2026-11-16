@@ -254,6 +254,8 @@ export const en = {
     address: 'Bushaashe Garuwa, Damot Sore Woreda, Wolaita Zone, Ethiopia',
     rights: 'Bushaashe Garuwa. Where Wolaita Heritage Lives.',
     developedBy: 'Developed by',
+    /** the developer's name as each language writes it (Wolaytta puts the family name first) */
+    developerName: 'Ashenafi Bancha',
   },
 
   notFound: {

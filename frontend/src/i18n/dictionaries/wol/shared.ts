@@ -317,7 +317,9 @@ const page: DeepPartial<Dictionary> = {
     // EN: Bushaashe Garuwa. Where Wolaita Heritage Lives.
     rights: "Bushaashe Baruwaa. Wolaytta Buquray De'iyoosaa.",
     // EN: Developed by
-    developedBy: "",
+    developedBy: "Hagaa Webisayttiya medhdhidaagee",
+    // EN: Ashenafi Bancha
+    developerName: "Bancca Ashshenaafa",
   },
 
   notFound: {

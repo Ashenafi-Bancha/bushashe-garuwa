@@ -252,6 +252,8 @@ export const am: Dictionary = {
     address: 'ቡሻሼ ጋሯ፣ ዳሞት ሶሬ ወረዳ፣ ወላይታ ዞን፣ ኢትዮጵያ',
     rights: 'ቡሻሼ ጋሯ። የወላይታ ቅርስ ሕያው የሆነበት።',
     developedBy: 'ድረ-ገጹን ያበለጸገው፦',
+    /** the developer's name as each language writes it (Wolaytta puts the family name first) */
+    developerName: 'Ashenafi Bancha',
   },
 
   notFound: {

@@ -72,7 +72,7 @@ export default function Footer() {
           <strong className="font-bold text-white">
             {/* the name leads to the developer's portfolio */}
             <a href="https://ashenafi.dev" target="_blank" rel="noopener" className="underline decoration-white/40 underline-offset-4 hover:decoration-white">
-              Ashenafi Bancha
+              {t.footer.developerName}
             </a>
             (<a href="tel:+251938103340" className="hover:underline underline-offset-4">0938103340</a>)
           </strong>
