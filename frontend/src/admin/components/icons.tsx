@@ -141,6 +141,14 @@ const PATHS = {
   wifiOff: <><path d="M3 3l18 18" /><path d="M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5-2.7M14.5 10.4A10 10 0 0 1 19 13M2 9.5a15 15 0 0 1 4.5-2.8M10.5 5.1A15 15 0 0 1 22 9.5" /><circle cx="12" cy="19.5" r="0.6" /></>,
   more: <><circle cx="5" cy="12" r="1.3" /><circle cx="12" cy="12" r="1.3" /><circle cx="19" cy="12" r="1.3" /></>,
   sparkle: <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" />,
+  chart: (
+    <>
+      <path d="M3.5 20.5h17" />
+      <rect x="5" y="12" width="3.2" height="6" rx="1" />
+      <rect x="10.4" y="7" width="3.2" height="11" rx="1" />
+      <rect x="15.8" y="3.5" width="3.2" height="14.5" rx="1" />
+    </>
+  ),
 } satisfies Record<string, ReactNode>;
 
 export type IconName = keyof typeof PATHS;

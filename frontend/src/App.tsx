@@ -19,6 +19,7 @@ import About from './pages/About';
 import FamilyHistory from './pages/FamilyHistory';
 import Gallery from './pages/Gallery';
 import { I18nProvider, useI18n } from './i18n/I18nProvider';
+import { VisitCounter } from './lib/visitCount';
 import PageTransition from './components/PageTransition';
 import { startSmoothScroll } from './lib/motion';
 
@@ -52,6 +53,8 @@ function AppLayout() {
       {/* a thin line across the top: how far down the page you are */}
       <div id="scroll-progress" aria-hidden="true" className="fixed top-0 inset-x-0 z-[60] h-[3px] origin-left scale-x-0 bg-[#24603B]" />
       <SeoHead />
+      {/* counts the visit to each page, for the staff area's Visitors */}
+      <VisitCounter />
       <Navbar />
       <BackButton />
       <PageTransition>

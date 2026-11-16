@@ -21,6 +21,7 @@ import ReviewsView from './ReviewsView';
 import ScheduleView, { TodayAgenda } from './ScheduleView';
 import StaffView from './StaffView';
 import VisitsView from './VisitsView';
+import VisitorsView from './VisitorsView';
 
 /** The words at the top of the work area, so staff always know where they are */
 const HEADINGS: Record<SectionId, { title: string; lead: string }> = {
@@ -34,6 +35,7 @@ const HEADINGS: Record<SectionId, { title: string; lead: string }> = {
   hero: { title: 'Page photos', lead: 'The large photograph that opens each page.' },
   content: { title: 'Website text', lead: 'Change the words on the website, in each language.' },
   reviews: { title: 'Guest reviews', lead: 'What guests said, shown on the home page.' },
+  visitors: { title: 'Visitors', lead: 'How many people visit the website, what they read and where they come from.' },
   staff: { title: 'Staff', lead: 'Who can sign in to the staff area.' },
   account: { title: 'My account', lead: 'Your name, your password and this app.' },
 };
@@ -219,6 +221,7 @@ export default function Dashboard() {
     {
       title: 'Website',
       sections: [
+        { id: 'visitors', label: 'Visitors', icon: 'chart' },
         { id: 'events', label: 'Events', icon: 'events' },
         { id: 'gallery', label: 'Gallery', icon: 'gallery' },
         { id: 'hero', label: 'Page photos', icon: 'hero' },
@@ -247,11 +250,13 @@ export default function Dashboard() {
     { id: 'hero', icon: 'hero', title: 'Page photos', state: summary?.media ? plural(summary.media.heroes, 'of yours', 'of yours') : '' },
     { id: 'content', icon: 'text', title: 'Website text', state: summary ? plural(summary.content.edited, 'text edited', 'texts edited') : '' },
     { id: 'reviews', icon: 'star', title: 'Guest reviews', state: '' },
+    { id: 'visitors', icon: 'chart', title: 'Visitors', state: 'who reads the website' },
   ];
 
   /** The tiles of the More sheet on a phone */
   const moreTiles: { id: SectionId; icon: IconName; label: string }[] = [
     { id: 'schedule', icon: 'schedule', label: 'Schedule' },
+    { id: 'visitors', icon: 'chart', label: 'Visitors' },
     { id: 'events', icon: 'events', label: 'Events' },
     { id: 'gallery', icon: 'gallery', label: 'Gallery' },
     { id: 'hero', icon: 'hero', label: 'Page photos' },
@@ -371,6 +376,7 @@ export default function Dashboard() {
             {shown === 'hero' && <HeroView />}
             {shown === 'content' && <ContentView />}
             {shown === 'reviews' && <ReviewsView />}
+            {shown === 'visitors' && <VisitorsView />}
             {shown === 'staff' && <StaffView />}
             {shown === 'account' && <AccountView app={app} />}
           </div>

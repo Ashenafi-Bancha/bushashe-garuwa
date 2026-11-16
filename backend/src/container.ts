@@ -19,6 +19,7 @@ import { reviewRepository } from './modules/reviews/review.repository.js';
 import { scheduleRepository } from './modules/schedule/schedule.repository.js';
 import { staffRepository } from './modules/staff/staff.repository.js';
 import { staffService } from './modules/staff/staff.service.js';
+import { statsRepository } from './modules/stats/stats.repository.js';
 import { mailerFor, type Mailer } from './modules/notifications/mailer.js';
 import { notifier } from './modules/notifications/notifier.js';
 
@@ -42,6 +43,7 @@ export function createContainer(env: Env, db: Database, options: { mailer?: Mail
     staff: staffRepository(db),
     reviews: reviewRepository(db),
     schedule: scheduleRepository(db),
+    stats: statsRepository(db),
   };
 
   const services = {

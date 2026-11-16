@@ -16,6 +16,7 @@ import { eventRoutes } from './modules/events/event.routes.js';
 import { healthRoutes } from './modules/health/health.routes.js';
 import { mediaRoutes } from './modules/media/media.routes.js';
 import { visitRoutes } from './modules/visits/visit.routes.js';
+import { statsRoutes } from './modules/stats/stats.routes.js';
 
 /**
  * Builds the API. Everything it needs is passed in, so tests can use an
@@ -27,6 +28,7 @@ import { visitRoutes } from './modules/visits/visit.routes.js';
  *   /api/v1/content      website text edited by staff
  *   /api/v1/events       events, and reserving a place at one
  *   /api/v1/media        photos staff added: the gallery and the pages' opening photos
+ *   /api/v1/stats        visitor statistics (no cookies), and their summary for staff
  *   /api/v1/admin        staff dashboard: session check and counts
  *   everything else      the website itself, when its built files are there (see websiteFolder)
  */
@@ -68,6 +70,7 @@ export function createApp(env: Env, db: Database, options: { mailer?: Mailer } =
   v1.use('/events', eventRoutes(services.events, services.bookings, guards));
   v1.use('/media', mediaRoutes(services.media, guards));
   v1.use('/reviews', reviewRoutes(repositories.reviews, guards));
+  v1.use('/stats', statsRoutes(repositories.stats, guards));
   v1.use('/admin', adminRoutes(repositories, services.staff, guards));
 
   app.use('/api/health', healthRoutes(db));

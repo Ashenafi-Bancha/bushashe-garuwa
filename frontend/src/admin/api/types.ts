@@ -174,3 +174,17 @@ export type ScheduledBooking = { id: number; reference: string; name: string; ph
 export type ScheduledEvent = { id: number; name: string; time: string | null; published: boolean; capacity: number | null; guests: number; bookings: ScheduledBooking[] };
 export type ScheduleDay = { date: string; visits: ScheduledVisit[]; events: ScheduledEvent[] };
 export type Schedule = { from: string; to: string; days: ScheduleDay[] };
+
+// ── Visitor statistics (backend/src/modules/stats) ──
+export type StatsSummary = {
+  days: number;
+  from: string;
+  to: string;
+  totals: { visitors: number; views: number };
+  today: { visitors: number; views: number };
+  daily: { day: string; visitors: number; views: number }[];
+  pages: { path: string; views: number; visitors: number }[];
+  sources: { source: string; visitors: number }[];
+  languages: { lang: string; visitors: number }[];
+  devices: { device: 'phone' | 'tablet' | 'computer'; visitors: number }[];
+};

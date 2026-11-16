@@ -189,4 +189,24 @@ export const migrations: { id: number; name: string; sql: string }[] = [
       );
     `,
   },
+  {
+    id: 7,
+    name: 'visitor statistics: one row per page opened, without cookies or addresses',
+    sql: `
+      CREATE TABLE page_views (
+        id         BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+        viewed_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+        -- the day in Ethiopia
+        day        DATE        NOT NULL,
+        path       TEXT        NOT NULL,
+        lang       TEXT        NOT NULL,
+        -- where the visit came from: direct, google, facebook, telegram, qr... or another site's name
+        source     TEXT        NOT NULL,
+        device     TEXT        NOT NULL CHECK (device IN ('phone', 'tablet', 'computer')),
+        -- a code that tells visitors apart for one day only (see modules/stats/stats.service.ts)
+        visitor    TEXT        NOT NULL
+      );
+      CREATE INDEX page_views_by_day ON page_views (day);
+    `,
+  },
 ];

@@ -15,7 +15,8 @@ export type SectionId =
   | 'staff'
   | 'account'
   | 'schedule'
-  | 'reviews';
+  | 'reviews'
+  | 'visitors';
 
 export type Section = {
   id: SectionId;

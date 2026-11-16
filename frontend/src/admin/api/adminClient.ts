@@ -18,8 +18,7 @@ import type {
   StaffRole,
   StaffUser,
   Summary,
-  VisitRequest,
-} from './types';
+  VisitRequest, StatsSummary } from './types';
 
 /** Fired when the API answers that the session is no longer valid, so the staff area returns to the sign-in screen */
 export const SESSION_ENDED_EVENT = 'bg-admin-session-ended';
@@ -156,6 +155,9 @@ export const adminApi = {
 
   // ── Who is coming, day by day ──
   schedule: (token: string, from?: string, days = 14) => request<Schedule>(token, `/v1/admin/schedule${list({ from, days })}`),
+
+  // ── Visitor statistics ──
+  stats: (token: string, days: number) => request<StatsSummary>(token, `/v1/stats/admin?days=${days}`),
 
   // ── Guests' reviews ──
   reviews: (token: string) => request<{ items: Review[] }>(token, '/v1/reviews/admin'),
