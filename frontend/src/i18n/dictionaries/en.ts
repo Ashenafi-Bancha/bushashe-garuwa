@@ -672,9 +672,15 @@ export const en = {
       },
       workshop: {
         title: 'Cultural Skills Workshop',
-        sub: 'Weaving and other Wolaita skills',
-        desc: 'Hands-on workshops in weaving and other traditional Wolaita skills are being prepared. They are planned and not open yet.',
-        includes: ['Weaving', 'Other traditional skills'],
+        sub: 'Other traditional Wolaita skills',
+        desc: 'Hands-on workshops in other traditional Wolaita skills are being prepared. They are planned and not open yet.',
+        includes: ['Traditional skills', 'Hands-on learning'],
+      },
+      shimena: {
+        title: 'Shimena Workshop',
+        sub: 'Cultural clothes from cotton, the Wolaita way',
+        desc: 'Shimena is the Wolaita craft of preparing cultural clothes in the traditional way, from cotton: the cotton is cleaned and spun into thread by hand, and the thread is woven on the traditional loom into cloth. A workshop where visitors learn shimena from the weavers is planned.',
+        includes: ['Spinning cotton into thread by hand', 'Weaving on the traditional loom', 'Cultural clothes made the Wolaita way', 'Learning from the weavers'],
       },
       tour: {
         title: 'Heritage Tour',
@@ -706,6 +712,16 @@ export const en = {
         desc: 'A special tour designed for families, blending storytelling, nature walks, cultural activities and food in a relaxed, multi-generational experience.',
         includes: ['Family-friendly program', 'Nature walk', 'Storytelling session for children', 'Traditional meal', 'Family portrait'],
       },
+    },
+    /** the Shimena workshop, planned (its own section on the Experiences page) */
+    shimenaSection: {
+      eyebrow: 'Planned workshop',
+      title: 'Shimena: Cultural Clothes from Cotton',
+      desc: 'In Wolaita, shimena is the craft of preparing cultural clothes in the cultural way, using the products of cotton. The cotton is cleaned and spun into thread by hand, the thread is woven on the traditional loom, and the woven cloth becomes the clothes Wolaita wears for celebrations and for everyday life.',
+      planned: 'The Shimena workshop is planned and not open yet. At Bushaashe Garuwa, visitors will watch the weavers at work, try spinning and weaving for themselves, and see how a piece of cultural cloth is made.',
+      steps: ['Cotton cleaned and spun into thread by hand', 'Thread woven on the traditional Wolaita loom', 'Cloth prepared into cultural clothes', 'Visitors watch, learn and try'],
+      note: 'Planned. Not open yet.',
+      cta: 'Ask us when it begins',
     },
     cta: {
       title: 'Not sure where to start?',

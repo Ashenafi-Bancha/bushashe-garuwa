@@ -14,6 +14,7 @@ const experiences: { id: keyof Dictionary['experiences']['items']; img?: string;
   { id: 'coffee' },
   { id: 'performance', soon: true },
   { id: 'workshop', soon: true },
+  { id: 'shimena', img: photos.gifaataa2, soon: true },
   { id: 'tour', img: photos.house },
   { id: 'horse', img: photos.horseRiding },
   { id: 'education', img: photos.eventGathering },
@@ -84,6 +85,36 @@ export default function Experiences() {
               </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* Shimena: preparing cultural clothes from cotton, the Wolaita way (planned, not open yet) */}
+      <section className="bg-[#FAF7F0] pb-12 sm:pb-20" aria-labelledby="shimena-title">
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-14 items-center bg-white rounded-[2rem] p-2.5 sm:p-3 elev-1">
+            <figure data-reveal className="relative img-zoom rounded-[1.5rem] overflow-hidden aspect-[4/3] lg:aspect-auto lg:h-full lg:min-h-[460px]">
+              <img {...picture(photos.gifaataa2, '(max-width: 1023px) 100vw, 50vw')} alt={t.photos.gifaataa2} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+              <span className="absolute top-4 left-4 rounded-full bg-[#F0CC7A] text-[#121915] text-xs font-extrabold uppercase tracking-[0.12em] px-3.5 py-1.5">{x.soon}</span>
+            </figure>
+            <div data-reveal className="px-3 pb-6 sm:px-6 lg:px-2 lg:py-8 lg:pr-10">
+              <span className="eyebrow mb-5">{x.shimenaSection.eyebrow}</span>
+              <h2 id="shimena-title" className="font-display text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#121915] leading-[1.05] mb-4">{wol(x.shimenaSection.title)}</h2>
+              <p className="text-[#18201B]/80 text-base sm:text-lg leading-relaxed mb-6">{wol(x.shimenaSection.desc)}</p>
+              <ol className="space-y-3 mb-6">
+                {x.shimenaSection.steps.map((step, n) => (
+                  <li key={step} className="flex items-start gap-3 text-[#18201B]">
+                    <span className="grid place-items-center w-7 h-7 rounded-full bg-[#F6EBD3] text-[#7A5210] text-xs font-extrabold flex-shrink-0">{n + 1}</span>
+                    <span className="pt-0.5 font-semibold text-[15px]">{wol(step)}</span>
+                  </li>
+                ))}
+              </ol>
+              <p className="text-[#18201B]/70 leading-relaxed mb-7">{wol(x.shimenaSection.planned)}</p>
+              <div className="flex flex-wrap items-center gap-4">
+                <Link to="/contact" className="btn-primary">{x.shimenaSection.cta}</Link>
+                <span className="text-[#9C6B17] text-sm font-bold">{x.shimenaSection.note}</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>

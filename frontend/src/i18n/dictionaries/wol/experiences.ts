@@ -84,15 +84,33 @@ const page: DeepPartial<Dictionary> = {
       workshop: {
         // EN: Cultural Skills Workshop
         title: "Wogaa Bilaa Loohissuwaa",
-        // EN: Weaving and other Wolaita skills
+        // EN: Other traditional Wolaita skills
         sub: "Dattaanne hara Wolaytta bilata",
-        // EN: Hands-on workshops in weaving and other traditional Wolaita skills are being prepared. They are planned and not open yet.
+        // EN: Hands-on workshops in other traditional Wolaita skills are being prepared. They are planned and not open yet.
         desc: "Dattaanne hara Wolaytta bilata loohissoti giigiiddi de'oosona. Halchchettidisona; shin biron doomettiichchibookkona.",
         includes: [
-          // EN: Weaving
+          // EN: Traditional skills
           "Dattaa",
-          // EN: Other traditional skills
+          // EN: Hands-on learning
           "Hara Wolaytta bilata",
+        ],
+      },
+      shimena: {
+        // EN: Shimena Workshop
+        title: "",
+        // EN: Cultural clothes from cotton, the Wolaita way
+        sub: "",
+        // EN: Shimena is the Wolaita craft of preparing cultural clothes in the traditional way, from cotton: the cotton is cleaned and spun into thread by hand, and the thread is woven on the traditional loom into cloth. A workshop where visitors learn shimena from the weavers is planned.
+        desc: "",
+        includes: [
+          // EN: Spinning cotton into thread by hand
+          "",
+          // EN: Weaving on the traditional loom
+          "",
+          // EN: Cultural clothes made the Wolaita way
+          "",
+          // EN: Learning from the weavers
+          "",
         ],
       },
       tour: {
@@ -187,6 +205,30 @@ const page: DeepPartial<Dictionary> = {
           "So asaa pootuwaa",
         ],
       },
+    },
+    shimenaSection: {
+      // EN: Planned workshop
+      eyebrow: "",
+      // EN: Shimena: Cultural Clothes from Cotton
+      title: "",
+      // EN: In Wolaita, shimena is the craft of preparing cultural clothes in the cultural way, using the products of cotton. The cotton is cleaned and spun into thread by hand, the thread is woven on the traditional loom, and the woven cloth becomes the clothes Wolaita wears for celebrations and for everyday life.
+      desc: "",
+      // EN: The Shimena workshop is planned and not open yet. At Bushaashe Garuwa, visitors will watch the weavers at work, try spinning and weaving for themselves, and see how a piece of cultural cloth is made.
+      planned: "",
+      steps: [
+        // EN: Cotton cleaned and spun into thread by hand
+        "",
+        // EN: Thread woven on the traditional Wolaita loom
+        "",
+        // EN: Cloth prepared into cultural clothes
+        "",
+        // EN: Visitors watch, learn and try
+        "",
+      ],
+      // EN: Planned. Not open yet.
+      note: "",
+      // EN: Ask us when it begins
+      cta: "",
     },
     cta: {
       // EN: Not sure where to start?
