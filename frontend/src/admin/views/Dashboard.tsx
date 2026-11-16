@@ -337,14 +337,14 @@ export default function Dashboard() {
         <header className={`lg:hidden sticky top-0 z-30 admin-topbar ${scrolled ? 'is-scrolled' : ''}`} style={{ paddingTop: 'env(safe-area-inset-top)' }}>
           <div className="h-14 px-2 grid grid-cols-[44px_1fr_44px] items-center">
             {isTab ? (
-              <img src={logoSmall} alt="Bushaashe Garuwa" className="w-9 h-9 ml-1 rounded-full bg-white object-contain ring-1 ring-[var(--a-border)]" />
+              <img src={logoSmall} alt="Bushaashe Garuwa" className="w-9 h-9 ml-1 rounded-full bg-white object-contain ring-2 ring-white/25" />
             ) : (
               <button type="button" onClick={goBack} aria-label="Back" className="admin-icon-btn !w-11 !h-11">
                 <Icon name="arrowLeft" className="w-5 h-5" />
               </button>
             )}
             {/* the section's name appears here once its large title has scrolled away */}
-            <div className={`text-center text-[16px] font-semibold text-[var(--a-ink)] truncate transition-opacity duration-200 ${scrolled || shown === 'overview' ? 'opacity-100' : 'opacity-0'}`}>{shown === 'overview' ? 'Bushaashe Garuwa' : heading.title}</div>
+            <div className={`text-center text-[16px] font-semibold text-white truncate transition-opacity duration-200 ${scrolled || shown === 'overview' ? 'opacity-100' : 'opacity-0'}`}>{shown === 'overview' ? 'Bushaashe Garuwa' : heading.title}</div>
             <button type="button" onClick={() => setSection('account')} aria-label="My account" className="justify-self-end mr-1 rounded-full active:scale-95 transition-transform">
               <Avatar name={user?.name ?? ''} email={user?.email} size="sm" />
             </button>

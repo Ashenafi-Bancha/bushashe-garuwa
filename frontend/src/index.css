@@ -1144,17 +1144,15 @@ html.lenis, html.lenis body { height: auto; }
 
 /* the phone's top bar and tab bar: white, frosted, with hairlines */
 .admin-topbar {
-  background: rgba(246, 245, 241, 0.85);
+  background: #24603B;
   -webkit-backdrop-filter: saturate(1.6) blur(16px);
   backdrop-filter: saturate(1.6) blur(16px);
   transition: box-shadow 0.25s ease;
 }
-.admin-topbar.is-scrolled { box-shadow: 0 1px 0 var(--a-border, #E6E3DA); }
+.admin-topbar.is-scrolled { box-shadow: 0 6px 18px -12px rgba(18, 25, 21, 0.6); }
 .admin-tabbar {
-  background: rgba(255, 255, 255, 0.94);
-  -webkit-backdrop-filter: saturate(1.6) blur(16px);
-  backdrop-filter: saturate(1.6) blur(16px);
-  border-top: 1px solid var(--a-border, #E6E3DA);
+  background: #24603B;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 /* a status shown as a small coloured chip that opens its list of choices */
@@ -1396,3 +1394,22 @@ html:lang(am) h1.font-display { font-size-adjust: none; letter-spacing: 0; }
 
 /* the staff area's page headings in the brand serif */
 .admin-h1 { font-family: var(--font-hero); font-weight: 700; font-size: 32px; letter-spacing: -0.005em; line-height: 1.05; }
+
+/* ── The staff area's frame in Garuwa Green: the computer menu, the phone's header and tab bar ── */
+.admin-green { background: #24603B; color: #FFFFFF; }
+.admin-green .admin-nav-item { color: rgba(255, 255, 255, 0.78); }
+.admin-green .admin-nav-item:hover { background: rgba(255, 255, 255, 0.1); color: #FFFFFF; }
+.admin-green .admin-nav-item.is-active { background: rgba(255, 255, 255, 0.16); color: #FFFFFF; }
+.admin-green .admin-nav-item.is-active svg { color: #F0CC7A; }
+.admin-green .admin-icon-btn,
+.admin-topbar .admin-icon-btn { color: rgba(255, 255, 255, 0.85); }
+.admin-green .admin-icon-btn:hover:not(:disabled),
+.admin-topbar .admin-icon-btn:hover:not(:disabled) { background: rgba(255, 255, 255, 0.12); color: #FFFFFF; }
+.admin-green :focus-visible,
+.admin-topbar :focus-visible,
+.admin-tabbar :focus-visible { outline-color: #FFFFFF; }
+.admin-tabbar button { color: rgba(255, 255, 255, 0.7) !important; }
+.admin-tabbar button[aria-current='page'] { color: #FFFFFF !important; }
+.admin-tabbar button[aria-current='page'] > span:first-child { background: rgba(255, 255, 255, 0.16) !important; }
+.admin-tabbar button[aria-current='page'] svg { color: #F0CC7A; }
+.admin-tabbar .admin-count { --tw-ring-color: #24603B; }
